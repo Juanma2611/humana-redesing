@@ -55,7 +55,6 @@ export default function Home() {
       <div className="hero-shade" />
       <div className="hero-content">
         <div className="eyebrow"><HeartPulse size={17} /> Medicina prepagada y seguros de salud</div>
-        <p className="hero-trust-line"><UsersRound size={15} /> <strong>Más de 200.000</strong> personas y empresas confían en Humana</p>
         <h1>Tu bienestar.<br /><span>Nuestra prioridad.</span></h1>
         <p>Planes para ti, tu familia o tu empresa, con orientación clara para que encuentres lo que necesitas sin complicaciones.</p>
         <div className="hero-actions">
@@ -63,6 +62,7 @@ export default function Home() {
           <Link className="secondary-button" href="/planes#asesor"><MessageCircle size={18} /> Hablar con un asesor</Link>
           <Link className="client-button" href="/cliente"><UserRound size={18} /> Ya soy cliente</Link>
         </div>
+        <div className="hero-trust-proof"><span className="trust-avatar-stack" aria-hidden="true"><i><UserRound /></i><i><UsersRound /></i><i><Building2 /></i></span><p><strong>Más de 200.000</strong> personas y empresas confían en Humana</p></div>
         <div className="trust-row"><span><Check size={15} /> Recorrido personalizado</span><span><Check size={15} /> Servicios fáciles de encontrar</span></div>
       </div>
     </section>
