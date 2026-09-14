@@ -1641,8 +1641,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .home-plans { background:#eef4f8; }
 .home-plan-grid { max-width:1240px; display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
 .home-plan-grid > a { overflow:hidden; min-height:430px; display:flex; flex-direction:column; border:1px solid #d9e7ed; border-radius:22px; background:white; box-shadow:0 14px 38px rgba(12,69,103,.07); transition:transform .4s var(--premium-ease),box-shadow .4s ease; }
-.home-plan-grid > a:hover { transform:translateY(-7px); box-shadow:0 24px 58px rgba(12,69,103,.14); }
-.home-plan-grid > a > div { height:175px; display:grid; place-items:center; color:white; background:radial-gradient(circle at 72% 15%,rgba(255,255,255,.25),transparent 25%),linear-gradient(145deg,#0a96cf,#075f94); }
+.home-plan-grid > a:nth-child(2),.home-plan-grid > a:nth-child(4) { margin-top:30px; }
+.home-plan-grid > a:hover { transform:translateY(-9px); box-shadow:0 26px 60px rgba(12,69,103,.15); }
+.home-plan-grid > a > div { height:175px; display:grid; place-items:center; color:white; background:radial-gradient(circle at 72% 15%,rgba(255,255,255,.25),transparent 25%),linear-gradient(145deg,#0a96cf,#075f94); transition:transform .5s var(--premium-ease); }
+.home-plan-grid > a:hover > div { transform:scale(1.04); }
 .home-plan-grid > a:nth-child(2) > div { background:linear-gradient(145deg,#10a8d7,#0780bb); }
 .home-plan-grid > a:nth-child(3) > div { background:linear-gradient(145deg,#0775b1,#0a94c9); }
 .home-plan-grid > a:nth-child(4) > div { background:linear-gradient(145deg,#075278,#0878a5); }
@@ -1679,6 +1681,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .home-official-section { padding:66px 20px; }
   .home-access { margin-top:58px; }
   .home-access-grid,.home-blog-grid,.home-benefits-grid,.home-plan-grid,.home-digital-band { grid-template-columns:1fr; }
+  .home-plan-grid > a:nth-child(2),.home-plan-grid > a:nth-child(4) { margin-top:0; }
   .home-benefits-grid article:last-child { flex-direction:column; text-align:center; padding:26px 20px; }
   .home-benefits-grid article:last-child a { margin:12px 0 0; }
   .home-access-grid article.featured { grid-column:1; grid-row:auto; }
