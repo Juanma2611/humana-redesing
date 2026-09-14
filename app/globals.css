@@ -1623,16 +1623,19 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .app-downloads span,.app-downloads strong { display:block; }
 .app-downloads span { font-size:9px; }
 .app-downloads strong { margin-top:2px; font-size:14px; }
-.home-phone { position:relative; width:270px; min-height:520px; justify-self:center; padding:48px 20px 24px; display:flex; flex-direction:column; border:9px solid #09273a; border-radius:43px; background:linear-gradient(180deg,#fff 0%,#edf9fc 100%); box-shadow:0 35px 80px rgba(4,55,83,.25); transform:rotate(2deg); }
-.home-phone-notch { position:absolute; top:10px; left:50%; width:82px; height:20px; border-radius:20px; background:#09273a; transform:translateX(-50%); }
+.home-phone { position:relative; width:288px; min-height:560px; justify-self:center; padding:50px 20px 26px; display:flex; flex-direction:column; border:10px solid #0a1f30; border-radius:46px; background:linear-gradient(165deg,#fff 0%,#e9f8fc 55%,#dcf1f8 100%); box-shadow:0 40px 85px rgba(4,55,83,.3), inset 0 0 0 1px rgba(255,255,255,.5); transform:rotate(1.4deg); }
+.home-phone:before { content:""; position:absolute; left:-13px; top:118px; width:3px; height:46px; border-radius:3px; background:#0a1f30; box-shadow:0 68px 0 #0a1f30; }
+.home-phone:after { content:""; position:absolute; left:50%; bottom:-26px; width:68%; height:24px; transform:translateX(-50%); background:radial-gradient(ellipse at center, rgba(4,55,83,.3), transparent 72%); filter:blur(3px); z-index:-1; }
+.home-phone-notch { position:absolute; top:14px; left:50%; width:96px; height:22px; border-radius:16px; background:#0a1f30; transform:translateX(-50%); }
+.home-phone-notch:after { content:""; position:absolute; right:14px; top:50%; width:6px; height:6px; border-radius:50%; background:#1e4258; transform:translateY(-50%); }
 .home-phone > img { width:106px; height:56px; object-fit:contain; align-self:center; mix-blend-mode:multiply; }
 .home-phone > small { margin-top:7px; color:#607a89; text-align:center; }
-.home-phone > strong { margin:22px -3px 13px; padding:12px; border-radius:11px; color:white; background:linear-gradient(135deg,#087eb9,#0da9d1); text-align:center; font-size:13px; }
-.phone-plan { padding:17px; display:grid; border:1px solid #d9e9ef; border-radius:15px; background:white; box-shadow:0 10px 25px rgba(12,69,103,.07); }
+.home-phone > strong { margin:22px -3px 13px; padding:12px; border-radius:11px; color:white; background:linear-gradient(135deg,#087eb9,#0da9d1); text-align:center; font-size:13px; box-shadow:0 10px 20px rgba(8,124,180,.3); }
+.phone-plan { padding:17px; display:grid; border:1px solid #d9e9ef; border-radius:15px; background:linear-gradient(160deg,#fff,#f5fbfd); box-shadow:0 10px 25px rgba(12,69,103,.07); }
 .phone-plan span,.phone-plan small { color:#708491; font-size:10px; }
 .phone-plan b { margin:4px 0; color:#0a557b; font-size:14px; }
 .phone-actions { margin-top:14px; display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-.phone-actions span { min-height:75px; padding:10px 5px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; border-radius:12px; color:#17698f; background:#eaf7fb; text-align:center; font-size:9px; font-weight:800; }
+.phone-actions span { min-height:75px; padding:10px 5px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; border-radius:12px; color:#17698f; background:#eaf7fb; text-align:center; font-size:9px; font-weight:800; box-shadow:inset 0 0 0 1px rgba(7,127,180,.08); }
 .phone-actions svg { width:20px; }
 
 .home-plans { background:#eef4f8; }
