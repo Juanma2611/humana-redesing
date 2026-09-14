@@ -135,11 +135,12 @@ p { text-wrap:pretty; }
 .guide-copy h2, .final-cta h2 { color: white; }
 .guide-copy p { max-width: 580px; margin: 0 0 28px; color: rgba(255,255,255,.8); font-size: 17px; line-height: 1.65; }
 .kicker.light { color: #86e1f6; }
-.guide-steps { display: grid; gap: 13px; }
-.guide-steps > div { min-height: 82px; padding: 15px 18px; border: 1px solid rgba(255,255,255,.19); border-radius: 16px; background: rgba(255,255,255,.11); backdrop-filter: blur(10px); display: flex; align-items: center; gap: 16px; }
-.guide-steps > div > span { flex: 0 0 auto; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: white; color: var(--humana-blue); font-weight: 850; }
-.guide-steps p { margin: 0; color: rgba(255,255,255,.82); }
-.guide-steps strong { display: block; color: white; font-size: 17px; }
+.guide-steps { display: flex; flex-direction: column; }
+.guide-steps > div { position: relative; padding: 24px 0 24px 66px; display: flex; align-items: flex-start; border-top: 1px solid rgba(255,255,255,.16); }
+.guide-steps > div:last-child { border-bottom: 1px solid rgba(255,255,255,.16); }
+.guide-steps > div > span { position: absolute; left: 0; top: 22px; font-size: 36px; line-height: 1; font-weight: 800; letter-spacing: -.03em; color: rgba(255,255,255,.34); }
+.guide-steps p { margin: 0; color: rgba(255,255,255,.82); font-size: 16px; line-height: 1.5; }
+.guide-steps strong { display: block; color: white; font-size: 18px; margin-bottom: 2px; }
 
 .benefits-section { background: #f5fbfd; margin-top: 92px; }
 .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -1264,10 +1265,11 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .final-cta,
 .about-purpose,
 .business-main-card { box-shadow:0 30px 90px rgba(5,73,111,.18); }
-.guide-steps > div,
 .about-ecosystem-grid article { transition:transform .42s var(--premium-ease),background .35s ease,border-color .35s ease; }
-.guide-steps > div:hover,
 .about-ecosystem-grid article:hover { transform:translateY(-5px); background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.34); }
+.guide-steps > div { transition:padding-left .3s var(--premium-ease); }
+.guide-steps > div:hover { padding-left:74px; }
+.guide-steps > div:hover > span { color:rgba(255,255,255,.6); }
 .audience-icon,
 .sales-plan-icon,
 .about-values-grid article > span,
