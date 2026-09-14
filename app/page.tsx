@@ -74,8 +74,8 @@ export default function Home() {
       <div className="home-access-grid">
         {quickServices.map(({icon:Icon,title,copy,cta,href,featured}) => <article className={featured ? "featured" : ""} key={title}><span><Icon /></span><h3>{title}</h3><p>{copy}</p><Link href={href}>{cta} <ArrowRight /></Link></article>)}
         <article className="provider-portal"><span className="home-service-icon"><Building2 /></span><div><h3>Portal del Prestador</h3><p>El portal donde los prestadores de salud administran su convenio, y donde las instituciones puedan iniciar su proceso de inclusión.</p></div><Link href="/servicios">Acceso <ArrowRight /></Link></article>
-        <article className="communication-card"><div><span className="kicker">Estamos para ayudarte</span><h3>Canales de comunicación</h3></div><div className="channel-grid">{channels.map(({icon:Icon,label,href}) => <Link key={label} href={href}><Icon /><span>{label}</span></Link>)}</div></article>
       </div>
+      <article className="communication-card"><div><span className="kicker">Estamos para ayudarte</span><h3>Canales de comunicación</h3></div><div className="channel-grid">{channels.map(({icon:Icon,label,href}) => <Link key={label} href={href}><Icon /><span>{label}</span></Link>)}</div></article>
       <div className="home-network-strip"><p>La Red Humana que nos ayuda a <strong>cuidarte:</strong></p><div><span>Hospital Kennedy</span><span>Clínica Pasteur</span><span>Hospital Vozandes Quito</span><span>Hospital Alcívar</span><span>Hospital Metropolitano</span></div></div>
     </section>
 
