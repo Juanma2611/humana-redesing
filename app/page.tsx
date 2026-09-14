@@ -96,7 +96,7 @@ export default function Home() {
 
     <section className="home-official-section home-included" aria-labelledby="home-benefits-title">
       <div className="section-heading"><span className="kicker">Más valor para ti</span><h2 id="home-benefits-title">Beneficios incluidos en tu plan</h2><p>Ten el control siempre, nuestros servicios te acompañan para que te sientas tranquilo, <strong>seguro y protegido.</strong></p></div>
-      <div className="home-benefits-grid">{officialBenefits.map(({icon:Icon,title,copy,href}) => <article key={title}><span><Icon /></span><h3>{title}</h3><p>{copy}</p>{href && <Link href={href}>Conocer beneficios <ArrowRight /></Link>}</article>)}</div>
+      <div className="home-benefits-grid">{officialBenefits.map(({icon:Icon,title,copy,href}) => <article key={title}><span><Icon /></span><div className="benefit-copy"><h3>{title}</h3><p>{copy}</p></div>{href && <Link href={href}>Conocer beneficios <ArrowRight /></Link>}</article>)}</div>
     </section>
 
     <section className="home-app-showcase" aria-labelledby="mihumana-title">

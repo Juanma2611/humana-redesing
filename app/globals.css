@@ -1596,12 +1596,21 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .home-benefits-grid { max-width:1240px; display:grid; grid-template-columns:repeat(4,1fr); gap:15px; }
 .home-benefits-grid article { min-height:245px; padding:26px 20px; display:flex; flex-direction:column; align-items:center; border:1px solid #dce8ee; border-radius:20px; background:white; text-align:center; transition:transform .35s var(--premium-ease),border-color .3s ease; }
 .home-benefits-grid article:hover { transform:translateY(-5px); border-color:#86d3e8; }
+.home-benefits-grid article:nth-child(-n+3) { background:#f4fafd; border-color:#d7ecf4; }
+.home-benefits-grid article:nth-child(n+4):nth-child(-n+5) { background:#f2fbf9; border-color:#cdeee7; }
+.home-benefits-grid article:nth-child(n+6):nth-child(-n+7) { background:#f7f7fb; border-color:#e2e5f0; }
 .home-benefits-grid article > span { width:50px; height:50px; display:grid; place-items:center; border-radius:15px; color:#0787c0; background:#e8f7fc; }
 .home-benefits-grid article > span svg { width:25px; }
 .home-benefits-grid h3 { margin:19px 0 10px; color:#087fbd; font-size:18px; }
 .home-benefits-grid p { margin:0; color:#587181; font-size:12px; line-height:1.6; }
 .home-benefits-grid a { margin-top:auto; padding-top:16px; display:inline-flex; align-items:center; gap:6px; color:#087eb9; font-size:12px; font-weight:850; }
 .home-benefits-grid a svg { width:14px; }
+.home-benefits-grid article:last-child { grid-column:1 / -1; flex-direction:row; align-items:center; justify-content:flex-start; gap:22px; text-align:left; padding:28px 36px; background:linear-gradient(120deg,#0878b4,#10a8d7); border:none; }
+.home-benefits-grid article:last-child > span { flex-shrink:0; background:rgba(255,255,255,.2); color:white; }
+.home-benefits-grid article:last-child .benefit-copy { flex:1; }
+.home-benefits-grid article:last-child h3 { margin:0; color:white; }
+.home-benefits-grid article:last-child p { margin:4px 0 0; color:rgba(255,255,255,.85); }
+.home-benefits-grid article:last-child a { margin-top:0; padding-top:0; margin-left:auto; color:white; flex-shrink:0; }
 
 .home-app-showcase { min-height:620px; padding:82px clamp(24px,7vw,110px); display:grid; grid-template-columns:1.2fr .8fr; gap:75px; align-items:center; overflow:hidden; background:radial-gradient(circle at 80% 40%,rgba(37,189,222,.2),transparent 28%),#fff; }
 .home-app-copy { max-width:800px; }
@@ -1667,6 +1676,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .home-official-section { padding:66px 20px; }
   .home-access { margin-top:58px; }
   .home-access-grid,.home-blog-grid,.home-benefits-grid,.home-plan-grid,.home-digital-band { grid-template-columns:1fr; }
+  .home-benefits-grid article:last-child { flex-direction:column; text-align:center; padding:26px 20px; }
+  .home-benefits-grid article:last-child a { margin:12px 0 0; }
   .home-access-grid article.featured { grid-column:1; grid-row:auto; }
   .home-access-grid article:not(.featured) { grid-template-columns:44px 1fr; }
   .communication-card { grid-template-columns:1fr; }
