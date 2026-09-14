@@ -42,6 +42,18 @@ El trabajo principal debe centrarse en:
 
 El resultado debe parecer desarrollado por un equipo profesional de diseño y desarrollo web.
 
+### 2.1. Alcance de "textos aprobados": Home vs. páginas internas
+
+La regla de "NO modificar textos aprobados" aplica de forma distinta según la página:
+
+* **Home (`app/page.tsx`)**: los textos son **definitivos**. Ya fueron migrados desde el sitio oficial y no deben modificarse bajo ninguna circunstancia, salvo instrucción explícita en contrario.
+* **Páginas internas** (`app/planes/`, `app/empresas/`, `app/conocenos/`, `app/beneficios/`, `app/cliente/`, `app/red-medica/`, `app/servicios/`, `app/encontrar-plan/`, `app/blog/`, y cualquier otra distinta de la Home): los textos actuales son **provisionales**. Deben reemplazarse progresivamente por los textos del sitio oficial de Humana, a medida que el usuario los vaya proporcionando.
+
+Al reemplazar textos provisionales por los oficiales en páginas internas:
+
+* Conservar la **jerarquía de títulos** (H1, H2, H3, etc.) del sitio oficial, por razones de SEO. No aplanar ni reordenar niveles de encabezado al pegar el contenido nuevo.
+* El resto de reglas de esta sección 2 (no tocar arquitectura de navegación, secciones creadas, planes médicos, segmentación, propuesta de valor) se mantiene vigente tanto en Home como en páginas internas: solo el contenido textual de páginas internas es reemplazable, no la estructura ni el propósito de cada sección.
+
 ## 3. IDENTIDAD DE MARCA
 
 Tono visual:
