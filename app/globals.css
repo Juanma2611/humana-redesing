@@ -1665,9 +1665,16 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .home-foundation blockquote span b { display:block; margin-bottom:4px; color:#087eb9; font-size:40px; font-weight:800; letter-spacing:-.02em; line-height:1; }
 
 .home-about { background:linear-gradient(180deg,#f1f7fa,#eaf3f7); }
-.home-about-copy { max-width:1120px; padding:42px clamp(24px,4vw,58px); border:1px solid #d4e5ec; border-radius:25px; background:rgba(255,255,255,.88); box-shadow:0 20px 60px rgba(12,69,103,.08); }
+.home-about-copy { max-width:1120px; padding:46px clamp(24px,4vw,58px); display:grid; grid-template-columns:1fr 1fr; gap:8px 48px; border:1px solid #d4e5ec; border-radius:25px; background:rgba(255,255,255,.88); box-shadow:0 20px 60px rgba(12,69,103,.08); }
 .home-about-copy p { margin:0 0 18px; color:#49697b; font-size:15px; line-height:1.8; }
+.home-about-copy p:first-child { grid-column:1; grid-row:1; align-self:start; color:#234b60; font-size:21px; font-weight:500; line-height:1.55; }
+.home-about-copy > a { grid-column:1; grid-row:2; align-self:start; margin-top:6px; }
+.home-about-copy p:nth-child(2) { grid-column:2; grid-row:1; padding-top:2px; }
+.home-about-copy p:nth-child(3) { grid-column:2; grid-row:2; padding-top:18px; border-top:1px solid #e2edf2; }
+.home-about-copy p:nth-child(4) { grid-column:2; grid-row:3; padding-top:18px; border-top:1px solid #e2edf2; margin-bottom:0; }
+.home-about-copy p:not(:first-child) { font-size:14px; }
 .home-about-copy strong { color:#164d6c; }
+.home-about-copy b { color:#087eb9; font-weight:800; }
 .home-about-copy > a { display:inline-flex; align-items:center; gap:8px; color:#087eb9; font-weight:850; }
 
 @media (max-width:1080px) {
@@ -1707,5 +1714,11 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .home-plan-grid > a { min-height:390px; }
   .foundation-visual { min-height:310px; }
   .foundation-visual img { object-position:68% center; }
-  .home-about-copy { padding:28px 20px; }
+  .home-about-copy { grid-template-columns:1fr; padding:28px 20px; }
+  .home-about-copy p,.home-about-copy > a { grid-column:1 !important; }
+  .home-about-copy p:first-child { grid-row:1; font-size:19px; }
+  .home-about-copy p:nth-child(2) { grid-row:2; padding-top:0; }
+  .home-about-copy p:nth-child(3) { grid-row:3; }
+  .home-about-copy p:nth-child(4) { grid-row:4; }
+  .home-about-copy > a { grid-row:5; }
 }
