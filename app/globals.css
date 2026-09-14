@@ -1542,7 +1542,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .provider-portal .home-service-icon svg { width:16px; }
 .home-access-grid article.provider-portal h3 { margin:0; color:white; font-size:15px; letter-spacing:-.02em; }
 .home-access-grid article.provider-portal p { margin:0; color:rgba(255,255,255,.85); font-size:12px; line-height:1.45; }
-.provider-portal > a { display:inline-flex; align-items:center; gap:7px; width:max-content; color:white; font-size:12px; font-weight:850; }
+.home-access-grid article.provider-portal > a { display:inline-flex; align-items:center; gap:7px; width:max-content; color:white; font-size:12px; font-weight:850; }
 .communication-card { max-width:1240px; margin:14px auto 0; padding:30px clamp(24px,4vw,40px); border:1px solid #dbe8ef; border-radius:22px; background:white; box-shadow:0 15px 42px rgba(12,69,103,.07); display:grid; grid-template-columns:.6fr 1.4fr; gap:30px; align-items:center; }
 .communication-card h3 { margin:0; color:#0b4c72; font-size:20px; letter-spacing:-.02em; }
 .communication-card .kicker { font-size:12px; }
