@@ -59,8 +59,10 @@ export default function Home() {
         <p>Planes para ti, tu familia o tu empresa, con orientación clara para que encuentres lo que necesitas sin complicaciones.</p>
         <div className="hero-actions">
           <Link className="primary-button" href="/planes">Encuentra tu plan <ArrowRight size={18} /></Link>
-          <Link className="secondary-button" href="/planes#asesor"><MessageCircle size={18} /> Hablar con un asesor</Link>
-          <Link className="client-button" href="/cliente"><UserRound size={18} /> Ya soy cliente</Link>
+          <div className="hero-actions-secondary">
+            <Link className="secondary-button" href="/planes#asesor"><MessageCircle size={18} /> Hablar con un asesor</Link>
+            <Link className="client-button" href="/cliente"><UserRound size={18} /> Ya soy cliente</Link>
+          </div>
         </div>
         <div className="hero-trust-proof"><span className="trust-avatar-stack" aria-hidden="true"><i><UserRound /></i><i><UsersRound /></i><i><Building2 /></i></span><p><strong>Más de 200.000</strong> personas y empresas confían en Humana</p></div>
         <div className="trust-row"><span><Check size={15} /> Recorrido personalizado</span><span><Check size={15} /> Servicios fáciles de encontrar</span></div>

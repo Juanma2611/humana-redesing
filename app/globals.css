@@ -88,18 +88,19 @@ p { text-wrap:pretty; }
 .white-button { color: var(--humana-navy); background: white; box-shadow: 0 10px 24px rgba(0,35,65,.16); }
 .ghost-button { color: white; border: 1px solid rgba(255,255,255,.48); }
 
-.hero { min-height: 92vh; position: relative; overflow: hidden; display: flex; align-items: center; }
+.hero { min-height: 78vh; position: relative; overflow: hidden; display: flex; align-items: center; }
 .hero-image { object-fit: cover; object-position: center; z-index: 0; }
 .hero-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(245,251,254,.98) 0%, rgba(245,251,254,.95) 30%, rgba(245,251,254,.72) 52%, rgba(245,251,254,.28) 70%, rgba(255,255,255,0) 100%); }
-.hero-content { width: min(560px, 46%); margin-left: clamp(24px, 7vw, 110px); position: relative; z-index: 2; padding: 148px 0 148px; }
+.hero-content { width: min(560px, 46%); margin-left: clamp(24px, 7vw, 110px); position: relative; z-index: 2; padding: 110px 0 110px; }
 .kicker { color: var(--humana-blue); font-weight: 800; font-size: 13px; letter-spacing: .09em; text-transform: uppercase; }
-.eyebrow { color: var(--humana-blue); font-weight: 750; font-size: 12px; letter-spacing: .13em; text-transform: uppercase; display: inline-flex; gap: 8px; align-items: center; margin-bottom: 6px; }
-.hero h1 { margin: 0; color: #073b60; font-size: clamp(56px, 7vw, 104px); line-height: .92; letter-spacing: -.055em; font-weight: 800; }
+.eyebrow { color: var(--humana-blue); font-weight: 750; font-size: 12px; letter-spacing: .13em; text-transform: uppercase; display: inline-flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.hero h1 { margin: 0; color: #073b60; font-size: clamp(50px, 5.8vw, 82px); line-height: .94; letter-spacing: -.052em; font-weight: 800; }
 .hero h1 span { color: var(--humana-sky); }
-.hero-content > p { max-width: 420px; margin: 22px 0 52px; color: #5b7688; font-size: 16px; line-height: 1.6; font-weight: 400; }
-.hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.hero-actions .primary-button { min-height: 60px; padding: 0 32px; border-radius: 15px; font-size: 17px; font-weight: 760; box-shadow: 0 16px 34px rgba(7,110,167,.3); }
-.hero-actions .secondary-button, .hero-actions .client-button { min-height: 44px; padding: 0 18px; font-size: 14px; font-weight: 700; }
+.hero-content > p { max-width: 440px; margin: 22px 0 38px; color: #5b7688; font-size: 16px; line-height: 1.6; font-weight: 400; }
+.hero-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.hero-actions .primary-button { min-height: 58px; padding: 0 30px; border-radius: 15px; font-size: 16px; font-weight: 760; box-shadow: 0 16px 34px rgba(7,110,167,.3); }
+.hero-actions-secondary { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.hero-actions-secondary .secondary-button, .hero-actions-secondary .client-button { min-height: 44px; padding: 0 18px; font-size: 14px; font-weight: 700; }
 .client-button { min-height:44px; padding:0 18px; display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid rgba(7,91,140,.2); border-radius:12px; color:#075b8c; background:rgba(255,255,255,.72); backdrop-filter:blur(8px); font-weight:800; transition:transform .2s ease,background .2s ease,box-shadow .2s ease; }
 .client-button:hover { transform:translateY(-2px); background:#fff; box-shadow:0 10px 25px rgba(7,91,140,.13); }
 .trust-row { margin-top: 42px; display: flex; gap: 22px; flex-wrap: wrap; font-size: 13px; font-weight: 650; color: #526d7d; }
@@ -200,9 +201,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .hero-content { width: auto; margin: 0; padding: 70px 22px; }
   .hero h1 { font-size: 47px; }
   .hero-content > p { font-size: 16px; line-height: 1.55; margin-bottom: 34px; }
-  .hero-actions { display: flex; flex-direction: column; align-items: stretch; }
+  .hero-actions { align-items: stretch; }
   .hero-actions .primary-button { width: 100%; }
-  .hero-actions .secondary-button, .hero-actions .client-button { justify-content: center; }
+  .hero-actions-secondary { flex-direction: column; align-items: stretch; }
+  .hero-actions-secondary .secondary-button, .hero-actions-secondary .client-button { justify-content: center; }
   .trust-row { gap: 10px; display: grid; }
   .hero > .explain-note { left: 18px; right: 18px; bottom: 16px; max-width: none; }
   .audience-section, .benefits-section, .network-section { padding: 70px 22px; }
