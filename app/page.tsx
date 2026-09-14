@@ -111,7 +111,7 @@ export default function Home() {
 
     <section className="home-foundation">
       <div className="foundation-visual"><Image src="/familia-humana.png" alt="Familia acompañada por Humana" fill sizes="(max-width: 900px) 100vw, 45vw" unoptimized /></div>
-      <div><span className="kicker">Nuestro compromiso</span><h2>Humana junto a Fundación Metrofraternidad,</h2><h3>brindando esperanza a quienes más lo necesita.</h3><p>Humana, sus afiliados y un cuerpo médico especializado entregan su conocimiento y dedicación para brindar atenciones médicas y cirugías complejas a niños y jóvenes de escasos recursos.</p><Link className="primary-button" href="/conocenos">Obra social Metrofraternidad <ArrowRight /></Link><blockquote><strong>Nuestro mejor plan es ayudar</strong><span>6.900 atenciones a niños y adolescentes de escasos recursos.</span></blockquote></div>
+      <div><span className="kicker">Nuestro compromiso</span><h2>Humana junto a Fundación Metrofraternidad,</h2><h3>brindando esperanza a quienes más lo necesita.</h3><p>Humana, sus afiliados y un cuerpo médico especializado entregan su conocimiento y dedicación para brindar atenciones médicas y cirugías complejas a niños y jóvenes de escasos recursos.</p><Link className="primary-button" href="/conocenos">Obra social Metrofraternidad <ArrowRight /></Link><blockquote><strong>Nuestro mejor plan es ayudar</strong><span><b>6.900</b> atenciones a niños y adolescentes de escasos recursos.</span></blockquote></div>
     </section>
 
     <section className="home-official-section home-about" aria-labelledby="home-about-title">
