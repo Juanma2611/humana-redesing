@@ -1581,11 +1581,11 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .hospital-carousel-arrow { flex:0 0 auto; width:38px; height:38px; display:grid; place-items:center; border:1px solid #d4e6ed; border-radius:50%; color:#3d5566; background:#fff; cursor:pointer; transition:background .25s ease,border-color .25s ease,transform .2s ease; }
 .hospital-carousel-arrow:hover { background:#f0f9fc; border-color:#8ed6e9; transform:translateY(-1px); }
 .hospital-carousel-arrow svg { width:18px; }
-.hospital-carousel-track { flex:1; min-width:0; display:flex; align-items:center; justify-content:space-between; gap:clamp(18px,3vw,40px); animation:hospital-fade .5s ease; }
+.hospital-carousel-track { flex:1; min-width:0; display:flex; align-items:center; justify-content:space-between; gap:clamp(18px,3vw,40px); animation:hospital-fade 1.4s var(--premium-ease); }
 .hospital-carousel-logo { flex:1 1 0; min-width:0; display:flex; align-items:center; justify-content:center; }
 .hospital-carousel-logo img { max-width:130px; width:100%; height:auto; object-fit:contain; filter:grayscale(0); opacity:.92; transition:opacity .25s ease; }
 .hospital-carousel-logo:hover img { opacity:1; }
-@keyframes hospital-fade { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+@keyframes hospital-fade { from { opacity:.3; transform:translateY(2px); } to { opacity:1; transform:translateY(0); } }
 
 .home-blog { background:#fff; }
 .section-heading.centered a { transition:opacity .25s ease; }
