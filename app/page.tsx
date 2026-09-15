@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { SiApple, SiGoogleplay, SiWhatsapp } from "react-icons/si";
 import { SiteShell } from "@/components/site-shell";
+import { blogArticles } from "@/lib/blog-articles";
 
 const quickServices = [
   { image: "/icons/red-prestadores.png", title: "Red de prestadores", copy: "La red de prestadores que te garantiza una atención médica de calidad", cta: "Ver Directorio", href: "/red-medica" },
@@ -24,11 +25,6 @@ const channels = [
   { icon: Phone, label: "1800 humana (48 62 62)", href: "tel:1800486262" },
 ];
 
-const articles = [
-  { image: "/beneficios-hero.webp", date: "Sep 11, 2026", title: "¿Cuánto cuesta una hospitalización en Ecuador en 2026?", copy: "Una hospitalización imprevista representa uno de los mayores riesgos para la estabilidad económica de una familia. Conoce los valores aproximados de un internamiento hospitalario en Ecuador durante el 2026 y cómo contar con un plan de salud adecuado te resguarda frente a estos costos elevados." },
-  { image: "/red-medica-hero.webp", date: "Sep 4, 2026", title: "¿Cuál es la diferencia entre medicina prepagada y seguro médico?", copy: "Aunque suelen usarse como sinónimos, la medicina prepagada y el seguro médico poseen diferencias estructurales, operativas y de regulación en Ecuador. Conocer las características distintivas de cada modalidad te permitirá tomar la decisión más idónea para la protección de tu salud y la de tu familia." },
-  { image: "/servicios-clientes-hero.webp", date: "Ago 30, 2026", title: "¿Qué cubre realmente una cobertura médica en Ecuador?", copy: "Muchas personas se preguntan qué servicios incluye efectivamente su plan de salud. Conocer el alcance real de una cobertura médica en Ecuador desde consultas ambulatorias hasta procedimientos quirúrgicos complejos es fundamental para aprovechar al máximo sus beneficios y evitar contratiempos financieros." },
-];
 
 const officialBenefits = [
   { image: "/icons/medico-domicilio.png", title: "Médico a domicilio", copy: "Solicita un médico para que acuda en el lugar donde lo necesites." },
@@ -85,8 +81,9 @@ export default function Home() {
     </section>
 
     <section className="home-official-section home-blog" aria-labelledby="home-blog-title">
-      <div className="section-heading centered"><span className="kicker">Información para cuidarte</span><h2 id="home-blog-title" className="home-blog-title">BLOG <span>humana</span></h2></div>
-      <div className="home-blog-grid">{articles.map(article => <article key={article.title}><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | Bienestar</span><p>{article.copy}</p><div className="home-blog-actions"><Link href="/blog">Leer más <ArrowRight /></Link><Link className="primary-button small" href="/planes">Cotizar en 1 minuto <ArrowRight size={16} /></Link></div></div></article>)}</div>
+      <div className="section-heading centered"><span className="kicker">Información para cuidarte</span><Link href="/blog"><h2 id="home-blog-title" className="home-blog-title">BLOG <span>humana</span></h2></Link></div>
+      <div className="home-blog-grid">{blogArticles.map(article => <article key={article.title}><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | Bienestar</span><p>{article.copy}</p><div className="home-blog-actions"><Link href="/blog">Leer más <ArrowRight /></Link><Link className="primary-button small" href="/planes">Cotizar en 1 minuto <ArrowRight size={16} /></Link></div></div></article>)}</div>
+      <div className="home-blog-viewall"><Link className="secondary-button" href="/blog">Ver todos los blogs <ArrowRight size={18} /></Link></div>
     </section>
 
     <section className="home-digital-band">
