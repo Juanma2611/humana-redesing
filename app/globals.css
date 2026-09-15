@@ -1604,8 +1604,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .home-blog-copy > span { color:#647c8b; font-size:12px; font-weight:750; }
 .home-blog-copy p { margin:14px 0 22px; color:#536f81; font-size:13px; line-height:1.65; }
 .home-blog-actions { margin-top:auto; display:flex; align-items:center; flex-wrap:wrap; gap:14px; }
-.home-blog-actions > a:first-child { display:inline-flex; align-items:center; gap:7px; color:#087eb9; font-size:13px; font-weight:850; }
-.home-blog-actions .primary-button.small { min-height:40px; padding:0 16px; font-size:13px; }
+.home-blog-actions > a:first-child:not(.primary-button) { display:inline-flex; align-items:center; gap:7px; color:#087eb9; font-size:13px; font-weight:850; }
+.home-blog-actions a.primary-button.small { min-height:40px; padding:0 16px; font-size:13px; color:#fff; }
 
 .home-digital-band { padding:76px clamp(24px,7vw,110px); display:grid; grid-template-columns:1.2fr 1fr; gap:1px; color:white; background:linear-gradient(120deg,#073e63,#087cad); }
 .home-digital-band article { min-height:360px; padding:48px clamp(28px,4vw,58px); background:rgba(255,255,255,.045); }
