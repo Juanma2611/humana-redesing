@@ -30,7 +30,7 @@ export default function Blog() {
     <section className="content-section blog-listing">
       <div className="blog-listing-main">
         <div className="blog-listing-grid">
-          {firstArticles.map(article => <article key={article.title}><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | {article.category}</span><p>{article.copy}</p><div className="home-blog-actions"><Link href="/blog">Leer más <ArrowRight /></Link><Link className="primary-button small" href="/planes">Cotizar en 1 minuto <ArrowRight size={16} /></Link></div></div></article>)}
+          {firstArticles.map(article => <article key={article.title}><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | {article.category}</span><p>{article.copy}</p><div className="home-blog-actions"><Link href="/blog">Leer más <ArrowRight /></Link></div></div></article>)}
         </div>
 
         <div className="blog-listing-grid blog-plan-grid">
@@ -38,7 +38,7 @@ export default function Blog() {
         </div>
 
         <div className="blog-listing-grid">
-          {restArticles.map(article => <article key={article.title}><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | {article.category}</span><p>{article.copy}</p><div className="home-blog-actions"><Link href="/blog">Leer más <ArrowRight /></Link><Link className="primary-button small" href="/planes">Cotizar en 1 minuto <ArrowRight size={16} /></Link></div></div></article>)}
+          {restArticles.map(article => <article key={article.title}><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | {article.category}</span><p>{article.copy}</p><div className="home-blog-actions"><Link href="/blog">Leer más <ArrowRight /></Link></div></div></article>)}
         </div>
       </div>
 

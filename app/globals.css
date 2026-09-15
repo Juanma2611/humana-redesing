@@ -530,6 +530,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .blog-listing { display:grid; grid-template-columns:1fr 320px; align-items:start; gap:44px; }
 .blog-listing-main { min-width:0; display:flex; flex-direction:column; gap:20px; }
 .blog-listing-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.blog-listing-grid article:last-child:nth-child(odd) { grid-column:1 / -1; }
+.blog-listing-grid article:last-child:nth-child(odd) .home-blog-image { height:220px; }
 .blog-listing-grid article { overflow:hidden; display:flex; flex-direction:column; border:1px solid #dce8ee; border-radius:22px; background:#f6fafc; box-shadow:0 14px 38px rgba(12,69,103,.06); transition:transform .35s var(--premium-ease),box-shadow .35s ease; }
 .blog-listing-grid article:hover { transform:translateY(-5px); box-shadow:0 20px 48px rgba(12,69,103,.11); }
 .blog-listing-grid .home-blog-image { height:180px; }
