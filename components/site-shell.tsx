@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Apple, Building2, Camera, CirclePlay, Clock3, CreditCard, Headphones, MapPin, Menu, MessageCircle, Network, ShieldCheck, Smartphone, UsersRound, X } from "lucide-react";
+import { Building2, Clock3, CreditCard, Headphones, MapPin, Menu, MessageCircle, ShieldCheck, Smartphone, X } from "lucide-react";
+import { SiApple, SiFacebook, SiGoogleplay, SiInstagram, SiYoutube } from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa6";
 import { useState } from "react";
 import { MotionOrchestrator } from "@/components/motion-orchestrator";
 
@@ -87,7 +89,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
             <div className="footer-card-heading"><span><Smartphone /></span><div><small>Todo en un solo lugar</small><h2 id="footer-digital">Servicios digitales</h2></div></div>
             <div className="footer-service-links"><Link href="/cliente">Portal de afiliados</Link><Link href="/cliente">Pago en línea</Link><Link href="/red-medica">Agendar cita médica</Link></div>
             <p>Descarga MiHumana</p>
-            <div className="footer-apps"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><Smartphone /><span>Disponible en<strong>Google Play</strong></span></a><a href="https://apps.apple.com/ec/search?term=mi%20humana" target="_blank" rel="noreferrer"><Apple /><span>Disponible en<strong>App Store</strong></span></a></div>
+            <div className="footer-apps"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><SiGoogleplay /><span>Disponible en<strong>Google Play</strong></span></a><a href="https://apps.apple.com/ec/search?term=mi%20humana" target="_blank" rel="noreferrer"><SiApple /><span>Disponible en<strong>App Store</strong></span></a></div>
           </section>
         </div>
 
@@ -98,7 +100,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
 
         <div className="footer-bottom">
           <p className="concept-note">Prototipo conceptual. Información, direcciones, beneficios, nombres y procesos sujetos a validación oficial de Humana.</p>
-          <div className="footer-social" aria-label="Redes sociales"><a href="https://www.facebook.com/HumanaEc" target="_blank" rel="noreferrer" aria-label="Facebook"><UsersRound /></a><a href="https://www.instagram.com/humanaec/" target="_blank" rel="noreferrer" aria-label="Instagram"><Camera /></a><a href="https://www.youtube.com/results?search_query=Humana+Ecuador" target="_blank" rel="noreferrer" aria-label="YouTube"><CirclePlay /></a><a href="https://www.linkedin.com/search/results/companies/?keywords=Humana%20Ecuador" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Network /></a></div>
+          <div className="footer-social" aria-label="Redes sociales"><a href="https://www.facebook.com/HumanaEc" target="_blank" rel="noreferrer" aria-label="Facebook"><SiFacebook /></a><a href="https://www.instagram.com/humanaec/" target="_blank" rel="noreferrer" aria-label="Instagram"><SiInstagram /></a><a href="https://www.youtube.com/results?search_query=Humana+Ecuador" target="_blank" rel="noreferrer" aria-label="YouTube"><SiYoutube /></a><a href="https://www.linkedin.com/search/results/companies/?keywords=Humana%20Ecuador" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a></div>
         </div>
         <p className="footer-copyright">Humana Cobertura Médica Integral · Planes médicos y medicina prepagada en Ecuador · Todos los derechos reservados © 2026</p>
       </footer>

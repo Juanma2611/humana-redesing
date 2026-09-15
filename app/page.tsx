@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Ambulance, Apple, ArrowRight, Building2, Check, ClipboardList,
+  Ambulance, ArrowRight, Building2, Check, ClipboardList,
   HeartHandshake, HeartPulse, House, Mail, MapPin, MessageCircle, Monitor, Network, Phone, Plane,
-  RotateCcw, ShieldCheck, ShoppingCart, Smartphone, Sparkles, Stethoscope, Store, UserRound,
+  RotateCcw, ShieldCheck, ShoppingCart, Sparkles, Stethoscope, Store, UserRound,
   UsersRound,
 } from "lucide-react";
+import { SiApple, SiGoogleplay, SiWhatsapp } from "react-icons/si";
 import { SiteShell } from "@/components/site-shell";
 
 const quickServices = [
@@ -16,7 +17,7 @@ const quickServices = [
 ];
 
 const channels = [
-  { icon: MessageCircle, label: "WhatsApp", href: "/servicios" },
+  { icon: SiWhatsapp, label: "WhatsApp", href: "/servicios", brandColor: "#25D366" },
   { icon: Monitor, label: "Oficina virtual", href: "/cliente" },
   { icon: ClipboardList, label: "Formulario", href: "/servicios" },
   { icon: MapPin, label: "Oficinas", href: "#oficinas" },
@@ -75,7 +76,7 @@ export default function Home() {
         {quickServices.map(({icon:Icon,title,copy,cta,href,featured}) => <article className={featured ? "featured" : ""} key={title}><span><Icon /></span><h3>{title}</h3><p>{copy}</p><Link href={href}>{cta} <ArrowRight /></Link></article>)}
         <article className="provider-portal"><span className="home-service-icon"><Building2 /></span><div><h3>Portal del Prestador</h3><p>El portal donde los prestadores de salud administran su convenio, y donde las instituciones puedan iniciar su proceso de inclusión.</p></div><Link href="https://humana.med.ec/portal-prestador/">Acceso <ArrowRight /></Link></article>
       </div>
-      <article className="communication-card"><div><span className="kicker">Estamos para ayudarte</span><h3>Canales de comunicación</h3></div><div className="channel-grid">{channels.map(({icon:Icon,label,href}) => <Link key={label} href={href}><Icon /><span>{label}</span></Link>)}</div></article>
+      <article className="communication-card"><div><span className="kicker">Estamos para ayudarte</span><h3>Canales de comunicación</h3></div><div className="channel-grid">{channels.map(({icon:Icon,label,href,brandColor}) => <Link key={label} href={href}><Icon style={brandColor ? { color: brandColor } : undefined} /><span>{label}</span></Link>)}</div></article>
       <div className="home-network-strip"><p>La Red Humana que nos ayuda a <strong>cuidarte:</strong></p><div><span>Hospital Kennedy</span><span>Clínica Pasteur</span><span>Hospital Vozandes Quito</span><span>Hospital Alcívar</span><span>Hospital Metropolitano</span></div></div>
     </section>
 
@@ -100,7 +101,7 @@ export default function Home() {
     </section>
 
     <section className="home-app-showcase" aria-labelledby="mihumana-title">
-      <div className="home-app-copy"><span className="kicker">Tu plan contigo</span><h2 id="mihumana-title">MiHumana App</h2><h3>Todos los servicios en tu celular</h3><p>Todos los <strong>documentos importantes</strong> para realizar sus trámites, en formato PDF editable, tales como solicitar reembolso, pre-autorización de cirugía, autorizaciones de débito, y más.</p><p>Obtenga el mejor beneficio de su cobertura médica, conociendo todas las <strong>prestaciones de su plan</strong>, sus <strong>deducibles y beneficios incluidos.</strong> Puede descargar el manual de uso de su plan.</p><div className="app-downloads"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><Smartphone /><span>Disponible en<strong>Google Play</strong></span></a><a href="https://apps.apple.com/ec/search?term=mi%20humana" target="_blank" rel="noreferrer"><Apple /><span>Disponible en<strong>App Store</strong></span></a></div></div>
+      <div className="home-app-copy"><span className="kicker">Tu plan contigo</span><h2 id="mihumana-title">MiHumana App</h2><h3>Todos los servicios en tu celular</h3><p>Todos los <strong>documentos importantes</strong> para realizar sus trámites, en formato PDF editable, tales como solicitar reembolso, pre-autorización de cirugía, autorizaciones de débito, y más.</p><p>Obtenga el mejor beneficio de su cobertura médica, conociendo todas las <strong>prestaciones de su plan</strong>, sus <strong>deducibles y beneficios incluidos.</strong> Puede descargar el manual de uso de su plan.</p><div className="app-downloads"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><SiGoogleplay /><span>Disponible en<strong>Google Play</strong></span></a><a href="https://apps.apple.com/ec/search?term=mi%20humana" target="_blank" rel="noreferrer"><SiApple /><span>Disponible en<strong>App Store</strong></span></a></div></div>
       <div className="home-phone" aria-label="Vista conceptual de MiHumana App"><div className="home-phone-notch" /><Image src="/humana-logo-oficial.png" alt="Humana" width={180} height={80} unoptimized /><small>Estamos aquí para acompañarte</small><strong>MH50 · HUMANA</strong><div className="phone-plan"><span>Plan contratado</span><b>Cobertura familiar</b><small>4 beneficiarios</small></div><div className="phone-actions"><span><ShieldCheck />Mi Plan</span><span><RotateCcw />Mis reembolsos</span><span><Stethoscope />Agenda</span><span><MessageCircle />Ayuda</span></div></div>
     </section>
 
