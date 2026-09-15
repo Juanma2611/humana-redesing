@@ -1,19 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Ambulance, ArrowRight, Building2, Check, ClipboardList,
-  HeartHandshake, HeartPulse, House, Mail, MapPin, MessageCircle, Monitor, Network, Phone, Plane,
-  RotateCcw, ShieldCheck, ShoppingCart, Sparkles, Stethoscope, Store, UserRound,
+  ArrowRight, Building2, Check, ClipboardList, HeartPulse, Mail, MapPin, MessageCircle, Monitor, Phone,
+  RotateCcw, ShieldCheck, Sparkles, Stethoscope, UserRound,
   UsersRound,
 } from "lucide-react";
 import { SiApple, SiGoogleplay, SiWhatsapp } from "react-icons/si";
 import { SiteShell } from "@/components/site-shell";
 
 const quickServices = [
-  { icon: Network, title: "Red de prestadores", copy: "La red de prestadores que te garantiza una atención médica de calidad", cta: "Ver Directorio", href: "/red-medica" },
-  { icon: ClipboardList, title: "Descarga de formularios", copy: "Descarga los formularios necesarios para realizar tus trámites", cta: "Formularios", href: "/servicios" },
-  { icon: Building2, title: "Portal de Bróker", copy: "Optimiza tu trabajo en una sola plataforma y transforma la experiencia", cta: "Ver más", href: "/portal-broker" },
-  { icon: ShoppingCart, title: "Cotizar un plan", copy: "Encuentra una amplia gama de Planes médicos en un único sitio.", cta: "Cotizar ahora", href: "/planes", featured: true },
+  { image: "/icons/red-prestadores.png", title: "Red de prestadores", copy: "La red de prestadores que te garantiza una atención médica de calidad", cta: "Ver Directorio", href: "/red-medica" },
+  { image: "/icons/formularios.png", title: "Descarga de formularios", copy: "Descarga los formularios necesarios para realizar tus trámites", cta: "Formularios", href: "/servicios" },
+  { image: "/icons/portal-broker.png", title: "Portal de Bróker", copy: "Optimiza tu trabajo en una sola plataforma y transforma la experiencia", cta: "Ver más", href: "/portal-broker", logo: true },
+  { image: "/icons/cotizar-plan.png", title: "Cotizar un plan", copy: "Encuentra una amplia gama de Planes médicos en un único sitio.", cta: "Cotizar ahora", href: "/planes", featured: true },
 ];
 
 const channels = [
@@ -32,13 +31,13 @@ const articles = [
 ];
 
 const officialBenefits = [
-  { icon: House, title: "Médico a domicilio", copy: "Solicita un médico para que acuda en el lugar donde lo necesites." },
-  { icon: Plane, title: "Asistencia en viajes", copy: "Viaja seguro con cobertura por un monto máximo de $100.000." },
-  { icon: Phone, title: "Teleconsulta médica", copy: "Ilimitadas y sin costo, agendando tu cita en el 1800 48 62 62 o mediante APP." },
-  { icon: Store, title: "Farmacia a domicilio", copy: "Solicita tus medicinas y aplica tu cobertura con Medicity, Pharmacys y Fybeca." },
-  { icon: Ambulance, title: "Ambulancia terrestre", copy: "Recibe asistencia médica oportuna en caso de emergencia." },
-  { icon: ShieldCheck, title: "Seguro de vida", copy: "Si en algún momento llegas a faltar, ofrecemos a tus familiares un importante apoyo mediante el seguro de vida." },
-  { icon: HeartHandshake, title: "Asistencia Exequial", copy: "Cobertura de sepelio con Jardines del Valle para titulares y dependientes." },
+  { image: "/icons/medico-domicilio.png", title: "Médico a domicilio", copy: "Solicita un médico para que acuda en el lugar donde lo necesites." },
+  { image: "/icons/asistencia-viajes.png", title: "Asistencia en viajes", copy: "Viaja seguro con cobertura por un monto máximo de $100.000." },
+  { image: "/icons/teleconsulta-medica.png", title: "Teleconsulta médica", copy: "Ilimitadas y sin costo, agendando tu cita en el 1800 48 62 62 o mediante APP." },
+  { image: "/icons/farmacia-domicilio.png", title: "Farmacia a domicilio", copy: "Solicita tus medicinas y aplica tu cobertura con Medicity, Pharmacys y Fybeca." },
+  { image: "/icons/ambulancia-terrestre.png", title: "Ambulancia terrestre", copy: "Recibe asistencia médica oportuna en caso de emergencia." },
+  { image: "/icons/seguro-vida.png", title: "Seguro de vida", copy: "Si en algún momento llegas a faltar, ofrecemos a tus familiares un importante apoyo mediante el seguro de vida." },
+  { image: "/icons/asistencia-exequial.png", title: "Asistencia Exequial", copy: "Cobertura de sepelio con Jardines del Valle para titulares y dependientes." },
   { icon: Sparkles, title: "Todos los beneficios", copy: "Conoce todos los beneficios que tienes al adquirir un plan médico con Humana, para cada tipo de seguro, conoce nuestros planes.", href: "/beneficios" },
 ];
 
@@ -73,7 +72,7 @@ export default function Home() {
     <section className="home-official-section home-access" aria-labelledby="home-access-title">
       <div className="section-heading centered"><span className="kicker">Accesos rápidos</span><h2 id="home-access-title">Todo lo que necesitas, en un solo lugar</h2></div>
       <div className="home-access-grid">
-        {quickServices.map(({icon:Icon,title,copy,cta,href,featured}) => <article className={featured ? "featured" : ""} key={title}><span><Icon /></span><h3>{title}</h3><p>{copy}</p><Link href={href}>{cta} <ArrowRight /></Link></article>)}
+        {quickServices.map(({image,title,copy,cta,href,featured,logo}) => <article className={featured ? "featured" : ""} key={title}>{logo ? <Image className="service-logo" src={image} alt="" width={140} height={56} unoptimized /> : <span><Image src={image} alt="" width={28} height={28} unoptimized /></span>}<h3>{title}</h3><p>{copy}</p><Link href={href}>{cta} <ArrowRight /></Link></article>)}
         <article className="provider-portal"><span className="home-service-icon"><Building2 /></span><div><h3>Portal del Prestador</h3><p>El portal donde los prestadores de salud administran su convenio, y donde las instituciones puedan iniciar su proceso de inclusión.</p></div><Link href="https://humana.med.ec/portal-prestador/">Acceso <ArrowRight /></Link></article>
       </div>
       <article className="communication-card"><div><span className="kicker">Estamos para ayudarte</span><h3>Canales de comunicación</h3></div><div className="channel-grid">{channels.map(({icon:Icon,label,href,brandColor,brandSize}) => <Link key={label} href={href}><Icon style={brandColor ? { color: brandColor, width: brandSize, height: brandSize } : undefined} /><span>{label}</span></Link>)}</div></article>
@@ -97,7 +96,7 @@ export default function Home() {
 
     <section className="home-official-section home-included" aria-labelledby="home-benefits-title">
       <div className="section-heading"><span className="kicker">Más valor para ti</span><h2 id="home-benefits-title">Beneficios incluidos en tu plan</h2><p>Ten el control siempre, nuestros servicios te acompañan para que te sientas tranquilo, <strong>seguro y protegido.</strong></p></div>
-      <div className="home-benefits-grid">{officialBenefits.map(({icon:Icon,title,copy,href}) => <article key={title}><span><Icon /></span><div className="benefit-copy"><h3>{title}</h3><p>{copy}</p></div>{href && <Link href={href}>Conocer beneficios <ArrowRight /></Link>}</article>)}</div>
+      <div className="home-benefits-grid">{officialBenefits.map(({image,icon:Icon,title,copy,href}) => <article key={title}><span>{image ? <Image src={image} alt="" width={28} height={28} unoptimized /> : Icon ? <Icon /> : null}</span><div className="benefit-copy"><h3>{title}</h3><p>{copy}</p></div>{href && <Link href={href}>Conocer beneficios <ArrowRight /></Link>}</article>)}</div>
     </section>
 
     <section className="home-app-showcase" aria-labelledby="mihumana-title">
