@@ -1565,12 +1565,18 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .channel-grid a { min-height:78px; padding:10px 6px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; border-radius:13px; color:#17698f; background:#f0f9fc; text-align:center; font-size:11px; font-weight:750; line-height:1.3; transition:transform .3s var(--premium-ease),background .3s ease; }
 .channel-grid a:hover { transform:translateY(-3px); background:#e3f5fb; }
 .channel-grid svg { width:20px; }
-.home-network-strip { max-width:1240px; margin:46px auto 0; padding-top:30px; display:flex; align-items:center; gap:32px; border-top:1px solid #d4e6ed; }
-.home-network-strip p { flex:0 0 auto; margin:0; color:#587184; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; }
-.home-network-strip > div { display:flex; flex-wrap:wrap; align-items:center; gap:0; }
-.home-network-strip span { position:relative; padding:0 18px; color:#3d5566; background:none; border:none; font-size:14px; font-weight:650; letter-spacing:-.01em; }
-.home-network-strip span:not(:last-child):after { content:""; position:absolute; right:0; top:50%; transform:translateY(-50%); width:4px; height:4px; border-radius:50%; background:#a9c1cc; }
-.home-network-strip span:first-child { padding-left:0; }
+.home-network-strip { max-width:1240px; margin:46px auto 0; padding-top:30px; display:flex; flex-direction:column; align-items:center; gap:22px; border-top:1px solid #d4e6ed; }
+.home-network-strip p { margin:0; color:#587184; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; }
+
+.hospital-carousel { width:100%; display:flex; align-items:center; gap:14px; }
+.hospital-carousel-arrow { flex:0 0 auto; width:38px; height:38px; display:grid; place-items:center; border:1px solid #d4e6ed; border-radius:50%; color:#3d5566; background:#fff; cursor:pointer; transition:background .25s ease,border-color .25s ease,transform .2s ease; }
+.hospital-carousel-arrow:hover { background:#f0f9fc; border-color:#8ed6e9; transform:translateY(-1px); }
+.hospital-carousel-arrow svg { width:18px; }
+.hospital-carousel-track { flex:1; min-width:0; display:flex; align-items:center; justify-content:space-between; gap:clamp(18px,3vw,40px); animation:hospital-fade .5s ease; }
+.hospital-carousel-logo { flex:1 1 0; min-width:0; display:flex; align-items:center; justify-content:center; }
+.hospital-carousel-logo img { max-width:130px; width:100%; height:auto; object-fit:contain; filter:grayscale(0); opacity:.92; transition:opacity .25s ease; }
+.hospital-carousel-logo:hover img { opacity:1; }
+@keyframes hospital-fade { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
 
 .home-blog { background:#fff; }
 .section-heading.centered a { transition:opacity .25s ease; }
@@ -1704,6 +1710,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .communication-card { grid-template-columns:1fr; padding:24px 20px; }
   .channel-grid { grid-template-columns:repeat(2,1fr); }
   .home-network-strip { align-items:flex-start; flex-direction:column; gap:16px; }
+  .hospital-carousel-logo:nth-child(n+4) { display:none; }
+  .hospital-carousel-logo img { max-width:100px; }
   .home-digital-band { padding:0; }
   .home-digital-band article { min-height:0; padding:52px 22px; }
   .home-digital-band article:first-child { border-right:0; border-bottom:1px solid rgba(255,255,255,.16); }

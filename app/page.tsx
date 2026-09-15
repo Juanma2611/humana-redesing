@@ -8,6 +8,7 @@ import {
 import { SiApple, SiGoogleplay, SiWhatsapp } from "react-icons/si";
 import { SiteShell } from "@/components/site-shell";
 import { blogArticles } from "@/lib/blog-articles";
+import { HospitalCarousel } from "@/components/hospital-carousel";
 
 const quickServices = [
   { image: "/icons/red-prestadores.png", title: "Red de prestadores", copy: "La red de prestadores que te garantiza una atención médica de calidad", cta: "Ver Directorio", href: "/red-medica" },
@@ -72,7 +73,7 @@ export default function Home() {
         <article className="provider-portal"><span className="home-service-icon"><Building2 /></span><div><h3>Portal del Prestador</h3><p>El portal donde los prestadores de salud administran su convenio, y donde las instituciones puedan iniciar su proceso de inclusión.</p></div><Link href="https://humana.med.ec/portal-prestador/">Acceso <ArrowRight /></Link></article>
       </div>
       <article className="communication-card"><div><span className="kicker">Estamos para ayudarte</span><h3>Canales de comunicación</h3></div><div className="channel-grid">{channels.map(({icon:Icon,label,href,brandColor,brandSize}) => <Link key={label} href={href}><Icon style={brandColor ? { color: brandColor, width: brandSize, height: brandSize } : undefined} /><span>{label}</span></Link>)}</div></article>
-      <div className="home-network-strip"><p>La Red Humana que nos ayuda a <strong>cuidarte:</strong></p><div><span>Hospital Kennedy</span><span>Clínica Pasteur</span><span>Hospital Vozandes Quito</span><span>Hospital Alcívar</span><span>Hospital Metropolitano</span></div></div>
+      <div className="home-network-strip"><p>La Red Humana que nos ayuda a <strong>cuidarte:</strong></p><HospitalCarousel /></div>
     </section>
 
     <section className="guide-section">
