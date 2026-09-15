@@ -25,7 +25,7 @@ const revealSelectors = [
   ".home-link-grid a",
   ".final-cta > *",
   ".page-hero-copy > *",
-  ".content-section > *",
+  ".content-section > *:not(.blog-listing)",
   ".sales-hero-copy > *",
   ".sales-title-row > *",
   ".sales-segments",
