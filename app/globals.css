@@ -176,7 +176,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @keyframes appear { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 1060px) {
-  .site-header { grid-template-columns: 165px 1fr auto; gap: 18px; }
+  .site-header, .site-header.full-header { grid-template-columns: 165px 1fr auto; gap: 18px; }
   .brand, .brand img { width: 160px; }
   .site-header nav { gap: 15px; font-size: 13px; }
   .header-actions .login-link { display: none; }
@@ -189,7 +189,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .prototype-bar strong { font-size: 11px; }
   .prototype-bar button { padding: 7px 9px; }
   .prototype-bar button svg { display: none; }
-  .site-header { height: 74px; padding: 0 18px; grid-template-columns: 1fr auto; }
+  .site-header, .site-header.full-header { height: 74px; padding: 0 18px; grid-template-columns: 1fr auto; }
   .brand, .brand img { width: 150px; height: 68px; }
   .site-header nav { display: none; position: absolute; top: 74px; left: 0; right: 0; padding: 16px 24px 25px; background: white; box-shadow: 0 18px 28px rgba(18,55,78,.12); }
   .site-header nav.nav-open { display: grid; gap: 0; }
