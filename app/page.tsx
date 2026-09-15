@@ -17,7 +17,7 @@ const quickServices = [
 ];
 
 const channels = [
-  { icon: SiWhatsapp, label: "WhatsApp", href: "/servicios", brandColor: "#25D366" },
+  { icon: SiWhatsapp, label: "WhatsApp", href: "/servicios", brandColor: "#0b80bd", brandSize: 26 },
   { icon: Monitor, label: "Oficina virtual", href: "/cliente" },
   { icon: ClipboardList, label: "Formulario", href: "/servicios" },
   { icon: MapPin, label: "Oficinas", href: "#oficinas" },
@@ -76,7 +76,7 @@ export default function Home() {
         {quickServices.map(({icon:Icon,title,copy,cta,href,featured}) => <article className={featured ? "featured" : ""} key={title}><span><Icon /></span><h3>{title}</h3><p>{copy}</p><Link href={href}>{cta} <ArrowRight /></Link></article>)}
         <article className="provider-portal"><span className="home-service-icon"><Building2 /></span><div><h3>Portal del Prestador</h3><p>El portal donde los prestadores de salud administran su convenio, y donde las instituciones puedan iniciar su proceso de inclusión.</p></div><Link href="https://humana.med.ec/portal-prestador/">Acceso <ArrowRight /></Link></article>
       </div>
-      <article className="communication-card"><div><span className="kicker">Estamos para ayudarte</span><h3>Canales de comunicación</h3></div><div className="channel-grid">{channels.map(({icon:Icon,label,href,brandColor}) => <Link key={label} href={href}><Icon style={brandColor ? { color: brandColor } : undefined} /><span>{label}</span></Link>)}</div></article>
+      <article className="communication-card"><div><span className="kicker">Estamos para ayudarte</span><h3>Canales de comunicación</h3></div><div className="channel-grid">{channels.map(({icon:Icon,label,href,brandColor,brandSize}) => <Link key={label} href={href}><Icon style={brandColor ? { color: brandColor, width: brandSize, height: brandSize } : undefined} /><span>{label}</span></Link>)}</div></article>
       <div className="home-network-strip"><p>La Red Humana que nos ayuda a <strong>cuidarte:</strong></p><div><span>Hospital Kennedy</span><span>Clínica Pasteur</span><span>Hospital Vozandes Quito</span><span>Hospital Alcívar</span><span>Hospital Metropolitano</span></div></div>
     </section>
 
