@@ -85,8 +85,8 @@ export default function Home() {
     </section>
 
     <section className="home-official-section home-blog" aria-labelledby="home-blog-title">
-      <div className="section-heading centered home-blog-heading"><span className="kicker">Información para cuidarte</span><h2 id="home-blog-title">BLOG humana</h2><Link className="primary-button" href="/planes">Cotizar en 1 minuto <ArrowRight size={18} /></Link></div>
-      <div className="home-blog-grid">{articles.map(article => <article key={article.title}><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | Bienestar</span><p>{article.copy}</p><Link href="/blog">Leer más <ArrowRight /></Link></div></article>)}</div>
+      <div className="section-heading centered"><span className="kicker">Información para cuidarte</span><h2 id="home-blog-title">BLOG humana</h2></div>
+      <div className="home-blog-grid">{articles.map(article => <article key={article.title}><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | Bienestar</span><p>{article.copy}</p><div className="home-blog-actions"><Link href="/blog">Leer más <ArrowRight /></Link><Link className="primary-button small" href="/planes">Cotizar en 1 minuto <ArrowRight size={16} /></Link></div></div></article>)}</div>
     </section>
 
     <section className="home-digital-band">
