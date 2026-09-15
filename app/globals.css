@@ -527,24 +527,32 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .benefit-alert > svg { width:45px; height:45px; color:var(--humana-teal); }
 .benefit-alert p { margin:5px 0 0; color:#647d8c; }
 
-.blog-tools { margin-bottom:28px; display:flex; justify-content:space-between; align-items:center; gap:24px; }
-.blog-tools label { width:min(460px,100%); height:48px; padding:0 15px; display:flex; align-items:center; gap:10px; border:1px solid #d5e5ec; border-radius:999px; }
-.blog-tools input { flex:1; border:0; outline:0; }
-.blog-tools > div { display:flex; gap:18px; color:#567283; font-size:13px; font-weight:700; }
-.blog-tools span { display:flex; gap:6px; align-items:center; }
-.blog-tools svg { color:var(--humana-blue); width:18px; }
-.blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.blog-grid article { overflow:hidden; border:1px solid #dce9ef; border-radius:20px; background:#fff; }
-.blog-cover { height:170px; display:grid; place-items:center; color:#fff; background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.25),transparent 22%),linear-gradient(135deg,#075c92,#12a6a2); }
-.blog-cover svg { width:65px; height:65px; stroke-width:1.3; }
-.blog-grid article > span, .blog-grid article > h2, .blog-grid article > p, .blog-grid article > a { margin-left:23px; margin-right:23px; }
-.blog-grid article > span { display:block; margin-top:21px; color:var(--humana-blue); font-size:11px; font-weight:850; text-transform:uppercase; }
-.blog-grid h2 { color:#123f5e; font-size:21px; line-height:1.25; }
-.blog-grid article > p { color:#647c8b; line-height:1.55; }
-.blog-grid article > a { margin-bottom:23px; padding:15px; display:block; border-radius:13px; color:#164d6c; background:#eff8fb; }
-.blog-grid article > a strong, .blog-grid article > a small { display:block; }
-.blog-grid article > a small { margin-top:6px; color:var(--humana-blue); font-weight:750; }
-.blog-grid article > a small svg { vertical-align:middle; }
+.blog-listing { display:grid; grid-template-columns:1fr 320px; align-items:start; gap:44px; }
+.blog-listing-main { min-width:0; display:flex; flex-direction:column; gap:20px; }
+.blog-listing-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.blog-listing-grid article { overflow:hidden; display:flex; flex-direction:column; border:1px solid #dce8ee; border-radius:22px; background:#f6fafc; box-shadow:0 14px 38px rgba(12,69,103,.06); transition:transform .35s var(--premium-ease),box-shadow .35s ease; }
+.blog-listing-grid article:hover { transform:translateY(-5px); box-shadow:0 20px 48px rgba(12,69,103,.11); }
+.blog-listing-grid .home-blog-image { height:180px; }
+.blog-listing-grid .home-blog-copy { padding:22px; }
+.blog-listing-grid .home-blog-copy h3 { font-size:19px; }
+.blog-plan-card { background:#fff; }
+.blog-plan-card .home-blog-copy h3 { color:#0b4c72; }
+
+.blog-sidebar { position:sticky; top:110px; display:flex; flex-direction:column; gap:16px; }
+.blog-sidebar-card { padding:22px; border:1px solid #dce8ee; border-radius:20px; background:#fff; box-shadow:0 12px 32px rgba(12,69,103,.06); }
+.blog-sidebar-card strong { display:flex; align-items:center; gap:8px; color:#0b4c72; font-size:16px; }
+.blog-app-kicker { display:block; margin:4px 0 12px; color:#087eb9; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+.blog-app-card .app-downloads { margin-top:0; padding:0; border:none; background:none; flex-direction:column; }
+.blog-app-card .app-downloads a { min-height:46px; }
+.blog-channel-list { list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:14px; }
+.blog-channel-list li { display:flex; align-items:flex-start; gap:12px; padding-top:14px; border-top:1px dashed #dbe8ef; }
+.blog-channel-list li:first-child { padding-top:0; border-top:none; }
+.blog-channel-list span { flex:0 0 auto; width:34px; height:34px; display:grid; place-items:center; border-radius:10px; color:#087eb9; background:#eef8fc; }
+.blog-channel-list svg { width:17px; }
+.blog-channel-list p { margin:0; color:#4c6d80; font-size:13px; line-height:1.5; }
+.blog-channel-list p a { display:block; color:#0b4c72; font-weight:700; }
+.blog-buy-card p { margin:10px 0 0; color:#4c6d80; font-size:13px; line-height:1.55; }
+.blog-buy-card .primary-button.small { margin-top:16px; width:100%; justify-content:center; }
 
 .client-hero { padding:55px clamp(24px,7vw,110px); display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg,#eff9fc,#f8fcfd); }
 .client-hero h1 { margin:8px 0; color:#073b60; font-size:50px; letter-spacing:-.04em; }
@@ -758,7 +766,9 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .network-kind-grid { grid-template-columns:1fr 1fr; }
   .network-finder { grid-template-columns:1fr; }
   .network-help-grid { grid-template-columns:1fr; }
-  .benefits-hub, .blog-grid, .company-grid { grid-template-columns:repeat(2,1fr); }
+  .benefits-hub, .company-grid { grid-template-columns:repeat(2,1fr); }
+  .blog-listing { grid-template-columns:1fr; }
+  .blog-sidebar { position:static; }
   .benefit-alert, .company-cta { grid-template-columns:auto 1fr; }
   .benefit-alert .primary-button, .company-cta .white-button { grid-column:2; justify-self:start; }
 }
@@ -787,10 +797,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .page-hero-with-image .page-hero-copy { width:auto; padding-top:4px; }
   .page-hero h1 { font-size:42px; }
   .content-section { padding:52px 22px; }
-  .choice-grid, .plan-grid, .service-grid, .benefits-hub, .blog-grid, .company-grid, .client-actions, .home-link-grid { grid-template-columns:1fr; }
+  .choice-grid, .plan-grid, .service-grid, .benefits-hub, .company-grid, .client-actions, .home-link-grid, .blog-listing-grid { grid-template-columns:1fr; }
   .wizard-wrap { padding:35px 14px 65px; }
   .wizard-card, .result-card { padding:25px 19px; min-height:0; }
-  .result-actions, .segmented, .blog-tools, .blog-tools > div { display:grid; }
+  .result-actions, .segmented { display:grid; }
   .journey-panel, .benefit-alert, .company-cta { grid-template-columns:1fr; }
   .benefit-alert .primary-button, .company-cta .white-button { grid-column:auto; justify-self:stretch; }
   .simple-steps { padding:0 22px 60px; grid-template-columns:1fr; }
@@ -808,7 +818,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .network-finder-copy,.network-search-form { padding:28px 20px; }
   .network-finder-copy h2 { font-size:30px; }
   .network-help-grid article { min-height:0; }
-  .blog-tools > div { gap:8px; }
   .client-hero { padding:42px 22px; display:grid; gap:22px; }
   .client-hero h1 { font-size:42px; }
   .activity-card { align-items:flex-start; gap:15px; display:grid; }
@@ -1222,7 +1231,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .home-link-grid a,
 .benefits-hub article,
 .service-grid article,
-.blog-grid article,
+.blog-listing-grid article,
 .client-actions > *,
 .about-timeline article,
 .about-values-grid article,
@@ -1235,7 +1244,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .home-link-grid a:hover,
 .benefits-hub article:hover,
 .service-grid article:hover,
-.blog-grid article:hover,
+.blog-listing-grid article:hover,
 .client-actions > *:hover,
 .about-timeline article:hover,
 .about-values-grid article:hover {
