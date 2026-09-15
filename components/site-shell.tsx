@@ -37,7 +37,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
     <main data-page-title={title}>
       <MotionOrchestrator />
       <div className="prototype-bar">
-        <div className="prototype-portals"><Link href="https://humana.med.ec/portal-prestador/">Portal Prestador</Link><Link href="/empresas">Portal Bróker</Link></div>
+        <div className="prototype-portals"><Link href="https://humana.med.ec/portal-prestador/">Portal Prestador</Link><Link href="/portal-broker">Portal Bróker</Link></div>
       </div>
       <header className="site-header full-header">
         <Link className="brand" href="/" aria-label="Humana, inicio">
