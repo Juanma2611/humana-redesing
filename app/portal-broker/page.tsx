@@ -4,7 +4,7 @@ import { PageHero, SiteShell } from "@/components/site-shell";
 
 export default function PortalBroker() {
   return <SiteShell title="Portal Bróker">
-    <PageHero eyebrow="Portal Bróker" title="Bienvenido, Bróker" description="Selecciona el tipo de gestión que necesitas para continuar." />
+    <PageHero eyebrow="Portal Bróker" title="Bienvenido, Bróker" description="Selecciona el tipo de gestión que necesitas para continuar." imageSrc="/humana-business-team-v2.png" imageAlt="Equipo de empresarios trabajando" imagePosition="center" />
     <section className="content-section">
       <div className="broker-chooser">
         <Link className="broker-chooser-card" href="/portal-broker/personas">
