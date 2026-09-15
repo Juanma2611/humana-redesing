@@ -1,27 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Ambulance, Apple, ArrowRight, Building2, Check, ClipboardList, Download,
-  HeartHandshake, HeartPulse, House, Mail, MapPin, MessageCircle, Plane,
-  RotateCcw, ShieldCheck, ShoppingCart, Smartphone, Sparkles, Stethoscope, UserRound,
-  UsersRound, Video,
+  Ambulance, Apple, ArrowRight, Building2, Check, ClipboardList,
+  HeartHandshake, HeartPulse, House, Mail, MapPin, MessageCircle, Monitor, Network, Phone, Plane,
+  RotateCcw, ShieldCheck, ShoppingCart, Smartphone, Sparkles, Stethoscope, Store, UserRound,
+  UsersRound,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
 const quickServices = [
-  { icon: Stethoscope, title: "Red de prestadores", copy: "La red de prestadores que te garantiza una atención médica de calidad", cta: "Ver Directorio", href: "/red-medica" },
-  { icon: Download, title: "Descarga de formularios", copy: "Descarga los formularios necesarios para realizar tus trámites", cta: "Formularios", href: "/servicios" },
+  { icon: Network, title: "Red de prestadores", copy: "La red de prestadores que te garantiza una atención médica de calidad", cta: "Ver Directorio", href: "/red-medica" },
+  { icon: ClipboardList, title: "Descarga de formularios", copy: "Descarga los formularios necesarios para realizar tus trámites", cta: "Formularios", href: "/servicios" },
   { icon: Building2, title: "Portal de Bróker", copy: "Optimiza tu trabajo en una sola plataforma y transforma la experiencia", cta: "Ver más", href: "/portal-broker" },
   { icon: ShoppingCart, title: "Cotizar un plan", copy: "Encuentra una amplia gama de Planes médicos en un único sitio.", cta: "Cotizar ahora", href: "/planes", featured: true },
 ];
 
 const channels = [
   { icon: MessageCircle, label: "WhatsApp", href: "/servicios" },
-  { icon: UserRound, label: "Oficina virtual", href: "/cliente" },
+  { icon: Monitor, label: "Oficina virtual", href: "/cliente" },
   { icon: ClipboardList, label: "Formulario", href: "/servicios" },
   { icon: MapPin, label: "Oficinas", href: "#oficinas" },
   { icon: Mail, label: "Correo", href: "/servicios" },
-  { icon: Stethoscope, label: "1800 humana (48 62 62)", href: "tel:1800486262" },
+  { icon: Phone, label: "1800 humana (48 62 62)", href: "tel:1800486262" },
 ];
 
 const articles = [
@@ -33,8 +33,8 @@ const articles = [
 const officialBenefits = [
   { icon: House, title: "Médico a domicilio", copy: "Solicita un médico para que acuda en el lugar donde lo necesites." },
   { icon: Plane, title: "Asistencia en viajes", copy: "Viaja seguro con cobertura por un monto máximo de $100.000." },
-  { icon: Video, title: "Teleconsulta médica", copy: "Ilimitadas y sin costo, agendando tu cita en el 1800 48 62 62 o mediante APP." },
-  { icon: ShoppingCart, title: "Farmacia a domicilio", copy: "Solicita tus medicinas y aplica tu cobertura con Medicity, Pharmacys y Fybeca." },
+  { icon: Phone, title: "Teleconsulta médica", copy: "Ilimitadas y sin costo, agendando tu cita en el 1800 48 62 62 o mediante APP." },
+  { icon: Store, title: "Farmacia a domicilio", copy: "Solicita tus medicinas y aplica tu cobertura con Medicity, Pharmacys y Fybeca." },
   { icon: Ambulance, title: "Ambulancia terrestre", copy: "Recibe asistencia médica oportuna en caso de emergencia." },
   { icon: ShieldCheck, title: "Seguro de vida", copy: "Si en algún momento llegas a faltar, ofrecemos a tus familiares un importante apoyo mediante el seguro de vida." },
   { icon: HeartHandshake, title: "Asistencia Exequial", copy: "Cobertura de sepelio con Jardines del Valle para titulares y dependientes." },
