@@ -47,8 +47,6 @@ const revealSelectors = [
   ".wizard-aside",
   ".service-grid article",
   ".benefits-hub article",
-  ".blog-listing-grid article",
-  ".blog-sidebar-card",
   ".client-actions > *",
   ".journey-panel > *",
   ".network-section > *",
