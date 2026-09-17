@@ -66,6 +66,8 @@ const officialImages: Record<number, string> = {
   17: "/blog/blog-26.jpg",
   18: "/blog/blog-27.jpg",
   19: "/blog/blog-28.jpg",
+  20: "/blog/blog-29.jpg",
+  21: "/blog/blog-30.jpg",
 };
 
 export const moreBlogArticles = moreBlogArticlesRaw.map((article, i) => ({
