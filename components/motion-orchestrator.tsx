@@ -97,11 +97,19 @@ export function MotionOrchestrator() {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.08, rootMargin: "0px 0px -7% 0px" },
+      { threshold: 0, rootMargin: "0px 0px -5% 0px" },
     );
 
     nodes.forEach((node) => observer.observe(node));
     images.forEach((image) => observer.observe(image));
+
+    // Red de seguridad: si por cualquier motivo (secciones muy altas, cambio
+    // de página, timing del navegador) el observer no revela un elemento a
+    // tiempo, se fuerza su aparición para que nada se quede invisible.
+    const safetyTimer = window.setTimeout(() => {
+      nodes.forEach((node) => node.classList.add("is-visible"));
+      images.forEach((image) => image.classList.add("is-visible"));
+    }, 900);
 
     let frame = 0;
     const updateParallax = () => {
@@ -122,6 +130,7 @@ export function MotionOrchestrator() {
 
     return () => {
       observer.disconnect();
+      window.clearTimeout(safetyTimer);
       window.removeEventListener("scroll", onScroll);
       if (frame) window.cancelAnimationFrame(frame);
     };
