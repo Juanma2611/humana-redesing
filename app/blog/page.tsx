@@ -34,7 +34,7 @@ export default function Blog() {
         </div>
 
         <div className="blog-listing-grid blog-plan-grid">
-          {blogPlans.map(plan => <article key={plan.title} className="blog-plan-card"><div className="home-blog-image"><Image src={plan.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{plan.title}</h3><span>{plan.date} | {plan.category}</span><p>{plan.copy}</p><div className="home-blog-actions">{planCtas[plan.title]?.map((cta, i) => <Link key={cta} className={i === 0 && planCtas[plan.title].length > 1 ? "primary-button small" : undefined} href="/planes">{cta} <ArrowRight size={16} /></Link>)}</div></div></article>)}
+          {blogPlans.map(plan => <article key={plan.title} className="blog-plan-card"><div className="home-blog-image"><Image src={plan.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{plan.detailSlug ? <Link href={`/planes/${plan.detailSlug}`}>{plan.title}</Link> : plan.title}</h3><span>{plan.date} | {plan.category}</span><p>{plan.copy}</p><div className="home-blog-actions">{planCtas[plan.title]?.map((cta, i) => <Link key={cta} className={i === 0 && planCtas[plan.title].length > 1 ? "primary-button small" : undefined} href="/planes">{cta} <ArrowRight size={16} /></Link>)}</div></div></article>)}
         </div>
 
         <div className="blog-listing-grid">

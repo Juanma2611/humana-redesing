@@ -1770,3 +1770,131 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .foundation-visual img { object-position:68% center; }
   .home-about-copy { padding:28px 20px; }
 }
+
+/* ===== Plan detail pages (Proteger / Individual y Familiar) ===== */
+.plan-detail-breadcrumb { padding:28px clamp(24px,7vw,110px) 0; }
+
+.secondary-button.green { background:#12a6a2; color:#fff; border:1px solid #12a6a2; }
+.secondary-button.green:hover { background:#0e8c88; }
+.secondary-button.light { background:var(--humana-ice); color:var(--humana-navy); border:1px solid #cfe6f0; }
+
+.plan-detail-hero { position:relative; min-height:320px; display:flex; align-items:flex-end; overflow:hidden; margin:18px clamp(24px,7vw,110px) 0; border-radius:28px; box-shadow:var(--premium-shadow); background:linear-gradient(135deg,#075c92,#0b80bd); }
+.plan-detail-hero-media { position:absolute; inset:0; }
+.plan-detail-hero-media img { object-fit:cover; }
+.plan-detail-hero-shade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(7,49,74,.35),rgba(7,49,74,.88)); }
+.plan-detail-hero-copy { position:relative; z-index:1; padding:56px clamp(24px,4vw,58px) 42px; color:#fff; max-width:760px; }
+.plan-detail-hero-copy .kicker { color:#bfe6f7; }
+.plan-detail-hero-copy h1 { color:#fff; margin:10px 0 16px; font-size:clamp(32px,4vw,46px); }
+.plan-detail-hero-copy p { color:#e3f1f8; font-size:16px; line-height:1.7; margin:0 0 14px; max-width:640px; }
+
+.plan-detail-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:20px; }
+
+.plan-detail-coverage-layout { display:grid; grid-template-columns:1.35fr .9fr; gap:44px; align-items:start; }
+
+.plan-detail-table-wrap h2 { margin:0 0 16px; color:#073b60; font-size:24px; }
+.plan-detail-table { width:100%; border-collapse:collapse; background:#fff; border-radius:18px; overflow:hidden; box-shadow:var(--premium-shadow); font-size:14.5px; }
+.plan-detail-table th, .plan-detail-table td { padding:13px 16px; text-align:left; border-bottom:1px solid var(--border); }
+.plan-detail-table thead th { background:var(--humana-ice); color:var(--humana-navy); font-weight:800; text-transform:uppercase; font-size:12px; letter-spacing:.03em; }
+.plan-detail-table thead th:first-child { background:var(--humana-ice); }
+.plan-detail-table tbody th[scope="row"] { font-weight:650; color:#33546a; width:38%; }
+.plan-detail-table tbody td { color:#3f5f73; text-align:center; }
+.plan-detail-table tr:last-child th, .plan-detail-table tr:last-child td { border-bottom:none; }
+.plan-detail-table tr.plan-table-section th { background:var(--humana-ice); color:var(--humana-navy); font-weight:800; text-transform:uppercase; font-size:12px; letter-spacing:.04em; }
+.plan-detail-table .cell-check { color:#12a6a2; }
+.plan-detail-table .cell-x { color:#c65252; opacity:.7; }
+
+.plan-detail-tables { display:flex; flex-direction:column; gap:36px; }
+
+.plan-detail-notes { list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; }
+.plan-detail-notes li { display:flex; align-items:flex-start; gap:10px; color:#3f5f73; font-size:14.5px; line-height:1.6; }
+.plan-detail-notes li svg { color:#0b80bd; flex-shrink:0; margin-top:2px; }
+
+.plan-detail-side { position:sticky; top:24px; display:flex; flex-direction:column; gap:26px; }
+.plan-detail-side .plan-detail-actions { flex-direction:column; margin-top:0; }
+.plan-detail-side .plan-detail-actions a, .plan-detail-side .plan-detail-actions button { width:100%; }
+
+.plan-detail-main-benefits h3 { margin:0 0 14px; color:#073b60; font-size:17px; }
+.plan-detail-benefits-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.plan-detail-benefit-card { display:flex; flex-direction:column; gap:8px; padding:16px; border-radius:16px; background:#fff; border:1px solid var(--border); box-shadow:var(--premium-shadow); }
+.plan-detail-benefit-card span { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:12px; background:var(--humana-ice); color:var(--humana-blue); }
+.plan-detail-benefit-card p { margin:0; font-size:13px; line-height:1.5; color:#3f5f73; font-weight:600; }
+
+.plan-detail-life-card { display:flex; gap:14px; padding:20px; border-radius:18px; background:#fff; border:1px solid var(--border); box-shadow:var(--premium-shadow); }
+.plan-detail-life-card > span { display:inline-flex; align-items:center; justify-content:center; width:46px; height:46px; border-radius:14px; background:var(--humana-ice); color:#12a6a2; flex-shrink:0; }
+.plan-detail-life-card strong { display:block; color:#073b60; margin-bottom:6px; font-size:15px; }
+.plan-detail-life-card p { margin:0; color:#3f5f73; font-size:13.5px; line-height:1.6; }
+
+.plan-detail-checkup .kicker { display:block; margin-bottom:8px; }
+.plan-detail-checkup > h2 { margin:0 0 22px; color:#073b60; font-size:clamp(26px,3vw,36px); }
+.plan-checkup-card { display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding:20px 24px; border-radius:18px; background:var(--humana-ice); margin-bottom:26px; }
+.plan-checkup-intro { display:flex; align-items:center; gap:12px; }
+.plan-checkup-intro strong { color:#073b60; font-size:16px; }
+.plan-checkup-brand { padding:4px 12px; border-radius:999px; background:#fff; color:var(--humana-blue); font-weight:800; font-size:12px; }
+.plan-checkup-card p { margin:0; color:#3f5f73; font-size:14px; }
+.plan-checkup-layout { display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:start; }
+.plan-checkup-table-wrap h3, .plan-checkup-conditions h3 { margin:0 0 14px; color:#073b60; font-size:17px; }
+.plan-checkup-table td { text-align:center; }
+.plan-checkup-conditions ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+.plan-checkup-conditions li { display:flex; gap:10px; align-items:flex-start; color:#3f5f73; font-size:14px; line-height:1.6; }
+.plan-checkup-conditions li svg { color:#0b80bd; flex-shrink:0; margin-top:2px; }
+
+.plan-huplus-banner { margin:56px clamp(24px,7vw,110px); padding:32px clamp(24px,4vw,48px); border-radius:24px; background:linear-gradient(135deg,#075c92,#12a6a2); color:#fff; box-shadow:var(--premium-shadow); }
+.plan-huplus-banner strong { display:block; font-size:22px; margin-bottom:12px; }
+.plan-huplus-categories { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+.plan-huplus-categories span { padding:5px 14px; border-radius:999px; background:rgba(255,255,255,.16); font-weight:700; font-size:13px; }
+.plan-huplus-banner p { margin:0; max-width:760px; color:#e3f1f8; font-size:14.5px; line-height:1.7; }
+
+.plan-detail-faq-layout { display:grid; grid-template-columns:1.3fr .9fr; gap:44px; align-items:start; }
+.plan-detail-faq-layout h2 { margin:0 0 22px; color:#073b60; font-size:clamp(24px,3vw,32px); }
+
+.plan-faq-accordion { display:flex; flex-direction:column; border-top:1px solid var(--border); }
+.plan-faq-item { border-bottom:1px solid var(--border); }
+.plan-faq-trigger { width:100%; display:flex; justify-content:space-between; align-items:center; gap:14px; padding:18px 4px; background:none; border:none; text-align:left; font-weight:700; color:#12314a; font-size:15px; cursor:pointer; }
+.plan-faq-trigger svg { color:var(--humana-blue); flex-shrink:0; transition:transform .3s var(--premium-ease); }
+.plan-faq-item.open .plan-faq-trigger svg { transform:rotate(180deg); }
+.plan-faq-content { padding:0 4px 20px; color:#3f5f73; font-size:14.5px; line-height:1.7; }
+.plan-faq-content p { margin:0 0 12px; }
+.plan-faq-placeholder { color:#8199a8; font-style:italic; }
+.plan-faq-checklist { list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; }
+.plan-faq-checklist li { display:flex; gap:10px; align-items:flex-start; }
+.plan-faq-checklist li svg { color:#12a6a2; flex-shrink:0; margin-top:3px; }
+
+.plan-lead-form { padding:26px; border-radius:22px; background:#fff; border:1px solid var(--border); box-shadow:var(--premium-shadow); }
+.plan-lead-form h3 { margin:0 0 18px; color:#073b60; font-size:18px; }
+.plan-lead-form form { display:flex; flex-direction:column; gap:14px; }
+.plan-lead-form label { display:flex; flex-direction:column; gap:6px; font-size:13px; font-weight:700; color:#33546a; }
+.plan-lead-form input[type="text"], .plan-lead-form input[type="email"], .plan-lead-form input[type="tel"] { min-height:44px; border-radius:11px; border:1px solid var(--input); padding:0 14px; font-size:14px; color:#12314a; font-weight:500; }
+.plan-lead-form input:focus { outline:2px solid var(--humana-sky); outline-offset:1px; }
+.plan-lead-checkbox { flex-direction:row; align-items:flex-start; gap:8px; font-weight:500; font-size:12.5px; color:#5e7384; }
+.plan-lead-checkbox input { margin-top:3px; }
+.plan-lead-form button[type="submit"] { margin-top:4px; }
+.plan-lead-success { display:flex; gap:10px; align-items:flex-start; color:#0e8c88; font-size:13.5px; line-height:1.6; }
+.plan-lead-success svg { flex-shrink:0; margin-top:2px; }
+.plan-lead-disclaimer { margin:16px 0 0; font-size:11.5px; color:#9db0bc; text-align:center; }
+
+.plan-acquire-section { display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center; margin:0 0 0; padding:70px clamp(24px,7vw,110px); background:linear-gradient(180deg,#f4f9fb,#eef8fc); }
+.plan-acquire-copy h2 { margin:8px 0 14px; color:#073b60; font-size:clamp(26px,3vw,36px); }
+.plan-acquire-copy > p { color:#3f5f73; margin:0 0 20px; font-size:15px; }
+.plan-acquire-steps { list-style:none; margin:0 0 20px; padding:0; display:flex; flex-direction:column; gap:14px; counter-reset:acquire; }
+.plan-acquire-steps li { display:flex; align-items:center; gap:14px; color:#12314a; font-weight:650; font-size:14.5px; }
+.plan-acquire-steps li span { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:11px; background:#fff; color:var(--humana-blue); box-shadow:var(--premium-shadow); flex-shrink:0; }
+.plan-acquire-note { color:#3f5f73; font-size:13.5px; line-height:1.7; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.plan-acquire-badges { display:flex; gap:10px; flex-wrap:wrap; margin:18px 0; }
+.plan-acquire-badges span { padding:6px 14px; border-radius:999px; background:#fff; border:1px solid #cfe6f0; color:var(--humana-navy); font-weight:700; font-size:12px; }
+.plan-acquire-visual { display:flex; align-items:center; justify-content:center; min-height:220px; border-radius:24px; background:linear-gradient(135deg,#075c92,#10a7db); color:#fff; box-shadow:var(--premium-shadow); }
+
+.plan-detail-toast { position:fixed; left:50%; bottom:26px; transform:translateX(-50%); z-index:60; }
+
+@media (max-width:1080px) {
+  .plan-detail-coverage-layout, .plan-checkup-layout, .plan-detail-faq-layout, .plan-acquire-section { grid-template-columns:1fr; }
+  .plan-detail-side { position:static; }
+  .plan-acquire-visual { min-height:160px; }
+}
+
+@media (max-width:760px) {
+  .plan-detail-hero { margin:14px 16px 0; min-height:280px; }
+  .plan-detail-hero-copy { padding:40px 22px 30px; }
+  .plan-detail-benefits-grid { grid-template-columns:1fr 1fr; }
+  .plan-huplus-banner { margin:40px 16px; }
+  .plan-acquire-section { padding:52px 20px; }
+}
