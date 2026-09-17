@@ -1578,7 +1578,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .home-official-section .section-heading h2,.home-app-showcase h2,.home-foundation h2 { margin:10px 0 13px; color:#073b60; font-size:clamp(34px,4.2vw,54px); line-height:1.06; letter-spacing:-.045em; }
 .home-access { margin-top:0; background:linear-gradient(180deg,#f3f9fc 0%,#edf6fa 100%); }
 .home-access-grid { max-width:1240px; margin:auto; display:grid; grid-template-columns: 1fr .82fr; grid-auto-rows:min-content; gap:14px; }
-.home-access-grid article { position:relative; padding:22px 24px; border:1px solid #dbe8ef; border-radius:18px; background:rgba(255,255,255,.94); box-shadow:0 12px 34px rgba(12,69,103,.07); transition:transform .4s var(--premium-ease),box-shadow .4s ease,border-color .3s ease; }
+.home-access-grid article { padding:22px 24px; border:1px solid #dbe8ef; border-radius:18px; background:rgba(255,255,255,.94); box-shadow:0 12px 34px rgba(12,69,103,.07); transition:transform .4s var(--premium-ease),box-shadow .4s ease,border-color .3s ease; }
 .home-access-grid article:hover { transform:translateY(-5px); border-color:#8ed6e9; box-shadow:0 18px 44px rgba(12,69,103,.12); }
 .home-access-grid article:not(.featured) { display:grid; grid-template-columns:50px 1fr; column-gap:16px; align-items:start; }
 .home-access-grid article:not(.featured) > span { grid-column:1; grid-row:1/-1; align-self:center; }
@@ -1597,17 +1597,17 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .home-access-grid article.featured > span img { width:20px; height:20px; }
 .home-access-grid article.featured h3 { margin:12px 0 5px; font-size:16px; }
 .home-access-grid article.featured p { margin:0 0 12px; font-size:12px; }
-.home-access-grid article > a,.home-access-grid article .card-cover-cta { margin-top:auto; display:inline-flex; align-items:center; gap:8px; color:#087eb9; font-size:13px; font-weight:850; }
-.home-access-grid article > a svg,.home-access-grid article .card-cover-cta svg,.provider-portal > a svg,.home-blog-copy a svg,.home-about-copy > a svg,.home-plan-grid > a > span svg { width:16px; transition:transform .3s ease; }
-.home-access-grid article > a:hover svg,.home-access-grid article:hover .card-cover-cta svg,.provider-portal > a:hover svg,.home-blog-copy a:hover svg,.home-about-copy > a:hover svg,.home-plan-grid > a:hover > span svg { transform:translateX(4px); }
-.home-access-grid .featured h3,.home-access-grid .featured p,.home-access-grid .featured > a,.home-access-grid .featured .card-cover-cta { color:white; }
+.home-access-grid article > a { margin-top:auto; display:inline-flex; align-items:center; gap:8px; color:#087eb9; font-size:13px; font-weight:850; }
+.home-access-grid article > a svg,.provider-portal > a svg,.home-blog-copy a svg,.home-about-copy > a svg,.home-plan-grid > a > span svg { width:16px; transition:transform .3s ease; }
+.home-access-grid article > a:hover svg,.provider-portal > a:hover svg,.home-blog-copy a:hover svg,.home-about-copy > a:hover svg,.home-plan-grid > a:hover > span svg { transform:translateX(4px); }
+.home-access-grid .featured h3,.home-access-grid .featured p,.home-access-grid .featured > a { color:white; }
 .home-access-grid .featured > span { color:white; background:rgba(255,255,255,.9); }
 .home-access-grid article.provider-portal { grid-column:2; grid-row:2 / 3; padding:18px 20px; border:none; background:linear-gradient(155deg,#0b4c72,#0a6796); box-shadow:0 15px 42px rgba(9,58,89,.18); display:flex; flex-direction:column; justify-content:center; gap:6px; }
 .provider-portal .home-service-icon { width:44px; height:44px; color:white; background:rgba(255,255,255,.16); }
 .provider-portal .home-service-icon svg { width:22px; }
 .home-access-grid article.provider-portal h3 { margin:0; color:white; font-size:15px; letter-spacing:-.02em; }
 .home-access-grid article.provider-portal p { margin:0; color:rgba(255,255,255,.85); font-size:12px; line-height:1.45; }
-.home-access-grid article.provider-portal > a,.home-access-grid article.provider-portal .provider-portal-cta { display:inline-flex; align-items:center; gap:7px; width:max-content; color:white; font-size:12px; font-weight:850; }
+.home-access-grid article.provider-portal > a { display:inline-flex; align-items:center; gap:7px; width:max-content; color:white; font-size:12px; font-weight:850; }
 .communication-card { max-width:1240px; margin:14px auto 0; padding:30px clamp(24px,4vw,40px); border:1px solid #dbe8ef; border-radius:22px; background:white; box-shadow:0 15px 42px rgba(12,69,103,.07); display:grid; grid-template-columns:.6fr 1.4fr; gap:30px; align-items:center; }
 .communication-card h3 { margin:0; color:#0b4c72; font-size:20px; letter-spacing:-.02em; }
 .communication-card .kicker { font-size:12px; }
