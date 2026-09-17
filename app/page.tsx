@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { SiApple, SiGoogleplay, SiWhatsapp } from "react-icons/si";
 import { SiteShell } from "@/components/site-shell";
-import { blogArticles } from "@/lib/blog-articles";
+import { blogArticlesWithSlug as blogArticles } from "@/lib/blog-articles";
 import { HospitalCarousel } from "@/components/hospital-carousel";
 
 const quickServices = [
@@ -83,7 +83,7 @@ export default function Home() {
 
     <section className="home-official-section home-blog" aria-labelledby="home-blog-title">
       <div className="section-heading centered"><span className="kicker">Información para cuidarte</span><a href="/blog"><h2 id="home-blog-title" className="home-blog-title">BLOG <span>humana</span></h2></a></div>
-      <div className="home-blog-grid">{blogArticles.map(article => <article key={article.title}><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | Bienestar</span><p>{article.copy}</p><div className="home-blog-actions"><Link href="/blog">Leer más <ArrowRight /></Link><Link className="primary-button small" href="/planes">Cotizar en 1 minuto <ArrowRight size={16} /></Link></div></div></article>)}</div>
+      <div className="home-blog-grid">{blogArticles.map(article => <article key={article.title}><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | Bienestar</span><p>{article.copy}</p><div className="home-blog-actions"><Link href={`/blog/${article.slug}`}>Leer más <ArrowRight /></Link><Link className="primary-button small" href="/planes">Cotizar en 1 minuto <ArrowRight size={16} /></Link></div></div></article>)}</div>
       <div className="home-blog-viewall"><a className="secondary-button" href="/blog">Ver todos los blogs <ArrowRight size={18} /></a></div>
     </section>
 
