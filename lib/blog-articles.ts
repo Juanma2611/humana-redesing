@@ -47,15 +47,10 @@ const moreBlogArticlesRaw = [
 
 const officialImages: Record<number, string> = {
   0: "/blog/blog-04.jpg",
-  1: "/blog/blog-05.jpg",
-  2: "/blog/blog-06.jpg",
-  3: "/blog/blog-07.jpg",
-  4: "/blog/blog-08.jpg",
-  5: "/blog/blog-09.jpg",
-  6: "/blog/blog-10.jpg",
-  7: "/blog/blog-11.jpg",
-  8: "/blog/blog-12.jpg",
-  9: "/blog/blog-13.jpg",
+  1: "/blog/blog-10.jpg",
+  2: "/blog/blog-11.jpg",
+  3: "/blog/blog-12.jpg",
+  4: "/blog/blog-13.jpg",
 };
 
 export const moreBlogArticles = moreBlogArticlesRaw.map((article, i) => ({
@@ -66,9 +61,9 @@ export const moreBlogArticles = moreBlogArticlesRaw.map((article, i) => ({
 export const allBlogArticles = [...blogArticles, ...moreBlogArticles];
 
 export const blogPlans = [
-  { date: "Ago 21, 2026", category: "Slide cotizador", title: "Plan Proteger", copy: "Plan de gastos médicos mayores para enfermedades o accidentes graves, desde $25,82 al mes. Se activa una vez superado el deducible. Hasta $500.000 de cobertura por incapacidad.", image: "/plan-ph15-hero.jpeg" },
-  { date: "Ago 21, 2026", category: "Slide cotizador", title: "Humana Kids", copy: "La versión especializada de nuestro plan familiar para menores de edad desde $79,54 al mes. Incluye control de niño sano y vacunas. De 0 a 17 años.", image: "/familia-humana.png" },
-  { date: "Ago 21, 2026", category: "Slide cotizador", title: "Plan Jóvenes", copy: "De 18 a 35 años. Cobertura accesible diseñada para la independencia desde $58,27 al mes. Cobertura de $15.000.", image: "/plan-ph30-hero.jpeg" },
-  { date: "Ago 21, 2026", category: "Slide cotizador", title: "Plan Prosonrisas", copy: "Plan dental para ti y tu familia. Desde $6,63 al mes por persona. Para todas las edades.", image: "/humana-prosonrisas-hero.png" },
-  { date: "Ago 20, 2026", category: "Slide cotizador", title: "Individual y Familiar", copy: "Cobertura para ti y toda tu familia con la red médica más amplia del Ecuador. Cobertura desde $15.000 hasta $150.000. Para todas las edades.", image: "/plan-mh150-hero.jpeg" },
+  { date: "Ago 21, 2026", category: "Slide cotizador", title: "Plan Proteger", copy: "Plan de gastos médicos mayores para enfermedades o accidentes graves, desde $25,82 al mes. Se activa una vez superado el deducible. Hasta $500.000 de cobertura por incapacidad.", image: "/blog/blog-05.jpg" },
+  { date: "Ago 21, 2026", category: "Slide cotizador", title: "Humana Kids", copy: "La versión especializada de nuestro plan familiar para menores de edad desde $79,54 al mes. Incluye control de niño sano y vacunas. De 0 a 17 años.", image: "/blog/blog-06.jpg" },
+  { date: "Ago 21, 2026", category: "Slide cotizador", title: "Plan Jóvenes", copy: "De 18 a 35 años. Cobertura accesible diseñada para la independencia desde $58,27 al mes. Cobertura de $15.000.", image: "/blog/blog-07.jpg" },
+  { date: "Ago 21, 2026", category: "Slide cotizador", title: "Plan Prosonrisas", copy: "Plan dental para ti y tu familia. Desde $6,63 al mes por persona. Para todas las edades.", image: "/blog/blog-08.jpg" },
+  { date: "Ago 20, 2026", category: "Slide cotizador", title: "Individual y Familiar", copy: "Cobertura para ti y toda tu familia con la red médica más amplia del Ecuador. Cobertura desde $15.000 hasta $150.000. Para todas las edades.", image: "/blog/blog-09.jpg" },
 ];
