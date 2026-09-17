@@ -45,9 +45,17 @@ const moreBlogArticlesRaw = [
   { date: "Dic 19, 2025", category: "Consejos", title: "Esta Navidad una experiencia más Humana", copy: "Cada diciembre, las luces se encienden, las calles se llenan de música y los calendarios empiezan a saturarse de compromisos. Y aunque es fácil dejarnos llevar por el ritmo acelerado de regalos, compras y decoraciones, este año te invitamos a hacer una pausa. A..." },
 ];
 
+const officialImages: Record<number, string> = {
+  0: "/blog/blog-04.jpg",
+  1: "/blog/blog-05.jpg",
+  2: "/blog/blog-06.jpg",
+  3: "/blog/blog-07.jpg",
+  4: "/blog/blog-08.jpg",
+};
+
 export const moreBlogArticles = moreBlogArticlesRaw.map((article, i) => ({
   ...article,
-  image: fallbackImages[i % fallbackImages.length],
+  image: officialImages[i] ?? fallbackImages[i % fallbackImages.length],
 }));
 
 export const allBlogArticles = [...blogArticles, ...moreBlogArticles];
