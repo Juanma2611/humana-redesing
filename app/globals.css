@@ -1578,7 +1578,9 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .home-official-section .section-heading h2,.home-app-showcase h2,.home-foundation h2 { margin:10px 0 13px; color:#073b60; font-size:clamp(34px,4.2vw,54px); line-height:1.06; letter-spacing:-.045em; }
 .home-access { margin-top:0; background:linear-gradient(180deg,#f3f9fc 0%,#edf6fa 100%); }
 .home-access-grid { max-width:1240px; margin:auto; display:grid; grid-template-columns: 1fr .82fr; grid-auto-rows:min-content; gap:14px; }
-.home-access-grid article { padding:22px 24px; border:1px solid #dbe8ef; border-radius:18px; background:rgba(255,255,255,.94); box-shadow:0 12px 34px rgba(12,69,103,.07); transition:transform .4s var(--premium-ease),box-shadow .4s ease,border-color .3s ease; }
+.home-access-grid article { position:relative; padding:22px 24px; border:1px solid #dbe8ef; border-radius:18px; background:rgba(255,255,255,.94); box-shadow:0 12px 34px rgba(12,69,103,.07); transition:transform .4s var(--premium-ease),box-shadow .4s ease,border-color .3s ease; }
+.home-access-grid article.card-clickable { cursor:pointer; }
+.home-access-grid article .card-cover-link { position:absolute; inset:0; z-index:1; }
 .home-access-grid article:hover { transform:translateY(-5px); border-color:#8ed6e9; box-shadow:0 18px 44px rgba(12,69,103,.12); }
 .home-access-grid article:not(.featured) { display:grid; grid-template-columns:50px 1fr; column-gap:16px; align-items:start; }
 .home-access-grid article:not(.featured) > span { grid-column:1; grid-row:1/-1; align-self:center; }
