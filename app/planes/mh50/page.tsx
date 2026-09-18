@@ -8,7 +8,7 @@ import {
   CreditCard, Cross, FlaskConical, HandHeart, HeartHandshake, HeartPulse,
   Hospital, Microscope, MessageCircle, Milk, Phone, PhoneCall, Pill, PlaneTakeoff,
   Ribbon, Scissors, ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Syringe,
-  Users, Wallet, ChevronRight, Heart,
+  Users, Wallet, ChevronRight,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
@@ -26,6 +26,8 @@ const coverageCategories = [
   {
     id: "hospitalizacion",
     icon: Hospital,
+    image: "/mh50-hospitalizacion.jpg",
+    imageAlt: "Familia acompañando a un paciente en una habitación de hospital de Red Humana",
     title: "Hospitalización",
     kicker: "Sin límite de días",
     phrase: "Cuando más nos necesitas, estamos contigo.",
@@ -42,6 +44,8 @@ const coverageCategories = [
   {
     id: "ambulatoria",
     icon: Stethoscope,
+    image: "/mh50-ambulatoria.jpg",
+    imageAlt: "Consulta médica ambulatoria en la Red Humana",
     title: "Atención ambulatoria",
     kicker: "Consultas desde $4",
     phrase: "Cuidarte también está en lo cotidiano.",
@@ -57,6 +61,8 @@ const coverageCategories = [
   {
     id: "medicinas",
     icon: Pill,
+    image: "/mh50-medicinas.jpg",
+    imageAlt: "Entrega de medicamentos en farmacia de la red de Humana",
     title: "Medicinas",
     kicker: "Copago anual $1.000",
     phrase: "Tu tratamiento también está protegido.",
@@ -72,6 +78,8 @@ const coverageCategories = [
   {
     id: "maternidad",
     icon: Baby,
+    image: "/mh50-maternidad.jpg",
+    imageAlt: "Madre gestante en control prenatal cubierto por MH50",
     title: "Maternidad",
     kicker: "Hasta $50.000 recién nacido",
     phrase: "Protección desde antes del primer abrazo.",
@@ -276,7 +284,7 @@ function CoverageStory() {
         </ul>
       </div>
       <div className="mh50-story-panels">
-        {coverageCategories.map(({ id, icon: Icon, title, kicker, phrase, essentials, lead, chips }) => {
+        {coverageCategories.map(({ id, icon: Icon, image, imageAlt, title, kicker, phrase, essentials, lead, chips }) => {
           const isOpen = !!expanded[id];
           return (
             <div
@@ -289,9 +297,9 @@ function CoverageStory() {
               aria-labelledby={`mh50-tab-${id}`}
               ref={(node) => { sectionRefs.current[id] = node; }}
             >
-              <div className="mh50-story-media" aria-hidden="true">
-                {/* PLACEHOLDER: reemplazar por foto real — ver lista de imágenes pendientes en el reporte de la ronda 3 */}
-                <span className="mh50-story-media-icon"><Icon /></span>
+              <div className="mh50-story-media">
+                <Image src={image} alt={imageAlt} fill sizes="(max-width: 900px) 100vw, 40vw" className="mh50-story-media-image" unoptimized />
+                <span className="mh50-story-media-icon" aria-hidden="true"><Icon /></span>
               </div>
               <div className="mh50-story-copy">
                 <span className="mh50-story-kicker">{kicker}</span>
@@ -489,12 +497,7 @@ export default function Mh50Page() {
 
       <section className="mh50-foundation">
         <div className="mh50-foundation-media" data-reveal="">
-          {/* PLACEHOLDER: reemplazar por foto real de niños beneficiados por
-              Fundación Metrofraternidad — ver lista de imágenes pendientes.
-              No se reutiliza la imagen del hero. */}
-          <div className="mh50-foundation-placeholder" data-placeholder="metrofraternidad-ninos">
-            <Heart aria-hidden="true" />
-          </div>
+          <Image src="/mh50-metrofraternidad.jpg" alt="Niños beneficiados por Fundación Metrofraternidad gracias a los planes de Humana" fill sizes="(max-width: 900px) 100vw, 45vw" className="mh50-foundation-image" unoptimized />
           <span className="mh50-foundation-stat">
             <strong>+6.900</strong>
             <span>niños beneficiados</span>
