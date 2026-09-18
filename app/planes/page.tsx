@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   Activity, Ambulance, ArrowRight, Baby, BedDouble, BriefcaseBusiness, Building2, Check, ChevronRight, Clock3,
   CircleDollarSign, Cross, FlaskConical, HeartHandshake, HeartPulse, Hospital, House, Layers3, Luggage,
@@ -234,7 +235,7 @@ function PlanCard({ plan, badge, isFeatured, onOpen, onQuote }: { plan: Plan; ba
     <p className="sales-plan-headline">{plan.headline}</p><span className="sales-plan-ideal">{plan.ideal}</span>
     <ul className="sales-benefits">{plan.benefits.map(({ icon: BenefitIcon, label }) => <li key={label}><BenefitIcon /><span>{label}</span></li>)}</ul>
     <div className="sales-limit"><span>{plan.statLabels?.limit ?? "Cobertura"}</span><strong>{plan.limit}</strong><small>{plan.limitNote}</small></div>
-    <div className="sales-card-actions"><button type="button" className="sales-buy" onClick={onQuote}>Cotizar en 1 minuto <ArrowRight /></button><button type="button" className="sales-more" onClick={onOpen}>Ver todo el plan <ChevronRight /></button></div>
+    <div className="sales-card-actions"><button type="button" className="sales-buy" onClick={onQuote}>Cotizar en 1 minuto <ArrowRight /></button>{plan.id === "mh50" ? <Link className="sales-more" href="/planes/mh50">Ver todo el plan <ChevronRight /></Link> : <button type="button" className="sales-more" onClick={onOpen}>Ver todo el plan <ChevronRight /></button>}</div>
   </article>;
 }
 
