@@ -55,11 +55,15 @@ const revealSelectors = [
   ".network-help-grid article",
   ".site-footer > *",
   ".mh50-hero-content > *",
+  ".mh50-hero-glass",
   ".mh50-stats-intro > *",
   ".mh50-stat",
   ".mh50-story-panel",
   ".mh50-benefits-intro > *",
   ".mh50-benefits-grid article",
+  ".mh50-extra-intro > *",
+  ".mh50-extra-category",
+  ".mh50-extra-grid article",
   ".mh50-foundation-media",
   ".mh50-foundation-copy > *",
   ".mh50-cta-copy > *",
@@ -73,6 +77,7 @@ const imageSelectors = [
   ".business-hero-image img",
   ".page-hero-media",
   ".mh50-hero-image",
+  ".mh50-foundation-image",
 ].join(",");
 
 export function MotionOrchestrator() {

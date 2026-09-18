@@ -4,9 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Ambulance, ArrowRight, Baby, Brain, ChevronDown, FlaskConical,
-  HeartHandshake, HeartPulse, Hospital, MessageCircle, Phone, PhoneCall, Pill,
-  PlaneTakeoff, Ribbon, ShieldCheck, Stethoscope, Users,
+  Activity, Ambulance, ArrowRight, Baby, Bike, Bone, Brain, ChevronDown,
+  CreditCard, Cross, FlaskConical, HandHeart, HeartHandshake, HeartPulse,
+  Hospital, Microscope, MessageCircle, Milk, Phone, PhoneCall, Pill, PlaneTakeoff,
+  Ribbon, Scissors, ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Syringe,
+  Users, Wallet,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
@@ -27,11 +29,12 @@ const coverageCategories = [
     title: "Hospitalización",
     kicker: "Sin límite de días",
     lead: "Habitación, cirugía, terapia intensiva y medicamentos, sin contar los días. Todo lo que tu familia necesita cuando más lo necesita.",
-    points: [
-      "90% de cobertura en Red Humana · 80% en libre elección por reembolso",
-      "Cuarto y alimentación: hasta $160 al día · acompañante hasta $50 al día",
-      "Trasplante de órganos y diálisis: hasta $25.000 al año",
-      "Incluye cuidados paliativos, rehabilitación y apoyo psicológico",
+    chips: [
+      { icon: ShieldPlus, text: "90% Red Humana · 80% libre elección" },
+      { icon: Hospital, text: "$160/día habitación" },
+      { icon: HandHeart, text: "$50/día acompañante" },
+      { icon: Activity, text: "$25.000/año trasplantes y diálisis" },
+      { icon: HeartPulse, text: "Incluye paliativos y rehabilitación" },
     ],
   },
   {
@@ -40,11 +43,11 @@ const coverageCategories = [
     title: "Atención ambulatoria",
     kicker: "Consultas desde $4",
     lead: "Consultas médicas, exámenes y médico a domicilio, con precios claros desde el primer momento.",
-    points: [
-      "Consultas RED CAM · Metrored $4 / Otros $8 en especialidades básicas",
-      "Médico a domicilio por $10",
-      "Exámenes de laboratorio, rayos X y ecografía: 90% en RED CAM",
-      "15 sesiones anuales de medicina alternativa, hasta $20 por sesión",
+    chips: [
+      { icon: Stethoscope, text: "Metrored $4 · Otros $8" },
+      { icon: Phone, text: "Médico a domicilio $10" },
+      { icon: Microscope, text: "90% laboratorio, RX y eco en RED CAM" },
+      { icon: Sparkles, text: "15 sesiones/año medicina alternativa" },
     ],
   },
   {
@@ -53,11 +56,11 @@ const coverageCategories = [
     title: "Medicinas",
     kicker: "Copago anual $1.000",
     lead: "Tus medicamentos, cubiertos en la red de farmacias más grande del país.",
-    points: [
-      "Copago anual en Pharmacys, Medicity, Fybeca, Sana Sana y Farmacias Económicas",
-      "Vademécum A: 90% de cobertura · Vademécum B: 70%",
-      "Medicinas en otros prestadores de Red Humana: 70%",
-      "Libre elección por reembolso: 70%",
+    chips: [
+      { icon: Pill, text: "Pharmacys, Medicity, Fybeca, Sana Sana" },
+      { icon: ShieldPlus, text: "Vademécum A: 90%" },
+      { icon: ShieldPlus, text: "Vademécum B: 70%" },
+      { icon: Wallet, text: "Libre elección: 70% por reembolso" },
     ],
   },
   {
@@ -66,22 +69,60 @@ const coverageCategories = [
     title: "Maternidad",
     kicker: "Hasta $50.000 recién nacido",
     lead: "Acompañamos cada etapa: del control prenatal al primer abrazo, con tu bebé cubierto desde la semana 20.",
-    points: [
-      "Atención prenatal: hasta $300 adicional a tarifa 0",
-      "Parto normal, cesárea o aborto no provocado: hasta $2.500",
-      "Complicaciones del parto o del recién nacido: hasta $3.750",
-      "Recién nacido por inclusión intrauterina: hasta $50.000",
+    chips: [
+      { icon: Stethoscope, text: "$300 atención prenatal" },
+      { icon: Baby, text: "$2.500 parto o cesárea" },
+      { icon: HeartPulse, text: "$3.750 complicaciones del parto" },
+      { icon: ShieldPlus, text: "$50.000 recién nacido incluido" },
     ],
   },
+];
+
+/* ---------------------------------------------------------------------- */
+/* Casos especiales y coberturas adicionales sin costo (datos del contrato)*/
+/* ---------------------------------------------------------------------- */
+
+const specialCases = [
+  { icon: FlaskConical, value: "Hasta $540", label: "Preexistencias · mes 7 a 12 de afiliación" },
+  { icon: FlaskConical, value: "Hasta $1.350", label: "Preexistencias · mes 13 a 24 de afiliación" },
+  { icon: FlaskConical, value: "20 salarios básicos", label: "Preexistencias · desde el mes 25" },
+  { icon: HandHeart, value: "20 salarios básicos", label: "Discapacidad, incluye preexistencias relacionadas" },
+  { icon: Users, value: "$25.000/año", label: "Adulto mayor con continuidad menor a 5 años" },
+];
+
+const extraCoverages = [
+  { icon: HeartHandshake, value: "$50/día · 30 días", label: "Cuidados paliativos y de largo plazo" },
+  { icon: Activity, value: "15 sesiones · $15/sesión", label: "Rehabilitación: lenguaje, cardíaca, física, dolor, ondas de choque, respiratoria" },
+  { icon: Baby, value: "Hasta $40", label: "Control de niño sano hasta los 5 años" },
+  { icon: Syringe, value: "Hasta $50/dosis", label: "Vacunas control de niño hasta los 2 años" },
+  { icon: ShieldPlus, value: "Hasta $1.500/año", label: "Control de natalidad definitivo" },
+  { icon: ShieldPlus, value: "Hasta $10/año", label: "Control de natalidad no definitivo" },
+  { icon: Milk, value: "Hasta $150/año", label: "Leche medicada" },
+  { icon: Bone, value: "Hasta $3.000/año", label: "Cirugías robóticas" },
+  { icon: Bike, value: "Hasta $1.500/año", label: "Deportes extremos" },
+  { icon: Ribbon, value: "Hasta $1.000/año", label: "Cirugía reconstructiva oncológica, incluye implantes" },
+  { icon: Microscope, value: "Hasta $200/año", label: "Pruebas de sensibilidad y tratamientos inmunológicos" },
+  { icon: Wallet, value: "Hasta $500/año", label: "Ayudas técnicas: prótesis, órtesis y equipo médico duradero" },
+];
+
+const emergencyCoverages = [
+  { icon: Ambulance, value: "Monto máximo de cobertura", label: "Emergencia y urgencia por accidente o enfermedad" },
+  { icon: Cross, value: "Hasta $500", label: "Servicio en mora" },
+  { icon: Cross, value: "Hasta $500", label: "En período de carencia" },
 ];
 
 const includedBenefits = [
   { icon: HeartHandshake, title: "Seguro de vida", detail: "$5.000 para integrantes del contrato de 18 a 64 años." },
   { icon: PlaneTakeoff, title: "Asistencia en viajes", detail: "15 días al año por afiliado, para titulares y dependientes." },
   { icon: Ribbon, title: "Asistencia exequial", detail: "Acompañamiento para titulares y dependientes en el momento más difícil." },
-  { icon: Ambulance, title: "Ambulancia", detail: "4 eventos al año por núcleo familiar, hasta $100 por evento en Red Humana." },
-  { icon: FlaskConical, title: "PAP, PSA y mamografía", detail: "Un examen preventivo al año, con reembolso del 100%." },
+  { icon: Ambulance, title: "Ambulancia terrestre", detail: "4 eventos al año por núcleo familiar, hasta $100 por evento en Red Humana." },
+  { icon: PlaneTakeoff, title: "Ambulancia aérea o fluvial", detail: "Por reembolso al 80%, hasta $1.500 al año." },
+  { icon: FlaskConical, title: "PAP test", detail: "Un examen preventivo al año, con reembolso hasta $15." },
+  { icon: Microscope, title: "Antígeno PSA", detail: "Un examen preventivo al año, con reembolso hasta $20." },
+  { icon: FlaskConical, title: "Mamografía", detail: "Un examen preventivo al año, con reembolso hasta $30." },
   { icon: Brain, title: "Psicología y nutrición", detail: "Hasta 12 y 6 consultas al año respectivamente, con reembolso." },
+  { icon: CreditCard, title: "Crédito en emergencia ambulatoria", detail: "100% en Red Humana sin deducible, si la lesión se trata dentro de 48h, hasta $1.000." },
+  { icon: Scissors, title: "Terceros molares", detail: "Extracción por reembolso al 100%, hasta $70 por molar." },
 ];
 
 const contactChannels = [
@@ -178,7 +219,7 @@ function CoverageStory() {
         </ul>
       </div>
       <div className="mh50-story-panels">
-        {coverageCategories.map(({ id, icon: Icon, title, kicker, lead, points }) => (
+        {coverageCategories.map(({ id, icon: Icon, title, kicker, lead, chips }) => (
           <div
             key={id}
             className="mh50-story-panel"
@@ -190,7 +231,13 @@ function CoverageStory() {
             <span className="mh50-story-kicker">{kicker}</span>
             <h3>{title}</h3>
             <p>{lead}</p>
-            <ul>{points.map((point) => <li key={point}>{point}</li>)}</ul>
+            <ul className="mh50-story-chips">
+              {chips.map(({ icon: ChipIcon, text }, index) => (
+                <li key={text} style={{ animationDelay: `${index * 60}ms` }}>
+                  <ChipIcon /> <span>{text}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
@@ -218,6 +265,9 @@ export default function Mh50Page() {
           unoptimized
         />
         <div className="mh50-hero-shade" aria-hidden="true" />
+        <span className="mh50-hero-seal">
+          <ShieldPlus /> <span>Plan más<br />elegido</span>
+        </span>
         <div className="mh50-hero-content">
           <span className="mh50-kicker light">Plan Full · Metrohumana 50.000</span>
           <h1>MH50</h1>
@@ -226,6 +276,20 @@ export default function Mh50Page() {
           <div className="mh50-hero-actions">
             <Link className="primary-button" href="/planes">Cotizar este plan <ArrowRight /></Link>
             <a className="ghost-button" href="#cobertura">Descubre la cobertura</a>
+          </div>
+        </div>
+        <div className="mh50-hero-glass">
+          <div className="mh50-glass-chip">
+            <strong>$50.000</strong>
+            <span>Cobertura máxima</span>
+          </div>
+          <div className="mh50-glass-chip">
+            <strong>90%</strong>
+            <span>Red Humana</span>
+          </div>
+          <div className="mh50-glass-chip">
+            <strong>Sin límite</strong>
+            <span>de días hospitalarios</span>
           </div>
         </div>
         <a className="mh50-scroll-indicator" href="#cifras" aria-label="Bajar para ver más">
@@ -262,9 +326,67 @@ export default function Mh50Page() {
         </div>
       </section>
 
+      <section className="mh50-extra">
+        <div className="mh50-extra-intro" data-reveal="">
+          <span className="mh50-kicker">Cobertura a fondo</span>
+          <h2>Casos especiales y beneficios adicionales</h2>
+          <p>Situaciones puntuales y coberturas extra que MH50 ya contempla, sin letra pequeña.</p>
+        </div>
+
+        <div className="mh50-extra-category" data-reveal="">
+          <h3><ShieldPlus /> Casos especiales</h3>
+          <div className="mh50-extra-grid">
+            {specialCases.map(({ icon: Icon, value, label }) => (
+              <article key={label} data-reveal="">
+                <span className="mh50-extra-icon"><Icon /></span>
+                <strong>{value}</strong>
+                <span>{label}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="mh50-extra-category" data-reveal="">
+          <h3><Sparkles /> Coberturas adicionales sin costo</h3>
+          <div className="mh50-extra-grid">
+            {extraCoverages.map(({ icon: Icon, value, label }) => (
+              <article key={label} data-reveal="">
+                <span className="mh50-extra-icon"><Icon /></span>
+                <strong>{value}</strong>
+                <span>{label}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="mh50-extra-category" data-reveal="">
+          <h3><Ambulance /> Coberturas obligatorias de emergencia</h3>
+          <div className="mh50-extra-grid">
+            {emergencyCoverages.map(({ icon: Icon, value, label }) => (
+              <article key={label} data-reveal="">
+                <span className="mh50-extra-icon"><Icon /></span>
+                <strong>{value}</strong>
+                <span>{label}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="mh50-foundation">
         <div className="mh50-foundation-media" data-reveal="">
-          <span className="mh50-foundation-badge"><HeartPulse /> Fundación Metrofraternidad</span>
+          <Image
+            src="/familia-humana.png"
+            alt="Niños beneficiados por Fundación Metrofraternidad"
+            fill
+            sizes="(max-width: 900px) 100vw, 45vw"
+            className="mh50-foundation-image"
+            unoptimized
+          />
+          <span className="mh50-foundation-stat">
+            <strong>+6.900</strong>
+            <span>niños beneficiados</span>
+          </span>
         </div>
         <div className="mh50-foundation-copy" data-reveal="">
           <span className="mh50-kicker light">Un gesto que va más allá</span>
