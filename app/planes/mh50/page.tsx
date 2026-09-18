@@ -25,6 +25,7 @@ const heroStats = [
 const coverageCategories = [
   {
     id: "hospitalizacion",
+    number: "01",
     icon: Hospital,
     image: "/mh50-hospitalizacion.jpg",
     imageAlt: "Familia acompañando a un paciente en una habitación de hospital de Red Humana",
@@ -43,6 +44,7 @@ const coverageCategories = [
   },
   {
     id: "ambulatoria",
+    number: "02",
     icon: Stethoscope,
     image: "/mh50-ambulatoria.jpg",
     imageAlt: "Consulta médica ambulatoria en la Red Humana",
@@ -60,6 +62,7 @@ const coverageCategories = [
   },
   {
     id: "medicinas",
+    number: "03",
     icon: Pill,
     image: "/mh50-medicinas.jpg",
     imageAlt: "Entrega de medicamentos en farmacia de la red de Humana",
@@ -77,6 +80,7 @@ const coverageCategories = [
   },
   {
     id: "maternidad",
+    number: "04",
     icon: Baby,
     image: "/mh50-maternidad.jpg",
     imageAlt: "Madre gestante en control prenatal cubierto por MH50",
@@ -215,7 +219,7 @@ function CountUpStat({ prefix, value, suffix, label }: { prefix: string; value: 
   }, [value]);
 
   return (
-    <div className="mh50-stat" ref={ref} data-reveal="">
+    <div className="mh50-stat" ref={ref}>
       <strong>{prefix}{display.toLocaleString("es-EC")}{suffix}</strong>
       <span>{label}</span>
     </div>
@@ -261,6 +265,14 @@ function CoverageStory() {
 
   return (
     <section className="mh50-story" id="cobertura">
+      <svg className="mh50-story-spine" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M 62 0 C 18 90, 88 190, 40 280 C -4 360, 84 430, 46 520 C 12 600, 90 690, 42 760 C 4 830, 82 900, 50 1000"
+          fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+        <circle cx="62" cy="18" r="4.5" fill="currentColor" />
+        <circle cx="40" cy="282" r="4.5" fill="currentColor" />
+        <circle cx="46" cy="522" r="4.5" fill="currentColor" />
+        <circle cx="42" cy="762" r="4.5" fill="currentColor" />
+      </svg>
       <div className="mh50-story-nav">
         <span className="mh50-kicker">Tu cobertura, explicada</span>
         <h2>Cuatro momentos de protección</h2>
@@ -284,14 +296,13 @@ function CoverageStory() {
         </ul>
       </div>
       <div className="mh50-story-panels">
-        {coverageCategories.map(({ id, icon: Icon, image, imageAlt, title, kicker, phrase, essentials, lead, chips }) => {
+        {coverageCategories.map(({ id, number, icon: Icon, image, imageAlt, title, kicker, phrase, essentials, lead, chips }) => {
           const isOpen = !!expanded[id];
           return (
             <div
               key={id}
               className="mh50-story-panel"
               data-category={id}
-              data-reveal=""
               id={`mh50-panel-${id}`}
               role="tabpanel"
               aria-labelledby={`mh50-tab-${id}`}
@@ -302,6 +313,7 @@ function CoverageStory() {
                 <span className="mh50-story-media-icon" aria-hidden="true"><Icon /></span>
               </div>
               <div className="mh50-story-copy">
+                <span className="mh50-story-number" aria-hidden="true">{number}</span>
                 <span className="mh50-story-kicker">{kicker}</span>
                 <h3>{title}</h3>
                 <p className="mh50-story-phrase">{phrase}</p>
@@ -429,7 +441,7 @@ export default function Mh50Page() {
       </section>
 
       <section className="mh50-stats" id="cifras">
-        <div className="mh50-stats-intro" data-reveal="">
+        <div className="mh50-stats-intro">
           <span className="mh50-kicker">En números</span>
           <h2>Una cobertura que se nota</h2>
         </div>
@@ -441,21 +453,21 @@ export default function Mh50Page() {
       <CoverageStory />
 
       <section className="mh50-benefits">
-        <div className="mh50-benefits-intro" data-reveal="">
+        <div className="mh50-benefits-intro">
           <span className="mh50-kicker">Sin costo adicional</span>
           <h2>Todo esto viene incluido</h2>
           <p>Beneficios que muchos planes cobran aparte, y que en MH50 ya están dentro de tu cobertura.</p>
         </div>
         <div className="mh50-benefits-grid">
           {featuredBenefits.map(({ icon: Icon, title, detail }) => (
-            <article key={title} data-reveal="">
+            <article key={title}>
               <span className="mh50-benefit-icon"><Icon /></span>
               <h3>{title}</h3>
               <p>{detail}</p>
             </article>
           ))}
         </div>
-        <div className="mh50-benefits-more" data-reveal="">
+        <div className="mh50-benefits-more">
           <button
             type="button"
             className="mh50-story-toggle"
@@ -479,14 +491,14 @@ export default function Mh50Page() {
       </section>
 
       <section className="mh50-extra">
-        <div className="mh50-extra-intro" data-reveal="">
+        <div className="mh50-extra-intro">
           <span className="mh50-kicker">Cobertura a fondo</span>
           <h2>Casos especiales y condiciones del plan</h2>
           <p>Información técnica organizada por categorías, disponible cuando la necesites, sin competir con la historia principal.</p>
         </div>
 
-        <div className="mh50-accordion-group" data-reveal="">
-          <AccordionSection icon={ShieldPlus} title="Casos especiales" items={specialCases} defaultOpen />
+        <div className="mh50-accordion-group">
+          <AccordionSection icon={ShieldPlus} title="Casos especiales" items={specialCases} />
           <AccordionSection icon={HandHeart} title="Prevención y bienestar" items={preventionCoverages} />
           <AccordionSection icon={Activity} title="Rehabilitación y ayudas técnicas" items={rehabCoverages} />
           <AccordionSection icon={Sparkles} title="Coberturas adicionales" items={extraCoverages} />
@@ -496,14 +508,14 @@ export default function Mh50Page() {
       </section>
 
       <section className="mh50-foundation">
-        <div className="mh50-foundation-media" data-reveal="">
+        <div className="mh50-foundation-media">
           <Image src="/mh50-metrofraternidad.jpg" alt="Niños beneficiados por Fundación Metrofraternidad gracias a los planes de Humana" fill sizes="(max-width: 900px) 100vw, 45vw" className="mh50-foundation-image" unoptimized />
           <span className="mh50-foundation-stat">
             <strong>+6.900</strong>
             <span>niños beneficiados</span>
           </span>
         </div>
-        <div className="mh50-foundation-copy" data-reveal="">
+        <div className="mh50-foundation-copy">
           <span className="mh50-kicker light">Un gesto que va más allá</span>
           <h2>Cada plan de Humana entrega esperanza</h2>
           <p>
@@ -519,7 +531,7 @@ export default function Mh50Page() {
       </section>
 
       <section className="mh50-cta">
-        <div className="mh50-cta-copy" data-reveal="">
+        <div className="mh50-cta-copy">
           <span className="mh50-kicker light">MH50 · Plan Full</span>
           <h2>Dale a tu familia la tranquilidad que merece</h2>
           <p>Cotiza el plan más elegido de Humana y empieza a proteger a los tuyos hoy mismo.</p>
@@ -539,7 +551,7 @@ export default function Mh50Page() {
             </div>
           )}
         </div>
-        <div className="mh50-cta-contact" data-reveal="">
+        <div className="mh50-cta-contact">
           {contactChannels.map(({ icon: Icon, label, value, href }) => (
             <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
               <Icon /> <span><small>{label}</small><strong>{value}</strong></span>
