@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Building2, Clock3, CreditCard, Headphones, MapPin, Menu, MessageCircle, ShieldCheck, Smartphone, X } from "lucide-react";
-import { SiApple, SiFacebook, SiGoogleplay, SiInstagram, SiYoutube } from "react-icons/si";
+import { SiApple, SiFacebook, SiGoogleplay, SiInstagram, SiTiktok, SiYoutube } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { useState } from "react";
 import { MotionOrchestrator } from "@/components/motion-orchestrator";
@@ -100,7 +100,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
 
         <div className="footer-bottom">
           <p className="concept-note">Prototipo conceptual. Información, direcciones, beneficios, nombres y procesos sujetos a validación oficial de Humana.</p>
-          <div className="footer-social" aria-label="Redes sociales"><a href="https://www.facebook.com/HumanaEc" target="_blank" rel="noreferrer" aria-label="Facebook"><SiFacebook /></a><a href="https://www.instagram.com/humanaec/" target="_blank" rel="noreferrer" aria-label="Instagram"><SiInstagram /></a><a href="https://www.youtube.com/results?search_query=Humana+Ecuador" target="_blank" rel="noreferrer" aria-label="YouTube"><SiYoutube /></a><a href="https://www.linkedin.com/search/results/companies/?keywords=Humana%20Ecuador" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a></div>
+          <div className="footer-social" aria-label="Redes sociales"><a href="https://www.facebook.com/HumanaEc/" target="_blank" rel="noreferrer" aria-label="Facebook"><SiFacebook /></a><a href="https://www.instagram.com/humanaec/" target="_blank" rel="noreferrer" aria-label="Instagram"><SiInstagram /></a><a href="https://www.tiktok.com/@humanaec" target="_blank" rel="noreferrer" aria-label="TikTok"><SiTiktok /></a><a href="https://www.youtube.com/humanaecuadorsa" target="_blank" rel="noreferrer" aria-label="YouTube"><SiYoutube /></a><a href="https://www.linkedin.com/company/humana-ecuador/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a></div>
         </div>
         <p className="footer-copyright">Humana Cobertura Médica Integral · Planes médicos y medicina prepagada en Ecuador · Todos los derechos reservados © 2026</p>
       </footer>
