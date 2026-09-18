@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Building2, ClipboardList, Mail, MapPin, Monitor, Phone } from "lucide-react";
-import { SiApple, SiGoogleplay, SiWhatsapp } from "react-icons/si";
+import { SiWhatsapp } from "react-icons/si";
 import { PageHero, SiteShell } from "@/components/site-shell";
 import { blogArticlesWithSlug as blogArticles, moreBlogArticlesWithSlug as moreBlogArticles, blogPlans } from "@/lib/blog-articles";
 
@@ -46,7 +46,7 @@ export default function Blog() {
         <div className="blog-sidebar-card blog-app-card">
           <strong>MiHumana APP:</strong>
           <span className="blog-app-kicker">DISPONIBLE EN:</span>
-          <div className="app-downloads"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><SiGoogleplay /><span>Disponible en<strong>Google Play</strong></span></a><a href="https://apps.apple.com/ec/search?term=mi%20humana" target="_blank" rel="noreferrer"><SiApple /><span>Disponible en<strong>App Store</strong></span></a></div>
+          <div className="app-downloads"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><Image src="/badges/google-play-badge.png" alt="Disponible en Google Play" width={897} height={240} unoptimized /></a><a href="https://apps.apple.com/ec/search?term=mi%20humana" target="_blank" rel="noreferrer"><Image src="/badges/app-store-badge.png" alt="Disponible en el App Store" width={841} height={240} unoptimized /></a></div>
         </div>
 
         <div className="blog-sidebar-card">

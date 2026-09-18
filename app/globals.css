@@ -276,11 +276,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .footer-service-links a:hover { padding-left:15px; background:rgba(255,255,255,.1); }
 .footer-digital-card > p { margin:0 0 9px; color:#8dc6d8; font-size:11px; font-weight:800; letter-spacing:.07em; text-align:left; text-transform:uppercase; }
 .footer-apps { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-.footer-apps a { min-height:45px; padding:7px 9px; display:flex; align-items:center; gap:7px; border-radius:9px; color:white; background:#021d2f; }
-.footer-apps svg { width:18px; }
-.footer-apps span,.footer-apps strong { display:block; }
-.footer-apps span { font-size:9px; line-height:1.2; }
-.footer-apps strong { margin-top:2px; font-size:11px; }
+.footer-apps a { display:flex; align-items:center; }
+.footer-apps img { display:block; width:100%; height:auto; border-radius:9px; }
 .footer-meta-grid { position:relative; z-index:1; padding:25px 0; display:grid; grid-template-columns:1fr 1fr; gap:35px; border-top:1px solid rgba(255,255,255,.12); }
 .footer-meta-grid section { min-width:0; }
 .footer-meta-grid h2 { margin-bottom:12px; font-size:12px; }
@@ -549,7 +546,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .blog-sidebar-card strong { display:flex; align-items:center; gap:8px; color:#0b4c72; font-size:16px; }
 .blog-app-kicker { display:block; margin:4px 0 12px; color:#087eb9; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
 .blog-app-card .app-downloads { margin-top:0; padding:0; border:none; background:none; flex-direction:column; }
-.blog-app-card .app-downloads a { min-height:46px; }
+.blog-app-card .app-downloads img { height:46px; }
 .blog-channel-list { list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:14px; }
 .blog-channel-list li { display:flex; align-items:flex-start; gap:12px; padding-top:14px; border-top:1px dashed #dbe8ef; }
 .blog-channel-list li:first-child { padding-top:0; border-top:none; }
@@ -1693,11 +1690,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .home-app-copy p { color:#4d697a; line-height:1.75; }
 .home-app-copy p strong { color:#087eb9; }
 .app-downloads { margin-top:30px; padding:20px; display:flex; flex-wrap:wrap; gap:12px; border:1px solid #dce8ee; border-radius:20px; background:#f6fafc; }
-.app-downloads a { min-height:57px; padding:9px 16px; display:flex; align-items:center; gap:10px; border-radius:12px; color:white; background:#071c28; }
-.app-downloads svg { width:23px; }
-.app-downloads span,.app-downloads strong { display:block; }
-.app-downloads span { font-size:10px; }
-.app-downloads strong { margin-top:2px; font-size:14px; }
+.app-downloads a { display:flex; align-items:center; }
+.app-downloads img { display:block; height:57px; width:auto; border-radius:12px; }
 .home-phone { position:relative; width:288px; min-height:560px; justify-self:center; padding:50px 20px 26px; display:flex; flex-direction:column; border:10px solid #0a1f30; border-radius:46px; background:linear-gradient(165deg,#fff 0%,#e9f8fc 55%,#dcf1f8 100%); box-shadow:0 40px 85px rgba(4,55,83,.3), inset 0 0 0 1px rgba(255,255,255,.5); transform:rotate(1.4deg); }
 .home-phone:before { content:""; position:absolute; left:-13px; top:118px; width:3px; height:46px; border-radius:3px; background:#0a1f30; box-shadow:0 68px 0 #0a1f30; }
 .home-phone:after { content:""; position:absolute; left:50%; bottom:-26px; width:68%; height:24px; transform:translateX(-50%); background:radial-gradient(ellipse at center, rgba(4,55,83,.3), transparent 72%); filter:blur(3px); z-index:-1; }

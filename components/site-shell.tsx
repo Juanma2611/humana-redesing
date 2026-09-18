@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Building2, Clock3, Headphones, MapPin, Menu, MessageCircle, ShieldCheck, Smartphone, X } from "lucide-react";
-import { SiApple, SiFacebook, SiGoogleplay, SiInstagram, SiTiktok, SiYoutube } from "react-icons/si";
+import { SiFacebook, SiInstagram, SiTiktok, SiYoutube } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { useState } from "react";
 import { MotionOrchestrator } from "@/components/motion-orchestrator";
@@ -98,7 +98,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
             <div className="footer-card-heading"><span><Smartphone /></span><div><small>Todo en un solo lugar</small><h2 id="footer-digital">Servicios digitales</h2></div></div>
             <div className="footer-service-links"><Link href="/cliente">Portal de afiliados</Link><Link href="/cliente">Pago en línea</Link><Link href="/red-medica">Agendar cita médica</Link></div>
             <p>Descarga MiHumana</p>
-            <div className="footer-apps"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><SiGoogleplay /><span>Disponible en<strong>Google Play</strong></span></a><a href="https://apps.apple.com/ec/search?term=mi%20humana" target="_blank" rel="noreferrer"><SiApple /><span>Disponible en<strong>App Store</strong></span></a></div>
+            <div className="footer-apps"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><Image src="/badges/google-play-badge.png" alt="Disponible en Google Play" width={897} height={240} unoptimized /></a><a href="https://apps.apple.com/ec/search?term=mi%20humana" target="_blank" rel="noreferrer"><Image src="/badges/app-store-badge.png" alt="Disponible en el App Store" width={841} height={240} unoptimized /></a></div>
           </section>
         </div>
 

@@ -5,7 +5,7 @@ import {
   RotateCcw, ShieldCheck, Sparkles, Stethoscope, UserRound,
   UsersRound,
 } from "lucide-react";
-import { SiApple, SiGoogleplay, SiWhatsapp } from "react-icons/si";
+import { SiWhatsapp } from "react-icons/si";
 import { SiteShell } from "@/components/site-shell";
 import { blogArticlesWithSlug as blogArticles } from "@/lib/blog-articles";
 import { HospitalCarousel } from "@/components/hospital-carousel";
@@ -98,7 +98,7 @@ export default function Home() {
     </section>
 
     <section className="home-app-showcase" aria-labelledby="mihumana-title">
-      <div className="home-app-copy"><span className="kicker">Tu plan contigo</span><h2 id="mihumana-title">MiHumana App</h2><h3>Todos los servicios en tu celular</h3><p>Todos los <strong>documentos importantes</strong> para realizar sus trámites, en formato PDF editable, tales como solicitar reembolso, pre-autorización de cirugía, autorizaciones de débito, y más.</p><p>Obtenga el mejor beneficio de su cobertura médica, conociendo todas las <strong>prestaciones de su plan</strong>, sus <strong>deducibles y beneficios incluidos.</strong> Puede descargar el manual de uso de su plan.</p><div className="app-downloads"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><SiGoogleplay /><span>Disponible en<strong>Google Play</strong></span></a><a href="https://apps.apple.com/ec/search?term=mi%20humana" target="_blank" rel="noreferrer"><SiApple /><span>Disponible en<strong>App Store</strong></span></a></div></div>
+      <div className="home-app-copy"><span className="kicker">Tu plan contigo</span><h2 id="mihumana-title">MiHumana App</h2><h3>Todos los servicios en tu celular</h3><p>Todos los <strong>documentos importantes</strong> para realizar sus trámites, en formato PDF editable, tales como solicitar reembolso, pre-autorización de cirugía, autorizaciones de débito, y más.</p><p>Obtenga el mejor beneficio de su cobertura médica, conociendo todas las <strong>prestaciones de su plan</strong>, sus <strong>deducibles y beneficios incluidos.</strong> Puede descargar el manual de uso de su plan.</p><div className="app-downloads"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><Image src="/badges/google-play-badge.png" alt="Disponible en Google Play" width={897} height={240} unoptimized /></a><a href="https://apps.apple.com/ec/search?term=mi%20humana" target="_blank" rel="noreferrer"><Image src="/badges/app-store-badge.png" alt="Disponible en el App Store" width={841} height={240} unoptimized /></a></div></div>
       <div className="home-phone" aria-label="Vista conceptual de MiHumana App"><div className="home-phone-notch" /><Image src="/humana-logo-oficial.png" alt="Humana" width={180} height={80} unoptimized /><small>Estamos aquí para acompañarte</small><strong>MH50 · HUMANA</strong><div className="phone-plan"><span>Plan contratado</span><b>Cobertura familiar</b><small>4 beneficiarios</small></div><div className="phone-actions"><span><ShieldCheck />Mi Plan</span><span><RotateCcw />Mis reembolsos</span><span><Stethoscope />Agenda</span><span><MessageCircle />Ayuda</span></div></div>
     </section>
 
