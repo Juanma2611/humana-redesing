@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Building2, Clock3, CreditCard, Headphones, MapPin, Menu, MessageCircle, ShieldCheck, Smartphone, X } from "lucide-react";
+import { Building2, Clock3, Headphones, MapPin, Menu, MessageCircle, ShieldCheck, Smartphone, X } from "lucide-react";
 import { SiApple, SiFacebook, SiGoogleplay, SiInstagram, SiTiktok, SiYoutube } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { useState } from "react";
@@ -30,6 +30,15 @@ const footerOffices = {
 } as const;
 
 type FooterOffice = keyof typeof footerOffices;
+
+const paymentBrands = [
+  { name: "VISA", image: "/payment/visa-logo.png", width: 26 },
+  { name: "Mastercard", image: "/payment/mastercard-logo.png", width: 24 },
+  { name: "American Express", image: "/payment/amex-logo.png", width: 25 },
+  { name: "Diners Club International", image: "/payment/dinersclub-logo.png", width: 42 },
+  { name: "Paymentez", image: "/payment/paymentez-logo.png", width: 64 },
+  { name: "Place to Pay", image: "/payment/placetopay-logo.png", width: 62 },
+];
 
 export function SiteShell({ children, title = "Prototipo navegable" }: { children: React.ReactNode; title?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -95,7 +104,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
 
         <div className="footer-meta-grid">
           <section><h2>Normativa y privacidad</h2><div className="footer-inline-links"><span>Lineamientos sanitarios</span><span>Ley de medicina prepagada</span><span>Protección de datos</span><span>Política de cookies</span></div></section>
-          <section><h2>Pago seguro</h2><div className="footer-payment-brands" aria-label="Medios de pago"><span><CreditCard /> VISA</span><span>Mastercard</span><span>AMEX</span><span>Diners Club</span><span>Paymentez</span><span>Place to Pay</span></div></section>
+          <section><h2>Pago seguro</h2><div className="footer-payment-brands" aria-label="Medios de pago">{paymentBrands.map(({name,image,width}) => <span key={name} className="payment-chip"><Image src={image} alt={name} width={width} height={40} unoptimized /></span>)}</div></section>
         </div>
 
         <div className="footer-bottom">
