@@ -54,6 +54,16 @@ const revealSelectors = [
   ".network-finder > *",
   ".network-help-grid article",
   ".site-footer > *",
+  ".mh50-hero-content > *",
+  ".mh50-stats-intro > *",
+  ".mh50-stat",
+  ".mh50-story-panel",
+  ".mh50-benefits-intro > *",
+  ".mh50-benefits-grid article",
+  ".mh50-foundation-media",
+  ".mh50-foundation-copy > *",
+  ".mh50-cta-copy > *",
+  ".mh50-cta-contact",
 ].join(",");
 
 const imageSelectors = [
@@ -62,6 +72,7 @@ const imageSelectors = [
   ".about-hero > img",
   ".business-hero-image img",
   ".page-hero-media",
+  ".mh50-hero-image",
 ].join(",");
 
 export function MotionOrchestrator() {
