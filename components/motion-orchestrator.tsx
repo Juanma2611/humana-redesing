@@ -61,9 +61,10 @@ const revealSelectors = [
   ".mh50-story-panel",
   ".mh50-benefits-intro > *",
   ".mh50-benefits-grid article",
+  ".mh50-benefits-more",
   ".mh50-extra-intro > *",
-  ".mh50-extra-category",
-  ".mh50-extra-grid article",
+  ".mh50-accordion-group",
+  ".mh50-accordion",
   ".mh50-foundation-media",
   ".mh50-foundation-copy > *",
   ".mh50-cta-copy > *",
@@ -77,7 +78,6 @@ const imageSelectors = [
   ".business-hero-image img",
   ".page-hero-media",
   ".mh50-hero-image",
-  ".mh50-foundation-image",
 ].join(",");
 
 export function MotionOrchestrator() {

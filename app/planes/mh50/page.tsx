@@ -8,7 +8,7 @@ import {
   CreditCard, Cross, FlaskConical, HandHeart, HeartHandshake, HeartPulse,
   Hospital, Microscope, MessageCircle, Milk, Phone, PhoneCall, Pill, PlaneTakeoff,
   Ribbon, Scissors, ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Syringe,
-  Users, Wallet,
+  Users, Wallet, ChevronRight, Heart,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
@@ -28,6 +28,8 @@ const coverageCategories = [
     icon: Hospital,
     title: "Hospitalización",
     kicker: "Sin límite de días",
+    phrase: "Cuando más nos necesitas, estamos contigo.",
+    essentials: ["90% en Red Humana", "Sin límite de días", "80% por libre elección"],
     lead: "Habitación, cirugía, terapia intensiva y medicamentos, sin contar los días. Todo lo que tu familia necesita cuando más lo necesita.",
     chips: [
       { icon: ShieldPlus, text: "90% Red Humana · 80% libre elección" },
@@ -42,6 +44,8 @@ const coverageCategories = [
     icon: Stethoscope,
     title: "Atención ambulatoria",
     kicker: "Consultas desde $4",
+    phrase: "Cuidarte también está en lo cotidiano.",
+    essentials: ["Consultas desde $4", "Médico a domicilio desde $10", "Exámenes con cobertura en Red CAM"],
     lead: "Consultas médicas, exámenes y médico a domicilio, con precios claros desde el primer momento.",
     chips: [
       { icon: Stethoscope, text: "Metrored $4 · Otros $8" },
@@ -55,6 +59,8 @@ const coverageCategories = [
     icon: Pill,
     title: "Medicinas",
     kicker: "Copago anual $1.000",
+    phrase: "Tu tratamiento también está protegido.",
+    essentials: ["Cobertura entre 70% y 90%", "Red de farmacias", "Reembolso por libre elección"],
     lead: "Tus medicamentos, cubiertos en la red de farmacias más grande del país.",
     chips: [
       { icon: Pill, text: "Pharmacys, Medicity, Fybeca, Sana Sana" },
@@ -68,6 +74,8 @@ const coverageCategories = [
     icon: Baby,
     title: "Maternidad",
     kicker: "Hasta $50.000 recién nacido",
+    phrase: "Protección desde antes del primer abrazo.",
+    essentials: ["Atención prenatal", "Parto o cesárea", "Complicaciones y cobertura del recién nacido"],
     lead: "Acompañamos cada etapa: del control prenatal al primer abrazo, con tu bebé cubierto desde la semana 20.",
     chips: [
       { icon: Stethoscope, text: "$300 atención prenatal" },
@@ -90,19 +98,25 @@ const specialCases = [
   { icon: Users, value: "$25.000/año", label: "Adulto mayor con continuidad menor a 5 años" },
 ];
 
-const extraCoverages = [
-  { icon: HeartHandshake, value: "$50/día · 30 días", label: "Cuidados paliativos y de largo plazo" },
-  { icon: Activity, value: "15 sesiones · $15/sesión", label: "Rehabilitación: lenguaje, cardíaca, física, dolor, ondas de choque, respiratoria" },
+const preventionCoverages = [
   { icon: Baby, value: "Hasta $40", label: "Control de niño sano hasta los 5 años" },
   { icon: Syringe, value: "Hasta $50/dosis", label: "Vacunas control de niño hasta los 2 años" },
   { icon: ShieldPlus, value: "Hasta $1.500/año", label: "Control de natalidad definitivo" },
   { icon: ShieldPlus, value: "Hasta $10/año", label: "Control de natalidad no definitivo" },
   { icon: Milk, value: "Hasta $150/año", label: "Leche medicada" },
+];
+
+const rehabCoverages = [
+  { icon: HeartHandshake, value: "$50/día · 30 días", label: "Cuidados paliativos y de largo plazo" },
+  { icon: Activity, value: "15 sesiones · $15/sesión", label: "Rehabilitación: lenguaje, cardíaca, física, dolor, ondas de choque, respiratoria" },
+  { icon: Wallet, value: "Hasta $500/año", label: "Ayudas técnicas: prótesis, órtesis y equipo médico duradero" },
+];
+
+const extraCoverages = [
   { icon: Bone, value: "Hasta $3.000/año", label: "Cirugías robóticas" },
   { icon: Bike, value: "Hasta $1.500/año", label: "Deportes extremos" },
   { icon: Ribbon, value: "Hasta $1.000/año", label: "Cirugía reconstructiva oncológica, incluye implantes" },
   { icon: Microscope, value: "Hasta $200/año", label: "Pruebas de sensibilidad y tratamientos inmunológicos" },
-  { icon: Wallet, value: "Hasta $500/año", label: "Ayudas técnicas: prótesis, órtesis y equipo médico duradero" },
 ];
 
 const emergencyCoverages = [
@@ -111,17 +125,28 @@ const emergencyCoverages = [
   { icon: Cross, value: "Hasta $500", label: "En período de carencia" },
 ];
 
-const includedBenefits = [
+const planConditions = [
+  { icon: Wallet, value: "$80", label: "Deducible anual del plan" },
+  { icon: Pill, value: "$1.000", label: "Copago anual de medicinas" },
+  { icon: ShieldPlus, value: "90% / 70%", label: "Vademécum A y B de medicinas" },
+  { icon: Hospital, value: "90% / 80%", label: "Cobertura en Red Humana / libre elección" },
+];
+
+const featuredBenefits = [
   { icon: HeartHandshake, title: "Seguro de vida", detail: "$5.000 para integrantes del contrato de 18 a 64 años." },
   { icon: PlaneTakeoff, title: "Asistencia en viajes", detail: "15 días al año por afiliado, para titulares y dependientes." },
-  { icon: Ribbon, title: "Asistencia exequial", detail: "Acompañamiento para titulares y dependientes en el momento más difícil." },
   { icon: Ambulance, title: "Ambulancia terrestre", detail: "4 eventos al año por núcleo familiar, hasta $100 por evento en Red Humana." },
+  { icon: Brain, title: "Psicología y nutrición", detail: "Hasta 12 y 6 consultas al año respectivamente, con reembolso." },
+  { icon: FlaskConical, title: "Exámenes preventivos", detail: "PAP, antígeno PSA y mamografía anuales, con reembolso." },
+  { icon: CreditCard, title: "Emergencia ambulatoria", detail: "100% en Red Humana sin deducible, si la lesión se trata dentro de 48h, hasta $1.000." },
+];
+
+const moreBenefits = [
+  { icon: Ribbon, title: "Asistencia exequial", detail: "Acompañamiento para titulares y dependientes en el momento más difícil." },
   { icon: PlaneTakeoff, title: "Ambulancia aérea o fluvial", detail: "Por reembolso al 80%, hasta $1.500 al año." },
   { icon: FlaskConical, title: "PAP test", detail: "Un examen preventivo al año, con reembolso hasta $15." },
   { icon: Microscope, title: "Antígeno PSA", detail: "Un examen preventivo al año, con reembolso hasta $20." },
   { icon: FlaskConical, title: "Mamografía", detail: "Un examen preventivo al año, con reembolso hasta $30." },
-  { icon: Brain, title: "Psicología y nutrición", detail: "Hasta 12 y 6 consultas al año respectivamente, con reembolso." },
-  { icon: CreditCard, title: "Crédito en emergencia ambulatoria", detail: "100% en Red Humana sin deducible, si la lesión se trata dentro de 48h, hasta $1.000." },
   { icon: Scissors, title: "Terceros molares", detail: "Extracción por reembolso al 100%, hasta $70 por molar." },
 ];
 
@@ -136,9 +161,16 @@ const contactChannels = [
 /* viewport, usando IntersectionObserver (una sola vez por elemento).     */
 /* ---------------------------------------------------------------------- */
 
+/**
+ * El valor final SIEMPRE se muestra desde el primer render (fallback inmediato),
+ * nunca arranca en 0: si el IntersectionObserver, requestAnimationFrame o
+ * prefers-reduced-motion impiden animar, el usuario igual ve la cifra correcta.
+ * La animación, cuando corre, es solo un acento editorial (< 900ms) desde un
+ * valor cercano al final, no un conteo largo desde cero.
+ */
 function CountUpStat({ prefix, value, suffix, label }: { prefix: string; value: number; suffix: string; label: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(value);
   const startedRef = useRef(false);
 
   useEffect(() => {
@@ -154,13 +186,15 @@ function CountUpStat({ prefix, value, suffix, label }: { prefix: string; value: 
         entries.forEach((entry) => {
           if (!entry.isIntersecting || startedRef.current) return;
           startedRef.current = true;
-          const duration = 1400;
+          const duration = 620; // < 1s, acento editorial
+          const startValue = Math.round(value * 0.4);
           const start = performance.now();
           const tick = (now: number) => {
             const progress = Math.min(1, (now - start) / duration);
             const eased = 1 - Math.pow(1 - progress, 3);
-            setDisplay(Math.round(value * eased));
+            setDisplay(Math.round(startValue + (value - startValue) * eased));
             if (progress < 1) window.requestAnimationFrame(tick);
+            else setDisplay(value);
           };
           window.requestAnimationFrame(tick);
           observer.disconnect();
@@ -187,13 +221,16 @@ function CountUpStat({ prefix, value, suffix, label }: { prefix: string; value: 
 
 function CoverageStory() {
   const [active, setActive] = useState(coverageCategories[0].id);
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const isClickScroll = useRef(false);
 
   useEffect(() => {
     const nodes = Object.values(sectionRefs.current).filter(Boolean) as HTMLDivElement[];
     if (!nodes.length) return;
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isClickScroll.current) return;
         entries.forEach((entry) => {
           if (entry.isIntersecting) setActive(entry.target.getAttribute("data-category") ?? active);
         });
@@ -205,41 +242,90 @@ function CoverageStory() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Navegación FUNCIONAL: clic o Enter/Espacio saltan al capítulo real,
+  // no solo resaltan pasivamente por scroll.
+  const goTo = (id: string) => {
+    setActive(id);
+    isClickScroll.current = true;
+    sectionRefs.current[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.setTimeout(() => { isClickScroll.current = false; }, 900);
+  };
+
   return (
     <section className="mh50-story" id="cobertura">
       <div className="mh50-story-nav">
         <span className="mh50-kicker">Tu cobertura, explicada</span>
-        <h2>Una protección pensada para cada momento</h2>
-        <ul>
+        <h2>Cuatro momentos de protección</h2>
+        <ul role="tablist" aria-label="Categorías de cobertura MH50">
           {coverageCategories.map(({ id, icon: Icon, title }) => (
-            <li key={id} className={active === id ? "active" : ""}>
-              <Icon /> <span>{title}</span>
+            <li key={id}>
+              <button
+                type="button"
+                role="tab"
+                id={`mh50-tab-${id}`}
+                aria-selected={active === id}
+                aria-controls={`mh50-panel-${id}`}
+                tabIndex={0}
+                className={active === id ? "active" : ""}
+                onClick={() => goTo(id)}
+              >
+                <Icon /> <span>{title}</span>
+              </button>
             </li>
           ))}
         </ul>
       </div>
       <div className="mh50-story-panels">
-        {coverageCategories.map(({ id, icon: Icon, title, kicker, lead, chips }) => (
-          <div
-            key={id}
-            className="mh50-story-panel"
-            data-category={id}
-            data-reveal=""
-            ref={(node) => { sectionRefs.current[id] = node; }}
-          >
-            <span className="mh50-story-icon"><Icon /></span>
-            <span className="mh50-story-kicker">{kicker}</span>
-            <h3>{title}</h3>
-            <p>{lead}</p>
-            <ul className="mh50-story-chips">
-              {chips.map(({ icon: ChipIcon, text }, index) => (
-                <li key={text} style={{ animationDelay: `${index * 60}ms` }}>
-                  <ChipIcon /> <span>{text}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {coverageCategories.map(({ id, icon: Icon, title, kicker, phrase, essentials, lead, chips }) => {
+          const isOpen = !!expanded[id];
+          return (
+            <div
+              key={id}
+              className="mh50-story-panel"
+              data-category={id}
+              data-reveal=""
+              id={`mh50-panel-${id}`}
+              role="tabpanel"
+              aria-labelledby={`mh50-tab-${id}`}
+              ref={(node) => { sectionRefs.current[id] = node; }}
+            >
+              <div className="mh50-story-media" aria-hidden="true">
+                {/* PLACEHOLDER: reemplazar por foto real — ver lista de imágenes pendientes en el reporte de la ronda 3 */}
+                <span className="mh50-story-media-icon"><Icon /></span>
+              </div>
+              <div className="mh50-story-copy">
+                <span className="mh50-story-kicker">{kicker}</span>
+                <h3>{title}</h3>
+                <p className="mh50-story-phrase">{phrase}</p>
+                <ul className="mh50-story-essentials">
+                  {essentials.map((item) => (
+                    <li key={item}><ShieldPlus /> <span>{item}</span></li>
+                  ))}
+                </ul>
+                <button
+                  type="button"
+                  className="mh50-story-toggle"
+                  aria-expanded={isOpen}
+                  aria-controls={`mh50-details-${id}`}
+                  onClick={() => setExpanded((prev) => ({ ...prev, [id]: !prev[id] }))}
+                >
+                  <span>{isOpen ? "Ocultar detalles completos" : "Ver detalles completos"}</span>
+                  <ChevronRight className={isOpen ? "open" : ""} />
+                </button>
+                <div className="mh50-story-details" id={`mh50-details-${id}`} hidden={!isOpen}>
+                  <p>{lead}</p>
+                  <ul className="mh50-story-chips">
+                    {chips.map(({ icon: ChipIcon, text }, index) => (
+                      <li key={text} style={{ animationDelay: `${index * 60}ms` }}>
+                        <ChipIcon /> <span>{text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -249,8 +335,45 @@ function CoverageStory() {
 /* Página                                                                  */
 /* ---------------------------------------------------------------------- */
 
+function AccordionSection({
+  icon: Icon,
+  title,
+  items,
+  defaultOpen = false,
+}: {
+  icon: typeof ShieldPlus;
+  title: string;
+  items: { icon: typeof ShieldPlus; value: string; label: string }[];
+  defaultOpen?: boolean;
+}) {
+  return (
+    <details className="mh50-accordion" open={defaultOpen}>
+      <summary>
+        <span className="mh50-accordion-title"><Icon /> {title}</span>
+        <ChevronDown className="mh50-accordion-chevron" />
+      </summary>
+      <div className="mh50-extra-grid">
+        {items.map(({ icon: ItemIcon, value, label }) => (
+          <article key={label}>
+            <span className="mh50-extra-icon"><ItemIcon /></span>
+            <strong>{value}</strong>
+            <span>{label}</span>
+          </article>
+        ))}
+      </div>
+    </details>
+  );
+}
+
 export default function Mh50Page() {
   const [quoted, setQuoted] = useState(false);
+  const [showAllBenefits, setShowAllBenefits] = useState(false);
+
+  // Handler demostrativo. Aquí se conectará la lógica real de cotización
+  // (formulario, CRM, WhatsApp Business, etc.) en la siguiente etapa.
+  const handleQuoteClick = () => {
+    setQuoted(true);
+  };
 
   return (
     <SiteShell title="MH50 · Plan Full Metrohumana 50.000">
@@ -316,7 +439,7 @@ export default function Mh50Page() {
           <p>Beneficios que muchos planes cobran aparte, y que en MH50 ya están dentro de tu cobertura.</p>
         </div>
         <div className="mh50-benefits-grid">
-          {includedBenefits.map(({ icon: Icon, title, detail }) => (
+          {featuredBenefits.map(({ icon: Icon, title, detail }) => (
             <article key={title} data-reveal="">
               <span className="mh50-benefit-icon"><Icon /></span>
               <h3>{title}</h3>
@@ -324,65 +447,54 @@ export default function Mh50Page() {
             </article>
           ))}
         </div>
+        <div className="mh50-benefits-more" data-reveal="">
+          <button
+            type="button"
+            className="mh50-story-toggle"
+            aria-expanded={showAllBenefits}
+            aria-controls="mh50-more-benefits"
+            onClick={() => setShowAllBenefits((v) => !v)}
+          >
+            <span>{showAllBenefits ? "Ocultar beneficios adicionales" : "Ver todos los beneficios"}</span>
+            <ChevronRight className={showAllBenefits ? "open" : ""} />
+          </button>
+          <div id="mh50-more-benefits" className="mh50-benefits-grid mh50-benefits-grid-more" hidden={!showAllBenefits}>
+            {moreBenefits.map(({ icon: Icon, title, detail }) => (
+              <article key={title}>
+                <span className="mh50-benefit-icon"><Icon /></span>
+                <h3>{title}</h3>
+                <p>{detail}</p>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="mh50-extra">
         <div className="mh50-extra-intro" data-reveal="">
           <span className="mh50-kicker">Cobertura a fondo</span>
-          <h2>Casos especiales y beneficios adicionales</h2>
-          <p>Situaciones puntuales y coberturas extra que MH50 ya contempla, sin letra pequeña.</p>
+          <h2>Casos especiales y condiciones del plan</h2>
+          <p>Información técnica organizada por categorías, disponible cuando la necesites, sin competir con la historia principal.</p>
         </div>
 
-        <div className="mh50-extra-category" data-reveal="">
-          <h3><ShieldPlus /> Casos especiales</h3>
-          <div className="mh50-extra-grid">
-            {specialCases.map(({ icon: Icon, value, label }) => (
-              <article key={label} data-reveal="">
-                <span className="mh50-extra-icon"><Icon /></span>
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="mh50-extra-category" data-reveal="">
-          <h3><Sparkles /> Coberturas adicionales sin costo</h3>
-          <div className="mh50-extra-grid">
-            {extraCoverages.map(({ icon: Icon, value, label }) => (
-              <article key={label} data-reveal="">
-                <span className="mh50-extra-icon"><Icon /></span>
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="mh50-extra-category" data-reveal="">
-          <h3><Ambulance /> Coberturas obligatorias de emergencia</h3>
-          <div className="mh50-extra-grid">
-            {emergencyCoverages.map(({ icon: Icon, value, label }) => (
-              <article key={label} data-reveal="">
-                <span className="mh50-extra-icon"><Icon /></span>
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </article>
-            ))}
-          </div>
+        <div className="mh50-accordion-group" data-reveal="">
+          <AccordionSection icon={ShieldPlus} title="Casos especiales" items={specialCases} defaultOpen />
+          <AccordionSection icon={HandHeart} title="Prevención y bienestar" items={preventionCoverages} />
+          <AccordionSection icon={Activity} title="Rehabilitación y ayudas técnicas" items={rehabCoverages} />
+          <AccordionSection icon={Sparkles} title="Coberturas adicionales" items={extraCoverages} />
+          <AccordionSection icon={Ambulance} title="Emergencias obligatorias" items={emergencyCoverages} />
+          <AccordionSection icon={Wallet} title="Condiciones y límites" items={planConditions} />
         </div>
       </section>
 
       <section className="mh50-foundation">
         <div className="mh50-foundation-media" data-reveal="">
-          <Image
-            src="/familia-humana.png"
-            alt="Niños beneficiados por Fundación Metrofraternidad"
-            fill
-            sizes="(max-width: 900px) 100vw, 45vw"
-            className="mh50-foundation-image"
-            unoptimized
-          />
+          {/* PLACEHOLDER: reemplazar por foto real de niños beneficiados por
+              Fundación Metrofraternidad — ver lista de imágenes pendientes.
+              No se reutiliza la imagen del hero. */}
+          <div className="mh50-foundation-placeholder" data-placeholder="metrofraternidad-ninos">
+            <Heart aria-hidden="true" />
+          </div>
           <span className="mh50-foundation-stat">
             <strong>+6.900</strong>
             <span>niños beneficiados</span>
@@ -412,7 +524,7 @@ export default function Mh50Page() {
             <button
               type="button"
               className="white-button"
-              onClick={() => setQuoted(true)}
+              onClick={handleQuoteClick}
             >
               Cotizar MH50 <ArrowRight />
             </button>
