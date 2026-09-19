@@ -236,7 +236,15 @@ export default function Mh50Page() {
       navLinks.forEach((link) => link.classList.toggle("is-active", link.dataset.chapterLink === current));
       if (current && current !== lastCurrent) {
         const activeLink = navLinks.find((link) => link.dataset.chapterLink === current);
-        activeLink?.scrollIntoView({ block: "nearest", inline: "center", behavior: reducedMotion ? "auto" : "smooth" });
+        const navContainer = activeLink?.parentElement;
+        // Se desplaza SOLO el contenedor horizontal del menú (scrollLeft),
+        // nunca scrollIntoView: al ser un menú position:sticky, scrollIntoView
+        // confunde su posición en el documento con la posición visual fija y
+        // termina arrastrando verticalmente toda la página hacia arriba.
+        if (activeLink && navContainer) {
+          const targetLeft = activeLink.offsetLeft - navContainer.clientWidth / 2 + activeLink.clientWidth / 2;
+          navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
+        }
         lastCurrent = current;
       }
     };
