@@ -2227,9 +2227,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 
 @media (max-width: 760px) {
-  .mh50-hero-content { padding: 120px 20px 100px; }
+  .mh50-hero { min-height: auto; padding: 96px 0 48px; }
+  .mh50-hero-content { padding: 24px 20px 0; }
   .mh50-hero-content h1 { font-size: 76px; }
-  .mh50-hero-glass { margin-top: 34px; }
+  .mh50-hero-glass { margin-top: 30px; }
   .mh50-glass-chip { min-width: 130px; padding: 13px 16px; }
   .mh50-stats-grid { grid-template-columns: 1fr; }
   .mh50-benefits-grid { grid-template-columns: 1fr; }
