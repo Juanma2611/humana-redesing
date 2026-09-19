@@ -57,31 +57,11 @@ const revealSelectors = [
 ].join(",");
 
 /*
- * MH50: estos elementos NUNCA dependen del IntersectionObserver ni de que el
- * usuario haga scroll gradual. Se marcan con [data-mh-reveal] (ver CSS) y su
- * animación de entrada corre por keyframes desde el montaje de la página,
- * nunca desde el cruce de un umbral de scroll. Así, entrar directo por hash
- * (#cifras), un scroll ultra rápido o un observer que no llega a tiempo jamás
- * dejan contenido en opacity:0 permanente — el contenido ya está visible en
- * el HTML/CSS por defecto y la animación es solo un acento cosmético.
+ * MH50: la página /planes/mh50 tiene su propio sistema de aparición al hacer
+ * scroll (IntersectionObserver con red de seguridad por timeout), definido
+ * localmente en app/planes/mh50/page.tsx sobre elementos .mh50-exp-reveal.
+ * No se gestiona aquí para mantener esa página autocontenida.
  */
-const mh50Selectors = [
-  ".mh50-hero-content > *",
-  ".mh50-hero-glass",
-  ".mh50-stats-intro > *",
-  ".mh50-stat",
-  ".mh50-story-panel",
-  ".mh50-benefits-intro > *",
-  ".mh50-benefits-grid article",
-  ".mh50-benefits-more",
-  ".mh50-extra-intro > *",
-  ".mh50-accordion-group",
-  ".mh50-accordion",
-  ".mh50-foundation-media",
-  ".mh50-foundation-copy > *",
-  ".mh50-cta-copy > *",
-  ".mh50-cta-contact",
-].join(",");
 
 const imageSelectors = [
   ".hero-image",
@@ -89,7 +69,6 @@ const imageSelectors = [
   ".about-hero > img",
   ".business-hero-image img",
   ".page-hero-media",
-  ".mh50-hero-image",
 ].join(",");
 
 export function MotionOrchestrator() {
@@ -97,7 +76,6 @@ export function MotionOrchestrator() {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const nodes = Array.from(document.querySelectorAll<HTMLElement>(revealSelectors));
     const images = Array.from(document.querySelectorAll<HTMLElement>(imageSelectors));
-    const mh50Nodes = Array.from(document.querySelectorAll<HTMLElement>(mh50Selectors));
 
     document.documentElement.classList.add("motion-ready");
 
@@ -105,17 +83,6 @@ export function MotionOrchestrator() {
       node.dataset.reveal = "";
       const siblings = node.parentElement
         ? Array.from(node.parentElement.children).filter((item) => (item as HTMLElement).matches?.(revealSelectors))
-        : [];
-      const position = Math.max(0, siblings.indexOf(node));
-      node.style.setProperty("--reveal-delay", `${Math.min(position, 4) * 70}ms`);
-    });
-
-    // MH50: animación de entrada por keyframes, disparada al montar, sin
-    // observer ni dependencia de scroll — ver comentario junto a mh50Selectors.
-    mh50Nodes.forEach((node) => {
-      node.dataset.mhReveal = "";
-      const siblings = node.parentElement
-        ? Array.from(node.parentElement.children).filter((item) => (item as HTMLElement).matches?.(mh50Selectors))
         : [];
       const position = Math.max(0, siblings.indexOf(node));
       node.style.setProperty("--reveal-delay", `${Math.min(position, 4) * 70}ms`);
