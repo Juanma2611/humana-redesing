@@ -409,9 +409,9 @@ export default function Mh50Page() {
               <h2>Más formas de acompañarte.</h2>
               <p>Servicios adicionales que forman parte de tu plan MH50, sin costo adicional.</p>
             </div>
-            <div className="mh50-exp-benefits-grid mh50-exp-reveal" role="list" aria-label="Beneficios incluidos en el plan MH50">
-              {featuredBenefits.map(({ icon: Icon, title }) => (
-                <article role="listitem" key={title}>
+            <div className="mh50-exp-benefits-grid" role="list" aria-label="Beneficios incluidos en el plan MH50">
+              {featuredBenefits.map(({ icon: Icon, title }, i) => (
+                <article className="mh50-exp-reveal" style={{ "--reveal-delay": `${(i % 6) * 60}ms` } as React.CSSProperties} role="listitem" key={title}>
                   <span className="mh50-exp-benefit-symbol" aria-hidden="true"><Icon /></span>
                   <h3>{title}</h3>
                   <span className="mh50-exp-benefit-arrow" aria-hidden="true">›</span>
@@ -427,9 +427,9 @@ export default function Mh50Page() {
             <h2>Tu cobertura, clara desde el inicio.</h2>
             <p>Estos son los periodos generales antes de utilizar determinadas prestaciones del plan.</p>
           </div>
-          <div className="mh50-exp-waiting-grid mh50-exp-reveal" role="list" aria-label="Periodos generales de carencia del plan MH50">
-            {waitingPeriods.map((w) => (
-              <article className="mh50-exp-waiting-card" role="listitem" key={w.title}>
+          <div className="mh50-exp-waiting-grid" role="list" aria-label="Periodos generales de carencia del plan MH50">
+            {waitingPeriods.map((w, i) => (
+              <article className="mh50-exp-waiting-card mh50-exp-reveal" style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties} role="listitem" key={w.title}>
                 <div className="mh50-exp-waiting-num"><strong>{w.days}</strong><span>días</span></div>
                 <h3>{w.title}</h3>
               </article>
