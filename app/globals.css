@@ -1442,6 +1442,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .plan-story-coverages > header > p { margin:0; color:#607b8b; font-size:17px; line-height:1.65; }
 .plan-story-chapter { --chapter:#0688b9; --chapter-soft:#e5f6fb; --chapter-pad:clamp(25px,4vw,52px); margin:0 0 28px; padding:var(--chapter-pad); display:grid; grid-template-columns:.78fr 1.22fr; gap:clamp(28px,5vw,70px); align-items:start; overflow:hidden; border:1px solid #d7e9ef; border-radius:30px; background:linear-gradient(135deg,var(--chapter-soft),#fff 56%); box-shadow:0 24px 65px rgba(5,68,102,.08); scroll-margin-top:85px; }
 .plan-story-chapter.reverse { grid-template-columns:1.22fr .78fr; }
+.plan-story-chapter-note { grid-column:1 / -1; margin:2px 0 0; color:#8398a6; font-size:12px; line-height:1.5; font-style:italic; }
 .plan-story-chapter.reverse .plan-story-chapter-intro { grid-column:2; grid-row:1; }
 .plan-story-chapter.reverse .plan-story-chapter-grid { grid-column:1; grid-row:1; }
 .plan-story-chapter.tone-consultas { --chapter:#078ab8; --chapter-soft:#e7f8fb; }

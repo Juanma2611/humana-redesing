@@ -130,8 +130,8 @@ const plans: Plan[] = [
     details: [
       { title: "Hospitalización", icon: Hospital, items: ["90% en red", "80% libre elección", "Habitación hasta $160/día", "Trasplantes hasta $7.500"] },
       { title: "Consultas y exámenes", icon: Stethoscope, items: ["Básicas desde $4 en Metrored", "Subespecialidades desde $8", "Exámenes básicos al 90% en CAM", "Médico a domicilio $10"] },
-      { title: "Medicinas", icon: Pill, items: ["Medicinas entre 70-90%"] },
-      { title: "Emergencias", icon: Activity, items: ["Urgencias hasta el límite del plan"] },
+      { title: "Medicinas", icon: Pill, items: ["Medicinas 70% - 90% de cobertura"] },
+      { title: "Emergencias", icon: Activity, items: ["Urgencias hasta el límite del plan", "Atención Red Humana", "Emergencia por accidente, según las condiciones del plan"] },
     ], waits: ["24 h emergencias", "30 días ambulatorio", "60 días maternidad", "90 días hospitalario"],
   },
   {
@@ -332,6 +332,7 @@ export default function Plans() {
                   const isWideLast = itemIndex === group.items.length - 1 && group.items.length % 2 === 0;
                   return <div className={`${itemIndex === 0 ? "spotlight" : ""}${isWideLast ? " wide-last" : ""}`.trim()} key={item}><span><CoverageIcon item={item} /></span><strong>{display.metric}</strong><p>{display.label}</p><Check aria-hidden="true" /></div>;
                 })}</div>
+                {selected.id === "ph15" && group.title === "Emergencias" && <p className="plan-story-chapter-note">Valores sujetos a las condiciones y exclusiones establecidas en el contrato.</p>}
               </article>;
             })}
           </section>
