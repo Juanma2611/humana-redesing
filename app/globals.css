@@ -872,7 +872,9 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .footer-brand p { font-size:12px; }
   .footer-trust-actions { grid-template-columns:1fr; }
   .footer-main-grid { grid-template-columns:1fr 1fr; }
-  .footer-contact-lines,.footer-apps { grid-template-columns:1fr; }
+  .footer-contact-lines { grid-template-columns:1fr; }
+  .footer-apps { max-width: 240px; }
+  .footer-apps img { max-width: 112px; }
   .footer-bottom { display:grid; }
   .site-footer .concept-note { max-width:none; }
 }
