@@ -327,7 +327,7 @@ export default function Plans() {
                   {chapterImage && <Image className="plan-story-chapter-photo" src={chapterImage} alt="" fill aria-hidden="true" unoptimized />}
                   <span><GroupIcon /></span><small>Tu cobertura</small><h3>{group.title}</h3><p>{chapterCopy[tone]}</p>
                 </div>
-                <div className="plan-story-chapter-grid">{group.items.map((item, itemIndex) => {
+                <div className={`plan-story-chapter-grid${selected.id === "ph15" && group.title === "Emergencias" ? " stacked" : ""}`}>{group.items.map((item, itemIndex) => {
                   const display = coverageDisplay(item);
                   const isWideLast = itemIndex === group.items.length - 1 && group.items.length % 2 === 0;
                   return <div className={`${itemIndex === 0 ? "spotlight" : ""}${isWideLast ? " wide-last" : ""}`.trim()} key={item}><span><CoverageIcon item={item} /></span><strong>{display.metric}</strong><p>{display.label}</p><Check aria-hidden="true" /></div>;
