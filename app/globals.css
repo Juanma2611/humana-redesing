@@ -1456,8 +1456,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .plan-story-chapter-intro h3 { margin:7px 0 13px; color:#113f5b; font-size:clamp(31px,3.5vw,46px); line-height:1.02; letter-spacing:-.045em; }
 .plan-story-chapter-intro p { margin:0; max-width:340px; color:#607b8b; line-height:1.65; }
 .plan-story-chapter-intro.has-image { position:sticky; overflow:hidden; border-radius:26px; margin:-15px -8px; padding:30px 24px; }
-.plan-story-chapter-photo { object-fit:cover; opacity:.7; z-index:0; -webkit-mask-image:radial-gradient(115% 105% at 38% 42%,#000 68%,transparent 100%); mask-image:radial-gradient(115% 105% at 38% 42%,#000 68%,transparent 100%); }
-.plan-story-chapter-intro.has-image:after { content:""; position:absolute; inset:0; z-index:0; background:linear-gradient(0deg,rgba(255,255,255,.8) 0%,rgba(255,255,255,.4) 45%,rgba(255,255,255,.08) 100%); }
+.plan-story-chapter-photo { object-fit:cover; opacity:.85; z-index:0; }
+.plan-story-chapter-intro.has-image:after { content:""; position:absolute; inset:0; z-index:0; background:linear-gradient(0deg,rgba(255,255,255,.78) 0%,rgba(255,255,255,.32) 42%,rgba(255,255,255,.05) 100%); }
 .plan-story-chapter-intro.has-image > *:not(.plan-story-chapter-photo) { position:relative; z-index:1; }
 .plan-story-chapter-grid { display:grid; grid-template-columns:1fr 1fr; align-content:center; gap:10px; }
 .plan-story-chapter-grid > div { position:relative; min-height:68px; padding:12px 15px; display:grid; grid-template-columns:38px minmax(0,1fr) 16px; grid-template-rows:auto auto; column-gap:12px; align-items:center; border:1px solid rgba(193,220,230,.86); border-radius:14px; background:rgba(255,255,255,.9); box-shadow:0 9px 22px rgba(4,65,97,.055); transition:transform .42s var(--premium-ease),box-shadow .42s ease; }
