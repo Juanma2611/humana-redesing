@@ -1456,7 +1456,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .plan-story-chapter-intro h3 { margin:7px 0 13px; color:#113f5b; font-size:clamp(31px,3.5vw,46px); line-height:1.02; letter-spacing:-.045em; }
 .plan-story-chapter-intro p { margin:0; max-width:340px; color:#607b8b; line-height:1.65; }
 .plan-story-chapter-intro.has-image { position:sticky; overflow:hidden; }
-.plan-story-chapter-photo { object-fit:cover; opacity:.4; z-index:0; -webkit-mask-image:radial-gradient(120% 100% at 30% 40%,#000 45%,transparent 88%); mask-image:radial-gradient(120% 100% at 30% 40%,#000 45%,transparent 88%); }
+.plan-story-chapter-photo { object-fit:cover; opacity:.7; z-index:0; -webkit-mask-image:linear-gradient(90deg,#000 82%,transparent); mask-image:linear-gradient(90deg,#000 82%,transparent); }
+.plan-story-chapter-intro.has-image:after { content:""; position:absolute; inset:0; z-index:0; background:linear-gradient(0deg,rgba(255,255,255,.86) 0%,rgba(255,255,255,.5) 55%,rgba(255,255,255,.1) 100%); }
 .plan-story-chapter-intro.has-image > *:not(.plan-story-chapter-photo) { position:relative; z-index:1; }
 .plan-story-chapter-grid { display:grid; grid-template-columns:1fr 1fr; align-content:center; gap:10px; }
 .plan-story-chapter-grid > div { position:relative; min-height:68px; padding:12px 15px; display:grid; grid-template-columns:38px minmax(0,1fr) 16px; grid-template-rows:auto auto; column-gap:12px; align-items:center; border:1px solid rgba(193,220,230,.86); border-radius:14px; background:rgba(255,255,255,.9); box-shadow:0 9px 22px rgba(4,65,97,.055); transition:transform .42s var(--premium-ease),box-shadow .42s ease; }
