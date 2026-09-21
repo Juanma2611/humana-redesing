@@ -315,10 +315,16 @@ export default function Plans() {
             {selected.details.map((group, index) => {
               const GroupIcon = group.icon;
               const tone = coverageTone(group.title);
-              const showHospitalizacionImage = selected.id === "ph15" && group.title === "Hospitalización";
+              const ph15ChapterImages: Record<string, string> = {
+                "Hospitalización": "/ph15-hospitalizacion.jpg",
+                "Consultas y exámenes": "/ph15-consultas.jpg",
+                "Medicinas": "/ph15-medicinas.jpg",
+                "Emergencias": "/ph15-emergencias.jpg",
+              };
+              const chapterImage = selected.id === "ph15" ? ph15ChapterImages[group.title] : undefined;
               return <article className={`plan-story-chapter tone-${tone} ${index % 2 ? "reverse" : ""}`} key={group.title}>
-                <div className={`plan-story-chapter-intro${showHospitalizacionImage ? " has-image" : ""}`}>
-                  {showHospitalizacionImage && <Image className="plan-story-chapter-photo" src="/ph15-hospitalizacion.jpg" alt="" fill aria-hidden="true" unoptimized />}
+                <div className={`plan-story-chapter-intro${chapterImage ? " has-image" : ""}`}>
+                  {chapterImage && <Image className="plan-story-chapter-photo" src={chapterImage} alt="" fill aria-hidden="true" unoptimized />}
                   <span><GroupIcon /></span><small>Tu cobertura</small><h3>{group.title}</h3><p>{chapterCopy[tone]}</p>
                 </div>
                 <div className="plan-story-chapter-grid">{group.items.map((item, itemIndex) => {
