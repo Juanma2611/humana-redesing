@@ -2205,7 +2205,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh50-exp-compass-core { position: relative; inset: auto; width: 210px; aspect-ratio: 1; }
   .mh50-exp-chapter { grid-template-columns: 1fr; padding: 80px 20px; }
   .mh50-exp-chapter.reverse .mh50-exp-chapter-image { order: 0; }
-  .mh50-exp-chapter-image { height: 50vh; min-height: 320px; }
+  .mh50-exp-chapter-image { height: auto; min-height: 0; aspect-ratio: 4 / 3; }
   .mh50-exp-chapter-copy h2 { font-size: 44px; }
   .mh50-exp-benefits-grid { grid-template-columns: 1fr; }
   .mh50-exp-vault { grid-template-columns: 1fr; }
