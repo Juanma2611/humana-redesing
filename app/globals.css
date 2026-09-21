@@ -2076,9 +2076,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 
 .mh50-exp-pharmacy-note { display: block; margin: 6px 0 2px; }
 .mh50-exp-pharmacy-note::before { display: none; }
-.mh50-exp-pharmacy-logos { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; max-width: 520px; margin-top: 10px; }
-.mh50-exp-pharmacy-logo { height: 76px; padding: 14px 20px; border-radius: 16px; background: rgba(255,255,255,.96); border: 1px solid rgba(255,255,255,.35); display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 30px rgba(7,63,96,.16); font-size: 17px; font-weight: 800; color: var(--mh-navy); text-align: center; overflow: hidden; }
-.mh50-exp-pharmacy-logo img { max-width: 100%; max-height: 48px; width: auto; height: auto; object-fit: contain; }
+.mh50-exp-pharmacy-logos { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(20px,3vw,36px); max-width: 620px; margin-top: 14px; }
+.mh50-exp-pharmacy-logos img { width: auto; height: 40px; max-width: 150px; object-fit: contain; }
 
 /* BENEFICIOS ---------------------------------------------------------------*/
 .mh50-exp-included { padding: clamp(70px, 8vw, 120px) clamp(16px, 5vw, 72px); background: #f4fafc; }

@@ -382,15 +382,11 @@ export default function Mh50Page() {
                 {c.essentials.map((item) => <li key={item}>{item}</li>)}
                 {c.id === "medicinas" && (
                   <li className="mh50-exp-pharmacy-note">
-                    <span className="mh50-exp-pharmacy-logos" aria-label="Farmacias afiliadas: Pharmacy's, Medicity, Fybeca y Sana Sana">
-                      <span className="mh50-exp-pharmacy-logo">Pharmacy&apos;s</span>
-                      <span className="mh50-exp-pharmacy-logo">Medicity</span>
-                      <span className="mh50-exp-pharmacy-logo">
-                        <Image src="/logo-fybeca-hd.jpeg" alt="Fybeca" width={90} height={34} unoptimized />
-                      </span>
-                      <span className="mh50-exp-pharmacy-logo">
-                        <Image src="/logo-sanasana-hd.png" alt="Sana Sana" width={90} height={34} unoptimized />
-                      </span>
+                    <span className="mh50-exp-pharmacy-logos" aria-label="Farmacias afiliadas: Pharmacy's, Sana Sana, Medicity y Fybeca">
+                      <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={150} height={50} unoptimized />
+                      <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={150} height={84} unoptimized />
+                      <Image src="/farmacia-medicity.png" alt="Medicity" width={150} height={88} unoptimized />
+                      <Image src="/farmacia-fybeca.png" alt="Farmacias Fybeca" width={150} height={100} unoptimized />
                     </span>
                   </li>
                 )}
