@@ -332,6 +332,12 @@ export default function Plans() {
                   const isWideLast = itemIndex === group.items.length - 1 && group.items.length % 2 === 0;
                   return <div className={`${itemIndex === 0 ? "spotlight" : ""}${isWideLast ? " wide-last" : ""}`.trim()} key={item}><span><CoverageIcon item={item} /></span><strong>{display.metric}</strong><p>{display.label}</p><Check aria-hidden="true" /></div>;
                 })}</div>
+                {selected.id === "ph15" && group.title === "Medicinas" && <div className="plan-story-chapter-logos">
+                  <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={140} height={47} unoptimized />
+                  <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={140} height={79} unoptimized />
+                  <Image src="/farmacia-medicity.png" alt="Medicity" width={140} height={82} unoptimized />
+                  <Image src="/farmacia-fybeca.png" alt="Farmacias Fybeca" width={140} height={93} unoptimized />
+                </div>}
                 {selected.id === "ph15" && group.title === "Emergencias" && <p className="plan-story-chapter-note">Valores sujetos a las condiciones y exclusiones establecidas en el contrato.</p>}
               </article>;
             })}
