@@ -2197,7 +2197,12 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh50-exp-stat-stage { grid-template-columns: 1fr; }
   .mh50-exp-stat { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.16); padding: 30px 0 !important; }
   .mh50-exp-moments { grid-template-columns: 1fr; gap: 50px; padding-block: 90px; }
-  .mh50-exp-compass { max-width: 460px; }
+  /* En móvil los 4 recuadros de la brújula se superponían: se simplifica a
+     solo el círculo MH50, sin recuadros. En desktop se mantienen intactos. */
+  .mh50-exp-compass { position: static; aspect-ratio: auto; max-width: none; width: auto; display: flex; justify-content: center; }
+  .mh50-exp-compass svg { display: none; }
+  .mh50-exp-compass-node { display: none; }
+  .mh50-exp-compass-core { position: relative; inset: auto; width: 210px; aspect-ratio: 1; }
   .mh50-exp-chapter { grid-template-columns: 1fr; padding: 80px 20px; }
   .mh50-exp-chapter.reverse .mh50-exp-chapter-image { order: 0; }
   .mh50-exp-chapter-image { height: 50vh; min-height: 320px; }
@@ -2226,16 +2231,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh50-exp-finale-actions { flex-direction: column; align-items: stretch; }
   .mh50-exp-waiting-copy h2 { font-size: 40px; }
   .mh50-exp-pharmacy-logos { max-width: none; }
-
-  /* La brújula de 4 momentos no puede usar posiciones absolutas superpuestas
-     en pantallas angostas: se convierte en una grilla 2x2 simple. */
-  .mh50-exp-compass { aspect-ratio: auto; width: 100%; max-width: 420px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .mh50-exp-compass svg { display: none; }
-  .mh50-exp-compass-core { position: relative; inset: auto; grid-column: 1 / -1; grid-row: 1; width: 140px; aspect-ratio: 1; margin: 0 auto 12px; }
+  .mh50-exp-compass-core { width: 170px; }
   .mh50-exp-compass-core strong { font-size: 36px; }
-  .mh50-exp-compass-node { position: relative; inset: auto; transform: none !important; min-width: 0; width: auto; min-height: 78px; padding: 13px 14px; justify-content: center; border-radius: 14px; }
-  .mh50-exp-compass-node.node-one { grid-column: 1; grid-row: 2; }
-  .mh50-exp-compass-node.node-two { grid-column: 2; grid-row: 2; }
-  .mh50-exp-compass-node.node-three { grid-column: 1; grid-row: 3; }
-  .mh50-exp-compass-node.node-four { grid-column: 2; grid-row: 3; }
 }
