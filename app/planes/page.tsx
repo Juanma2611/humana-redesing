@@ -315,8 +315,12 @@ export default function Plans() {
             {selected.details.map((group, index) => {
               const GroupIcon = group.icon;
               const tone = coverageTone(group.title);
+              const showHospitalizacionImage = selected.id === "ph15" && group.title === "Hospitalización";
               return <article className={`plan-story-chapter tone-${tone} ${index % 2 ? "reverse" : ""}`} key={group.title}>
-                <div className="plan-story-chapter-intro"><span><GroupIcon /></span><small>Tu cobertura</small><h3>{group.title}</h3><p>{chapterCopy[tone]}</p></div>
+                <div className={`plan-story-chapter-intro${showHospitalizacionImage ? " has-image" : ""}`}>
+                  {showHospitalizacionImage && <Image className="plan-story-chapter-photo" src="/ph15-hospitalizacion.jpg" alt="Paciente acompañado por personal médico en una habitación de hospital" width={520} height={390} unoptimized />}
+                  <span><GroupIcon /></span><small>Tu cobertura</small><h3>{group.title}</h3><p>{chapterCopy[tone]}</p>
+                </div>
                 <div className="plan-story-chapter-grid">{group.items.map((item, itemIndex) => {
                   const display = coverageDisplay(item);
                   const isWideLast = itemIndex === group.items.length - 1 && group.items.length % 2 === 0;
