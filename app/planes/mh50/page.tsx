@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Activity, Ambulance, Baby, Bone, Bike, Brain, CreditCard, Cross,
+  Activity, Ambulance, Baby, Bone, Bike, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Milk, PackageCheck, Phone, PhoneCall, Pill, PlaneTakeoff,
-  Ribbon, Sailboat, Salad, Scissors, ShieldCheck, ShieldPlus, Sparkles,
+  Ribbon, Scissors, ShieldCheck, ShieldPlus, Sparkles,
   Stethoscope, Syringe, Users, Video, Wallet,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
@@ -130,13 +130,8 @@ const featuredBenefits = [
   { icon: Ribbon, title: "Asistencia exequial" },
   { icon: Ambulance, title: "Ambulancia terrestre" },
   { icon: HomeIcon, title: "Médico a domicilio" },
-  { icon: PlaneTakeoff, title: "Asistencia en viajes" },
-  { icon: Video, title: "Teleconsulta médica" },
-  { icon: Brain, title: "Psicología" },
-  { icon: Salad, title: "Nutrición" },
-  { icon: FlaskConical, title: "Exámenes preventivos" },
-  { icon: CreditCard, title: "Crédito en emergencia ambulatoria" },
-  { icon: Sailboat, title: "Ambulancia aérea o fluvial" },
+  { icon: PlaneTakeoff, title: "Asistencia en viaje" },
+  { icon: Video, title: "Teleconsulta" },
   { icon: PackageCheck, title: "Medicinas a domicilio" },
 ];
 
@@ -383,8 +378,8 @@ export default function Mh50Page() {
                 {c.id === "medicinas" && (
                   <li className="mh50-exp-pharmacy-note">
                     <span className="mh50-exp-pharmacy-logos" aria-label="Farmacias afiliadas: Pharmacy's, Sana Sana, Medicity y Fybeca">
-                      <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={150} height={50} unoptimized />
-                      <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={150} height={84} unoptimized />
+                      <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={178} height={60} unoptimized />
+                      <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={200} height={38} unoptimized />
                       <Image src="/farmacia-medicity.png" alt="Medicity" width={150} height={88} unoptimized />
                       <Image src="/farmacia-fybeca.png" alt="Farmacias Fybeca" width={150} height={100} unoptimized />
                     </span>

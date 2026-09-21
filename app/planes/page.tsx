@@ -327,18 +327,20 @@ export default function Plans() {
                   {chapterImage && <Image className="plan-story-chapter-photo" src={chapterImage} alt="" fill aria-hidden="true" unoptimized />}
                   <span><GroupIcon /></span><small>Tu cobertura</small><h3>{group.title}</h3><p>{chapterCopy[tone]}</p>
                 </div>
-                <div className={`plan-story-chapter-grid${selected.id === "ph15" && group.title === "Emergencias" ? " stacked" : ""}`}>{group.items.map((item, itemIndex) => {
-                  const display = coverageDisplay(item);
-                  const isWideLast = itemIndex === group.items.length - 1 && group.items.length % 2 === 0;
-                  return <div className={`${itemIndex === 0 ? "spotlight" : ""}${isWideLast ? " wide-last" : ""}`.trim()} key={item}><span><CoverageIcon item={item} /></span><strong>{display.metric}</strong><p>{display.label}</p><Check aria-hidden="true" /></div>;
-                })}</div>
-                {selected.id === "ph15" && group.title === "Medicinas" && <div className="plan-story-chapter-logos">
-                  <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={140} height={47} unoptimized />
-                  <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={140} height={79} unoptimized />
-                  <Image src="/farmacia-medicity.png" alt="Medicity" width={140} height={82} unoptimized />
-                  <Image src="/farmacia-fybeca.png" alt="Farmacias Fybeca" width={140} height={93} unoptimized />
-                </div>}
-                {selected.id === "ph15" && group.title === "Emergencias" && <p className="plan-story-chapter-note">Valores sujetos a las condiciones y exclusiones establecidas en el contrato.</p>}
+                <div className="plan-story-chapter-grid">
+                  <div className={`plan-story-chapter-cards${selected.id === "ph15" && group.title === "Emergencias" ? " stacked" : ""}`}>{group.items.map((item, itemIndex) => {
+                    const display = coverageDisplay(item);
+                    const isWideLast = itemIndex === group.items.length - 1 && group.items.length % 2 === 0;
+                    return <div className={`${itemIndex === 0 ? "spotlight" : ""}${isWideLast ? " wide-last" : ""}`.trim()} key={item}><span><CoverageIcon item={item} /></span><strong>{display.metric}</strong><p>{display.label}</p><Check aria-hidden="true" /></div>;
+                  })}</div>
+                  {selected.id === "ph15" && group.title === "Medicinas" && <div className="plan-story-chapter-logos">
+                    <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={178} height={60} unoptimized />
+                    <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={200} height={38} unoptimized />
+                    <Image src="/farmacia-medicity.png" alt="Medicity" width={150} height={88} unoptimized />
+                    <Image src="/farmacia-fybeca.png" alt="Farmacias Fybeca" width={150} height={100} unoptimized />
+                  </div>}
+                  {selected.id === "ph15" && group.title === "Emergencias" && <p className="plan-story-chapter-note">Valores sujetos a las condiciones y exclusiones establecidas en el contrato.</p>}
+                </div>
               </article>;
             })}
           </section>
