@@ -2317,7 +2317,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .sales-plans-layout .sales-segments { position: sticky; top: 0; z-index: 5; max-height: none; grid-auto-flow: column; grid-auto-columns: minmax(128px, auto); grid-template-columns: none; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; gap: 8px; padding: 8px; margin-bottom: 8px; }
   .sales-plans-layout .sales-segments button { white-space: nowrap; justify-content: center; }
 
-  .plan-editorial-hero { min-height: 0; aspect-ratio: 3 / 4; align-items: flex-end; border-radius: 22px; }
+  .plan-editorial-hero { min-height: 0; aspect-ratio: 4 / 5; align-items: flex-end; border-radius: 22px; }
+  .plan-editorial-hero-photo { object-position: center 18%; }
   .plan-editorial-hero-overlay { background: linear-gradient(180deg, rgba(3,47,77,.58) 0%, rgba(4,54,86,.62) 45%, #053d62f7 100%); }
   .plan-editorial-hero-copy { width: auto; margin: 0; padding: 26px 20px; }
   .plan-editorial-hero-copy h2 { font-size: 36px; }
