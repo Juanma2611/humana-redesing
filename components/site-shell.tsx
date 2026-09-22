@@ -2,11 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Building2, Clock3, Headphones, MapPin, Menu, MessageCircle, ShieldCheck, Smartphone, X } from "lucide-react";
+import { Building2, ChevronDown, Clock3, HeartPulse, Headphones, Layers3, MapPin, Menu, MessageCircle, ShieldCheck, Smartphone, SmilePlus, UsersRound, X } from "lucide-react";
 import { SiFacebook, SiInstagram, SiTiktok, SiYoutube } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MotionOrchestrator } from "@/components/motion-orchestrator";
+
+const plansMenu = [
+  { segment: "individual", label: "Individual", icon: HeartPulse },
+  { segment: "familiar", label: "Familiar", icon: UsersRound },
+  { segment: "dental", label: "ProSonrisas", icon: SmilePlus },
+  { segment: "empresa", label: "Empresas", icon: Building2 },
+  { segment: "proteger", label: "Protección extra", icon: Layers3 },
+] as const;
 
 const footerOffices = {
   Quito: {
@@ -42,8 +50,22 @@ const paymentBrands = [
 
 export function SiteShell({ children, title = "Prototipo navegable" }: { children: React.ReactNode; title?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [plansOpen, setPlansOpen] = useState(false);
   const [activeOffice, setActiveOffice] = useState<FooterOffice>("Quito");
   const office = footerOffices[activeOffice];
+  const plansDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!plansOpen) return;
+    const onOutside = (event: MouseEvent) => {
+      if (plansDropdownRef.current && !plansDropdownRef.current.contains(event.target as Node)) setPlansOpen(false);
+    };
+    document.addEventListener("mousedown", onOutside);
+    return () => document.removeEventListener("mousedown", onOutside);
+  }, [plansOpen]);
+
+  const closeMenus = () => { setPlansOpen(false); setMenuOpen(false); };
+
   return (
     <main data-page-title={title}>
       <MotionOrchestrator />
@@ -55,7 +77,19 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
           <Image src="/humana-logo-oficial.png" alt="Humana · Cobertura Médica Integral" width={746} height={334} priority unoptimized />
         </Link>
         <nav className={menuOpen ? "nav-open" : ""} aria-label="Navegación principal">
-          <Link href="/planes">Planes</Link>
+          <div className={`nav-plans-dropdown${plansOpen ? " open" : ""}`} ref={plansDropdownRef}>
+            <button type="button" className="nav-plans-trigger" aria-haspopup="true" aria-expanded={plansOpen} onClick={() => setPlansOpen((open) => !open)}>
+              Planes <ChevronDown size={14} className="nav-plans-caret" aria-hidden="true" />
+            </button>
+            <div className="nav-plans-menu" role="menu">
+              {plansMenu.map(({ segment, label, icon: Icon }) => (
+                <Link key={segment} href={`/planes?segment=${segment}`} role="menuitem" onClick={closeMenus}>
+                  <span className="nav-plans-menu-icon"><Icon size={17} aria-hidden="true" /></span>
+                  <span>{label}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
           <Link href="/encontrar-plan">Para ti</Link>
           <Link href="/empresas">Empresas</Link>
           <Link href="/conocenos">Conócenos</Link>
