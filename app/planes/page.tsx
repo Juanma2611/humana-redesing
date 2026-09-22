@@ -239,7 +239,7 @@ function PlanCard({ plan, badge, isFeatured, onOpen, onQuote }: { plan: Plan; ba
   </article>;
 }
 
-const editorialSegments: Segment[] = ["individual", "familiar"];
+const editorialSegments: Segment[] = ["individual", "familiar", "dental", "proteger"];
 
 function PlanEditorialHero({ id, eyebrow, title, description, image, imageAlt, onQuote, scrollTargetId, sectionRef }: {
   id: string; eyebrow: string; title: string; description: string; image: string; imageAlt: string;
@@ -301,6 +301,7 @@ export default function Plans() {
   const mh80 = plans.find(plan => plan.id === "mh80")!;
   const mh150 = plans.find(plan => plan.id === "mh150")!;
   const prosonrisas = plans.find(plan => plan.id === "prosonrisas")!;
+  const proteger = plans.find(plan => plan.id === "proteger")!;
   const observerTargets = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
@@ -399,6 +400,32 @@ export default function Plans() {
               <PlanEditorialBlock plan={mh80} onQuote={() => quote(mh80)} onOpen={() => setSelected(mh80)} />
               <PlanEditorialBlock plan={mh150} reverse onQuote={() => quote(mh150)} onOpen={() => setSelected(mh150)} />
               <PlanEditorialBlock plan={prosonrisas} sectionId="familiar-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
+
+              <PlanEditorialHero
+                id="seg-dental"
+                sectionRef={el => { observerTargets.current.dental = el; }}
+                eyebrow="ProSonrisas"
+                title="ProSonrisas"
+                description="Cuidado de la sonrisa y salud dental para ti y tu familia, con atención especializada y sin preexistencias."
+                image="/humana-prosonrisas-hero.png"
+                imageAlt="Atención odontológica de un paciente sonriendo"
+                onQuote={() => quote(prosonrisas, "cotización ProSonrisas")}
+                scrollTargetId="dental-prosonrisas"
+              />
+              <PlanEditorialBlock plan={prosonrisas} sectionId="dental-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
+
+              <PlanEditorialHero
+                id="seg-proteger"
+                sectionRef={el => { observerTargets.current.proteger = el; }}
+                eyebrow="Protección extra"
+                title="Protección extra"
+                description="Respaldo adicional para enfrentar enfermedades graves o situaciones inesperadas, complementando tu plan actual."
+                image={planHeroImage(proteger)}
+                imageAlt="Familia con respaldo del Plan Proteger"
+                onQuote={() => quote(proteger, "cotización Proteger")}
+                scrollTargetId="proteger-proteger"
+              />
+              <PlanEditorialBlock plan={proteger} reverse sectionId="proteger-proteger" onQuote={() => quote(proteger)} onOpen={() => setSelected(proteger)} />
             </div>
           ) : (
             <>
