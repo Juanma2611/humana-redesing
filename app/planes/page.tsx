@@ -239,7 +239,7 @@ function PlanCard({ plan, badge, isFeatured, onOpen, onQuote }: { plan: Plan; ba
   </article>;
 }
 
-const editorialSegments: Segment[] = ["individual", "familiar", "dental", "proteger"];
+const editorialSegments: Segment[] = ["individual", "familiar", "dental", "empresa", "proteger"];
 
 function PlanEditorialHero({ id, eyebrow, title, description, image, imageAlt, onQuote, scrollTargetId, sectionRef }: {
   id: string; eyebrow: string; title: string; description: string; image: string; imageAlt: string;
@@ -301,6 +301,7 @@ export default function Plans() {
   const mh80 = plans.find(plan => plan.id === "mh80")!;
   const mh150 = plans.find(plan => plan.id === "mh150")!;
   const prosonrisas = plans.find(plan => plan.id === "prosonrisas")!;
+  const business = plans.find(plan => plan.id === "business")!;
   const proteger = plans.find(plan => plan.id === "proteger")!;
   const observerTargets = useRef<Record<string, HTMLElement | null>>({});
 
@@ -413,6 +414,20 @@ export default function Plans() {
                 scrollTargetId="dental-prosonrisas"
               />
               <PlanEditorialBlock plan={prosonrisas} sectionId="dental-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
+
+              <PlanEditorialHero
+                id="seg-empresa"
+                sectionRef={el => { observerTargets.current.empresa = el; }}
+                eyebrow="Empresas"
+                title="Empresas"
+                description="Bienestar que impulsa a tu equipo: cobertura médica configurable que fortalece la productividad y el cuidado de tus colaboradores."
+                image="/humana-business-team-v2.png"
+                imageAlt="Equipo de trabajo protegido por Humana Business"
+                onQuote={() => quote(business, "cotización Humana Business")}
+                scrollTargetId="empresa-business"
+              />
+              <PlanEditorialBlock plan={business} sectionId="empresa-business" onQuote={() => quote(business)} onOpen={() => setSelected(business)} />
+              <PlanEditorialBlock plan={prosonrisas} reverse sectionId="empresa-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
 
               <PlanEditorialHero
                 id="seg-proteger"
