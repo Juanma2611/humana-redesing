@@ -2279,6 +2279,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .plan-editorial-hero-copy h2 { margin: 0 0 12px; font-size: clamp(36px, 4.4vw, 58px); line-height: .98; letter-spacing: -.045em; color: #fff; }
 .plan-editorial-hero-copy p { margin: 0 0 24px; color: #e1f5fb; font-size: 17px; line-height: 1.5; max-width: 46ch; }
 .plan-editorial-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.plan-editorial-hero-actions .sales-buy, .plan-editorial-block-actions .sales-buy { padding: 0 26px; }
 .plan-editorial-secondary { min-height: 50px; padding: 0 22px; border: 1px solid rgba(255,255,255,.55); border-radius: 13px; display: inline-flex; align-items: center; gap: 9px; color: #fff; background: rgba(255,255,255,.08); font-weight: 720; backdrop-filter: blur(6px); transition: transform .35s var(--premium-ease), background .35s ease, border-color .3s ease; }
 .plan-editorial-secondary:hover { transform: translateY(-2px); background: rgba(255,255,255,.18); border-color: #fff; }
 
