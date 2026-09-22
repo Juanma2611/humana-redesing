@@ -199,10 +199,8 @@ export const featuredBenefits = [
   { iconKey: "Ribbon", title: "Asistencia exequial", detail: "Para titular y dependientes, según condiciones del servicio" }, // [A]
   { iconKey: "Ambulance", title: "Ambulancia terrestre", detail: "4 eventos al año, hasta $100 por evento en Red Humana" }, // [C]/[A]
   { iconKey: "HomeIcon", title: "Médico a domicilio", detail: "Consulta de medicina general con copago de $10" }, // [C]
-  { iconKey: "Stethoscope", title: "PAP test anual", detail: "Por reembolso al 100%, hasta $15" }, // [A]
-  { iconKey: "FlaskConical", title: "Antígeno prostático (PSA)", detail: "Desde los 40 años, por reembolso al 100%, hasta $20" }, // [A]
-  { iconKey: "ShieldPlus", title: "Mamografía anual", detail: "Desde los 40 años, por reembolso al 100%, hasta $30" }, // [A]
-  { iconKey: "Sparkles", title: "Extracción de terceros molares", detail: "Por reembolso al 100%, hasta $70 por molar, carencia 90 días" }, // [A]
+  { iconKey: "Video", title: "Teleconsulta", detail: "Atención médica a distancia" },
+  { iconKey: "PackageCheck", title: "Medicinas a domicilio", detail: "Entrega de tratamiento donde estés" },
 ];
 
 /* Carencias generales del plan */

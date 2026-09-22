@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import {
   Activity, Ambulance, Baby, Bike, Bone, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
-  MessageCircle, Milk, Phone, PhoneCall, Pill, Ribbon,
-  ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Syringe, Users, Wallet,
+  MessageCircle, Milk, PackageCheck, Phone, PhoneCall, Pill, Ribbon,
+  ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Syringe, Users, Video, Wallet,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import {
@@ -22,8 +22,8 @@ import {
 const iconMap = {
   Activity, Ambulance, Baby, Bike, Bone, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, HomeIcon,
-  MessageCircle, Milk, Phone, PhoneCall, Pill, Ribbon,
-  ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Syringe, Users, Wallet,
+  MessageCircle, Milk, PackageCheck, Phone, PhoneCall, Pill, Ribbon,
+  ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Syringe, Users, Video, Wallet,
 } as const;
 
 function Icon({ name }: { name: keyof typeof iconMap }) {
@@ -37,6 +37,7 @@ export default function Ph15Page() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
+  const [benefitIndex, setBenefitIndex] = useState(0);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -46,6 +47,19 @@ export default function Ph15Page() {
   };
   const closeDialog = () => dialogRef.current?.close();
   const handleQuoteClick = () => setQuoted(true);
+
+  const goToBenefit = (i: number) => setBenefitIndex(((i % featuredBenefits.length) + featuredBenefits.length) % featuredBenefits.length);
+  const prevBenefit = () => goToBenefit(benefitIndex - 1);
+  const nextBenefit = () => goToBenefit(benefitIndex + 1);
+
+  /* Carrusel automático de beneficios (solo móvil): avanza cada 3s y se
+     reinicia si el cliente navega manualmente con las flechas. */
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setBenefitIndex((i) => (i + 1) % featuredBenefits.length);
+    }, 3000);
+    return () => window.clearInterval(timer);
+  }, [benefitIndex]);
 
   /* Barra de progreso, scrollspy de capítulos y aparición al hacer scroll.
      Autocontenido en esta página, igual que en MH50: el scrollspy mueve solo
@@ -262,6 +276,25 @@ export default function Ph15Page() {
                   <span className="ph15-exp-benefit-arrow" aria-hidden="true">›</span>
                 </article>
               ))}
+            </div>
+            <div className="ph15-exp-benefits-carousel" role="list" aria-label="Beneficios incluidos en el plan PH15">
+              <div className="ph15-exp-benefits-carousel-track" style={{ transform: `translateX(-${benefitIndex * 100}%)` }}>
+                {featuredBenefits.map(({ iconKey, title }) => (
+                  <article className="ph15-exp-benefits-carousel-card" role="listitem" key={title}>
+                    <span className="ph15-exp-benefit-symbol" aria-hidden="true"><Icon name={iconKey as keyof typeof iconMap} /></span>
+                    <h3>{title}</h3>
+                  </article>
+                ))}
+              </div>
+              <div className="ph15-exp-benefits-carousel-controls">
+                <button type="button" onClick={prevBenefit} aria-label="Beneficio anterior">‹</button>
+                <div className="ph15-exp-benefits-carousel-dots">
+                  {featuredBenefits.map(({ title }, i) => (
+                    <button type="button" key={title} className={i === benefitIndex ? "active" : ""} aria-label={`Ir al beneficio ${title}`} onClick={() => goToBenefit(i)} />
+                  ))}
+                </div>
+                <button type="button" onClick={nextBenefit} aria-label="Siguiente beneficio">›</button>
+              </div>
             </div>
           </div>
         </section>
