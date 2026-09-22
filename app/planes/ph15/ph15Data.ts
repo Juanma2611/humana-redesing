@@ -119,7 +119,7 @@ export const chapters: Chapter[] = [
     eyebrow: "MEDICINAS",
     title: "Tu tratamiento, cubierto.",
     lead: "Acceso a farmacias de la red Humana con cobertura de hasta el 90% según el medicamento.",
-    essentials: ["Vademécum A: 90%", "Vademécum B: 70%", "Tope anual $1.000"],
+    essentials: ["Cobertura de medicinas entre 70% - 90%", "Tope anual $1.000"],
     dialogTitle: "Medicinas",
     dialogLead: "Cobertura farmacéutica anual con un tope de $1.000, según el vademécum del medicamento y la red utilizada.",
     detailItems: [
