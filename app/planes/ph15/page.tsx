@@ -1,0 +1,387 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import {
+  Activity, Ambulance, Baby, Bike, Bone, Cross,
+  FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
+  MessageCircle, Milk, Phone, PhoneCall, Pill, Ribbon,
+  ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Syringe, Users, Wallet,
+} from "lucide-react";
+import { SiteShell } from "@/components/site-shell";
+import {
+  chapters, contactChannels, essenceStats, featuredBenefits,
+  otherConditions, planIdentity, preventionCoverages, rehabCoverages,
+  specialCases, waitingPeriods,
+} from "./ph15Data";
+
+/* Mapa de íconos: ph15Data.ts guarda solo el nombre del ícono (string) para
+   mantener los datos como constantes serializables; aquí se resuelven a los
+   componentes reales de lucide-react. */
+const iconMap = {
+  Activity, Ambulance, Baby, Bike, Bone, Cross,
+  FlaskConical, HandHeart, HeartHandshake, HeartPulse, HomeIcon,
+  MessageCircle, Milk, Phone, PhoneCall, Pill, Ribbon,
+  ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Syringe, Users, Wallet,
+} as const;
+
+function Icon({ name }: { name: keyof typeof iconMap }) {
+  const Cmp = iconMap[name];
+  return <Cmp aria-hidden="true" />;
+}
+
+export default function Ph15Page() {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLSpanElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
+  const [quoted, setQuoted] = useState(false);
+
+  const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
+
+  const openDialog = (id: string) => {
+    setActiveChapterId(id);
+    dialogRef.current?.showModal();
+  };
+  const closeDialog = () => dialogRef.current?.close();
+  const handleQuoteClick = () => setQuoted(true);
+
+  /* Barra de progreso, scrollspy de capítulos y aparición al hacer scroll.
+     Autocontenido en esta página, igual que en MH50: el scrollspy mueve solo
+     el scrollLeft del contenedor sticky del menú (nunca scrollIntoView, que
+     arrastra verticalmente toda la página cuando el contenedor es sticky). */
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const navLinks = Array.from(root.querySelectorAll<HTMLAnchorElement>("[data-chapter-link]"));
+    const chapterSections = navLinks
+      .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
+      .filter((el): el is HTMLElement => !!el);
+    let lastCurrent = "";
+
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (progressRef.current) {
+        progressRef.current.style.width = `${max ? (window.scrollY / max) * 100 : 0}%`;
+      }
+      let current = "";
+      chapterSections.forEach((section) => {
+        if (section.getBoundingClientRect().top < window.innerHeight * 0.52) current = section.id;
+      });
+      navLinks.forEach((link) => link.classList.toggle("is-active", link.dataset.chapterLink === current));
+      if (current && current !== lastCurrent) {
+        const activeLink = navLinks.find((link) => link.dataset.chapterLink === current);
+        const navContainer = activeLink?.parentElement;
+        if (activeLink && navContainer) {
+          const targetLeft = activeLink.offsetLeft - navContainer.clientWidth / 2 + activeLink.clientWidth / 2;
+          navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
+        }
+        lastCurrent = current;
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      root.classList.remove("is-motion-ready");
+      root.querySelectorAll(".ph15-exp-reveal").forEach((el) => el.classList.add("is-visible"));
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+
+    root.classList.add("is-motion-ready");
+    const revealNodes = Array.from(root.querySelectorAll<HTMLElement>(".ph15-exp-reveal"));
+    const revealObserver = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      }),
+      { threshold: 0.12, rootMargin: "0px 0px -5% 0px" },
+    );
+    revealNodes.forEach((el) => revealObserver.observe(el));
+
+    const safetyTimer = window.setTimeout(() => {
+      revealNodes.forEach((el) => el.classList.add("is-visible"));
+    }, 2400);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      revealObserver.disconnect();
+      window.clearTimeout(safetyTimer);
+    };
+  }, []);
+
+  return (
+    <SiteShell title="PH15 · Plan Preferido Practihumana 15.000">
+      <div className="ph15-exp" ref={rootRef}>
+        <div className="ph15-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
+
+        <section className="ph15-exp-hero" id="ph15-inicio">
+          <div className="ph15-exp-hero-copy">
+            <span className="ph15-exp-eyebrow light">PLAN PREFERIDO · PRACTIHUMANA</span>
+            <h1>PH<span>15</span></h1>
+            <p className="ph15-exp-hero-line">Empieza a cuidarte<br />hoy mismo.</p>
+            <p className="ph15-exp-hero-body">
+              Tu primer plan de salud: consultas accesibles, respaldo hospitalario y medicinas cubiertas,
+              pensado para tu ritmo de vida.
+            </p>
+            <div className="ph15-exp-hero-actions">
+              <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotiza tu plan</button>
+              <a className="ghost-button" href="#ph15-cobertura">Explora tu cobertura</a>
+            </div>
+            {quoted && (
+              <div className="ph15-exp-confirm" role="status" style={{ maxWidth: 520, marginTop: 20 }}>
+                <ShieldCheck /> <span>Solicitud demostrativa registrada. Un asesor de Humana te contactará. No se envió información real.</span>
+              </div>
+            )}
+          </div>
+          <div className="ph15-exp-gallery" aria-label="Momentos de protección PH15">
+            <figure className="ph15-exp-photo card-a">
+              <Image src="/plan-ph15-hero.jpeg" alt="Persona joven sonriendo, protegida por PH15" fill sizes="(max-width: 980px) 60vw, 30vw" unoptimized />
+            </figure>
+            <figure className="ph15-exp-photo card-b">
+              <Image src="/ph15-consultas.jpg" alt="Consulta médica cercana" fill sizes="(max-width: 980px) 54vw, 26vw" unoptimized />
+            </figure>
+            <figure className="ph15-exp-photo card-c">
+              <Image src="/ph15-medicinas.jpg" alt="Entrega de medicamentos en farmacia de la red" fill sizes="(max-width: 980px) 55vw, 26vw" unoptimized />
+            </figure>
+          </div>
+          <a className="ph15-exp-scroll-cue" href="#ph15-esencia"><span />Desliza para descubrir</a>
+        </section>
+
+        <section className="ph15-exp-essence" id="ph15-esencia">
+          <div className="ph15-exp-eyebrow light ph15-exp-reveal">PH15 EN TRES IDEAS</div>
+          <h2 className="ph15-exp-display ph15-exp-reveal">Protección clara,<br />desde el día uno.</h2>
+          <div className="ph15-exp-stat-stage">
+            {essenceStats.map((stat) => (
+              <article className="ph15-exp-stat ph15-exp-reveal" key={stat.value}>
+                <strong>{stat.value}</strong>
+                <p>{stat.label.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}</p>
+              </article>
+            ))}
+          </div>
+          <p className="ph15-exp-fineprint ph15-exp-reveal">Información resumida para fines demostrativos. Aplican las condiciones del plan {planIdentity.fullName}.</p>
+        </section>
+
+        <section className="ph15-exp-moments" id="ph15-cobertura">
+          <span className="ph15-exp-giant-word" aria-hidden="true">CONTIGO</span>
+          <div className="ph15-exp-moments-copy ph15-exp-reveal">
+            <span className="ph15-exp-eyebrow">TU COBERTURA, EXPLICADA</span>
+            <h2>Cinco momentos.<br />Una sola tranquilidad.</h2>
+            <p>Menos letra pequeña. Más claridad sobre cómo PH15 te acompaña, desde una consulta hasta una emergencia.</p>
+            <div className="ph15-exp-signals" aria-label="Datos principales de los cinco momentos">
+              <span><strong>90%</strong> hospitalización</span>
+              <span><strong>Desde $8</strong> consultas</span>
+              <span><strong>70–90%</strong> medicinas</span>
+              <span><strong>$50</strong> deducible anual</span>
+            </div>
+          </div>
+          <div className="ph15-exp-compass ph15-exp-reveal" aria-label="Los cinco momentos de protección de PH15">
+            <svg viewBox="0 0 520 520" aria-hidden="true">
+              <circle cx="260" cy="260" r="198" />
+              <circle cx="260" cy="260" r="132" />
+              <path d="M260 62V458M62 260H458" />
+            </svg>
+            <div className="ph15-exp-compass-core"><small>PLAN</small><strong>PH15</strong><span>Practihumana</span></div>
+            <div className="ph15-exp-compass-node node-one"><b>01</b><span>Hospitalización</span></div>
+            <div className="ph15-exp-compass-node node-two"><b>02</b><span>Atención ambulatoria</span></div>
+            <div className="ph15-exp-compass-node node-three"><b>03</b><span>Medicinas</span></div>
+            <div className="ph15-exp-compass-node node-four"><b>04</b><span>Maternidad</span></div>
+          </div>
+        </section>
+
+        <nav className="ph15-exp-chapter-nav" aria-label="Capítulos de cobertura">
+          <a href="#ph15-resumen" data-chapter-link="ph15-resumen"><span>00</span>Resumen</a>
+          {chapters.map((c) => (
+            <a key={c.id} href={`#ph15-${c.id}`} data-chapter-link={`ph15-${c.id}`}><span>{c.number}</span>{c.navLabel}</a>
+          ))}
+          <a href="#ph15-incluido" data-chapter-link="ph15-incluido"><span>06</span>Beneficios</a>
+          <a href="#ph15-carencias" data-chapter-link="ph15-carencias"><span>07</span>Carencias</a>
+        </nav>
+
+        <section className="ph15-exp-chapter theme-light" id="ph15-resumen" style={{ minHeight: "auto", padding: "clamp(60px, 7vw, 100px) clamp(20px, 8vw, 130px)" }}>
+          <div className="ph15-exp-chapter-copy ph15-exp-reveal" style={{ gridColumn: "1 / -1", maxWidth: 760 }}>
+            <span className="ph15-exp-eyebrow">RESUMEN DEL PLAN</span>
+            <h2>PH15, en una mirada.</h2>
+            <p className="ph15-exp-lead">
+              {planIdentity.fullName} es un plan {planIdentity.type.toLowerCase()}, de modalidad {planIdentity.modality.toLowerCase()},
+              con una cobertura máxima de {planIdentity.maxCoverage} por beneficiario y un deducible anual de {planIdentity.deductible}.
+              Trabaja con la red {planIdentity.network}.
+            </p>
+          </div>
+        </section>
+
+        {chapters.map((c, i) => (
+          <section
+            key={c.id}
+            id={`ph15-${c.id}`}
+            className={`ph15-exp-chapter theme-${c.theme}${i % 2 === 1 ? " reverse" : ""}`}
+          >
+            <div className="ph15-exp-chapter-number" aria-hidden="true">{c.number}</div>
+            <div className="ph15-exp-chapter-image ph15-exp-reveal">
+              <Image src={c.image} alt={c.imageAlt} fill sizes="(max-width: 980px) 100vw, 45vw" unoptimized />
+            </div>
+            <div className="ph15-exp-chapter-copy ph15-exp-reveal">
+              <span className={`ph15-exp-eyebrow${c.theme === "deep" || c.theme === "teal" ? " light" : ""}`}>{c.eyebrow}</span>
+              <h2>{c.title}</h2>
+              <p className="ph15-exp-lead">{c.lead}</p>
+              <ul>
+                {c.essentials.map((item) => <li key={item}>{item}</li>)}
+                {c.id === "medicinas" && (
+                  <li className="ph15-exp-pharmacy-note">
+                    <span className="ph15-exp-pharmacy-logos" aria-label="Farmacias afiliadas: Pharmacy's, Sana Sana, Medicity y Fybeca">
+                      <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={178} height={60} unoptimized />
+                      <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={200} height={38} unoptimized />
+                      <Image src="/farmacia-medicity.png" alt="Medicity" width={150} height={88} unoptimized />
+                      <Image src="/farmacia-fybeca.png" alt="Farmacias Fybeca" width={150} height={100} unoptimized />
+                    </span>
+                  </li>
+                )}
+              </ul>
+              <button type="button" className="ph15-exp-text-button" onClick={() => openDialog(c.id)}>
+                Ver detalles completos <span>↗</span>
+              </button>
+              {c.conditions.length > 0 && (
+                <details style={{ marginTop: 26 }}>
+                  <summary style={{ cursor: "pointer", fontWeight: 700, fontSize: 14 }}>Condiciones y topes adicionales</summary>
+                  <ul style={{ marginTop: 14, display: "grid", gap: 10, fontSize: 14, opacity: 0.85 }}>
+                    {c.conditions.map((cond) => (
+                      <li key={cond.label} style={{ display: "flex", justifyContent: "space-between", gap: 16 }}>
+                        <span>{cond.label}</span><strong style={{ whiteSpace: "nowrap" }}>{cond.value}</strong>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+            </div>
+          </section>
+        ))}
+
+        <section className="ph15-exp-included" id="ph15-incluido">
+          <div className="ph15-exp-benefits-panel">
+            <div className="ph15-exp-benefits-head ph15-exp-reveal">
+              <span className="ph15-exp-eyebrow light">BENEFICIOS HUMANA</span>
+              <h2>Más formas de acompañarte.</h2>
+              <p>Servicios adicionales que forman parte de tu plan PH15, sin costo adicional a la facturación.</p>
+            </div>
+            <div className="ph15-exp-benefits-grid" role="list" aria-label="Beneficios incluidos en el plan PH15">
+              {featuredBenefits.map(({ iconKey, title, detail }, i) => (
+                <article className="ph15-exp-reveal" style={{ "--reveal-delay": `${(i % 6) * 60}ms` } as React.CSSProperties} role="listitem" key={title}>
+                  <span className="ph15-exp-benefit-symbol" aria-hidden="true"><Icon name={iconKey as keyof typeof iconMap} /></span>
+                  <h3>{title}<br /><small style={{ fontWeight: 500, opacity: 0.7, fontSize: 12 }}>{detail}</small></h3>
+                  <span className="ph15-exp-benefit-arrow" aria-hidden="true">›</span>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="ph15-exp-waiting" id="ph15-carencias">
+          <div className="ph15-exp-waiting-copy ph15-exp-reveal">
+            <span className="ph15-exp-eyebrow">CARENCIAS PH15</span>
+            <h2>Tu cobertura, clara desde el inicio.</h2>
+            <p>
+              Una carencia es el tiempo que debe transcurrir desde tu afiliación antes de poder usar
+              determinadas prestaciones del plan. Estos son los periodos generales de PH15.
+            </p>
+          </div>
+          <div className="ph15-exp-waiting-grid" role="list" aria-label="Periodos generales de carencia del plan PH15">
+            {waitingPeriods.map((w, i) => (
+              <article className="ph15-exp-waiting-card ph15-exp-reveal" style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties} role="listitem" key={w.title}>
+                <div className="ph15-exp-waiting-num"><strong>{w.period.split(" ")[0]}</strong><span>{w.period.split(" ")[1] ?? ""}</span></div>
+                <h3>{w.title}</h3>
+              </article>
+            ))}
+          </div>
+          <p className="ph15-exp-waiting-note ph15-exp-reveal">Aplican las condiciones particulares y la vigencia establecida en el contrato de cada afiliación.</p>
+        </section>
+
+        <section className="ph15-exp-vault">
+          <div className="ph15-exp-vault-copy ph15-exp-reveal">
+            <span className="ph15-exp-eyebrow light">CLARIDAD ANTES DE ELEGIR</span>
+            <h2>Los detalles importan.<br />Por eso están aquí.</h2>
+            <p>Consulta condiciones, límites y coberturas adicionales sin interrumpir la experiencia principal.</p>
+          </div>
+          <div className="ph15-exp-accordions ph15-exp-reveal">
+            <details>
+              <summary>Preexistencias, discapacidad y continuidad <span>+</span></summary>
+              <div className="ph15-exp-accordion-grid">
+                {specialCases.map(({ iconKey, value, label }) => (
+                  <article key={label}><Icon name={iconKey as keyof typeof iconMap} /><strong>{value}</strong><span>{label}</span></article>
+                ))}
+              </div>
+            </details>
+            <details>
+              <summary>Prevención y bienestar <span>+</span></summary>
+              <div className="ph15-exp-accordion-grid">
+                {preventionCoverages.map(({ iconKey, value, label }) => (
+                  <article key={label}><Icon name={iconKey as keyof typeof iconMap} /><strong>{value}</strong><span>{label}</span></article>
+                ))}
+              </div>
+            </details>
+            <details>
+              <summary>Rehabilitación y ayudas técnicas <span>+</span></summary>
+              <div className="ph15-exp-accordion-grid">
+                {rehabCoverages.map(({ iconKey, value, label }) => (
+                  <article key={label}><Icon name={iconKey as keyof typeof iconMap} /><strong>{value}</strong><span>{label}</span></article>
+                ))}
+              </div>
+            </details>
+            <details>
+              <summary>Otras condiciones cubiertas <span>+</span></summary>
+              <div className="ph15-exp-accordion-grid">
+                {otherConditions.map(({ iconKey, value, label }) => (
+                  <article key={label}><Icon name={iconKey as keyof typeof iconMap} /><strong>{value}</strong><span>{label}</span></article>
+                ))}
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <section className="ph15-exp-finale" id="ph15-cierre">
+          <div className="ph15-exp-finale-rings" aria-hidden="true" />
+          <div className="ph15-exp-finale-copy ph15-exp-reveal">
+            <span className="ph15-exp-eyebrow light">PH15 · PLAN PREFERIDO</span>
+            <h2>Tu primer paso hacia la tranquilidad.</h2>
+            <p>Cotiza PH15 y empieza a cuidarte hoy, con el respaldo de Humana.</p>
+            <div className="ph15-exp-finale-actions">
+              <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotizar PH15</button>
+              <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
+            </div>
+            {quoted && (
+              <div className="ph15-exp-confirm" role="status">
+                <ShieldCheck /> <span>Solicitud demostrativa registrada. Un asesor de Humana te contactará. No se envió información real.</span>
+              </div>
+            )}
+            <div className="ph15-exp-contact">
+              {contactChannels.map(({ iconKey, label, value, href }) => (
+                <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+                  <Icon name={iconKey as keyof typeof iconMap} /> <span><small>{label}</small><strong>{value}</strong></span>
+                </a>
+              ))}
+            </div>
+            <p className="ph15-exp-trust"><Users /> Más de 200.000 personas y empresas confían en Humana.</p>
+          </div>
+          <div className="ph15-exp-finale-mark" aria-hidden="true"><span>PH</span><strong>15</strong></div>
+        </section>
+
+        <dialog className="ph15-exp-dialog" ref={dialogRef} onClose={() => setActiveChapterId(null)}>
+          <button type="button" className="ph15-exp-dialog-close" onClick={closeDialog} aria-label="Cerrar">×</button>
+          <span className="ph15-exp-eyebrow">DETALLE DEL PLAN</span>
+          <h2>{activeChapter?.dialogTitle}</h2>
+          <div className="ph15-exp-dialog-body">
+            <p>{activeChapter?.dialogLead}</p>
+            <ul>
+              {activeChapter?.detailItems.map((item) => (
+                <li key={item.label}><ShieldPlus /> <span><strong>{item.value}</strong> · {item.label}</span></li>
+              ))}
+            </ul>
+          </div>
+        </dialog>
+      </div>
+    </SiteShell>
+  );
+}
