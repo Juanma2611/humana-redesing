@@ -261,11 +261,11 @@ function PlanEditorialHero({ id, eyebrow, title, description, image, imageAlt, o
   </section>;
 }
 
-function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, mh50Link }: {
-  plan: Plan; reverse?: boolean; onQuote: () => void; onOpen: () => void; mh50Link?: boolean;
+function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, mh50Link, sectionId }: {
+  plan: Plan; reverse?: boolean; onQuote: () => void; onOpen: () => void; mh50Link?: boolean; sectionId?: string;
 }) {
   const Icon = plan.icon;
-  return <article id={`plan-block-${plan.id}`} className={`plan-editorial-block${reverse ? " reverse" : ""}`}>
+  return <article id={sectionId ?? `plan-block-${plan.id}`} className={`plan-editorial-block${reverse ? " reverse" : ""}`}>
     <div className="plan-editorial-block-media">
       <Image src={planHeroImage(plan)} alt={`Plan ${plan.name} Humana`} fill sizes="(max-width: 760px) 100vw, 640px" unoptimized className="plan-editorial-block-photo" />
     </div>
@@ -298,6 +298,9 @@ export default function Plans() {
   const ph15 = plans.find(plan => plan.id === "ph15")!;
   const ph30 = plans.find(plan => plan.id === "ph30")!;
   const mh50 = plans.find(plan => plan.id === "mh50")!;
+  const mh80 = plans.find(plan => plan.id === "mh80")!;
+  const mh150 = plans.find(plan => plan.id === "mh150")!;
+  const prosonrisas = plans.find(plan => plan.id === "prosonrisas")!;
   const observerTargets = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
@@ -376,7 +379,9 @@ export default function Plans() {
                 scrollTargetId="plan-block-ph15"
               />
               <PlanEditorialBlock plan={ph15} onQuote={() => quote(ph15)} onOpen={() => setSelected(ph15)} />
-              <PlanEditorialBlock plan={ph30} reverse onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
+              <PlanEditorialBlock plan={ph30} reverse sectionId="individual-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
+              <PlanEditorialBlock plan={mh50} sectionId="individual-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} mh50Link />
+              <PlanEditorialBlock plan={prosonrisas} reverse sectionId="individual-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
 
               <PlanEditorialHero
                 id="seg-familiar"
@@ -387,9 +392,13 @@ export default function Plans() {
                 image="/familia-humana.png"
                 imageAlt="Familia disfrutando un momento juntos, protegida por MetroHumana"
                 onQuote={() => quote(mh50, "cotización MetroHumana")}
-                scrollTargetId="plan-block-mh50"
+                scrollTargetId="familiar-ph30"
               />
-              <PlanEditorialBlock plan={mh50} onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} mh50Link />
+              <PlanEditorialBlock plan={ph30} sectionId="familiar-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
+              <PlanEditorialBlock plan={mh50} reverse sectionId="familiar-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} mh50Link />
+              <PlanEditorialBlock plan={mh80} onQuote={() => quote(mh80)} onOpen={() => setSelected(mh80)} />
+              <PlanEditorialBlock plan={mh150} reverse onQuote={() => quote(mh150)} onOpen={() => setSelected(mh150)} />
+              <PlanEditorialBlock plan={prosonrisas} sectionId="familiar-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
             </div>
           ) : (
             <>
