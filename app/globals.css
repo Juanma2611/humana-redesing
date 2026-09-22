@@ -2581,11 +2581,17 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 
 /* REVEAL --------------------------------------------------------------- */
 .ph15-exp-reveal { opacity: 1; transform: none; }
-.ph15-exp.is-motion-ready .ph15-exp-reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease var(--reveal-delay,0ms), transform .8s cubic-bezier(.22,.8,.3,1) var(--reveal-delay,0ms); }
+.ph15-exp.is-motion-ready .ph15-exp-reveal { opacity: 0; transform: translateY(38px) scale(.985); transition: opacity .9s ease var(--reveal-delay,0ms), transform .9s cubic-bezier(.22,.8,.3,1) var(--reveal-delay,0ms); }
 .ph15-exp.is-motion-ready .ph15-exp-reveal.is-visible { opacity: 1; transform: none; }
+
+/* Zoom muy suave en las fotos de capítulo al aparecer en pantalla. */
+.ph15-exp-chapter-image img { transition: transform 1.6s cubic-bezier(.22,.8,.3,1); transform: scale(1.1); }
+.ph15-exp.is-motion-ready .ph15-exp-chapter-image.ph15-exp-reveal.is-visible img { transform: scale(1); }
+.ph15-exp:not(.is-motion-ready) .ph15-exp-chapter-image img { transform: scale(1); }
 
 @media (prefers-reduced-motion: reduce) {
   .ph15-exp.is-motion-ready .ph15-exp-reveal { opacity: 1; transform: none; transition: none; }
+  .ph15-exp-chapter-image img { transform: scale(1); transition: none; }
 }
 
 /* RESPONSIVE ------------------------------------------------------------ */
