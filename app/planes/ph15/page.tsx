@@ -194,25 +194,12 @@ export default function Ph15Page() {
         </section>
 
         <nav className="ph15-exp-chapter-nav" aria-label="Capítulos de cobertura">
-          <a href="#ph15-resumen" data-chapter-link="ph15-resumen"><span>00</span>Resumen</a>
           {chapters.map((c) => (
             <a key={c.id} href={`#ph15-${c.id}`} data-chapter-link={`ph15-${c.id}`}><span>{c.number}</span>{c.navLabel}</a>
           ))}
           <a href="#ph15-incluido" data-chapter-link="ph15-incluido"><span>06</span>Beneficios</a>
           <a href="#ph15-carencias" data-chapter-link="ph15-carencias"><span>07</span>Carencias</a>
         </nav>
-
-        <section className="ph15-exp-chapter theme-light" id="ph15-resumen" style={{ minHeight: "auto", padding: "clamp(60px, 7vw, 100px) clamp(20px, 8vw, 130px)" }}>
-          <div className="ph15-exp-chapter-copy ph15-exp-reveal" style={{ gridColumn: "1 / -1", maxWidth: 760 }}>
-            <span className="ph15-exp-eyebrow">RESUMEN DEL PLAN</span>
-            <h2>PH15, en una mirada.</h2>
-            <p className="ph15-exp-lead">
-              {planIdentity.fullName} es un plan {planIdentity.type.toLowerCase()}, de modalidad {planIdentity.modality.toLowerCase()},
-              con una cobertura máxima de {planIdentity.maxCoverage} por beneficiario y un deducible anual de {planIdentity.deductible}.
-              Trabaja con la red {planIdentity.network}.
-            </p>
-          </div>
-        </section>
 
         {chapters.map((c, i) => (
           <section
@@ -225,7 +212,7 @@ export default function Ph15Page() {
               <Image src={c.image} alt={c.imageAlt} fill sizes="(max-width: 980px) 100vw, 45vw" unoptimized />
             </div>
             <div className="ph15-exp-chapter-copy ph15-exp-reveal">
-              <span className={`ph15-exp-eyebrow${c.theme === "deep" || c.theme === "teal" ? " light" : ""}`}>{c.eyebrow}</span>
+              <span className={`ph15-exp-eyebrow${c.theme === "teal" ? " light" : ""}`}>{c.eyebrow}</span>
               <h2>{c.title}</h2>
               <p className="ph15-exp-lead">{c.lead}</p>
               <ul>
