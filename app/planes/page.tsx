@@ -8,7 +8,7 @@ import {
   MapPinned, MessageCircle, Microscope, PackageCheck, Phone, Pill, Plane, ScanHeart, ShieldCheck, SmilePlus,
   Sparkles, Stethoscope, Syringe, UsersRound, Video, WalletCards,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SiteShell } from "@/components/site-shell";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
@@ -239,12 +239,66 @@ function PlanCard({ plan, badge, isFeatured, onOpen, onQuote }: { plan: Plan; ba
   </article>;
 }
 
+const editorialSegments: Segment[] = ["individual", "familiar"];
+
+function PlanEditorialHero({ id, eyebrow, title, description, image, imageAlt, onQuote, scrollTargetId, sectionRef }: {
+  id: string; eyebrow: string; title: string; description: string; image: string; imageAlt: string;
+  onQuote: () => void; scrollTargetId: string; sectionRef: (el: HTMLElement | null) => void;
+}) {
+  const goTo = () => document.getElementById(scrollTargetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  return <section id={id} ref={sectionRef} className="plan-editorial-hero">
+    <Image src={image} alt={imageAlt} fill sizes="100vw" unoptimized className="plan-editorial-hero-photo" />
+    <div className="plan-editorial-hero-overlay" />
+    <div className="plan-editorial-hero-copy">
+      <span className="plan-editorial-eyebrow">{eyebrow}</span>
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <div className="plan-editorial-hero-actions">
+        <button type="button" className="sales-buy" onClick={onQuote}>Cotiza tu plan <ArrowRight /></button>
+        <button type="button" className="plan-editorial-secondary" onClick={goTo}>Conoce más <ChevronRight /></button>
+      </div>
+    </div>
+  </section>;
+}
+
+function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, mh50Link }: {
+  plan: Plan; reverse?: boolean; onQuote: () => void; onOpen: () => void; mh50Link?: boolean;
+}) {
+  const Icon = plan.icon;
+  return <article id={`plan-block-${plan.id}`} className={`plan-editorial-block${reverse ? " reverse" : ""}`}>
+    <div className="plan-editorial-block-media">
+      <Image src={planHeroImage(plan)} alt={`Plan ${plan.name} Humana`} fill sizes="(max-width: 760px) 100vw, 640px" unoptimized className="plan-editorial-block-photo" />
+    </div>
+    <div className="plan-editorial-block-copy">
+      <span className="plan-editorial-block-family"><Icon aria-hidden="true" /> {plan.family}</span>
+      <h3>{plan.name}</h3>
+      <p className="plan-editorial-block-headline">{plan.headline}</p>
+      <p className="plan-editorial-block-ideal">{plan.ideal}</p>
+      <div className="plan-editorial-block-stats">
+        <div><span>{plan.statLabels?.limit ?? "Cobertura"}</span><strong>{plan.limit}</strong><small>{plan.limitNote}</small></div>
+        <div><span>{plan.statLabels?.deductible ?? "Deducible"}</span><strong>{plan.deductible}</strong></div>
+      </div>
+      <div className="plan-editorial-block-actions">
+        <button type="button" className="sales-buy" onClick={onQuote}>Cotiza tu plan <ArrowRight /></button>
+        {mh50Link
+          ? <Link className="sales-more" href="/planes/mh50">Conoce más acerca del plan <ChevronRight /></Link>
+          : <button type="button" className="sales-more" onClick={onOpen}>Conoce más acerca del plan <ChevronRight /></button>}
+      </div>
+    </div>
+  </article>;
+}
+
 export default function Plans() {
   const [segment, setSegment] = useState<Segment>("familiar");
   const [selected, setSelected] = useState<Plan | null>(null);
   const [message, setMessage] = useState("");
   const visible = plans.filter(plan => plan.segment.includes(segment)).sort((a, b) => a.id === "prosonrisas" ? 1 : b.id === "prosonrisas" ? -1 : 0);
   const quote = (plan: Plan, channel = "cotización") => setMessage(`${plan.name}: ${channel} demostrativa. No se enviaron datos.`);
+  const isEditorial = editorialSegments.includes(segment);
+  const ph15 = plans.find(plan => plan.id === "ph15")!;
+  const ph30 = plans.find(plan => plan.id === "ph30")!;
+  const mh50 = plans.find(plan => plan.id === "mh50")!;
+  const observerTargets = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -258,22 +312,97 @@ export default function Plans() {
         setSelected(match);
       }
     }
+    if (requestedSegment && editorialSegments.includes(requestedSegment)) {
+      requestAnimationFrame(() => {
+        document.getElementById(`seg-${requestedSegment}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
   }, []);
+
+  // Scroll-spy: mientras el usuario navega dentro del flujo editorial (individual/familiar),
+  // el menú de categorías refleja automáticamente qué sección está en pantalla.
+  useEffect(() => {
+    if (!isEditorial) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const targets = editorialSegments.map(key => observerTargets.current[key]).filter(Boolean) as HTMLElement[];
+    if (!targets.length) return;
+    const observer = new IntersectionObserver(entries => {
+      const visibleEntry = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visibleEntry) {
+        const key = editorialSegments.find(seg => observerTargets.current[seg] === visibleEntry.target);
+        if (key) setSegment(key);
+      }
+    }, { threshold: reduceMotion ? 0.51 : [0.3, 0.5, 0.7], rootMargin: "-90px 0px -40% 0px" });
+    targets.forEach(target => observer.observe(target));
+    return () => observer.disconnect();
+  }, [isEditorial]);
 
   return <SiteShell title="Planes · Nueva presentación comercial">
     <section className="sales-hero"><Image src="/familia-humana.png" alt="Familia disfrutando un momento juntos" fill priority sizes="100vw" unoptimized /><div className="sales-hero-overlay" /><div className="sales-hero-copy"><span><HeartHandshake /> Planes Humana</span><h1>El respaldo que tu vida necesita.</h1><p>Elige. Compara. Cotiza.</p><button type="button" onClick={() => document.getElementById("elige-segmento")?.scrollIntoView({ behavior: "smooth" })}>Ver planes <ArrowRight /></button><div className="sales-trust-proof"><UsersRound /><span><strong>Más de 200.000</strong> personas y empresas confían en Humana</span></div></div></section>
 
     <section className="sales-plans" id="elige-segmento">
       <div className="sales-title-row"><div><span className="sales-eyebrow">Encuentra tu plan</span><h2>¿A quién quieres proteger?</h2></div><button type="button" className="sales-advisor" onClick={() => setMessage("Asesoría demostrativa. WhatsApp y llamada se conectarán en la versión oficial.")}><MessageCircle /> Hablar con un asesor</button></div>
-      <div className="sales-segments" role="tablist" aria-label="Tipo de plan">
-        {(Object.keys(segmentCopy) as Segment[]).map(key => { const icons = { individual: HeartPulse, familiar: UsersRound, dental: SmilePlus, empresa: Building2, proteger: Layers3 }; const SegmentIcon = icons[key]; return <button key={key} type="button" role="tab" aria-selected={segment === key} className={segment === key ? "active" : ""} onClick={() => setSegment(key)}><SegmentIcon /> {segmentCopy[key].label}</button>; })}
+
+      <div className="sales-plans-layout">
+        <nav className="sales-segments" role="tablist" aria-label="Tipo de plan">
+          {(Object.keys(segmentCopy) as Segment[]).map(key => {
+            const icons = { individual: HeartPulse, familiar: UsersRound, dental: SmilePlus, empresa: Building2, proteger: Layers3 };
+            const SegmentIcon = icons[key];
+            return <button
+              key={key} type="button" role="tab" aria-selected={segment === key}
+              className={segment === key ? "active" : ""}
+              onClick={() => {
+                setSegment(key);
+                if (editorialSegments.includes(key)) {
+                  requestAnimationFrame(() => document.getElementById(`seg-${key}`)?.scrollIntoView({ behavior: "smooth", block: "start" }));
+                }
+              }}
+            ><SegmentIcon /> {segmentCopy[key].label}</button>;
+          })}
+        </nav>
+
+        <div className="sales-plans-content">
+          {isEditorial ? (
+            <div className="plan-editorial-flow">
+              <PlanEditorialHero
+                id="seg-individual"
+                sectionRef={el => { observerTargets.current.individual = el; }}
+                eyebrow="Línea individual"
+                title="PractiHumana"
+                description="La línea de planes pensada para empezar a cuidarte hoy, con consultas accesibles y respaldo hospitalario desde el primer día."
+                image="/plan-ph15-hero.jpeg"
+                imageAlt="Persona joven sonriendo, protegida por un plan PractiHumana"
+                onQuote={() => quote(ph15, "cotización PractiHumana")}
+                scrollTargetId="plan-block-ph15"
+              />
+              <PlanEditorialBlock plan={ph15} onQuote={() => quote(ph15)} onOpen={() => setSelected(ph15)} />
+              <PlanEditorialBlock plan={ph30} reverse onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
+
+              <PlanEditorialHero
+                id="seg-familiar"
+                sectionRef={el => { observerTargets.current.familiar = el; }}
+                eyebrow="Línea familiar"
+                title="MetroHumana"
+                description="Protección pensada para acompañar a toda tu familia, con maternidad, niño sano y bienestar incluidos."
+                image="/familia-humana.png"
+                imageAlt="Familia disfrutando un momento juntos, protegida por MetroHumana"
+                onQuote={() => quote(mh50, "cotización MetroHumana")}
+                scrollTargetId="plan-block-mh50"
+              />
+              <PlanEditorialBlock plan={mh50} onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} mh50Link />
+            </div>
+          ) : (
+            <>
+              <div key={`heading-${segment}`} className="sales-segment-heading segment-enter" aria-live="polite"><h3>{segmentCopy[segment].title}</h3><p>{segmentCopy[segment].short}</p></div>
+              <div key={`plans-${segment}`} className={`sales-plan-grid sales-plan-grid-${segment} segment-enter`}>{visible.map((plan, planIndex) => {
+                const isFeatured = (segment === "dental" && plan.id === "prosonrisas");
+                const badge = segment === "dental" && plan.id === "prosonrisas" ? "Plan dental recomendado" : plan.id === "prosonrisas" ? "Complementa tu protección" : undefined;
+                return <div className="plan-card-motion" style={{ "--plan-delay": `${planIndex * 75}ms` } as React.CSSProperties} key={plan.id}><PlanCard plan={plan} badge={badge} isFeatured={isFeatured} onOpen={() => setSelected(plan)} onQuote={() => quote(plan)} /></div>;
+              })}</div>
+            </>
+          )}
+        </div>
       </div>
-      <div key={`heading-${segment}`} className="sales-segment-heading segment-enter" aria-live="polite"><h3>{segmentCopy[segment].title}</h3><p>{segmentCopy[segment].short}</p></div>
-      <div key={`plans-${segment}`} className={`sales-plan-grid sales-plan-grid-${segment} segment-enter`}>{visible.map((plan, planIndex) => {
-        const isFeatured = (segment === "individual" && plan.id === "ph15") || (segment === "familiar" && plan.id === "mh50") || (segment === "dental" && plan.id === "prosonrisas");
-        const badge = segment === "individual" && plan.id === "ph15" ? "Opción individual recomendada" : segment === "familiar" && plan.id === "mh50" ? "Más recomendado para familias" : segment === "dental" && plan.id === "prosonrisas" ? "Plan dental recomendado" : plan.id === "prosonrisas" ? "Complementa tu protección" : undefined;
-        return <div className="plan-card-motion" style={{ "--plan-delay": `${planIndex * 75}ms` } as React.CSSProperties} key={plan.id}><PlanCard plan={plan} badge={badge} isFeatured={isFeatured} onOpen={() => setSelected(plan)} onQuote={() => quote(plan)} /></div>;
-      })}</div>
       {message && <div className="sales-demo-message" role="status"><Check /><span>{message}</span><button type="button" onClick={() => setMessage("")}>Cerrar</button></div>}
     </section>
 

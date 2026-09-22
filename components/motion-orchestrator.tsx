@@ -31,6 +31,8 @@ const revealSelectors = [
   ".sales-segments",
   ".sales-segment-heading",
   ".sales-plan-card",
+  ".plan-editorial-hero-copy > *",
+  ".plan-editorial-block",
   ".sales-assurance > *",
   ".business-hero-copy > *",
   ".business-hero-image",
@@ -66,6 +68,8 @@ const revealSelectors = [
 const imageSelectors = [
   ".hero-image",
   ".sales-hero > img",
+  ".plan-editorial-hero-photo",
+  ".plan-editorial-block-photo",
   ".about-hero > img",
   ".business-hero-image img",
   ".page-hero-media",
