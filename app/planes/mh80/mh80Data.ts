@@ -66,11 +66,14 @@ export const robotSurgery = {
     { value: "4ª", label: "generación del Robot Da Vinci, la más avanzada de su tecnología" }, // [A]
     { value: "4", label: "especialidades quirúrgicas de alta complejidad cubiertas" }, // [A]
   ],
+  // Nombres de especialidad: [A]. Las descripciones son texto explicativo
+  // general (no contractual) para ayudar al cliente a entender cada
+  // procedimiento; no citan cifras ni condiciones del plan.
   specialties: [
-    "Cirugía de colon y recto",
-    "Cirugía bariátrica",
-    "Cirugía hepato-bilio-pancreática",
-    "Cirugía del tercio inferior del esófago",
+    { name: "Cirugía de colon y recto", detail: "Procedimientos de colon y recto con incisiones mínimas, mayor precisión y menor trauma para el paciente." },
+    { name: "Cirugía bariátrica", detail: "Cirugía de control de peso realizada con la precisión y estabilidad del brazo robótico." },
+    { name: "Cirugía hepato-bilio-pancreática", detail: "Intervenciones de alta complejidad en hígado, vías biliares y páncreas, con mayor control quirúrgico." },
+    { name: "Cirugía del tercio inferior del esófago", detail: "Procedimientos de precisión en la zona baja del esófago, minimizando el impacto en tejidos cercanos." },
   ], // [A]
   facts: [
     { title: "Mínimamente invasiva", detail: "Incisiones más pequeñas y mayor precisión en cada movimiento quirúrgico." }, // [A]
