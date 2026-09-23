@@ -2778,7 +2778,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .ph30-exp-chapter.theme-deep .ph30-exp-chapter-number { color: rgba(7,92,146,.05); left: -20px; right: auto; }
 .ph30-exp-chapter-image { height: min(64vh, 680px); min-height: 340px; border-radius: 32px; overflow: hidden; box-shadow: var(--ph-shadow); position: relative; }
 .ph30-exp-chapter-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,25,42,.2), transparent 45%); }
-.ph30-exp-chapter-image img { object-fit: cover; }
+.ph30-exp-chapter-image img { object-fit: cover; object-position: var(--img-pos, center); }
+@media (max-width: 980px) {
+  .ph30-exp-chapter-image img { object-position: var(--img-pos-mobile, var(--img-pos, center)); }
+}
 .ph30-exp-chapter-copy { position: relative; z-index: 2; }
 .ph30-exp-chapter-copy h2 { font-size: clamp(38px, 5vw, 68px); line-height: 1; letter-spacing: -.03em; margin: 20px 0; font-weight: 720; }
 .ph30-exp-chapter-copy .ph30-exp-lead { font-size: 19px; line-height: 1.65; opacity: .74; max-width: 540px; }

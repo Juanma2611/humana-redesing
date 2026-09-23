@@ -223,7 +223,17 @@ export default function Ph30Page() {
           >
             <div className="ph30-exp-chapter-number" aria-hidden="true">{c.number}</div>
             <div className="ph30-exp-chapter-image ph30-exp-reveal">
-              <Image src={c.image} alt={c.imageAlt} fill sizes="(max-width: 980px) 100vw, 45vw" unoptimized />
+              <Image
+                src={c.image}
+                alt={c.imageAlt}
+                fill
+                sizes="(max-width: 980px) 100vw, 45vw"
+                unoptimized
+                style={{
+                  ...(c.imagePosition ? { "--img-pos": c.imagePosition } as React.CSSProperties : {}),
+                  ...(c.imagePositionMobile ? { "--img-pos-mobile": c.imagePositionMobile } as React.CSSProperties : {}),
+                }}
+              />
             </div>
             <div className="ph30-exp-chapter-copy ph30-exp-reveal">
               <span className={`ph30-exp-eyebrow${c.theme === "teal" ? " light" : ""}`}>{c.eyebrow}</span>

@@ -57,6 +57,8 @@ export type Chapter = {
   image: string;
   imageAlt: string;
   imageIsTemporaryFrom?: string; // documenta origen si la foto es prestada de otro plan
+  imagePosition?: string; // object-position CSS en desktop (evitar cortar rostros)
+  imagePositionMobile?: string; // object-position CSS en movil, si difiere del de desktop
   eyebrow: string;
   title: string;
   lead: string;
@@ -81,8 +83,8 @@ export const chapters: Chapter[] = [
     number: "01",
     navLabel: "Hospitalización",
     theme: "deep",
-    image: "/ph15-hospitalizacion.jpg",
-    imageIsTemporaryFrom: "PH15 (reemplazar por public/images/planes/ph30/ph30-hospitalizacion.png cuando el cliente la envíe)",
+    image: "/images/planes/ph30/ph30-hospitalizacion.jpg",
+    imagePosition: "68% 38%",
     imageAlt: "Persona siendo atendida en un ambiente hospitalario cálido y seguro",
     eyebrow: "HOSPITALIZACIÓN",
     title: "El siguiente nivel de respaldo.",
@@ -108,8 +110,8 @@ export const chapters: Chapter[] = [
     number: "02",
     navLabel: "Atención ambulatoria",
     theme: "light",
-    image: "/ph15-consultas.jpg",
-    imageIsTemporaryFrom: "PH15 (reemplazar por public/images/planes/ph30/ph30-ambulatoria.png cuando el cliente la envíe)",
+    image: "/images/planes/ph30/ph30-ambulatoria.jpg",
+    imagePositionMobile: "center 20%",
     imageAlt: "Consulta médica cercana entre paciente y doctora",
     eyebrow: "ATENCIÓN AMBULATORIA",
     title: "Cuidarte hoy, con más red.",
@@ -137,8 +139,7 @@ export const chapters: Chapter[] = [
     number: "03",
     navLabel: "Medicinas",
     theme: "teal",
-    image: "/ph15-medicinas.jpg",
-    imageIsTemporaryFrom: "PH15 (reemplazar por public/images/planes/ph30/ph30-medicinas.png cuando el cliente la envíe)",
+    image: "/images/planes/ph30/ph30-medicinas.jpg",
     imageAlt: "Entrega de medicamentos en una farmacia de la red Humana",
     eyebrow: "MEDICINAS",
     title: "Tu tratamiento, cubierto.",
@@ -162,8 +163,7 @@ export const chapters: Chapter[] = [
     number: "04",
     navLabel: "Maternidad",
     theme: "warm",
-    image: "/ph15-maternidad.jpg",
-    imageIsTemporaryFrom: "PH15 (reemplazar por public/images/planes/ph30/ph30-maternidad.png cuando el cliente la envíe)",
+    image: "/images/planes/ph30/ph30-maternidad.jpg",
     imageAlt: "Madre gestante en un control prenatal acompañada de su médico",
     eyebrow: "MATERNIDAD",
     title: "Acompañamos cada etapa.",
@@ -191,8 +191,8 @@ export const chapters: Chapter[] = [
     number: "05",
     navLabel: "Emergencias",
     theme: "deep",
-    image: "/ph15-emergencias.jpg",
-    imageIsTemporaryFrom: "PH15 (reemplazar por public/images/planes/ph30/ph30-emergencias.png cuando el cliente la envíe)",
+    image: "/images/planes/ph30/ph30-emergencias.jpg",
+    imagePositionMobile: "center 15%",
     imageAlt: "Atención de emergencia médica a un paciente",
     eyebrow: "EMERGENCIAS",
     title: "Cuando no puede esperar.",
