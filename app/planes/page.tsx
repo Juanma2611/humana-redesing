@@ -261,8 +261,8 @@ function PlanEditorialHero({ id, eyebrow, title, description, image, imageAlt, o
   </section>;
 }
 
-function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, mh50Link, ph15Link, sectionId }: {
-  plan: Plan; reverse?: boolean; onQuote: () => void; onOpen: () => void; mh50Link?: boolean; ph15Link?: boolean; sectionId?: string;
+function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, mh50Link, ph15Link, ph30Link, sectionId }: {
+  plan: Plan; reverse?: boolean; onQuote: () => void; onOpen: () => void; mh50Link?: boolean; ph15Link?: boolean; ph30Link?: boolean; sectionId?: string;
 }) {
   const Icon = plan.icon;
   return <article id={sectionId ?? `plan-block-${plan.id}`} className={`plan-editorial-block${reverse ? " reverse" : ""}`}>
@@ -284,6 +284,8 @@ function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, mh50Link, ph15Link
           ? <Link className="sales-more" href="/planes/mh50">Conoce más acerca del plan <ChevronRight /></Link>
           : ph15Link
           ? <Link className="sales-more" href="/planes/ph15">Conoce más acerca del plan <ChevronRight /></Link>
+          : ph30Link
+          ? <Link className="sales-more" href="/planes/ph30">Conoce más acerca del plan <ChevronRight /></Link>
           : <button type="button" className="sales-more" onClick={onOpen}>Conoce más acerca del plan <ChevronRight /></button>}
       </div>
     </div>
@@ -383,7 +385,7 @@ export default function Plans() {
                 scrollTargetId="plan-block-ph15"
               />
               <PlanEditorialBlock plan={ph15} onQuote={() => quote(ph15)} onOpen={() => setSelected(ph15)} ph15Link />
-              <PlanEditorialBlock plan={ph30} reverse sectionId="individual-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
+              <PlanEditorialBlock plan={ph30} reverse sectionId="individual-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} ph30Link />
               <PlanEditorialBlock plan={mh50} sectionId="individual-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} mh50Link />
               <PlanEditorialBlock plan={prosonrisas} reverse sectionId="individual-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
 
@@ -398,7 +400,7 @@ export default function Plans() {
                 onQuote={() => quote(mh50, "cotización MetroHumana")}
                 scrollTargetId="familiar-ph30"
               />
-              <PlanEditorialBlock plan={ph30} sectionId="familiar-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
+              <PlanEditorialBlock plan={ph30} sectionId="familiar-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} ph30Link />
               <PlanEditorialBlock plan={mh50} reverse sectionId="familiar-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} mh50Link />
               <PlanEditorialBlock plan={mh80} onQuote={() => quote(mh80)} onOpen={() => setSelected(mh80)} />
               <PlanEditorialBlock plan={mh150} reverse onQuote={() => quote(mh150)} onOpen={() => setSelected(mh150)} />
