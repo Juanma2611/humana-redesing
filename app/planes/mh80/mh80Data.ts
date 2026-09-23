@@ -80,15 +80,18 @@ export const robotSurgery = {
     { title: "Menos días de hospitalización", detail: "Recuperación más corta frente a una cirugía convencional." }, // [A]
     { title: "Pronto retorno a tu vida diaria", detail: "Vuelve antes a tus actividades cotidianas y a tu familia." }, // [A]
   ],
-  // Insignias flotantes alrededor del visual tecnológico (sección "El futuro
-  // de la cirugía ya está aquí"). Mismas ideas que "facts" arriba, en
-  // formato corto para mostrarse como chips flotantes en vez de tarjetas.
+  // Insignias flotantes alrededor del visual tecnológico. Iconografía SVG
+  // (lucide-react) en vez de emojis; el nombre del ícono se resuelve en
+  // page.tsx contra el iconMap local, igual que el resto de datos con
+  // iconKey en este archivo.
   floatingBadges: [
-    { emoji: "🤖", label: "Tecnología robótica" },
-    { emoji: "🎯", label: "Mayor precisión quirúrgica" },
-    { emoji: "🏥", label: "Procedimientos avanzados" },
-    { emoji: "⚕️", label: "Menor invasividad" },
+    { iconKey: "Cpu", label: "Tecnología robótica" },
+    { iconKey: "Target", label: "Mayor precisión quirúrgica" },
+    { iconKey: "Building2", label: "Procedimientos avanzados" },
+    { iconKey: "ShieldPlus", label: "Menor invasividad" },
   ],
+  // Palabras clave estilo Apple para acompañar las cifras de la sección.
+  capabilityTags: ["PRECISIÓN AVANZADA", "TECNOLOGÍA MÉDICA", "PROCEDIMIENTOS ESPECIALIZADOS"],
 };
 
 /* Cifras esenciales, siempre visibles sin depender de animación. */

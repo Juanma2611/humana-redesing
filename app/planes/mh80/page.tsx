@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Activity, Ambulance, Baby, Bone, Cpu, Cross,
+  Activity, Ambulance, Baby, Bone, Building2, Cpu, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Phone, PhoneCall, Ribbon, Scan,
-  ShieldCheck, ShieldPlus, Sparkles, Syringe, Users, Video, Wallet, Zap,
+  ShieldCheck, ShieldPlus, Sparkles, Syringe, Target, Users, Video, Wallet, Zap,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import {
@@ -27,10 +27,10 @@ const coverageModules = chapters.slice(0, 4);
    mantener los datos como constantes serializables; aquí se resuelven a los
    componentes reales de lucide-react. */
 const iconMap = {
-  Activity, Ambulance, Baby, Bone, Cross,
+  Activity, Ambulance, Baby, Bone, Building2, Cpu, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, HomeIcon,
   MessageCircle, Phone, PhoneCall, Ribbon,
-  ShieldCheck, ShieldPlus, Sparkles, Syringe, Users, Video, Wallet,
+  ShieldCheck, ShieldPlus, Sparkles, Syringe, Target, Users, Video, Wallet,
 } as const;
 
 function Icon({ name }: { name: keyof typeof iconMap }) {
@@ -41,6 +41,7 @@ function Icon({ name }: { name: keyof typeof iconMap }) {
 export default function Mh80Page() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
   const [activeSpecialty, setActiveSpecialty] = useState(0);
@@ -80,6 +81,10 @@ export default function Mh80Page() {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       if (progressRef.current) {
         progressRef.current.style.width = `${max ? (window.scrollY / max) * 100 : 0}%`;
+      }
+      if (galleryRef.current && !reducedMotion) {
+        const offset = Math.min(window.scrollY * 0.12, 60);
+        galleryRef.current.style.transform = `translateY(${offset}px)`;
       }
       let current = "";
       chapterSections.forEach((section) => {
@@ -135,9 +140,10 @@ export default function Mh80Page() {
         <div className="mh80-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh80-exp-hero" id="mh80-inicio">
+          <div className="mh80-exp-hero-particles" aria-hidden="true" />
           <div className="mh80-exp-hero-copy">
             <span className="mh80-robotic-hero-badge"><Cpu size={14} aria-hidden="true" /> MH80 · TECNOLOGÍA MÉDICA AVANZADA</span>
-            <h1 className="mh80-exp-hero-line">La cirugía del futuro ahora está más cerca de tu familia.</h1>
+            <h1 className="mh80-exp-hero-line">La medicina del futuro ahora protege a tu familia.</h1>
             <p className="mh80-exp-hero-body">
               Un plan diseñado para protegerte con cobertura médica avanzada, innovación tecnológica
               y acceso a soluciones de salud de nueva generación.
@@ -152,7 +158,7 @@ export default function Mh80Page() {
               </div>
             )}
           </div>
-          <div className="mh80-exp-gallery" aria-label="Momentos de protección familiar MH80">
+          <div className="mh80-exp-gallery" ref={galleryRef} aria-label="Momentos de protección familiar MH80">
             <figure className="mh80-exp-photo card-a">
               <Image src="/plan-mh80-hero.jpeg" alt="Familia protegida por MH80" fill sizes="(max-width: 980px) 60vw, 30vw" unoptimized />
             </figure>
@@ -181,8 +187,11 @@ export default function Mh80Page() {
           <div className="mh80-robotic-copy mh80-exp-reveal">
             <span className="mh80-robotic-badge"><Cpu size={14} aria-hidden="true" /> {robotSurgery.badge}</span>
             <span className="mh80-exp-eyebrow light">{robotSurgery.eyebrow}</span>
-            <h2>El futuro de la cirugía ya está aquí.</h2>
+            <h2>La precisión de la tecnología al servicio de tu salud.</h2>
             <p className="mh80-robotic-lead">{robotSurgery.lead}</p>
+            <div className="mh80-robotic-tags" aria-hidden="true">
+              {robotSurgery.capabilityTags.map((t) => <span key={t}>{t}</span>)}
+            </div>
             <div className="mh80-robotic-stats">
               {robotSurgery.stats.map((s) => (
                 <div key={s.label} className="mh80-robotic-stat">
@@ -212,7 +221,7 @@ export default function Mh80Page() {
                   style={{ "--reveal-delay": `${i * 120}ms` } as React.CSSProperties}
                   key={b.label}
                 >
-                  <span aria-hidden="true">{b.emoji}</span> {b.label}
+                  <Icon name={b.iconKey as keyof typeof iconMap} /> {b.label}
                 </span>
               ))}
             </div>
