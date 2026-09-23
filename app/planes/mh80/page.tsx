@@ -4,16 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Activity, Ambulance, Baby, Bone, Cross,
+  Activity, Ambulance, Baby, Bone, Cpu, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
-  MessageCircle, Phone, PhoneCall, Ribbon,
-  ShieldCheck, ShieldPlus, Sparkles, Syringe, Users, Video, Wallet,
+  MessageCircle, Phone, PhoneCall, Ribbon, Scan,
+  ShieldCheck, ShieldPlus, Sparkles, Syringe, Users, Video, Wallet, Zap,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import {
   chapters, contactChannels, essenceStats, faqs, featuredBenefits,
   otherConditions, planIdentity, preventionCoverages, rehabCoverages,
-  specialCases, waitingPeriods,
+  robotSurgery, specialCases, waitingPeriods,
 } from "./mh80Data";
 
 /* Mapa de íconos: mh80Data.ts guarda solo el nombre del ícono (string) para
@@ -140,15 +140,17 @@ export default function Mh80Page() {
 
         <section className="mh80-exp-hero" id="mh80-inicio">
           <div className="mh80-exp-hero-copy">
+            <span className="mh80-robotic-hero-badge"><Cpu size={14} aria-hidden="true" /> {robotSurgery.badge} · CIRUGÍA ROBÓTICA</span>
             <span className="mh80-exp-eyebrow light">PLAN FAMILIAR · METROHUMANA</span>
             <h1>MH<span>80</span></h1>
-            <p className="mh80-exp-hero-line">Plan Familiar MH80</p>
+            <p className="mh80-exp-hero-line">El único plan con cirugía robótica Da Vinci.</p>
             <p className="mh80-exp-hero-body">
-              Una cobertura pensada para acompañar a tu familia en cada momento importante:
-              protección amplia, confiable y accesible para familias jóvenes, padres con hijos y parejas.
+              Tecnología robótica de última generación, con la protección familiar de siempre:
+              cobertura amplia, confiable y accesible para familias jóvenes, padres con hijos y parejas.
             </p>
             <div className="mh80-exp-hero-actions">
               <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotiza tu plan</button>
+              <a className="mh80-robotic-cta" href="#mh80-robotica"><Zap size={16} aria-hidden="true" /> Descubre la cirugía robótica</a>
               <a className="ghost-button" href="#mh80-cobertura">Conoce tu cobertura</a>
             </div>
             {quoted && (
@@ -169,6 +171,61 @@ export default function Mh80Page() {
             </figure>
           </div>
           <a className="mh80-exp-scroll-cue" href="#mh80-esencia"><span />Desliza para descubrir</a>
+        </section>
+
+        <section className="mh80-robotic" id="mh80-robotica">
+          <div className="mh80-robotic-grid" aria-hidden="true" />
+          <div className="mh80-robotic-glow" aria-hidden="true" />
+          <div className="mh80-robotic-copy mh80-exp-reveal">
+            <span className="mh80-robotic-badge"><Cpu size={14} aria-hidden="true" /> {robotSurgery.badge}</span>
+            <span className="mh80-exp-eyebrow light">{robotSurgery.eyebrow}</span>
+            <h2>{robotSurgery.title}</h2>
+            <p className="mh80-robotic-lead">{robotSurgery.lead}</p>
+            <div className="mh80-robotic-stats">
+              {robotSurgery.stats.map((s) => (
+                <div key={s.label} className="mh80-robotic-stat">
+                  <strong>{s.value}</strong>
+                  <span>{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mh80-robotic-visual mh80-exp-reveal" aria-hidden="true">
+            <div className="mh80-robotic-core">
+              <span className="mh80-robotic-ring ring-1" />
+              <span className="mh80-robotic-ring ring-2" />
+              <span className="mh80-robotic-ring ring-3" />
+              <span className="mh80-robotic-core-icon"><Cpu /></span>
+            </div>
+            <div className="mh80-robotic-scanline" />
+            <div className="mh80-robotic-crosshair top-left" />
+            <div className="mh80-robotic-crosshair top-right" />
+            <div className="mh80-robotic-crosshair bottom-left" />
+            <div className="mh80-robotic-crosshair bottom-right" />
+          </div>
+
+          <div className="mh80-robotic-specialties mh80-exp-reveal">
+            <span className="mh80-robotic-specialties-label"><Scan size={14} aria-hidden="true" /> ¿Qué tipo de cirugías realiza?</span>
+            <ul>
+              {robotSurgery.specialties.map((s) => <li key={s}>{s}</li>)}
+            </ul>
+          </div>
+
+          <div className="mh80-robotic-facts" role="list" aria-label="Ventajas de la cirugía robótica MH80">
+            {robotSurgery.facts.map((f, i) => (
+              <article
+                className="mh80-robotic-fact mh80-exp-reveal"
+                style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
+                role="listitem"
+                key={f.title}
+              >
+                <span className="mh80-robotic-fact-icon" aria-hidden="true"><Zap size={16} /></span>
+                <h4>{f.title}</h4>
+                <p>{f.detail}</p>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section className="mh80-exp-essence" id="mh80-esencia">
@@ -213,6 +270,7 @@ export default function Mh80Page() {
         </section>
 
         <nav className="mh80-exp-chapter-nav" aria-label="Capítulos de cobertura">
+          <a href="#mh80-robotica" data-chapter-link="mh80-robotica" className="mh80-robotic-nav-link"><span><Cpu size={11} aria-hidden="true" /></span>Cirugía robótica</a>
           <a href="#mh80-esencia" data-chapter-link="mh80-esencia"><span>·</span>Resumen</a>
           {chapters.map((c) => (
             <a key={c.id} href={`#mh80-${c.id}`} data-chapter-link={`mh80-${c.id}`}><span>{c.number}</span>{c.navLabel}</a>

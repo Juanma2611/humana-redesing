@@ -47,6 +47,38 @@ export const planIdentity = {
   deductible: "$200",
 };
 
+/* Diferenciador tecnológico de MH80: cirugía robótica Da Vinci. Fuente única
+   y exclusiva: [A] "43833e0c-MH80_plan_.pdf" (tabla/infografía comercial),
+   texto corrido de la pieza "Robot Da Vinci". El contrato [C] no menciona la
+   cirugía robótica de forma explícita por nombre, pero sí respalda la cifra
+   de cobertura hospitalaria al 80% en Red Metrohumana (pág. 3) sobre la que
+   se apoya este beneficio. La mención del hospital/sede exacta donde está
+   disponible el robot no se pudo leer en el PDF (queda como imagen/infografía
+   sin texto extraíble) — por eso NO se menciona una sede específica; se
+   mantiene la referencia general a la Red Metrohumana. */
+export const robotSurgery = {
+  badge: "ÚNICO EN EL MERCADO", // [A]
+  eyebrow: "TECNOLOGÍA MH80",
+  title: "Cirugía robótica Da Vinci.",
+  lead: "MH80 es el único plan de medicina prepagada del mercado con cobertura de cirugía robótica, al 80% de cobertura hasta la suma máxima contratada.", // [A]
+  stats: [
+    { value: "80%", label: "de cobertura en cirugía robótica, hasta la suma máxima contratada" }, // [A]
+    { value: "4ª", label: "generación del Robot Da Vinci, la más avanzada de su tecnología" }, // [A]
+    { value: "4", label: "especialidades quirúrgicas de alta complejidad cubiertas" }, // [A]
+  ],
+  specialties: [
+    "Cirugía de colon y recto",
+    "Cirugía bariátrica",
+    "Cirugía hepato-bilio-pancreática",
+    "Cirugía del tercio inferior del esófago",
+  ], // [A]
+  facts: [
+    { title: "Mínimamente invasiva", detail: "Incisiones más pequeñas y mayor precisión en cada movimiento quirúrgico." }, // [A]
+    { title: "Menos días de hospitalización", detail: "Recuperación más corta frente a una cirugía convencional." }, // [A]
+    { title: "Pronto retorno a tu vida diaria", detail: "Vuelve antes a tus actividades cotidianas y a tu familia." }, // [A]
+  ],
+};
+
 /* Cifras esenciales, siempre visibles sin depender de animación. */
 export const essenceStats = [
   { value: "$80.000", label: "de cobertura máxima\npor beneficiario" }, // [C] pág. 1

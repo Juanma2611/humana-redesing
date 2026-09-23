@@ -3613,3 +3613,137 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @media (max-width: 980px) {
   .mh80-exp-faq { grid-template-columns: 1fr; gap: 30px; }
 }
+
+/* ============================================================ */
+/* DIFERENCIADOR MH80: CIRUGÍA ROBÓTICA DA VINCI — bloque         */
+/* tecnológico/futurista exclusivo de este plan. Namespace propio */
+/* .mh80-robotic-* para no mezclar con el resto del sistema visual */
+/* Humana; hereda las variables --ph-* de .mh80-exp por herencia   */
+/* de custom properties (es un descendiente en el DOM).            */
+/* ============================================================ */
+.mh80-robotic-hero-badge {
+  display: flex; align-items: center; gap: 8px; width: fit-content;
+  padding: 8px 16px; margin-bottom: 16px; border-radius: 999px;
+  background: rgba(0,234,255,.1); border: 1px solid rgba(0,234,255,.4);
+  color: #7ff2ff; font-size: 11px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; animation: mh80RoboticPulseBadge 2.6s ease-in-out infinite;
+}
+@keyframes mh80RoboticPulseBadge {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,234,255,.35); }
+  50% { box-shadow: 0 0 0 8px rgba(0,234,255,0); }
+}
+.mh80-robotic-cta {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 22px;
+  border-radius: 13px; font-weight: 720; font-size: 15px;
+  background: linear-gradient(120deg, rgba(0,234,255,.16), rgba(124,92,255,.2));
+  border: 1px solid rgba(0,234,255,.5); color: #eaf6ff;
+  transition: transform .2s var(--premium-ease, ease), box-shadow .2s ease;
+}
+.mh80-robotic-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0,234,255,.22); }
+
+.mh80-exp-chapter-nav a.mh80-robotic-nav-link { color: #0089a8; font-weight: 800; }
+.mh80-exp-chapter-nav a.mh80-robotic-nav-link.is-active { color: var(--ph-ink); border-color: #00c2e0; }
+.mh80-exp-chapter-nav a.mh80-robotic-nav-link span { display: inline-flex; }
+
+.mh80-robotic {
+  position: relative; overflow: hidden; background: #04070d; color: #eaf6ff;
+  padding: clamp(90px, 10vw, 150px) clamp(20px, 8vw, 130px);
+  display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px, 6vw, 80px) clamp(30px, 6vw, 80px);
+  grid-template-areas: "copy visual" "specialties specialties" "facts facts";
+}
+.mh80-robotic-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,234,255,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,234,255,.07) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(circle at 50% 30%, black, transparent 75%);
+  mask-image: radial-gradient(circle at 50% 30%, black, transparent 75%);
+}
+.mh80-robotic-glow {
+  position: absolute; width: 700px; height: 700px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(0,234,255,.16), transparent 65%);
+  top: -220px; right: -160px; filter: blur(6px);
+}
+.mh80-robotic-copy { grid-area: copy; position: relative; z-index: 2; align-self: center; }
+.mh80-robotic-badge {
+  display: flex; align-items: center; gap: 8px; width: fit-content; padding: 8px 16px; margin-bottom: 18px;
+  border-radius: 999px; background: rgba(0,234,255,.08); border: 1px solid rgba(0,234,255,.4);
+  color: #7ff2ff; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+}
+.mh80-robotic-copy h2 {
+  font-size: clamp(38px, 5vw, 64px); line-height: 1; letter-spacing: -.03em; margin: 18px 0 22px; font-weight: 760;
+  background: linear-gradient(120deg, #fff, #7ff2ff 55%, #a78bff);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.mh80-robotic-lead { font-size: 18px; line-height: 1.7; color: rgba(234,246,255,.72); max-width: 520px; }
+.mh80-robotic-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 36px; max-width: 560px;
+  background: rgba(0,234,255,.14); border: 1px solid rgba(0,234,255,.18); border-radius: 16px; overflow: hidden;
+}
+.mh80-robotic-stat { background: rgba(4,10,18,.9); padding: 18px 16px; display: flex; flex-direction: column; gap: 6px; }
+.mh80-robotic-stat strong { font-size: clamp(26px, 3vw, 36px); color: #7ff2ff; letter-spacing: -.03em; text-shadow: 0 0 18px rgba(0,234,255,.5); }
+.mh80-robotic-stat span { font-size: 12px; line-height: 1.4; color: rgba(234,246,255,.6); }
+
+.mh80-robotic-visual { grid-area: visual; position: relative; z-index: 2; align-self: center; aspect-ratio: 1; max-width: 420px; width: 100%; margin: auto; }
+.mh80-robotic-core { position: absolute; inset: 18%; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.mh80-robotic-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(0,234,255,.35); animation: mh80RoboticSpin 14s linear infinite; }
+.mh80-robotic-ring.ring-2 { inset: 14%; border-color: rgba(124,92,255,.35); animation-duration: 10s; animation-direction: reverse; }
+.mh80-robotic-ring.ring-3 { inset: 28%; border-color: rgba(0,234,255,.5); border-style: dashed; animation-duration: 20s; }
+@keyframes mh80RoboticSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.mh80-robotic-core-icon {
+  position: relative; z-index: 2; width: 64px; height: 64px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(145deg, rgba(0,234,255,.22), rgba(124,92,255,.22));
+  box-shadow: 0 0 40px rgba(0,234,255,.35), inset 0 0 0 1px rgba(255,255,255,.14); color: #eaf6ff;
+}
+.mh80-robotic-core-icon svg { width: 28px; height: 28px; }
+.mh80-robotic-scanline {
+  position: absolute; left: 6%; right: 6%; height: 2px; top: 8%;
+  background: linear-gradient(90deg, transparent, rgba(0,234,255,.9), transparent);
+  box-shadow: 0 0 12px rgba(0,234,255,.7); animation: mh80RoboticScan 3.4s ease-in-out infinite;
+}
+@keyframes mh80RoboticScan { 0%, 100% { top: 8%; opacity: .2; } 50% { top: 92%; opacity: 1; } }
+.mh80-robotic-crosshair { position: absolute; width: 22px; height: 22px; border: 1.5px solid rgba(0,234,255,.5); }
+.mh80-robotic-crosshair.top-left { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.mh80-robotic-crosshair.top-right { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.mh80-robotic-crosshair.bottom-left { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.mh80-robotic-crosshair.bottom-right { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+.mh80-robotic-specialties { grid-area: specialties; position: relative; z-index: 2; border-top: 1px solid rgba(0,234,255,.14); padding-top: 34px; }
+.mh80-robotic-specialties-label {
+  display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px;
+  font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #7ff2ff;
+}
+.mh80-robotic-specialties ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.mh80-robotic-specialties li {
+  position: relative; background: rgba(255,255,255,.03); border: 1px solid rgba(0,234,255,.14);
+  border-radius: 14px; padding: 16px 18px 16px 22px; font-size: 14px; font-weight: 620; color: rgba(234,246,255,.86);
+}
+.mh80-robotic-specialties li::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(180deg, #7ff2ff, #a78bff); border-radius: 3px 0 0 3px;
+}
+
+.mh80-robotic-facts { grid-area: facts; position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.mh80-robotic-fact { background: rgba(255,255,255,.03); border: 1px solid rgba(0,234,255,.12); border-radius: 18px; padding: 24px; backdrop-filter: blur(6px); }
+.mh80-robotic-fact-icon {
+  display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 10px;
+  background: rgba(0,234,255,.12); color: #7ff2ff; margin-bottom: 14px;
+}
+.mh80-robotic-fact h4 { margin: 0 0 8px; font-size: 16px; font-weight: 720; color: #fff; }
+.mh80-robotic-fact p { margin: 0; font-size: 13.5px; line-height: 1.55; color: rgba(234,246,255,.62); }
+
+@media (max-width: 980px) {
+  .mh80-robotic { grid-template-columns: 1fr; grid-template-areas: "copy" "visual" "specialties" "facts"; }
+  .mh80-robotic-visual { max-width: 260px; }
+  .mh80-robotic-specialties ul { grid-template-columns: repeat(2, 1fr); }
+  .mh80-robotic-facts { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .mh80-robotic-specialties ul { grid-template-columns: 1fr; }
+  .mh80-robotic-stats { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mh80-robotic-ring, .mh80-robotic-scanline, .mh80-robotic-hero-badge { animation: none !important; }
+}
