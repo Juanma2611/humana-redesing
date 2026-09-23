@@ -3321,8 +3321,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   overflow: hidden;
   color: #fff;
   background-image:
-    linear-gradient(115deg, rgba(4,16,32,.94) 0%, rgba(6,26,46,.85) 32%, rgba(7,45,71,.64) 58%, rgba(8,60,92,.46) 100%),
-    url("/images/planes/mh80/mh80-bg-glass.jpg");
+    linear-gradient(115deg, rgba(3,7,14,.66) 0%, rgba(4,10,19,.58) 40%, rgba(5,14,26,.5) 100%),
+    url("/images/planes/mh80/mh80-bg-hex.jpg");
   background-size: cover;
   background-position: center;
   padding: 150px clamp(20px, 7vw, 110px) 90px;
@@ -3332,9 +3332,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   gap: 40px;
 }
 .mh80-exp-hero-copy { position: relative; z-index: 2; max-width: 640px; }
-.mh80-exp-hero-copy h1 { font-size: clamp(60px, 10vw, 140px); line-height: .82; margin: 26px 0 32px; letter-spacing: -.05em; font-weight: 780; color: #fff; }
-.mh80-exp-hero-copy h1 span { color: var(--ph-bright); }
-.mh80-exp-hero-line { font-size: clamp(30px, 3.4vw, 50px); line-height: 1.06; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+.mh80-exp-hero-copy h1.mh80-exp-hero-line { font-size: clamp(38px, 5.4vw, 74px); line-height: 1.02; font-weight: 760; letter-spacing: -.03em; margin: 22px 0 0; color: #fff; max-width: 620px; }
 .mh80-exp-hero-body { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,.72); max-width: 540px; margin-top: 16px; }
 .mh80-exp-hero-actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
 .mh80-exp-hero-actions .primary-button,
@@ -3523,9 +3521,9 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-exp-finale {
   min-height: 92svh;
   background-image:
-    radial-gradient(circle at 74% 40%, rgba(16,167,219,.24), transparent 22%),
-    linear-gradient(135deg, rgba(4,16,32,.94) 0%, rgba(6,26,46,.86) 45%, rgba(7,45,71,.66) 100%),
-    url("/images/planes/mh80/mh80-bg-glass.jpg");
+    radial-gradient(circle at 74% 40%, rgba(16,167,219,.2), transparent 22%),
+    linear-gradient(135deg, rgba(3,7,14,.7) 0%, rgba(4,10,19,.6) 45%, rgba(5,14,26,.5) 100%),
+    url("/images/planes/mh80/mh80-bg-hex.jpg");
   background-size: cover;
   background-position: center 30%;
   color: #fff; padding: clamp(80px, 10vw, 150px) clamp(20px, 8vw, 130px); display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; position: relative; overflow: hidden; gap: 40px;
@@ -3575,7 +3573,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* RESPONSIVE ------------------------------------------------------------ */
 @media (max-width: 980px) {
   .mh80-exp-hero { grid-template-columns: 1fr; padding: 120px 20px 80px; }
-  .mh80-exp-hero-copy h1 { font-size: 22vw; }
   .mh80-exp-gallery { height: min(105vw, 520px); margin-top: 30px; }
   .mh80-exp-photo.card-a { width: 60%; right: 0; }
   .mh80-exp-photo.card-b { width: 54%; left: 0; top: 30%; }
@@ -3604,7 +3601,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 
 @media (max-width: 560px) {
-  .mh80-exp-hero-line { font-size: 32px; }
+  .mh80-exp-hero-copy h1.mh80-exp-hero-line { font-size: 34px; }
   .mh80-exp-hero-body { font-size: 15px; }
   .mh80-exp-hero-actions { flex-direction: column; align-items: stretch; }
   .mh80-exp-display { font-size: 58px; }
@@ -3815,4 +3812,109 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 @media (prefers-reduced-motion: reduce) {
   .mh80-robotic-ring, .mh80-robotic-scanline, .mh80-robotic-hero-badge { animation: none !important; }
+}
+
+/* ============================================================ */
+/* MH80 — "El futuro de la cirugía ya está aquí": insignias       */
+/* flotantes alrededor del visual tecnológico.                    */
+/* ============================================================ */
+.mh80-robotic-visual { overflow: visible; }
+.mh80-robotic-floaters { position: absolute; inset: -10%; pointer-events: none; }
+.mh80-robotic-floater {
+  position: absolute; display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 16px; border-radius: 999px; font-size: 13px; font-weight: 650; white-space: nowrap;
+  background: rgba(4,10,19,.7); border: 1px solid rgba(16,167,219,.3);
+  color: #eaf6ff; backdrop-filter: blur(8px); box-shadow: 0 14px 30px rgba(0,0,0,.3);
+  animation: mh80FloaterDrift 6s ease-in-out infinite;
+}
+.mh80-robotic-floater.float-1 { top: -4%; left: -8%; animation-delay: 0s; }
+.mh80-robotic-floater.float-2 { top: 6%; right: -14%; animation-delay: .6s; }
+.mh80-robotic-floater.float-3 { bottom: 10%; left: -16%; animation-delay: 1.2s; }
+.mh80-robotic-floater.float-4 { bottom: -4%; right: -6%; animation-delay: 1.8s; }
+@keyframes mh80FloaterDrift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@media (max-width: 980px) {
+  .mh80-robotic-floaters { position: static; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 24px; }
+  .mh80-robotic-floater { position: static !important; animation: none; }
+}
+
+/* ============================================================ */
+/* MH80 — Sección "Una protección diseñada alrededor de tu vida"  */
+/* (módulos de cobertura tipo sistema tecnológico).                */
+/* ============================================================ */
+.mh80-modules {
+  position: relative; padding: clamp(80px, 9vw, 140px) clamp(20px, 8vw, 130px);
+  background-image:
+    linear-gradient(100deg, rgba(6,14,26,.86) 0%, rgba(8,20,34,.8) 45%, rgba(10,28,44,.72) 100%),
+    url("/images/planes/mh80/mh80-bg-glass.jpg");
+  background-size: cover;
+  background-position: center 45%;
+  color: #eaf6ff;
+}
+.mh80-modules-head { max-width: 760px; margin-bottom: 50px; }
+.mh80-modules-head h2 { margin: 18px 0 0; font-size: clamp(34px, 4.4vw, 56px); line-height: 1.05; letter-spacing: -.03em; font-weight: 740; color: #fff; }
+.mh80-modules-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.mh80-module {
+  border-radius: 26px; overflow: hidden; background: rgba(255,255,255,.04);
+  border: 1px solid rgba(16,167,219,.18); box-shadow: 0 24px 60px rgba(0,0,0,.28);
+  display: flex; flex-direction: column; transition: transform .3s var(--premium-ease, ease), border-color .3s ease;
+}
+.mh80-module:hover { transform: translateY(-4px); border-color: rgba(16,167,219,.4); }
+.mh80-module-image { position: relative; height: 200px; }
+.mh80-module-image img { object-fit: cover; object-position: var(--img-pos, center); }
+@media (max-width: 980px) {
+  .mh80-module-image img { object-position: var(--img-pos-mobile, var(--img-pos, center)); }
+}
+.mh80-module-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(4,10,19,.86), transparent 55%); }
+.mh80-module-number {
+  position: absolute; left: 18px; bottom: 14px; z-index: 1; font-size: 13px; font-weight: 800;
+  letter-spacing: .12em; color: #6ec8ee;
+}
+.mh80-module-copy { padding: 26px 26px 30px; display: flex; flex-direction: column; flex: 1; }
+.mh80-module-copy h3 { margin: 12px 0 10px; font-size: 22px; line-height: 1.2; letter-spacing: -.02em; color: #fff; font-weight: 720; }
+.mh80-module-copy > p { margin: 0 0 16px; font-size: 14.5px; line-height: 1.55; color: rgba(234,246,255,.68); }
+.mh80-module-copy ul { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 8px; font-size: 13.5px; }
+.mh80-module-copy ul li { display: flex; align-items: center; gap: 10px; color: rgba(234,246,255,.82); }
+.mh80-module-copy ul li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #6ec8ee; flex: none; }
+.mh80-module-toggle {
+  margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+  border: 0; background: transparent; color: #6ec8ee; font-weight: 720; font-size: 13.5px; cursor: pointer; padding: 0;
+}
+.mh80-module-toggle span { font-size: 16px; }
+.mh80-module-details {
+  list-style: none; margin: 16px 0 0; padding: 16px 0 0; border-top: 1px solid rgba(16,167,219,.16);
+  display: grid; gap: 10px; font-size: 13px;
+}
+.mh80-module-details li { display: flex; justify-content: space-between; text-align: left; gap: 14px; color: rgba(234,246,255,.66); }
+.mh80-module-details li span { flex: 1; }
+.mh80-module-details strong { color: #fff; white-space: nowrap; }
+@media (max-width: 980px) {
+  .mh80-modules-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================ */
+/* MH80 — Sección "Datos clave" (números grandes tipo Apple).     */
+/* ============================================================ */
+.mh80-keystats {
+  position: relative; overflow: hidden; padding: clamp(80px, 9vw, 140px) clamp(20px, 8vw, 130px);
+  background-image:
+    linear-gradient(100deg, rgba(3,7,14,.78) 0%, rgba(3,7,14,.68) 50%, rgba(3,7,14,.6) 100%),
+    url("/images/planes/mh80/mh80-bg-curve.jpg");
+  background-size: cover;
+  background-position: center 45%;
+  color: #eaf6ff;
+}
+.mh80-keystats-head { max-width: 700px; margin-bottom: 56px; }
+.mh80-keystats-head h2 { margin: 18px 0 0; font-size: clamp(34px, 4.4vw, 56px); line-height: 1.05; letter-spacing: -.03em; font-weight: 740; color: #fff; }
+.mh80-keystats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: rgba(16,167,219,.16); border: 1px solid rgba(16,167,219,.16); border-radius: 22px; overflow: hidden; }
+.mh80-keystat { background: rgba(4,10,19,.82); padding: 40px 26px; display: flex; flex-direction: column; gap: 10px; }
+.mh80-keystat strong { font-size: clamp(44px, 5vw, 64px); line-height: 1; letter-spacing: -.03em; color: #6ec8ee; text-shadow: 0 0 22px rgba(16,167,219,.4); }
+.mh80-keystat span { font-size: 13.5px; line-height: 1.4; color: rgba(234,246,255,.62); }
+@media (max-width: 980px) {
+  .mh80-keystats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .mh80-keystats-grid { grid-template-columns: 1fr; }
 }

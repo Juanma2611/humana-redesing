@@ -80,6 +80,15 @@ export const robotSurgery = {
     { title: "Menos días de hospitalización", detail: "Recuperación más corta frente a una cirugía convencional." }, // [A]
     { title: "Pronto retorno a tu vida diaria", detail: "Vuelve antes a tus actividades cotidianas y a tu familia." }, // [A]
   ],
+  // Insignias flotantes alrededor del visual tecnológico (sección "El futuro
+  // de la cirugía ya está aquí"). Mismas ideas que "facts" arriba, en
+  // formato corto para mostrarse como chips flotantes en vez de tarjetas.
+  floatingBadges: [
+    { emoji: "🤖", label: "Tecnología robótica" },
+    { emoji: "🎯", label: "Mayor precisión quirúrgica" },
+    { emoji: "🏥", label: "Procedimientos avanzados" },
+    { emoji: "⚕️", label: "Menor invasividad" },
+  ],
 };
 
 /* Cifras esenciales, siempre visibles sin depender de animación. */
@@ -87,6 +96,18 @@ export const essenceStats = [
   { value: "$80.000", label: "de cobertura máxima\npor beneficiario" }, // [C] pág. 1
   { value: "80%", label: "de cobertura hospitalaria\nen Red Metrohumana" }, // [C] pág. 1 / pág. 3
   { value: "$200", label: "de deducible\nanual" }, // [C] pág. 1
+];
+
+/* Sección "Datos clave MH80" (números grandes tipo Apple). Todas las cifras
+   ya están respaldadas arriba (essenceStats) o en el capítulo de Medicinas /
+   Maternidad; se reagrupan aquí en 4 cifras redondas para esa sección
+   específica. No se usan las cifras de ejemplo de un brief genérico —
+   solo datos reales verificados contra el contrato [C]. */
+export const keyStats = [
+  { value: "80%", label: "Cobertura hospitalaria dentro de Red Metrohumana" }, // [C] pág. 3
+  { value: "70%", label: "Cobertura hospitalaria por libre elección" }, // [C] pág. 3
+  { value: "70%+", label: "Cobertura de medicinas en farmacias de convenio" }, // [C] pág. 2
+  { value: "$4.000", label: "Sublímite de maternidad cubierta" }, // [C] pág. 3
 ];
 
 export type ChapterDetailItem = { label: string; value: string };

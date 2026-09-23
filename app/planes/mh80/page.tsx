@@ -11,10 +11,17 @@ import {
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import {
-  contactChannels, essenceStats, faqs, featuredBenefits,
+  chapters, contactChannels, faqs, featuredBenefits, keyStats,
   otherConditions, preventionCoverages, rehabCoverages,
   robotSurgery, specialCases, waitingPeriods,
 } from "./mh80Data";
+
+/* Los 4 módulos de cobertura que pide mostrar la sección "Una protección
+   diseñada alrededor de tu vida": Hospitalización, Atención ambulatoria,
+   Medicinas y Maternidad. Emergencias queda fuera de esta grilla (se
+   mantiene su información en el resto del sitio/plan), por diseño
+   explícito de esta sección. */
+const coverageModules = chapters.slice(0, 4);
 
 /* Mapa de íconos: mh80Data.ts guarda solo el nombre del ícono (string) para
    mantener los datos como constantes serializables; aquí se resuelven a los
@@ -37,8 +44,10 @@ export default function Mh80Page() {
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
   const [activeSpecialty, setActiveSpecialty] = useState(0);
+  const [expandedModule, setExpandedModule] = useState<string | null>(null);
 
   const handleQuoteClick = () => setQuoted(true);
+  const toggleModule = (id: string) => setExpandedModule((current) => (current === id ? null : id));
 
   const goToBenefit = (i: number) => setBenefitIndex(((i % featuredBenefits.length) + featuredBenefits.length) % featuredBenefits.length);
   const prevBenefit = () => goToBenefit(benefitIndex - 1);
@@ -127,26 +136,15 @@ export default function Mh80Page() {
 
         <section className="mh80-exp-hero" id="mh80-inicio">
           <div className="mh80-exp-hero-copy">
-            <span className="mh80-robotic-hero-badge"><Cpu size={14} aria-hidden="true" /> {robotSurgery.badge} · CIRUGÍA ROBÓTICA</span>
-            <span className="mh80-exp-eyebrow light">PLAN FAMILIAR · METROHUMANA</span>
-            <h1>MH<span>80</span></h1>
-            <p className="mh80-exp-hero-line">El único plan con cirugía robótica Da Vinci.</p>
+            <span className="mh80-robotic-hero-badge"><Cpu size={14} aria-hidden="true" /> MH80 · TECNOLOGÍA MÉDICA AVANZADA</span>
+            <h1 className="mh80-exp-hero-line">La cirugía del futuro ahora está más cerca de tu familia.</h1>
             <p className="mh80-exp-hero-body">
-              Tecnología robótica de última generación, con la protección familiar de siempre:
-              cobertura amplia, confiable y accesible para familias jóvenes, padres con hijos y parejas.
+              Un plan diseñado para protegerte con cobertura médica avanzada, innovación tecnológica
+              y acceso a soluciones de salud de nueva generación.
             </p>
-            <div className="mh80-robotic-hero-chips" aria-label="Datos esenciales del plan MH80">
-              {essenceStats.map((s) => (
-                <div key={s.value} className="mh80-robotic-hero-chip">
-                  <strong>{s.value}</strong>
-                  <span>{s.label.split("\n")[0]}</span>
-                </div>
-              ))}
-            </div>
             <div className="mh80-exp-hero-actions">
-              <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotiza tu plan</button>
-              <a className="mh80-robotic-cta" href="#mh80-robotica"><Zap size={16} aria-hidden="true" /> Descubre la cirugía robótica</a>
-              <a className="ghost-button" href="#mh80-incluido">Conoce tu cobertura</a>
+              <a className="mh80-robotic-cta" href="#mh80-robotica"><Zap size={16} aria-hidden="true" /> Conoce la cirugía robótica</a>
+              <button type="button" className="ghost-button" onClick={handleQuoteClick}>Cotiza MH80</button>
             </div>
             {quoted && (
               <div className="mh80-exp-confirm" role="status" style={{ maxWidth: 520, marginTop: 20 }}>
@@ -169,10 +167,12 @@ export default function Mh80Page() {
         </section>
 
         <nav className="mh80-exp-chapter-nav mh80-robotic-nav" aria-label="Secciones del plan MH80">
-          <a href="#mh80-robotica" data-chapter-link="mh80-robotica" className="mh80-robotic-nav-link"><span><Cpu size={11} aria-hidden="true" /></span>Cirugía robótica</a>
-          <a href="#mh80-incluido" data-chapter-link="mh80-incluido"><span>02</span>Beneficios</a>
-          <a href="#mh80-carencias" data-chapter-link="mh80-carencias"><span>03</span>Carencias</a>
-          <a href="#mh80-preguntas" data-chapter-link="mh80-preguntas"><span>04</span>Preguntas</a>
+          <a href="#mh80-robotica" data-chapter-link="mh80-robotica" className="mh80-robotic-nav-link"><span><Cpu size={11} aria-hidden="true" /></span>El futuro</a>
+          <a href="#mh80-coberturas" data-chapter-link="mh80-coberturas"><span>02</span>Coberturas</a>
+          <a href="#mh80-datos" data-chapter-link="mh80-datos"><span>03</span>Datos clave</a>
+          <a href="#mh80-incluido" data-chapter-link="mh80-incluido"><span>04</span>Beneficios</a>
+          <a href="#mh80-carencias" data-chapter-link="mh80-carencias"><span>05</span>Carencias</a>
+          <a href="#mh80-preguntas" data-chapter-link="mh80-preguntas"><span>06</span>Preguntas</a>
         </nav>
 
         <section className="mh80-robotic" id="mh80-robotica">
@@ -181,7 +181,7 @@ export default function Mh80Page() {
           <div className="mh80-robotic-copy mh80-exp-reveal">
             <span className="mh80-robotic-badge"><Cpu size={14} aria-hidden="true" /> {robotSurgery.badge}</span>
             <span className="mh80-exp-eyebrow light">{robotSurgery.eyebrow}</span>
-            <h2>{robotSurgery.title}</h2>
+            <h2>El futuro de la cirugía ya está aquí.</h2>
             <p className="mh80-robotic-lead">{robotSurgery.lead}</p>
             <div className="mh80-robotic-stats">
               {robotSurgery.stats.map((s) => (
@@ -193,18 +193,29 @@ export default function Mh80Page() {
             </div>
           </div>
 
-          <div className="mh80-robotic-visual mh80-exp-reveal" aria-hidden="true">
-            <div className="mh80-robotic-core">
+          <div className="mh80-robotic-visual mh80-exp-reveal">
+            <div className="mh80-robotic-core" aria-hidden="true">
               <span className="mh80-robotic-ring ring-1" />
               <span className="mh80-robotic-ring ring-2" />
               <span className="mh80-robotic-ring ring-3" />
               <span className="mh80-robotic-core-icon"><Cpu /></span>
             </div>
-            <div className="mh80-robotic-scanline" />
-            <div className="mh80-robotic-crosshair top-left" />
-            <div className="mh80-robotic-crosshair top-right" />
-            <div className="mh80-robotic-crosshair bottom-left" />
-            <div className="mh80-robotic-crosshair bottom-right" />
+            <div className="mh80-robotic-scanline" aria-hidden="true" />
+            <div className="mh80-robotic-crosshair top-left" aria-hidden="true" />
+            <div className="mh80-robotic-crosshair top-right" aria-hidden="true" />
+            <div className="mh80-robotic-crosshair bottom-left" aria-hidden="true" />
+            <div className="mh80-robotic-crosshair bottom-right" aria-hidden="true" />
+            <div className="mh80-robotic-floaters" aria-label="Ventajas de la cirugía robótica MH80">
+              {robotSurgery.floatingBadges.map((b, i) => (
+                <span
+                  className={`mh80-robotic-floater float-${i + 1} mh80-exp-reveal`}
+                  style={{ "--reveal-delay": `${i * 120}ms` } as React.CSSProperties}
+                  key={b.label}
+                >
+                  <span aria-hidden="true">{b.emoji}</span> {b.label}
+                </span>
+              ))}
+            </div>
           </div>
 
           <div className="mh80-robotic-specialties mh80-exp-reveal">
@@ -228,18 +239,68 @@ export default function Mh80Page() {
               <p>{robotSurgery.specialties[activeSpecialty].detail}</p>
             </div>
           </div>
+        </section>
 
-          <div className="mh80-robotic-facts" role="list" aria-label="Ventajas de la cirugía robótica MH80">
-            {robotSurgery.facts.map((f, i) => (
+        <section className="mh80-modules" id="mh80-coberturas">
+          <div className="mh80-modules-head mh80-exp-reveal">
+            <span className="mh80-exp-eyebrow light">SISTEMA DE COBERTURA MH80</span>
+            <h2>Una protección diseñada alrededor de tu vida.</h2>
+          </div>
+          <div className="mh80-modules-grid" role="list">
+            {coverageModules.map((m, i) => (
               <article
-                className="mh80-robotic-fact mh80-exp-reveal"
+                className={`mh80-module mh80-exp-reveal${expandedModule === m.id ? " is-open" : ""}`}
                 style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
                 role="listitem"
-                key={f.title}
+                key={m.id}
               >
-                <span className="mh80-robotic-fact-icon" aria-hidden="true"><Zap size={16} /></span>
-                <h4>{f.title}</h4>
-                <p>{f.detail}</p>
+                <div className="mh80-module-image">
+                  <Image
+                    src={m.image}
+                    alt={m.imageAlt}
+                    fill
+                    sizes="(max-width: 980px) 100vw, 45vw"
+                    unoptimized
+                    style={{
+                      ...(m.imagePosition ? { "--img-pos": m.imagePosition } as React.CSSProperties : {}),
+                      ...(m.imagePositionMobile ? { "--img-pos-mobile": m.imagePositionMobile } as React.CSSProperties : {}),
+                    }}
+                  />
+                  <span className="mh80-module-number">{m.number}</span>
+                </div>
+                <div className="mh80-module-copy">
+                  <span className="mh80-exp-eyebrow">{m.eyebrow}</span>
+                  <h3>{m.title}</h3>
+                  <p>{m.lead}</p>
+                  <ul>
+                    {m.essentials.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                  <button type="button" className="mh80-module-toggle" onClick={() => toggleModule(m.id)} aria-expanded={expandedModule === m.id}>
+                    {expandedModule === m.id ? "Ocultar detalles" : "Explorar detalles"} <span>{expandedModule === m.id ? "−" : "+"}</span>
+                  </button>
+                  {expandedModule === m.id && (
+                    <ul className="mh80-module-details">
+                      {m.detailItems.map((d) => (
+                        <li key={d.label}><span>{d.label}</span><strong>{d.value}</strong></li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="mh80-keystats" id="mh80-datos">
+          <div className="mh80-keystats-head mh80-exp-reveal">
+            <span className="mh80-exp-eyebrow light">DATOS CLAVE MH80</span>
+            <h2>Cifras que respaldan tu decisión.</h2>
+          </div>
+          <div className="mh80-keystats-grid" role="list">
+            {keyStats.map((s, i) => (
+              <article className="mh80-keystat mh80-exp-reveal" style={{ "--reveal-delay": `${i * 100}ms` } as React.CSSProperties} role="listitem" key={s.label}>
+                <strong>{s.value}</strong>
+                <span>{s.label}</span>
               </article>
             ))}
           </div>
@@ -388,6 +449,17 @@ export default function Mh80Page() {
           </div>
           <div className="mh80-exp-finale-mark" aria-hidden="true"><span>MH</span><strong>80</strong></div>
         </section>
+
+        {/*
+          ASISTENTE VIRTUAL MH80 — estructura reservada, sin implementar todavía.
+          Cuando se construya: un componente flotante (posición fixed, alto
+          z-index) que se monta aquí, reacciona al scroll (usar el mismo
+          IntersectionObserver/scrollspy de arriba para saber en qué sección
+          está el usuario) y muestra burbujas de texto contextuales por
+          sección, con botón de minimizar (guardar preferencia en
+          localStorage). Este contenedor vacío es el punto de montaje.
+        */}
+        <div id="mh80-assistant-slot" aria-hidden="true" style={{ display: "none" }} />
       </div>
     </SiteShell>
   );
