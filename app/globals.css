@@ -3335,7 +3335,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
   background: radial-gradient(ellipse 90% 70% at 50% 38%, transparent 30%, rgba(2,5,10,.6) 100%);
 }
-.mh80-exp-hero-particles {
+.mh80-particles {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background-image: radial-gradient(rgba(110,200,238,.55) 1px, transparent 1.6px);
   background-size: 46px 46px;
@@ -3347,7 +3347,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   100% { background-position: 0 -320px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mh80-exp-hero-particles { animation: none; }
+  .mh80-particles { animation: none; }
 }
 .mh80-exp-hero-copy { position: relative; z-index: 2; max-width: 640px; }
 .mh80-exp-hero-copy h1.mh80-exp-hero-line { font-size: clamp(38px, 5.4vw, 74px); line-height: 1.02; font-weight: 760; letter-spacing: -.03em; margin: 22px 0 0; color: #fff; max-width: 620px; }
@@ -3619,9 +3619,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 
 @media (max-width: 560px) {
-  .mh80-exp-hero-copy h1.mh80-exp-hero-line { font-size: 34px; }
-  .mh80-exp-hero-body { font-size: 15px; }
+  .mh80-exp-hero-copy h1.mh80-exp-hero-line { font-size: 40px; line-height: 1.04; }
+  .mh80-exp-hero-body { font-size: 14px; max-width: 92%; }
   .mh80-exp-hero-actions { flex-direction: column; align-items: stretch; }
+  .mh80-exp-hero-actions .mh80-robotic-cta { min-height: 56px; font-size: 16px; font-weight: 760; }
   .mh80-exp-display { font-size: 58px; }
   .mh80-exp-moments-copy h2, .mh80-exp-benefits-head h2 { font-size: 46px; }
   .mh80-exp-signals { grid-template-columns: 1fr 1fr; }
@@ -3640,6 +3641,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-exp-pharmacy-chip { display: inline-flex; align-items: center; padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 700; background: rgba(18,166,162,.1); border: 1px solid rgba(18,166,162,.24); color: var(--ph-navy); }
 
 .mh80-exp-faq {
+  position: relative; overflow: hidden;
   padding: clamp(70px, 8vw, 120px) clamp(20px, 8vw, 130px);
   background-image:
     linear-gradient(100deg, rgba(3,7,14,.74) 0%, rgba(3,7,14,.66) 50%, rgba(3,7,14,.58) 100%),
@@ -3648,6 +3650,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   background-position: center 60%;
   display: grid; grid-template-columns: .8fr 1.2fr; gap: 7vw; color: #eaf6ff;
 }
+.mh80-exp-faq-copy, .mh80-exp-faq-list { position: relative; z-index: 2; }
 .mh80-exp-faq-copy h2 { font-size: clamp(34px, 4.2vw, 54px); line-height: 1; letter-spacing: -.035em; margin: 20px 0; color: #fff; font-weight: 720; }
 .mh80-exp-faq-list { display: grid; gap: 12px; align-content: start; }
 .mh80-exp-faq-list details { border: 1px solid rgba(16,167,219,.16); border-radius: 18px; background: rgba(255,255,255,.03); padding: 6px 22px; backdrop-filter: blur(6px); }
@@ -3931,9 +3934,9 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   background-position: center 45%;
   color: #eaf6ff;
 }
-.mh80-keystats-head { max-width: 700px; margin-bottom: 56px; }
+.mh80-keystats-head { position: relative; z-index: 2; max-width: 700px; margin-bottom: 56px; }
 .mh80-keystats-head h2 { margin: 18px 0 0; font-size: clamp(34px, 4.4vw, 56px); line-height: 1.05; letter-spacing: -.03em; font-weight: 740; color: #fff; }
-.mh80-keystats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: rgba(16,167,219,.16); border: 1px solid rgba(16,167,219,.16); border-radius: 22px; overflow: hidden; }
+.mh80-keystats-grid { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: rgba(16,167,219,.16); border: 1px solid rgba(16,167,219,.16); border-radius: 22px; overflow: hidden; }
 .mh80-keystat { background: rgba(4,10,19,.82); padding: 40px 26px; display: flex; flex-direction: column; gap: 10px; }
 .mh80-keystat strong { font-size: clamp(44px, 5vw, 64px); line-height: 1; letter-spacing: -.03em; color: #6ec8ee; text-shadow: 0 0 22px rgba(16,167,219,.4); }
 .mh80-keystat span { font-size: 13.5px; line-height: 1.4; color: rgba(234,246,255,.62); }
@@ -3942,4 +3945,72 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 @media (max-width: 560px) {
   .mh80-keystats-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================ */
+/* MH80 — Hero: elemento holográfico protagonista (detrás de la  */
+/* galería de fotos), evita que el fondo se sienta vacío.         */
+/* ============================================================ */
+.mh80-hero-hologram {
+  position: absolute; z-index: 1; top: 50%; right: clamp(0px, 4vw, 90px);
+  width: min(50vw, 640px); aspect-ratio: 1; transform: translateY(-46%);
+  pointer-events: none;
+}
+.mh80-hero-hologram-ring {
+  position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(16,167,219,.22);
+  animation: mh80HeroRingSpin 26s linear infinite;
+}
+.mh80-hero-hologram-ring.ring-2 { inset: 9%; border-color: rgba(18,166,162,.2); animation-duration: 20s; animation-direction: reverse; }
+.mh80-hero-hologram-ring.ring-3 { inset: 18%; border-color: rgba(16,167,219,.3); border-style: dashed; animation-duration: 34s; }
+@keyframes mh80HeroRingSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.mh80-hero-hologram-orbit {
+  position: absolute; inset: 24%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(16,167,219,.16), transparent 68%);
+  filter: blur(2px);
+}
+.mh80-hero-hologram-core {
+  position: absolute; inset: 42%; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(150deg, rgba(16,167,219,.3), rgba(18,166,162,.24));
+  box-shadow: 0 0 60px rgba(16,167,219,.4), inset 0 0 0 1px rgba(255,255,255,.16);
+  color: #eaf6ff; animation: mh80HeroCorePulse 3.6s ease-in-out infinite;
+}
+.mh80-hero-hologram-core svg { width: 34%; height: 34%; }
+@keyframes mh80HeroCorePulse {
+  0%, 100% { box-shadow: 0 0 46px rgba(16,167,219,.32), inset 0 0 0 1px rgba(255,255,255,.14); }
+  50% { box-shadow: 0 0 78px rgba(16,167,219,.5), inset 0 0 0 1px rgba(255,255,255,.22); }
+}
+.mh80-hero-hologram-beam {
+  position: absolute; left: 8%; right: 8%; height: 1.4px;
+  background: linear-gradient(90deg, transparent, rgba(16,167,219,.85), transparent);
+  box-shadow: 0 0 14px rgba(16,167,219,.6);
+  animation: mh80HeroBeamSweep 4.4s ease-in-out infinite;
+}
+.mh80-hero-hologram-beam.beam-2 { animation-delay: 2.2s; }
+@keyframes mh80HeroBeamSweep {
+  0%, 100% { top: 12%; opacity: 0; }
+  15% { opacity: 1; }
+  50% { top: 88%; opacity: .9; }
+  70% { opacity: 0; }
+}
+.mh80-hero-hologram-reticle { position: absolute; width: 26px; height: 26px; border: 1.4px solid rgba(16,167,219,.5); }
+.mh80-hero-hologram-reticle.top { top: 2%; left: 2%; border-right: 0; border-bottom: 0; }
+.mh80-hero-hologram-reticle.bottom { bottom: 2%; right: 2%; border-left: 0; border-top: 0; }
+.mh80-hero-hologram-readout {
+  position: absolute; display: flex; flex-direction: column; gap: 2px; padding: 10px 16px;
+  border-radius: 14px; background: rgba(4,10,19,.68); border: 1px solid rgba(16,167,219,.28);
+  backdrop-filter: blur(8px); box-shadow: 0 16px 34px rgba(0,0,0,.3);
+  animation: mh80FloaterDrift 6s ease-in-out infinite;
+}
+.mh80-hero-hologram-readout strong { font-size: 20px; color: #6ec8ee; letter-spacing: -.02em; }
+.mh80-hero-hologram-readout small { font-size: 10px; letter-spacing: .06em; color: rgba(234,246,255,.6); text-transform: uppercase; }
+.mh80-hero-hologram-readout.r1 { top: 4%; left: -6%; animation-delay: .3s; }
+.mh80-hero-hologram-readout.r2 { bottom: 8%; right: -8%; animation-delay: 1.6s; }
+@media (max-width: 980px) {
+  .mh80-hero-hologram {
+    position: relative; z-index: 1; inset: auto; top: auto; right: auto; transform: none;
+    width: min(78vw, 340px); margin: 20px auto 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mh80-hero-hologram-ring, .mh80-hero-hologram-core, .mh80-hero-hologram-beam, .mh80-hero-hologram-readout { animation: none !important; }
 }

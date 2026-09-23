@@ -140,7 +140,7 @@ export default function Mh80Page() {
         <div className="mh80-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh80-exp-hero" id="mh80-inicio">
-          <div className="mh80-exp-hero-particles" aria-hidden="true" />
+          <div className="mh80-particles" aria-hidden="true" />
           <div className="mh80-exp-hero-copy">
             <span className="mh80-robotic-hero-badge"><Cpu size={14} aria-hidden="true" /> MH80 · TECNOLOGÍA MÉDICA AVANZADA</span>
             <h1 className="mh80-exp-hero-line">La medicina del futuro ahora protege a tu familia.</h1>
@@ -157,6 +157,19 @@ export default function Mh80Page() {
                 <ShieldCheck /> <span>Solicitud demostrativa registrada. Un asesor de Humana te contactará. No se envió información real.</span>
               </div>
             )}
+          </div>
+          <div className="mh80-hero-hologram" aria-hidden="true">
+            <span className="mh80-hero-hologram-ring ring-1" />
+            <span className="mh80-hero-hologram-ring ring-2" />
+            <span className="mh80-hero-hologram-ring ring-3" />
+            <span className="mh80-hero-hologram-orbit" />
+            <span className="mh80-hero-hologram-core"><Cpu /></span>
+            <span className="mh80-hero-hologram-beam beam-1" />
+            <span className="mh80-hero-hologram-beam beam-2" />
+            <span className="mh80-hero-hologram-reticle top" />
+            <span className="mh80-hero-hologram-reticle bottom" />
+            <span className="mh80-hero-hologram-readout r1"><strong>{robotSurgery.stats[0].value}</strong><small>Cirugía robótica</small></span>
+            <span className="mh80-hero-hologram-readout r2"><strong>{robotSurgery.stats[1].value}</strong><small>Robot Da Vinci</small></span>
           </div>
           <div className="mh80-exp-gallery" ref={galleryRef} aria-label="Momentos de protección familiar MH80">
             <figure className="mh80-exp-photo card-a">
@@ -301,6 +314,7 @@ export default function Mh80Page() {
         </section>
 
         <section className="mh80-keystats" id="mh80-datos">
+          <div className="mh80-particles" aria-hidden="true" />
           <div className="mh80-keystats-head mh80-exp-reveal">
             <span className="mh80-exp-eyebrow light">DATOS CLAVE MH80</span>
             <h2>Cifras que respaldan tu decisión.</h2>
@@ -417,6 +431,7 @@ export default function Mh80Page() {
         </section>
 
         <section className="mh80-exp-faq" id="mh80-preguntas">
+          <div className="mh80-particles" aria-hidden="true" />
           <div className="mh80-exp-faq-copy mh80-exp-reveal">
             <span className="mh80-exp-eyebrow">PREGUNTAS FRECUENTES</span>
             <h2>Todo lo que quieres<br />saber sobre MH80.</h2>
