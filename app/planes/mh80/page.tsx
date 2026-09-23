@@ -4,17 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Activity, Ambulance, Baby, Bone, Building2, Cpu, Cross,
+  Activity, Ambulance, Baby, Bone, Bot, Building2, Cpu, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Phone, PhoneCall, Ribbon, Scan,
-  ShieldCheck, ShieldPlus, Sparkles, Syringe, Target, Users, Video, Wallet, Zap,
+  ShieldCheck, ShieldPlus, Sparkles, Syringe, Target, Users, Video, Wallet, X, Zap,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import {
-  chapters, contactChannels, faqs, featuredBenefits, keyStats,
+  assistantMessages, chapters, contactChannels, faqs, featuredBenefits, keyStats,
   otherConditions, preventionCoverages, rehabCoverages,
   robotSurgery, specialCases, waitingPeriods,
 } from "./mh80Data";
+
+const ASSISTANT_STORAGE_KEY = "mh80-assistant-minimized";
 
 /* Los 4 módulos de cobertura que pide mostrar la sección "Una protección
    diseñada alrededor de tu vida": Hospitalización, Atención ambulatoria,
@@ -42,10 +44,30 @@ export default function Mh80Page() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
+  const assistantRef = useRef<HTMLDivElement>(null);
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
   const [activeSpecialty, setActiveSpecialty] = useState(0);
   const [expandedModule, setExpandedModule] = useState<string | null>(null);
+  const [assistantSection, setAssistantSection] = useState("mh80-inicio");
+  const [assistantMinimized, setAssistantMinimized] = useState(false);
+
+  /* Prototipo del asistente virtual: recuerda si el cliente lo minimizó,
+     para no volver a mostrarlo grande en la misma sesión del navegador. */
+  useEffect(() => {
+    try {
+      if (window.localStorage.getItem(ASSISTANT_STORAGE_KEY) === "1") setAssistantMinimized(true);
+    } catch {
+      /* localStorage no disponible (modo privado, etc.): se ignora y el asistente queda visible */
+    }
+  }, []);
+  const toggleAssistant = () => {
+    setAssistantMinimized((current) => {
+      const next = !current;
+      try { window.localStorage.setItem(ASSISTANT_STORAGE_KEY, next ? "1" : "0"); } catch { /* noop */ }
+      return next;
+    });
+  };
 
   const handleQuoteClick = () => setQuoted(true);
   const toggleModule = (id: string) => setExpandedModule((current) => (current === id ? null : id));
@@ -76,15 +98,23 @@ export default function Mh80Page() {
       .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
       .filter((el): el is HTMLElement => !!el);
     let lastCurrent = "";
+    let lastAssistantSection = "";
+    const assistantSections = Array.from(root.querySelectorAll<HTMLElement>("[id^='mh80-']"))
+      .filter((el) => el.id in assistantMessages);
 
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = max ? window.scrollY / max : 0;
       if (progressRef.current) {
-        progressRef.current.style.width = `${max ? (window.scrollY / max) * 100 : 0}%`;
+        progressRef.current.style.width = `${percent * 100}%`;
       }
       if (galleryRef.current && !reducedMotion) {
         const offset = Math.min(window.scrollY * 0.12, 60);
         galleryRef.current.style.transform = `translateY(${offset}px)`;
+      }
+      if (assistantRef.current && !reducedMotion && window.innerWidth > 760) {
+        const track = window.innerHeight - 300;
+        assistantRef.current.style.top = `${140 + percent * track}px`;
       }
       let current = "";
       chapterSections.forEach((section) => {
@@ -99,6 +129,15 @@ export default function Mh80Page() {
           navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
         }
         lastCurrent = current;
+      }
+
+      let currentAssistant = assistantSections[0]?.id ?? "";
+      assistantSections.forEach((section) => {
+        if (section.getBoundingClientRect().top < window.innerHeight * 0.6) currentAssistant = section.id;
+      });
+      if (currentAssistant && currentAssistant !== lastAssistantSection) {
+        setAssistantSection(currentAssistant);
+        lastAssistantSection = currentAssistant;
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -474,16 +513,33 @@ export default function Mh80Page() {
           <div className="mh80-exp-finale-mark" aria-hidden="true"><span>MH</span><strong>80</strong></div>
         </section>
 
-        {/*
-          ASISTENTE VIRTUAL MH80 — estructura reservada, sin implementar todavía.
-          Cuando se construya: un componente flotante (posición fixed, alto
-          z-index) que se monta aquí, reacciona al scroll (usar el mismo
-          IntersectionObserver/scrollspy de arriba para saber en qué sección
-          está el usuario) y muestra burbujas de texto contextuales por
-          sección, con botón de minimizar (guardar preferencia en
-          localStorage). Este contenedor vacío es el punto de montaje.
-        */}
-        <div id="mh80-assistant-slot" aria-hidden="true" style={{ display: "none" }} />
+        {/* ASISTENTE VIRTUAL MH80 — primer prototipo. Se mueve verticalmente
+            según el porcentaje de scroll (ver assistantRef en el efecto de
+            arriba), cambia su mensaje según la sección visible, y se puede
+            minimizar (preferencia guardada en localStorage). */}
+        <div
+          id="mh80-assistant-slot"
+          ref={assistantRef}
+          className={`mh80-assistant${assistantMinimized ? " is-minimized" : ""}`}
+        >
+          {assistantMinimized ? (
+            <button type="button" className="mh80-assistant-avatar" onClick={toggleAssistant} aria-label="Mostrar asistente de MH80">
+              <Bot size={20} aria-hidden="true" />
+            </button>
+          ) : (
+            <div className="mh80-assistant-panel" role="status">
+              <button type="button" className="mh80-assistant-avatar" onClick={toggleAssistant} aria-label="Minimizar asistente de MH80">
+                <Bot size={20} aria-hidden="true" />
+              </button>
+              <div className="mh80-assistant-bubble">
+                <button type="button" className="mh80-assistant-close" onClick={toggleAssistant} aria-label="Minimizar asistente de MH80">
+                  <X size={13} aria-hidden="true" />
+                </button>
+                <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </SiteShell>
   );

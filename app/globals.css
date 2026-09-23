@@ -4014,3 +4014,44 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @media (prefers-reduced-motion: reduce) {
   .mh80-hero-hologram-ring, .mh80-hero-hologram-core, .mh80-hero-hologram-beam, .mh80-hero-hologram-readout { animation: none !important; }
 }
+
+/* ============================================================ */
+/* MH80 — Asistente virtual flotante (primer prototipo).          */
+/* ============================================================ */
+.mh80-assistant {
+  position: fixed; right: clamp(16px, 3vw, 32px); top: 140px; z-index: 60;
+  transition: top .3s linear;
+}
+.mh80-assistant-avatar {
+  width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(16,167,219,.4);
+  background: linear-gradient(150deg, #0b80bd, #12a6a2); color: #fff;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  box-shadow: 0 16px 34px rgba(0,0,0,.32), 0 0 0 0 rgba(16,167,219,.4);
+  animation: mh80AssistantPulse 3.2s ease-in-out infinite; flex: none;
+}
+@keyframes mh80AssistantPulse {
+  0%, 100% { box-shadow: 0 16px 34px rgba(0,0,0,.32), 0 0 0 0 rgba(16,167,219,.35); }
+  50% { box-shadow: 0 16px 34px rgba(0,0,0,.32), 0 0 0 10px rgba(16,167,219,0); }
+}
+.mh80-assistant-panel { display: flex; align-items: flex-start; gap: 12px; flex-direction: row-reverse; }
+.mh80-assistant-bubble {
+  position: relative; max-width: 240px; padding: 14px 30px 14px 16px; margin-top: 4px;
+  border-radius: 16px 16px 4px 16px; background: rgba(4,10,19,.88); border: 1px solid rgba(16,167,219,.28);
+  backdrop-filter: blur(10px); box-shadow: 0 18px 40px rgba(0,0,0,.34); color: #eaf6ff;
+}
+.mh80-assistant-bubble p { margin: 0; font-size: 13px; line-height: 1.5; animation: mh80AssistantFade .35s ease; }
+@keyframes mh80AssistantFade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+.mh80-assistant-close {
+  position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; border-radius: 50%;
+  border: 0; background: rgba(255,255,255,.08); color: rgba(234,246,255,.7);
+  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+}
+.mh80-assistant-close:hover { background: rgba(255,255,255,.16); color: #fff; }
+@media (max-width: 760px) {
+  .mh80-assistant { top: auto !important; bottom: 22px; right: 16px; }
+  .mh80-assistant-bubble { max-width: 62vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mh80-assistant-avatar { animation: none; }
+  .mh80-assistant { transition: none; }
+}

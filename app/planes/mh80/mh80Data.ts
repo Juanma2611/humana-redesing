@@ -344,6 +344,20 @@ export const otherConditions = [
   { iconKey: "ShieldPlus", value: "Hasta $10 al año", label: "Control de natalidad no definitivo" }, // [C] pág. 6
 ];
 
+/* Prototipo del asistente virtual flotante de MH80 (primera versión).
+   Mensajes cortos y contextuales por sección, sin datos contractuales
+   nuevos — solo referencian lo que cada sección ya muestra. */
+export const assistantMessages: Record<string, string> = {
+  "mh80-inicio": "Hola, soy el asistente de MH80. Te acompaño mientras descubres el plan.",
+  "mh80-robotica": "Este es el diferenciador de MH80: cirugía robótica Da Vinci, único en el mercado.",
+  "mh80-coberturas": "Explora cada módulo de cobertura: hospitalización, ambulatoria, medicinas y maternidad.",
+  "mh80-datos": "Estas cifras están respaldadas por el contrato oficial de MH80.",
+  "mh80-incluido": "Estos beneficios vienen incluidos, sin costo adicional a tu facturación.",
+  "mh80-carencias": "Aquí ves cuándo empieza a aplicar cada cobertura desde tu afiliación.",
+  "mh80-preguntas": "¿Tienes dudas? Revisa las preguntas frecuentes de MH80.",
+  "mh80-cierre": "¿Listo para proteger a tu familia? Cotiza MH80 ahora.",
+};
+
 export const contactChannels = [
   { iconKey: "MessageCircle", label: "WhatsApp", value: "+593 2401 7002", href: "https://wa.me/59324017002" },
   { iconKey: "PhoneCall", label: "Línea gratuita", value: "1800 48 62 62", href: "tel:1800486262" },
