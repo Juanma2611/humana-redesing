@@ -2312,6 +2312,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .plan-editorial-block-copy { display: flex; flex-direction: column; align-items: flex-start; }
 .plan-editorial-block-family { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px; color: var(--humana-blue); font-weight: 800; text-transform: uppercase; letter-spacing: .06em; font-size: 12.5px; }
 .plan-editorial-block-family svg { width: 16px; }
+.plan-editorial-block-recommend { display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 999px; background: #73def0; color: #063b58; font-size: 12px; font-weight: 850; letter-spacing: .01em; margin-bottom: 12px; }
 .plan-editorial-block-copy h3 { margin: 0 0 8px; font-size: clamp(30px, 3.2vw, 42px); letter-spacing: -.03em; color: #073b60; }
 .plan-editorial-block-headline { margin: 0 0 4px; font-size: 17px; font-weight: 750; color: #12314a; }
 .plan-editorial-block-ideal { margin: 0 0 22px; color: var(--muted-foreground); font-size: 14.5px; }

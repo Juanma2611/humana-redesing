@@ -146,7 +146,7 @@ const plans: Plan[] = [
     ], waits: ["24 h emergencias", "30 días ambulatorio", "60 días maternidad", "90 días hospitalario"],
   },
   {
-    id: "ph30", segment: ["individual", "familiar"], name: "PH30", family: "Practihumana", headline: "Respaldo para cada día", ideal: "Personas y familias jóvenes",
+    id: "ph30", segment: ["individual"], name: "PH30", family: "Practihumana", headline: "Respaldo para cada día", ideal: "Personas y familias jóvenes",
     limit: "$30.000", limitNote: "cobertura anual", deductible: "$60 anual", network: "Practihumana", icon: HeartPulse,
     benefits: [{ icon: Stethoscope, label: "Consultas desde $4" }, { icon: Hospital, label: "90% hospitalario en red" }, { icon: Baby, label: "Maternidad y niño sano" }, { icon: House, label: "Médico a domicilio $10" }],
     includedBenefits: basicIncludedBenefits,
@@ -170,7 +170,7 @@ const plans: Plan[] = [
     ], waits: ["24 h emergencias", "30 días ambulatorio", "60 días maternidad", "90 días hospitalario"],
   },
   {
-    id: "mh50", segment: ["individual", "familiar"], name: "MH50", family: "Metrohumana", headline: "Tranquilidad para tu familia", ideal: "La opción familiar destacada",
+    id: "mh50", segment: ["familiar"], name: "MH50", family: "Metrohumana", headline: "Tranquilidad para tu familia", ideal: "La opción familiar destacada",
     limit: "$50.000", limitNote: "por incapacidad", deductible: "$80", network: "Metrohumana", icon: UsersRound, featured: true,
     benefits: [{ icon: Hospital, label: "90% hospitalario en red" }, { icon: Baby, label: "Maternidad y niño sano" }, { icon: HeartHandshake, label: "Psicología y nutrición" }, { icon: BriefcaseBusiness, label: "Asistencia en viajes" }],
     includedBenefits: fullIncludedBenefits,
@@ -194,7 +194,7 @@ const plans: Plan[] = [
     ], waits: ["24 h emergencias", "30 días ambulatorio", "60 días maternidad", "90 días hospitalario"],
   },
   {
-    id: "prosonrisas", segment: ["individual", "familiar", "dental", "empresa", "proteger"], name: "ProSonrisas", family: "Plan dental", headline: "Sonríe con tranquilidad", ideal: "Protección dental para ti y tus seres queridos",
+    id: "prosonrisas", segment: ["dental"], name: "ProSonrisas", family: "Plan dental", headline: "Sonríe con tranquilidad", ideal: "Protección dental para ti y tus seres queridos",
     limit: "Desde $6,63", limitNote: "por persona", deductible: "Según alternativa", network: "Dental nacional", icon: SmilePlus,
     statLabels: { limit: "Tarifa referencial", deductible: "Copagos", network: "Red" },
     benefits: [{ icon: Stethoscope, label: "Evaluación sin costo" }, { icon: Sparkles, label: "Limpiezas y rayos X" }, { icon: ShieldCheck, label: "Sin preexistencias" }, { icon: UsersRound, label: "Incluye a tus seres queridos" }],
@@ -272,8 +272,8 @@ function PlanEditorialHero({ id, eyebrow, title, description, image, imageAlt, o
   </section>;
 }
 
-function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, sectionId }: {
-  plan: Plan; reverse?: boolean; onQuote: () => void; onOpen: () => void; sectionId?: string;
+function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, sectionId, badge }: {
+  plan: Plan; reverse?: boolean; onQuote: () => void; onOpen: () => void; sectionId?: string; badge?: string;
 }) {
   const Icon = plan.icon;
   return <article id={sectionId ?? `plan-block-${plan.id}`} className={`plan-editorial-block${reverse ? " reverse" : ""}`}>
@@ -282,6 +282,7 @@ function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, sectionId }: {
     </div>
     <div className="plan-editorial-block-copy">
       <span className="plan-editorial-block-family"><Icon aria-hidden="true" /> {plan.family}</span>
+      {badge && <span className="plan-editorial-block-recommend">{badge}</span>}
       <h3>{plan.name}</h3>
       <p className="plan-editorial-block-headline">{plan.headline}</p>
       <p className="plan-editorial-block-ideal">{plan.ideal}</p>
@@ -391,10 +392,8 @@ export default function Plans() {
                 onQuote={() => quote(ph15, "cotización PractiHumana")}
                 scrollTargetId="plan-block-ph15"
               />
-              <PlanEditorialBlock plan={ph15} onQuote={() => quote(ph15)} onOpen={() => setSelected(ph15)} />
+              <PlanEditorialBlock plan={ph15} badge="Opción recomendada individual" onQuote={() => quote(ph15)} onOpen={() => setSelected(ph15)} />
               <PlanEditorialBlock plan={ph30} reverse sectionId="individual-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
-              <PlanEditorialBlock plan={mh50} sectionId="individual-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} />
-              <PlanEditorialBlock plan={prosonrisas} reverse sectionId="individual-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
 
               <PlanEditorialHero
                 id="seg-familiar"
@@ -405,13 +404,11 @@ export default function Plans() {
                 image="/familia-humana.png"
                 imageAlt="Familia disfrutando un momento juntos, protegida por MetroHumana"
                 onQuote={() => quote(mh50, "cotización MetroHumana")}
-                scrollTargetId="familiar-ph30"
+                scrollTargetId="familiar-mh50"
               />
-              <PlanEditorialBlock plan={ph30} sectionId="familiar-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
-              <PlanEditorialBlock plan={mh50} reverse sectionId="familiar-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} />
-              <PlanEditorialBlock plan={mh80} sectionId="familiar-mh80" onQuote={() => quote(mh80)} onOpen={() => setSelected(mh80)} />
-              <PlanEditorialBlock plan={mh150} reverse sectionId="familiar-mh150" onQuote={() => quote(mh150)} onOpen={() => setSelected(mh150)} />
-              <PlanEditorialBlock plan={prosonrisas} sectionId="familiar-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
+              <PlanEditorialBlock plan={mh50} badge="Mejor opción familiar" sectionId="familiar-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} />
+              <PlanEditorialBlock plan={mh80} reverse sectionId="familiar-mh80" onQuote={() => quote(mh80)} onOpen={() => setSelected(mh80)} />
+              <PlanEditorialBlock plan={mh150} sectionId="familiar-mh150" onQuote={() => quote(mh150)} onOpen={() => setSelected(mh150)} />
 
               <PlanEditorialHero
                 id="seg-dental"
@@ -438,7 +435,6 @@ export default function Plans() {
                 scrollTargetId="empresa-business"
               />
               <PlanEditorialBlock plan={business} sectionId="empresa-business" onQuote={() => quote(business)} onOpen={() => setSelected(business)} />
-              <PlanEditorialBlock plan={prosonrisas} reverse sectionId="empresa-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
 
               <PlanEditorialHero
                 id="seg-proteger"
