@@ -4133,6 +4133,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .business-decor .deco { position: absolute; stroke-width: 1.2; }
 .business-decor.on-dark .deco { color: rgba(255,255,255,.08); }
 .business-decor.on-light .deco { color: rgba(16,167,219,.1); }
+.mh50-exp-impact .business-decor .deco { color: rgba(255,255,255,.22); filter: drop-shadow(0 2px 6px rgba(0,0,0,.45)); }
 
 .business-decor .deco-building { width: clamp(90px, 9vw, 160px); height: auto; top: 8%; right: 6%; transform: rotate(6deg); }
 .business-decor .deco-building-2 { width: clamp(50px, 5vw, 90px); height: auto; top: 46%; left: 4%; transform: rotate(-8deg); }
