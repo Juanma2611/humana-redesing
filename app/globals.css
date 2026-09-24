@@ -50,7 +50,12 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* No usamos "scroll-behavior: smooth" a nivel global: el router hace
+   window.scrollTo(0,0) en cada cambio de página, y con smooth global ese
+   salto se anima (la página parece "subir desde abajo" hacia el hero en
+   vez de abrir directamente ahí). Los anchors dentro de una misma página
+   se animan en su lugar vía JS (ver SiteShell), que sí puede distinguir
+   una navegación en página de un cambio de ruta. */
 body { margin: 0; background: #fff; color: var(--humana-ink); font-family:var(--font-sans); font-weight:450; font-optical-sizing:auto; font-feature-settings:"kern" 1,"liga" 1,"calt" 1; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
 a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }

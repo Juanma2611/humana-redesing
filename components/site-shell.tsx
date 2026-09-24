@@ -54,6 +54,28 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
   const [activeOffice, setActiveOffice] = useState<FooterOffice>("Quito");
   const office = footerOffices[activeOffice];
   const plansDropdownRef = useRef<HTMLDivElement>(null);
+  /* No hay "scroll-behavior: smooth" global (ver globals.css): el router
+     hace window.scrollTo(0,0) en cada cambio de página y con smooth global
+     ese salto se animaba, dando la sensación de que la página "sube desde
+     abajo" hacia el hero en vez de abrir directamente ahí. En su lugar,
+     los <a href="#seccion"> que apuntan dentro de la misma página se
+     animan aquí explícitamente vía JS, que sí distingue un anchor interno
+     de un cambio de ruta. */
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      const link = (event.target as HTMLElement)?.closest?.("a[href^='#']") as HTMLAnchorElement | null;
+      if (!link) return;
+      const hash = link.getAttribute("href") ?? "";
+      if (hash.length <= 1) return;
+      const target = document.getElementById(hash.slice(1));
+      if (!target) return;
+      event.preventDefault();
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
 
   useEffect(() => {
     if (!plansOpen) return;
