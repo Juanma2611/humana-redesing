@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Ambulance, Banknote, BarChart3, Briefcase, Building2, CircleDollarSign, HeartPulse, Home as HomeIcon,
-  MessageCircle, PenLine, Phone, PhoneCall, Pill, ShieldCheck, ShieldPlus, Stethoscope, TrendingUp,
+  Ambulance, Banknote, BarChart3, Briefcase, Building2, CircleDollarSign, Handshake, HeartPulse, Home as HomeIcon,
+  LineChart, MessageCircle, PenLine, Phone, PhoneCall, Pill, PieChart, ShieldCheck, ShieldPlus, Stethoscope, Target, TrendingUp,
   Users, Video, WalletCards,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
@@ -20,9 +20,15 @@ function BusinessDecor({ tone }: { tone: "on-dark" | "on-light" }) {
   return (
     <div className={`business-decor ${tone}`} aria-hidden="true">
       <Building2 className="deco deco-building" />
+      <Building2 className="deco deco-building-2" />
       <Briefcase className="deco deco-briefcase" />
       <PenLine className="deco deco-pen" />
       <BarChart3 className="deco deco-chart" />
+      <LineChart className="deco deco-linechart" />
+      <PieChart className="deco deco-piechart" />
+      <TrendingUp className="deco deco-trending" />
+      <Target className="deco deco-target" />
+      <Handshake className="deco deco-handshake" />
     </div>
   );
 }

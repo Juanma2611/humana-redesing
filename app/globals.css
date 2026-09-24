@@ -4135,11 +4135,20 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .business-decor.on-light .deco { color: rgba(16,167,219,.1); }
 
 .business-decor .deco-building { width: clamp(90px, 9vw, 160px); height: auto; top: 8%; right: 6%; transform: rotate(6deg); }
+.business-decor .deco-building-2 { width: clamp(50px, 5vw, 90px); height: auto; top: 46%; left: 4%; transform: rotate(-8deg); }
 .business-decor .deco-briefcase { width: clamp(60px, 6vw, 100px); height: auto; bottom: 12%; left: 6%; transform: rotate(-10deg); }
 .business-decor .deco-pen { width: clamp(70px, 7vw, 120px); height: auto; top: 20%; left: 22%; transform: rotate(-30deg); }
 .business-decor .deco-chart { width: clamp(60px, 6vw, 110px); height: auto; bottom: 8%; right: 22%; transform: rotate(4deg); }
+.business-decor .deco-linechart { width: clamp(60px, 6vw, 100px); height: auto; top: 12%; left: 46%; transform: rotate(-4deg); }
+.business-decor .deco-piechart { width: clamp(46px, 5vw, 80px); height: auto; bottom: 30%; left: 36%; transform: rotate(10deg); }
+.business-decor .deco-trending { width: clamp(46px, 5vw, 80px); height: auto; top: 62%; right: 10%; transform: rotate(-6deg); }
+.business-decor .deco-target { width: clamp(40px, 4vw, 70px); height: auto; top: 34%; right: 34%; transform: rotate(0deg); }
+.business-decor .deco-handshake { width: clamp(50px, 5vw, 90px); height: auto; bottom: 4%; right: 44%; transform: rotate(8deg); }
 @media (max-width: 760px) {
-  .business-decor .deco-pen, .business-decor .deco-chart { display: none; }
+  .business-decor .deco-pen, .business-decor .deco-chart, .business-decor .deco-piechart,
+  .business-decor .deco-target, .business-decor .deco-handshake, .business-decor .deco-building-2 { display: none; }
   .business-decor .deco-building { top: 4%; right: -6%; }
   .business-decor .deco-briefcase { bottom: 4%; left: -6%; }
+  .business-decor .deco-linechart { top: 40%; right: -6%; left: auto; }
+  .business-decor .deco-trending { bottom: 4%; right: -4%; top: auto; }
 }
