@@ -4026,7 +4026,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .mh80-assistant-figure {
   border: 0; background: transparent; padding: 0; cursor: pointer;
-  width: clamp(86px, 8vw, 120px); aspect-ratio: 200 / 260; flex: none;
+  width: clamp(92px, 8.4vw, 130px); aspect-ratio: 220 / 300; flex: none;
   filter: drop-shadow(0 18px 30px rgba(4,20,34,.4)) drop-shadow(0 0 22px rgba(16,167,219,.22));
 }
 .mh80-assistant-float {

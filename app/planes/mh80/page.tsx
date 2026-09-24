@@ -542,26 +542,30 @@ export default function Mh80Page() {
             aria-label={assistantMinimized ? "Mostrar asistente de MH80" : "Minimizar asistente de MH80"}
           >
             <span className="mh80-assistant-float">
-              <svg viewBox="0 0 200 260" width="100%" height="100%" aria-hidden="true">
+              <svg viewBox="0 0 220 300" width="100%" height="100%" aria-hidden="true">
                 <defs>
-                  <radialGradient id="mh80BotBody" cx="38%" cy="28%" r="75%">
+                  <radialGradient id="mh80BotBody" cx="36%" cy="24%" r="80%">
                     <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="55%" stopColor="#eef5fa" />
-                    <stop offset="100%" stopColor="#cfdfe8" />
+                    <stop offset="55%" stopColor="#f3f8fb" />
+                    <stop offset="100%" stopColor="#d7e4ea" />
                   </radialGradient>
-                  <radialGradient id="mh80BotVisor" cx="42%" cy="30%" r="80%">
-                    <stop offset="0%" stopColor="#2a3742" />
-                    <stop offset="55%" stopColor="#0d1620" />
-                    <stop offset="100%" stopColor="#04080c" />
+                  <radialGradient id="mh80BotVisor" cx="40%" cy="26%" r="85%">
+                    <stop offset="0%" stopColor="#333f49" />
+                    <stop offset="45%" stopColor="#111c26" />
+                    <stop offset="100%" stopColor="#03070a" />
                   </radialGradient>
-                  <radialGradient id="mh80BotEye" cx="50%" cy="42%" r="60%">
-                    <stop offset="0%" stopColor="#eafcff" />
-                    <stop offset="35%" stopColor="#5ce1f2" />
+                  <radialGradient id="mh80BotEye" cx="50%" cy="40%" r="62%">
+                    <stop offset="0%" stopColor="#eefdff" />
+                    <stop offset="32%" stopColor="#5ce1f2" />
                     <stop offset="100%" stopColor="#0b80bd" />
                   </radialGradient>
-                  <linearGradient id="mh80BotFin" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient id="mh80BotFinOuter" x1="10%" y1="0%" x2="90%" y2="100%">
                     <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="100%" stopColor="#c3d6e0" />
+                    <stop offset="100%" stopColor="#d3e2e9" />
+                  </linearGradient>
+                  <linearGradient id="mh80BotFinInner" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#1a2530" />
+                    <stop offset="100%" stopColor="#060b10" />
                   </linearGradient>
                   <filter id="mh80BotGlow" x="-60%" y="-60%" width="220%" height="220%">
                     <feGaussianBlur stdDeviation="4" result="blur" />
@@ -572,44 +576,56 @@ export default function Mh80Page() {
                   </filter>
                 </defs>
 
-                {/* aletas laterales */}
-                <ellipse cx="34" cy="150" rx="14" ry="52" fill="url(#mh80BotFin)" stroke="#0b80bd" strokeOpacity=".35" transform="rotate(-8 34 150)" />
-                <ellipse cx="166" cy="150" rx="14" ry="52" fill="url(#mh80BotFin)" stroke="#0b80bd" strokeOpacity=".35" transform="rotate(8 166 150)" />
+                {/* aletas laterales dobles */}
+                <g transform="rotate(-7 40 175)">
+                  <ellipse cx="40" cy="175" rx="20" ry="78" fill="url(#mh80BotFinOuter)" stroke="#cfe0e8" strokeWidth="1" />
+                  <ellipse cx="52" cy="175" rx="10" ry="66" fill="url(#mh80BotFinInner)" />
+                  <ellipse cx="52" cy="175" rx="10" ry="66" fill="none" stroke="#10a7db" strokeOpacity=".65" strokeWidth="1.4" filter="url(#mh80BotGlow)" />
+                </g>
+                <g transform="rotate(7 180 175)">
+                  <ellipse cx="180" cy="175" rx="20" ry="78" fill="url(#mh80BotFinOuter)" stroke="#cfe0e8" strokeWidth="1" />
+                  <ellipse cx="168" cy="175" rx="10" ry="66" fill="url(#mh80BotFinInner)" />
+                  <ellipse cx="168" cy="175" rx="10" ry="66" fill="none" stroke="#10a7db" strokeOpacity=".65" strokeWidth="1.4" filter="url(#mh80BotGlow)" />
+                </g>
 
                 {/* cuerpo */}
                 <path
-                  d="M60 118 C60 104 76 96 100 96 C124 96 140 104 140 118 L136 205 C134 230 118 250 100 254 C82 250 66 230 64 205 Z"
+                  d="M60 152 C60 130 83 118 110 118 C137 118 160 130 160 152 L154 242 C150 278 130 297 110 300 C90 297 70 278 66 242 Z"
                   fill="url(#mh80BotBody)"
                   stroke="#ffffff"
                 />
-                <path d="M100 108 L100 232" stroke="#0b80bd" strokeOpacity=".22" strokeWidth="1.5" />
+                <path d="M110 130 C104 175 104 235 110 288" stroke="#9fbdc9" strokeOpacity=".4" strokeWidth="1.2" fill="none" />
 
-                {/* emblema H */}
+                {/* emblema h */}
                 <g filter="url(#mh80BotGlow)">
                   <path
-                    d="M90 168 v28 M90 182 h16 M106 168 v28"
+                    d="M96 178 v42 M96 196 C96 188 104 184 110 184 C116 184 120 188 120 195 v25"
                     stroke="#10a7db"
-                    strokeWidth="6"
+                    strokeWidth="7"
                     strokeLinecap="round"
+                    strokeLinejoin="round"
                     fill="none"
                   />
+                  <circle cx="128" cy="182" r="4.5" fill="#10a7db" />
                 </g>
 
+                {/* cuello */}
+                <ellipse cx="110" cy="145" rx="32" ry="5" fill="#10a7db" opacity=".3" filter="url(#mh80BotGlow)" />
+
                 {/* cabeza */}
-                <ellipse cx="100" cy="66" rx="54" ry="50" fill="url(#mh80BotBody)" stroke="#ffffff" />
-                <ellipse cx="100" cy="68" rx="43" ry="35" fill="url(#mh80BotVisor)" />
-                <ellipse cx="100" cy="100" rx="36" ry="6" fill="#10a7db" opacity=".28" filter="url(#mh80BotGlow)" />
+                <ellipse cx="110" cy="82" rx="66" ry="60" fill="url(#mh80BotBody)" stroke="#ffffff" />
+                <ellipse cx="110" cy="85" rx="55" ry="47" fill="url(#mh80BotVisor)" />
 
                 {/* ojos */}
                 <g filter="url(#mh80BotGlow)">
-                  <ellipse cx="80" cy="70" rx="11" ry="14" fill="url(#mh80BotEye)" />
-                  <ellipse cx="120" cy="70" rx="11" ry="14" fill="url(#mh80BotEye)" />
+                  <ellipse cx="83" cy="90" rx="17" ry="22" fill="url(#mh80BotEye)" />
+                  <ellipse cx="137" cy="90" rx="17" ry="22" fill="url(#mh80BotEye)" />
                 </g>
-                <ellipse cx="76" cy="64" rx="3" ry="4" fill="#ffffff" opacity=".85" />
-                <ellipse cx="116" cy="64" rx="3" ry="4" fill="#ffffff" opacity=".85" />
+                <ellipse cx="77" cy="80" rx="5" ry="6" fill="#ffffff" opacity=".85" />
+                <ellipse cx="131" cy="80" rx="5" ry="6" fill="#ffffff" opacity=".85" />
 
                 {/* brillo de casco */}
-                <path d="M62 46 C70 30 88 20 100 20" stroke="#ffffff" strokeWidth="6" strokeLinecap="round" opacity=".55" fill="none" />
+                <path d="M62 56 C72 32 94 18 110 18" stroke="#ffffff" strokeWidth="7" strokeLinecap="round" opacity=".55" fill="none" />
               </svg>
             </span>
           </button>
