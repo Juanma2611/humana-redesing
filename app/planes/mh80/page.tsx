@@ -211,7 +211,7 @@ export default function Mh80Page() {
               <Image src="/plan-mh80-hero.jpeg" alt="Familia protegida por MH80" fill sizes="(max-width: 980px) 60vw, 30vw" unoptimized />
             </figure>
             <figure className="mh80-exp-photo card-b">
-              <Image src="/mh50-ambulatoria.jpg" alt="Consulta médica cercana en familia" fill sizes="(max-width: 980px) 54vw, 26vw" unoptimized />
+              <Image src="/images/planes/mh80/mh80-photo-recepcion.jpg" alt="Recepción de un centro médico premium" fill sizes="(max-width: 980px) 54vw, 26vw" unoptimized />
             </figure>
             <figure className="mh80-exp-photo card-c">
               <Image src="/mh50-hospitalizacion.jpg" alt="Atención hospitalaria cálida y segura" fill sizes="(max-width: 980px) 55vw, 26vw" unoptimized />
@@ -294,6 +294,19 @@ export default function Mh80Page() {
             <div className="mh80-robotic-specialty-detail" key={robotSurgery.specialties[activeSpecialty].name}>
               <Cpu size={16} aria-hidden="true" />
               <p>{robotSurgery.specialties[activeSpecialty].detail}</p>
+            </div>
+          </div>
+
+          <div className="mh80-robotic-photo mh80-exp-reveal">
+            <div className="mh80-robotic-photo-frame">
+              <Image
+                src="/images/planes/mh80/mh80-photo-quirofano.jpg"
+                alt="Quirófano equipado con tecnología médica avanzada"
+                fill
+                sizes="(max-width: 980px) 100vw, 80vw"
+                unoptimized
+              />
+              <span className="mh80-robotic-photo-caption">Quirófano equipado con tecnología de última generación</span>
             </div>
           </div>
         </section>

@@ -3736,13 +3736,28 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-robotic {
   position: relative; overflow: hidden; color: #eaf6ff;
   background-image:
-    linear-gradient(100deg, rgba(3,10,19,.7) 0%, rgba(4,14,26,.62) 40%, rgba(6,24,42,.55) 100%),
-    url("/images/planes/mh80/mh80-bg-hex.jpg");
+    linear-gradient(100deg, rgba(3,10,19,.82) 0%, rgba(4,14,26,.74) 40%, rgba(6,24,42,.66) 100%),
+    url("/images/planes/mh80/mh80-photo-cirugia-robotica.jpg");
   background-size: cover;
   background-position: center 30%;
   padding: clamp(90px, 10vw, 150px) clamp(20px, 8vw, 130px);
   display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px, 6vw, 80px) clamp(30px, 6vw, 80px);
-  grid-template-areas: "copy visual" "specialties specialties" "facts facts";
+  grid-template-areas: "copy visual" "specialties specialties" "photo photo";
+}
+.mh80-robotic-photo { grid-area: photo; position: relative; z-index: 2; }
+.mh80-robotic-photo-frame {
+  position: relative; height: clamp(220px, 30vw, 340px); border-radius: 26px; overflow: hidden;
+  border: 1px solid rgba(16,167,219,.28); box-shadow: 0 26px 60px rgba(0,0,0,.4);
+}
+.mh80-robotic-photo-frame img { object-fit: cover; }
+.mh80-robotic-photo-frame::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(3,7,14,.78), transparent 55%);
+}
+.mh80-robotic-photo-caption {
+  position: absolute; left: 24px; bottom: 20px; z-index: 1;
+  font-size: 13px; font-weight: 650; color: rgba(234,246,255,.9);
+  letter-spacing: .01em;
 }
 .mh80-robotic-grid { display: none; }
 .mh80-robotic-glow {
@@ -3820,7 +3835,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-robotic-fact p { margin: 0; font-size: 13.5px; line-height: 1.55; color: rgba(234,246,255,.62); }
 
 @media (max-width: 980px) {
-  .mh80-robotic { grid-template-columns: 1fr; grid-template-areas: "copy" "visual" "specialties" "facts"; }
+  .mh80-robotic { grid-template-columns: 1fr; grid-template-areas: "copy" "visual" "specialties" "photo"; }
   .mh80-robotic-visual { max-width: 260px; }
   .mh80-robotic-specialties-grid { grid-template-columns: repeat(2, 1fr); }
   .mh80-robotic-facts { grid-template-columns: 1fr; }
@@ -3928,10 +3943,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-keystats {
   position: relative; overflow: hidden; padding: clamp(80px, 9vw, 140px) clamp(20px, 8vw, 130px);
   background-image:
-    linear-gradient(100deg, rgba(3,7,14,.78) 0%, rgba(3,7,14,.68) 50%, rgba(3,7,14,.6) 100%),
-    url("/images/planes/mh80/mh80-bg-curve.jpg");
+    linear-gradient(100deg, rgba(3,7,14,.86) 0%, rgba(3,7,14,.78) 50%, rgba(3,7,14,.7) 100%),
+    url("/images/planes/mh80/mh80-photo-interfaz-medica.jpg");
   background-size: cover;
-  background-position: center 45%;
+  background-position: center 30%;
   color: #eaf6ff;
 }
 .mh80-keystats-head { position: relative; z-index: 2; max-width: 700px; margin-bottom: 56px; }
