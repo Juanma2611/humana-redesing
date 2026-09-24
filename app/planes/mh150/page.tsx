@@ -158,10 +158,10 @@ export default function Mh150Page() {
               <Image src="/plan-mh150-hero.jpeg" alt="Familia protegida por MH150" fill sizes="(max-width: 980px) 60vw, 30vw" unoptimized />
             </figure>
             <figure className="mh150-exp-photo card-b">
-              <Image src="/ph15-consultas.jpg" alt="Consulta con médico especialista" fill sizes="(max-width: 980px) 54vw, 26vw" unoptimized />
+              <Image src="/images/planes/mh150/mh150-ambulatoria.jpg" alt="Familia en consulta con médico especialista" fill sizes="(max-width: 980px) 54vw, 26vw" unoptimized />
             </figure>
             <figure className="mh150-exp-photo card-c">
-              <Image src="/ph15-hospitalizacion.jpg" alt="Atención hospitalaria cálida y segura" fill sizes="(max-width: 980px) 55vw, 26vw" unoptimized />
+              <Image src="/images/planes/mh150/mh150-hospitalizacion.jpg" alt="Atención hospitalaria cálida y segura" fill sizes="(max-width: 980px) 55vw, 26vw" unoptimized />
             </figure>
           </div>
           <a className="mh150-exp-scroll-cue" href="#mh150-esencia"><span />Desliza para descubrir</a>

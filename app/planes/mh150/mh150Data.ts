@@ -58,23 +58,15 @@ export type Chapter = {
   conditions: ChapterDetailItem[];
 };
 
-/* IMÁGENES TEMPORALES: MH150 todavía no cuenta con set fotográfico propio.
-   Mientras se reciben las fotos definitivas de familias/hospitales premium,
-   se reutilizan escenas ya existentes en el repo (PH30/PH15/MH50),
-   documentadas explícitamente con `imageIsTemporaryFrom`. Cuando el cliente
-   entregue las fotos definitivas, deben guardarse en
-   `public/images/planes/mh150/` y solo hace falta actualizar el campo
-   `image` de cada capítulo (y quitar `imageIsTemporaryFrom`). */
+/* Fotografías reales entregadas por el cliente, en public/images/planes/mh150/. */
 export const chapters: Chapter[] = [
   {
     id: "hospitalizacion",
     number: "01",
     navLabel: "Hospitalización",
     theme: "deep",
-    image: "/images/planes/ph30/ph30-hospitalizacion.jpg",
-    imageIsTemporaryFrom: "PH30 (public/images/planes/ph30/ph30-hospitalizacion.jpg)",
-    imagePosition: "68% 38%",
-    imageAlt: "Persona siendo atendida en un ambiente hospitalario cálido y seguro",
+    image: "/images/planes/mh150/mh150-hospitalizacion.jpg",
+    imageAlt: "Paciente acompañado por personal de enfermería en una habitación hospitalaria premium",
     eyebrow: "HOSPITALIZACIÓN",
     title: "El respaldo más completo.",
     lead: "Habitación, cirugía, medicamentos, cuidados intensivos y rehabilitación, sin límite de días de hospitalización, con la mayor cobertura de la familia MH.",
@@ -99,10 +91,8 @@ export const chapters: Chapter[] = [
     number: "02",
     navLabel: "Atención médica",
     theme: "light",
-    image: "/images/planes/ph30/ph30-ambulatoria.jpg",
-    imageIsTemporaryFrom: "PH30 (public/images/planes/ph30/ph30-ambulatoria.jpg)",
-    imagePositionMobile: "center 20%",
-    imageAlt: "Consulta médica cercana entre paciente y doctora especialista",
+    image: "/images/planes/mh150/mh150-ambulatoria.jpg",
+    imageAlt: "Familia en consulta con una médica especialista, revisando resultados en pantalla",
     eyebrow: "ATENCIÓN AMBULATORIA",
     title: "Acceso directo al especialista.",
     lead: "Consultas, exámenes y médico a domicilio dentro de la amplia Red Metrohumana, con copagos claros y cobertura de hasta el 90% en exámenes de diagnóstico.",
@@ -129,9 +119,8 @@ export const chapters: Chapter[] = [
     number: "03",
     navLabel: "Medicinas",
     theme: "teal",
-    image: "/images/planes/ph30/ph30-medicinas.jpg",
-    imageIsTemporaryFrom: "PH30 (public/images/planes/ph30/ph30-medicinas.jpg)",
-    imageAlt: "Entrega de medicamentos en una farmacia de la red Humana",
+    image: "/images/planes/mh150/mh150-medicinas.jpg",
+    imageAlt: "Farmacéutica asesorando a una clienta sobre su medicamento en una farmacia de la red Humana",
     eyebrow: "MEDICINAS",
     title: "Tu tratamiento, cubierto al máximo.",
     lead: "Acceso a la amplia red de farmacias asociadas a Humana, con cobertura de tus medicinas entre el 70% y el 90%, y el tope anual más alto de la familia MH.",
@@ -154,9 +143,8 @@ export const chapters: Chapter[] = [
     number: "04",
     navLabel: "Maternidad",
     theme: "warm",
-    image: "/images/planes/ph30/ph30-maternidad.jpg",
-    imageIsTemporaryFrom: "PH30 (public/images/planes/ph30/ph30-maternidad.jpg)",
-    imageAlt: "Madre gestante en un control prenatal acompañada de su médico",
+    image: "/images/planes/mh150/mh150-maternidad.jpg",
+    imageAlt: "Padres junto a su recién nacido, acompañados por su médica en la habitación",
     eyebrow: "MATERNIDAD",
     title: "Una nueva etapa también merece protección.",
     lead: "Atención prenatal, parto y protección ante complicaciones, con el mayor respaldo económico de la familia MH para el inicio de tu familia.",
@@ -183,10 +171,8 @@ export const chapters: Chapter[] = [
     number: "05",
     navLabel: "Emergencias",
     theme: "deep",
-    image: "/images/planes/ph30/ph30-emergencias.jpg",
-    imageIsTemporaryFrom: "PH30 (public/images/planes/ph30/ph30-emergencias.jpg)",
-    imagePositionMobile: "center 15%",
-    imageAlt: "Atención de emergencia médica a un paciente",
+    image: "/images/planes/mh150/mh150-emergencias.jpg",
+    imageAlt: "Equipo médico trasladando a un paciente hacia la sala de emergencias",
     eyebrow: "EMERGENCIAS",
     title: "Cuando más importa, Humana está contigo.",
     lead: "Cobertura de emergencia y urgencia médica por accidente o enfermedad, activa desde las 24 horas de afiliación, hasta el tope máximo de tu plan.",
