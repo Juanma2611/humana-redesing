@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Activity, Ambulance, Baby, Bone, Bot, Building2, Cpu, Cross,
+  Activity, Ambulance, Baby, Bone, Building2, Cpu, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Phone, PhoneCall, Ribbon, Scan,
   ShieldCheck, ShieldPlus, Sparkles, Syringe, Target, Users, Video, Wallet, X, Zap,
@@ -513,32 +513,106 @@ export default function Mh80Page() {
           <div className="mh80-exp-finale-mark" aria-hidden="true"><span>MH</span><strong>80</strong></div>
         </section>
 
-        {/* ASISTENTE VIRTUAL MH80 — primer prototipo. Se mueve verticalmente
-            según el porcentaje de scroll (ver assistantRef en el efecto de
-            arriba), cambia su mensaje según la sección visible, y se puede
-            minimizar (preferencia guardada en localStorage). */}
+        {/* ASISTENTE VIRTUAL MH80 — personaje robot 3D (SVG original, no
+            fotografía ni ícono plano). Se mueve verticalmente según el
+            porcentaje de scroll (ver assistantRef en el efecto de arriba),
+            flota con una animación CSS continua, cambia su mensaje según la
+            sección visible, y se puede minimizar (preferencia guardada en
+            localStorage). Diseño propio inspirado en la referencia del
+            cliente, no una copia: cuerpo blanco glossy, visor oscuro, ojos
+            cian, una sola aleta lateral por lado (no doble) y emblema "H"
+            de Humana en el pecho en vez de un logo ajeno. */}
         <div
           id="mh80-assistant-slot"
           ref={assistantRef}
           className={`mh80-assistant${assistantMinimized ? " is-minimized" : ""}`}
         >
-          {assistantMinimized ? (
-            <button type="button" className="mh80-assistant-avatar" onClick={toggleAssistant} aria-label="Mostrar asistente de MH80">
-              <Bot size={20} aria-hidden="true" />
-            </button>
-          ) : (
-            <div className="mh80-assistant-panel" role="status">
-              <button type="button" className="mh80-assistant-avatar" onClick={toggleAssistant} aria-label="Minimizar asistente de MH80">
-                <Bot size={20} aria-hidden="true" />
+          {!assistantMinimized && (
+            <div className="mh80-assistant-bubble" role="status">
+              <button type="button" className="mh80-assistant-close" onClick={toggleAssistant} aria-label="Minimizar asistente de MH80">
+                <X size={13} aria-hidden="true" />
               </button>
-              <div className="mh80-assistant-bubble">
-                <button type="button" className="mh80-assistant-close" onClick={toggleAssistant} aria-label="Minimizar asistente de MH80">
-                  <X size={13} aria-hidden="true" />
-                </button>
-                <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
-              </div>
+              <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
             </div>
           )}
+          <button
+            type="button"
+            className="mh80-assistant-figure"
+            onClick={toggleAssistant}
+            aria-label={assistantMinimized ? "Mostrar asistente de MH80" : "Minimizar asistente de MH80"}
+          >
+            <span className="mh80-assistant-float">
+              <svg viewBox="0 0 200 260" width="100%" height="100%" aria-hidden="true">
+                <defs>
+                  <radialGradient id="mh80BotBody" cx="38%" cy="28%" r="75%">
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="55%" stopColor="#eef5fa" />
+                    <stop offset="100%" stopColor="#cfdfe8" />
+                  </radialGradient>
+                  <radialGradient id="mh80BotVisor" cx="42%" cy="30%" r="80%">
+                    <stop offset="0%" stopColor="#2a3742" />
+                    <stop offset="55%" stopColor="#0d1620" />
+                    <stop offset="100%" stopColor="#04080c" />
+                  </radialGradient>
+                  <radialGradient id="mh80BotEye" cx="50%" cy="42%" r="60%">
+                    <stop offset="0%" stopColor="#eafcff" />
+                    <stop offset="35%" stopColor="#5ce1f2" />
+                    <stop offset="100%" stopColor="#0b80bd" />
+                  </radialGradient>
+                  <linearGradient id="mh80BotFin" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="100%" stopColor="#c3d6e0" />
+                  </linearGradient>
+                  <filter id="mh80BotGlow" x="-60%" y="-60%" width="220%" height="220%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                {/* aletas laterales */}
+                <ellipse cx="34" cy="150" rx="14" ry="52" fill="url(#mh80BotFin)" stroke="#0b80bd" strokeOpacity=".35" transform="rotate(-8 34 150)" />
+                <ellipse cx="166" cy="150" rx="14" ry="52" fill="url(#mh80BotFin)" stroke="#0b80bd" strokeOpacity=".35" transform="rotate(8 166 150)" />
+
+                {/* cuerpo */}
+                <path
+                  d="M60 118 C60 104 76 96 100 96 C124 96 140 104 140 118 L136 205 C134 230 118 250 100 254 C82 250 66 230 64 205 Z"
+                  fill="url(#mh80BotBody)"
+                  stroke="#ffffff"
+                />
+                <path d="M100 108 L100 232" stroke="#0b80bd" strokeOpacity=".22" strokeWidth="1.5" />
+
+                {/* emblema H */}
+                <g filter="url(#mh80BotGlow)">
+                  <path
+                    d="M90 168 v28 M90 182 h16 M106 168 v28"
+                    stroke="#10a7db"
+                    strokeWidth="6"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                </g>
+
+                {/* cabeza */}
+                <ellipse cx="100" cy="66" rx="54" ry="50" fill="url(#mh80BotBody)" stroke="#ffffff" />
+                <ellipse cx="100" cy="68" rx="43" ry="35" fill="url(#mh80BotVisor)" />
+                <ellipse cx="100" cy="100" rx="36" ry="6" fill="#10a7db" opacity=".28" filter="url(#mh80BotGlow)" />
+
+                {/* ojos */}
+                <g filter="url(#mh80BotGlow)">
+                  <ellipse cx="80" cy="70" rx="11" ry="14" fill="url(#mh80BotEye)" />
+                  <ellipse cx="120" cy="70" rx="11" ry="14" fill="url(#mh80BotEye)" />
+                </g>
+                <ellipse cx="76" cy="64" rx="3" ry="4" fill="#ffffff" opacity=".85" />
+                <ellipse cx="116" cy="64" rx="3" ry="4" fill="#ffffff" opacity=".85" />
+
+                {/* brillo de casco */}
+                <path d="M62 46 C70 30 88 20 100 20" stroke="#ffffff" strokeWidth="6" strokeLinecap="round" opacity=".55" fill="none" />
+              </svg>
+            </span>
+          </button>
         </div>
       </div>
     </SiteShell>

@@ -348,11 +348,11 @@ export const otherConditions = [
    Mensajes cortos y contextuales por sección, sin datos contractuales
    nuevos — solo referencian lo que cada sección ya muestra. */
 export const assistantMessages: Record<string, string> = {
-  "mh80-inicio": "Hola, soy el asistente de MH80. Te acompaño mientras descubres el plan.",
-  "mh80-robotica": "Este es el diferenciador de MH80: cirugía robótica Da Vinci, único en el mercado.",
+  "mh80-inicio": "Hola, soy el asistente virtual de MH80. Te mostraré cómo la tecnología transforma la forma de cuidar tu salud.",
+  "mh80-robotica": "MH80 incorpora acceso a tecnología médica avanzada para procedimientos de alta precisión.",
   "mh80-coberturas": "Explora cada módulo de cobertura: hospitalización, ambulatoria, medicinas y maternidad.",
   "mh80-datos": "Estas cifras están respaldadas por el contrato oficial de MH80.",
-  "mh80-incluido": "Estos beneficios vienen incluidos, sin costo adicional a tu facturación.",
+  "mh80-incluido": "Descubre cómo este plan combina protección familiar, innovación y respaldo médico.",
   "mh80-carencias": "Aquí ves cuándo empieza a aplicar cada cobertura desde tu afiliación.",
   "mh80-preguntas": "¿Tienes dudas? Revisa las preguntas frecuentes de MH80.",
   "mh80-cierre": "¿Listo para proteger a tu familia? Cotiza MH80 ahora.",

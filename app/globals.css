@@ -4016,42 +4016,50 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 
 /* ============================================================ */
-/* MH80 — Asistente virtual flotante (primer prototipo).          */
+/* MH80 — Asistente virtual: personaje robot 3D flotante (SVG      */
+/* original, sin base inferior, con burbuja glassmorphism clara).  */
 /* ============================================================ */
 .mh80-assistant {
-  position: fixed; right: clamp(16px, 3vw, 32px); top: 140px; z-index: 60;
+  position: fixed; right: clamp(10px, 2.4vw, 40px); top: 140px; z-index: 60;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
   transition: top .3s linear;
 }
-.mh80-assistant-avatar {
-  width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(16,167,219,.4);
-  background: linear-gradient(150deg, #0b80bd, #12a6a2); color: #fff;
-  display: flex; align-items: center; justify-content: center; cursor: pointer;
-  box-shadow: 0 16px 34px rgba(0,0,0,.32), 0 0 0 0 rgba(16,167,219,.4);
-  animation: mh80AssistantPulse 3.2s ease-in-out infinite; flex: none;
+.mh80-assistant-figure {
+  border: 0; background: transparent; padding: 0; cursor: pointer;
+  width: clamp(86px, 8vw, 120px); aspect-ratio: 200 / 260; flex: none;
+  filter: drop-shadow(0 18px 30px rgba(4,20,34,.4)) drop-shadow(0 0 22px rgba(16,167,219,.22));
 }
-@keyframes mh80AssistantPulse {
-  0%, 100% { box-shadow: 0 16px 34px rgba(0,0,0,.32), 0 0 0 0 rgba(16,167,219,.35); }
-  50% { box-shadow: 0 16px 34px rgba(0,0,0,.32), 0 0 0 10px rgba(16,167,219,0); }
+.mh80-assistant-float {
+  display: block; width: 100%; height: 100%;
+  animation: mh80BotFloat 4.2s ease-in-out infinite;
+  transform-origin: 50% 85%;
 }
-.mh80-assistant-panel { display: flex; align-items: flex-start; gap: 12px; flex-direction: row-reverse; }
+@keyframes mh80BotFloat {
+  0%, 100% { transform: translateY(0) rotate(-1.2deg); }
+  50% { transform: translateY(-10px) rotate(1.2deg); }
+}
+.mh80-assistant.is-minimized .mh80-assistant-figure { width: clamp(52px, 5vw, 66px); }
 .mh80-assistant-bubble {
-  position: relative; max-width: 240px; padding: 14px 30px 14px 16px; margin-top: 4px;
-  border-radius: 16px 16px 4px 16px; background: rgba(4,10,19,.88); border: 1px solid rgba(16,167,219,.28);
-  backdrop-filter: blur(10px); box-shadow: 0 18px 40px rgba(0,0,0,.34); color: #eaf6ff;
+  position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
+  border-radius: 18px 18px 4px 18px; background: rgba(255,255,255,.88);
+  border: 1px solid rgba(16,167,219,.22); backdrop-filter: blur(14px);
+  box-shadow: 0 20px 44px rgba(4,20,34,.22); color: #12314a;
 }
-.mh80-assistant-bubble p { margin: 0; font-size: 13px; line-height: 1.5; animation: mh80AssistantFade .35s ease; }
+.mh80-assistant-bubble p { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 550; animation: mh80AssistantFade .35s ease; }
 @keyframes mh80AssistantFade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
 .mh80-assistant-close {
   position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; border-radius: 50%;
-  border: 0; background: rgba(255,255,255,.08); color: rgba(234,246,255,.7);
+  border: 0; background: rgba(11,128,189,.1); color: #0b80bd;
   display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
 }
-.mh80-assistant-close:hover { background: rgba(255,255,255,.16); color: #fff; }
+.mh80-assistant-close:hover { background: rgba(11,128,189,.18); }
 @media (max-width: 760px) {
-  .mh80-assistant { top: auto !important; bottom: 22px; right: 16px; }
-  .mh80-assistant-bubble { max-width: 62vw; }
+  .mh80-assistant { top: auto !important; bottom: 20px; right: 14px; }
+  .mh80-assistant-figure { width: 64px; }
+  .mh80-assistant.is-minimized .mh80-assistant-figure { width: 46px; }
+  .mh80-assistant-bubble { max-width: 58vw; padding: 12px 26px 12px 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mh80-assistant-avatar { animation: none; }
+  .mh80-assistant-float { animation: none; }
   .mh80-assistant { transition: none; }
 }
