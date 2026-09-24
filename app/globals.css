@@ -2012,6 +2012,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh50-exp-hero-copy { position: relative; z-index: 2; max-width: 640px; }
 .mh50-exp-hero-copy h1 { font-size: clamp(90px, 15vw, 210px); line-height: .78; margin: 26px 0 32px; letter-spacing: -.06em; font-weight: 780; color: #fff; }
 .mh50-exp-hero-copy h1 span { color: var(--mh-bright); }
+.mh50-exp-hero-copy h1.is-long { font-size: clamp(56px, 9vw, 130px); }
 .mh50-exp-hero-line { font-size: clamp(30px, 3.4vw, 50px); line-height: 1.06; font-weight: 700; letter-spacing: -.03em; margin: 0; }
 .mh50-exp-hero-body { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,.72); max-width: 540px; margin-top: 16px; }
 .mh50-exp-hero-actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
@@ -2071,6 +2072,15 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh50-exp-chapter-nav a { padding: 16px 22px; font-size: 13px; font-weight: 700; color: rgba(7,54,81,.55); border-bottom: 2px solid transparent; white-space: nowrap; flex: 0 0 auto; }
 .mh50-exp-chapter-nav a span { font-size: 10px; margin-right: 8px; }
 .mh50-exp-chapter-nav a.is-active { color: var(--mh-ink); border-color: var(--mh-navy); }
+.mh50-exp-plan-toggle { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.mh50-exp-plan-toggle button {
+  display: flex; align-items: baseline; gap: 8px; padding: 14px 22px; border-radius: 999px;
+  border: 1px solid rgba(7,92,146,.18); background: #fff; font-size: 14px; font-weight: 700;
+  color: rgba(7,54,81,.6); cursor: pointer; transition: all .2s ease;
+}
+.mh50-exp-plan-toggle button span { font-size: 13px; font-weight: 800; color: var(--mh-blue); }
+.mh50-exp-plan-toggle button.is-active { background: var(--mh-navy); border-color: var(--mh-navy); color: #fff; }
+.mh50-exp-plan-toggle button.is-active span { color: #fff; }
 
 /* CHAPTERS ------------------------------------------------------------- */
 .mh50-exp-chapter { min-height: 100svh; padding: clamp(90px, 10vw, 150px) clamp(20px, 8vw, 130px); display: grid; grid-template-columns: minmax(0,1.05fr) minmax(320px,.95fr); gap: clamp(40px, 7vw, 110px); align-items: center; position: relative; overflow: hidden; scroll-margin-top: 62px; }
@@ -2158,6 +2168,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh50-exp-accordion-grid article strong { display: block; font-size: 17px; color: var(--mh-bright); margin-bottom: 4px; }
 .mh50-exp-accordion-grid article span { font-size: 13px; color: rgba(255,255,255,.62); line-height: 1.4; }
 .mh50-exp-accordion-grid svg { width: 18px; height: 18px; color: var(--mh-bright); margin-bottom: 8px; }
+.mh50-exp-accordion-grid.on-light article { background: #fff; border-color: rgba(7,92,146,.12); box-shadow: 0 10px 30px rgba(7,63,96,.06); }
+.mh50-exp-accordion-grid.on-light article strong { color: var(--mh-navy); }
+.mh50-exp-accordion-grid.on-light article span { color: var(--mh-muted); }
+.mh50-exp-accordion-grid.on-light svg { color: var(--mh-blue); }
 
 /* IMPACTO --------------------------------------------------------------- */
 .mh50-exp-impact { min-height: 82svh; position: relative; color: #fff; display: flex; align-items: flex-end; overflow: hidden; }
@@ -2184,6 +2198,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh50-exp-finale-mark { position: relative; z-index: 2; text-align: center; }
 .mh50-exp-finale-mark span { font-size: clamp(32px, 4.4vw, 60px); font-weight: 700; }
 .mh50-exp-finale-mark strong { display: block; font-size: clamp(130px, 22vw, 340px); line-height: .74; letter-spacing: -.1em; color: var(--mh-bright); }
+.mh50-exp-finale-mark strong.is-long { font-size: clamp(60px, 11vw, 160px); }
 .mh50-exp-finale-rings { position: absolute; width: 820px; height: 820px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; right: -220px; pointer-events: none; }
 .mh50-exp-finale-rings::after, .mh50-exp-finale-rings::before { content: ""; position: absolute; border: 1px solid rgba(255,255,255,.1); border-radius: 50%; inset: 90px; }
 .mh50-exp-finale-rings::after { inset: 200px; }
@@ -2211,6 +2226,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @media (max-width: 980px) {
   .mh50-exp-hero { grid-template-columns: 1fr; padding: 120px 20px 80px; }
   .mh50-exp-hero-copy h1 { font-size: 30vw; }
+  .mh50-exp-hero-copy h1.is-long { font-size: 15vw; }
   .mh50-exp-gallery { height: min(105vw, 520px); margin-top: 30px; }
   .mh50-exp-photo.card-a { width: 60%; right: 0; }
   .mh50-exp-photo.card-b { width: 54%; left: 0; top: 30%; }

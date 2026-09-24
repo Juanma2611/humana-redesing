@@ -101,6 +101,17 @@ function coverageDisplay(item: string) {
   return { metric, label: label || item };
 }
 
+const fullPlanPages: Record<string, string> = {
+  mh50: "/planes/mh50",
+  ph15: "/planes/ph15",
+  ph30: "/planes/ph30",
+  mh80: "/planes/mh80",
+  mh150: "/planes/mh150",
+  proteger: "/planes/proteger",
+  prosonrisas: "/planes/prosonrisas",
+  business: "/planes/business",
+};
+
 function planHeroImage(plan: Plan) {
   if (plan.id === "ph15") return "/plan-ph15-hero.jpeg";
   if (plan.id === "ph30") return "/plan-ph30-hero.jpeg";
@@ -235,7 +246,7 @@ function PlanCard({ plan, badge, isFeatured, onOpen, onQuote }: { plan: Plan; ba
     <p className="sales-plan-headline">{plan.headline}</p><span className="sales-plan-ideal">{plan.ideal}</span>
     <ul className="sales-benefits">{plan.benefits.map(({ icon: BenefitIcon, label }) => <li key={label}><BenefitIcon /><span>{label}</span></li>)}</ul>
     <div className="sales-limit"><span>{plan.statLabels?.limit ?? "Cobertura"}</span><strong>{plan.limit}</strong><small>{plan.limitNote}</small></div>
-    <div className="sales-card-actions"><button type="button" className="sales-buy" onClick={onQuote}>Cotizar en 1 minuto <ArrowRight /></button>{plan.id === "mh50" ? <Link className="sales-more" href="/planes/mh50">Ver todo el plan <ChevronRight /></Link> : <button type="button" className="sales-more" onClick={onOpen}>Ver todo el plan <ChevronRight /></button>}</div>
+    <div className="sales-card-actions"><button type="button" className="sales-buy" onClick={onQuote}>Cotizar en 1 minuto <ArrowRight /></button>{fullPlanPages[plan.id] ? <Link className="sales-more" href={fullPlanPages[plan.id]}>Ver todo el plan <ChevronRight /></Link> : <button type="button" className="sales-more" onClick={onOpen}>Ver todo el plan <ChevronRight /></button>}</div>
   </article>;
 }
 
@@ -261,8 +272,8 @@ function PlanEditorialHero({ id, eyebrow, title, description, image, imageAlt, o
   </section>;
 }
 
-function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, mh50Link, ph15Link, ph30Link, mh80Link, mh150Link, sectionId }: {
-  plan: Plan; reverse?: boolean; onQuote: () => void; onOpen: () => void; mh50Link?: boolean; ph15Link?: boolean; ph30Link?: boolean; mh80Link?: boolean; mh150Link?: boolean; sectionId?: string;
+function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, sectionId }: {
+  plan: Plan; reverse?: boolean; onQuote: () => void; onOpen: () => void; sectionId?: string;
 }) {
   const Icon = plan.icon;
   return <article id={sectionId ?? `plan-block-${plan.id}`} className={`plan-editorial-block${reverse ? " reverse" : ""}`}>
@@ -280,16 +291,8 @@ function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, mh50Link, ph15Link
       </div>
       <div className="plan-editorial-block-actions">
         <button type="button" className="sales-buy" onClick={onQuote}>Cotiza tu plan <ArrowRight /></button>
-        {mh50Link
-          ? <Link className="sales-more" href="/planes/mh50">Conoce más acerca del plan <ChevronRight /></Link>
-          : ph15Link
-          ? <Link className="sales-more" href="/planes/ph15">Conoce más acerca del plan <ChevronRight /></Link>
-          : ph30Link
-          ? <Link className="sales-more" href="/planes/ph30">Conoce más acerca del plan <ChevronRight /></Link>
-          : mh80Link
-          ? <Link className="sales-more" href="/planes/mh80">Conoce más acerca del plan <ChevronRight /></Link>
-          : mh150Link
-          ? <Link className="sales-more" href="/planes/mh150">Conoce más acerca del plan <ChevronRight /></Link>
+        {fullPlanPages[plan.id]
+          ? <Link className="sales-more" href={fullPlanPages[plan.id]}>Conoce más acerca del plan <ChevronRight /></Link>
           : <button type="button" className="sales-more" onClick={onOpen}>Conoce más acerca del plan <ChevronRight /></button>}
       </div>
     </div>
@@ -388,9 +391,9 @@ export default function Plans() {
                 onQuote={() => quote(ph15, "cotización PractiHumana")}
                 scrollTargetId="plan-block-ph15"
               />
-              <PlanEditorialBlock plan={ph15} onQuote={() => quote(ph15)} onOpen={() => setSelected(ph15)} ph15Link />
-              <PlanEditorialBlock plan={ph30} reverse sectionId="individual-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} ph30Link />
-              <PlanEditorialBlock plan={mh50} sectionId="individual-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} mh50Link />
+              <PlanEditorialBlock plan={ph15} onQuote={() => quote(ph15)} onOpen={() => setSelected(ph15)} />
+              <PlanEditorialBlock plan={ph30} reverse sectionId="individual-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
+              <PlanEditorialBlock plan={mh50} sectionId="individual-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} />
               <PlanEditorialBlock plan={prosonrisas} reverse sectionId="individual-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
 
               <PlanEditorialHero
@@ -404,10 +407,10 @@ export default function Plans() {
                 onQuote={() => quote(mh50, "cotización MetroHumana")}
                 scrollTargetId="familiar-ph30"
               />
-              <PlanEditorialBlock plan={ph30} sectionId="familiar-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} ph30Link />
-              <PlanEditorialBlock plan={mh50} reverse sectionId="familiar-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} mh50Link />
-              <PlanEditorialBlock plan={mh80} sectionId="familiar-mh80" onQuote={() => quote(mh80)} onOpen={() => setSelected(mh80)} mh80Link />
-              <PlanEditorialBlock plan={mh150} reverse sectionId="familiar-mh150" onQuote={() => quote(mh150)} onOpen={() => setSelected(mh150)} mh150Link />
+              <PlanEditorialBlock plan={ph30} sectionId="familiar-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
+              <PlanEditorialBlock plan={mh50} reverse sectionId="familiar-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} />
+              <PlanEditorialBlock plan={mh80} sectionId="familiar-mh80" onQuote={() => quote(mh80)} onOpen={() => setSelected(mh80)} />
+              <PlanEditorialBlock plan={mh150} reverse sectionId="familiar-mh150" onQuote={() => quote(mh150)} onOpen={() => setSelected(mh150)} />
               <PlanEditorialBlock plan={prosonrisas} sectionId="familiar-prosonrisas" onQuote={() => quote(prosonrisas)} onOpen={() => setSelected(prosonrisas)} />
 
               <PlanEditorialHero
