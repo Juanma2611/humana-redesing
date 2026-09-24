@@ -421,6 +421,7 @@ export default function ProsonrisasPage() {
             id={`prosonrisas-${c.id}`}
             className={`mh50-exp-chapter theme-${c.theme}${i % 2 === 1 ? " reverse" : ""}`}
           >
+            <DentalDecor tone={c.theme === "dark" || c.theme === "blue" ? "on-dark" : "on-light"} />
             <div className="mh50-exp-chapter-number" aria-hidden="true">{c.number}</div>
             <div className="mh50-exp-chapter-image mh50-exp-reveal">
               <Image src={c.image} alt={c.imageAlt} fill sizes="(max-width: 980px) 100vw, 45vw" unoptimized />
@@ -439,7 +440,8 @@ export default function ProsonrisasPage() {
           </section>
         ))}
 
-        <section className="mh50-exp-included" id="prosonrisas-incluido">
+        <section className="mh50-exp-included" id="prosonrisas-incluido" style={{ position: "relative" }}>
+          <DentalDecor tone="on-light" />
           <div className="mh50-exp-benefits-panel">
             <div className="mh50-exp-benefits-head mh50-exp-reveal">
               <span className="mh50-exp-eyebrow light">PRINCIPALES BENEFICIOS</span>
@@ -478,6 +480,7 @@ export default function ProsonrisasPage() {
         </section>
 
         <section className="mh50-exp-waiting" id="prosonrisas-carencias">
+          <DentalDecor tone="on-light" />
           <div className="mh50-exp-waiting-copy mh50-exp-reveal">
             <span className="mh50-exp-eyebrow">CARENCIAS PROSONRISAS</span>
             <h2>Tu cobertura, clara desde el inicio.</h2>
@@ -494,7 +497,8 @@ export default function ProsonrisasPage() {
           <p className="mh50-exp-waiting-note mh50-exp-reveal">La urgencia y emergencia dental preautorizada tiene vigencia de 24 horas. Aplican las condiciones particulares del contrato.</p>
         </section>
 
-        <section className="mh50-exp-vault">
+        <section className="mh50-exp-vault" style={{ position: "relative" }}>
+          <DentalDecor tone="on-dark" />
           <div className="mh50-exp-vault-copy mh50-exp-reveal">
             <span className="mh50-exp-eyebrow light">CLARIDAD ANTES DE ELEGIR</span>
             <h2>Los detalles importan.<br />Por eso están aquí.</h2>
@@ -523,6 +527,7 @@ export default function ProsonrisasPage() {
         <section className="mh50-exp-impact">
           <Image src="/mh50-metrofraternidad.jpg" alt="Niños en un entorno comunitario de atención médica" fill sizes="100vw" unoptimized />
           <div className="mh50-exp-impact-overlay" />
+          <DentalDecor tone="on-dark" />
           <div className="mh50-exp-impact-copy mh50-exp-reveal">
             <span className="mh50-exp-eyebrow light">NUESTRA ESENCIA</span>
             <h2>30 años de experiencia cuidando la salud de los ecuatorianos.</h2>
@@ -534,6 +539,7 @@ export default function ProsonrisasPage() {
 
         <section className="mh50-exp-finale" id="prosonrisas-cierre">
           <div className="mh50-exp-finale-rings" aria-hidden="true" />
+          <DentalDecor tone="on-dark" />
           <div className="mh50-exp-finale-copy mh50-exp-reveal">
             <span className="mh50-exp-eyebrow light">PROSONRISAS · PLAN DENTAL</span>
             <h2>Una sonrisa saludable transforma tu vida.</h2>
