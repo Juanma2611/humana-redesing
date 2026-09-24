@@ -4153,3 +4153,21 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .business-decor .deco-linechart { top: 40%; right: -6%; left: auto; }
   .business-decor .deco-trending { bottom: 4%; right: -4%; top: auto; }
 }
+
+/* Humana Business — caja de contacto debajo de "Ventajas empresa y equipo" */
+.business-contact-box {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px;
+  margin: 0 clamp(20px, 8vw, 130px) clamp(60px, 8vw, 100px);
+  padding: clamp(28px, 4vw, 44px) clamp(28px, 4vw, 48px);
+  background: var(--mh-ice); border: 1px solid rgba(7,92,146,.14); border-radius: 26px;
+  box-shadow: 0 20px 50px rgba(7,63,96,.08);
+}
+.business-contact-box h3 { margin: 0 0 8px; font-size: clamp(22px, 2.4vw, 30px); letter-spacing: -.02em; color: var(--mh-navy); }
+.business-contact-box p { margin: 0; max-width: 480px; color: var(--mh-muted); font-size: 15px; line-height: 1.6; }
+.business-contact-box-actions { display: flex; flex-wrap: wrap; gap: 12px; flex: none; }
+.business-contact-box-actions .ghost-button { color: var(--mh-navy); border-color: rgba(7,92,146,.35); }
+@media (max-width: 760px) {
+  .business-contact-box { flex-direction: column; align-items: flex-start; }
+  .business-contact-box-actions { width: 100%; }
+  .business-contact-box-actions a, .business-contact-box-actions button { width: 100%; text-align: center; }
+}

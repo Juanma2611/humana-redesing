@@ -151,16 +151,6 @@ const chapters: Chapter[] = [
   },
 ];
 
-/* Beneficios sin costo adicional destacados */
-const featuredBenefits = [
-  { icon: Video, title: "Teleconsulta médica 24h" },
-  { icon: HomeIcon, title: "Médico a domicilio" },
-  { icon: Ambulance, title: "Ambulancia terrestre" },
-  { icon: Pill, title: "Red de más de 1.600 farmacias" },
-  { icon: Users, title: "Extensión a familiares" },
-  { icon: CircleDollarSign, title: "Precios competitivos" },
-];
-
 const contactChannels = [
   { icon: MessageCircle, label: "WhatsApp", value: "+593 2401 7002", href: "https://wa.me/59324017002" },
   { icon: PhoneCall, label: "Línea gratuita", value: "1800 48 62 62", href: "tel:1800486262" },
@@ -177,7 +167,6 @@ export default function HumanaBusinessPage() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
-  const [benefitIndex, setBenefitIndex] = useState(0);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -188,17 +177,6 @@ export default function HumanaBusinessPage() {
   const closeDialog = () => dialogRef.current?.close();
 
   const handleQuoteClick = () => setQuoted(true);
-
-  const goToBenefit = (i: number) => setBenefitIndex(((i % featuredBenefits.length) + featuredBenefits.length) % featuredBenefits.length);
-  const prevBenefit = () => goToBenefit(benefitIndex - 1);
-  const nextBenefit = () => goToBenefit(benefitIndex + 1);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setBenefitIndex((i) => (i + 1) % featuredBenefits.length);
-    }, 3000);
-    return () => window.clearInterval(timer);
-  }, [benefitIndex]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -333,7 +311,6 @@ export default function HumanaBusinessPage() {
           {chapters.map((c) => (
             <a key={c.id} href={`#business-${c.id}`} data-chapter-link={`business-${c.id}`}><span>{c.number}</span>{c.navLabel}</a>
           ))}
-          <a href="#business-incluido" data-chapter-link="business-incluido"><span>05</span>Beneficios</a>
         </nav>
 
         {chapters.map((c, i) => (
@@ -357,65 +334,18 @@ export default function HumanaBusinessPage() {
               <button type="button" className="mh50-exp-text-button" onClick={() => openDialog(c.id)}>
                 Explorar detalles <span>↗</span>
               </button>
-              {c.id === "servicios" && (
-                <div className="mh50-exp-hero-actions" style={{ marginTop: 28 }}>
-                  <a className="primary-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">Contáctate con nosotros</a>
-                  <button type="button" className="ghost-button" onClick={handleQuoteClick}>Personaliza tu plan Humana Business</button>
-                </div>
-              )}
             </div>
           </section>
         ))}
 
-        <section className="mh50-exp-included" id="business-incluido" style={{ position: "relative" }}>
-          <BusinessDecor tone="on-light" />
-          <div className="mh50-exp-benefits-panel">
-            <div className="mh50-exp-benefits-head mh50-exp-reveal">
-              <span className="mh50-exp-eyebrow light">BENEFICIOS PARA TU EQUIPO</span>
-              <h2>Más formas de cuidar a tu gente.</h2>
-              <p>Servicios que forman parte de tu plan Humana Business, sin costo adicional.</p>
-            </div>
-            <div className="mh50-exp-benefits-grid" role="list" aria-label="Beneficios incluidos en Humana Business">
-              {featuredBenefits.map(({ icon: Icon, title }, i) => (
-                <article className="mh50-exp-reveal" style={{ "--reveal-delay": `${(i % 6) * 60}ms` } as React.CSSProperties} role="listitem" key={title}>
-                  <span className="mh50-exp-benefit-symbol" aria-hidden="true"><Icon /></span>
-                  <h3>{title}</h3>
-                  <span className="mh50-exp-benefit-arrow" aria-hidden="true">›</span>
-                </article>
-              ))}
-            </div>
-            <div className="mh50-exp-benefits-carousel" role="list" aria-label="Beneficios incluidos en Humana Business">
-              <div className="mh50-exp-benefits-carousel-track" style={{ transform: `translateX(-${benefitIndex * 100}%)` }}>
-                {featuredBenefits.map(({ icon: Icon, title }) => (
-                  <article className="mh50-exp-benefits-carousel-card" role="listitem" key={title}>
-                    <span className="mh50-exp-benefit-symbol" aria-hidden="true"><Icon /></span>
-                    <h3>{title}</h3>
-                  </article>
-                ))}
-              </div>
-              <div className="mh50-exp-benefits-carousel-controls">
-                <button type="button" onClick={prevBenefit} aria-label="Beneficio anterior">‹</button>
-                <div className="mh50-exp-benefits-carousel-dots">
-                  {featuredBenefits.map(({ title }, i) => (
-                    <button type="button" key={title} className={i === benefitIndex ? "active" : ""} aria-label={`Ir al beneficio ${title}`} onClick={() => goToBenefit(i)} />
-                  ))}
-                </div>
-                <button type="button" onClick={nextBenefit} aria-label="Siguiente beneficio">›</button>
-              </div>
-            </div>
+        <section className="business-contact-box mh50-exp-reveal">
+          <div>
+            <h3>¿Listo para armar el plan de tu empresa?</h3>
+            <p>Contáctate con nosotros y personaliza tu plan Humana Business según las necesidades de tu equipo.</p>
           </div>
-        </section>
-
-        <section className="mh50-exp-impact">
-          <Image src="/mh50-metrofraternidad.jpg" alt="Niños en un entorno comunitario de atención médica" fill sizes="100vw" unoptimized />
-          <div className="mh50-exp-impact-overlay" />
-          <BusinessDecor tone="on-dark" />
-          <div className="mh50-exp-impact-copy mh50-exp-reveal">
-            <span className="mh50-exp-eyebrow light">RESPALDO A NIVEL NACIONAL</span>
-            <h2>Líderes en el segmento corporativo de medicina prepagada.</h2>
-            <p>Formamos parte del grupo más importante en prestaciones médicas de Ecuador, con clientes en telecomunicaciones, petróleo, servicios y más.</p>
-            <strong>170.000+</strong>
-            <span>afiliados respaldados a nivel nacional</span>
+          <div className="business-contact-box-actions">
+            <a className="primary-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">Contáctate con nosotros</a>
+            <button type="button" className="ghost-button" onClick={handleQuoteClick}>Personaliza tu plan Humana Business</button>
           </div>
         </section>
 
