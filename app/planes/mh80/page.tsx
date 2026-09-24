@@ -576,16 +576,49 @@ export default function Mh80Page() {
                   </filter>
                 </defs>
 
-                {/* aletas laterales dobles */}
-                <g transform="rotate(-7 40 175)">
-                  <ellipse cx="40" cy="175" rx="20" ry="78" fill="url(#mh80BotFinOuter)" stroke="#cfe0e8" strokeWidth="1" />
-                  <ellipse cx="52" cy="175" rx="10" ry="66" fill="url(#mh80BotFinInner)" />
-                  <ellipse cx="52" cy="175" rx="10" ry="66" fill="none" stroke="#10a7db" strokeOpacity=".65" strokeWidth="1.4" filter="url(#mh80BotGlow)" />
+                {/* aletas laterales dobles: forma de hoja/blade con puntas
+                    (dos arcos que se unen arriba y abajo), no óvalos planos */}
+                <g transform="rotate(-6 42 172)">
+                  <path
+                    d="M42 96 C60 118 60 228 42 250 C24 228 24 118 42 96 Z"
+                    fill="url(#mh80BotFinOuter)"
+                    stroke="#dbe7ed"
+                    strokeWidth="1"
+                  />
+                  <path d="M34 118 C40 150 40 198 34 228" stroke="#ffffff" strokeOpacity=".8" strokeWidth="3" strokeLinecap="round" fill="none" />
+                  <path
+                    d="M54 112 C64 132 64 214 54 234 C44 214 44 132 54 112 Z"
+                    fill="url(#mh80BotFinInner)"
+                  />
+                  <path
+                    d="M54 112 C64 132 64 214 54 234 C44 214 44 132 54 112 Z"
+                    fill="none"
+                    stroke="#10a7db"
+                    strokeOpacity=".7"
+                    strokeWidth="1.6"
+                    filter="url(#mh80BotGlow)"
+                  />
                 </g>
-                <g transform="rotate(7 180 175)">
-                  <ellipse cx="180" cy="175" rx="20" ry="78" fill="url(#mh80BotFinOuter)" stroke="#cfe0e8" strokeWidth="1" />
-                  <ellipse cx="168" cy="175" rx="10" ry="66" fill="url(#mh80BotFinInner)" />
-                  <ellipse cx="168" cy="175" rx="10" ry="66" fill="none" stroke="#10a7db" strokeOpacity=".65" strokeWidth="1.4" filter="url(#mh80BotGlow)" />
+                <g transform="rotate(6 178 172)">
+                  <path
+                    d="M178 96 C196 118 196 228 178 250 C160 228 160 118 178 96 Z"
+                    fill="url(#mh80BotFinOuter)"
+                    stroke="#dbe7ed"
+                    strokeWidth="1"
+                  />
+                  <path d="M186 118 C180 150 180 198 186 228" stroke="#ffffff" strokeOpacity=".8" strokeWidth="3" strokeLinecap="round" fill="none" />
+                  <path
+                    d="M166 112 C176 132 176 214 166 234 C156 214 156 132 166 112 Z"
+                    fill="url(#mh80BotFinInner)"
+                  />
+                  <path
+                    d="M166 112 C176 132 176 214 166 234 C156 214 156 132 166 112 Z"
+                    fill="none"
+                    stroke="#10a7db"
+                    strokeOpacity=".7"
+                    strokeWidth="1.6"
+                    filter="url(#mh80BotGlow)"
+                  />
                 </g>
 
                 {/* cuerpo */}
