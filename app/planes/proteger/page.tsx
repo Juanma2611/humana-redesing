@@ -21,14 +21,6 @@ const essenceStats = [
   { value: "$250.000", label: "de cobertura para\ntrasplante de órganos" },
 ];
 
-/* Top eventos/enfermedades que pueden superar $100.000 en gastos médicos
-   en Ecuador, usados para la sección de impacto/storytelling. */
-const impactEvents = [
-  { title: "Cáncer de mama", detail: "Cirugía + quimioterapia + radioterapia + terapias dirigidas (según estadio)", value: "≈ $142.850", period: "por tratamiento anual" },
-  { title: "Cáncer de próstata", detail: "Cirugía o radioterapia + hormonoterapia + fármacos de alto costo (según estadio)", value: "≈ $80.757", period: "por tratamiento anual" },
-  { title: "Trasplante de hígado", detail: "Cirugía altamente especializada + hospitalización/UCI + manejo pre y post-trasplante", value: "$55.000 – $100.000", period: "puede ser mayor según el caso" },
-];
-
 type Chapter = {
   id: string;
   number: string;
@@ -128,16 +120,6 @@ const chapters: Chapter[] = [
   },
 ];
 
-/* Beneficios sin costo adicional incluidos en Proteger */
-const featuredBenefits = [
-  { icon: HeartHandshake, title: "Seguro de vida $5.000" },
-  { icon: HeartPulse, title: "Chequeo médico anual" },
-  { icon: HandHeart, title: "Asistencias HU PLUS" },
-  { icon: Layers3, title: "Coordinación de beneficios" },
-  { icon: Sparkles, title: "Cirugía reconstructiva oncológica" },
-  { icon: ShieldPlus, title: "Red en convenio MetroHumana" },
-];
-
 /* Carencias generales del plan Proteger */
 const waitingPeriods = [
   { days: "0", title: "Chequeo médico y asistencias" },
@@ -182,7 +164,6 @@ export default function ProtegerPage() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
-  const [benefitIndex, setBenefitIndex] = useState(0);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -193,17 +174,6 @@ export default function ProtegerPage() {
   const closeDialog = () => dialogRef.current?.close();
 
   const handleQuoteClick = () => setQuoted(true);
-
-  const goToBenefit = (i: number) => setBenefitIndex(((i % featuredBenefits.length) + featuredBenefits.length) % featuredBenefits.length);
-  const prevBenefit = () => goToBenefit(benefitIndex - 1);
-  const nextBenefit = () => goToBenefit(benefitIndex + 1);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setBenefitIndex((i) => (i + 1) % featuredBenefits.length);
-    }, 3000);
-    return () => window.clearInterval(timer);
-  }, [benefitIndex]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -315,32 +285,11 @@ export default function ProtegerPage() {
           <p className="mh50-exp-fineprint mh50-exp-reveal">Información resumida para fines demostrativos. Aplican las condiciones del plan.</p>
         </section>
 
-        <section className="mh50-exp-moments" id="proteger-impacto">
-          <span className="mh50-exp-giant-word" aria-hidden="true">RESPALDO</span>
-          <div className="mh50-exp-moments-copy mh50-exp-reveal">
-            <span className="mh50-exp-eyebrow">GASTOS QUE PUEDEN SUPERAR $100.000</span>
-            <h2>Una enfermedad grave<br />puede costar más de lo previsto.</h2>
-            <p>En Ecuador, ciertos diagnósticos y tratamientos pueden generar gastos médicos extremadamente altos, especialmente cuando se requiere UCI, cirugías complejas o tratamientos especializados.</p>
-          </div>
-          <div className="mh50-exp-accordions mh50-exp-reveal" style={{ maxWidth: 720, margin: "0 auto" }}>
-            <div className="mh50-exp-accordion-grid on-light">
-              {impactEvents.map((e) => (
-                <article key={e.title}>
-                  <Cross />
-                  <strong>{e.value}</strong>
-                  <span>{e.title} — {e.detail} ({e.period})</span>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <nav className="mh50-exp-chapter-nav" aria-label="Capítulos de cobertura de Proteger">
           {chapters.map((c) => (
             <a key={c.id} href={`#proteger-${c.id}`} data-chapter-link={`proteger-${c.id}`}><span>{c.number}</span>{c.navLabel}</a>
           ))}
-          <a href="#proteger-incluido" data-chapter-link="proteger-incluido"><span>05</span>Beneficios</a>
-          <a href="#proteger-carencias" data-chapter-link="proteger-carencias"><span>06</span>Carencias</a>
+          <a href="#proteger-carencias" data-chapter-link="proteger-carencias"><span>05</span>Carencias</a>
         </nav>
 
         {chapters.map((c, i) => (
@@ -366,44 +315,6 @@ export default function ProtegerPage() {
             </div>
           </section>
         ))}
-
-        <section className="mh50-exp-included" id="proteger-incluido">
-          <div className="mh50-exp-benefits-panel">
-            <div className="mh50-exp-benefits-head mh50-exp-reveal">
-              <span className="mh50-exp-eyebrow light">BENEFICIOS ESPECIALES</span>
-              <h2>Más formas de acompañarte.</h2>
-              <p>Servicios adicionales que forman parte de tu plan Proteger, sin costo adicional.</p>
-            </div>
-            <div className="mh50-exp-benefits-grid" role="list" aria-label="Beneficios incluidos en el plan Proteger">
-              {featuredBenefits.map(({ icon: Icon, title }, i) => (
-                <article className="mh50-exp-reveal" style={{ "--reveal-delay": `${(i % 6) * 60}ms` } as React.CSSProperties} role="listitem" key={title}>
-                  <span className="mh50-exp-benefit-symbol" aria-hidden="true"><Icon /></span>
-                  <h3>{title}</h3>
-                  <span className="mh50-exp-benefit-arrow" aria-hidden="true">›</span>
-                </article>
-              ))}
-            </div>
-            <div className="mh50-exp-benefits-carousel" role="list" aria-label="Beneficios incluidos en el plan Proteger">
-              <div className="mh50-exp-benefits-carousel-track" style={{ transform: `translateX(-${benefitIndex * 100}%)` }}>
-                {featuredBenefits.map(({ icon: Icon, title }) => (
-                  <article className="mh50-exp-benefits-carousel-card" role="listitem" key={title}>
-                    <span className="mh50-exp-benefit-symbol" aria-hidden="true"><Icon /></span>
-                    <h3>{title}</h3>
-                  </article>
-                ))}
-              </div>
-              <div className="mh50-exp-benefits-carousel-controls">
-                <button type="button" onClick={prevBenefit} aria-label="Beneficio anterior">‹</button>
-                <div className="mh50-exp-benefits-carousel-dots">
-                  {featuredBenefits.map(({ title }, i) => (
-                    <button type="button" key={title} className={i === benefitIndex ? "active" : ""} aria-label={`Ir al beneficio ${title}`} onClick={() => goToBenefit(i)} />
-                  ))}
-                </div>
-                <button type="button" onClick={nextBenefit} aria-label="Siguiente beneficio">›</button>
-              </div>
-            </div>
-          </div>
-        </section>
 
         <section className="mh50-exp-waiting" id="proteger-carencias">
           <div className="mh50-exp-waiting-copy mh50-exp-reveal">
