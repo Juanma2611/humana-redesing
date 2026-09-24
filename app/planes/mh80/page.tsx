@@ -293,7 +293,14 @@ export default function Mh80Page() {
             </div>
             <div className="mh80-robotic-specialty-detail" key={robotSurgery.specialties[activeSpecialty].name}>
               <Cpu size={16} aria-hidden="true" />
-              <p>{robotSurgery.specialties[activeSpecialty].detail}</p>
+              <div className="mh80-robotic-specialty-detail-body">
+                <p>{robotSurgery.specialties[activeSpecialty].detail}</p>
+                <ul className="mh80-robotic-specialty-benefits">
+                  {robotSurgery.specialties[activeSpecialty].benefits.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
 

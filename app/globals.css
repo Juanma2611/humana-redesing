@@ -3727,10 +3727,14 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-robotic-specialty-detail {
   display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; padding: 18px 20px;
   border-radius: 14px; background: rgba(16,167,219,.05); border: 1px solid rgba(16,167,219,.16);
-  color: rgba(234,246,255,.8); font-size: 14px; line-height: 1.6; max-width: 720px;
+  color: rgba(234,246,255,.8); font-size: 14px; line-height: 1.6; max-width: 720px; min-width: 0;
   animation: mh80RoboticFadeIn .35s ease;
 }
 .mh80-robotic-specialty-detail svg { flex: none; margin-top: 2px; color: #6ec8ee; }
+.mh80-robotic-specialty-detail-body { min-width: 0; flex: 1 1 auto; }
+.mh80-robotic-specialty-benefits { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.mh80-robotic-specialty-benefits li { flex: 1 1 180px; position: relative; padding-left: 18px; font-size: 13px; color: rgba(234,246,255,.72); }
+.mh80-robotic-specialty-benefits li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: #10a7db; }
 @keyframes mh80RoboticFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
 .mh80-robotic {
@@ -3810,7 +3814,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-robotic-crosshair.bottom-left { bottom: 0; left: 0; border-right: 0; border-top: 0; }
 .mh80-robotic-crosshair.bottom-right { bottom: 0; right: 0; border-left: 0; border-top: 0; }
 
-.mh80-robotic-specialties { grid-area: specialties; position: relative; z-index: 2; border-top: 1px solid rgba(16,167,219,.14); padding-top: 34px; }
+.mh80-robotic-specialties { grid-area: specialties; position: relative; z-index: 2; border-top: 1px solid rgba(16,167,219,.14); padding-top: 34px; min-width: 0; }
 .mh80-robotic-specialties-label {
   display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px;
   font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #6ec8ee;
@@ -3839,12 +3843,14 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh80-robotic-visual { max-width: 260px; }
   .mh80-robotic-specialties-grid { grid-template-columns: repeat(2, 1fr); }
   .mh80-robotic-facts { grid-template-columns: 1fr; }
+  .mh80-robotic-specialty-benefits li { flex-basis: 100%; }
 }
 @media (max-width: 560px) {
   .mh80-robotic-specialties-grid { grid-template-columns: 1fr; }
   .mh80-robotic-stats { grid-template-columns: 1fr; }
   .mh80-robotic-hero-chips { gap: 8px; }
   .mh80-robotic-hero-chip { padding: 8px 12px; }
+  .mh80-robotic-specialty-benefits li { flex-basis: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .mh80-robotic-ring, .mh80-robotic-scanline, .mh80-robotic-hero-badge { animation: none !important; }

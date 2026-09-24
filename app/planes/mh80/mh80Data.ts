@@ -70,10 +70,26 @@ export const robotSurgery = {
   // general (no contractual) para ayudar al cliente a entender cada
   // procedimiento; no citan cifras ni condiciones del plan.
   specialties: [
-    { name: "Cirugía de colon y recto", detail: "Procedimientos de colon y recto con incisiones mínimas, mayor precisión y menor trauma para el paciente." },
-    { name: "Cirugía bariátrica", detail: "Cirugía de control de peso realizada con la precisión y estabilidad del brazo robótico." },
-    { name: "Cirugía hepato-bilio-pancreática", detail: "Intervenciones de alta complejidad en hígado, vías biliares y páncreas, con mayor control quirúrgico." },
-    { name: "Cirugía del tercio inferior del esófago", detail: "Procedimientos de precisión en la zona baja del esófago, minimizando el impacto en tejidos cercanos." },
+    {
+      name: "Cirugía de colon y recto",
+      detail: "Extirpación de tumores y resecciones de colon y recto con incisiones de apenas 5 mm, alta precisión y menor sangrado que la cirugía convencional.",
+      benefits: ["Recuperación en 3 a 5 días de hospitalización", "Menor riesgo de complicaciones e infecciones", "Preserva mejor la función de órganos cercanos"],
+    },
+    {
+      name: "Cirugía bariátrica",
+      detail: "Procedimientos para control de peso, como bypass gástrico o manga gástrica, con visión 3D de alta definición e instrumentos más finos que la laparoscopia tradicional.",
+      benefits: ["Mayor precisión en pacientes con anatomía compleja", "Menor dolor postoperatorio", "Reduce el riesgo de fugas y sangrado"],
+    },
+    {
+      name: "Cirugía hepato-bilio-pancreática",
+      detail: "Intervenciones de alta complejidad en hígado, vías biliares y páncreas, con visión tridimensional ampliada y control quirúrgico total del especialista.",
+      benefits: ["Instrumentos con 7 grados de movimiento y sin temblor", "Menor hospitalización y recuperación más rápida", "Resultados oncológicos equivalentes o mejores"],
+    },
+    {
+      name: "Cirugía del tercio inferior del esófago",
+      detail: "Esofaguectomías de precisión en la zona baja del esófago, con abordaje mínimamente invasivo y coordinación de equipos especializados.",
+      benefits: ["Incisiones mínimas y menor impacto en tejidos cercanos", "Menor sangrado y dolor postoperatorio", "Retorno más rápido a las actividades cotidianas"],
+    },
   ], // [A]
   facts: [
     { title: "Mínimamente invasiva", detail: "Incisiones más pequeñas y mayor precisión en cada movimiento quirúrgico." }, // [A]
