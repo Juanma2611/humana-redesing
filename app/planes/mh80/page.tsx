@@ -513,15 +513,13 @@ export default function Mh80Page() {
           <div className="mh80-exp-finale-mark" aria-hidden="true"><span>MH</span><strong>80</strong></div>
         </section>
 
-        {/* ASISTENTE VIRTUAL MH80 — personaje robot 3D (SVG original, no
-            fotografía ni ícono plano). Se mueve verticalmente según el
+        {/* ASISTENTE VIRTUAL MH80 — personaje entregado por el cliente
+            (código JSX/CSS exacto, integrado tal cual con prefijo
+            "mh80-bot-" en las clases). Se mueve verticalmente según el
             porcentaje de scroll (ver assistantRef en el efecto de arriba),
-            flota con una animación CSS continua, cambia su mensaje según la
+            flota con la animación del cliente, cambia su mensaje según la
             sección visible, y se puede minimizar (preferencia guardada en
-            localStorage). Diseño propio inspirado en la referencia del
-            cliente, no una copia: cuerpo blanco glossy, visor oscuro, ojos
-            cian, una sola aleta lateral por lado (no doble) y emblema "H"
-            de Humana en el pecho en vez de un logo ajeno. */}
+            localStorage). */}
         <div
           id="mh80-assistant-slot"
           ref={assistantRef}
@@ -541,126 +539,20 @@ export default function Mh80Page() {
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente de MH80" : "Minimizar asistente de MH80"}
           >
-            <span className="mh80-assistant-float">
-              <svg viewBox="0 0 220 300" width="100%" height="100%" aria-hidden="true">
-                <defs>
-                  <radialGradient id="mh80BotBody" cx="36%" cy="24%" r="80%">
-                    <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="55%" stopColor="#f3f8fb" />
-                    <stop offset="100%" stopColor="#d7e4ea" />
-                  </radialGradient>
-                  <radialGradient id="mh80BotVisor" cx="40%" cy="26%" r="85%">
-                    <stop offset="0%" stopColor="#333f49" />
-                    <stop offset="45%" stopColor="#111c26" />
-                    <stop offset="100%" stopColor="#03070a" />
-                  </radialGradient>
-                  <radialGradient id="mh80BotEye" cx="50%" cy="40%" r="62%">
-                    <stop offset="0%" stopColor="#eefdff" />
-                    <stop offset="32%" stopColor="#5ce1f2" />
-                    <stop offset="100%" stopColor="#0b80bd" />
-                  </radialGradient>
-                  <linearGradient id="mh80BotFinOuter" x1="10%" y1="0%" x2="90%" y2="100%">
-                    <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="100%" stopColor="#d3e2e9" />
-                  </linearGradient>
-                  <linearGradient id="mh80BotFinInner" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#1a2530" />
-                    <stop offset="100%" stopColor="#060b10" />
-                  </linearGradient>
-                  <filter id="mh80BotGlow" x="-60%" y="-60%" width="220%" height="220%">
-                    <feGaussianBlur stdDeviation="4" result="blur" />
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-
-                {/* aletas laterales dobles: forma de hoja/blade con puntas
-                    (dos arcos que se unen arriba y abajo), no óvalos planos */}
-                <g transform="rotate(-6 42 172)">
-                  <path
-                    d="M42 96 C60 118 60 228 42 250 C24 228 24 118 42 96 Z"
-                    fill="url(#mh80BotFinOuter)"
-                    stroke="#dbe7ed"
-                    strokeWidth="1"
-                  />
-                  <path d="M34 118 C40 150 40 198 34 228" stroke="#ffffff" strokeOpacity=".8" strokeWidth="3" strokeLinecap="round" fill="none" />
-                  <path
-                    d="M54 112 C64 132 64 214 54 234 C44 214 44 132 54 112 Z"
-                    fill="url(#mh80BotFinInner)"
-                  />
-                  <path
-                    d="M54 112 C64 132 64 214 54 234 C44 214 44 132 54 112 Z"
-                    fill="none"
-                    stroke="#10a7db"
-                    strokeOpacity=".7"
-                    strokeWidth="1.6"
-                    filter="url(#mh80BotGlow)"
-                  />
-                </g>
-                <g transform="rotate(6 178 172)">
-                  <path
-                    d="M178 96 C196 118 196 228 178 250 C160 228 160 118 178 96 Z"
-                    fill="url(#mh80BotFinOuter)"
-                    stroke="#dbe7ed"
-                    strokeWidth="1"
-                  />
-                  <path d="M186 118 C180 150 180 198 186 228" stroke="#ffffff" strokeOpacity=".8" strokeWidth="3" strokeLinecap="round" fill="none" />
-                  <path
-                    d="M166 112 C176 132 176 214 166 234 C156 214 156 132 166 112 Z"
-                    fill="url(#mh80BotFinInner)"
-                  />
-                  <path
-                    d="M166 112 C176 132 176 214 166 234 C156 214 156 132 166 112 Z"
-                    fill="none"
-                    stroke="#10a7db"
-                    strokeOpacity=".7"
-                    strokeWidth="1.6"
-                    filter="url(#mh80BotGlow)"
-                  />
-                </g>
-
-                {/* cuerpo */}
-                <path
-                  d="M60 152 C60 130 83 118 110 118 C137 118 160 130 160 152 L154 242 C150 278 130 297 110 300 C90 297 70 278 66 242 Z"
-                  fill="url(#mh80BotBody)"
-                  stroke="#ffffff"
-                />
-                <path d="M110 130 C104 175 104 235 110 288" stroke="#9fbdc9" strokeOpacity=".4" strokeWidth="1.2" fill="none" />
-
-                {/* emblema h (trazo único: palo izquierdo recto + arco que baja como pierna derecha, sin cruzar por arriba del palo) */}
-                <g filter="url(#mh80BotGlow)">
-                  <path
-                    d="M92 172 V224 M92 197 Q92 186 104 186 Q117 186 117 201 V224"
-                    stroke="#10a7db"
-                    strokeWidth="7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                  />
-                  <circle cx="129" cy="178" r="4.5" fill="#10a7db" />
-                </g>
-
-                {/* cuello */}
-                <ellipse cx="110" cy="145" rx="32" ry="5" fill="#10a7db" opacity=".3" filter="url(#mh80BotGlow)" />
-
-                {/* cabeza */}
-                <ellipse cx="110" cy="82" rx="66" ry="60" fill="url(#mh80BotBody)" stroke="#ffffff" />
-                <ellipse cx="110" cy="85" rx="55" ry="47" fill="url(#mh80BotVisor)" />
-
-                {/* ojos: capa de glow detrás (difusa) + óvalo nítido encima (sin filtro, para que no se deforme) */}
-                <ellipse cx="83" cy="90" rx="19" ry="23" fill="#10a7db" opacity=".38" filter="url(#mh80BotGlow)" />
-                <ellipse cx="137" cy="90" rx="19" ry="23" fill="#10a7db" opacity=".38" filter="url(#mh80BotGlow)" />
-                <ellipse cx="83" cy="90" rx="14" ry="18" fill="url(#mh80BotEye)" />
-                <ellipse cx="137" cy="90" rx="14" ry="18" fill="url(#mh80BotEye)" />
-                <ellipse cx="78" cy="82" rx="4.5" ry="5.5" fill="#ffffff" opacity=".9" />
-                <ellipse cx="132" cy="82" rx="4.5" ry="5.5" fill="#ffffff" opacity=".9" />
-
-                {/* brillo de casco */}
-                <path d="M62 56 C72 32 94 18 110 18" stroke="#ffffff" strokeWidth="7" strokeLinecap="round" opacity=".55" fill="none" />
-              </svg>
-            </span>
+            <div className="mh80-bot" aria-hidden="true">
+              <div className="mh80-bot-glow" />
+              <div className="mh80-bot-head">
+                <div className="mh80-bot-visor">
+                  <span className="mh80-bot-eye eye-left" />
+                  <span className="mh80-bot-eye eye-right" />
+                </div>
+              </div>
+              <div className="mh80-bot-body">
+                <div className="mh80-bot-logo">h</div>
+              </div>
+              <div className="mh80-bot-arm arm-left" />
+              <div className="mh80-bot-arm arm-right" />
+            </div>
           </button>
         </div>
       </div>
