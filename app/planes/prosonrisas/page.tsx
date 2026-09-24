@@ -293,13 +293,13 @@ export default function ProsonrisasPage() {
           </div>
           <div className="mh50-exp-gallery" aria-label="Momentos de sonrisas protegidas">
             <figure className="mh50-exp-photo card-a">
-              <Image src="/humana-prosonrisas-hero.png" alt="Familia sonriendo, protegida por Prosonrisas" fill sizes="(max-width: 980px) 60vw, 30vw" unoptimized />
+              <Image src="/images/planes/prosonrisas/prosonrisas-equipo.jpg" alt="Equipo de especialistas odontológicos de la red Prosonrisas" fill sizes="(max-width: 980px) 60vw, 30vw" unoptimized />
             </figure>
             <figure className="mh50-exp-photo card-b">
-              <Image src="/ph15-consultas.jpg" alt="Consulta odontológica con un especialista" fill sizes="(max-width: 980px) 54vw, 26vw" unoptimized />
+              <Image src="/images/planes/prosonrisas/prosonrisas-tratamiento.jpg" alt="Consulta odontológica con un especialista" fill sizes="(max-width: 980px) 54vw, 26vw" unoptimized />
             </figure>
             <figure className="mh50-exp-photo card-c">
-              <Image src="/ph15-medicinas.jpg" alt="Cuidado dental preventivo" fill sizes="(max-width: 980px) 55vw, 26vw" unoptimized />
+              <Image src="/images/planes/prosonrisas/prosonrisas-odontopediatria.jpg" alt="Odontopediatra atendiendo a un niño" fill sizes="(max-width: 980px) 55vw, 26vw" unoptimized />
             </figure>
           </div>
           <a className="mh50-exp-scroll-cue" href="#prosonrisas-esencia"><span />Desliza para descubrir</a>
