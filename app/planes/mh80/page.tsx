@@ -596,17 +596,17 @@ export default function Mh80Page() {
                 />
                 <path d="M110 130 C104 175 104 235 110 288" stroke="#9fbdc9" strokeOpacity=".4" strokeWidth="1.2" fill="none" />
 
-                {/* emblema h */}
+                {/* emblema h (trazo único: palo izquierdo recto + arco que baja como pierna derecha, sin cruzar por arriba del palo) */}
                 <g filter="url(#mh80BotGlow)">
                   <path
-                    d="M96 178 v42 M96 196 C96 188 104 184 110 184 C116 184 120 188 120 195 v25"
+                    d="M92 172 V224 M92 197 Q92 186 104 186 Q117 186 117 201 V224"
                     stroke="#10a7db"
                     strokeWidth="7"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     fill="none"
                   />
-                  <circle cx="128" cy="182" r="4.5" fill="#10a7db" />
+                  <circle cx="129" cy="178" r="4.5" fill="#10a7db" />
                 </g>
 
                 {/* cuello */}
@@ -616,13 +616,13 @@ export default function Mh80Page() {
                 <ellipse cx="110" cy="82" rx="66" ry="60" fill="url(#mh80BotBody)" stroke="#ffffff" />
                 <ellipse cx="110" cy="85" rx="55" ry="47" fill="url(#mh80BotVisor)" />
 
-                {/* ojos */}
-                <g filter="url(#mh80BotGlow)">
-                  <ellipse cx="83" cy="90" rx="17" ry="22" fill="url(#mh80BotEye)" />
-                  <ellipse cx="137" cy="90" rx="17" ry="22" fill="url(#mh80BotEye)" />
-                </g>
-                <ellipse cx="77" cy="80" rx="5" ry="6" fill="#ffffff" opacity=".85" />
-                <ellipse cx="131" cy="80" rx="5" ry="6" fill="#ffffff" opacity=".85" />
+                {/* ojos: capa de glow detrás (difusa) + óvalo nítido encima (sin filtro, para que no se deforme) */}
+                <ellipse cx="83" cy="90" rx="19" ry="23" fill="#10a7db" opacity=".38" filter="url(#mh80BotGlow)" />
+                <ellipse cx="137" cy="90" rx="19" ry="23" fill="#10a7db" opacity=".38" filter="url(#mh80BotGlow)" />
+                <ellipse cx="83" cy="90" rx="14" ry="18" fill="url(#mh80BotEye)" />
+                <ellipse cx="137" cy="90" rx="14" ry="18" fill="url(#mh80BotEye)" />
+                <ellipse cx="78" cy="82" rx="4.5" ry="5.5" fill="#ffffff" opacity=".9" />
+                <ellipse cx="132" cy="82" rx="4.5" ry="5.5" fill="#ffffff" opacity=".9" />
 
                 {/* brillo de casco */}
                 <path d="M62 56 C72 32 94 18 110 18" stroke="#ffffff" strokeWidth="7" strokeLinecap="round" opacity=".55" fill="none" />
