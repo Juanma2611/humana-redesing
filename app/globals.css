@@ -4016,64 +4016,28 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 
 /* ============================================================ */
-/* MH80 — Asistente virtual: personaje robot 3D flotante (SVG      */
-/* original, sin base inferior, con burbuja glassmorphism clara).  */
+/* MH80 — Asistente virtual: personaje oficial en PNG (imagen        */
+/* entregada por el cliente, con transparencia real), flotando fijo  */
+/* en pantalla, con burbuja glassmorphism clara.                     */
 /* ============================================================ */
 .mh80-assistant {
-  /* Fijo durante el scroll (no se desplaza según % de página, a
-     diferencia de la versión anterior): queda anclado siempre en la
-     misma esquina, como un personaje integrado a la experiencia. */
+  /* Fijo durante el scroll: queda anclado siempre en la misma
+     esquina, como un personaje integrado a la experiencia. */
   position: fixed; right: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
   display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
 }
 .mh80-assistant-figure {
   border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
-  transform: scale(.62); transform-origin: bottom right;
+  display: block; animation: mh80BotFloat 4s ease-in-out infinite;
 }
-.mh80-assistant.is-minimized .mh80-assistant-figure { transform: scale(.32); }
-
-/* Personaje del asistente MH80 — código entregado por el cliente,
-   integrado tal cual (mismos colores, formas y animación); solo se
-   prefijaron las clases a "mh80-bot-*" para no colisionar con el resto
-   del sitio, y el tamaño/posicionamiento absoluto originales (que
-   asumían ser el único elemento fixed de la página) se delegan al
-   contenedor .mh80-assistant existente, que ya maneja la posición
-   fixed y el seguimiento del scroll. */
-.mh80-bot { width: 170px; height: 250px; position: relative; animation: mh80BotFloat 4s ease-in-out infinite; }
-.mh80-bot-glow {
-  position: absolute; width: 220px; height: 80px;
-  background: radial-gradient(rgba(0,190,255,.4), transparent);
-  bottom: -30px; left: -25px; filter: blur(15px);
+.mh80-bot-image {
+  width: clamp(150px, 13vw, 220px); height: auto; display: block;
+  filter: drop-shadow(0 20px 35px rgba(0,180,255,.35));
 }
-.mh80-bot-head {
-  width: 170px; height: 120px;
-  background: linear-gradient(145deg, #ffffff, #dfe8f5);
-  border-radius: 80px; position: absolute; top: 0;
-  box-shadow: 0 0 35px rgba(0,170,255,.35);
-}
-.mh80-bot-visor {
-  width: 140px; height: 75px; background: #020617; border-radius: 50px;
-  position: absolute; top: 22px; left: 15px;
-  display: flex; justify-content: center; align-items: center; gap: 35px;
-}
-.mh80-bot-eye { width: 28px; height: 28px; background: #00d9ff; border-radius: 50%; box-shadow: 0 0 25px #00d9ff; }
-.mh80-bot-body {
-  position: absolute; top: 110px; left: 20px; width: 130px; height: 130px;
-  background: linear-gradient(160deg, #ffffff, #dce6f2);
-  border-radius: 35px 35px 70px 70px;
-  box-shadow: 0 0 25px rgba(0,170,255,.25);
-}
-.mh80-bot-logo {
-  position: absolute; top: 45px; width: 100%; text-align: center;
-  font-size: 55px; font-weight: 700; color: #00bfff;
-  text-shadow: 0 0 20px #00bfff; font-family: Arial, sans-serif;
-}
-.mh80-bot-arm { position: absolute; top: 125px; width: 25px; height: 100px; background: #fff; border-radius: 20px; }
-.mh80-bot-arm.arm-left { left: -5px; }
-.mh80-bot-arm.arm-right { right: -5px; }
+.mh80-assistant.is-minimized .mh80-bot-image { width: 72px; }
 @keyframes mh80BotFloat {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(-18px); }
 }
 .mh80-assistant-bubble {
   position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
@@ -4091,11 +4055,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-assistant-close:hover { background: rgba(11,128,189,.18); }
 @media (max-width: 768px) {
   .mh80-assistant { bottom: 20px; right: 14px; }
-  .mh80-assistant-figure { transform: scale(.44); }
-  .mh80-assistant.is-minimized .mh80-assistant-figure { transform: scale(.26); }
+  .mh80-bot-image { width: 110px; }
+  .mh80-assistant.is-minimized .mh80-bot-image { width: 56px; }
   .mh80-assistant-bubble { max-width: 58vw; padding: 12px 26px 12px 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mh80-bot { animation: none; }
-  .mh80-assistant { transition: none; }
+  .mh80-assistant-figure { animation: none; }
 }

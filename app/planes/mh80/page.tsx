@@ -535,20 +535,15 @@ export default function Mh80Page() {
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente de MH80" : "Minimizar asistente de MH80"}
           >
-            <div className="mh80-bot" aria-hidden="true">
-              <div className="mh80-bot-glow" />
-              <div className="mh80-bot-head">
-                <div className="mh80-bot-visor">
-                  <span className="mh80-bot-eye eye-left" />
-                  <span className="mh80-bot-eye eye-right" />
-                </div>
-              </div>
-              <div className="mh80-bot-body">
-                <div className="mh80-bot-logo">h</div>
-              </div>
-              <div className="mh80-bot-arm arm-left" />
-              <div className="mh80-bot-arm arm-right" />
-            </div>
+            <Image
+              src="/images/planes/mh80/mh80-robot.png"
+              alt="Asistente virtual MH80"
+              width={560}
+              height={840}
+              unoptimized
+              className="mh80-bot-image"
+              priority={false}
+            />
           </button>
         </div>
       </div>
