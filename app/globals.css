@@ -4020,9 +4020,11 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* original, sin base inferior, con burbuja glassmorphism clara).  */
 /* ============================================================ */
 .mh80-assistant {
-  position: fixed; right: clamp(10px, 2.4vw, 40px); top: 140px; z-index: 60;
+  /* Fijo durante el scroll (no se desplaza según % de página, a
+     diferencia de la versión anterior): queda anclado siempre en la
+     misma esquina, como un personaje integrado a la experiencia. */
+  position: fixed; right: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
   display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
-  transition: top .3s linear;
 }
 .mh80-assistant-figure {
   border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
@@ -4088,7 +4090,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .mh80-assistant-close:hover { background: rgba(11,128,189,.18); }
 @media (max-width: 768px) {
-  .mh80-assistant { top: auto !important; bottom: 20px; right: 14px; }
+  .mh80-assistant { bottom: 20px; right: 14px; }
   .mh80-assistant-figure { transform: scale(.44); }
   .mh80-assistant.is-minimized .mh80-assistant-figure { transform: scale(.26); }
   .mh80-assistant-bubble { max-width: 58vw; padding: 12px 26px 12px 14px; }

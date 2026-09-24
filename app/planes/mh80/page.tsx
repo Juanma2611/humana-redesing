@@ -112,10 +112,6 @@ export default function Mh80Page() {
         const offset = Math.min(window.scrollY * 0.12, 60);
         galleryRef.current.style.transform = `translateY(${offset}px)`;
       }
-      if (assistantRef.current && !reducedMotion && window.innerWidth > 760) {
-        const track = window.innerHeight - 300;
-        assistantRef.current.style.top = `${140 + percent * track}px`;
-      }
       let current = "";
       chapterSections.forEach((section) => {
         if (section.getBoundingClientRect().top < window.innerHeight * 0.52) current = section.id;
