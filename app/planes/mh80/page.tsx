@@ -306,7 +306,7 @@ export default function Mh80Page() {
           <div className="mh80-modules-grid" role="list">
             {coverageModules.map((m, i) => (
               <article
-                className={`mh80-module mh80-exp-reveal${expandedModule === m.id ? " is-open" : ""}`}
+                className="mh80-module mh80-exp-reveal"
                 style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
                 role="listitem"
                 key={m.id}
