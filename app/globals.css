@@ -4123,3 +4123,23 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .prosonrisas-dental-decor .deco-tooth-1 { top: 4%; left: -6%; }
   .prosonrisas-dental-decor .deco-tooth-2 { bottom: 4%; right: -8%; left: auto; }
 }
+
+/* ============================================================ */
+/* Humana Business — decoración de fondo con siluetas de oficina  */
+/* (edificio, maletín, lápiz, gráfico) en celeste + blanco, para  */
+/* reforzar la identidad corporativa sin recargar el diseño.      */
+/* ============================================================ */
+.business-decor { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.business-decor .deco { position: absolute; stroke-width: 1.2; }
+.business-decor.on-dark .deco { color: rgba(255,255,255,.08); }
+.business-decor.on-light .deco { color: rgba(16,167,219,.1); }
+
+.business-decor .deco-building { width: clamp(90px, 9vw, 160px); height: auto; top: 8%; right: 6%; transform: rotate(6deg); }
+.business-decor .deco-briefcase { width: clamp(60px, 6vw, 100px); height: auto; bottom: 12%; left: 6%; transform: rotate(-10deg); }
+.business-decor .deco-pen { width: clamp(70px, 7vw, 120px); height: auto; top: 20%; left: 22%; transform: rotate(-30deg); }
+.business-decor .deco-chart { width: clamp(60px, 6vw, 110px); height: auto; bottom: 8%; right: 22%; transform: rotate(4deg); }
+@media (max-width: 760px) {
+  .business-decor .deco-pen, .business-decor .deco-chart { display: none; }
+  .business-decor .deco-building { top: 4%; right: -6%; }
+  .business-decor .deco-briefcase { bottom: 4%; left: -6%; }
+}

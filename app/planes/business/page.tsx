@@ -4,11 +4,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Ambulance, Banknote, Building2, CircleDollarSign, HeartHandshake, HeartPulse, Home as HomeIcon,
-  Layers3, MessageCircle, Phone, PhoneCall, Pill, ShieldCheck, ShieldPlus, Sparkles, Stethoscope, TrendingUp,
+  Ambulance, Banknote, BarChart3, Briefcase, Building2, CircleDollarSign, HeartPulse, Home as HomeIcon,
+  MessageCircle, PenLine, Phone, PhoneCall, Pill, ShieldCheck, ShieldPlus, Stethoscope, TrendingUp,
   Users, Video, WalletCards,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+
+/* ---------------------------------------------------------------------- */
+/* Decoración de fondo: siluetas de oficina (edificio, maletín, lápiz,     */
+/* gráfico) muy sutiles, para reforzar la identidad corporativa de         */
+/* Humana Business sin recargar el diseño.                                 */
+/* ---------------------------------------------------------------------- */
+
+function BusinessDecor({ tone }: { tone: "on-dark" | "on-light" }) {
+  return (
+    <div className={`business-decor ${tone}`} aria-hidden="true">
+      <Building2 className="deco deco-building" />
+      <Briefcase className="deco deco-briefcase" />
+      <PenLine className="deco deco-pen" />
+      <BarChart3 className="deco deco-chart" />
+    </div>
+  );
+}
 
 /* ---------------------------------------------------------------------- */
 /* Datos reales del plan Humana Business, extraídos de la presentación     */
@@ -128,22 +145,6 @@ const chapters: Chapter[] = [
   },
 ];
 
-/* Ventajas para la empresa vs. ventajas para el colaborador */
-const companyAdvantages = [
-  { icon: TrendingUp, label: "Disminución del ausentismo" },
-  { icon: HeartHandshake, label: "Aumento del bienestar y calidad de vida" },
-  { icon: Sparkles, label: "Incremento de la productividad" },
-  { icon: CircleDollarSign, label: "Deducción de impuestos" },
-];
-
-const employeeAdvantages = [
-  { icon: Stethoscope, label: "Atención médica oportuna y personalizada" },
-  { icon: Building2, label: "Acceso a la red más amplia de prestadores del país" },
-  { icon: HomeIcon, label: "Médicos y medicinas a domicilio" },
-  { icon: ShieldPlus, label: "Crédito en cobertura de emergencia por accidente al 100%" },
-  { icon: Users, label: "Extensión de coberturas a familiares" },
-];
-
 /* Beneficios sin costo adicional destacados */
 const featuredBenefits = [
   { icon: Video, title: "Teleconsulta médica 24h" },
@@ -152,11 +153,6 @@ const featuredBenefits = [
   { icon: Pill, title: "Red de más de 1.600 farmacias" },
   { icon: Users, title: "Extensión a familiares" },
   { icon: CircleDollarSign, title: "Precios competitivos" },
-];
-
-const differences = [
-  { icon: Layers3, value: "Corporativo tradicional", label: "Traje a la medida: se puede negociar coberturas, porcentajes, prestadores y más" },
-  { icon: WalletCards, value: "Plan Humana Business", label: "Se puede seleccionar los beneficios, coberturas, porcentajes y copagos" },
 ];
 
 const contactChannels = [
@@ -267,6 +263,7 @@ export default function HumanaBusinessPage() {
         <div className="mh50-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh50-exp-hero" id="business-inicio">
+          <BusinessDecor tone="on-dark" />
           <div className="mh50-exp-hero-copy">
             <span className="mh50-exp-eyebrow light">PLAN EMPRESARIAL · HUMANA BUSINESS</span>
             <h1 className="is-long">Busi<span>ness</span></h1>
@@ -295,6 +292,7 @@ export default function HumanaBusinessPage() {
         </section>
 
         <section className="mh50-exp-essence" id="business-esencia">
+          <BusinessDecor tone="on-dark" />
           <div className="mh50-exp-eyebrow light mh50-exp-reveal">HUMANA BUSINESS EN TRES IDEAS</div>
           <h2 className="mh50-exp-display mh50-exp-reveal">Más que un plan médico,<br />una estrategia de bienestar.</h2>
           <div className="mh50-exp-stat-stage">
@@ -309,6 +307,7 @@ export default function HumanaBusinessPage() {
         </section>
 
         <section className="mh50-exp-moments" id="business-configura">
+          <BusinessDecor tone="on-light" />
           <span className="mh50-exp-giant-word" aria-hidden="true">EQUIPO</span>
           <div className="mh50-exp-moments-copy mh50-exp-reveal">
             <span className="mh50-exp-eyebrow">ARMA TU PLAN A LA MEDIDA</span>
@@ -329,7 +328,6 @@ export default function HumanaBusinessPage() {
             <a key={c.id} href={`#business-${c.id}`} data-chapter-link={`business-${c.id}`}><span>{c.number}</span>{c.navLabel}</a>
           ))}
           <a href="#business-incluido" data-chapter-link="business-incluido"><span>05</span>Beneficios</a>
-          <a href="#business-diferencias" data-chapter-link="business-diferencias"><span>06</span>Diferencias</a>
         </nav>
 
         {chapters.map((c, i) => (
@@ -338,6 +336,7 @@ export default function HumanaBusinessPage() {
             id={`business-${c.id}`}
             className={`mh50-exp-chapter theme-${c.theme}${i % 2 === 1 ? " reverse" : ""}`}
           >
+            <BusinessDecor tone={c.theme === "dark" || c.theme === "blue" ? "on-dark" : "on-light"} />
             <div className="mh50-exp-chapter-number" aria-hidden="true">{c.number}</div>
             <div className="mh50-exp-chapter-image mh50-exp-reveal">
               <Image src={c.image} alt={c.imageAlt} fill sizes="(max-width: 980px) 100vw, 45vw" unoptimized />
@@ -352,11 +351,18 @@ export default function HumanaBusinessPage() {
               <button type="button" className="mh50-exp-text-button" onClick={() => openDialog(c.id)}>
                 Explorar detalles <span>↗</span>
               </button>
+              {c.id === "servicios" && (
+                <div className="mh50-exp-hero-actions" style={{ marginTop: 28 }}>
+                  <a className="primary-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">Contáctate con nosotros</a>
+                  <button type="button" className="ghost-button" onClick={handleQuoteClick}>Personaliza tu plan Humana Business</button>
+                </div>
+              )}
             </div>
           </section>
         ))}
 
-        <section className="mh50-exp-included" id="business-incluido">
+        <section className="mh50-exp-included" id="business-incluido" style={{ position: "relative" }}>
+          <BusinessDecor tone="on-light" />
           <div className="mh50-exp-benefits-panel">
             <div className="mh50-exp-benefits-head mh50-exp-reveal">
               <span className="mh50-exp-eyebrow light">BENEFICIOS PARA TU EQUIPO</span>
@@ -394,43 +400,10 @@ export default function HumanaBusinessPage() {
           </div>
         </section>
 
-        <section className="mh50-exp-waiting" id="business-diferencias">
-          <div className="mh50-exp-waiting-copy mh50-exp-reveal">
-            <span className="mh50-exp-eyebrow">EMPRESA Y COLABORADOR</span>
-            <h2>Ventajas para todos los que cuidas.</h2>
-            <p>Beneficios pensados tanto para tu empresa como para cada uno de tus colaboradores.</p>
-          </div>
-          <div className="mh50-exp-accordions mh50-exp-reveal">
-            <details open>
-              <summary>Ventajas para la empresa <span>+</span></summary>
-              <div className="mh50-exp-accordion-grid">
-                {companyAdvantages.map(({ icon: Icon, label }) => (
-                  <article key={label}><Icon /><strong>Beneficio</strong><span>{label}</span></article>
-                ))}
-              </div>
-            </details>
-            <details open>
-              <summary>Ventajas para tus colaboradores <span>+</span></summary>
-              <div className="mh50-exp-accordion-grid">
-                {employeeAdvantages.map(({ icon: Icon, label }) => (
-                  <article key={label}><Icon /><strong>Beneficio</strong><span>{label}</span></article>
-                ))}
-              </div>
-            </details>
-            <details>
-              <summary>Diferencias frente al corporativo tradicional <span>+</span></summary>
-              <div className="mh50-exp-accordion-grid">
-                {differences.map(({ icon: Icon, value, label }) => (
-                  <article key={value}><Icon /><strong>{value}</strong><span>{label}</span></article>
-                ))}
-              </div>
-            </details>
-          </div>
-        </section>
-
         <section className="mh50-exp-impact">
           <Image src="/mh50-metrofraternidad.jpg" alt="Niños en un entorno comunitario de atención médica" fill sizes="100vw" unoptimized />
           <div className="mh50-exp-impact-overlay" />
+          <BusinessDecor tone="on-dark" />
           <div className="mh50-exp-impact-copy mh50-exp-reveal">
             <span className="mh50-exp-eyebrow light">RESPALDO A NIVEL NACIONAL</span>
             <h2>Líderes en el segmento corporativo de medicina prepagada.</h2>
@@ -442,6 +415,7 @@ export default function HumanaBusinessPage() {
 
         <section className="mh50-exp-finale" id="business-cierre">
           <div className="mh50-exp-finale-rings" aria-hidden="true" />
+          <BusinessDecor tone="on-dark" />
           <div className="mh50-exp-finale-copy mh50-exp-reveal">
             <span className="mh50-exp-eyebrow light">HUMANA BUSINESS · PLAN EMPRESARIAL</span>
             <h2>El bienestar de tus colaboradores impulsa tu empresa.</h2>
