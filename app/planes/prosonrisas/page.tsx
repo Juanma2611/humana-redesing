@@ -10,6 +10,58 @@ import {
 import { SiteShell } from "@/components/site-shell";
 
 /* ---------------------------------------------------------------------- */
+/* Decoración de fondo: siluetas dentales (diente, cepillo, espejo,        */
+/* burbuja) muy sutiles, para darle a Prosonrisas una identidad propia     */
+/* celeste + blanco, amigable, distinta del resto de planes médicos.       */
+/* ---------------------------------------------------------------------- */
+
+function ToothShape(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 64 64" fill="none" {...props}>
+      <path
+        d="M32 6c-7 0-9 5-13 5-6 0-10 6-10 14 0 9 4 16 7 24 2 5 4 8 7 8 4 0 3-11 9-11s5 11 9 11c3 0 5-3 7-8 3-8 7-15 7-24 0-8-4-14-10-14-4 0-6-5-13-5Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+function ToothbrushShape(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 120 32" fill="none" {...props}>
+      <rect x="0" y="12" width="70" height="9" rx="4.5" fill="currentColor" />
+      <rect x="66" y="2" width="50" height="20" rx="8" fill="currentColor" />
+      <rect x="72" y="0" width="6" height="9" rx="2" fill="currentColor" />
+      <rect x="84" y="0" width="6" height="9" rx="2" fill="currentColor" />
+      <rect x="96" y="0" width="6" height="9" rx="2" fill="currentColor" />
+      <rect x="108" y="0" width="6" height="9" rx="2" fill="currentColor" />
+    </svg>
+  );
+}
+
+function DentalMirrorShape(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 40 110" fill="none" {...props}>
+      <rect x="16" y="20" width="8" height="86" rx="4" fill="currentColor" />
+      <circle cx="20" cy="14" r="14" fill="none" stroke="currentColor" strokeWidth="5" />
+    </svg>
+  );
+}
+
+function DentalDecor({ tone }: { tone: "on-dark" | "on-light" }) {
+  return (
+    <div className={`prosonrisas-dental-decor ${tone}`} aria-hidden="true">
+      <ToothShape className="deco deco-tooth-1" />
+      <ToothShape className="deco deco-tooth-2" />
+      <ToothbrushShape className="deco deco-brush" />
+      <DentalMirrorShape className="deco deco-mirror" />
+      <Sparkles className="deco deco-sparkle-1" />
+      <Sparkles className="deco deco-sparkle-2" />
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------------- */
 /* Datos reales del plan Prosonrisas, extraídos de la presentación         */
 /* oficial 2024 del producto (Prosonrisas Plus / Prosonrisas Full).        */
 /* ---------------------------------------------------------------------- */
@@ -278,6 +330,7 @@ export default function ProsonrisasPage() {
         <div className="mh50-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh50-exp-hero" id="prosonrisas-inicio">
+          <DentalDecor tone="on-dark" />
           <div className="mh50-exp-hero-copy">
             <span className="mh50-exp-eyebrow light">PLAN DENTAL · PROSONRISAS</span>
             <h1 className="is-long">Pro<span>sonrisas</span></h1>
@@ -306,6 +359,7 @@ export default function ProsonrisasPage() {
         </section>
 
         <section className="mh50-exp-essence" id="prosonrisas-esencia">
+          <DentalDecor tone="on-dark" />
           <div className="mh50-exp-eyebrow light mh50-exp-reveal">PROSONRISAS EN TRES IDEAS</div>
           <h2 className="mh50-exp-display mh50-exp-reveal">Volvió Prosonrisas,<br />tu plan dental.</h2>
           <div className="mh50-exp-stat-stage">
@@ -320,6 +374,7 @@ export default function ProsonrisasPage() {
         </section>
 
         <section className="mh50-exp-moments" id="prosonrisas-planes">
+          <DentalDecor tone="on-light" />
           <span className="mh50-exp-giant-word" aria-hidden="true">SONRÍE</span>
           <div className="mh50-exp-moments-copy mh50-exp-reveal">
             <span className="mh50-exp-eyebrow">ELIGE TU ALTERNATIVA</span>

@@ -4099,3 +4099,26 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @media (prefers-reduced-motion: reduce) {
   .mh80-assistant-figure { animation: none; }
 }
+
+/* ============================================================ */
+/* Prosonrisas — decoración de fondo con siluetas dentales        */
+/* (diente, cepillo, espejo, destellos) en celeste + blanco,      */
+/* para una identidad propia, amigable, distinta al resto de      */
+/* planes médicos.                                                */
+/* ============================================================ */
+.prosonrisas-dental-decor { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.prosonrisas-dental-decor .deco { position: absolute; }
+.prosonrisas-dental-decor.on-dark .deco { color: rgba(255,255,255,.08); }
+.prosonrisas-dental-decor.on-light .deco { color: rgba(16,167,219,.1); }
+
+.prosonrisas-dental-decor .deco-tooth-1 { width: clamp(90px, 9vw, 160px); height: auto; top: 8%; left: 4%; transform: rotate(-12deg); }
+.prosonrisas-dental-decor .deco-tooth-2 { width: clamp(70px, 7vw, 120px); height: auto; bottom: 10%; left: 38%; transform: rotate(18deg); }
+.prosonrisas-dental-decor .deco-brush { width: clamp(140px, 14vw, 240px); height: auto; top: 14%; right: 6%; transform: rotate(-20deg); }
+.prosonrisas-dental-decor .deco-mirror { width: clamp(50px, 5vw, 80px); height: auto; bottom: 6%; right: 18%; transform: rotate(24deg); }
+.prosonrisas-dental-decor .deco-sparkle-1 { width: 26px; height: 26px; top: 30%; left: 20%; }
+.prosonrisas-dental-decor .deco-sparkle-2 { width: 20px; height: 20px; bottom: 22%; right: 32%; }
+@media (max-width: 760px) {
+  .prosonrisas-dental-decor .deco-brush, .prosonrisas-dental-decor .deco-mirror { display: none; }
+  .prosonrisas-dental-decor .deco-tooth-1 { top: 4%; left: -6%; }
+  .prosonrisas-dental-decor .deco-tooth-2 { bottom: 4%; right: -8%; left: auto; }
+}
