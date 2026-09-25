@@ -4107,6 +4107,53 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 
 /* ============================================================ */
+/* Prosonrisas — asistente mascota (diente flotante)              */
+/* ============================================================ */
+
+.prosonrisas-assistant {
+  position: fixed; right: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+}
+.prosonrisas-assistant-figure {
+  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
+  display: block; animation: prosonrisasToothFloat 4s ease-in-out infinite;
+}
+.prosonrisas-tooth-image {
+  width: clamp(120px, 10vw, 170px); height: auto; display: block;
+  filter: drop-shadow(0 20px 35px rgba(16,167,219,.35));
+  transition: transform .3s ease;
+}
+.prosonrisas-assistant-figure:hover .prosonrisas-tooth-image { transform: scale(1.05); }
+.prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 64px; }
+@keyframes prosonrisasToothFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+.prosonrisas-assistant-bubble {
+  position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
+  border-radius: 18px 18px 4px 18px; background: rgba(255,255,255,.9);
+  border: 1px solid rgba(16,167,219,.22); backdrop-filter: blur(14px);
+  box-shadow: 0 20px 44px rgba(4,20,34,.2); color: #12314a;
+}
+.prosonrisas-assistant-bubble p { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 550; animation: prosonrisasAssistantFade .35s ease; }
+@keyframes prosonrisasAssistantFade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+.prosonrisas-assistant-close {
+  position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; border-radius: 50%;
+  border: 0; background: rgba(16,167,219,.12); color: #0b80bd;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+}
+.prosonrisas-assistant-close:hover { background: rgba(16,167,219,.2); }
+@media (max-width: 768px) {
+  .prosonrisas-assistant { bottom: 20px; right: 14px; }
+  .prosonrisas-tooth-image { width: 92px; }
+  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 52px; }
+  .prosonrisas-assistant-bubble { max-width: 58vw; padding: 12px 26px 12px 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prosonrisas-assistant-figure { animation: none; }
+}
+
+/* ============================================================ */
 /* Prosonrisas — decoración de fondo con siluetas dentales        */
 /* (diente, cepillo, espejo, destellos) en celeste + blanco,      */
 /* para una identidad propia, amigable, distinta al resto de      */

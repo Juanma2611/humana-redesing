@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   Baby, BadgeCheck, Building2, CircleDollarSign, Gem, HeartPulse, MessageCircle,
-  Phone, PhoneCall, Pill, ScanEye, Scissors, ShieldCheck, ShieldPlus, Smile, Sparkles, Stethoscope, Syringe, Users,
+  Phone, PhoneCall, Pill, ScanEye, Scissors, ShieldCheck, ShieldPlus, Smile, Sparkles, Stethoscope, Syringe, Users, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
@@ -226,6 +226,23 @@ const contactChannels = [
   { icon: Phone, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
 ];
 
+const assistantMessages: Record<string, string> = {
+  "prosonrisas-inicio": "Hola, soy el asistente virtual de Prosonrisas. Te ayudaré a descubrir cómo cuidar tu sonrisa con beneficios pensados para ti.",
+  "prosonrisas-esencia": "Descubre beneficios para cuidar tu sonrisa con especialistas y una red dental pensada para ti y tu familia.",
+  "prosonrisas-planes": "Conoce los beneficios de Prosonrisas Plus y Full, y elige el plan que mejor se adapta a ti.",
+  "prosonrisas-especialistas": "Accede a especialistas odontológicos: odontología general, ortodoncia, periodoncia y más.",
+  "prosonrisas-restauraciones": "Tu salud dental también merece protección, con cobertura para restauraciones y tratamientos.",
+  "prosonrisas-endodoncia": "Cuenta con cobertura para tratamientos de endodoncia realizados por especialistas de la red.",
+  "prosonrisas-diferenciales": "Prosonrisas suma beneficios diferenciales para cuidar tu sonrisa más allá de lo básico.",
+  "prosonrisas-incluido": "Revisa a detalle todo lo que incluye tu plan Prosonrisas, organizado por categorías.",
+  "prosonrisas-carencias": "Aquí puedes ver cuándo empieza a aplicar cada cobertura desde tu afiliación.",
+  "prosonrisas-detalles": "Consulta el glosario de términos dentales y la red que respalda tu plan Prosonrisas.",
+  "prosonrisas-esencia-grupo": "Prosonrisas forma parte de Conclina, el grupo con más experiencia en salud del Ecuador.",
+  "prosonrisas-cierre": "¿Listo para cuidar tu sonrisa? Cotiza Prosonrisas ahora.",
+};
+
+const ASSISTANT_STORAGE_KEY = "prosonrisas-assistant-minimized";
+
 /* ---------------------------------------------------------------------- */
 /* Página                                                                  */
 /* ---------------------------------------------------------------------- */
@@ -234,10 +251,13 @@ export default function ProsonrisasPage() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const assistantRef = useRef<HTMLDivElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
   const [activePlan, setActivePlan] = useState(planOptions[1].id);
+  const [assistantSection, setAssistantSection] = useState("prosonrisas-inicio");
+  const [assistantMinimized, setAssistantMinimized] = useState(false);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
   const selectedPlan = planOptions.find((p) => p.id === activePlan) ?? planOptions[0];
@@ -249,6 +269,26 @@ export default function ProsonrisasPage() {
   const closeDialog = () => dialogRef.current?.close();
 
   const handleQuoteClick = () => setQuoted(true);
+
+  useEffect(() => {
+    try {
+      if (window.localStorage.getItem(ASSISTANT_STORAGE_KEY) === "1") setAssistantMinimized(true);
+    } catch {
+      /* localStorage no disponible (modo privado, etc.): se ignora y el asistente queda visible */
+    }
+  }, []);
+
+  const toggleAssistant = () => {
+    setAssistantMinimized((current) => {
+      const next = !current;
+      try {
+        window.localStorage.setItem(ASSISTANT_STORAGE_KEY, next ? "1" : "0");
+      } catch {
+        /* noop */
+      }
+      return next;
+    });
+  };
 
   const goToBenefit = (i: number) => setBenefitIndex(((i % featuredBenefits.length) + featuredBenefits.length) % featuredBenefits.length);
   const prevBenefit = () => goToBenefit(benefitIndex - 1);
@@ -270,6 +310,10 @@ export default function ProsonrisasPage() {
       .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
       .filter((el): el is HTMLElement => !!el);
     let lastCurrent = "";
+    let lastAssistantSection = "";
+    const assistantSections = Array.from(root.querySelectorAll<HTMLElement>("[id^='prosonrisas-']")).filter(
+      (el) => el.id in assistantMessages,
+    );
 
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -289,6 +333,15 @@ export default function ProsonrisasPage() {
           navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
         }
         lastCurrent = current;
+      }
+
+      let currentAssistant = assistantSections[0]?.id ?? "";
+      assistantSections.forEach((section) => {
+        if (section.getBoundingClientRect().top < window.innerHeight * 0.6) currentAssistant = section.id;
+      });
+      if (currentAssistant && currentAssistant !== lastAssistantSection) {
+        setAssistantSection(currentAssistant);
+        lastAssistantSection = currentAssistant;
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -497,7 +550,7 @@ export default function ProsonrisasPage() {
           <p className="mh50-exp-waiting-note mh50-exp-reveal">La urgencia y emergencia dental preautorizada tiene vigencia de 24 horas. Aplican las condiciones particulares del contrato.</p>
         </section>
 
-        <section className="mh50-exp-vault" style={{ position: "relative" }}>
+        <section className="mh50-exp-vault" id="prosonrisas-detalles" style={{ position: "relative" }}>
           <DentalDecor tone="on-dark" />
           <div className="mh50-exp-vault-copy mh50-exp-reveal">
             <span className="mh50-exp-eyebrow light">CLARIDAD ANTES DE ELEGIR</span>
@@ -524,7 +577,7 @@ export default function ProsonrisasPage() {
           </div>
         </section>
 
-        <section className="mh50-exp-impact">
+        <section className="mh50-exp-impact" id="prosonrisas-esencia-grupo">
           <Image src="/mh50-metrofraternidad.jpg" alt="Niños en un entorno comunitario de atención médica" fill sizes="100vw" unoptimized />
           <div className="mh50-exp-impact-overlay" />
           <DentalDecor tone="on-dark" />
@@ -564,6 +617,42 @@ export default function ProsonrisasPage() {
           </div>
           <div className="mh50-exp-finale-mark" aria-hidden="true"><span>PLAN</span><strong className="is-long">SONRISAS</strong></div>
         </section>
+
+        <div
+          id="prosonrisas-assistant-slot"
+          ref={assistantRef}
+          className={`prosonrisas-assistant${assistantMinimized ? " is-minimized" : ""}`}
+        >
+          {!assistantMinimized && (
+            <div className="prosonrisas-assistant-bubble" role="status">
+              <button
+                type="button"
+                className="prosonrisas-assistant-close"
+                onClick={toggleAssistant}
+                aria-label="Minimizar asistente de Prosonrisas"
+              >
+                <X size={13} aria-hidden="true" />
+              </button>
+              <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
+            </div>
+          )}
+          <button
+            type="button"
+            className="prosonrisas-assistant-figure"
+            onClick={toggleAssistant}
+            aria-label={assistantMinimized ? "Mostrar asistente de Prosonrisas" : "Minimizar asistente de Prosonrisas"}
+          >
+            <Image
+              src="/images/planes/prosonrisas/prosonrisas-tooth.png"
+              alt="Asistente virtual Prosonrisas"
+              width={560}
+              height={560}
+              unoptimized
+              className="prosonrisas-tooth-image"
+              priority={false}
+            />
+          </button>
+        </div>
 
         <dialog className="mh50-exp-dialog" ref={dialogRef} onClose={() => setActiveChapterId(null)}>
           <button type="button" className="mh50-exp-dialog-close" onClick={closeDialog} aria-label="Cerrar">×</button>
