@@ -4180,6 +4180,69 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 
 /* ============================================================ */
+/* Oso Humana — avatar de acompañamiento de marca                 */
+/* Compartido por PH15, PH30, MH50 y MH150 (mismo personaje,      */
+/* solo cambian los mensajes de cada plan). MH80 y Prosonrisas    */
+/* conservan sus propios asistentes (robot / diente).             */
+/* ============================================================ */
+
+.humana-bear-assistant {
+  position: fixed; right: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+}
+.humana-bear-figure {
+  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
+  display: block; animation: humanaBearFloat 4s ease-in-out infinite;
+}
+.humana-bear-image {
+  width: clamp(150px, 13vw, 220px); height: auto; display: block;
+  filter: drop-shadow(0 20px 35px rgba(11,128,189,.3));
+  transition: transform .3s ease;
+}
+.humana-bear-figure:hover .humana-bear-image { transform: scale(1.05); }
+.humana-bear-assistant.is-minimized .humana-bear-image { width: 72px; }
+@keyframes humanaBearFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+.humana-bear-bubble {
+  position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
+  border-radius: 18px 18px 4px 18px; background: rgba(255,255,255,.9);
+  border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(14px);
+  box-shadow: 0 20px 44px rgba(4,20,34,.2); color: #12314a;
+}
+.humana-bear-bubble p { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 550; animation: humanaBearAssistantFade .35s ease; }
+@keyframes humanaBearAssistantFade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+.humana-bear-close {
+  position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; border-radius: 50%;
+  border: 0; background: rgba(11,128,189,.1); color: #0b80bd;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+}
+.humana-bear-close:hover { background: rgba(11,128,189,.18); }
+@media (max-width: 768px) {
+  /* En móvil el asistente pasa a ser una barra horizontal pegada al borde
+     inferior (como un widget de chat), para no tapar el contenido de la
+     página con una tarjeta flotante grande a media pantalla. */
+  .humana-bear-assistant {
+    left: 12px; right: 12px; bottom: 14px;
+    flex-direction: row; align-items: center; justify-content: flex-end; gap: 8px;
+  }
+  .humana-bear-image { width: 60px; }
+  .humana-bear-assistant.is-minimized .humana-bear-image { width: 48px; }
+  .humana-bear-bubble {
+    flex: 1 1 auto; max-width: none; padding: 10px 28px 10px 14px;
+    border-radius: 16px 16px 16px 4px;
+  }
+  .humana-bear-bubble p {
+    font-size: 12.5px; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .humana-bear-figure { animation: none; }
+}
+
+/* ============================================================ */
 /* Prosonrisas — decoración de fondo con siluetas dentales        */
 /* (diente, cepillo, espejo, destellos) en celeste + blanco,      */
 /* para una identidad propia, amigable, distinta al resto de      */

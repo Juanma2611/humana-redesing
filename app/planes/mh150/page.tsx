@@ -7,7 +7,7 @@ import {
   Activity, Ambulance, Baby, Bike, Bone, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Milk, Phone, PhoneCall, Plane, Ribbon,
-  ShieldCheck, ShieldPlus, Sparkles, Syringe, Users, Waves, Wallet,
+  ShieldCheck, ShieldPlus, Sparkles, Syringe, Users, Waves, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import {
@@ -31,13 +31,35 @@ function Icon({ name }: { name: keyof typeof iconMap }) {
   return <Cmp aria-hidden="true" />;
 }
 
+/* Asistente virtual: el oso Humana, con enfoque de protección familiar
+   para MH150. Mismo personaje que PH15/PH30/MH50; solo cambian los mensajes. */
+const assistantMessages: Record<string, string> = {
+  "mh150-inicio": "Hola, soy tu asistente Humana. Tu familia merece una protección que los acompañe siempre.",
+  "mh150-esencia": "Descubre cómo Humana cuida a quienes más quieres.",
+  "mh150-cobertura": "Conoce las coberturas pensadas para proteger a toda tu familia.",
+  "mh150-hospitalizacion": "Respaldo hospitalario para tu familia en los momentos que más lo necesita.",
+  "mh150-ambulatoria": "Consultas médicas accesibles para cada integrante de tu familia.",
+  "mh150-medicinas": "Medicinas cubiertas en la red de farmacias más amplia del país.",
+  "mh150-maternidad": "Acompañamos a tu familia también en la maternidad.",
+  "mh150-emergencias": "Ante una emergencia, tu familia cuenta con el respaldo de Humana.",
+  "mh150-incluido": "Conoce los beneficios pensados para proteger a tu familia.",
+  "mh150-carencias": "Aquí puedes ver cuándo empieza a aplicar cada cobertura desde tu afiliación.",
+  "mh150-faq": "¿Tienes dudas? Revisa las preguntas frecuentes de MH150.",
+  "mh150-cierre": "Protege a quienes más quieres. Cotiza MH150 ahora.",
+};
+
+const ASSISTANT_STORAGE_KEY = "mh150-bear-assistant-minimized";
+
 export default function Mh150Page() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const assistantRef = useRef<HTMLDivElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
+  const [assistantSection, setAssistantSection] = useState("mh150-inicio");
+  const [assistantMinimized, setAssistantMinimized] = useState(false);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -47,6 +69,26 @@ export default function Mh150Page() {
   };
   const closeDialog = () => dialogRef.current?.close();
   const handleQuoteClick = () => setQuoted(true);
+
+  useEffect(() => {
+    try {
+      if (window.localStorage.getItem(ASSISTANT_STORAGE_KEY) === "1") setAssistantMinimized(true);
+    } catch {
+      /* localStorage no disponible (modo privado, etc.): se ignora y el asistente queda visible */
+    }
+  }, []);
+
+  const toggleAssistant = () => {
+    setAssistantMinimized((current) => {
+      const next = !current;
+      try {
+        window.localStorage.setItem(ASSISTANT_STORAGE_KEY, next ? "1" : "0");
+      } catch {
+        /* noop */
+      }
+      return next;
+    });
+  };
 
   const goToBenefit = (i: number) => setBenefitIndex(((i % featuredBenefits.length) + featuredBenefits.length) % featuredBenefits.length);
   const prevBenefit = () => goToBenefit(benefitIndex - 1);
@@ -74,6 +116,10 @@ export default function Mh150Page() {
       .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
       .filter((el): el is HTMLElement => !!el);
     let lastCurrent = "";
+    let lastAssistantSection = "";
+    const assistantSections = Array.from(root.querySelectorAll<HTMLElement>("[id^='mh150-']")).filter(
+      (el) => el.id in assistantMessages,
+    );
 
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -93,6 +139,15 @@ export default function Mh150Page() {
           navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
         }
         lastCurrent = current;
+      }
+
+      let currentAssistant = assistantSections[0]?.id ?? "";
+      assistantSections.forEach((section) => {
+        if (section.getBoundingClientRect().top < window.innerHeight * 0.6) currentAssistant = section.id;
+      });
+      if (currentAssistant && currentAssistant !== lastAssistantSection) {
+        setAssistantSection(currentAssistant);
+        lastAssistantSection = currentAssistant;
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -412,6 +467,42 @@ export default function Mh150Page() {
           </div>
           <div className="mh150-exp-finale-mark" aria-hidden="true"><span>MH</span><strong>150</strong></div>
         </section>
+
+        <div
+          id="mh150-assistant-slot"
+          ref={assistantRef}
+          className={`humana-bear-assistant${assistantMinimized ? " is-minimized" : ""}`}
+        >
+          {!assistantMinimized && (
+            <div className="humana-bear-bubble" role="status">
+              <button
+                type="button"
+                className="humana-bear-close"
+                onClick={toggleAssistant}
+                aria-label="Minimizar asistente Humana"
+              >
+                <X size={13} aria-hidden="true" />
+              </button>
+              <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
+            </div>
+          )}
+          <button
+            type="button"
+            className="humana-bear-figure"
+            onClick={toggleAssistant}
+            aria-label={assistantMinimized ? "Mostrar asistente Humana" : "Minimizar asistente Humana"}
+          >
+            <Image
+              src="/images/planes/mh150/humana-bear.png"
+              alt="Asistente virtual Humana"
+              width={560}
+              height={670}
+              unoptimized
+              className="humana-bear-image"
+              priority={false}
+            />
+          </button>
+        </div>
 
         <dialog className="mh150-exp-dialog" ref={dialogRef} onClose={() => setActiveChapterId(null)}>
           <button type="button" className="mh150-exp-dialog-close" onClick={closeDialog} aria-label="Cerrar">×</button>
