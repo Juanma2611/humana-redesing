@@ -4097,10 +4097,23 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .mh80-assistant-close:hover { background: rgba(11,128,189,.18); }
 @media (max-width: 768px) {
-  .mh80-assistant { bottom: 20px; right: 14px; }
-  .mh80-bot-image { width: 110px; }
-  .mh80-assistant.is-minimized .mh80-bot-image { width: 56px; }
-  .mh80-assistant-bubble { max-width: 58vw; padding: 12px 26px 12px 14px; }
+  /* En móvil el asistente pasa a ser una barra horizontal pegada al borde
+     inferior (como un widget de chat), para no tapar el contenido de la
+     página con una tarjeta flotante grande a media pantalla. */
+  .mh80-assistant {
+    left: 12px; right: 12px; bottom: 14px;
+    flex-direction: row; align-items: center; justify-content: flex-end; gap: 8px;
+  }
+  .mh80-bot-image { width: 60px; }
+  .mh80-assistant.is-minimized .mh80-bot-image { width: 48px; }
+  .mh80-assistant-bubble {
+    flex: 1 1 auto; max-width: none; padding: 10px 28px 10px 14px;
+    border-radius: 16px 16px 16px 4px;
+  }
+  .mh80-assistant-bubble p {
+    font-size: 12.5px; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .mh80-assistant-figure { animation: none; }
@@ -4144,10 +4157,23 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .prosonrisas-assistant-close:hover { background: rgba(16,167,219,.2); }
 @media (max-width: 768px) {
-  .prosonrisas-assistant { bottom: 20px; right: 14px; }
-  .prosonrisas-tooth-image { width: 110px; }
-  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 56px; }
-  .prosonrisas-assistant-bubble { max-width: 58vw; padding: 12px 26px 12px 14px; }
+  /* En móvil el asistente pasa a ser una barra horizontal pegada al borde
+     inferior (como un widget de chat), para no tapar el contenido de la
+     página con una tarjeta flotante grande a media pantalla. */
+  .prosonrisas-assistant {
+    left: 12px; right: 12px; bottom: 14px;
+    flex-direction: row; align-items: center; justify-content: flex-end; gap: 8px;
+  }
+  .prosonrisas-tooth-image { width: 60px; }
+  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 48px; }
+  .prosonrisas-assistant-bubble {
+    flex: 1 1 auto; max-width: none; padding: 10px 28px 10px 14px;
+    border-radius: 16px 16px 16px 4px;
+  }
+  .prosonrisas-assistant-bubble p {
+    font-size: 12.5px; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .prosonrisas-assistant-figure { animation: none; }
