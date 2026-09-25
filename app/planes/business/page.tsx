@@ -74,8 +74,8 @@ const chapters: Chapter[] = [
     number: "01",
     navLabel: "Arma tu plan",
     theme: "dark",
-    image: "/humana-business-team-v2.png",
-    imageAlt: "Equipo de trabajo protegido por Humana Business",
+    image: "/images/planes/business/business-oficina.jpg",
+    imageAlt: "Equipo de oficina configurando su plan Humana Business",
     eyebrow: "ARMA TU PLAN A LA MEDIDA",
     title: "Se puede seleccionar los beneficios, coberturas, porcentajes y copagos.",
     lead: "A diferencia de un plan corporativo tradicional negociado a la medida, Humana Business te permite combinar los atributos según las necesidades de tu empresa.",
@@ -134,8 +134,8 @@ const chapters: Chapter[] = [
     number: "04",
     navLabel: "Ventajas empresa y equipo",
     theme: "warm",
-    image: "/humana-business-team.jpg",
-    imageAlt: "Colaboradores de una empresa protegidos por Humana Business",
+    image: "/images/planes/business/business-retail.jpg",
+    imageAlt: "Equipo de una tienda protegido por Humana Business",
     eyebrow: "MÁS QUE UN PLAN MÉDICO",
     title: "Cuidar a tu gente es la mejor inversión para tu negocio.",
     lead: "Bienestar para tu equipo, productividad para tu empresa. Una estrategia de bienestar, no solo un plan médico.",
@@ -263,13 +263,13 @@ export default function HumanaBusinessPage() {
           </div>
           <div className="mh50-exp-gallery" aria-label="Momentos de bienestar empresarial">
             <figure className="mh50-exp-photo card-a">
-              <Image src="/humana-business-team-v2.png" alt="Equipo de trabajo protegido por Humana Business" fill sizes="(max-width: 980px) 60vw, 30vw" unoptimized />
+              <Image src="/images/planes/business/business-industrial.jpg" alt="Ingeniero y colaboradora protegidos en una planta industrial" fill sizes="(max-width: 980px) 60vw, 30vw" unoptimized />
             </figure>
             <figure className="mh50-exp-photo card-b">
-              <Image src="/humana-business-team.jpg" alt="Colaboradores de una empresa saludable" fill sizes="(max-width: 980px) 54vw, 26vw" unoptimized />
+              <Image src="/images/planes/business/business-oficina.jpg" alt="Equipo de oficina protegido por Humana Business" fill sizes="(max-width: 980px) 54vw, 26vw" unoptimized />
             </figure>
             <figure className="mh50-exp-photo card-c">
-              <Image src="/ph15-consultas.jpg" alt="Atención médica oportuna para colaboradores" fill sizes="(max-width: 980px) 55vw, 26vw" unoptimized />
+              <Image src="/images/planes/business/business-taller.jpg" alt="Técnicos de un taller automotriz protegidos por Humana Business" fill sizes="(max-width: 980px) 55vw, 26vw" unoptimized />
             </figure>
           </div>
           <a className="mh50-exp-scroll-cue" href="#business-esencia"><span />Desliza para descubrir</a>
