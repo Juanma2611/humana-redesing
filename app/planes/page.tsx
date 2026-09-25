@@ -230,8 +230,8 @@ const plans: Plan[] = [
 ];
 
 const segmentCopy: Record<Segment, { label: string; title: string; short: string }> = {
-  individual: { label: "Individual", title: "Empieza por ti", short: "Planes para tu ritmo de vida" },
   familiar: { label: "Familiar", title: "Protege a quienes amas", short: "MH50 es nuestra opción familiar destacada" },
+  individual: { label: "Individual", title: "Empieza por ti", short: "Planes para tu ritmo de vida" },
   dental: { label: "ProSonrisas", title: "Tu sonrisa también merece respaldo", short: "Elige entre ProSonrisas Plus y Full" },
   empresa: { label: "Empresas", title: "Convierte bienestar en valor", short: "Cobertura flexible para tu equipo" },
   proteger: { label: "Protección extra", title: "Más respaldo para lo inesperado", short: "Complementa tu cobertura actual" },
@@ -250,7 +250,7 @@ function PlanCard({ plan, badge, isFeatured, onOpen, onQuote }: { plan: Plan; ba
   </article>;
 }
 
-const editorialSegments: Segment[] = ["individual", "familiar", "dental", "empresa", "proteger"];
+const editorialSegments: Segment[] = ["familiar", "individual", "dental", "empresa", "proteger"];
 
 function PlanEditorialHero({ id, eyebrow, title, description, image, imageAlt, onQuote, scrollTargetId, sectionRef }: {
   id: string; eyebrow: string; title: string; description: string; image: string; imageAlt: string;
@@ -382,20 +382,6 @@ export default function Plans() {
           {isEditorial ? (
             <div className="plan-editorial-flow">
               <PlanEditorialHero
-                id="seg-individual"
-                sectionRef={el => { observerTargets.current.individual = el; }}
-                eyebrow="Línea individual"
-                title="PractiHumana"
-                description="La línea de planes pensada para empezar a cuidarte hoy, con consultas accesibles y respaldo hospitalario desde el primer día."
-                image="/plan-ph15-hero.jpeg"
-                imageAlt="Persona joven sonriendo, protegida por un plan PractiHumana"
-                onQuote={() => quote(ph15, "cotización PractiHumana")}
-                scrollTargetId="plan-block-ph15"
-              />
-              <PlanEditorialBlock plan={ph15} badge="Opción recomendada individual" onQuote={() => quote(ph15)} onOpen={() => setSelected(ph15)} />
-              <PlanEditorialBlock plan={ph30} reverse sectionId="individual-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
-
-              <PlanEditorialHero
                 id="seg-familiar"
                 sectionRef={el => { observerTargets.current.familiar = el; }}
                 eyebrow="Línea familiar"
@@ -409,6 +395,20 @@ export default function Plans() {
               <PlanEditorialBlock plan={mh50} badge="Mejor opción familiar" sectionId="familiar-mh50" onQuote={() => quote(mh50)} onOpen={() => setSelected(mh50)} />
               <PlanEditorialBlock plan={mh80} reverse sectionId="familiar-mh80" onQuote={() => quote(mh80)} onOpen={() => setSelected(mh80)} />
               <PlanEditorialBlock plan={mh150} sectionId="familiar-mh150" onQuote={() => quote(mh150)} onOpen={() => setSelected(mh150)} />
+
+              <PlanEditorialHero
+                id="seg-individual"
+                sectionRef={el => { observerTargets.current.individual = el; }}
+                eyebrow="Línea individual"
+                title="PractiHumana"
+                description="La línea de planes pensada para empezar a cuidarte hoy, con consultas accesibles y respaldo hospitalario desde el primer día."
+                image="/plan-ph15-hero.jpeg"
+                imageAlt="Persona joven sonriendo, protegida por un plan PractiHumana"
+                onQuote={() => quote(ph15, "cotización PractiHumana")}
+                scrollTargetId="plan-block-ph15"
+              />
+              <PlanEditorialBlock plan={ph15} badge="Opción recomendada individual" onQuote={() => quote(ph15)} onOpen={() => setSelected(ph15)} />
+              <PlanEditorialBlock plan={ph30} reverse sectionId="individual-ph30" onQuote={() => quote(ph30)} onOpen={() => setSelected(ph30)} />
 
               <PlanEditorialHero
                 id="seg-dental"
