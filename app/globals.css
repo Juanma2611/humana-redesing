@@ -4119,12 +4119,12 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   display: block; animation: prosonrisasToothFloat 4s ease-in-out infinite;
 }
 .prosonrisas-tooth-image {
-  width: clamp(120px, 10vw, 170px); height: auto; display: block;
+  width: clamp(150px, 13vw, 220px); height: auto; display: block;
   filter: drop-shadow(0 20px 35px rgba(16,167,219,.35));
   transition: transform .3s ease;
 }
 .prosonrisas-assistant-figure:hover .prosonrisas-tooth-image { transform: scale(1.05); }
-.prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 64px; }
+.prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 72px; }
 @keyframes prosonrisasToothFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-16px); }
@@ -4145,8 +4145,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .prosonrisas-assistant-close:hover { background: rgba(16,167,219,.2); }
 @media (max-width: 768px) {
   .prosonrisas-assistant { bottom: 20px; right: 14px; }
-  .prosonrisas-tooth-image { width: 92px; }
-  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 52px; }
+  .prosonrisas-tooth-image { width: 110px; }
+  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 56px; }
   .prosonrisas-assistant-bubble { max-width: 58vw; padding: 12px 26px 12px 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
