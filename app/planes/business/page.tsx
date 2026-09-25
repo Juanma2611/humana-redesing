@@ -94,8 +94,8 @@ const chapters: Chapter[] = [
     number: "02",
     navLabel: "Red ambulatoria",
     theme: "blue",
-    image: "/ph15-consultas.jpg",
-    imageAlt: "Consulta médica en la red ambulatoria de Humana",
+    image: "/images/planes/business/business-industrial.jpg",
+    imageAlt: "Ingeniero y colaboradora de una planta industrial protegidos por la red ambulatoria",
     eyebrow: "RED AMBULATORIA",
     title: "Atención médica oportuna y personalizada, sin pagar deducible.",
     lead: "Consultas médicas en Red CAM y Red Preferida, exámenes de diagnóstico y medicinas con descuentos en toda la red de farmacias.",
@@ -114,8 +114,8 @@ const chapters: Chapter[] = [
     number: "03",
     navLabel: "Servicios adicionales",
     theme: "light",
-    image: "/ph15-emergencias.jpg",
-    imageAlt: "Servicio de asistencia médica de Humana Business",
+    image: "/images/planes/business/business-taller.jpg",
+    imageAlt: "Técnicos de un taller automotriz protegidos con servicios adicionales de Humana Business",
     eyebrow: "SERVICIOS ADICIONALES",
     title: "Atención médica sin salir de casa o la oficina.",
     lead: "Teleconsulta médica, médico a domicilio y ambulancia terrestre, disponibles para tus colaboradores cuando los necesiten.",
@@ -258,7 +258,7 @@ export default function HumanaBusinessPage() {
             </p>
             <div className="mh50-exp-hero-actions">
               <a className="primary-button" href="#business-cierre">Solicita asesoría empresarial</a>
-              <a className="ghost-button" href="#business-configura">Conoce sus beneficios</a>
+              <a className="ghost-button" href="#business-arma-plan">Conoce sus beneficios</a>
             </div>
           </div>
           <div className="mh50-exp-gallery" aria-label="Momentos de bienestar empresarial">
@@ -290,7 +290,7 @@ export default function HumanaBusinessPage() {
           <p className="mh50-exp-fineprint mh50-exp-reveal">Información resumida para fines demostrativos. Aplican las condiciones del plan.</p>
         </section>
 
-        <section className="mh50-exp-moments" id="business-configura">
+        <section className="mh50-exp-moments" id="business-arma-plan">
           <BusinessDecor tone="on-light" />
           <span className="mh50-exp-giant-word" aria-hidden="true">EQUIPO</span>
           <div className="mh50-exp-moments-copy mh50-exp-reveal">
