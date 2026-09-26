@@ -4097,23 +4097,25 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .mh80-assistant-close:hover { background: rgba(11,128,189,.18); }
 @media (max-width: 768px) {
-  /* En móvil el asistente es una barra horizontal pegada al borde inferior
-     (como un widget de chat), para no tapar el contenido de la página con
-     una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
-     grandes que el resto del sitio para que se note y se lea con claridad. */
-  .mh80-assistant {
-    left: 10px; right: 10px; bottom: 16px;
-    flex-direction: row; align-items: center; justify-content: flex-end; gap: 10px;
-  }
-  .mh80-bot-image { width: 96px; }
-  .mh80-assistant.is-minimized .mh80-bot-image { width: 60px; }
+  /* En móvil la burbuja vuelve a ubicarse encima del personaje (igual que en
+     escritorio), con una colita apuntando hacia él, tipo globo de historieta.
+     El personaje se agranda para que tenga más presencia en pantallas chicas. */
+  .mh80-assistant { right: 14px; bottom: 20px; gap: 12px; }
+  .mh80-bot-image { width: 140px; }
+  .mh80-assistant.is-minimized .mh80-bot-image { width: 70px; }
   .mh80-assistant-bubble {
-    flex: 1 1 auto; max-width: none; padding: 14px 30px 14px 16px;
-    border-radius: 18px 18px 18px 6px; border-left: 3px solid #10a7db;
+    max-width: 78vw; padding: 16px 34px 18px 18px;
+    border-radius: 20px 20px 4px 20px;
+  }
+  .mh80-assistant-bubble::after {
+    content: ""; position: absolute; bottom: -9px; right: 30px;
+    width: 20px; height: 20px; background: rgba(255,255,255,.88);
+    border-right: 1px solid rgba(16,167,219,.22); border-bottom: 1px solid rgba(16,167,219,.22);
+    border-bottom-right-radius: 4px; transform: rotate(45deg);
   }
   .mh80-assistant-bubble p {
     font-size: 14.5px; line-height: 1.45; font-weight: 600;
-    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -4162,19 +4164,22 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      (como un widget de chat), para no tapar el contenido de la página con
      una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
      grandes que el resto del sitio para que se note y se lea con claridad. */
-  .prosonrisas-assistant {
-    left: 10px; right: 10px; bottom: 16px;
-    flex-direction: row; align-items: center; justify-content: flex-end; gap: 10px;
-  }
-  .prosonrisas-tooth-image { width: 96px; }
-  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 60px; }
+  .prosonrisas-assistant { right: 14px; bottom: 20px; gap: 12px; }
+  .prosonrisas-tooth-image { width: 140px; }
+  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 70px; }
   .prosonrisas-assistant-bubble {
-    flex: 1 1 auto; max-width: none; padding: 14px 30px 14px 16px;
-    border-radius: 18px 18px 18px 6px; border-left: 3px solid #10a7db;
+    max-width: 78vw; padding: 16px 34px 18px 18px;
+    border-radius: 20px 20px 4px 20px;
+  }
+  .prosonrisas-assistant-bubble::after {
+    content: ""; position: absolute; bottom: -9px; right: 30px;
+    width: 20px; height: 20px; background: rgba(255,255,255,.9);
+    border-right: 1px solid rgba(16,167,219,.22); border-bottom: 1px solid rgba(16,167,219,.22);
+    border-bottom-right-radius: 4px; transform: rotate(45deg);
   }
   .prosonrisas-assistant-bubble p {
     font-size: 14.5px; line-height: 1.45; font-weight: 600;
-    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -4226,19 +4231,22 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      (como un widget de chat), para no tapar el contenido de la página con
      una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
      grandes que el resto del sitio para que se note y se lea con claridad. */
-  .humana-bear-assistant {
-    left: 10px; right: 10px; bottom: 16px;
-    flex-direction: row; align-items: center; justify-content: flex-end; gap: 10px;
-  }
-  .humana-bear-image { width: 96px; }
-  .humana-bear-assistant.is-minimized .humana-bear-image { width: 60px; }
+  .humana-bear-assistant { right: 14px; bottom: 20px; gap: 12px; }
+  .humana-bear-image { width: 140px; }
+  .humana-bear-assistant.is-minimized .humana-bear-image { width: 70px; }
   .humana-bear-bubble {
-    flex: 1 1 auto; max-width: none; padding: 14px 30px 14px 16px;
-    border-radius: 18px 18px 18px 6px; border-left: 3px solid #0b80bd;
+    max-width: 78vw; padding: 16px 34px 18px 18px;
+    border-radius: 20px 20px 4px 20px;
+  }
+  .humana-bear-bubble::after {
+    content: ""; position: absolute; bottom: -9px; right: 30px;
+    width: 20px; height: 20px; background: rgba(255,255,255,.9);
+    border-right: 1px solid rgba(11,128,189,.2); border-bottom: 1px solid rgba(11,128,189,.2);
+    border-bottom-right-radius: 4px; transform: rotate(45deg);
   }
   .humana-bear-bubble p {
     font-size: 14.5px; line-height: 1.45; font-weight: 600;
-    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -4295,19 +4303,22 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      (como un widget de chat), para no tapar el contenido de la página con
      una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
      grandes que el resto del sitio para que se note y se lea con claridad. */
-  .humana-business-bear-assistant {
-    left: 10px; right: 10px; bottom: 16px;
-    flex-direction: row; align-items: center; justify-content: flex-end; gap: 10px;
-  }
-  .humana-business-bear-image { width: 96px; }
-  .humana-business-bear-assistant.is-minimized .humana-business-bear-image { width: 60px; }
+  .humana-business-bear-assistant { right: 14px; bottom: 20px; gap: 12px; }
+  .humana-business-bear-image { width: 140px; }
+  .humana-business-bear-assistant.is-minimized .humana-business-bear-image { width: 70px; }
   .humana-business-bear-bubble {
-    flex: 1 1 auto; max-width: none; padding: 14px 30px 14px 16px;
-    border-radius: 18px 18px 18px 6px; border-left: 3px solid #0b80bd;
+    max-width: 78vw; padding: 16px 34px 18px 18px;
+    border-radius: 20px 20px 4px 20px;
+  }
+  .humana-business-bear-bubble::after {
+    content: ""; position: absolute; bottom: -9px; right: 30px;
+    width: 20px; height: 20px; background: rgba(255,255,255,.92);
+    border-right: 1px solid rgba(11,128,189,.2); border-bottom: 1px solid rgba(11,128,189,.2);
+    border-bottom-right-radius: 4px; transform: rotate(45deg);
   }
   .humana-business-bear-bubble p {
     font-size: 14.5px; line-height: 1.45; font-weight: 600;
-    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
   }
 }
 @media (prefers-reduced-motion: reduce) {
