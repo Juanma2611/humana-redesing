@@ -4097,22 +4097,23 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .mh80-assistant-close:hover { background: rgba(11,128,189,.18); }
 @media (max-width: 768px) {
-  /* En móvil el asistente pasa a ser una barra horizontal pegada al borde
-     inferior (como un widget de chat), para no tapar el contenido de la
-     página con una tarjeta flotante grande a media pantalla. */
+  /* En móvil el asistente es una barra horizontal pegada al borde inferior
+     (como un widget de chat), para no tapar el contenido de la página con
+     una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
+     grandes que el resto del sitio para que se note y se lea con claridad. */
   .mh80-assistant {
-    left: 12px; right: 12px; bottom: 14px;
-    flex-direction: row; align-items: center; justify-content: flex-end; gap: 8px;
+    left: 10px; right: 10px; bottom: 16px;
+    flex-direction: row; align-items: center; justify-content: flex-end; gap: 10px;
   }
-  .mh80-bot-image { width: 60px; }
-  .mh80-assistant.is-minimized .mh80-bot-image { width: 48px; }
+  .mh80-bot-image { width: 96px; }
+  .mh80-assistant.is-minimized .mh80-bot-image { width: 60px; }
   .mh80-assistant-bubble {
-    flex: 1 1 auto; max-width: none; padding: 10px 28px 10px 14px;
-    border-radius: 16px 16px 16px 4px;
+    flex: 1 1 auto; max-width: none; padding: 14px 30px 14px 16px;
+    border-radius: 18px 18px 18px 6px; border-left: 3px solid #10a7db;
   }
   .mh80-assistant-bubble p {
-    font-size: 12.5px; line-height: 1.4;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    font-size: 14.5px; line-height: 1.45; font-weight: 600;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -4157,22 +4158,23 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .prosonrisas-assistant-close:hover { background: rgba(16,167,219,.2); }
 @media (max-width: 768px) {
-  /* En móvil el asistente pasa a ser una barra horizontal pegada al borde
-     inferior (como un widget de chat), para no tapar el contenido de la
-     página con una tarjeta flotante grande a media pantalla. */
+  /* En móvil el asistente es una barra horizontal pegada al borde inferior
+     (como un widget de chat), para no tapar el contenido de la página con
+     una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
+     grandes que el resto del sitio para que se note y se lea con claridad. */
   .prosonrisas-assistant {
-    left: 12px; right: 12px; bottom: 14px;
-    flex-direction: row; align-items: center; justify-content: flex-end; gap: 8px;
+    left: 10px; right: 10px; bottom: 16px;
+    flex-direction: row; align-items: center; justify-content: flex-end; gap: 10px;
   }
-  .prosonrisas-tooth-image { width: 60px; }
-  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 48px; }
+  .prosonrisas-tooth-image { width: 96px; }
+  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 60px; }
   .prosonrisas-assistant-bubble {
-    flex: 1 1 auto; max-width: none; padding: 10px 28px 10px 14px;
-    border-radius: 16px 16px 16px 4px;
+    flex: 1 1 auto; max-width: none; padding: 14px 30px 14px 16px;
+    border-radius: 18px 18px 18px 6px; border-left: 3px solid #10a7db;
   }
   .prosonrisas-assistant-bubble p {
-    font-size: 12.5px; line-height: 1.4;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    font-size: 14.5px; line-height: 1.45; font-weight: 600;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -4220,22 +4222,23 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .humana-bear-close:hover { background: rgba(11,128,189,.18); }
 @media (max-width: 768px) {
-  /* En móvil el asistente pasa a ser una barra horizontal pegada al borde
-     inferior (como un widget de chat), para no tapar el contenido de la
-     página con una tarjeta flotante grande a media pantalla. */
+  /* En móvil el asistente es una barra horizontal pegada al borde inferior
+     (como un widget de chat), para no tapar el contenido de la página con
+     una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
+     grandes que el resto del sitio para que se note y se lea con claridad. */
   .humana-bear-assistant {
-    left: 12px; right: 12px; bottom: 14px;
-    flex-direction: row; align-items: center; justify-content: flex-end; gap: 8px;
+    left: 10px; right: 10px; bottom: 16px;
+    flex-direction: row; align-items: center; justify-content: flex-end; gap: 10px;
   }
-  .humana-bear-image { width: 60px; }
-  .humana-bear-assistant.is-minimized .humana-bear-image { width: 48px; }
+  .humana-bear-image { width: 96px; }
+  .humana-bear-assistant.is-minimized .humana-bear-image { width: 60px; }
   .humana-bear-bubble {
-    flex: 1 1 auto; max-width: none; padding: 10px 28px 10px 14px;
-    border-radius: 16px 16px 16px 4px;
+    flex: 1 1 auto; max-width: none; padding: 14px 30px 14px 16px;
+    border-radius: 18px 18px 18px 6px; border-left: 3px solid #0b80bd;
   }
   .humana-bear-bubble p {
-    font-size: 12.5px; line-height: 1.4;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    font-size: 14.5px; line-height: 1.45; font-weight: 600;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -4288,19 +4291,23 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .humana-business-bear-close:hover { background: rgba(11,128,189,.18); }
 @media (max-width: 768px) {
+  /* En móvil el asistente es una barra horizontal pegada al borde inferior
+     (como un widget de chat), para no tapar el contenido de la página con
+     una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
+     grandes que el resto del sitio para que se note y se lea con claridad. */
   .humana-business-bear-assistant {
-    left: 12px; right: 12px; bottom: 14px;
-    flex-direction: row; align-items: center; justify-content: flex-end; gap: 8px;
+    left: 10px; right: 10px; bottom: 16px;
+    flex-direction: row; align-items: center; justify-content: flex-end; gap: 10px;
   }
-  .humana-business-bear-image { width: 60px; }
-  .humana-business-bear-assistant.is-minimized .humana-business-bear-image { width: 48px; }
+  .humana-business-bear-image { width: 96px; }
+  .humana-business-bear-assistant.is-minimized .humana-business-bear-image { width: 60px; }
   .humana-business-bear-bubble {
-    flex: 1 1 auto; max-width: none; padding: 10px 28px 10px 14px;
-    border-radius: 16px 16px 16px 4px;
+    flex: 1 1 auto; max-width: none; padding: 14px 30px 14px 16px;
+    border-radius: 18px 18px 18px 6px; border-left: 3px solid #0b80bd;
   }
   .humana-business-bear-bubble p {
-    font-size: 12.5px; line-height: 1.4;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    font-size: 14.5px; line-height: 1.45; font-weight: 600;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
   }
 }
 @media (prefers-reduced-motion: reduce) {
