@@ -173,6 +173,9 @@ const assistantMessages: Record<string, string> = {
 };
 
 const ASSISTANT_STORAGE_KEY = "business-bear-assistant-minimized";
+const ASSISTANT_WELCOME_MESSAGE =
+  "Hola, soy el asistente virtual de Humana Business. Te acompañaré a descubrir cómo cuidar el bienestar de tu equipo.";
+const ASSISTANT_WELCOME_DURATION_MS = 5000;
 
 /* ---------------------------------------------------------------------- */
 /* Página                                                                  */
@@ -187,6 +190,7 @@ export default function HumanaBusinessPage() {
   const [quoted, setQuoted] = useState(false);
   const [assistantSection, setAssistantSection] = useState("business-inicio");
   const [assistantMinimized, setAssistantMinimized] = useState(false);
+  const [assistantWelcome, setAssistantWelcome] = useState(true);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -217,6 +221,17 @@ export default function HumanaBusinessPage() {
       return next;
     });
   };
+
+  /* Estado de bienvenida: el oso saluda al ingresar y, tras unos segundos,
+     pasa a la postura normal con mensajes según la sección visible. */
+  useEffect(() => {
+    if (assistantMinimized) {
+      setAssistantWelcome(false);
+      return;
+    }
+    const timer = window.setTimeout(() => setAssistantWelcome(false), ASSISTANT_WELCOME_DURATION_MS);
+    return () => window.clearTimeout(timer);
+  }, [assistantMinimized]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -433,7 +448,7 @@ export default function HumanaBusinessPage() {
         <div
           id="business-assistant-slot"
           ref={assistantRef}
-          className={`humana-business-bear-assistant${assistantMinimized ? " is-minimized" : ""}`}
+          className={`humana-business-bear-assistant${assistantMinimized ? " is-minimized" : ""}${assistantWelcome ? " is-welcome" : ""}`}
         >
           {!assistantMinimized && (
             <div className="humana-business-bear-bubble" role="status">
@@ -445,7 +460,9 @@ export default function HumanaBusinessPage() {
               >
                 <X size={13} aria-hidden="true" />
               </button>
-              <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
+              <p key={assistantWelcome ? "welcome" : assistantSection}>
+                {assistantWelcome ? ASSISTANT_WELCOME_MESSAGE : assistantMessages[assistantSection]}
+              </p>
             </div>
           )}
           <button
@@ -455,7 +472,7 @@ export default function HumanaBusinessPage() {
             aria-label={assistantMinimized ? "Mostrar asistente de Humana Business" : "Minimizar asistente de Humana Business"}
           >
             <Image
-              src="/images/planes/business/humana-business-bear.png"
+              src={assistantWelcome ? "/images/planes/business/humana-business-bear-wave.png" : "/images/planes/business/humana-business-bear.png"}
               alt="Asistente virtual Humana Business"
               width={560}
               height={670}
