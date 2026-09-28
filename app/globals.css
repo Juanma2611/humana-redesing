@@ -4288,6 +4288,28 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
     padding-left: clamp(300px, 23vw, 360px);
   }
 }
+/* Animación de saludo del oso en MH50: sprite de 104 fotogramas en una
+   sola imagen (un solo archivo, una sola petición), animado con CSS puro
+   vía @keyframes. Reproduce una vez en tiempo real (5.2s) y se queda en
+   el último fotograma (el saludo). Reemplaza el enfoque anterior de 104
+   archivos individuales cargados por JavaScript, que en conexiones
+   lentas tardaba en arrancar y podía verse "cortado". */
+.mh50-page .humana-bear-image--sprite {
+  height: auto;
+  aspect-ratio: 512 / 768;
+  display: block;
+  background-image: url(/images/planes/mh50/bear-wave-sprite.webp);
+  background-repeat: no-repeat;
+  background-size: 10400% 100%;
+  animation: mh50BearWaveSprite 5.2s steps(103) 1 forwards;
+}
+@keyframes mh50BearWaveSprite {
+  from { background-position-x: 0%; }
+  to { background-position-x: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mh50-page .humana-bear-image--sprite { animation: none; background-position-x: 100%; }
+}
 
 /* ============================================================ */
 /* Oso Humana Business — versión ejecutiva del oso, exclusiva      */
