@@ -1,0 +1,26 @@
+{
+  "name": "humana-sanity-studio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "SANITY_STUDIO_PROJECT_ID=${SANITY_STUDIO_PROJECT_ID:-$SANITY_PROJECT_ID} sanity dev",
+    "build": "SANITY_STUDIO_PROJECT_ID=${SANITY_STUDIO_PROJECT_ID:-$SANITY_PROJECT_ID} sanity build",
+    "deploy": "SANITY_STUDIO_PROJECT_ID=${SANITY_STUDIO_PROJECT_ID:-$SANITY_PROJECT_ID} sanity deploy",
+    "seed": "tsx scripts/seed.ts",
+    "check": "tsx scripts/check.ts"
+  },
+  "dependencies": {
+    "@sanity/vision": "^6.16.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "sanity": "^6.16.0",
+    "styled-components": "^6.5.3"
+  },
+  "devDependencies": {
+    "@sanity/client": "^8.7.0",
+    "@types/node": "^22.20.4",
+    "tsx": "^4.23.15",
+    "typescript": "5.9.3"
+  }
+}

@@ -367,3 +367,16 @@ Curva de animación estándar: `--premium-ease: cubic-bezier(.22, 1, .36, 1)`
 
 - Radio de borde base: `--radius: 1.15rem` (con variantes sm/md/lg/xl derivadas).
 - Botones: altura mínima `50px`, `border-radius: 13px`, `font-weight: 720`.
+
+---
+
+## 21. CONTENIDO EN SANITY (backoffice)
+
+El contenido editable del sitio se está migrando a Sanity. El Studio (panel) vive en `sanity/` como proyecto independiente, con sus propias dependencias.
+
+* Proyecto Sanity: `hqo9jmzx`, dataset `production`. Panel publicado en https://humana-ecuador.sanity.studio
+* Acceso: `SANITY_PROJECT_ID` es variable de entorno. Los tokens NO son variables: están guardados como credenciales de API del entorno y se inyectan solos en cada petición (Editor → `hqo9jmzx.api.sanity.io`; Deploy Studio → `api.sanity.io`). Nunca pedir ni escribir tokens en el chat ni en el repositorio.
+* Comandos (desde `sanity/`): `npm run check` verifica la conexión; `npm run seed` carga el contenido actual del sitio (sobrescribe lo publicado: usar solo en la carga inicial); `SANITY_AUTH_TOKEN=inyectado npm run deploy -- --yes` vuelve a publicar el panel (la CLI exige que la variable exista; el valor real lo pone el entorno).
+* Cuando el usuario pida un cambio de contenido, hacerlo en Sanity **como borrador** (documento con ID `drafts.<id>`), nunca publicar directamente. El equipo revisa y publica desde el panel. Solo publicar si el usuario lo pide de forma explícita.
+* Después de cada cambio, indicar qué documento y qué campos se modificaron, con el valor anterior y el nuevo.
+* Las reglas de la sección 2 siguen vigentes: no cambiar etiquetas de planes recomendados, segmentación ni arquitectura sin instrucción explícita.
