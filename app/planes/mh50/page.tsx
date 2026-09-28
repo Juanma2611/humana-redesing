@@ -206,6 +206,16 @@ const assistantMessages: Record<string, string> = {
 
 const ASSISTANT_STORAGE_KEY = "mh50-bear-assistant-minimized";
 
+/* Animación de saludo del oso: secuencia real de fotogramas (extraída de un
+   video del cliente, fondo removido) que reproduce una sola vez al entrar
+   a la página y luego se sostiene en el último fotograma (el saludo). */
+const BEAR_WAVE_FRAME_COUNT = 104;
+const BEAR_WAVE_FPS = 20;
+const bearWaveFrames = Array.from(
+  { length: BEAR_WAVE_FRAME_COUNT },
+  (_, i) => `/images/planes/mh50/bear-wave/frame_${String(i + 1).padStart(3, "0")}.webp`,
+);
+
 export default function Mh50Page() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
@@ -216,6 +226,9 @@ export default function Mh50Page() {
   const [benefitIndex, setBenefitIndex] = useState(0);
   const [assistantSection, setAssistantSection] = useState("mh50-inicio");
   const [assistantMinimized, setAssistantMinimized] = useState(false);
+  const [bearFrame, setBearFrame] = useState(0);
+  const [bearWaveReady, setBearWaveReady] = useState(false);
+  const bearWavePlayedRef = useRef(false);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -246,6 +259,47 @@ export default function Mh50Page() {
       return next;
     });
   };
+
+  /* Precarga la secuencia de fotogramas del saludo y, una vez lista, la
+     reproduce una sola vez a tiempo real (20 fps); al terminar se queda
+     en el último fotograma (el saludo) en vez de reiniciar. */
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all(
+      bearWaveFrames.map(
+        (src) =>
+          new Promise<void>((resolve) => {
+            const img = new window.Image();
+            img.onload = () => resolve();
+            img.onerror = () => resolve();
+            img.src = src;
+          }),
+      ),
+    ).then(() => {
+      if (!cancelled) setBearWaveReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!bearWaveReady || bearWavePlayedRef.current) return;
+    bearWavePlayedRef.current = true;
+    const frameDuration = 1000 / BEAR_WAVE_FPS;
+    const lastFrame = BEAR_WAVE_FRAME_COUNT - 1;
+    let start = 0;
+    let raf = 0;
+    const tick = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      const frame = Math.min(lastFrame, Math.floor(elapsed / frameDuration));
+      setBearFrame(frame);
+      if (frame < lastFrame) raf = window.requestAnimationFrame(tick);
+    };
+    raf = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(raf);
+  }, [bearWaveReady]);
 
   const goToBenefit = (i: number) => setBenefitIndex(((i % featuredBenefits.length) + featuredBenefits.length) % featuredBenefits.length);
   const prevBenefit = () => goToBenefit(benefitIndex - 1);
@@ -620,14 +674,13 @@ export default function Mh50Page() {
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente Humana" : "Minimizar asistente Humana"}
           >
-            <Image
-              src="/images/planes/mh50/humana-bear.png"
+            {/* eslint-disable-next-line @next/next/no-img-element -- secuencia de fotogramas: next/image no soporta el cambio de src cuadro a cuadro sin parpadeos */}
+            <img
+              src={bearWaveReady ? bearWaveFrames[bearFrame] : bearWaveFrames[0]}
               alt="Asistente virtual Humana"
-              width={560}
-              height={670}
-              unoptimized
+              width={512}
+              height={768}
               className="humana-bear-image"
-              priority={false}
             />
           </button>
         </div>
