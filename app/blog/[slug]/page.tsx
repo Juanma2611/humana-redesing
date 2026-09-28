@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { ArrowRight, Building2, ClipboardList, Globe, Mail, MapPin, Monitor, Phone, Smartphone, Store } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 import { SiteShell } from "@/components/site-shell";
-import { allBlogArticles, contactBlocks, type BlogBodyBlock } from "@/lib/blog-articles";
+import { contactBlocks, type BlogBodyBlock } from "@/lib/blog-articles";
+import { getBlogArticles } from "@/lib/blog-source";
 
 const channels = [
   { icon: SiWhatsapp, label: "Canal de atención por WhatsApp", value: "+593 2401 7002", brandColor: "#0b80bd" },
@@ -25,8 +26,8 @@ const contactIcons: Record<string, React.ComponentType<{ size?: number }>> = {
   quote: ArrowRight,
 };
 
-export function generateStaticParams() {
-  return allBlogArticles.map(article => ({ slug: article.slug }));
+export async function generateStaticParams() {
+  return (await getBlogArticles()).map(article => ({ slug: article.slug }));
 }
 
 function renderBody(body: BlogBodyBlock[] | undefined, fallback: string) {
@@ -42,10 +43,11 @@ function renderBody(body: BlogBodyBlock[] | undefined, fallback: string) {
 
 export default async function BlogArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const article = allBlogArticles.find(a => a.slug === slug);
+  const articles = await getBlogArticles();
+  const article = articles.find(a => a.slug === slug);
   if (!article) notFound();
 
-  const related = allBlogArticles.filter(a => a.slug !== slug).slice(0, 3);
+  const related = articles.filter(a => a.slug !== slug).slice(0, 3);
 
   return (
     <SiteShell title="Bienestar">
