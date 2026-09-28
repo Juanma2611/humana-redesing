@@ -346,7 +346,7 @@ export default function Mh50Page() {
 
   return (
     <SiteShell title="MH50 · Plan Full Metrohumana 50.000">
-      <div className="mh50-exp" ref={rootRef}>
+      <div className="mh50-exp mh50-page" ref={rootRef}>
         <div className="mh50-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh50-exp-hero" id="mh50-inicio">

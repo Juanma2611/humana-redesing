@@ -4253,6 +4253,42 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .humana-bear-figure { animation: none; }
 }
 
+/* MH50, únicamente: el asistente se mueve a la esquina inferior izquierda,
+   porque la esquina derecha queda reservada para otros accesos (central de
+   ayuda, contacto). Solo afecta a MH50: el resto de planes que comparten
+   las clases .humana-bear-* (PH15, PH30, MH150) conservan la esquina
+   derecha. La burbuja se espeja para que la colita apunte hacia el oso. */
+.mh50-page .humana-bear-assistant {
+  left: clamp(10px, 2.4vw, 40px); right: auto;
+  align-items: flex-start;
+}
+.mh50-page .humana-bear-bubble { border-radius: 18px 18px 18px 4px; }
+@media (max-width: 768px) {
+  .mh50-page .humana-bear-assistant { left: 14px; right: auto; align-items: flex-start; }
+  .mh50-page .humana-bear-bubble { border-radius: 20px 20px 20px 4px; }
+  .mh50-page .humana-bear-bubble::after {
+    right: auto; left: 30px;
+    border-right: none; border-left: 1px solid rgba(11,128,189,.2);
+    border-bottom-right-radius: 0; border-bottom-left-radius: 4px;
+    transform: rotate(-45deg);
+  }
+}
+/* Reserva de espacio en escritorio: el oso ahora vive sobre el borde
+   izquierdo, donde antes solo había fotos decorativas (a la derecha). Como
+   ahí sí hay títulos, botones y datos, se corre el contenido un poco más
+   a la derecha en las secciones con columna izquierda, para que el oso
+   nunca quede encima del texto. */
+@media (min-width: 769px) {
+  .mh50-page .mh50-exp-hero,
+  .mh50-page .mh50-exp-essence,
+  .mh50-page .mh50-exp-moments,
+  .mh50-page .mh50-exp-waiting,
+  .mh50-page .mh50-exp-vault,
+  .mh50-page .mh50-exp-finale {
+    padding-left: clamp(300px, 23vw, 360px);
+  }
+}
+
 /* ============================================================ */
 /* Oso Humana Business — versión ejecutiva del oso, exclusiva      */
 /* del plan Humana Business. No reemplaza al robot MH80, al        */
