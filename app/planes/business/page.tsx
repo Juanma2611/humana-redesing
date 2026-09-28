@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   Ambulance, Banknote, BarChart3, Briefcase, Building2, CircleDollarSign, Handshake, HeartPulse, Home as HomeIcon,
   LineChart, MessageCircle, PenLine, Phone, PhoneCall, Pill, PieChart, ShieldCheck, ShieldPlus, Stethoscope, Target, TrendingUp,
-  Users, Video, WalletCards,
+  Users, Video, WalletCards, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
@@ -157,6 +157,23 @@ const contactChannels = [
   { icon: Phone, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
 ];
 
+/* Asistente virtual: versión ejecutiva del oso Humana, adaptada al
+   segmento empresarial. Personaje exclusivo de Humana Business; no
+   reemplaza al robot MH80, al diente Prosonrisas ni al oso familiar
+   PH15/PH30/MH50/MH150. */
+const assistantMessages: Record<string, string> = {
+  "business-inicio": "Hola, soy el asistente virtual de Humana Business. Te ayudaré a descubrir cómo proteger el bienestar y la salud de tu equipo.",
+  "business-esencia": "Humana Business es más que un plan médico: una estrategia de bienestar para tu empresa.",
+  "business-arma-plan": "Configura límites, deducibles y copagos a la medida de tu empresa.",
+  "business-configura": "Combina los atributos del plan según las necesidades de tu equipo, con precios competitivos.",
+  "business-red": "Atención médica oportuna en la Red CAM y la Red Preferida, sin pagar deducible.",
+  "business-servicios": "Teleconsulta, médico a domicilio y ambulancia, disponibles para tus colaboradores.",
+  "business-ventajas": "Cuidar a tu gente es la mejor inversión para tu negocio.",
+  "business-cierre": "¿Listo para armar el plan de tu empresa? Solicita asesoría empresarial.",
+};
+
+const ASSISTANT_STORAGE_KEY = "business-bear-assistant-minimized";
+
 /* ---------------------------------------------------------------------- */
 /* Página                                                                  */
 /* ---------------------------------------------------------------------- */
@@ -165,8 +182,11 @@ export default function HumanaBusinessPage() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const assistantRef = useRef<HTMLDivElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
+  const [assistantSection, setAssistantSection] = useState("business-inicio");
+  const [assistantMinimized, setAssistantMinimized] = useState(false);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -179,6 +199,26 @@ export default function HumanaBusinessPage() {
   const handleQuoteClick = () => setQuoted(true);
 
   useEffect(() => {
+    try {
+      if (window.localStorage.getItem(ASSISTANT_STORAGE_KEY) === "1") setAssistantMinimized(true);
+    } catch {
+      /* localStorage no disponible (modo privado, etc.): se ignora y el asistente queda visible */
+    }
+  }, []);
+
+  const toggleAssistant = () => {
+    setAssistantMinimized((current) => {
+      const next = !current;
+      try {
+        window.localStorage.setItem(ASSISTANT_STORAGE_KEY, next ? "1" : "0");
+      } catch {
+        /* noop */
+      }
+      return next;
+    });
+  };
+
+  useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -187,6 +227,10 @@ export default function HumanaBusinessPage() {
       .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
       .filter((el): el is HTMLElement => !!el);
     let lastCurrent = "";
+    let lastAssistantSection = "";
+    const assistantSections = Array.from(root.querySelectorAll<HTMLElement>("[id^='business-']")).filter(
+      (el) => el.id in assistantMessages,
+    );
 
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -206,6 +250,15 @@ export default function HumanaBusinessPage() {
           navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
         }
         lastCurrent = current;
+      }
+
+      let currentAssistant = assistantSections[0]?.id ?? "";
+      assistantSections.forEach((section) => {
+        if (section.getBoundingClientRect().top < window.innerHeight * 0.6) currentAssistant = section.id;
+      });
+      if (currentAssistant && currentAssistant !== lastAssistantSection) {
+        setAssistantSection(currentAssistant);
+        lastAssistantSection = currentAssistant;
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -376,6 +429,42 @@ export default function HumanaBusinessPage() {
           </div>
           <div className="mh50-exp-finale-mark" aria-hidden="true"><span>PLAN</span><strong className="is-long">BUSINESS</strong></div>
         </section>
+
+        <div
+          id="business-assistant-slot"
+          ref={assistantRef}
+          className={`humana-business-bear-assistant${assistantMinimized ? " is-minimized" : ""}`}
+        >
+          {!assistantMinimized && (
+            <div className="humana-business-bear-bubble" role="status">
+              <button
+                type="button"
+                className="humana-business-bear-close"
+                onClick={toggleAssistant}
+                aria-label="Minimizar asistente de Humana Business"
+              >
+                <X size={13} aria-hidden="true" />
+              </button>
+              <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
+            </div>
+          )}
+          <button
+            type="button"
+            className="humana-business-bear-figure"
+            onClick={toggleAssistant}
+            aria-label={assistantMinimized ? "Mostrar asistente de Humana Business" : "Minimizar asistente de Humana Business"}
+          >
+            <Image
+              src="/images/planes/business/humana-business-bear.png"
+              alt="Asistente virtual Humana Business"
+              width={560}
+              height={670}
+              unoptimized
+              className="humana-business-bear-image"
+              priority={false}
+            />
+          </button>
+        </div>
 
         <dialog className="mh50-exp-dialog" ref={dialogRef} onClose={() => setActiveChapterId(null)}>
           <button type="button" className="mh50-exp-dialog-close" onClick={closeDialog} aria-label="Cerrar">×</button>
