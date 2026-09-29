@@ -648,14 +648,24 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .status-panel > a { display:flex; gap:6px; align-items:center; margin-top:20px; color:var(--humana-blue); font-weight:750; }
 .status-panel > p { color:#8a9aa3; font-size:11px; margin-top:18px; }
 /* MiHumana · perfil familiar MH50 */
-.client-dashboard-hero { position:relative; overflow:hidden; padding:54px clamp(24px,7vw,110px); display:grid; grid-template-columns:1fr minmax(390px,520px); gap:48px; align-items:center; background:radial-gradient(circle at 14% 20%,rgba(98,211,231,.2),transparent 28%),linear-gradient(132deg,#effaff 0%,#f8fcfd 48%,#dff4fa 100%); }
-.client-dashboard-hero::after { content:""; position:absolute; width:350px; height:350px; right:-130px; bottom:-240px; border:58px solid rgba(255,255,255,.46); border-radius:50%; }
+.client-dashboard-hero {
+  position:relative; overflow:hidden; min-height:520px;
+  padding:64px clamp(24px,7vw,110px); display:grid; grid-template-columns:1.05fr minmax(360px,480px);
+  gap:48px; align-items:center; background:#062d47;
+}
+.client-hero-photo { position:absolute; inset:0; z-index:0; object-fit:cover; object-position:78% 30%; }
+.client-hero-overlay {
+  position:absolute; inset:0; z-index:0;
+  background:
+    linear-gradient(100deg, rgba(4,32,52,.97) 0%, rgba(6,45,71,.88) 38%, rgba(6,45,71,.4) 62%, rgba(6,45,71,.15) 100%),
+    linear-gradient(to top, rgba(4,26,42,.5), transparent 45%);
+}
 .client-welcome { position:relative; z-index:1; }
-.client-welcome h1 { margin:10px 0 8px; color:#063c61; font-size:clamp(44px,5vw,66px); line-height:1; letter-spacing:-.05em; }
-.client-welcome > p { margin:0; color:#527184; font-size:19px; }
-.profile-demo-note { width:max-content; margin-top:23px; padding:10px 14px; display:flex; align-items:center; gap:8px; border:1px solid rgba(21,158,187,.18); border-radius:999px; color:#176a82; background:rgba(255,255,255,.7); font-size:13px; font-weight:750; backdrop-filter:blur(10px); }
-.profile-demo-note svg { width:17px; }
-.mh50-summary { position:relative; z-index:1; padding:27px 29px; border:1px solid rgba(255,255,255,.72); border-radius:25px; color:white; background:radial-gradient(circle at 90% 5%,rgba(78,215,236,.38),transparent 32%),linear-gradient(145deg,#064d79,#078fbd); box-shadow:0 24px 70px rgba(5,83,126,.24); }
+.client-welcome h1 { margin:10px 0 10px; color:#fff; font-size:clamp(46px,5.6vw,72px); line-height:.98; letter-spacing:-.05em; font-weight:780; }
+.client-welcome > p { margin:0; color:rgba(255,255,255,.78); font-size:19px; max-width:420px; }
+.profile-demo-note { width:max-content; max-width:100%; margin-top:24px; padding:9px 14px; display:flex; align-items:center; gap:7px; border:1px solid rgba(255,255,255,.18); border-radius:999px; color:rgba(255,255,255,.82); background:rgba(255,255,255,.08); font-size:12px; font-weight:650; backdrop-filter:blur(10px); }
+.profile-demo-note svg { width:13px; flex:none; color:#86e1f6; }
+.mh50-summary { position:relative; z-index:1; padding:27px 29px; border:1px solid rgba(255,255,255,.14); border-radius:25px; color:white; background:radial-gradient(circle at 90% 5%,rgba(78,215,236,.3),transparent 32%),linear-gradient(145deg,#053452,#086994); box-shadow:0 30px 80px rgba(2,18,30,.55); backdrop-filter:blur(6px); }
 .mh50-summary > div:first-child { display:flex; align-items:center; gap:11px; }
 .mh50-summary > div:first-child > span { width:38px; height:38px; display:grid; place-items:center; border-radius:12px; background:rgba(255,255,255,.14); }
 .mh50-summary > div:first-child svg { width:20px; }
