@@ -186,7 +186,7 @@ export default function Ph30Page() {
 
   return (
     <SiteShell title="PH30 · Plan Clásico Practihumana 30.000">
-      <div className="ph30-exp" ref={rootRef}>
+      <div className={`ph30-exp${assistantMinimized ? " bear-minimized" : ""}`} ref={rootRef}>
         <div className="ph30-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="ph30-exp-hero" id="ph30-inicio">

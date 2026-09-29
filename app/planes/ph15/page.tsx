@@ -186,7 +186,7 @@ export default function Ph15Page() {
 
   return (
     <SiteShell title="PH15 · Plan Preferido Practihumana 15.000">
-      <div className="ph15-exp" ref={rootRef}>
+      <div className={`ph15-exp${assistantMinimized ? " bear-minimized" : ""}`} ref={rootRef}>
         <div className="ph15-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="ph15-exp-hero" id="ph15-inicio">
