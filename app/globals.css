@@ -4237,8 +4237,13 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      entero) para que, al hacer scroll, nunca alcance a tapar una línea de
      texto o un ítem de lista en la esquina inferior izquierda. */
   .humana-bear-assistant.is-minimized { left: 10px; bottom: 14px; }
-  .humana-bear-assistant.is-minimized .humana-bear-image { width: 52px; }
-  .humana-bear-assistant.is-minimized .humana-bear-figure { animation: none; }
+  .humana-bear-assistant.is-minimized .humana-bear-figure {
+    animation: none; border-radius: 50%; background: #fff;
+    box-shadow: 0 8px 22px rgba(4,20,34,.3);
+    overflow: hidden; width: 46px; height: 46px; display: flex;
+    align-items: flex-start; justify-content: center;
+  }
+  .humana-bear-assistant.is-minimized .humana-bear-image { width: 62px; max-width: none; flex: none; margin-top: 2px; }
   .humana-bear-bubble {
     max-width: 78vw; padding: 16px 34px 18px 18px;
     border-radius: 20px 20px 20px 4px;
