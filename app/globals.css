@@ -1054,7 +1054,12 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .sales-view-more svg { transition:transform .35s var(--premium-ease); }
 .sales-view-more:hover svg { transform:translateX(4px); }
 
-.sales-assurance { padding:42px clamp(22px,7vw,110px); display:flex; align-items:center; justify-content:space-between; gap:25px; color:white; background:linear-gradient(120deg,#063b5d,#087fac); }
+.sales-assurance {
+  padding:42px clamp(22px,7vw,110px); display:flex; align-items:center; justify-content:space-between; gap:25px; color:white; position:relative; overflow:hidden;
+  background:
+    radial-gradient(circle at 88% 20%, rgba(126,224,236,.28), transparent 30%),
+    linear-gradient(120deg,#063b5d,#087fac);
+}
 .sales-assurance > div { display:flex; align-items:center; gap:15px; }
 .sales-assurance > div > svg { width:42px; height:42px; color:#79dfeb; }
 .sales-assurance strong,.sales-assurance small { display:block; }
@@ -1111,7 +1116,13 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 
 /* Humana Business */
-.business-hero { min-height:520px; display:grid; grid-template-columns:.95fr 1.05fr; overflow:hidden; background:linear-gradient(135deg,#eef9fc,#f8fcfd); }
+.business-hero {
+  min-height:520px; display:grid; grid-template-columns:.95fr 1.05fr; overflow:hidden; position:relative;
+  background:
+    radial-gradient(circle at 8% 90%, rgba(16,167,219,.14), transparent 32%),
+    radial-gradient(circle at 42% 6%, rgba(18,166,162,.12), transparent 28%),
+    linear-gradient(135deg,#eef9fc,#f8fcfd);
+}
 .business-hero-copy { padding:82px clamp(28px,6vw,100px); display:flex; flex-direction:column; justify-content:center; align-items:flex-start; }
 .business-hero-copy h1 { max-width:650px; margin:13px 0 18px; color:#073b60; font-size:clamp(48px,5.5vw,76px); line-height:.98; letter-spacing:-.05em; }
 .business-hero-copy > p { margin:0 0 28px; color:#527286; font-size:20px; font-weight:750; }
@@ -1120,7 +1131,13 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .business-hero-image { position:relative; min-height:520px; overflow:hidden; }
 .business-hero-image:after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,#f2fafc 0,transparent 25%); }
 .business-hero-image img { object-fit:cover; object-position:72% center; }
-.business-product { padding:78px clamp(22px,7vw,110px) 88px; background:#fff; }
+.business-product {
+  padding:78px clamp(22px,7vw,110px) 88px; position:relative; overflow:hidden;
+  background:
+    radial-gradient(circle at 92% 4%, rgba(16,167,219,.07), transparent 30%),
+    radial-gradient(circle at 4% 96%, rgba(18,166,162,.06), transparent 30%),
+    #fff;
+}
 .business-product-intro { max-width:760px; margin:0 auto 38px; text-align:center; }
 .business-chip { display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:999px; color:#075c92; background:#e5f7fb; font-size:13px; font-weight:850; text-transform:uppercase; }
 .business-chip svg { width:17px; }
