@@ -549,7 +549,7 @@ export default function Plans() {
           <p className="sales-legal">{selected.id === "prosonrisas" ? "Tarifas referenciales por persona según la información oficial compartida. Aplican condiciones contractuales; la tarifa corporativa puede variar según el volumen." : "Aplican deducibles, porcentajes, carencias, topes y condiciones contractuales. Los valores mostrados son límites o beneficios; no son el precio mensual. [PRECIO] pendiente de cotización y validación comercial."}</p>
         </main>
 
-        <div className="sales-detail-actions"><button type="button" className="sales-buy" onClick={() => quote(selected)}>Cotizar en 1 minuto <ArrowRight /></button><button type="button" className="sales-contact whatsapp" onClick={() => quote(selected, "WhatsApp")}><MessageCircle /> WhatsApp</button><button type="button" className="sales-contact" onClick={() => quote(selected, "llamada")}><Phone /> Llamar</button></div>
+        <div className="sales-detail-actions"><button type="button" className="sales-buy" onClick={() => quote(selected)}>Cotizar en 1 minuto <ArrowRight /></button>{fullPlanPages[selected.id] && <Link className="sales-view-more" href={fullPlanPages[selected.id]}>Ver más del plan <ChevronRight /></Link>}<button type="button" className="sales-contact whatsapp" onClick={() => quote(selected, "WhatsApp")}><MessageCircle /> WhatsApp</button><button type="button" className="sales-contact" onClick={() => quote(selected, "llamada")}><Phone /> Llamar</button></div>
       </DialogContent>}
     </Dialog>
 

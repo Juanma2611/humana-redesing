@@ -1035,10 +1035,16 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .sales-waits strong { margin-right:4px; color:#123f5e; }
 .sales-waits span { padding:7px 10px; border-radius:999px; color:#416779; background:white; font-size:12px; font-weight:750; }
 .sales-legal { margin:18px 28px; color:#788b95; font-size:12px; line-height:1.5; }
-.sales-detail-actions { position:sticky; bottom:0; padding:15px 28px 20px; display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:9px; background:linear-gradient(180deg,rgba(255,255,255,.88),white 25%); }
+.sales-detail-actions { position:sticky; bottom:0; padding:15px 28px 20px; display:grid; grid-template-columns:1.15fr 1fr 1fr 1fr; gap:9px; background:linear-gradient(180deg,rgba(255,255,255,.88),white 25%); }
 .sales-contact { border:1px solid #bad7e3; color:#075c92; background:white; }
 .sales-contact.whatsapp { color:#146a4d; border-color:#b9e4d4; background:#ecfaf5; }
 .sales-detail-actions svg { width:18px; }
+/* Botón destacado que lleva a la página completa y rediseñada del plan
+   (distinto del "Cotizar" y de los de contacto): color propio (teal de
+   marca) para que se note como una alternativa clara para ver más. */
+.sales-view-more { border:0; color:#fff; background:linear-gradient(135deg,#0d9a92,#12c2b6); box-shadow:0 10px 24px rgba(18,166,162,.25); }
+.sales-view-more svg { transition:transform .35s var(--premium-ease); }
+.sales-view-more:hover svg { transform:translateX(4px); }
 
 .sales-assurance { padding:42px clamp(22px,7vw,110px); display:flex; align-items:center; justify-content:space-between; gap:25px; color:white; background:linear-gradient(120deg,#063b5d,#087fac); }
 .sales-assurance > div { display:flex; align-items:center; gap:15px; }
@@ -1614,8 +1620,16 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .plan-story-network > span { width:52px; height:52px; border-radius:16px; }
   .plan-story-network > button { grid-column:1/-1; width:100%; }
   .premium-plan-story .plan-story-body { padding-bottom:72px; }
-  .premium-plan-story .sales-detail-actions { min-height:64px; padding:8px 8px calc(8px + env(safe-area-inset-bottom)); grid-template-columns:1.55fr .82fr .68fr; gap:6px; }
-  .premium-plan-story .sales-detail-actions .sales-buy { grid-column:auto; }
+  /* Con el 4to botón ("Ver más del plan") ya no entran los 4 en una sola
+     fila sin apretar los textos, así que en móvil pasan a una grilla de
+     2x2: cotizar y ver más arriba (las dos acciones principales), contacto
+     abajo. */
+  .premium-plan-story .sales-detail-actions { min-height:auto; padding:8px 8px calc(8px + env(safe-area-inset-bottom)); grid-template-columns:1fr 1fr; gap:6px; }
+  .premium-plan-story .sales-detail-actions .sales-buy,
+  .premium-plan-story .sales-detail-actions .sales-view-more,
+  .premium-plan-story .sales-detail-actions a,
+  .premium-plan-story .sales-detail-actions button { grid-column:auto; }
+  .premium-plan-story .sales-detail-actions a,
   .premium-plan-story .sales-detail-actions button { min-height:46px; padding:0 7px; gap:4px; font-size:11.5px; white-space:nowrap; }
   .premium-plan-story .sales-detail-actions svg { width:16px; }
 }
@@ -1625,7 +1639,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .sales-hero-copy h1 { font-size:43px; }
   .plan-story-hero-copy h2 { font-size:50px; }
   .plan-prosonrisas .plan-story-hero-copy h2 { font-size:39px; }
-  .premium-plan-story .sales-detail-actions { grid-template-columns:1.5fr .8fr .7fr; }
+  .premium-plan-story .sales-detail-actions a,
   .premium-plan-story .sales-detail-actions button { padding:0 4px; font-size:10.5px; }
 }
 
