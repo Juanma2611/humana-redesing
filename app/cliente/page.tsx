@@ -5,7 +5,7 @@ import Link from "next/link";
 import {
   ArrowRight, Baby, CheckCircle2, CircleDollarSign, FileHeart, HeartPulse,
   Hospital, Info, Pill, ReceiptText, Search, ShieldCheck, Sparkles,
-  Stethoscope, UserRound, UsersRound, WalletCards,
+  Stethoscope, UserRound, WalletCards,
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { SiteShell } from "@/components/site-shell";
@@ -90,15 +90,6 @@ export default function Client() {
 
     <section className="client-dashboard">
       <div className="client-dashboard-main">
-        <section className="family-panel" aria-labelledby="family-title">
-          <div className="client-section-heading"><div><h2 id="family-title">Mi familia</h2></div><UsersRound /></div>
-          <div className="family-grid">{family.map((person) => {
-            const used = Math.min(annualDeductible, person.deductibleUsed);
-            return <button type="button" key={person.id} className={memberId === person.id ? "family-member active" : "family-member"} onClick={() => setMemberId(person.id)} aria-pressed={memberId === person.id}>
-              <span className="member-avatar">{person.initials}</span><span className="member-copy"><strong>{person.name}</strong><small>{person.relationship} · {person.age}</small></span><span className="member-status"><CheckCircle2 /> Activo</span><span className="member-deductible"><small>Deducible utilizado</small><Progress value={(used / annualDeductible) * 100} /><strong>{money.format(used)} de {money.format(annualDeductible)}</strong></span>
-            </button>;
-          })}</div>
-        </section>
 
         <section className="copay-simulator" aria-labelledby="simulator-title">
           <div className="simulator-heading"><div><span className="kicker light">Calcula antes de atenderte</span><h2 id="simulator-title">Simulador de copagos MH50</h2><p>Usa las condiciones demostrativas del integrante seleccionado.</p></div><CircleDollarSign /></div>
