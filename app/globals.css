@@ -4233,7 +4233,12 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      grandes que el resto del sitio para que se note y se lea con claridad. */
   .humana-bear-assistant { left: 14px; bottom: 20px; gap: 12px; }
   .humana-bear-image { width: 140px; }
-  .humana-bear-assistant.is-minimized .humana-bear-image { width: 70px; }
+  /* Minimizado, se reduce a una insignia pequeña (no el oso de cuerpo
+     entero) para que, al hacer scroll, nunca alcance a tapar una línea de
+     texto o un ítem de lista en la esquina inferior izquierda. */
+  .humana-bear-assistant.is-minimized { left: 10px; bottom: 14px; }
+  .humana-bear-assistant.is-minimized .humana-bear-image { width: 52px; }
+  .humana-bear-assistant.is-minimized .humana-bear-figure { animation: none; }
   .humana-bear-bubble {
     max-width: 78vw; padding: 16px 34px 18px 18px;
     border-radius: 20px 20px 20px 4px;
