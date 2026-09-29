@@ -4293,6 +4293,19 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
     padding-left: clamp(300px, 23vw, 360px);
   }
 
+  /* El bloque de impacto ("Somos parte del grupo...") no reserva espacio en
+     la sección en sí (su fondo es una foto a pantalla completa): el texto
+     vive en un bloque interno con su propio padding, así que la reserva se
+     aplica ahí para que el oso (que es fixed y siempre visible) no tape el
+     título ni las cifras. */
+  .mh50-page .mh50-exp-impact-copy,
+  .proteger-page .mh50-exp-impact-copy,
+  .ph15-exp-impact-copy,
+  .ph30-exp-impact-copy,
+  .mh150-exp-impact-copy {
+    padding-left: clamp(320px, 25vw, 380px);
+  }
+
   /* El mismo espacio que reserva el oso en escritorio deja menos ancho para
      las tres cifras destacadas ("tres ideas"), y su tamaño (hasta 108px)
      llegaba a cortarse contra el borde derecho en la tercera columna.
