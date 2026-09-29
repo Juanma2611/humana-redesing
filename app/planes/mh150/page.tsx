@@ -72,7 +72,9 @@ export default function Mh150Page() {
 
   useEffect(() => {
     try {
-      if (window.localStorage.getItem(ASSISTANT_STORAGE_KEY) === "1") setAssistantMinimized(true);
+      const stored = window.localStorage.getItem(ASSISTANT_STORAGE_KEY);
+      if (stored === "1") setAssistantMinimized(true);
+      else if (stored === null && window.matchMedia("(max-width: 768px)").matches) setAssistantMinimized(true);
     } catch {
       /* localStorage no disponible (modo privado, etc.): se ignora y el asistente queda visible */
     }
