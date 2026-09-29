@@ -954,7 +954,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .sales-limit span,.sales-limit small { display:block; color:#728894; font-size:12px; font-weight:700; }
 .sales-limit strong { display:block; color:#075c92; font-size:32px; line-height:1.05; letter-spacing:-.04em; }
 .sales-card-actions { display:grid; gap:7px; }
-.sales-buy,.sales-contact,.sales-more { min-height:49px; border-radius:11px; display:flex; align-items:center; justify-content:center; gap:8px; font-weight:850; cursor:pointer; }
+.sales-buy,.sales-contact,.sales-more,.sales-view-more { min-height:49px; border-radius:11px; display:flex; align-items:center; justify-content:center; gap:8px; font-weight:850; cursor:pointer; font-size:15px; text-decoration:none; }
 .sales-buy { border:0; color:white; background:linear-gradient(135deg,#0777af,#0ba9cf); box-shadow:0 10px 24px rgba(8,118,168,.2); }
 .sales-buy svg,.sales-more svg { width:17px; }
 .sales-more { border:0; color:#075c92; background:transparent; }
