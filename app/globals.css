@@ -2006,6 +2006,15 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   align-items: center;
   gap: 40px;
 }
+/* Un segundo halo (además del que ya trae el hero) detrás del bloque de
+   fotos, exclusivo de Proteger, para que el hero se sienta con más
+   profundidad en vez de un degradado plano de dos tonos. */
+.proteger-page .mh50-exp-hero {
+  background:
+    radial-gradient(circle at 80% 30%, rgba(16, 167, 219, .26), transparent 34%),
+    radial-gradient(circle at 18% 82%, rgba(18,166,162,.14), transparent 30%),
+    linear-gradient(135deg, var(--mh-deep) 0%, var(--mh-deep2) 55%, var(--mh-sky) 130%);
+}
 .mh50-exp-hero::after {
   content: "";
   position: absolute; inset: 0;
@@ -2050,6 +2059,28 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
    grandes a pedido del usuario: se reducen solo en esta página. */
 .proteger-page .mh50-exp-display { font-size: clamp(34px, 5vw, 72px); margin-bottom: 54px; }
 .proteger-page .mh50-exp-stat strong { font-size: clamp(36px, 5vw, 72px); }
+
+/* Rediseño de fondos de Proteger: el hero y "tres ideas" quedaban los dos
+   igual de oscuros, uno detrás del otro, y sumado a los capítulos y el
+   glosario (también oscuros) la página se sentía monótona. "Tres ideas"
+   pasa a un fondo claro premium (hielo/gris azulado) para crear ritmo
+   visual entre el hero y los capítulos, con acentos de luz azul en las
+   esquinas en vez de un bloque de color plano. */
+.proteger-page .mh50-exp-essence {
+  background:
+    radial-gradient(circle at 92% 8%, rgba(16,167,219,.16), transparent 30%),
+    radial-gradient(circle at 4% 96%, rgba(11,128,189,.1), transparent 32%),
+    linear-gradient(165deg, #eef7fb 0%, #f7fbfd 55%, #eef4f8 100%);
+  color: var(--mh-ink);
+}
+.proteger-page .mh50-exp-essence::before { background: rgba(16,167,219,.14); }
+.proteger-page .mh50-exp-essence .mh50-exp-eyebrow.light { color: var(--mh-navy); }
+.proteger-page .mh50-exp-essence .mh50-exp-display { color: var(--mh-ink); }
+.proteger-page .mh50-exp-stat-stage { border-top-color: rgba(7,92,146,.16); }
+.proteger-page .mh50-exp-stat { border-right-color: rgba(7,92,146,.14); }
+.proteger-page .mh50-exp-stat strong { color: var(--mh-navy); }
+.proteger-page .mh50-exp-stat p { color: var(--mh-muted); }
+.proteger-page .mh50-exp-fineprint { color: rgba(7,54,81,.42); }
 
 /* MOMENTS INTRO ------------------------------------------------------------ */
 .mh50-exp-moments { min-height: 84vh; padding: clamp(80px, 10vw, 140px) clamp(20px, 8vw, 130px); background: var(--mh-ice); position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0,1fr) minmax(380px,.85fr); gap: 6vw; align-items: center; }
