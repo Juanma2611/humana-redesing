@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Building2, ClipboardList, Globe, Mail, MapPin, Monitor, Phone, Smartphone, Store } from "lucide-react";
+import { ArrowRight, Building2, ClipboardList, Globe, Mail, MapPin, Monitor, Phone, ShoppingCart, Smartphone, Store } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 import { SiteShell } from "@/components/site-shell";
 import { contactBlocks, type BlogBodyBlock } from "@/lib/blog-articles";
@@ -131,7 +131,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
               <span className="blog-app-kicker">¿Aún no tienes un plan?</span>
               <strong><Building2 size={18} /> Compra online</strong>
               <p>Adquiere tu plan médico de forma fácil, segura y 100% digital.</p>
-              <Link className="primary-button small" href="/planes">Cotizar online <ArrowRight size={16} /></Link>
+              <Link className="primary-button small" href="/planes"><ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} /></Link>
             </div>
           </aside>
         </div>

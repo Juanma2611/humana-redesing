@@ -7,7 +7,7 @@ import {
   Activity, Ambulance, Baby, Bone, Building2, Cpu, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Phone, PhoneCall, Ribbon, Scan,
-  ShieldCheck, ShieldPlus, Sparkles, Syringe, Target, Users, Video, Wallet, X, Zap,
+  ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Syringe, Target, Users, Video, Wallet, X, Zap,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import {
@@ -187,7 +187,7 @@ export default function Mh80Page() {
             </p>
             <div className="mh80-exp-hero-actions">
               <a className="mh80-robotic-cta" href="#mh80-robotica"><Zap size={16} aria-hidden="true" /> Conoce la cirugía robótica</a>
-              <button type="button" className="ghost-button" onClick={handleQuoteClick}>Cotiza MH80</button>
+              <button type="button" className="ghost-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotiza MH80</button>
             </div>
             {quoted && (
               <div className="mh80-exp-confirm" role="status" style={{ maxWidth: 520, marginTop: 20 }}>
@@ -510,7 +510,7 @@ export default function Mh80Page() {
             <h2>Protege hoy a quienes más amas.</h2>
             <p>Cotiza MH80 y da un paso más en la protección de tu familia, con el respaldo de Humana.</p>
             <div className="mh80-exp-finale-actions">
-              <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotizar plan</button>
+              <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotizar plan</button>
               <a className="ghost-button" href="tel:1800486262">Hablar con asesor</a>
             </div>
             {quoted && (

@@ -7,7 +7,7 @@ import {
   Activity, Ambulance, Baby, Bike, Bone, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Milk, Phone, PhoneCall, Plane, Ribbon,
-  ShieldCheck, ShieldPlus, Sparkles, Syringe, Users, Waves, Wallet, X,
+  ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Syringe, Users, Waves, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import {
@@ -201,7 +201,7 @@ export default function Mh150Page() {
               quienes buscan la mayor tranquilidad posible.
             </p>
             <div className="mh150-exp-hero-actions">
-              <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotiza tu plan</button>
+              <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotiza tu plan</button>
               <a className="ghost-button" href="#mh150-cobertura">Conoce tu cobertura</a>
             </div>
             {quoted && (
@@ -449,7 +449,7 @@ export default function Mh150Page() {
             <h2>Protege hoy a quienes más amas.</h2>
             <p>Cotiza MH150 y dale a tu familia el mayor respaldo posible, con el acompañamiento de Humana.</p>
             <div className="mh150-exp-finale-actions">
-              <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotizar plan</button>
+              <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotizar plan</button>
               <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">Hablar con asesor</a>
             </div>
             {quoted && (

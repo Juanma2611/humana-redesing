@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   Baby, BadgeCheck, Building2, CircleDollarSign, Gem, HeartPulse, MessageCircle,
-  Phone, PhoneCall, Pill, ScanEye, Scissors, ShieldCheck, ShieldPlus, Smile, Sparkles, Stethoscope, Syringe, Users, X,
+  Phone, PhoneCall, Pill, ScanEye, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Smile, Sparkles, Stethoscope, Syringe, Users, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
@@ -395,7 +395,7 @@ export default function ProsonrisasPage() {
               dental más amplia del país y sin preexistencias.
             </p>
             <div className="mh50-exp-hero-actions">
-              <a className="primary-button" href="#prosonrisas-planes">Cotiza ahora</a>
+              <a className="primary-button" href="#prosonrisas-planes"><ShoppingCart size={18} /> Cotiza ahora</a>
               <a className="ghost-button" href="#prosonrisas-especialistas">Conoce sus beneficios</a>
             </div>
           </div>
@@ -600,7 +600,7 @@ export default function ProsonrisasPage() {
             <h2>Una sonrisa saludable transforma tu vida.</h2>
             <p>Elige entre Prosonrisas Plus y Full, y empieza a cuidar tu sonrisa y la de tu familia hoy mismo.</p>
             <div className="mh50-exp-finale-actions">
-              <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotiza ahora</button>
+              <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotiza ahora</button>
               <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
             </div>
             {quoted && (

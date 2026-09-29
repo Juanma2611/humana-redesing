@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   Banknote, Cross, FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
-  Layers3, MessageCircle, Phone, PhoneCall, Pill, ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Users, Wallet, X,
+  Layers3, MessageCircle, Phone, PhoneCall, Pill, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Stethoscope, Users, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
@@ -307,7 +307,7 @@ export default function ProtegerPage() {
               médico actual con respaldo económico adicional cuando más lo necesitas.
             </p>
             <div className="mh50-exp-hero-actions">
-              <a className="primary-button" href="#proteger-cierre">Cotiza ahora</a>
+              <a className="primary-button" href="#proteger-cierre"><ShoppingCart size={18} /> Cotiza ahora</a>
               <a className="ghost-button" href="#proteger-cobertura">Conoce sus beneficios</a>
             </div>
           </div>
@@ -440,7 +440,7 @@ export default function ProtegerPage() {
             <h2>La tranquilidad de saber que están protegidos.</h2>
             <p>Combina Proteger con tu plan médico actual y accede a un respaldo económico adicional cuando más lo necesites.</p>
             <div className="mh50-exp-finale-actions">
-              <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotiza ahora</button>
+              <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotiza ahora</button>
               <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
             </div>
             {quoted && (

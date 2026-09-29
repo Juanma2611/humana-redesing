@@ -6,7 +6,7 @@ import {
   Activity, Ambulance, ArrowRight, Baby, BedDouble, BriefcaseBusiness, Building2, Check, ChevronRight, Clock3,
   CircleDollarSign, Cross, FlaskConical, HeartHandshake, HeartPulse, Hospital, House, Layers3, Luggage,
   MapPinned, MessageCircle, Microscope, PackageCheck, Phone, Pill, Plane, ScanHeart, ShieldCheck, SmilePlus,
-  Sparkles, Stethoscope, Syringe, UsersRound, Video, WalletCards,
+  ShoppingCart, Sparkles, Stethoscope, Syringe, UsersRound, Video, WalletCards,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SiteShell } from "@/components/site-shell";
@@ -246,7 +246,7 @@ function PlanCard({ plan, badge, isFeatured, onOpen, onQuote }: { plan: Plan; ba
     <p className="sales-plan-headline">{plan.headline}</p><span className="sales-plan-ideal">{plan.ideal}</span>
     <ul className="sales-benefits">{plan.benefits.map(({ icon: BenefitIcon, label }) => <li key={label}><BenefitIcon /><span>{label}</span></li>)}</ul>
     <div className="sales-limit"><span>{plan.statLabels?.limit ?? "Cobertura"}</span><strong>{plan.limit}</strong><small>{plan.limitNote}</small></div>
-    <div className="sales-card-actions"><button type="button" className="sales-buy" onClick={onQuote}>Cotizar en 1 minuto <ArrowRight /></button>{fullPlanPages[plan.id] ? <Link className="sales-more" href={fullPlanPages[plan.id]}>Ver todo el plan <ChevronRight /></Link> : <button type="button" className="sales-more" onClick={onOpen}>Ver todo el plan <ChevronRight /></button>}</div>
+    <div className="sales-card-actions"><button type="button" className="sales-buy" onClick={onQuote}><ShoppingCart size={17} /> Cotizar en 1 minuto <ArrowRight /></button>{fullPlanPages[plan.id] ? <Link className="sales-more" href={fullPlanPages[plan.id]}>Ver todo el plan <ChevronRight /></Link> : <button type="button" className="sales-more" onClick={onOpen}>Ver todo el plan <ChevronRight /></button>}</div>
   </article>;
 }
 
@@ -265,7 +265,7 @@ function PlanEditorialHero({ id, eyebrow, title, description, image, imageAlt, o
       <h2>{title}</h2>
       <p>{description}</p>
       <div className="plan-editorial-hero-actions">
-        <button type="button" className="sales-buy" onClick={onQuote}>Cotiza tu plan <ArrowRight /></button>
+        <button type="button" className="sales-buy" onClick={onQuote}><ShoppingCart size={17} /> Cotiza tu plan <ArrowRight /></button>
         <button type="button" className="plan-editorial-secondary" onClick={goTo}>Conoce más <ChevronRight /></button>
       </div>
     </div>
@@ -291,7 +291,7 @@ function PlanEditorialBlock({ plan, reverse, onQuote, onOpen, sectionId, badge }
         <div><span>{plan.statLabels?.deductible ?? "Deducible"}</span><strong>{plan.deductible}</strong></div>
       </div>
       <div className="plan-editorial-block-actions">
-        <button type="button" className="sales-buy" onClick={onQuote}>Cotiza tu plan <ArrowRight /></button>
+        <button type="button" className="sales-buy" onClick={onQuote}><ShoppingCart size={17} /> Cotiza tu plan <ArrowRight /></button>
         {fullPlanPages[plan.id]
           ? <Link className="sales-more" href={fullPlanPages[plan.id]}>Conoce más acerca del plan <ChevronRight /></Link>
           : <button type="button" className="sales-more" onClick={onOpen}>Conoce más acerca del plan <ChevronRight /></button>}
@@ -549,7 +549,7 @@ export default function Plans() {
           <p className="sales-legal">{selected.id === "prosonrisas" ? "Tarifas referenciales por persona según la información oficial compartida. Aplican condiciones contractuales; la tarifa corporativa puede variar según el volumen." : "Aplican deducibles, porcentajes, carencias, topes y condiciones contractuales. Los valores mostrados son límites o beneficios; no son el precio mensual. [PRECIO] pendiente de cotización y validación comercial."}</p>
         </main>
 
-        <div className="sales-detail-actions"><button type="button" className="sales-buy" onClick={() => quote(selected)}>Cotizar en 1 minuto <ArrowRight /></button>{fullPlanPages[selected.id] && <Link className="sales-view-more" href={fullPlanPages[selected.id]}>Ver más del plan <ChevronRight /></Link>}<button type="button" className="sales-contact whatsapp" onClick={() => quote(selected, "WhatsApp")}><MessageCircle /> WhatsApp</button><button type="button" className="sales-contact" onClick={() => quote(selected, "llamada")}><Phone /> Llamar</button></div>
+        <div className="sales-detail-actions"><button type="button" className="sales-buy" onClick={() => quote(selected)}><ShoppingCart size={17} /> Cotizar en 1 minuto <ArrowRight /></button>{fullPlanPages[selected.id] && <Link className="sales-view-more" href={fullPlanPages[selected.id]}>Ver más del plan <ChevronRight /></Link>}<button type="button" className="sales-contact whatsapp" onClick={() => quote(selected, "WhatsApp")}><MessageCircle /> WhatsApp</button><button type="button" className="sales-contact" onClick={() => quote(selected, "llamada")}><Phone /> Llamar</button></div>
       </DialogContent>}
     </Dialog>
 

@@ -7,7 +7,7 @@ import {
   Activity, Ambulance, Baby, Bike, Bone, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Milk, PackageCheck, Phone, PhoneCall, Pill, Ribbon,
-  ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Syringe, Users, Video, Wallet, X,
+  ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Stethoscope, Syringe, Users, Video, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import {
@@ -199,7 +199,7 @@ export default function Ph15Page() {
               pensado para tu ritmo de vida.
             </p>
             <div className="ph15-exp-hero-actions">
-              <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotiza tu plan</button>
+              <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotiza tu plan</button>
               <a className="ghost-button" href="#ph15-cobertura">Explora tu cobertura</a>
             </div>
             {quoted && (
@@ -424,7 +424,7 @@ export default function Ph15Page() {
             <h2>Tu primer paso hacia la tranquilidad.</h2>
             <p>Cotiza PH15 y empieza a cuidarte hoy, con el respaldo de Humana.</p>
             <div className="ph15-exp-finale-actions">
-              <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotizar PH15</button>
+              <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotizar PH15</button>
               <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
             </div>
             {quoted && (
