@@ -91,7 +91,7 @@ export default function Client() {
     <section className="client-dashboard">
       <div className="client-dashboard-main">
         <section className="family-panel" aria-labelledby="family-title">
-          <div className="client-section-heading"><div><span className="kicker">Núcleo protegido</span><h2 id="family-title">Mi familia</h2></div><UsersRound /></div>
+          <div className="client-section-heading"><div><h2 id="family-title">Mi familia</h2></div><UsersRound /></div>
           <div className="family-grid">{family.map((person) => {
             const used = Math.min(annualDeductible, person.deductibleUsed);
             return <button type="button" key={person.id} className={memberId === person.id ? "family-member active" : "family-member"} onClick={() => setMemberId(person.id)} aria-pressed={memberId === person.id}>
