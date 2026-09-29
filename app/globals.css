@@ -4292,6 +4292,48 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh150-exp-finale {
     padding-left: clamp(300px, 23vw, 360px);
   }
+
+  /* El mismo espacio que reserva el oso en escritorio deja menos ancho para
+     las tres cifras destacadas ("tres ideas"), y su tamaño (hasta 108px)
+     llegaba a cortarse contra el borde derecho en la tercera columna.
+     Se reduce un poco el tope del clamp solo en estas páginas para que las
+     tres cifras quepan siempre dentro del contenedor. */
+  .mh50-page .mh50-exp-stat strong,
+  .proteger-page .mh50-exp-stat strong,
+  .ph15-exp-stat strong,
+  .ph30-exp-stat strong,
+  .mh150-exp-stat strong {
+    font-size: clamp(32px, 4.6vw, 82px);
+  }
+
+  .mh50-page .mh50-exp-stat,
+  .proteger-page .mh50-exp-stat,
+  .ph15-exp-stat,
+  .ph30-exp-stat,
+  .mh150-exp-stat {
+    min-width: 0;
+    padding-right: 2.5vw;
+  }
+  .mh50-page .mh50-exp-stat:not(:first-child),
+  .proteger-page .mh50-exp-stat:not(:first-child),
+  .ph15-exp-stat:not(:first-child),
+  .ph30-exp-stat:not(:first-child),
+  .mh150-exp-stat:not(:first-child) {
+    padding-left: 2vw;
+  }
+
+  /* Igual que el capítulo alterna imagen/texto de lado, el oso solo debe
+     empujar el contenido cuando el texto ("copy") cae en la columna
+     izquierda, es decir, en los capítulos "reverse". En los capítulos sin
+     alternar, la imagen ocupa la izquierda y no hay nada que tapar, así
+     que se deja el layout original (más ancho) para esos casos. */
+  .mh50-page .mh50-exp-chapter.reverse,
+  .proteger-page .mh50-exp-chapter.reverse,
+  .ph15-exp-chapter.reverse,
+  .ph30-exp-chapter.reverse,
+  .mh150-exp-chapter.reverse {
+    padding-left: clamp(300px, 23vw, 360px);
+  }
 }
 /* Animación de saludo del oso en MH50: sprite de 104 fotogramas en una
    sola imagen (un solo archivo, una sola petición), animado con CSS puro
