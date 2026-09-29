@@ -4194,8 +4194,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* ============================================================ */
 
 .humana-bear-assistant {
-  position: fixed; right: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+  position: fixed; left: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
 }
 .humana-bear-figure {
   border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
@@ -4214,7 +4214,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .humana-bear-bubble {
   position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
-  border-radius: 18px 18px 4px 18px; background: rgba(255,255,255,.9);
+  border-radius: 18px 18px 18px 4px; background: rgba(255,255,255,.9);
   border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(14px);
   box-shadow: 0 20px 44px rgba(4,20,34,.2); color: #12314a;
 }
@@ -4231,18 +4231,18 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      (como un widget de chat), para no tapar el contenido de la página con
      una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
      grandes que el resto del sitio para que se note y se lea con claridad. */
-  .humana-bear-assistant { right: 14px; bottom: 20px; gap: 12px; }
+  .humana-bear-assistant { left: 14px; bottom: 20px; gap: 12px; }
   .humana-bear-image { width: 140px; }
   .humana-bear-assistant.is-minimized .humana-bear-image { width: 70px; }
   .humana-bear-bubble {
     max-width: 78vw; padding: 16px 34px 18px 18px;
-    border-radius: 20px 20px 4px 20px;
+    border-radius: 20px 20px 20px 4px;
   }
   .humana-bear-bubble::after {
-    content: ""; position: absolute; bottom: -9px; right: 30px;
+    content: ""; position: absolute; bottom: -9px; left: 30px;
     width: 20px; height: 20px; background: rgba(255,255,255,.9);
-    border-right: 1px solid rgba(11,128,189,.2); border-bottom: 1px solid rgba(11,128,189,.2);
-    border-bottom-right-radius: 4px; transform: rotate(45deg);
+    border-left: 1px solid rgba(11,128,189,.2); border-bottom: 1px solid rgba(11,128,189,.2);
+    border-bottom-left-radius: 4px; transform: rotate(-45deg);
   }
   .humana-bear-bubble p {
     font-size: 14.5px; line-height: 1.45; font-weight: 600;
@@ -4253,38 +4253,43 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .humana-bear-figure { animation: none; }
 }
 
-/* MH50, únicamente: el asistente se mueve a la esquina inferior izquierda,
-   porque la esquina derecha queda reservada para otros accesos (central de
-   ayuda, contacto). Solo afecta a MH50: el resto de planes que comparten
-   las clases .humana-bear-* (PH15, PH30, MH150) conservan la esquina
-   derecha. La burbuja se espeja para que la colita apunte hacia el oso. */
-.mh50-page .humana-bear-assistant {
-  left: clamp(10px, 2.4vw, 40px); right: auto;
-  align-items: flex-start;
-}
-.mh50-page .humana-bear-bubble { border-radius: 18px 18px 18px 4px; }
-@media (max-width: 768px) {
-  .mh50-page .humana-bear-assistant { left: 14px; right: auto; align-items: flex-start; }
-  .mh50-page .humana-bear-bubble { border-radius: 20px 20px 20px 4px; }
-  .mh50-page .humana-bear-bubble::after {
-    right: auto; left: 30px;
-    border-right: none; border-left: 1px solid rgba(11,128,189,.2);
-    border-bottom-right-radius: 0; border-bottom-left-radius: 4px;
-    transform: rotate(-45deg);
-  }
-}
-/* Reserva de espacio en escritorio: el oso ahora vive sobre el borde
-   izquierdo, donde antes solo había fotos decorativas (a la derecha). Como
-   ahí sí hay títulos, botones y datos, se corre el contenido un poco más
-   a la derecha en las secciones con columna izquierda, para que el oso
-   nunca quede encima del texto. */
+/* El oso familiar (PH15, PH30, MH50, MH150, Proteger) vive en la esquina
+   inferior izquierda en las cinco páginas, porque la esquina derecha queda
+   reservada para otros accesos (central de ayuda, contacto). Como ahí sí
+   hay títulos, botones y datos (a diferencia de la derecha, que antes solo
+   tenía fotos decorativas), cada página reserva espacio a la izquierda en
+   sus secciones con columna izquierda para que el oso nunca quede encima
+   del texto, en escritorio. */
 @media (min-width: 769px) {
   .mh50-page .mh50-exp-hero,
   .mh50-page .mh50-exp-essence,
   .mh50-page .mh50-exp-moments,
   .mh50-page .mh50-exp-waiting,
   .mh50-page .mh50-exp-vault,
-  .mh50-page .mh50-exp-finale {
+  .mh50-page .mh50-exp-finale,
+  .proteger-page .mh50-exp-hero,
+  .proteger-page .mh50-exp-essence,
+  .proteger-page .mh50-exp-waiting,
+  .proteger-page .mh50-exp-vault,
+  .proteger-page .mh50-exp-finale,
+  .ph15-exp-hero,
+  .ph15-exp-essence,
+  .ph15-exp-moments,
+  .ph15-exp-waiting,
+  .ph15-exp-vault,
+  .ph15-exp-finale,
+  .ph30-exp-hero,
+  .ph30-exp-essence,
+  .ph30-exp-moments,
+  .ph30-exp-waiting,
+  .ph30-exp-vault,
+  .ph30-exp-finale,
+  .mh150-exp-hero,
+  .mh150-exp-essence,
+  .mh150-exp-moments,
+  .mh150-exp-waiting,
+  .mh150-exp-vault,
+  .mh150-exp-finale {
     padding-left: clamp(300px, 23vw, 360px);
   }
 }

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   Banknote, Cross, FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
-  Layers3, MessageCircle, Phone, PhoneCall, Pill, ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Users, Wallet,
+  Layers3, MessageCircle, Phone, PhoneCall, Pill, ShieldCheck, ShieldPlus, Sparkles, Stethoscope, Users, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
@@ -154,6 +154,22 @@ const contactChannels = [
   { icon: Phone, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
 ];
 
+/* Asistente virtual: el oso Humana, con enfoque de respaldo económico
+   complementario para Proteger. Mismo personaje que PH15/PH30/MH50/MH150;
+   solo cambian los mensajes. */
+const assistantMessages: Record<string, string> = {
+  "proteger-inicio": "Hola, soy tu asistente Humana. Estoy aquí para ayudarte a conocer tu respaldo económico frente a lo inesperado.",
+  "proteger-esencia": "Cuando la salud exige más, Proteger complementa tu plan médico actual.",
+  "proteger-respaldo": "Proteger entra en acción cuando los gastos médicos superan lo que tu plan base puede cubrir.",
+  "proteger-robotica": "Cobertura del 100% para procedimientos con cirugía robótica.",
+  "proteger-trasplantes": "Respaldo para trasplante de órganos y un seguro de vida para tu tranquilidad.",
+  "proteger-prevencion": "Un chequeo médico anual sin costo y asistencias HU PLUS para tu vida diaria.",
+  "proteger-carencias": "Aquí puedes ver cuándo empieza a aplicar cada cobertura desde tu afiliación.",
+  "proteger-cierre": "¿Listo para proteger tu futuro? Cotiza Proteger ahora.",
+};
+
+const ASSISTANT_STORAGE_KEY = "proteger-bear-assistant-minimized";
+
 /* ---------------------------------------------------------------------- */
 /* Página                                                                  */
 /* ---------------------------------------------------------------------- */
@@ -162,8 +178,11 @@ export default function ProtegerPage() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const assistantRef = useRef<HTMLDivElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
+  const [assistantSection, setAssistantSection] = useState("proteger-inicio");
+  const [assistantMinimized, setAssistantMinimized] = useState(false);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -176,6 +195,26 @@ export default function ProtegerPage() {
   const handleQuoteClick = () => setQuoted(true);
 
   useEffect(() => {
+    try {
+      if (window.localStorage.getItem(ASSISTANT_STORAGE_KEY) === "1") setAssistantMinimized(true);
+    } catch {
+      /* localStorage no disponible (modo privado, etc.): se ignora y el asistente queda visible */
+    }
+  }, []);
+
+  const toggleAssistant = () => {
+    setAssistantMinimized((current) => {
+      const next = !current;
+      try {
+        window.localStorage.setItem(ASSISTANT_STORAGE_KEY, next ? "1" : "0");
+      } catch {
+        /* noop */
+      }
+      return next;
+    });
+  };
+
+  useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -184,6 +223,10 @@ export default function ProtegerPage() {
       .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
       .filter((el): el is HTMLElement => !!el);
     let lastCurrent = "";
+    let lastAssistantSection = "";
+    const assistantSections = Array.from(root.querySelectorAll<HTMLElement>("[id^='proteger-']")).filter(
+      (el) => el.id in assistantMessages,
+    );
 
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -203,6 +246,15 @@ export default function ProtegerPage() {
           navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
         }
         lastCurrent = current;
+      }
+
+      let currentAssistant = assistantSections[0]?.id ?? "";
+      assistantSections.forEach((section) => {
+        if (section.getBoundingClientRect().top < window.innerHeight * 0.6) currentAssistant = section.id;
+      });
+      if (currentAssistant && currentAssistant !== lastAssistantSection) {
+        setAssistantSection(currentAssistant);
+        lastAssistantSection = currentAssistant;
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -240,7 +292,7 @@ export default function ProtegerPage() {
 
   return (
     <SiteShell title="Proteger · Cobertura complementaria Humana">
-      <div className="mh50-exp" ref={rootRef}>
+      <div className="mh50-exp proteger-page" ref={rootRef}>
         <div className="mh50-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh50-exp-hero" id="proteger-inicio">
@@ -405,6 +457,42 @@ export default function ProtegerPage() {
           </div>
           <div className="mh50-exp-finale-mark" aria-hidden="true"><span>PLAN</span><strong className="is-long">PROTEGER</strong></div>
         </section>
+
+        <div
+          id="proteger-assistant-slot"
+          ref={assistantRef}
+          className={`humana-bear-assistant${assistantMinimized ? " is-minimized" : ""}`}
+        >
+          {!assistantMinimized && (
+            <div className="humana-bear-bubble" role="status">
+              <button
+                type="button"
+                className="humana-bear-close"
+                onClick={toggleAssistant}
+                aria-label="Minimizar asistente Humana"
+              >
+                <X size={13} aria-hidden="true" />
+              </button>
+              <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
+            </div>
+          )}
+          <button
+            type="button"
+            className="humana-bear-figure"
+            onClick={toggleAssistant}
+            aria-label={assistantMinimized ? "Mostrar asistente Humana" : "Minimizar asistente Humana"}
+          >
+            <Image
+              src="/images/planes/proteger/humana-bear.png"
+              alt="Asistente virtual Humana"
+              width={560}
+              height={670}
+              unoptimized
+              className="humana-bear-image"
+              priority={false}
+            />
+          </button>
+        </div>
 
         <dialog className="mh50-exp-dialog" ref={dialogRef} onClose={() => setActiveChapterId(null)}>
           <button type="button" className="mh50-exp-dialog-close" onClick={closeDialog} aria-label="Cerrar">×</button>
