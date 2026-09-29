@@ -298,7 +298,7 @@ export default function HumanaBusinessPage() {
 
   return (
     <SiteShell title="Humana Business · Plan empresarial">
-      <div className="mh50-exp" ref={rootRef}>
+      <div className={`mh50-exp business-page${assistantMinimized ? " bear-minimized" : ""}`} ref={rootRef}>
         <div className="mh50-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh50-exp-hero" id="business-inicio">

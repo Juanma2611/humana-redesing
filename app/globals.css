@@ -4109,8 +4109,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-assistant {
   /* Fijo durante el scroll: queda anclado siempre en la misma
      esquina, como un personaje integrado a la experiencia. */
-  position: fixed; right: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+  position: fixed; left: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
 }
 .mh80-assistant-figure {
   border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
@@ -4127,7 +4127,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .mh80-assistant-bubble {
   position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
-  border-radius: 18px 18px 4px 18px; background: rgba(255,255,255,.88);
+  border-radius: 18px 18px 18px 4px; background: rgba(255,255,255,.88);
   border: 1px solid rgba(16,167,219,.22); backdrop-filter: blur(14px);
   box-shadow: 0 20px 44px rgba(4,20,34,.22); color: #12314a;
 }
@@ -4143,18 +4143,25 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   /* En móvil la burbuja vuelve a ubicarse encima del personaje (igual que en
      escritorio), con una colita apuntando hacia él, tipo globo de historieta.
      El personaje se agranda para que tenga más presencia en pantallas chicas. */
-  .mh80-assistant { right: 14px; bottom: 20px; gap: 12px; }
+  .mh80-assistant { left: 14px; bottom: 20px; gap: 12px; }
   .mh80-bot-image { width: 140px; }
-  .mh80-assistant.is-minimized .mh80-bot-image { width: 70px; }
+  .mh80-assistant.is-minimized { left: 10px; bottom: 14px; }
+  .mh80-assistant.is-minimized .mh80-assistant-figure {
+    animation: none; border-radius: 50%; background: #fff;
+    box-shadow: 0 8px 22px rgba(4,20,34,.3);
+    overflow: hidden; width: 46px; height: 46px; display: flex;
+    align-items: flex-start; justify-content: center;
+  }
+  .mh80-assistant.is-minimized .mh80-bot-image { width: 62px; max-width: none; flex: none; margin-top: 2px; }
   .mh80-assistant-bubble {
     max-width: 78vw; padding: 16px 34px 18px 18px;
-    border-radius: 20px 20px 4px 20px;
+    border-radius: 20px 20px 20px 4px;
   }
   .mh80-assistant-bubble::after {
-    content: ""; position: absolute; bottom: -9px; right: 30px;
+    content: ""; position: absolute; bottom: -9px; left: 30px;
     width: 20px; height: 20px; background: rgba(255,255,255,.88);
-    border-right: 1px solid rgba(16,167,219,.22); border-bottom: 1px solid rgba(16,167,219,.22);
-    border-bottom-right-radius: 4px; transform: rotate(45deg);
+    border-left: 1px solid rgba(16,167,219,.22); border-bottom: 1px solid rgba(16,167,219,.22);
+    border-bottom-left-radius: 4px; transform: rotate(-45deg);
   }
   .mh80-assistant-bubble p {
     font-size: 14.5px; line-height: 1.45; font-weight: 600;
@@ -4170,8 +4177,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* ============================================================ */
 
 .prosonrisas-assistant {
-  position: fixed; right: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+  position: fixed; left: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
 }
 .prosonrisas-assistant-figure {
   border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
@@ -4190,7 +4197,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .prosonrisas-assistant-bubble {
   position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
-  border-radius: 18px 18px 4px 18px; background: rgba(255,255,255,.9);
+  border-radius: 18px 18px 18px 4px; background: rgba(255,255,255,.9);
   border: 1px solid rgba(16,167,219,.22); backdrop-filter: blur(14px);
   box-shadow: 0 20px 44px rgba(4,20,34,.2); color: #12314a;
 }
@@ -4207,18 +4214,25 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      (como un widget de chat), para no tapar el contenido de la página con
      una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
      grandes que el resto del sitio para que se note y se lea con claridad. */
-  .prosonrisas-assistant { right: 14px; bottom: 20px; gap: 12px; }
+  .prosonrisas-assistant { left: 14px; bottom: 20px; gap: 12px; }
   .prosonrisas-tooth-image { width: 140px; }
-  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 70px; }
+  .prosonrisas-assistant.is-minimized { left: 10px; bottom: 14px; }
+  .prosonrisas-assistant.is-minimized .prosonrisas-assistant-figure {
+    animation: none; border-radius: 50%; background: #fff;
+    box-shadow: 0 8px 22px rgba(4,20,34,.3);
+    overflow: hidden; width: 46px; height: 46px; display: flex;
+    align-items: flex-start; justify-content: center;
+  }
+  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 62px; max-width: none; flex: none; margin-top: 2px; }
   .prosonrisas-assistant-bubble {
     max-width: 78vw; padding: 16px 34px 18px 18px;
-    border-radius: 20px 20px 4px 20px;
+    border-radius: 20px 20px 20px 4px;
   }
   .prosonrisas-assistant-bubble::after {
-    content: ""; position: absolute; bottom: -9px; right: 30px;
+    content: ""; position: absolute; bottom: -9px; left: 30px;
     width: 20px; height: 20px; background: rgba(255,255,255,.9);
-    border-right: 1px solid rgba(16,167,219,.22); border-bottom: 1px solid rgba(16,167,219,.22);
-    border-bottom-right-radius: 4px; transform: rotate(45deg);
+    border-left: 1px solid rgba(16,167,219,.22); border-bottom: 1px solid rgba(16,167,219,.22);
+    border-bottom-left-radius: 4px; transform: rotate(-45deg);
   }
   .prosonrisas-assistant-bubble p {
     font-size: 14.5px; line-height: 1.45; font-weight: 600;
@@ -4347,7 +4361,21 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh150-exp .mh150-exp-moments,
   .mh150-exp .mh150-exp-waiting,
   .mh150-exp .mh150-exp-vault,
-  .mh150-exp .mh150-exp-finale {
+  .mh150-exp .mh150-exp-finale,
+  .prosonrisas-page .mh50-exp-hero,
+  .prosonrisas-page .mh50-exp-essence,
+  .prosonrisas-page .mh50-exp-moments,
+  .prosonrisas-page .mh50-exp-waiting,
+  .prosonrisas-page .mh50-exp-vault,
+  .prosonrisas-page .mh50-exp-finale,
+  .business-page .mh50-exp-hero,
+  .business-page .mh50-exp-essence,
+  .business-page .mh50-exp-moments,
+  .business-page .mh50-exp-finale,
+  .mh80-exp .mh80-exp-hero,
+  .mh80-exp .mh80-exp-waiting,
+  .mh80-exp .mh80-exp-vault,
+  .mh80-exp .mh80-exp-finale {
     transition: padding-left .35s var(--premium-ease, ease);
   }
   .mh50-page:not(.bear-minimized) .mh50-exp-hero,
@@ -4378,7 +4406,21 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh150-exp:not(.bear-minimized) .mh150-exp-moments,
   .mh150-exp:not(.bear-minimized) .mh150-exp-waiting,
   .mh150-exp:not(.bear-minimized) .mh150-exp-vault,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-finale {
+  .mh150-exp:not(.bear-minimized) .mh150-exp-finale,
+  .prosonrisas-page:not(.bear-minimized) .mh50-exp-hero,
+  .prosonrisas-page:not(.bear-minimized) .mh50-exp-essence,
+  .prosonrisas-page:not(.bear-minimized) .mh50-exp-moments,
+  .prosonrisas-page:not(.bear-minimized) .mh50-exp-waiting,
+  .prosonrisas-page:not(.bear-minimized) .mh50-exp-vault,
+  .prosonrisas-page:not(.bear-minimized) .mh50-exp-finale,
+  .business-page:not(.bear-minimized) .mh50-exp-hero,
+  .business-page:not(.bear-minimized) .mh50-exp-essence,
+  .business-page:not(.bear-minimized) .mh50-exp-moments,
+  .business-page:not(.bear-minimized) .mh50-exp-finale,
+  .mh80-exp:not(.bear-minimized) .mh80-exp-hero,
+  .mh80-exp:not(.bear-minimized) .mh80-exp-waiting,
+  .mh80-exp:not(.bear-minimized) .mh80-exp-vault,
+  .mh80-exp:not(.bear-minimized) .mh80-exp-finale {
     padding-left: clamp(300px, 23vw, 360px);
   }
 
@@ -4391,14 +4433,16 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .proteger-page .mh50-exp-impact-copy,
   .ph15-exp .ph15-exp-impact-copy,
   .ph30-exp .ph30-exp-impact-copy,
-  .mh150-exp .mh150-exp-impact-copy {
+  .mh150-exp .mh150-exp-impact-copy,
+  .prosonrisas-page .mh50-exp-impact-copy {
     transition: padding-left .35s var(--premium-ease, ease);
   }
   .mh50-page:not(.bear-minimized) .mh50-exp-impact-copy,
   .proteger-page:not(.bear-minimized) .mh50-exp-impact-copy,
   .ph15-exp:not(.bear-minimized) .ph15-exp-impact-copy,
   .ph30-exp:not(.bear-minimized) .ph30-exp-impact-copy,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-impact-copy {
+  .mh150-exp:not(.bear-minimized) .mh150-exp-impact-copy,
+  .prosonrisas-page:not(.bear-minimized) .mh50-exp-impact-copy {
     padding-left: clamp(320px, 25vw, 380px);
   }
 
@@ -4410,7 +4454,9 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh50-page:not(.bear-minimized) .mh50-exp-stat strong,
   .ph15-exp:not(.bear-minimized) .ph15-exp-stat strong,
   .ph30-exp:not(.bear-minimized) .ph30-exp-stat strong,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-stat strong {
+  .mh150-exp:not(.bear-minimized) .mh150-exp-stat strong,
+  .prosonrisas-page:not(.bear-minimized) .mh50-exp-stat strong,
+  .business-page:not(.bear-minimized) .mh50-exp-stat strong {
     font-size: clamp(32px, 4.6vw, 82px);
   }
   .proteger-page:not(.bear-minimized) .mh50-exp-stat strong {
@@ -4421,7 +4467,9 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .proteger-page .mh50-exp-stat,
   .ph15-exp-stat,
   .ph30-exp-stat,
-  .mh150-exp-stat {
+  .mh150-exp-stat,
+  .prosonrisas-page .mh50-exp-stat,
+  .business-page .mh50-exp-stat {
     min-width: 0;
     padding-right: 2.5vw;
   }
@@ -4429,7 +4477,9 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .proteger-page .mh50-exp-stat:not(:first-child),
   .ph15-exp-stat:not(:first-child),
   .ph30-exp-stat:not(:first-child),
-  .mh150-exp-stat:not(:first-child) {
+  .mh150-exp-stat:not(:first-child),
+  .prosonrisas-page .mh50-exp-stat:not(:first-child),
+  .business-page .mh50-exp-stat:not(:first-child) {
     padding-left: 2vw;
   }
 
@@ -4442,14 +4492,18 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .proteger-page .mh50-exp-chapter.reverse,
   .ph15-exp .ph15-exp-chapter.reverse,
   .ph30-exp .ph30-exp-chapter.reverse,
-  .mh150-exp .mh150-exp-chapter.reverse {
+  .mh150-exp .mh150-exp-chapter.reverse,
+  .prosonrisas-page .mh50-exp-chapter.reverse,
+  .business-page .mh50-exp-chapter.reverse {
     transition: padding-left .35s var(--premium-ease, ease);
   }
   .mh50-page:not(.bear-minimized) .mh50-exp-chapter.reverse,
   .proteger-page:not(.bear-minimized) .mh50-exp-chapter.reverse,
   .ph15-exp:not(.bear-minimized) .ph15-exp-chapter.reverse,
   .ph30-exp:not(.bear-minimized) .ph30-exp-chapter.reverse,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-chapter.reverse {
+  .mh150-exp:not(.bear-minimized) .mh150-exp-chapter.reverse,
+  .prosonrisas-page:not(.bear-minimized) .mh50-exp-chapter.reverse,
+  .business-page:not(.bear-minimized) .mh50-exp-chapter.reverse {
     padding-left: clamp(300px, 23vw, 360px);
   }
 }
@@ -4486,8 +4540,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* ============================================================ */
 
 .humana-business-bear-assistant {
-  position: fixed; right: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+  position: fixed; left: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
   animation: humanaBusinessBearAppear .6s var(--premium-ease, ease) both;
 }
 @keyframes humanaBusinessBearAppear {
@@ -4511,7 +4565,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .humana-business-bear-bubble {
   position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
-  border-radius: 18px 18px 4px 18px; background: rgba(255,255,255,.92);
+  border-radius: 18px 18px 18px 4px; background: rgba(255,255,255,.92);
   border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(16px);
   box-shadow: 0 20px 44px rgba(4,20,34,.2); color: #12314a;
 }
@@ -4528,18 +4582,25 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      (como un widget de chat), para no tapar el contenido de la página con
      una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
      grandes que el resto del sitio para que se note y se lea con claridad. */
-  .humana-business-bear-assistant { right: 14px; bottom: 20px; gap: 12px; }
+  .humana-business-bear-assistant { left: 14px; bottom: 20px; gap: 12px; }
   .humana-business-bear-image { width: 140px; }
-  .humana-business-bear-assistant.is-minimized .humana-business-bear-image { width: 70px; }
+  .humana-business-bear-assistant.is-minimized { left: 10px; bottom: 14px; }
+  .humana-business-bear-assistant.is-minimized .humana-business-bear-figure {
+    animation: none; border-radius: 50%; background: #fff;
+    box-shadow: 0 8px 22px rgba(4,20,34,.3);
+    overflow: hidden; width: 46px; height: 46px; display: flex;
+    align-items: flex-start; justify-content: center;
+  }
+  .humana-business-bear-assistant.is-minimized .humana-business-bear-image { width: 62px; max-width: none; flex: none; margin-top: 2px; }
   .humana-business-bear-bubble {
     max-width: 78vw; padding: 16px 34px 18px 18px;
-    border-radius: 20px 20px 4px 20px;
+    border-radius: 20px 20px 20px 4px;
   }
   .humana-business-bear-bubble::after {
-    content: ""; position: absolute; bottom: -9px; right: 30px;
+    content: ""; position: absolute; bottom: -9px; left: 30px;
     width: 20px; height: 20px; background: rgba(255,255,255,.92);
-    border-right: 1px solid rgba(11,128,189,.2); border-bottom: 1px solid rgba(11,128,189,.2);
-    border-bottom-right-radius: 4px; transform: rotate(45deg);
+    border-left: 1px solid rgba(11,128,189,.2); border-bottom: 1px solid rgba(11,128,189,.2);
+    border-bottom-left-radius: 4px; transform: rotate(-45deg);
   }
   .humana-business-bear-bubble p {
     font-size: 14.5px; line-height: 1.45; font-weight: 600;

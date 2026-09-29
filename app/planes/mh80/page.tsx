@@ -173,7 +173,7 @@ export default function Mh80Page() {
 
   return (
     <SiteShell title="MH80 · Plan Familiar Metrohumana 80.000">
-      <div className="mh80-exp" ref={rootRef}>
+      <div className={`mh80-exp${assistantMinimized ? " bear-minimized" : ""}`} ref={rootRef}>
         <div className="mh80-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh80-exp-hero" id="mh80-inicio">
