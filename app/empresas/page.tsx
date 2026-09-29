@@ -23,6 +23,8 @@ export default function Companies() {
     </section>
 
     <section className="business-product" id="humana-business">
+      <Image src="/humana-business-skyline.png" alt="" aria-hidden="true" fill sizes="100vw" unoptimized className="business-product-bg" />
+      <div className="business-product-overlay" aria-hidden="true" />
       <div className="business-product-intro"><span className="business-chip"><Building2 /> Humana Business</span><h2>Una solución que crece con tu empresa.</h2><p>Para pequeñas y medianas empresas.</p></div>
       <div className="business-product-layout">
         <article className="business-main-card">
