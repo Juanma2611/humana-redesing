@@ -187,7 +187,7 @@ export default function Mh150Page() {
 
   return (
     <SiteShell title="MH150 · Plan Premium MetroHumana 150.000">
-      <div className="mh150-exp" ref={rootRef}>
+      <div className={`mh150-exp${assistantMinimized ? " bear-minimized" : ""}`} ref={rootRef}>
         <div className="mh150-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh150-exp-hero" id="mh150-inicio">
