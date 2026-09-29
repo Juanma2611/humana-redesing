@@ -1197,13 +1197,24 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .about-trust { width:max-content; max-width:100%; margin-top:23px; padding:11px 15px; display:flex; align-items:center; gap:10px; border:1px solid #cae4ee; border-radius:999px; color:#41657a; background:rgba(255,255,255,.9); font-size:14px; font-weight:700; box-shadow:0 10px 28px rgba(13,73,109,.08); }
 .about-trust > svg { width:21px; color:#079a9a; }
 .about-trust strong { color:#087bb5; font-size:18px; }
-.about-numbers { padding:0 clamp(24px,7vw,110px); display:grid; grid-template-columns:repeat(4,1fr); color:white; background:linear-gradient(115deg,#063c60,#087fb1); }
+.about-numbers {
+  padding:0 clamp(24px,7vw,110px); display:grid; grid-template-columns:repeat(4,1fr); color:white; position:relative; overflow:hidden;
+  background:
+    radial-gradient(circle at 92% 100%, rgba(126,224,236,.22), transparent 34%),
+    linear-gradient(115deg,#063c60,#087fb1);
+}
 .about-numbers article { min-height:138px; padding:28px; border-right:1px solid rgba(255,255,255,.14); display:flex; flex-direction:column; justify-content:center; }
 .about-numbers article:last-child { border:0; }
 .about-numbers strong { color:#7ce0ef; font-size:34px; line-height:1; letter-spacing:-.04em; }
 .about-numbers span { margin-top:9px; color:#e3f3f8; font-size:14px; font-weight:700; }
 .about-numbers svg { width:32px; height:32px; color:#7ce0ef; }
-.about-story { padding:96px clamp(24px,7vw,110px); display:grid; grid-template-columns:.78fr 1.22fr; gap:80px; align-items:start; }
+.about-story {
+  padding:96px clamp(24px,7vw,110px); display:grid; grid-template-columns:.78fr 1.22fr; gap:80px; align-items:start; position:relative; overflow:hidden;
+  background:
+    radial-gradient(circle at 6% 4%, rgba(16,167,219,.06), transparent 30%),
+    radial-gradient(circle at 96% 92%, rgba(18,166,162,.05), transparent 30%),
+    #fff;
+}
 .about-story-intro { position:sticky; top:30px; }
 .about-story-intro h2,.about-ecosystem-heading h2,.about-purpose h2 { margin:11px 0 16px; color:#073b60; font-size:clamp(36px,4.2vw,56px); line-height:1.06; letter-spacing:-.04em; }
 .about-story-intro p { color:#5b7687; font-size:17px; line-height:1.7; }
@@ -1223,14 +1234,25 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .about-ecosystem-grid svg { width:31px; height:31px; color:#7ce0ef; }
 .about-ecosystem-grid h3 { margin:24px 0 9px; color:white; font-size:20px; }
 .about-ecosystem-grid p { margin:0; color:#d5eaf2; font-size:14px; line-height:1.6; }
-.about-values { padding:92px clamp(24px,7vw,110px); background:#f6fbfd; }
+.about-values {
+  padding:92px clamp(24px,7vw,110px); position:relative; overflow:hidden;
+  background:
+    radial-gradient(circle at 90% 8%, rgba(16,167,219,.09), transparent 30%),
+    radial-gradient(circle at 8% 94%, rgba(18,166,162,.07), transparent 30%),
+    #f6fbfd;
+}
 .about-values-grid { max-width:1080px; margin:auto; display:grid; grid-template-columns:repeat(4,1fr); gap:17px; }
 .about-values-grid article { padding:30px 23px; text-align:center; border:1px solid #dce9ef; border-radius:20px; background:white; box-shadow:0 11px 33px rgba(13,73,109,.07); }
 .about-values-grid article > span { width:56px; height:56px; margin:auto; display:grid; place-items:center; border-radius:17px; color:#087bb5; background:#e6f7fb; }
 .about-values-grid svg { width:27px; }
 .about-values-grid h3 { margin:18px 0 8px; color:#123f5e; font-size:20px; }
 .about-values-grid p { margin:0; color:#607b8b; font-size:14px; line-height:1.55; }
-.about-purpose { margin:0 clamp(20px,5vw,76px) 58px; padding:50px clamp(24px,4vw,58px); display:grid; grid-template-columns:auto 1fr auto; gap:25px; align-items:center; border-radius:28px; color:white; background:linear-gradient(120deg,#0877ae,#09a9ce); }
+.about-purpose {
+  margin:0 clamp(20px,5vw,76px) 58px; padding:50px clamp(24px,4vw,58px); display:grid; grid-template-columns:auto 1fr auto; gap:25px; align-items:center; border-radius:28px; color:white; position:relative; overflow:hidden;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(255,255,255,.22), transparent 30%),
+    linear-gradient(120deg,#0877ae,#09a9ce);
+}
 .about-purpose > svg { width:48px; height:48px; color:#a0eff6; }
 .about-purpose h2 { margin:7px 0; color:white; font-size:clamp(31px,3.6vw,47px); }
 .about-purpose p { margin:0; color:#e3f6fa; font-size:16px; }
