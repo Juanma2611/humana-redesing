@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Building2, ChevronDown, Clock3, HeartPulse, Headphones, Layers3, MapPin, Menu, MessageCircle, ShieldCheck, Smartphone, SmilePlus, UsersRound, X } from "lucide-react";
+import { Building2, ChevronDown, Clock3, HeartPulse, Headphones, Layers3, MapPin, Menu, MessageCircle, ShieldCheck, ShoppingCart, Smartphone, SmilePlus, UsersRound, X } from "lucide-react";
 import { SiFacebook, SiInstagram, SiTiktok, SiYoutube } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
@@ -123,7 +123,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
         <div className="header-actions">
           <div className="help-mini"><Headphones size={18} /><span>¿Necesitas ayuda?<strong>02 395 7400</strong></span></div>
           <Link className="login-link bordered" href="/cliente">MiHumana</Link>
-          <Link className="primary-button small" href="/planes">Cotiza tu plan</Link>
+          <Link className="primary-button small" href="/planes"><ShoppingCart size={15} /> Cotiza tu plan</Link>
         </div>
         <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menú">{menuOpen ? <X /> : <Menu />}</button>
       </header>

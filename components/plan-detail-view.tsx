@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import {
   Activity, Ambulance, ArrowRight, Check, ChevronDown, CreditCard, Cross, Droplets, FileCheck2, HeartHandshake,
-  HeartPulse, Laptop, Lock, MessageCircle, PhoneCall, PlusCircle, ShieldCheck, Sparkles, Stethoscope, X,
+  HeartPulse, Laptop, Lock, MessageCircle, PhoneCall, PlusCircle, ShieldCheck, ShoppingCart, Sparkles, Stethoscope, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import type { PlanDetail } from "@/lib/plan-details";
@@ -23,7 +23,7 @@ function ActionButtons({ plan, onDemo }: { plan: PlanDetail; onDemo: (message: s
   return (
     <div className="plan-detail-actions">
       <Link className="primary-button" href="/planes">
-        {plan.slug === "proteger" ? "Cotizar plan" : "Cotizar online"} <ArrowRight size={16} />
+        <ShoppingCart size={16} /> {plan.slug === "proteger" ? "Cotizar plan" : "Cotizar online"} <ArrowRight size={16} />
       </Link>
       <button
         type="button"
@@ -149,7 +149,7 @@ function AcquireSection({ onDemo }: { onDemo: (message: string) => void }) {
           <span>Venta digital</span><span>Fácil</span><span>Seguro</span><span>Sin trámites</span>
         </div>
         <button type="button" className="primary-button" onClick={() => onDemo("Cotización online demostrativa. No se enviaron datos.")}>
-          Cotizar online <ArrowRight size={16} />
+          <ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} />
         </button>
       </div>
       <div className="plan-acquire-visual" aria-hidden="true"><Laptop size={72} /></div>
