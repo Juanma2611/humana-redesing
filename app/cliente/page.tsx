@@ -85,7 +85,7 @@ export default function Client() {
       <Image src="/servicios-clientes-hero.webp" alt="Afiliada consultando su plan Humana desde el celular" fill priority sizes="100vw" unoptimized className="client-hero-photo" />
       <div className="client-hero-overlay" aria-hidden="true" />
       <div className="client-welcome"><span className="kicker light">MiHumana</span><h1>Hola, Andrea</h1><p>Tu familia y tu plan, claros en un solo lugar.</p><div className="profile-demo-note"><Sparkles size={13} /> Perfil de ejemplo para mostrar cómo se ve la experiencia</div></div>
-      <article className="mh50-summary"><div><span><ShieldCheck /></span><small>Plan familiar activo</small></div><h2>MH50</h2><p>Plan Full Metrohumana 50.000</p><div className="mh50-summary-stats"><span><strong>$50.000</strong><small>cobertura máxima</small></span><span><strong>4</strong><small>integrantes</small></span><span><strong>90%</strong><small>hospitalario en red</small></span></div></article>
+      <article className="mh50-summary"><div><span><ShieldCheck /></span><small>Plan familiar activo</small></div><h2>MH50</h2><p>Plan Full Metrohumana 50.000</p><div className="mh50-summary-stats"><span><strong>$50.000</strong><small>cobertura máxima</small></span><span><strong>90%</strong><small>hospitalario en red</small></span></div></article>
     </section>
 
     <section className="client-dashboard">
