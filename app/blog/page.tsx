@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Building2, ClipboardList, Mail, MapPin, Monitor, Phone } from "lucide-react";
+import { ArrowRight, Building2, ClipboardList, Mail, MapPin, Monitor, Phone, ShoppingCart } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 import { PageHero, SiteShell } from "@/components/site-shell";
 import { blogPlans } from "@/lib/blog-articles";
@@ -60,7 +60,7 @@ export default async function Blog() {
           <strong><Building2 size={18} /> Compra online</strong>
           <p>Adquiere tu plan médico de forma fácil, segura y 100% digital.</p>
           <p>¿Quieres saber cómo funciona el sistema de compra online? Es un modo seguro y rápido de contratar tu plan.</p>
-          <Link className="primary-button small" href="/planes">Cotizar online <ArrowRight size={16} /></Link>
+          <Link className="primary-button small" href="/planes"><ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} /></Link>
         </div>
       </aside>
     </section>

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Building2, Check, HeartHandshake, MessageCircle, Phone, SlidersHorizontal, Stethoscope, UsersRound, WalletCards } from "lucide-react";
+import { ArrowRight, Building2, Check, HeartHandshake, MessageCircle, Phone, ShoppingCart, SlidersHorizontal, Stethoscope, UsersRound, WalletCards } from "lucide-react";
 import { useState } from "react";
 import { SiteShell } from "@/components/site-shell";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -30,7 +30,7 @@ export default function Companies() {
           <div className="business-card-title"><span><HeartHandshake /></span><div><small>Protección para tu equipo</small><h3>Humana Business</h3></div></div>
           <ul><li><UsersRound /><b>Empleados protegidos</b></li><li><WalletCards /><b>Cobertura configurable</b></li><li><HeartHandshake /><b>Familiares opcionales</b></li><li><Stethoscope /><b>Teleconsulta y atención</b></li></ul>
           <div className="business-coverage"><small>Opciones de cobertura</small><strong>$10K · $20K · $50K</strong><span>por colaborador</span></div>
-          <button type="button" className="sales-buy" onClick={() => setMessage("Cotización empresarial demostrativa. No se enviaron datos.")}>Cotizar para mi empresa <ArrowRight /></button>
+          <button type="button" className="sales-buy" onClick={() => setMessage("Cotización empresarial demostrativa. No se enviaron datos.")}><ShoppingCart size={17} /> Cotizar para mi empresa <ArrowRight /></button>
           <Link className="sales-more" href="/planes?segment=empresa&plan=business">Ver ficha completa <ArrowRight /></Link>
         </article>
 

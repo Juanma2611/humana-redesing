@@ -7,7 +7,7 @@ import {
   Activity, Ambulance, Baby, Bone, Bike, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Milk, PackageCheck, Phone, PhoneCall, Pill, PlaneTakeoff,
-  Ribbon, Scissors, ShieldCheck, ShieldPlus, Sparkles,
+  Ribbon, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles,
   Stethoscope, Syringe, Users, Video, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
@@ -578,7 +578,7 @@ export default function Mh50Page() {
             <h2>La tranquilidad de saber que están protegidos.</h2>
             <p>Cotiza el plan más elegido de Humana y empieza a proteger a los tuyos hoy mismo.</p>
             <div className="mh50-exp-finale-actions">
-              <button type="button" className="primary-button" onClick={handleQuoteClick}>Cotizar MH50</button>
+              <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotizar MH50</button>
               <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
             </div>
             {quoted && (
