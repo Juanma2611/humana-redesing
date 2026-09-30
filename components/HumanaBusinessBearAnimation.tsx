@@ -43,12 +43,41 @@ export function HumanaBusinessBearAnimation() {
     if (!visible) return;
     const video = videoRef.current;
     if (!video) return;
-    const playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(() => {
-        /* autoplay bloqueado por el navegador: el póster estático queda visible */
-      });
-    }
+
+    // React a veces no sincroniza el atributo JSX "muted" como propiedad
+    // real del elemento tras la hidratación; si el navegador lee
+    // video.muted=false en ese momento, bloquea el autoplay sin avisar.
+    // Se fuerza explícitamente por código para que el autoplay no falle.
+    video.muted = true;
+    video.defaultMuted = true;
+
+    const attemptPlay = () => {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {
+          /* se reintenta más abajo (canplay / primera interacción del usuario) */
+        });
+      }
+    };
+
+    attemptPlay();
+    video.addEventListener("loadedmetadata", attemptPlay);
+    video.addEventListener("canplay", attemptPlay);
+
+    // Última red de seguridad: algunos navegadores solo permiten iniciar
+    // la reproducción tras un gesto del usuario (toque, clic, scroll).
+    const onUserGesture = () => {
+      if (video.paused) attemptPlay();
+    };
+    window.addEventListener("pointerdown", onUserGesture, { once: true });
+    window.addEventListener("scroll", onUserGesture, { once: true, passive: true });
+
+    return () => {
+      video.removeEventListener("loadedmetadata", attemptPlay);
+      video.removeEventListener("canplay", attemptPlay);
+      window.removeEventListener("pointerdown", onUserGesture);
+      window.removeEventListener("scroll", onUserGesture);
+    };
   }, [visible]);
 
   const dismiss = () => {
