@@ -50,6 +50,9 @@ export function HumanaBusinessBearAnimation() {
     // Se fuerza explícitamente por código para que el autoplay no falle.
     video.muted = true;
     video.defaultMuted = true;
+    // A pedido del usuario, la animación se ve más pausada y premium que
+    // a velocidad original.
+    video.playbackRate = 0.65;
 
     const attemptPlay = () => {
       const playPromise = video.play();
@@ -81,6 +84,10 @@ export function HumanaBusinessBearAnimation() {
   }, [visible]);
 
   const dismiss = () => {
+    // Se pausa explícitamente antes de desmontar: aunque al quitar el
+    // <video> del DOM la reproducción se corta igual, esto evita
+    // cualquier fotograma "fantasma" residual durante la transición.
+    videoRef.current?.pause();
     setVisible(false);
     try {
       window.sessionStorage.setItem(STORAGE_KEY, "1");
@@ -91,6 +98,14 @@ export function HumanaBusinessBearAnimation() {
 
   const closeBubble = () => setBubbleOpen(false);
   const toggleBubble = () => setBubbleOpen((current) => !current);
+
+  useEffect(() => {
+    // Con el oso a la izquierda, el hero (y demás secciones con columna
+    // izquierda) necesitan el mismo "reservar espacio" que ya usan los
+    // otros planes, para que nunca quede texto debajo del personaje.
+    document.body.classList.toggle("has-business-bear-video", visible);
+    return () => document.body.classList.remove("has-business-bear-video");
+  }, [visible]);
 
   if (!visible) return null;
 
