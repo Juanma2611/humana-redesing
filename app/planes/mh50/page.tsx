@@ -11,6 +11,15 @@ import {
   Stethoscope, Syringe, Users, Video, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+import { PoseRotatingImage } from "@/components/PoseRotatingImage";
+
+const mh50BearPoses = [
+  "/images/planes/mh50/humana-bear-familia-parados.webp",
+  "/images/planes/mh50/humana-bear-familia-sentados.webp",
+  "/images/planes/mh50/humana-bear-familia-futbol.webp",
+  "/images/planes/mh50/humana-bear-familia-corazon.webp",
+  "/images/planes/mh50/humana-bear-familia-pulgar.webp",
+];
 
 /* ---------------------------------------------------------------------- */
 /* Datos reales del plan MH50 (Metrohumana 50.000)                        */
@@ -622,14 +631,12 @@ export default function Mh50Page() {
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente Humana" : "Minimizar asistente Humana"}
           >
-            <Image
-              src="/images/planes/mh50/humana-bear.png"
+            <PoseRotatingImage
+              images={mh50BearPoses}
               alt="Asistente virtual Humana"
-              width={560}
-              height={670}
-              unoptimized
+              width={1145}
+              height={1374}
               className="humana-bear-image"
-              priority={false}
             />
           </button>
         </div>
