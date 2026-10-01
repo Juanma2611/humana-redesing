@@ -4386,7 +4386,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
 }
 .mh50-quick-btn {
-  width: 56px; height: 56px; border-radius: 50%; border: 0; cursor: pointer;
+  width: 68px; height: 68px; border-radius: 50%; border: 0; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 14px 32px rgba(4,20,34,.26);
   transition: transform .2s ease, box-shadow .2s ease;
@@ -4456,7 +4456,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 @media (max-width: 768px) {
   .mh50-quick-actions { right: 12px; bottom: 16px; gap: 10px; }
-  .mh50-quick-btn { width: 50px; height: 50px; }
+  .mh50-quick-btn { width: 60px; height: 60px; }
   .mh50-quick-faq { width: min(360px, 94vw); max-height: min(72vh, 620px); padding: 18px 18px 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
