@@ -8,15 +8,6 @@ import {
   Phone, PhoneCall, Pill, ScanEye, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Smile, Sparkles, Stethoscope, Syringe, Users, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
-import { PoseRotatingImage } from "@/components/PoseRotatingImage";
-
-const prosonrisasBearPoses = [
-  "/images/planes/prosonrisas/prosonrisas-bear-cepillo.webp",
-  "/images/planes/prosonrisas/prosonrisas-bear-saludo.webp",
-  "/images/planes/prosonrisas/prosonrisas-bear-pulgar.webp",
-  "/images/planes/prosonrisas/prosonrisas-bear-corazon.webp",
-  "/images/planes/prosonrisas/prosonrisas-bear-brazos-cruzados.webp",
-];
 
 /* ---------------------------------------------------------------------- */
 /* Decoración de fondo: siluetas dentales (diente, cepillo, espejo,        */
@@ -632,13 +623,13 @@ export default function ProsonrisasPage() {
         <div
           id="prosonrisas-assistant-slot"
           ref={assistantRef}
-          className={`prosonrisas-assistant${assistantMinimized ? " is-minimized" : ""}`}
+          className={`prosonrisas-peek-assistant${assistantMinimized ? " is-minimized" : ""}`}
         >
           {!assistantMinimized && (
-            <div className="prosonrisas-assistant-bubble" role="status">
+            <div className="prosonrisas-peek-bubble" role="status">
               <button
                 type="button"
-                className="prosonrisas-assistant-close"
+                className="prosonrisas-peek-close"
                 onClick={toggleAssistant}
                 aria-label="Minimizar asistente de Prosonrisas"
               >
@@ -649,16 +640,18 @@ export default function ProsonrisasPage() {
           )}
           <button
             type="button"
-            className="prosonrisas-assistant-figure"
+            className="prosonrisas-peek-figure"
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente de Prosonrisas" : "Minimizar asistente de Prosonrisas"}
           >
-            <PoseRotatingImage
-              images={prosonrisasBearPoses}
+            <Image
+              src="/images/planes/prosonrisas/prosonrisas-bear-peek.webp"
               alt="Asistente virtual Prosonrisas"
-              width={1145}
-              height={1374}
-              className="prosonrisas-tooth-image"
+              width={417}
+              height={551}
+              unoptimized
+              className="prosonrisas-peek-image"
+              priority={false}
             />
           </button>
         </div>

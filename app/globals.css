@@ -4165,77 +4165,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 
 /* ============================================================ */
-/* Prosonrisas — asistente mascota (diente flotante)              */
-/* ============================================================ */
-
-.prosonrisas-assistant {
-  position: fixed; left: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-}
-.prosonrisas-assistant-figure {
-  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
-  display: block; animation: prosonrisasToothFloat 4s ease-in-out infinite;
-}
-.prosonrisas-tooth-image {
-  width: clamp(150px, 13vw, 220px); height: auto; display: block;
-  filter: drop-shadow(0 20px 35px rgba(16,167,219,.35));
-  transition: transform .3s ease;
-}
-.prosonrisas-assistant-figure:hover .prosonrisas-tooth-image { transform: scale(1.05); }
-.prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 72px; }
-@keyframes prosonrisasToothFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-16px); }
-}
-.prosonrisas-assistant-bubble {
-  position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
-  border-radius: 18px 18px 18px 4px; background: rgba(255,255,255,.9);
-  border: 1px solid rgba(16,167,219,.22); backdrop-filter: blur(14px);
-  box-shadow: 0 20px 44px rgba(4,20,34,.2); color: #12314a;
-}
-.prosonrisas-assistant-bubble p { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 550; animation: prosonrisasAssistantFade .35s ease; }
-@keyframes prosonrisasAssistantFade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
-.prosonrisas-assistant-close {
-  position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; border-radius: 50%;
-  border: 0; background: rgba(16,167,219,.12); color: #0b80bd;
-  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
-}
-.prosonrisas-assistant-close:hover { background: rgba(16,167,219,.2); }
-@media (max-width: 768px) {
-  /* En móvil el asistente es una barra horizontal pegada al borde inferior
-     (como un widget de chat), para no tapar el contenido de la página con
-     una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
-     grandes que el resto del sitio para que se note y se lea con claridad. */
-  .prosonrisas-assistant { left: 14px; bottom: 20px; gap: 12px; }
-  .prosonrisas-tooth-image { width: 140px; }
-  .prosonrisas-assistant.is-minimized { left: 10px; bottom: 14px; }
-  .prosonrisas-assistant.is-minimized .prosonrisas-assistant-figure {
-    animation: none; border-radius: 50%; background: #fff;
-    box-shadow: 0 8px 22px rgba(4,20,34,.3);
-    overflow: hidden; width: 46px; height: 46px; display: flex;
-    align-items: flex-start; justify-content: center;
-  }
-  .prosonrisas-assistant.is-minimized .prosonrisas-tooth-image { width: 62px; max-width: none; flex: none; margin-top: 2px; }
-  .prosonrisas-assistant-bubble {
-    max-width: 78vw; padding: 16px 34px 18px 18px;
-    border-radius: 20px 20px 20px 4px;
-  }
-  .prosonrisas-assistant-bubble::after {
-    content: ""; position: absolute; bottom: -9px; left: 30px;
-    width: 20px; height: 20px; background: rgba(255,255,255,.9);
-    border-left: 1px solid rgba(16,167,219,.22); border-bottom: 1px solid rgba(16,167,219,.22);
-    border-bottom-left-radius: 4px; transform: rotate(-45deg);
-  }
-  .prosonrisas-assistant-bubble p {
-    font-size: 14.5px; line-height: 1.45; font-weight: 600;
-    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .prosonrisas-assistant-figure { animation: none; }
-}
-
-/* ============================================================ */
 /* Oso Humana — avatar de acompañamiento de marca                 */
 /* Compartido por PH15, PH30, MH50 y MH150 (mismo personaje,      */
 /* solo cambian los mensajes de cada plan). MH80 y Prosonrisas    */
@@ -4504,6 +4433,66 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh50-peek-figure { animation: none; }
 }
 
+/* ============================================================ */
+/* Asistente de Prosonrisas — misma variante "asoma desde el       */
+/* borde derecho" que Proteger, MH80 y MH50, con el oso dentista.  */
+/* Clases propias (prosonrisas-peek-*) en vez de las anteriores     */
+/* prosonrisas-assistant-* (mascota diente), que quedan sin uso.    */
+/* ============================================================ */
+.prosonrisas-peek-assistant {
+  position: fixed; right: 0; bottom: clamp(18vh, 24vh, 30vh); z-index: 60;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+}
+.prosonrisas-peek-figure {
+  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
+  display: block; animation: protegerPeekFloat 4s ease-in-out infinite;
+}
+.prosonrisas-peek-image {
+  width: clamp(90px, 8vw, 130px); height: auto; display: block;
+  filter: drop-shadow(0 16px 28px rgba(16,167,219,.3));
+  transition: transform .3s ease, width .25s ease;
+}
+.prosonrisas-peek-figure:hover .prosonrisas-peek-image { transform: translateX(-4px); }
+.prosonrisas-peek-assistant.is-minimized .prosonrisas-peek-image { width: 56px; }
+.prosonrisas-peek-bubble {
+  position: relative; max-width: 190px; padding: 12px 26px 12px 16px;
+  border-radius: 16px 4px 16px 16px; background: rgba(255,255,255,.92);
+  border: 1px solid rgba(16,167,219,.22); backdrop-filter: blur(14px);
+  box-shadow: 0 16px 36px rgba(4,20,34,.18); color: #12314a;
+  margin-right: clamp(6px, 1.6vw, 18px);
+  animation: protegerPeekBubbleIn .32s cubic-bezier(.22,1,.36,1) both;
+}
+.prosonrisas-peek-bubble p { margin: 0; font-size: 12px; line-height: 1.45; font-weight: 550; }
+.prosonrisas-peek-close {
+  position: absolute; top: 7px; right: 7px; width: 16px; height: 16px; border-radius: 50%;
+  border: 0; background: rgba(16,167,219,.1); color: #0b80bd;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+}
+.prosonrisas-peek-close:hover { background: rgba(16,167,219,.18); }
+@media (max-width: 768px) {
+  .prosonrisas-peek-assistant { bottom: clamp(16vh, 20vh, 26vh); gap: 2px; }
+  .prosonrisas-peek-image { width: 68px; }
+  .prosonrisas-peek-assistant.is-minimized { bottom: 14vh; }
+  .prosonrisas-peek-assistant.is-minimized .prosonrisas-peek-figure {
+    animation: none; border-radius: 50% 0 0 50%; background: #fff;
+    box-shadow: 0 8px 22px rgba(4,20,34,.3);
+    overflow: hidden; width: 42px; height: 42px; display: flex;
+    align-items: center; justify-content: flex-start;
+  }
+  .prosonrisas-peek-assistant.is-minimized .prosonrisas-peek-image { width: 56px; max-width: none; flex: none; }
+  .prosonrisas-peek-bubble {
+    max-width: 58vw; padding: 11px 24px 11px 14px;
+    margin-right: clamp(4px, 1.5vw, 12px);
+  }
+  .prosonrisas-peek-bubble p {
+    font-size: 11.5px; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prosonrisas-peek-figure { animation: none; }
+}
+
 /* El oso familiar (PH15, PH30, MH150) vive en la esquina
    inferior izquierda en estas tres páginas, porque la esquina derecha queda
    reservada para otros accesos (central de ayuda, contacto). Como ahí sí
@@ -4535,12 +4524,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh150-exp .mh150-exp-waiting,
   .mh150-exp .mh150-exp-vault,
   .mh150-exp .mh150-exp-finale,
-  .prosonrisas-page .mh50-exp-hero,
-  .prosonrisas-page .mh50-exp-essence,
-  .prosonrisas-page .mh50-exp-moments,
-  .prosonrisas-page .mh50-exp-waiting,
-  .prosonrisas-page .mh50-exp-vault,
-  .prosonrisas-page .mh50-exp-finale,
   .business-page .mh50-exp-hero,
   .business-page .mh50-exp-essence,
   .business-page .mh50-exp-moments,
@@ -4565,12 +4548,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh150-exp:not(.bear-minimized) .mh150-exp-waiting,
   .mh150-exp:not(.bear-minimized) .mh150-exp-vault,
   .mh150-exp:not(.bear-minimized) .mh150-exp-finale,
-  .prosonrisas-page:not(.bear-minimized) .mh50-exp-hero,
-  .prosonrisas-page:not(.bear-minimized) .mh50-exp-essence,
-  .prosonrisas-page:not(.bear-minimized) .mh50-exp-moments,
-  .prosonrisas-page:not(.bear-minimized) .mh50-exp-waiting,
-  .prosonrisas-page:not(.bear-minimized) .mh50-exp-vault,
-  .prosonrisas-page:not(.bear-minimized) .mh50-exp-finale,
   .business-page:not(.bear-minimized) .mh50-exp-hero,
   .business-page:not(.bear-minimized) .mh50-exp-essence,
   .business-page:not(.bear-minimized) .mh50-exp-moments,
@@ -4585,14 +4562,12 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      cuando está minimizado. */
   .ph15-exp .ph15-exp-impact-copy,
   .ph30-exp .ph30-exp-impact-copy,
-  .mh150-exp .mh150-exp-impact-copy,
-  .prosonrisas-page .mh50-exp-impact-copy {
+  .mh150-exp .mh150-exp-impact-copy {
     transition: padding-left .35s var(--premium-ease, ease);
   }
   .ph15-exp:not(.bear-minimized) .ph15-exp-impact-copy,
   .ph30-exp:not(.bear-minimized) .ph30-exp-impact-copy,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-impact-copy,
-  .prosonrisas-page:not(.bear-minimized) .mh50-exp-impact-copy {
+  .mh150-exp:not(.bear-minimized) .mh150-exp-impact-copy {
     padding-left: clamp(320px, 25vw, 380px);
   }
 
@@ -4603,8 +4578,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      espacio; si está minimizado, hay ancho de sobra y no hace falta. */
   .ph15-exp:not(.bear-minimized) .ph15-exp-stat strong,
   .ph30-exp:not(.bear-minimized) .ph30-exp-stat strong,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-stat strong,
-  .prosonrisas-page:not(.bear-minimized) .mh50-exp-stat strong {
+  .mh150-exp:not(.bear-minimized) .mh150-exp-stat strong {
     font-size: clamp(32px, 4.6vw, 82px);
   }
   .business-page:not(.bear-minimized) .mh50-exp-stat strong {
@@ -4639,14 +4613,12 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .ph15-exp .ph15-exp-chapter.reverse,
   .ph30-exp .ph30-exp-chapter.reverse,
   .mh150-exp .mh150-exp-chapter.reverse,
-  .prosonrisas-page .mh50-exp-chapter.reverse,
   .business-page .mh50-exp-chapter.reverse {
     transition: padding-left .35s var(--premium-ease, ease);
   }
   .ph15-exp:not(.bear-minimized) .ph15-exp-chapter.reverse,
   .ph30-exp:not(.bear-minimized) .ph30-exp-chapter.reverse,
   .mh150-exp:not(.bear-minimized) .mh150-exp-chapter.reverse,
-  .prosonrisas-page:not(.bear-minimized) .mh50-exp-chapter.reverse,
   .business-page:not(.bear-minimized) .mh50-exp-chapter.reverse {
     padding-left: clamp(300px, 23vw, 360px);
   }
