@@ -647,8 +647,8 @@ export default function Mh50Page() {
             <Image
               src="/images/planes/mh50/mh50-faq-icon.webp"
               alt=""
-              width={28}
-              height={28}
+              width={36}
+              height={36}
               unoptimized
               aria-hidden="true"
             />
@@ -663,8 +663,8 @@ export default function Mh50Page() {
             <Image
               src="/images/planes/mh50/mh50-whatsapp-icon.webp"
               alt=""
-              width={26}
-              height={26}
+              width={34}
+              height={34}
               unoptimized
               aria-hidden="true"
             />
