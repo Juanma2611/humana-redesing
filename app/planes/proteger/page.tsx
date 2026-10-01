@@ -8,6 +8,16 @@ import {
   Layers3, MessageCircle, Phone, PhoneCall, Pill, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Stethoscope, Users, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+import { PoseRotatingImage } from "@/components/PoseRotatingImage";
+
+const humanaBearProtegerPoses = [
+  "/images/planes/proteger/humana-bear-proteger-neutro.webp",
+  "/images/planes/proteger/humana-bear-proteger-saludo.webp",
+  "/images/planes/proteger/humana-bear-proteger-corazon.webp",
+  "/images/planes/proteger/humana-bear-proteger-volando.webp",
+  "/images/planes/proteger/humana-bear-proteger-pulgar.webp",
+  "/images/planes/proteger/humana-bear-proteger-musculo.webp",
+];
 
 /* ---------------------------------------------------------------------- */
 /* Datos reales del plan Proteger, extraídos de la Guía de producto        */
@@ -484,14 +494,12 @@ export default function ProtegerPage() {
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente Humana" : "Minimizar asistente Humana"}
           >
-            <Image
-              src="/images/planes/proteger/humana-bear.png"
+            <PoseRotatingImage
+              images={humanaBearProtegerPoses}
               alt="Asistente virtual Humana"
-              width={560}
-              height={670}
-              unoptimized
+              width={458}
+              height={544}
               className="humana-bear-image"
-              priority={false}
             />
           </button>
         </div>
