@@ -10,11 +10,19 @@ import {
   ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Syringe, Target, Users, Video, Wallet, X, Zap,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+import { PoseRotatingImage } from "@/components/PoseRotatingImage";
 import {
   assistantMessages, chapters, contactChannels, faqs, featuredBenefits, keyStats,
   otherConditions, preventionCoverages, rehabCoverages,
   robotSurgery, specialCases, waitingPeriods,
 } from "./mh80Data";
+
+const mh80RobotPoses = [
+  "/images/planes/mh80/mh80-robot-neutro.webp",
+  "/images/planes/mh80/mh80-robot-cartel.webp",
+  "/images/planes/mh80/mh80-robot-corazon.webp",
+  "/images/planes/mh80/mh80-robot-pulgar.webp",
+];
 
 const ASSISTANT_STORAGE_KEY = "mh80-assistant-minimized";
 
@@ -557,14 +565,12 @@ export default function Mh80Page() {
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente de MH80" : "Minimizar asistente de MH80"}
           >
-            <Image
-              src="/images/planes/mh80/mh80-robot.png"
+            <PoseRotatingImage
+              images={mh80RobotPoses}
               alt="Asistente virtual MH80"
-              width={560}
-              height={840}
-              unoptimized
+              width={458}
+              height={545}
               className="mh80-bot-image"
-              priority={false}
             />
           </button>
         </div>
