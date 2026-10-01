@@ -9,6 +9,14 @@ import {
   Users, Video, WalletCards, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+import { PoseRotatingImage } from "@/components/PoseRotatingImage";
+
+const humanaBusinessBearPoses = [
+  "/images/planes/business/humana-business-bear-pulgar.webp",
+  "/images/planes/business/humana-business-bear-cartel.webp",
+  "/images/planes/business/humana-business-bear-corbata.webp",
+  "/images/planes/business/humana-business-bear-brazos-cruzados.webp",
+];
 
 /* ---------------------------------------------------------------------- */
 /* Decoración de fondo: siluetas de oficina (edificio, maletín, lápiz,     */
@@ -453,14 +461,12 @@ export default function HumanaBusinessPage() {
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente de Humana Business" : "Minimizar asistente de Humana Business"}
           >
-            <Image
-              src="/images/planes/business/humana-business-bear.png"
+            <PoseRotatingImage
+              images={humanaBusinessBearPoses}
               alt="Asistente virtual Humana Business"
-              width={560}
-              height={670}
-              unoptimized
+              width={458}
+              height={545}
               className="humana-business-bear-image"
-              priority={false}
             />
           </button>
         </div>
