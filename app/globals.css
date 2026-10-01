@@ -4395,33 +4395,35 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh50-quick-btn-faq { background: var(--humana-blue, #0b80bd); color: #fff; }
 .mh50-quick-btn-whatsapp { background: #25d366; color: #fff; }
 .mh50-quick-faq {
-  position: relative; width: min(320px, 78vw); padding: 18px 20px 16px;
-  border-radius: 18px; background: rgba(255,255,255,.97);
+  position: relative; width: min(400px, 92vw); padding: 20px 22px 18px;
+  border-radius: 20px; background: rgba(255,255,255,.98);
   border: 1px solid rgba(11,128,189,.16); backdrop-filter: blur(14px);
   box-shadow: 0 24px 56px rgba(4,20,34,.24); color: #12314a;
   animation: mh50QuickFaqIn .28s cubic-bezier(.22,1,.36,1) both;
-  max-height: min(70vh, 560px); display: flex; flex-direction: column;
+  max-height: min(78vh, 680px); display: flex; flex-direction: column;
 }
 .mh50-quick-faq-eyebrow {
   display: block; font-size: 11px; font-weight: 750; letter-spacing: .08em;
-  color: var(--humana-blue, #0b80bd); margin-bottom: 10px;
+  color: var(--humana-blue, #0b80bd); margin-bottom: 12px;
 }
 .mh50-quick-faq-close {
-  position: absolute; top: 10px; right: 10px; width: 22px; height: 22px; border-radius: 50%;
+  position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border-radius: 50%;
   border: 0; background: rgba(11,128,189,.1); color: #0b80bd;
   display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
 }
 .mh50-quick-faq-close:hover { background: rgba(11,128,189,.18); }
-/* Transcripción de chat simulado: mensajes del bot (izquierda) y del
-   cliente (derecha, al "presionar" una pregunta), seguidos de chips con
-   las preguntas que aún no se han hecho. Todo en el cliente, sin IA real
-   ni backend: las respuestas son las mismas de quickFaqs. */
-.mh50-chat-messages {
-  flex: 1 1 auto; min-height: 60px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;
-  padding-right: 2px; margin-bottom: 10px;
+/* Chat simulado, todo en una sola columna que se desplaza junta (sin
+   dos zonas de scroll separadas): mensajes del bot (izquierda) y del
+   cliente (derecha, al "presionar" una pregunta), con las preguntas
+   pendientes siempre al final, como opciones rápidas de un chat real.
+   Todo en el cliente, sin IA real ni backend: las respuestas son las
+   mismas de quickFaqs. */
+.mh50-chat-body {
+  flex: 1 1 auto; min-height: 120px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+  padding-right: 2px;
 }
 .mh50-chat-bubble {
-  max-width: 85%; padding: 9px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5;
+  max-width: 88%; padding: 11px 15px; border-radius: 16px; font-size: 14px; line-height: 1.55;
 }
 .mh50-chat-bubble-bot {
   align-self: flex-start; background: rgba(238,248,252,.9); color: #12314a;
@@ -4432,12 +4434,12 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   border-bottom-right-radius: 4px;
 }
 .mh50-chat-chips {
-  flex: 0 1 auto; display: flex; flex-direction: column; gap: 8px; overflow-y: auto;
-  border-top: 1px solid rgba(11,128,189,.12); padding-top: 10px;
+  display: flex; flex-direction: column; gap: 8px;
+  border-top: 1px solid rgba(11,128,189,.12); padding-top: 12px; margin-top: 2px;
 }
 .mh50-chat-chip {
-  text-align: left; padding: 9px 14px; border-radius: 999px; cursor: pointer;
-  font-size: 12.5px; font-weight: 620; line-height: 1.3;
+  text-align: left; padding: 11px 16px; border-radius: 999px; cursor: pointer;
+  font-size: 13.5px; font-weight: 620; line-height: 1.35;
   border: 1px solid rgba(11,128,189,.28); background: #fff; color: var(--humana-blue, #0b80bd);
   transition: background .18s ease, border-color .18s ease;
 }
@@ -4447,7 +4449,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   border-color: transparent; background: #25d366; color: #fff; font-weight: 650;
 }
 .mh50-chat-chip-contact:hover { background: #21bd5c; }
-.mh50-chat-done { margin: 0 0 2px; font-size: 12.5px; line-height: 1.5; color: #5e7384; }
+.mh50-chat-done { margin: 0 0 2px; font-size: 13px; line-height: 1.55; color: #5e7384; }
 @keyframes mh50QuickFaqIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -4455,7 +4457,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @media (max-width: 768px) {
   .mh50-quick-actions { right: 12px; bottom: 16px; gap: 10px; }
   .mh50-quick-btn { width: 50px; height: 50px; }
-  .mh50-quick-faq { width: min(300px, 84vw); padding: 16px 18px 14px; }
+  .mh50-quick-faq { width: min(360px, 94vw); max-height: min(72vh, 620px); padding: 18px 18px 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .mh50-quick-faq { animation: none; }
