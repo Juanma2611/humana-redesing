@@ -3839,31 +3839,27 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-robotic-hero-chip strong { font-size: 18px; color: #6ec8ee; letter-spacing: -.02em; }
 .mh80-robotic-hero-chip span { font-size: 11px; color: rgba(234,246,255,.6); line-height: 1.3; }
 
-.mh80-robotic-specialties-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.mh80-robotic-specialty {
-  position: relative; text-align: left; background: rgba(255,255,255,.03); border: 1px solid rgba(16,167,219,.14);
-  border-radius: 14px; padding: 16px 18px 16px 22px; font-size: 14px; font-weight: 620; color: rgba(234,246,255,.86);
-  cursor: pointer; transition: border-color .2s ease, background .2s ease, transform .2s ease;
+/* Tarjetas de especialidades quirúrgicas: reemplaza el selector de
+   pestañas + panel de detalle (sentía a plantilla genérica de IA) por
+   tarjetas fijas, todas visibles a la vez, cada una con su propio
+   título, descripción y lista de beneficios — más editorial, menos
+   "dashboard futurista". */
+.mh80-robotic-specialty-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.mh80-robotic-specialty-card {
+  position: relative; background: rgba(255,255,255,.03); border: 1px solid rgba(16,167,219,.14);
+  border-radius: 16px; padding: 22px 24px; min-width: 0;
+  transition: border-color .2s ease, transform .2s ease;
 }
-.mh80-robotic-specialty::before {
+.mh80-robotic-specialty-card::before {
   content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-  background: linear-gradient(180deg, #6ec8ee, #4fd6ce); border-radius: 3px 0 0 3px; opacity: .5; transition: opacity .2s ease;
+  background: linear-gradient(180deg, #6ec8ee, #4fd6ce); border-radius: 3px 0 0 3px;
 }
-.mh80-robotic-specialty:hover { border-color: rgba(16,167,219,.35); transform: translateY(-2px); }
-.mh80-robotic-specialty.is-active { background: rgba(16,167,219,.1); border-color: rgba(16,167,219,.55); color: #fff; }
-.mh80-robotic-specialty.is-active::before { opacity: 1; }
-.mh80-robotic-specialty-detail {
-  display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; padding: 18px 20px;
-  border-radius: 14px; background: rgba(16,167,219,.05); border: 1px solid rgba(16,167,219,.16);
-  color: rgba(234,246,255,.8); font-size: 14px; line-height: 1.6; max-width: 720px; min-width: 0;
-  animation: mh80RoboticFadeIn .35s ease;
-}
-.mh80-robotic-specialty-detail svg { flex: none; margin-top: 2px; color: #6ec8ee; }
-.mh80-robotic-specialty-detail-body { min-width: 0; flex: 1 1 auto; }
-.mh80-robotic-specialty-benefits { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
-.mh80-robotic-specialty-benefits li { flex: 1 1 180px; position: relative; padding-left: 18px; font-size: 13px; color: rgba(234,246,255,.72); }
-.mh80-robotic-specialty-benefits li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: #10a7db; }
-@keyframes mh80RoboticFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.mh80-robotic-specialty-card:hover { border-color: rgba(16,167,219,.32); transform: translateY(-2px); }
+.mh80-robotic-specialty-card h3 { margin: 0 0 10px; font-size: 16px; font-weight: 720; color: #fff; }
+.mh80-robotic-specialty-card p { margin: 0 0 14px; font-size: 13.5px; line-height: 1.6; color: rgba(234,246,255,.72); }
+.mh80-robotic-specialty-benefits { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.mh80-robotic-specialty-benefits li { position: relative; padding-left: 16px; font-size: 12.5px; line-height: 1.5; color: rgba(234,246,255,.68); }
+.mh80-robotic-specialty-benefits li::before { content: ""; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: #10a7db; }
 
 .mh80-robotic {
   position: relative; overflow: hidden; color: #eaf6ff;
@@ -3947,15 +3943,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px;
   font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #6ec8ee;
 }
-.mh80-robotic-specialties ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.mh80-robotic-specialties li {
-  position: relative; background: rgba(255,255,255,.03); border: 1px solid rgba(16,167,219,.14);
-  border-radius: 14px; padding: 16px 18px 16px 22px; font-size: 14px; font-weight: 620; color: rgba(234,246,255,.86);
-}
-.mh80-robotic-specialties li::before {
-  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-  background: linear-gradient(180deg, #6ec8ee, #4fd6ce); border-radius: 3px 0 0 3px;
-}
 
 .mh80-robotic-facts { grid-area: facts; position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .mh80-robotic-fact { background: rgba(255,255,255,.03); border: 1px solid rgba(16,167,219,.12); border-radius: 18px; padding: 24px; backdrop-filter: blur(6px); }
@@ -3969,16 +3956,13 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @media (max-width: 980px) {
   .mh80-robotic { grid-template-columns: 1fr; grid-template-areas: "copy" "visual" "specialties" "photo"; }
   .mh80-robotic-visual { max-width: 260px; }
-  .mh80-robotic-specialties-grid { grid-template-columns: repeat(2, 1fr); }
   .mh80-robotic-facts { grid-template-columns: 1fr; }
-  .mh80-robotic-specialty-benefits li { flex-basis: 100%; }
 }
 @media (max-width: 560px) {
-  .mh80-robotic-specialties-grid { grid-template-columns: 1fr; }
+  .mh80-robotic-specialty-cards { grid-template-columns: 1fr; }
   .mh80-robotic-stats { grid-template-columns: 1fr; }
   .mh80-robotic-hero-chips { gap: 8px; }
   .mh80-robotic-hero-chip { padding: 8px 12px; }
-  .mh80-robotic-specialty-benefits li { flex-basis: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .mh80-robotic-ring, .mh80-robotic-scanline, .mh80-robotic-hero-badge { animation: none !important; }
