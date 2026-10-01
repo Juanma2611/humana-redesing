@@ -4480,10 +4480,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh80-exp:not(.bear-minimized) .mh80-exp-waiting,
   .mh80-exp:not(.bear-minimized) .mh80-exp-vault,
   .mh80-exp:not(.bear-minimized) .mh80-exp-finale,
-  body.has-business-bear-video .business-page .mh50-exp-hero,
-  body.has-business-bear-video .business-page .mh50-exp-essence,
-  body.has-business-bear-video .business-page .mh50-exp-moments,
-  body.has-business-bear-video .business-page .mh50-exp-finale {
+  .business-page:not(.bear-minimized) .mh50-exp-hero,
+  .business-page:not(.bear-minimized) .mh50-exp-essence,
+  .business-page:not(.bear-minimized) .mh50-exp-moments,
+  .business-page:not(.bear-minimized) .mh50-exp-finale {
     padding-left: clamp(300px, 23vw, 360px);
   }
 
@@ -4524,7 +4524,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .proteger-page:not(.bear-minimized) .mh50-exp-stat strong {
     font-size: clamp(30px, 3.6vw, 64px);
   }
-  body.has-business-bear-video .business-page .mh50-exp-stat strong {
+  .business-page:not(.bear-minimized) .mh50-exp-stat strong {
     font-size: clamp(32px, 4.6vw, 82px);
   }
 
@@ -4568,35 +4568,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .ph30-exp:not(.bear-minimized) .ph30-exp-chapter.reverse,
   .mh150-exp:not(.bear-minimized) .mh150-exp-chapter.reverse,
   .prosonrisas-page:not(.bear-minimized) .mh50-exp-chapter.reverse,
-  body.has-business-bear-video .business-page .mh50-exp-chapter.reverse {
+  .business-page:not(.bear-minimized) .mh50-exp-chapter.reverse {
     padding-left: clamp(300px, 23vw, 360px);
   }
 }
-/* Animación de saludo del oso en MH50: sprite de 104 fotogramas en una
-   sola imagen (un solo archivo, una sola petición), animado con CSS puro
-   vía @keyframes. Se reproduce en bucle infinito y alternado (parado →
-   saluda → parado → saluda...), usando la misma secuencia de ida y
-   vuelta, para que el oso no se quede congelado después de los primeros
-   5.2s. Reemplaza el enfoque anterior de 104 archivos individuales
-   cargados por JavaScript, que en conexiones lentas tardaba en arrancar
-   y podía verse "cortado". */
-.mh50-page .humana-bear-image--sprite {
-  height: auto;
-  aspect-ratio: 512 / 768;
-  display: block;
-  background-image: url(/images/planes/mh50/bear-wave-sprite.webp);
-  background-repeat: no-repeat;
-  background-size: 10400% 100%;
-  animation: mh50BearWaveSprite 5.2s steps(103) infinite alternate;
-}
-@keyframes mh50BearWaveSprite {
-  from { background-position-x: 0%; }
-  to { background-position-x: 100%; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mh50-page .humana-bear-image--sprite { animation: none; background-position-x: 100%; }
-}
-
 /* ============================================================ */
 /* Oso Humana Business — versión ejecutiva del oso, exclusiva      */
 /* del plan Humana Business. No reemplaza al robot MH80, al        */
