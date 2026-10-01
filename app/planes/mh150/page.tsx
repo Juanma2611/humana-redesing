@@ -10,11 +10,19 @@ import {
   ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Syringe, Users, Waves, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+import { PoseRotatingImage } from "@/components/PoseRotatingImage";
 import {
   chapters, contactChannels, essenceStats, faqItems, featuredBenefits,
   otherConditions, pharmacyPartners, planIdentity, preventionCoverages,
   rehabCoverages, specialCases, waitingPeriods,
 } from "./mh150Data";
+
+const humanaBearPoses = [
+  "/images/planes/shared/humana-bear-pulgar.webp",
+  "/images/planes/shared/humana-bear-corazon.webp",
+  "/images/planes/shared/humana-bear-cartel.webp",
+  "/images/planes/shared/humana-bear-brazos-cruzados.webp",
+];
 
 /* Mapa de íconos: mh150Data.ts guarda solo el nombre del ícono (string) para
    mantener los datos como constantes serializables; aquí se resuelven a los
@@ -494,14 +502,12 @@ export default function Mh150Page() {
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente Humana" : "Minimizar asistente Humana"}
           >
-            <Image
-              src="/images/planes/mh150/humana-bear.png"
+            <PoseRotatingImage
+              images={humanaBearPoses}
               alt="Asistente virtual Humana"
-              width={560}
-              height={670}
-              unoptimized
+              width={458}
+              height={544}
               className="humana-bear-image"
-              priority={false}
             />
           </button>
         </div>
