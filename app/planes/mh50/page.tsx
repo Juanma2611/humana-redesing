@@ -223,6 +223,13 @@ export default function Mh50Page() {
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
   const [faqOpen, setFaqOpen] = useState(false);
+  const [faqQuery, setFaqQuery] = useState("");
+
+  const normalize = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  const faqQueryNormalized = normalize(faqQuery.trim());
+  const filteredFaqs = faqQueryNormalized
+    ? quickFaqs.filter((item) => normalize(item.question).includes(faqQueryNormalized) || normalize(item.answer).includes(faqQueryNormalized))
+    : quickFaqs;
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -576,26 +583,45 @@ export default function Mh50Page() {
               <button
                 type="button"
                 className="mh50-quick-faq-close"
-                onClick={() => setFaqOpen(false)}
+                onClick={() => { setFaqOpen(false); setFaqQuery(""); }}
                 aria-label="Cerrar preguntas frecuentes"
               >
                 <X size={14} aria-hidden="true" />
               </button>
               <span className="mh50-quick-faq-eyebrow">PREGUNTAS FRECUENTES</span>
-              <div className="mh50-quick-faq-list">
-                {quickFaqs.map((item) => (
-                  <details key={item.question}>
-                    <summary>{item.question}</summary>
-                    <p>{item.answer}</p>
-                  </details>
-                ))}
-              </div>
+              <input
+                type="text"
+                className="mh50-quick-faq-search"
+                placeholder="Escribe tu duda…"
+                value={faqQuery}
+                onChange={(e) => setFaqQuery(e.target.value)}
+              />
+              {filteredFaqs.length > 0 ? (
+                <div className="mh50-quick-faq-list">
+                  {filteredFaqs.map((item) => (
+                    <details key={item.question}>
+                      <summary>{item.question}</summary>
+                      <p>{item.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              ) : (
+                <div className="mh50-quick-faq-empty">
+                  <p>No encontramos una respuesta para esa duda. Escríbenos y un asesor te ayuda directamente.</p>
+                  <a href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
+                    <MessageCircle size={15} aria-hidden="true" /> Escribir por WhatsApp
+                  </a>
+                  <a href="tel:1800486262">
+                    <PhoneCall size={15} aria-hidden="true" /> Llamar a la línea gratuita
+                  </a>
+                </div>
+              )}
             </div>
           )}
           <button
             type="button"
             className="mh50-quick-btn mh50-quick-btn-faq"
-            onClick={() => setFaqOpen((v) => !v)}
+            onClick={() => setFaqOpen((v) => { if (v) setFaqQuery(""); return !v; })}
             aria-label={faqOpen ? "Cerrar preguntas frecuentes" : "Abrir preguntas frecuentes"}
             aria-expanded={faqOpen}
           >
