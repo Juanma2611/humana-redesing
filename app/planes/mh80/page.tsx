@@ -47,7 +47,6 @@ export default function Mh80Page() {
   const assistantRef = useRef<HTMLDivElement>(null);
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
-  const [activeSpecialty, setActiveSpecialty] = useState(0);
   const [expandedModule, setExpandedModule] = useState<string | null>(null);
   const [assistantSection, setAssistantSection] = useState("mh80-inicio");
   const [assistantMinimized, setAssistantMinimized] = useState(false);
@@ -278,31 +277,19 @@ export default function Mh80Page() {
           </div>
 
           <div className="mh80-robotic-specialties mh80-exp-reveal">
-            <span className="mh80-robotic-specialties-label"><Scan size={14} aria-hidden="true" /> ¿Qué tipo de cirugías realiza? · Toca para conocer más</span>
-            <div className="mh80-robotic-specialties-grid" role="list">
-              {robotSurgery.specialties.map((s, i) => (
-                <button
-                  type="button"
-                  key={s.name}
-                  role="listitem"
-                  className={`mh80-robotic-specialty${i === activeSpecialty ? " is-active" : ""}`}
-                  onClick={() => setActiveSpecialty(i)}
-                  aria-pressed={i === activeSpecialty}
-                >
-                  {s.name}
-                </button>
+            <span className="mh80-robotic-specialties-label"><Scan size={14} aria-hidden="true" /> ¿Qué tipo de cirugías realiza?</span>
+            <div className="mh80-robotic-specialty-cards" role="list">
+              {robotSurgery.specialties.map((s) => (
+                <article className="mh80-robotic-specialty-card" role="listitem" key={s.name}>
+                  <h3>{s.name}</h3>
+                  <p>{s.detail}</p>
+                  <ul className="mh80-robotic-specialty-benefits">
+                    {s.benefits.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
+                </article>
               ))}
-            </div>
-            <div className="mh80-robotic-specialty-detail" key={robotSurgery.specialties[activeSpecialty].name}>
-              <Cpu size={16} aria-hidden="true" />
-              <div className="mh80-robotic-specialty-detail-body">
-                <p>{robotSurgery.specialties[activeSpecialty].detail}</p>
-                <ul className="mh80-robotic-specialty-benefits">
-                  {robotSurgery.specialties[activeSpecialty].benefits.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
-                </ul>
-              </div>
             </div>
           </div>
 
