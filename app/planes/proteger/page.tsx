@@ -8,16 +8,6 @@ import {
   Layers3, MessageCircle, Phone, PhoneCall, Pill, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Stethoscope, Users, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
-import { PoseRotatingImage } from "@/components/PoseRotatingImage";
-
-const humanaBearProtegerPoses = [
-  "/images/planes/proteger/humana-bear-proteger-neutro.webp",
-  "/images/planes/proteger/humana-bear-proteger-saludo.webp",
-  "/images/planes/proteger/humana-bear-proteger-corazon.webp",
-  "/images/planes/proteger/humana-bear-proteger-volando.webp",
-  "/images/planes/proteger/humana-bear-proteger-pulgar.webp",
-  "/images/planes/proteger/humana-bear-proteger-musculo.webp",
-];
 
 /* ---------------------------------------------------------------------- */
 /* Datos reales del plan Proteger, extraídos de la Guía de producto        */
@@ -473,13 +463,13 @@ export default function ProtegerPage() {
         <div
           id="proteger-assistant-slot"
           ref={assistantRef}
-          className={`humana-bear-assistant${assistantMinimized ? " is-minimized" : ""}`}
+          className={`proteger-peek-assistant${assistantMinimized ? " is-minimized" : ""}`}
         >
           {!assistantMinimized && (
-            <div className="humana-bear-bubble" role="status">
+            <div className="proteger-peek-bubble" role="status">
               <button
                 type="button"
-                className="humana-bear-close"
+                className="proteger-peek-close"
                 onClick={toggleAssistant}
                 aria-label="Minimizar asistente Humana"
               >
@@ -490,16 +480,18 @@ export default function ProtegerPage() {
           )}
           <button
             type="button"
-            className="humana-bear-figure"
+            className="proteger-peek-figure"
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente Humana" : "Minimizar asistente Humana"}
           >
-            <PoseRotatingImage
-              images={humanaBearProtegerPoses}
+            <Image
+              src="/images/planes/proteger/proteger-bear-peek.webp"
               alt="Asistente virtual Humana"
-              width={458}
-              height={544}
-              className="humana-bear-image"
+              width={402}
+              height={620}
+              unoptimized
+              className="proteger-peek-image"
+              priority={false}
             />
           </button>
         </div>
