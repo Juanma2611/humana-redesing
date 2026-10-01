@@ -15,7 +15,7 @@ export function PoseRotatingImage({
   width,
   height,
   className,
-  intervalMs = 5000,
+  intervalMs = 4000,
 }: {
   images: string[];
   alt: string;
