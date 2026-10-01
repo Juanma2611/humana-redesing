@@ -8,6 +8,15 @@ import {
   Phone, PhoneCall, Pill, ScanEye, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Smile, Sparkles, Stethoscope, Syringe, Users, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+import { PoseRotatingImage } from "@/components/PoseRotatingImage";
+
+const prosonrisasBearPoses = [
+  "/images/planes/prosonrisas/prosonrisas-bear-cepillo.webp",
+  "/images/planes/prosonrisas/prosonrisas-bear-saludo.webp",
+  "/images/planes/prosonrisas/prosonrisas-bear-pulgar.webp",
+  "/images/planes/prosonrisas/prosonrisas-bear-corazon.webp",
+  "/images/planes/prosonrisas/prosonrisas-bear-brazos-cruzados.webp",
+];
 
 /* ---------------------------------------------------------------------- */
 /* Decoración de fondo: siluetas dentales (diente, cepillo, espejo,        */
@@ -644,14 +653,12 @@ export default function ProsonrisasPage() {
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente de Prosonrisas" : "Minimizar asistente de Prosonrisas"}
           >
-            <Image
-              src="/images/planes/prosonrisas/prosonrisas-tooth.png"
+            <PoseRotatingImage
+              images={prosonrisasBearPoses}
               alt="Asistente virtual Prosonrisas"
-              width={560}
-              height={560}
-              unoptimized
+              width={1145}
+              height={1374}
               className="prosonrisas-tooth-image"
-              priority={false}
             />
           </button>
         </div>
