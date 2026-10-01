@@ -583,8 +583,8 @@ export default function Mh50Page() {
               </button>
               <span className="mh50-quick-faq-eyebrow">PREGUNTAS FRECUENTES</span>
               <div className="mh50-quick-faq-list">
-                {quickFaqs.map((item, i) => (
-                  <details key={item.question} open={i === 0}>
+                {quickFaqs.map((item) => (
+                  <details key={item.question}>
                     <summary>{item.question}</summary>
                     <p>{item.answer}</p>
                   </details>
