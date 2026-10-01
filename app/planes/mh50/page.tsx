@@ -195,23 +195,23 @@ const contactChannels = [
 const quickFaqs = [
   {
     question: "¿Cuándo puedo empezar a usar mi cobertura?",
-    answer: "Depende de cada tipo de atención: 30 días para atención ambulatoria, 60 días para maternidad y 90 días para atención hospitalaria, contados desde tu afiliación.",
+    answer: "¡Buena pregunta! ⏱️ Depende del tipo de atención: 30 días para atención ambulatoria, 60 días para maternidad y 90 días para hospitalización, contados desde el día en que te afilias.",
   },
   {
     question: "¿Qué cubre la hospitalización?",
-    answer: "90% en Red Humana y 80% por libre elección, sin límite de días hospitalarios, incluyendo habitación, acompañante, trasplantes, diálisis y rehabilitación.",
+    answer: "Tienes un respaldo bien completo 🏥: 90% en Red Humana y 80% por libre elección, sin límite de días hospitalarios. Incluye habitación, acompañante, trasplantes, diálisis y rehabilitación.",
   },
   {
     question: "¿Cómo funciona la cobertura de medicinas?",
-    answer: "90% para el Vademécum A, 70% para el Vademécum B, y 70% por reembolso si usas libre elección, en una amplia red de farmacias.",
+    answer: "Así de simple 💊: 90% para el Vademécum A, 70% para el Vademécum B, y 70% por reembolso si prefieres libre elección. Todo en una amplia red de farmacias.",
   },
   {
     question: "¿Qué pasa si tengo una preexistencia declarada?",
-    answer: "Humana la cubre de forma progresiva: hasta $540 entre el mes 7 y 12 de afiliación, hasta $1.350 entre el mes 13 y 24, y hasta 20 salarios básicos desde el mes 25.",
+    answer: "Tranquilo, Humana te acompaña en eso 💙. La cobertura crece de forma progresiva: hasta $540 entre el mes 7 y 12 de afiliación, hasta $1.350 entre el mes 13 y 24, y hasta 20 salarios básicos desde el mes 25.",
   },
   {
     question: "¿Cómo contacto a Humana?",
-    answer: "Por WhatsApp al +593 2401 7002, por la línea gratuita 1800 48 62 62, o por correo a servicioalcliente@humana.med.ec.",
+    answer: "¡Con gusto! 😊 Puedes escribirnos por WhatsApp al +593 2401 7002, llamar a nuestra línea gratuita 1800 48 62 62, o enviarnos un correo a servicioalcliente@humana.med.ec.",
   },
 ];
 
@@ -227,7 +227,7 @@ export default function Mh50Page() {
   const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const CHAT_GREETING = "Hola 👋 Soy el asistente de Humana para MH50. Toca una pregunta para ver la respuesta.";
+  const CHAT_GREETING = "¡Hola! 👋 Soy tu asistente de Humana para MH50. Toca una de estas preguntas y te respondo al instante 😊";
   const pendingFaqs = quickFaqs.filter((item) => !askedQuestions.includes(item.question));
 
   const openChat = () => {
@@ -608,32 +608,32 @@ export default function Mh50Page() {
                 <X size={14} aria-hidden="true" />
               </button>
               <span className="mh50-quick-faq-eyebrow">ASISTENTE MH50</span>
-              <div className="mh50-chat-messages">
+              <div className="mh50-chat-body">
                 {chatMessages.map((msg, i) => (
                   <div key={i} className={`mh50-chat-bubble mh50-chat-bubble-${msg.role}`}>
                     {msg.text}
                   </div>
                 ))}
+                <div className="mh50-chat-chips">
+                  {pendingFaqs.length > 0 ? (
+                    pendingFaqs.map((item) => (
+                      <button
+                        key={item.question}
+                        type="button"
+                        className="mh50-chat-chip"
+                        onClick={() => askQuestion(item.question, item.answer)}
+                      >
+                        {item.question}
+                      </button>
+                    ))
+                  ) : (
+                    <p className="mh50-chat-done">Eso es todo lo que puedo responder por aquí 🙌 Para algo más específico, habla con un asesor:</p>
+                  )}
+                  <a className="mh50-chat-chip mh50-chat-chip-contact" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
+                    <MessageCircle size={14} aria-hidden="true" /> Hablar con un asesor
+                  </a>
+                </div>
                 <div ref={chatEndRef} />
-              </div>
-              <div className="mh50-chat-chips">
-                {pendingFaqs.length > 0 ? (
-                  pendingFaqs.map((item) => (
-                    <button
-                      key={item.question}
-                      type="button"
-                      className="mh50-chat-chip"
-                      onClick={() => askQuestion(item.question, item.answer)}
-                    >
-                      {item.question}
-                    </button>
-                  ))
-                ) : (
-                  <p className="mh50-chat-done">Eso es todo lo que puedo responder por aquí. Para algo más específico, habla con un asesor:</p>
-                )}
-                <a className="mh50-chat-chip mh50-chat-chip-contact" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
-                  <MessageCircle size={14} aria-hidden="true" /> Hablar con un asesor
-                </a>
               </div>
             </div>
           )}
