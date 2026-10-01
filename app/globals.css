@@ -4444,8 +4444,68 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh80-peek-figure { animation: none; }
 }
 
-/* El oso familiar (PH15, PH30, MH50, MH150, Proteger) vive en la esquina
-   inferior izquierda en las cinco páginas, porque la esquina derecha queda
+/* ============================================================ */
+/* Asistente de MH50 — misma variante "asoma desde el borde        */
+/* derecho" que Proteger y MH80, con la pareja de osos familiares.  */
+/* Clases propias (mh50-peek-*) para no interferir con las clases   */
+/* humana-bear-* que siguen usando PH15, PH30 y MH150.              */
+/* ============================================================ */
+.mh50-peek-assistant {
+  position: fixed; right: 0; bottom: clamp(18vh, 24vh, 30vh); z-index: 60;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+}
+.mh50-peek-figure {
+  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
+  display: block; animation: protegerPeekFloat 4s ease-in-out infinite;
+}
+.mh50-peek-image {
+  width: clamp(90px, 8vw, 130px); height: auto; display: block;
+  filter: drop-shadow(0 16px 28px rgba(7,63,96,.3));
+  transition: transform .3s ease, width .25s ease;
+}
+.mh50-peek-figure:hover .mh50-peek-image { transform: translateX(-4px); }
+.mh50-peek-assistant.is-minimized .mh50-peek-image { width: 56px; }
+.mh50-peek-bubble {
+  position: relative; max-width: 190px; padding: 12px 26px 12px 16px;
+  border-radius: 16px 4px 16px 16px; background: rgba(255,255,255,.92);
+  border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(14px);
+  box-shadow: 0 16px 36px rgba(4,20,34,.18); color: #12314a;
+  margin-right: clamp(6px, 1.6vw, 18px);
+  animation: protegerPeekBubbleIn .32s cubic-bezier(.22,1,.36,1) both;
+}
+.mh50-peek-bubble p { margin: 0; font-size: 12px; line-height: 1.45; font-weight: 550; }
+.mh50-peek-close {
+  position: absolute; top: 7px; right: 7px; width: 16px; height: 16px; border-radius: 50%;
+  border: 0; background: rgba(11,128,189,.1); color: #0b80bd;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+}
+.mh50-peek-close:hover { background: rgba(11,128,189,.18); }
+@media (max-width: 768px) {
+  .mh50-peek-assistant { bottom: clamp(16vh, 20vh, 26vh); gap: 2px; }
+  .mh50-peek-image { width: 68px; }
+  .mh50-peek-assistant.is-minimized { bottom: 14vh; }
+  .mh50-peek-assistant.is-minimized .mh50-peek-figure {
+    animation: none; border-radius: 50% 0 0 50%; background: #fff;
+    box-shadow: 0 8px 22px rgba(4,20,34,.3);
+    overflow: hidden; width: 42px; height: 42px; display: flex;
+    align-items: center; justify-content: flex-start;
+  }
+  .mh50-peek-assistant.is-minimized .mh50-peek-image { width: 56px; max-width: none; flex: none; }
+  .mh50-peek-bubble {
+    max-width: 58vw; padding: 11px 24px 11px 14px;
+    margin-right: clamp(4px, 1.5vw, 12px);
+  }
+  .mh50-peek-bubble p {
+    font-size: 11.5px; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mh50-peek-figure { animation: none; }
+}
+
+/* El oso familiar (PH15, PH30, MH150) vive en la esquina
+   inferior izquierda en estas tres páginas, porque la esquina derecha queda
    reservada para otros accesos (central de ayuda, contacto). Como ahí sí
    hay títulos, botones y datos (a diferencia de la derecha, que antes solo
    tenía fotos decorativas), cada página reserva espacio a la izquierda en
@@ -4457,12 +4517,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      minimiza o lo cierra, el contenido vuelve a ocupar el ancho normal en
      vez de dejar un hueco vacío a la izquierda donde ya no hay nada. La
      transición suaviza el cambio de ancho al minimizar/restaurar. */
-  .mh50-page .mh50-exp-hero,
-  .mh50-page .mh50-exp-essence,
-  .mh50-page .mh50-exp-moments,
-  .mh50-page .mh50-exp-waiting,
-  .mh50-page .mh50-exp-vault,
-  .mh50-page .mh50-exp-finale,
   .ph15-exp .ph15-exp-hero,
   .ph15-exp .ph15-exp-essence,
   .ph15-exp .ph15-exp-moments,
@@ -4493,12 +4547,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .business-page .mh50-exp-finale {
     transition: padding-left .35s var(--premium-ease, ease);
   }
-  .mh50-page:not(.bear-minimized) .mh50-exp-hero,
-  .mh50-page:not(.bear-minimized) .mh50-exp-essence,
-  .mh50-page:not(.bear-minimized) .mh50-exp-moments,
-  .mh50-page:not(.bear-minimized) .mh50-exp-waiting,
-  .mh50-page:not(.bear-minimized) .mh50-exp-vault,
-  .mh50-page:not(.bear-minimized) .mh50-exp-finale,
   .ph15-exp:not(.bear-minimized) .ph15-exp-hero,
   .ph15-exp:not(.bear-minimized) .ph15-exp-essence,
   .ph15-exp:not(.bear-minimized) .ph15-exp-moments,
@@ -4535,14 +4583,12 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      vive en un bloque interno con su propio padding, así que la reserva se
      aplica ahí para que el oso no tape el título ni las cifras, salvo
      cuando está minimizado. */
-  .mh50-page .mh50-exp-impact-copy,
   .ph15-exp .ph15-exp-impact-copy,
   .ph30-exp .ph30-exp-impact-copy,
   .mh150-exp .mh150-exp-impact-copy,
   .prosonrisas-page .mh50-exp-impact-copy {
     transition: padding-left .35s var(--premium-ease, ease);
   }
-  .mh50-page:not(.bear-minimized) .mh50-exp-impact-copy,
   .ph15-exp:not(.bear-minimized) .ph15-exp-impact-copy,
   .ph30-exp:not(.bear-minimized) .ph30-exp-impact-copy,
   .mh150-exp:not(.bear-minimized) .mh150-exp-impact-copy,
@@ -4555,7 +4601,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      llegaba a cortarse contra el borde derecho en la tercera columna.
      Se reduce un poco el tope del clamp solo mientras el oso ocupa ese
      espacio; si está minimizado, hay ancho de sobra y no hace falta. */
-  .mh50-page:not(.bear-minimized) .mh50-exp-stat strong,
   .ph15-exp:not(.bear-minimized) .ph15-exp-stat strong,
   .ph30-exp:not(.bear-minimized) .ph30-exp-stat strong,
   .mh150-exp:not(.bear-minimized) .mh150-exp-stat strong,
@@ -4591,7 +4636,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      izquierda, es decir, en los capítulos "reverse". En los capítulos sin
      alternar, la imagen ocupa la izquierda y no hay nada que tapar, así
      que se deja el layout original (más ancho) para esos casos. */
-  .mh50-page .mh50-exp-chapter.reverse,
   .ph15-exp .ph15-exp-chapter.reverse,
   .ph30-exp .ph30-exp-chapter.reverse,
   .mh150-exp .mh150-exp-chapter.reverse,
@@ -4599,7 +4643,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .business-page .mh50-exp-chapter.reverse {
     transition: padding-left .35s var(--premium-ease, ease);
   }
-  .mh50-page:not(.bear-minimized) .mh50-exp-chapter.reverse,
   .ph15-exp:not(.bear-minimized) .ph15-exp-chapter.reverse,
   .ph30-exp:not(.bear-minimized) .ph30-exp-chapter.reverse,
   .mh150-exp:not(.bear-minimized) .mh150-exp-chapter.reverse,
