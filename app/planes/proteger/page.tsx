@@ -158,12 +158,12 @@ const contactChannels = [
    complementario para Proteger. Mismo personaje que PH15/PH30/MH50/MH150;
    solo cambian los mensajes. */
 const assistantMessages: Record<string, string> = {
-  "proteger-inicio": "Hola, soy tu asistente Humana. Estoy aquí para ayudarte a conocer tu respaldo económico frente a lo inesperado.",
-  "proteger-esencia": "Cuando la salud exige más, Proteger complementa tu plan médico actual.",
-  "proteger-respaldo": "Proteger entra en acción cuando los gastos médicos superan lo que tu plan base puede cubrir.",
+  "proteger-inicio": "Hola, soy tu asistente Humana. Estoy aquí para ayudarte.",
+  "proteger-esencia": "Cuando la salud exige más, Proteger complementa tu plan médico.",
+  "proteger-respaldo": "Proteger entra en acción cuando los gastos médicos son muy altos.",
   "proteger-robotica": "Cobertura del 100% para procedimientos con cirugía robótica.",
-  "proteger-trasplantes": "Respaldo para trasplante de órganos y un seguro de vida para tu tranquilidad.",
-  "proteger-prevencion": "Un chequeo médico anual sin costo y asistencias HU PLUS para tu vida diaria.",
+  "proteger-trasplantes": "Respaldo para trasplante de órganos y un seguro de vida.",
+  "proteger-prevencion": "Un chequeo médico anual sin costo y asistencias HU PLUS.",
   "proteger-carencias": "Aquí puedes ver cuándo empieza a aplicar cada cobertura desde tu afiliación.",
   "proteger-cierre": "¿Listo para proteger tu futuro? Cotiza Proteger ahora.",
 };
