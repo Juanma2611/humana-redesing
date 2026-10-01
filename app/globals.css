@@ -4165,77 +4165,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 
 /* ============================================================ */
-/* MH80 — Asistente virtual: personaje oficial en PNG (imagen        */
-/* entregada por el cliente, con transparencia real), flotando fijo  */
-/* en pantalla, con burbuja glassmorphism clara.                     */
-/* ============================================================ */
-.mh80-assistant {
-  /* Fijo durante el scroll: queda anclado siempre en la misma
-     esquina, como un personaje integrado a la experiencia. */
-  position: fixed; left: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-}
-.mh80-assistant-figure {
-  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
-  display: block; animation: mh80BotFloat 4s ease-in-out infinite;
-}
-.mh80-bot-image {
-  width: clamp(150px, 13vw, 220px); height: auto; display: block;
-  filter: drop-shadow(0 20px 35px rgba(0,180,255,.35));
-}
-.mh80-assistant.is-minimized .mh80-bot-image { width: 72px; }
-@keyframes mh80BotFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-18px); }
-}
-.mh80-assistant-bubble {
-  position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
-  border-radius: 18px 18px 18px 4px; background: rgba(255,255,255,.88);
-  border: 1px solid rgba(16,167,219,.22); backdrop-filter: blur(14px);
-  box-shadow: 0 20px 44px rgba(4,20,34,.22); color: #12314a;
-}
-.mh80-assistant-bubble p { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 550; animation: mh80AssistantFade .35s ease; }
-@keyframes mh80AssistantFade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
-.mh80-assistant-close {
-  position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; border-radius: 50%;
-  border: 0; background: rgba(11,128,189,.1); color: #0b80bd;
-  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
-}
-.mh80-assistant-close:hover { background: rgba(11,128,189,.18); }
-@media (max-width: 768px) {
-  /* En móvil la burbuja vuelve a ubicarse encima del personaje (igual que en
-     escritorio), con una colita apuntando hacia él, tipo globo de historieta.
-     El personaje se agranda para que tenga más presencia en pantallas chicas. */
-  .mh80-assistant { left: 14px; bottom: 20px; gap: 12px; }
-  .mh80-bot-image { width: 140px; }
-  .mh80-assistant.is-minimized { left: 10px; bottom: 14px; }
-  .mh80-assistant.is-minimized .mh80-assistant-figure {
-    animation: none; border-radius: 50%; background: #fff;
-    box-shadow: 0 8px 22px rgba(4,20,34,.3);
-    overflow: hidden; width: 46px; height: 46px; display: flex;
-    align-items: flex-start; justify-content: center;
-  }
-  .mh80-assistant.is-minimized .mh80-bot-image { width: 62px; max-width: none; flex: none; margin-top: 2px; }
-  .mh80-assistant-bubble {
-    max-width: 78vw; padding: 16px 34px 18px 18px;
-    border-radius: 20px 20px 20px 4px;
-  }
-  .mh80-assistant-bubble::after {
-    content: ""; position: absolute; bottom: -9px; left: 30px;
-    width: 20px; height: 20px; background: rgba(255,255,255,.88);
-    border-left: 1px solid rgba(16,167,219,.22); border-bottom: 1px solid rgba(16,167,219,.22);
-    border-bottom-left-radius: 4px; transform: rotate(-45deg);
-  }
-  .mh80-assistant-bubble p {
-    font-size: 14.5px; line-height: 1.45; font-weight: 600;
-    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mh80-assistant-figure { animation: none; }
-}
-
-/* ============================================================ */
 /* Prosonrisas — asistente mascota (diente flotante)              */
 /* ============================================================ */
 
@@ -4455,6 +4384,66 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .proteger-peek-figure { animation: none; }
 }
 
+/* ============================================================ */
+/* Asistente de MH80 — misma variante "asoma desde el borde        */
+/* derecho" que Proteger, con el robot futurista en vez del oso     */
+/* superhéroe. Clases propias (mh80-peek-*) para no interferir con  */
+/* el resto de clases mh80-* ya existentes en la página.            */
+/* ============================================================ */
+.mh80-peek-assistant {
+  position: fixed; right: 0; bottom: clamp(18vh, 24vh, 30vh); z-index: 60;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+}
+.mh80-peek-figure {
+  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
+  display: block; animation: protegerPeekFloat 4s ease-in-out infinite;
+}
+.mh80-peek-image {
+  width: clamp(90px, 8vw, 130px); height: auto; display: block;
+  filter: drop-shadow(0 16px 28px rgba(7,63,96,.3));
+  transition: transform .3s ease, width .25s ease;
+}
+.mh80-peek-figure:hover .mh80-peek-image { transform: translateX(-4px); }
+.mh80-peek-assistant.is-minimized .mh80-peek-image { width: 56px; }
+.mh80-peek-bubble {
+  position: relative; max-width: 190px; padding: 12px 26px 12px 16px;
+  border-radius: 16px 4px 16px 16px; background: rgba(255,255,255,.92);
+  border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(14px);
+  box-shadow: 0 16px 36px rgba(4,20,34,.18); color: #12314a;
+  margin-right: clamp(6px, 1.6vw, 18px);
+  animation: protegerPeekBubbleIn .32s cubic-bezier(.22,1,.36,1) both;
+}
+.mh80-peek-bubble p { margin: 0; font-size: 12px; line-height: 1.45; font-weight: 550; }
+.mh80-peek-close {
+  position: absolute; top: 7px; right: 7px; width: 16px; height: 16px; border-radius: 50%;
+  border: 0; background: rgba(11,128,189,.1); color: #0b80bd;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+}
+.mh80-peek-close:hover { background: rgba(11,128,189,.18); }
+@media (max-width: 768px) {
+  .mh80-peek-assistant { bottom: clamp(16vh, 20vh, 26vh); gap: 2px; }
+  .mh80-peek-image { width: 68px; }
+  .mh80-peek-assistant.is-minimized { bottom: 14vh; }
+  .mh80-peek-assistant.is-minimized .mh80-peek-figure {
+    animation: none; border-radius: 50% 0 0 50%; background: #fff;
+    box-shadow: 0 8px 22px rgba(4,20,34,.3);
+    overflow: hidden; width: 42px; height: 42px; display: flex;
+    align-items: center; justify-content: flex-start;
+  }
+  .mh80-peek-assistant.is-minimized .mh80-peek-image { width: 56px; max-width: none; flex: none; }
+  .mh80-peek-bubble {
+    max-width: 58vw; padding: 11px 24px 11px 14px;
+    margin-right: clamp(4px, 1.5vw, 12px);
+  }
+  .mh80-peek-bubble p {
+    font-size: 11.5px; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mh80-peek-figure { animation: none; }
+}
+
 /* El oso familiar (PH15, PH30, MH50, MH150, Proteger) vive en la esquina
    inferior izquierda en las cinco páginas, porque la esquina derecha queda
    reservada para otros accesos (central de ayuda, contacto). Como ahí sí
@@ -4498,10 +4487,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .prosonrisas-page .mh50-exp-waiting,
   .prosonrisas-page .mh50-exp-vault,
   .prosonrisas-page .mh50-exp-finale,
-  .mh80-exp .mh80-exp-hero,
-  .mh80-exp .mh80-exp-waiting,
-  .mh80-exp .mh80-exp-vault,
-  .mh80-exp .mh80-exp-finale,
   .business-page .mh50-exp-hero,
   .business-page .mh50-exp-essence,
   .business-page .mh50-exp-moments,
@@ -4538,10 +4523,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .prosonrisas-page:not(.bear-minimized) .mh50-exp-waiting,
   .prosonrisas-page:not(.bear-minimized) .mh50-exp-vault,
   .prosonrisas-page:not(.bear-minimized) .mh50-exp-finale,
-  .mh80-exp:not(.bear-minimized) .mh80-exp-hero,
-  .mh80-exp:not(.bear-minimized) .mh80-exp-waiting,
-  .mh80-exp:not(.bear-minimized) .mh80-exp-vault,
-  .mh80-exp:not(.bear-minimized) .mh80-exp-finale,
   .business-page:not(.bear-minimized) .mh50-exp-hero,
   .business-page:not(.bear-minimized) .mh50-exp-essence,
   .business-page:not(.bear-minimized) .mh50-exp-moments,

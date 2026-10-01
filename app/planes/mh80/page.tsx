@@ -10,19 +10,11 @@ import {
   ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Syringe, Target, Users, Video, Wallet, X, Zap,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
-import { PoseRotatingImage } from "@/components/PoseRotatingImage";
 import {
   assistantMessages, chapters, contactChannels, faqs, featuredBenefits, keyStats,
   otherConditions, preventionCoverages, rehabCoverages,
   robotSurgery, specialCases, waitingPeriods,
 } from "./mh80Data";
-
-const mh80RobotPoses = [
-  "/images/planes/mh80/mh80-robot-neutro.webp",
-  "/images/planes/mh80/mh80-robot-cartel.webp",
-  "/images/planes/mh80/mh80-robot-corazon.webp",
-  "/images/planes/mh80/mh80-robot-pulgar.webp",
-];
 
 const ASSISTANT_STORAGE_KEY = "mh80-assistant-minimized";
 
@@ -549,11 +541,11 @@ export default function Mh80Page() {
         <div
           id="mh80-assistant-slot"
           ref={assistantRef}
-          className={`mh80-assistant${assistantMinimized ? " is-minimized" : ""}`}
+          className={`mh80-peek-assistant${assistantMinimized ? " is-minimized" : ""}`}
         >
           {!assistantMinimized && (
-            <div className="mh80-assistant-bubble" role="status">
-              <button type="button" className="mh80-assistant-close" onClick={toggleAssistant} aria-label="Minimizar asistente de MH80">
+            <div className="mh80-peek-bubble" role="status">
+              <button type="button" className="mh80-peek-close" onClick={toggleAssistant} aria-label="Minimizar asistente de MH80">
                 <X size={13} aria-hidden="true" />
               </button>
               <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
@@ -561,16 +553,18 @@ export default function Mh80Page() {
           )}
           <button
             type="button"
-            className="mh80-assistant-figure"
+            className="mh80-peek-figure"
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente de MH80" : "Minimizar asistente de MH80"}
           >
-            <PoseRotatingImage
-              images={mh80RobotPoses}
+            <Image
+              src="/images/planes/mh80/mh80-robot-peek.webp"
               alt="Asistente virtual MH80"
-              width={458}
-              height={545}
-              className="mh80-bot-image"
+              width={409}
+              height={610}
+              unoptimized
+              className="mh80-peek-image"
+              priority={false}
             />
           </button>
         </div>
