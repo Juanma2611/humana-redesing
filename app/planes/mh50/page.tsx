@@ -7,7 +7,7 @@ import {
   Activity, Ambulance, Baby, Bone, Bike, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Milk, PackageCheck, Phone, PhoneCall, Pill, PlaneTakeoff,
-  Ribbon, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles,
+  Ribbon, Scissors, Send, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles,
   Stethoscope, Syringe, Users, Video, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
@@ -225,6 +225,7 @@ export default function Mh50Page() {
   const [faqOpen, setFaqOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState<{ role: "bot" | "user"; text: string }[]>([]);
   const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   const CHAT_GREETING = "¡Hola! 👋 Soy tu asistente de Humana para MH50. Toca una de estas preguntas y te respondo al instante 😊";
@@ -240,15 +241,21 @@ export default function Mh50Page() {
     setFaqOpen(false);
     setChatMessages([]);
     setAskedQuestions([]);
+    setIsTyping(false);
   };
   const askQuestion = (question: string, answer: string) => {
-    setChatMessages((msgs) => [...msgs, { role: "user", text: question }, { role: "bot", text: answer }]);
+    setChatMessages((msgs) => [...msgs, { role: "user", text: question }]);
     setAskedQuestions((asked) => [...asked, question]);
+    setIsTyping(true);
+    window.setTimeout(() => {
+      setIsTyping(false);
+      setChatMessages((msgs) => [...msgs, { role: "bot", text: answer }]);
+    }, 700 + Math.random() * 500);
   };
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }, [chatMessages]);
+  }, [chatMessages, isTyping]);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -599,41 +606,64 @@ export default function Mh50Page() {
         <div className="mh50-quick-actions">
           {faqOpen && (
             <div className="mh50-quick-faq" role="dialog" aria-label="Chat de preguntas frecuentes de MH50">
-              <button
-                type="button"
-                className="mh50-quick-faq-close"
-                onClick={closeChat}
-                aria-label="Cerrar chat"
-              >
-                <X size={14} aria-hidden="true" />
-              </button>
-              <span className="mh50-quick-faq-eyebrow">ASISTENTE MH50</span>
+              <div className="mh50-chat-header">
+                <span className="mh50-chat-avatar">
+                  <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={20} height={20} unoptimized aria-hidden="true" />
+                </span>
+                <div className="mh50-chat-header-text">
+                  <strong>Asistente Humana</strong>
+                  <span className="mh50-chat-status"><i /> En línea</span>
+                </div>
+                <button type="button" className="mh50-quick-faq-close" onClick={closeChat} aria-label="Cerrar chat">
+                  <X size={16} aria-hidden="true" />
+                </button>
+              </div>
               <div className="mh50-chat-body">
                 {chatMessages.map((msg, i) => (
-                  <div key={i} className={`mh50-chat-bubble mh50-chat-bubble-${msg.role}`}>
-                    {msg.text}
+                  <div key={i} className={`mh50-chat-row mh50-chat-row-${msg.role}`}>
+                    {msg.role === "bot" && (
+                      <span className="mh50-chat-avatar mh50-chat-avatar-sm">
+                        <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={14} height={14} unoptimized aria-hidden="true" />
+                      </span>
+                    )}
+                    <div className={`mh50-chat-bubble mh50-chat-bubble-${msg.role}`}>{msg.text}</div>
                   </div>
                 ))}
-                <div className="mh50-chat-chips">
-                  {pendingFaqs.length > 0 ? (
-                    pendingFaqs.map((item) => (
-                      <button
-                        key={item.question}
-                        type="button"
-                        className="mh50-chat-chip"
-                        onClick={() => askQuestion(item.question, item.answer)}
-                      >
-                        {item.question}
-                      </button>
-                    ))
-                  ) : (
-                    <p className="mh50-chat-done">Eso es todo lo que puedo responder por aquí 🙌 Para algo más específico, habla con un asesor:</p>
-                  )}
-                  <a className="mh50-chat-chip mh50-chat-chip-contact" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
-                    <MessageCircle size={14} aria-hidden="true" /> Hablar con un asesor
-                  </a>
-                </div>
+                {isTyping && (
+                  <div className="mh50-chat-row mh50-chat-row-bot">
+                    <span className="mh50-chat-avatar mh50-chat-avatar-sm">
+                      <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={14} height={14} unoptimized aria-hidden="true" />
+                    </span>
+                    <div className="mh50-chat-bubble mh50-chat-bubble-bot mh50-chat-typing">
+                      <span /><span /><span />
+                    </div>
+                  </div>
+                )}
                 <div ref={chatEndRef} />
+              </div>
+              <div className="mh50-chat-suggestions">
+                {pendingFaqs.length > 0 ? (
+                  pendingFaqs.map((item) => (
+                    <button
+                      key={item.question}
+                      type="button"
+                      className="mh50-chat-chip"
+                      disabled={isTyping}
+                      onClick={() => askQuestion(item.question, item.answer)}
+                    >
+                      {item.question}
+                    </button>
+                  ))
+                ) : (
+                  <span className="mh50-chat-chip mh50-chat-chip-contact-label">¿Algo más específico?</span>
+                )}
+                <a className="mh50-chat-chip mh50-chat-chip-contact" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
+                  <MessageCircle size={14} aria-hidden="true" /> Hablar con un asesor
+                </a>
+              </div>
+              <div className="mh50-chat-inputbar" aria-hidden="true">
+                <span className="mh50-chat-inputbar-field">Escribe tu pregunta…</span>
+                <span className="mh50-chat-inputbar-send"><Send size={15} /></span>
               </div>
             </div>
           )}
