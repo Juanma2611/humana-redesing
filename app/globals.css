@@ -4474,11 +4474,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh50-page .mh50-exp-waiting,
   .mh50-page .mh50-exp-vault,
   .mh50-page .mh50-exp-finale,
-  .proteger-page .mh50-exp-hero,
-  .proteger-page .mh50-exp-essence,
-  .proteger-page .mh50-exp-waiting,
-  .proteger-page .mh50-exp-vault,
-  .proteger-page .mh50-exp-finale,
   .ph15-exp .ph15-exp-hero,
   .ph15-exp .ph15-exp-essence,
   .ph15-exp .ph15-exp-moments,
@@ -4519,11 +4514,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh50-page:not(.bear-minimized) .mh50-exp-waiting,
   .mh50-page:not(.bear-minimized) .mh50-exp-vault,
   .mh50-page:not(.bear-minimized) .mh50-exp-finale,
-  .proteger-page:not(.bear-minimized) .mh50-exp-hero,
-  .proteger-page:not(.bear-minimized) .mh50-exp-essence,
-  .proteger-page:not(.bear-minimized) .mh50-exp-waiting,
-  .proteger-page:not(.bear-minimized) .mh50-exp-vault,
-  .proteger-page:not(.bear-minimized) .mh50-exp-finale,
   .ph15-exp:not(.bear-minimized) .ph15-exp-hero,
   .ph15-exp:not(.bear-minimized) .ph15-exp-essence,
   .ph15-exp:not(.bear-minimized) .ph15-exp-moments,
@@ -4565,7 +4555,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      aplica ahí para que el oso no tape el título ni las cifras, salvo
      cuando está minimizado. */
   .mh50-page .mh50-exp-impact-copy,
-  .proteger-page .mh50-exp-impact-copy,
   .ph15-exp .ph15-exp-impact-copy,
   .ph30-exp .ph30-exp-impact-copy,
   .mh150-exp .mh150-exp-impact-copy,
@@ -4573,7 +4562,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
     transition: padding-left .35s var(--premium-ease, ease);
   }
   .mh50-page:not(.bear-minimized) .mh50-exp-impact-copy,
-  .proteger-page:not(.bear-minimized) .mh50-exp-impact-copy,
   .ph15-exp:not(.bear-minimized) .ph15-exp-impact-copy,
   .ph30-exp:not(.bear-minimized) .ph30-exp-impact-copy,
   .mh150-exp:not(.bear-minimized) .mh150-exp-impact-copy,
@@ -4592,9 +4580,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh150-exp:not(.bear-minimized) .mh150-exp-stat strong,
   .prosonrisas-page:not(.bear-minimized) .mh50-exp-stat strong {
     font-size: clamp(32px, 4.6vw, 82px);
-  }
-  .proteger-page:not(.bear-minimized) .mh50-exp-stat strong {
-    font-size: clamp(30px, 3.6vw, 64px);
   }
   .business-page:not(.bear-minimized) .mh50-exp-stat strong {
     font-size: clamp(32px, 4.6vw, 82px);
@@ -4626,7 +4611,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
      alternar, la imagen ocupa la izquierda y no hay nada que tapar, así
      que se deja el layout original (más ancho) para esos casos. */
   .mh50-page .mh50-exp-chapter.reverse,
-  .proteger-page .mh50-exp-chapter.reverse,
   .ph15-exp .ph15-exp-chapter.reverse,
   .ph30-exp .ph30-exp-chapter.reverse,
   .mh150-exp .mh150-exp-chapter.reverse,
@@ -4635,7 +4619,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
     transition: padding-left .35s var(--premium-ease, ease);
   }
   .mh50-page:not(.bear-minimized) .mh50-exp-chapter.reverse,
-  .proteger-page:not(.bear-minimized) .mh50-exp-chapter.reverse,
   .ph15-exp:not(.bear-minimized) .ph15-exp-chapter.reverse,
   .ph30-exp:not(.bear-minimized) .ph30-exp-chapter.reverse,
   .mh150-exp:not(.bear-minimized) .mh150-exp-chapter.reverse,
