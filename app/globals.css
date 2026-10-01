@@ -4392,16 +4392,16 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* ============================================================ */
 .proteger-peek-assistant {
   position: fixed; right: 0; bottom: clamp(18vh, 24vh, 30vh); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
 }
 .proteger-peek-figure {
   border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
   display: block; animation: protegerPeekFloat 4s ease-in-out infinite;
 }
 .proteger-peek-image {
-  width: clamp(110px, 10vw, 160px); height: auto; display: block;
+  width: clamp(90px, 8vw, 130px); height: auto; display: block;
   filter: drop-shadow(0 16px 28px rgba(7,63,96,.3));
-  transition: transform .3s ease;
+  transition: transform .3s ease, width .25s ease;
 }
 .proteger-peek-figure:hover .proteger-peek-image { transform: translateX(-4px); }
 .proteger-peek-assistant.is-minimized .proteger-peek-image { width: 56px; }
@@ -4414,7 +4414,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   border-radius: 16px 4px 16px 16px; background: rgba(255,255,255,.92);
   border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(14px);
   box-shadow: 0 16px 36px rgba(4,20,34,.18); color: #12314a;
-  margin-right: clamp(16px, 4vw, 40px);
+  margin-right: clamp(6px, 1.6vw, 18px);
   /* La burbuja va arriba de la cabeza del oso (no a su costado), así que
      entra con un leve desplazamiento hacia abajo en vez del slide lateral
      que usábamos cuando estaba a la izquierda del personaje. */
@@ -4432,8 +4432,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .proteger-peek-close:hover { background: rgba(11,128,189,.18); }
 @media (max-width: 768px) {
-  .proteger-peek-assistant { bottom: clamp(16vh, 20vh, 26vh); gap: 6px; }
-  .proteger-peek-image { width: 86px; }
+  .proteger-peek-assistant { bottom: clamp(16vh, 20vh, 26vh); gap: 2px; }
+  .proteger-peek-image { width: 68px; }
   .proteger-peek-assistant.is-minimized { bottom: 14vh; }
   .proteger-peek-assistant.is-minimized .proteger-peek-figure {
     animation: none; border-radius: 50% 0 0 50%; background: #fff;
@@ -4444,7 +4444,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .proteger-peek-assistant.is-minimized .proteger-peek-image { width: 56px; max-width: none; flex: none; }
   .proteger-peek-bubble {
     max-width: 58vw; padding: 11px 24px 11px 14px;
-    margin-right: clamp(10px, 3vw, 22px);
+    margin-right: clamp(4px, 1.5vw, 12px);
   }
   .proteger-peek-bubble p {
     font-size: 11.5px; line-height: 1.4;
