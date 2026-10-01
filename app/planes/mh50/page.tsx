@@ -223,13 +223,32 @@ export default function Mh50Page() {
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
   const [faqOpen, setFaqOpen] = useState(false);
-  const [faqQuery, setFaqQuery] = useState("");
+  const [chatMessages, setChatMessages] = useState<{ role: "bot" | "user"; text: string }[]>([]);
+  const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
+  const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const normalize = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
-  const faqQueryNormalized = normalize(faqQuery.trim());
-  const filteredFaqs = faqQueryNormalized
-    ? quickFaqs.filter((item) => normalize(item.question).includes(faqQueryNormalized) || normalize(item.answer).includes(faqQueryNormalized))
-    : quickFaqs;
+  const CHAT_GREETING = "Hola 👋 Soy el asistente de Humana para MH50. Toca una pregunta para ver la respuesta.";
+  const pendingFaqs = quickFaqs.filter((item) => !askedQuestions.includes(item.question));
+
+  const openChat = () => {
+    setFaqOpen(true);
+    if (chatMessages.length === 0) {
+      setChatMessages([{ role: "bot", text: CHAT_GREETING }]);
+    }
+  };
+  const closeChat = () => {
+    setFaqOpen(false);
+    setChatMessages([]);
+    setAskedQuestions([]);
+  };
+  const askQuestion = (question: string, answer: string) => {
+    setChatMessages((msgs) => [...msgs, { role: "user", text: question }, { role: "bot", text: answer }]);
+    setAskedQuestions((asked) => [...asked, question]);
+  };
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [chatMessages]);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -579,50 +598,50 @@ export default function Mh50Page() {
 
         <div className="mh50-quick-actions">
           {faqOpen && (
-            <div className="mh50-quick-faq" role="dialog" aria-label="Preguntas frecuentes de MH50">
+            <div className="mh50-quick-faq" role="dialog" aria-label="Chat de preguntas frecuentes de MH50">
               <button
                 type="button"
                 className="mh50-quick-faq-close"
-                onClick={() => { setFaqOpen(false); setFaqQuery(""); }}
-                aria-label="Cerrar preguntas frecuentes"
+                onClick={closeChat}
+                aria-label="Cerrar chat"
               >
                 <X size={14} aria-hidden="true" />
               </button>
-              <span className="mh50-quick-faq-eyebrow">PREGUNTAS FRECUENTES</span>
-              <input
-                type="text"
-                className="mh50-quick-faq-search"
-                placeholder="Escribe tu duda…"
-                value={faqQuery}
-                onChange={(e) => setFaqQuery(e.target.value)}
-              />
-              {filteredFaqs.length > 0 ? (
-                <div className="mh50-quick-faq-list">
-                  {filteredFaqs.map((item) => (
-                    <details key={item.question}>
-                      <summary>{item.question}</summary>
-                      <p>{item.answer}</p>
-                    </details>
-                  ))}
-                </div>
-              ) : (
-                <div className="mh50-quick-faq-empty">
-                  <p>No encontramos una respuesta para esa duda. Escríbenos y un asesor te ayuda directamente.</p>
-                  <a href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
-                    <MessageCircle size={15} aria-hidden="true" /> Escribir por WhatsApp
-                  </a>
-                  <a href="tel:1800486262">
-                    <PhoneCall size={15} aria-hidden="true" /> Llamar a la línea gratuita
-                  </a>
-                </div>
-              )}
+              <span className="mh50-quick-faq-eyebrow">ASISTENTE MH50</span>
+              <div className="mh50-chat-messages">
+                {chatMessages.map((msg, i) => (
+                  <div key={i} className={`mh50-chat-bubble mh50-chat-bubble-${msg.role}`}>
+                    {msg.text}
+                  </div>
+                ))}
+                <div ref={chatEndRef} />
+              </div>
+              <div className="mh50-chat-chips">
+                {pendingFaqs.length > 0 ? (
+                  pendingFaqs.map((item) => (
+                    <button
+                      key={item.question}
+                      type="button"
+                      className="mh50-chat-chip"
+                      onClick={() => askQuestion(item.question, item.answer)}
+                    >
+                      {item.question}
+                    </button>
+                  ))
+                ) : (
+                  <p className="mh50-chat-done">Eso es todo lo que puedo responder por aquí. Para algo más específico, habla con un asesor:</p>
+                )}
+                <a className="mh50-chat-chip mh50-chat-chip-contact" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
+                  <MessageCircle size={14} aria-hidden="true" /> Hablar con un asesor
+                </a>
+              </div>
             </div>
           )}
           <button
             type="button"
             className="mh50-quick-btn mh50-quick-btn-faq"
-            onClick={() => setFaqOpen((v) => { if (v) setFaqQuery(""); return !v; })}
-            aria-label={faqOpen ? "Cerrar preguntas frecuentes" : "Abrir preguntas frecuentes"}
+            onClick={() => (faqOpen ? closeChat() : openChat())}
+            aria-label={faqOpen ? "Cerrar chat" : "Abrir chat de preguntas frecuentes"}
             aria-expanded={faqOpen}
           >
             <Image
