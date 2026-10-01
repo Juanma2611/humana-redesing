@@ -4392,7 +4392,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* ============================================================ */
 .proteger-peek-assistant {
   position: fixed; right: 0; bottom: clamp(18vh, 24vh, 30vh); z-index: 60;
-  display: flex; flex-direction: row; align-items: flex-end; gap: 8px;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
 }
 .proteger-peek-figure {
   border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
@@ -4411,19 +4411,19 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .proteger-peek-bubble {
   position: relative; max-width: 190px; padding: 12px 26px 12px 16px;
-  border-radius: 16px 16px 4px 16px; background: rgba(255,255,255,.92);
+  border-radius: 16px 4px 16px 16px; background: rgba(255,255,255,.92);
   border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(14px);
   box-shadow: 0 16px 36px rgba(4,20,34,.18); color: #12314a;
-  margin-bottom: clamp(30px, 8vw, 54px);
-  /* El oso está anclado al borde derecho, así que la burbuja debe entrar
-     desde ahí hacia la izquierda (no al revés, que es como se veía con
-     la animación genérica que solo subía el texto). */
+  margin-right: clamp(16px, 4vw, 40px);
+  /* La burbuja va arriba de la cabeza del oso (no a su costado), así que
+     entra con un leve desplazamiento hacia abajo en vez del slide lateral
+     que usábamos cuando estaba a la izquierda del personaje. */
   animation: protegerPeekBubbleIn .32s cubic-bezier(.22,1,.36,1) both;
 }
 .proteger-peek-bubble p { margin: 0; font-size: 12px; line-height: 1.45; font-weight: 550; }
 @keyframes protegerPeekBubbleIn {
-  from { opacity: 0; transform: translateX(16px); }
-  to { opacity: 1; transform: translateX(0); }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .proteger-peek-close {
   position: absolute; top: 7px; right: 7px; width: 16px; height: 16px; border-radius: 50%;
@@ -4443,8 +4443,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   }
   .proteger-peek-assistant.is-minimized .proteger-peek-image { width: 56px; max-width: none; flex: none; }
   .proteger-peek-bubble {
-    max-width: 50vw; padding: 11px 24px 11px 14px;
-    margin-bottom: clamp(26px, 14vw, 46px);
+    max-width: 58vw; padding: 11px 24px 11px 14px;
+    margin-right: clamp(10px, 3vw, 22px);
   }
   .proteger-peek-bubble p {
     font-size: 11.5px; line-height: 1.4;
