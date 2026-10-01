@@ -3955,7 +3955,23 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 
 @media (max-width: 980px) {
   .mh80-robotic { grid-template-columns: 1fr; grid-template-areas: "copy" "visual" "specialties" "photo"; }
-  .mh80-robotic-visual { max-width: 260px; }
+  /* En móvil el círculo tecnológico (anillos + ícono) se achica y las
+     insignias flotantes dejan de estar superpuestas encima — pasan a una
+     fila debajo, en flujo normal del documento (el contenedor crece para
+     darles espacio en vez de mantener una altura fija). Los anillos usan
+     medidas fijas en vez de inset en % para no deformarse a óvalo cuando
+     el contenedor crece más alto que ancho. */
+  .mh80-robotic-visual { max-width: 220px; height: auto; }
+  /* Centrado con left/calc en vez de transform:translateX, porque los
+     anillos ya usan transform:rotate para la animación de giro (un
+     transform estático de centrado quedaría sobrescrito en cada
+     fotograma de esa animación). */
+  .mh80-robotic-ring { inset: auto; left: calc(50% - 110px); width: 220px; height: 220px; top: 0; }
+  .mh80-robotic-ring.ring-2 { inset: auto; left: calc(50% - 80px); width: 160px; height: 160px; top: 30px; }
+  .mh80-robotic-ring.ring-3 { inset: auto; left: calc(50% - 50px); width: 100px; height: 100px; top: 60px; }
+  .mh80-robotic-core { inset: auto; left: calc(50% - 32px); width: 64px; height: 64px; top: 78px; }
+  .mh80-robotic-crosshair.top-left, .mh80-robotic-crosshair.top-right { top: 0; }
+  .mh80-robotic-crosshair.bottom-left, .mh80-robotic-crosshair.bottom-right { top: 198px; bottom: auto; }
   .mh80-robotic-facts { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
@@ -3997,7 +4013,11 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   50% { transform: translateY(-8px); }
 }
 @media (max-width: 980px) {
-  .mh80-robotic-floaters { position: static; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 24px; }
+  /* El círculo tecnológico (anillos + crosshairs) se posiciona absoluto
+     dentro de un contenedor cuadrado (aspect-ratio 1); se reserva esa
+     misma altura con padding-top en vez de depender del tamaño real del
+     círculo, para que las insignias (en flujo normal) aparezcan debajo. */
+  .mh80-robotic-floaters { position: static; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 0; padding-top: 220px; }
   .mh80-robotic-floater { position: static !important; animation: none; }
 }
 
