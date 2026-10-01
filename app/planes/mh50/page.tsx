@@ -622,11 +622,15 @@ export default function Mh50Page() {
             onClick={toggleAssistant}
             aria-label={assistantMinimized ? "Mostrar asistente Humana" : "Minimizar asistente Humana"}
           >
-            {/* Animación de saludo (sprite CSS, sin JS): un solo archivo con los
-                104 fotogramas del video del cliente en fila; el navegador anima
-                el recorte con @keyframes, sin depender de cargar cientos de
-                archivos por separado. */}
-            <span className="humana-bear-image humana-bear-image--sprite" aria-hidden="true" />
+            <Image
+              src="/images/planes/mh50/humana-bear.png"
+              alt="Asistente virtual Humana"
+              width={560}
+              height={670}
+              unoptimized
+              className="humana-bear-image"
+              priority={false}
+            />
           </button>
         </div>
 
