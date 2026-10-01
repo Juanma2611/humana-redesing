@@ -7,7 +7,7 @@ import {
   Activity, Ambulance, Baby, Bone, Bike, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Milk, PackageCheck, Phone, PhoneCall, Pill, PlaneTakeoff,
-  Ribbon, Scissors, Send, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles,
+  Ribbon, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles,
   Stethoscope, Syringe, Users, Video, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
@@ -660,10 +660,6 @@ export default function Mh50Page() {
                 <a className="mh50-chat-chip mh50-chat-chip-contact" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
                   <MessageCircle size={14} aria-hidden="true" /> Hablar con un asesor
                 </a>
-              </div>
-              <div className="mh50-chat-inputbar" aria-hidden="true">
-                <span className="mh50-chat-inputbar-field">Escribe tu pregunta…</span>
-                <span className="mh50-chat-inputbar-send"><Send size={15} /></span>
               </div>
             </div>
           )}
