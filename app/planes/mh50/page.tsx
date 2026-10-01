@@ -634,8 +634,8 @@ export default function Mh50Page() {
             <PoseRotatingImage
               images={mh50BearPoses}
               alt="Asistente virtual Humana"
-              width={1145}
-              height={1374}
+              width={458}
+              height={544}
               className="humana-bear-image"
             />
           </button>
