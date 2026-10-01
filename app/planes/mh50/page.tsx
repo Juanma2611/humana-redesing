@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Activity, Ambulance, Baby, Bone, Bike, CircleHelp, Cross,
+  Activity, Ambulance, Baby, Bone, Bike, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Milk, PackageCheck, Phone, PhoneCall, Pill, PlaneTakeoff,
   Ribbon, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles,
@@ -625,7 +625,14 @@ export default function Mh50Page() {
             aria-label={faqOpen ? "Cerrar preguntas frecuentes" : "Abrir preguntas frecuentes"}
             aria-expanded={faqOpen}
           >
-            <CircleHelp size={22} aria-hidden="true" />
+            <Image
+              src="/images/planes/mh50/mh50-faq-icon.webp"
+              alt=""
+              width={28}
+              height={28}
+              unoptimized
+              aria-hidden="true"
+            />
           </button>
           <a
             className="mh50-quick-btn mh50-quick-btn-whatsapp"
