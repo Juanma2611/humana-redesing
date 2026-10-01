@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Activity, Ambulance, Baby, Bone, Bike, Cross,
+  Activity, Ambulance, Baby, Bone, Bike, CircleHelp, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   MessageCircle, Milk, PackageCheck, Phone, PhoneCall, Pill, PlaneTakeoff,
   Ribbon, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles,
@@ -189,33 +189,40 @@ const contactChannels = [
 /* Página                                                                  */
 /* ---------------------------------------------------------------------- */
 
-/* Asistente virtual: el oso Humana, con enfoque de protección familiar
-   para MH50. Mismo personaje que PH15/PH30/MH150; solo cambian los mensajes. */
-const assistantMessages: Record<string, string> = {
-  "mh50-inicio": "Hola, soy tu asistente Humana. Tu familia merece una protección que los acompañe siempre.",
-  "mh50-esencia": "Descubre cómo Humana cuida a quienes más quieres.",
-  "mh50-cobertura": "Conoce las coberturas pensadas para proteger a toda tu familia.",
-  "mh50-hospitalizacion": "Respaldo hospitalario para tu familia en los momentos que más lo necesita.",
-  "mh50-ambulatoria": "Consultas médicas accesibles para cada integrante de tu familia.",
-  "mh50-medicinas": "Medicinas cubiertas en la red de farmacias más amplia del país.",
-  "mh50-maternidad": "Acompañamos a tu familia también en la maternidad.",
-  "mh50-incluido": "Conoce los beneficios pensados para proteger a tu familia.",
-  "mh50-carencias": "Aquí puedes ver cuándo empieza a aplicar cada cobertura desde tu afiliación.",
-  "mh50-cierre": "Protege a quienes más quieres. Cotiza MH50 ahora.",
-};
-
-const ASSISTANT_STORAGE_KEY = "mh50-bear-assistant-minimized";
+/* Preguntas frecuentes del panel rápido (botón de ayuda), con datos
+   reales del plan ya presentes en esta misma página (carencias,
+   coberturas y canales de contacto). */
+const quickFaqs = [
+  {
+    question: "¿Cuándo puedo empezar a usar mi cobertura?",
+    answer: "Depende de cada tipo de atención: 30 días para atención ambulatoria, 60 días para maternidad y 90 días para atención hospitalaria, contados desde tu afiliación.",
+  },
+  {
+    question: "¿Qué cubre la hospitalización?",
+    answer: "90% en Red Humana y 80% por libre elección, sin límite de días hospitalarios, incluyendo habitación, acompañante, trasplantes, diálisis y rehabilitación.",
+  },
+  {
+    question: "¿Cómo funciona la cobertura de medicinas?",
+    answer: "90% para el Vademécum A, 70% para el Vademécum B, y 70% por reembolso si usas libre elección, en una amplia red de farmacias.",
+  },
+  {
+    question: "¿Qué pasa si tengo una preexistencia declarada?",
+    answer: "Humana la cubre de forma progresiva: hasta $540 entre el mes 7 y 12 de afiliación, hasta $1.350 entre el mes 13 y 24, y hasta 20 salarios básicos desde el mes 25.",
+  },
+  {
+    question: "¿Cómo contacto a Humana?",
+    answer: "Por WhatsApp al +593 2401 7002, por la línea gratuita 1800 48 62 62, o por correo a servicioalcliente@humana.med.ec.",
+  },
+];
 
 export default function Mh50Page() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const assistantRef = useRef<HTMLDivElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
-  const [assistantSection, setAssistantSection] = useState("mh50-inicio");
-  const [assistantMinimized, setAssistantMinimized] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(false);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -226,28 +233,6 @@ export default function Mh50Page() {
   const closeDialog = () => dialogRef.current?.close();
 
   const handleQuoteClick = () => setQuoted(true);
-
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(ASSISTANT_STORAGE_KEY);
-      if (stored === "1") setAssistantMinimized(true);
-      else if (stored === null && window.matchMedia("(max-width: 768px)").matches) setAssistantMinimized(true);
-    } catch {
-      /* localStorage no disponible (modo privado, etc.): se ignora y el asistente queda visible */
-    }
-  }, []);
-
-  const toggleAssistant = () => {
-    setAssistantMinimized((current) => {
-      const next = !current;
-      try {
-        window.localStorage.setItem(ASSISTANT_STORAGE_KEY, next ? "1" : "0");
-      } catch {
-        /* noop */
-      }
-      return next;
-    });
-  };
 
   const goToBenefit = (i: number) => setBenefitIndex(((i % featuredBenefits.length) + featuredBenefits.length) % featuredBenefits.length);
   const prevBenefit = () => goToBenefit(benefitIndex - 1);
@@ -274,10 +259,6 @@ export default function Mh50Page() {
       .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
       .filter((el): el is HTMLElement => !!el);
     let lastCurrent = "";
-    let lastAssistantSection = "";
-    const assistantSections = Array.from(root.querySelectorAll<HTMLElement>("[id^='mh50-']")).filter(
-      (el) => el.id in assistantMessages,
-    );
 
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -301,15 +282,6 @@ export default function Mh50Page() {
           navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
         }
         lastCurrent = current;
-      }
-
-      let currentAssistant = assistantSections[0]?.id ?? "";
-      assistantSections.forEach((section) => {
-        if (section.getBoundingClientRect().top < window.innerHeight * 0.6) currentAssistant = section.id;
-      });
-      if (currentAssistant && currentAssistant !== lastAssistantSection) {
-        setAssistantSection(currentAssistant);
-        lastAssistantSection = currentAssistant;
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -348,7 +320,7 @@ export default function Mh50Page() {
 
   return (
     <SiteShell title="MH50 · Plan Full Metrohumana 50.000">
-      <div className={`mh50-exp mh50-page${assistantMinimized ? " bear-minimized" : ""}`} ref={rootRef}>
+      <div className="mh50-exp mh50-page" ref={rootRef}>
         <div className="mh50-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh50-exp-hero" id="mh50-inicio">
@@ -598,40 +570,46 @@ export default function Mh50Page() {
           <div className="mh50-exp-finale-mark" aria-hidden="true"><span>MH</span><strong>50</strong></div>
         </section>
 
-        <div
-          id="mh50-assistant-slot"
-          ref={assistantRef}
-          className={`mh50-peek-assistant${assistantMinimized ? " is-minimized" : ""}`}
-        >
-          {!assistantMinimized && (
-            <div className="mh50-peek-bubble" role="status">
+        <div className="mh50-quick-actions">
+          {faqOpen && (
+            <div className="mh50-quick-faq" role="dialog" aria-label="Preguntas frecuentes de MH50">
               <button
                 type="button"
-                className="mh50-peek-close"
-                onClick={toggleAssistant}
-                aria-label="Minimizar asistente Humana"
+                className="mh50-quick-faq-close"
+                onClick={() => setFaqOpen(false)}
+                aria-label="Cerrar preguntas frecuentes"
               >
-                <X size={13} aria-hidden="true" />
+                <X size={14} aria-hidden="true" />
               </button>
-              <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
+              <span className="mh50-quick-faq-eyebrow">PREGUNTAS FRECUENTES</span>
+              <div className="mh50-quick-faq-list">
+                {quickFaqs.map((item, i) => (
+                  <details key={item.question} open={i === 0}>
+                    <summary>{item.question}</summary>
+                    <p>{item.answer}</p>
+                  </details>
+                ))}
+              </div>
             </div>
           )}
           <button
             type="button"
-            className="mh50-peek-figure"
-            onClick={toggleAssistant}
-            aria-label={assistantMinimized ? "Mostrar asistente Humana" : "Minimizar asistente Humana"}
+            className="mh50-quick-btn mh50-quick-btn-faq"
+            onClick={() => setFaqOpen((v) => !v)}
+            aria-label={faqOpen ? "Cerrar preguntas frecuentes" : "Abrir preguntas frecuentes"}
+            aria-expanded={faqOpen}
           >
-            <Image
-              src="/images/planes/mh50/humana-bear-familia-peek.webp"
-              alt="Asistente virtual Humana"
-              width={447}
-              height={558}
-              unoptimized
-              className="mh50-peek-image"
-              priority={false}
-            />
+            <CircleHelp size={22} aria-hidden="true" />
           </button>
+          <a
+            className="mh50-quick-btn mh50-quick-btn-whatsapp"
+            href="https://wa.me/59324017002"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Escribir por WhatsApp"
+          >
+            <MessageCircle size={22} aria-hidden="true" />
+          </a>
         </div>
 
         <dialog className="mh50-exp-dialog" ref={dialogRef} onClose={() => setActiveChapterId(null)}>
