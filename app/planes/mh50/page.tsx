@@ -641,7 +641,14 @@ export default function Mh50Page() {
             rel="noreferrer"
             aria-label="Escribir por WhatsApp"
           >
-            <MessageCircle size={22} aria-hidden="true" />
+            <Image
+              src="/images/planes/mh50/mh50-whatsapp-icon.webp"
+              alt=""
+              width={26}
+              height={26}
+              unoptimized
+              aria-hidden="true"
+            />
           </a>
         </div>
 
