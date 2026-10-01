@@ -4415,8 +4415,16 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(14px);
   box-shadow: 0 16px 36px rgba(4,20,34,.18); color: #12314a;
   margin-bottom: clamp(30px, 8vw, 54px);
+  /* El oso está anclado al borde derecho, así que la burbuja debe entrar
+     desde ahí hacia la izquierda (no al revés, que es como se veía con
+     la animación genérica que solo subía el texto). */
+  animation: protegerPeekBubbleIn .32s cubic-bezier(.22,1,.36,1) both;
 }
-.proteger-peek-bubble p { margin: 0; font-size: 12px; line-height: 1.45; font-weight: 550; animation: humanaBearAssistantFade .35s ease; }
+.proteger-peek-bubble p { margin: 0; font-size: 12px; line-height: 1.45; font-weight: 550; }
+@keyframes protegerPeekBubbleIn {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 .proteger-peek-close {
   position: absolute; top: 7px; right: 7px; width: 16px; height: 16px; border-radius: 50%;
   border: 0; background: rgba(11,128,189,.1); color: #0b80bd;
