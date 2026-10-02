@@ -312,10 +312,11 @@ export default function Ph15Page() {
               {c.conditions.length > 0 && (
                 <details style={{ marginTop: 26 }}>
                   <summary style={{ cursor: "pointer", fontWeight: 700, fontSize: 14 }}>Condiciones y topes adicionales</summary>
-                  <ul style={{ marginTop: 14, display: "grid", gap: 10, fontSize: 14, opacity: 0.85 }}>
+                  <ul style={{ marginTop: 14, display: "grid", gap: 14, fontSize: 14 }}>
                     {c.conditions.map((cond) => (
-                      <li key={cond.label} style={{ display: "flex", justifyContent: "space-between", gap: 16 }}>
-                        <span>{cond.label}</span><strong style={{ whiteSpace: "nowrap" }}>{cond.value}</strong>
+                      <li key={cond.label} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 4 }}>
+                        <span style={{ opacity: 0.85 }}>{cond.label}</span>
+                        <strong style={{ color: "var(--ph-teal)" }}>{cond.value}</strong>
                       </li>
                     ))}
                   </ul>
