@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   Activity, Ambulance, Baby, Bone, Building2, Cpu, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
-  MessageCircle, Phone, PhoneCall, Ribbon, Scan,
+  Mail, MessageCircle, Phone, PhoneCall, Ribbon, Scan,
   ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Syringe, Target, Users, Video, Wallet, X, Zap,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
@@ -31,7 +31,7 @@ const coverageModules = chapters.slice(0, 4);
 const iconMap = {
   Activity, Ambulance, Baby, Bone, Building2, Cpu, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, HomeIcon,
-  MessageCircle, Phone, PhoneCall, Ribbon,
+  Mail, MessageCircle, Phone, PhoneCall, Ribbon,
   ShieldCheck, ShieldPlus, Sparkles, Syringe, Target, Users, Video, Wallet,
 } as const;
 

@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   Activity, Ambulance, Baby, Bike, Bone, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
-  MessageCircle, Milk, Phone, PhoneCall, Plane, Ribbon,
+  Mail, MessageCircle, Milk, Phone, PhoneCall, Plane, Ribbon,
   ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Syringe, Users, Waves, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
@@ -30,7 +30,7 @@ const humanaBearPoses = [
 const iconMap = {
   Activity, Ambulance, Baby, Bike, Bone, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, HomeIcon,
-  MessageCircle, Milk, Phone, PhoneCall, Plane, Ribbon,
+  Mail, MessageCircle, Milk, Phone, PhoneCall, Plane, Ribbon,
   ShieldCheck, ShieldPlus, Sparkles, Syringe, Users, Waves, Wallet,
 } as const;
 

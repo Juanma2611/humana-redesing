@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   Activity, Ambulance, Baby, Bone, Bike, Cross,
   FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
-  MessageCircle, Milk, PackageCheck, Phone, PhoneCall, Pill, PlaneTakeoff,
+  Mail, MessageCircle, Milk, PackageCheck, Phone, PhoneCall, Pill, PlaneTakeoff,
   Ribbon, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles,
   Stethoscope, Syringe, Users, Video, Wallet, X,
 } from "lucide-react";
@@ -182,7 +182,7 @@ const emergencyCoverages = [
 const contactChannels = [
   { icon: MessageCircle, label: "WhatsApp", value: "+593 2401 7002", href: "https://wa.me/59324017002" },
   { icon: PhoneCall, label: "Línea gratuita", value: "1800 48 62 62", href: "tel:1800486262" },
-  { icon: Phone, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
+  { icon: Mail, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
 ];
 
 /* ---------------------------------------------------------------------- */
@@ -362,8 +362,8 @@ export default function Mh50Page() {
             <h1>MH<span>50</span></h1>
             <p className="mh50-exp-hero-line">Protección que crece<br />con tu familia.</p>
             <p className="mh50-exp-hero-body">
-              Un plan pensado para acompañar cada momento importante, desde una consulta cotidiana
-              hasta cuando más respaldo necesitas.
+              Un plan pensado para acompañarte en cada momento importante, con el respaldo
+              que tú y tu familia merecen.
             </p>
             <div className="mh50-exp-hero-actions">
               <a className="primary-button" href="#mh50-esencia">Descubrir el plan</a>
