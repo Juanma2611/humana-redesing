@@ -226,22 +226,31 @@ const contactChannels = [
   { icon: Mail, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
 ];
 
-const assistantMessages: Record<string, string> = {
-  "prosonrisas-inicio": "Hola, soy el asistente virtual de Prosonrisas. Te ayudaré a descubrir cómo cuidar tu sonrisa con beneficios pensados para ti.",
-  "prosonrisas-esencia": "Descubre beneficios para cuidar tu sonrisa con especialistas y una red dental pensada para ti y tu familia.",
-  "prosonrisas-planes": "Conoce los beneficios de Prosonrisas Plus y Full, y elige el plan que mejor se adapta a ti.",
-  "prosonrisas-especialistas": "Accede a especialistas odontológicos: odontología general, ortodoncia, periodoncia y más.",
-  "prosonrisas-restauraciones": "Tu salud dental también merece protección, con cobertura para restauraciones y tratamientos.",
-  "prosonrisas-endodoncia": "Cuenta con cobertura para tratamientos de endodoncia realizados por especialistas de la red.",
-  "prosonrisas-diferenciales": "Prosonrisas suma beneficios diferenciales para cuidar tu sonrisa más allá de lo básico.",
-  "prosonrisas-incluido": "Revisa a detalle todo lo que incluye tu plan Prosonrisas, organizado por categorías.",
-  "prosonrisas-carencias": "Aquí puedes ver cuándo empieza a aplicar cada cobertura desde tu afiliación.",
-  "prosonrisas-detalles": "Consulta el glosario de términos dentales y la red que respalda tu plan Prosonrisas.",
-  "prosonrisas-esencia-grupo": "Prosonrisas forma parte de Conclina, el grupo con más experiencia en salud del Ecuador.",
-  "prosonrisas-cierre": "¿Listo para cuidar tu sonrisa? Cotiza Prosonrisas ahora.",
-};
-
-const ASSISTANT_STORAGE_KEY = "prosonrisas-assistant-minimized";
+/* Preguntas frecuentes del panel rápido (botón de ayuda), con datos reales
+   del plan ya presentes en esta misma página (carencias, red dental y
+   canales de contacto). */
+const quickFaqs = [
+  {
+    question: "¿Cuándo puedo empezar a usar mi cobertura?",
+    answer: "¡Buena pregunta! ⏱️ Las evaluaciones y consultas están disponibles desde el día 0, restauraciones y odontopediatría desde los 30 días, y cirugía, endodoncia y periodoncia desde los 60 días de afiliación.",
+  },
+  {
+    question: "¿Qué especialistas puedo consultar?",
+    answer: "Tienes acceso a especialistas odontológicos 🦷: odontología general, ortodoncia, periodoncia y más, en nuestra red dental.",
+  },
+  {
+    question: "¿Cuántos puntos de red dental tengo disponibles?",
+    answer: "¡Una red bien amplia! 😊 Más de 2.000 médicos en convenio a nivel nacional, 96 clínicas y hospitales, y más de 1.200 puntos de venta de farmacia.",
+  },
+  {
+    question: "¿Cuál es la diferencia entre Plus y Full?",
+    answer: "Ambos planes cubren tu salud dental 💙, y Prosonrisas Full suma beneficios adicionales como el blanqueamiento dental, máximo uno al año.",
+  },
+  {
+    question: "¿Cómo contacto a Humana?",
+    answer: "¡Con gusto! 😊 Puedes escribirnos por WhatsApp al +593 2401 7002, llamar a nuestra línea gratuita 1800 48 62 62, o enviarnos un correo a servicioalcliente@humana.med.ec.",
+  },
+];
 
 /* ---------------------------------------------------------------------- */
 /* Página                                                                  */
@@ -251,13 +260,15 @@ export default function ProsonrisasPage() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const assistantRef = useRef<HTMLDivElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
   const [activePlan, setActivePlan] = useState(planOptions[1].id);
-  const [assistantSection, setAssistantSection] = useState("prosonrisas-inicio");
-  const [assistantMinimized, setAssistantMinimized] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<{ role: "bot" | "user"; text: string }[]>([]);
+  const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
   const selectedPlan = planOptions.find((p) => p.id === activePlan) ?? planOptions[0];
@@ -270,27 +281,34 @@ export default function ProsonrisasPage() {
 
   const handleQuoteClick = () => setQuoted(true);
 
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(ASSISTANT_STORAGE_KEY);
-      if (stored === "1") setAssistantMinimized(true);
-      else if (stored === null && window.matchMedia("(max-width: 768px)").matches) setAssistantMinimized(true);
-    } catch {
-      /* localStorage no disponible (modo privado, etc.): se ignora y el asistente queda visible */
-    }
-  }, []);
+  const CHAT_GREETING = "¡Hola! 👋 Soy tu asistente de Humana para Prosonrisas. Toca una de estas preguntas y te respondo al instante 😊";
+  const pendingFaqs = quickFaqs.filter((item) => !askedQuestions.includes(item.question));
 
-  const toggleAssistant = () => {
-    setAssistantMinimized((current) => {
-      const next = !current;
-      try {
-        window.localStorage.setItem(ASSISTANT_STORAGE_KEY, next ? "1" : "0");
-      } catch {
-        /* noop */
-      }
-      return next;
-    });
+  const openChat = () => {
+    setFaqOpen(true);
+    if (chatMessages.length === 0) {
+      setChatMessages([{ role: "bot", text: CHAT_GREETING }]);
+    }
   };
+  const closeChat = () => {
+    setFaqOpen(false);
+    setChatMessages([]);
+    setAskedQuestions([]);
+    setIsTyping(false);
+  };
+  const askQuestion = (question: string, answer: string) => {
+    setChatMessages((msgs) => [...msgs, { role: "user", text: question }]);
+    setAskedQuestions((asked) => [...asked, question]);
+    setIsTyping(true);
+    window.setTimeout(() => {
+      setIsTyping(false);
+      setChatMessages((msgs) => [...msgs, { role: "bot", text: answer }]);
+    }, 700 + Math.random() * 500);
+  };
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [chatMessages, isTyping]);
 
   const goToBenefit = (i: number) => setBenefitIndex(((i % featuredBenefits.length) + featuredBenefits.length) % featuredBenefits.length);
   const prevBenefit = () => goToBenefit(benefitIndex - 1);
@@ -312,10 +330,6 @@ export default function ProsonrisasPage() {
       .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
       .filter((el): el is HTMLElement => !!el);
     let lastCurrent = "";
-    let lastAssistantSection = "";
-    const assistantSections = Array.from(root.querySelectorAll<HTMLElement>("[id^='prosonrisas-']")).filter(
-      (el) => el.id in assistantMessages,
-    );
 
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -335,15 +349,6 @@ export default function ProsonrisasPage() {
           navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
         }
         lastCurrent = current;
-      }
-
-      let currentAssistant = assistantSections[0]?.id ?? "";
-      assistantSections.forEach((section) => {
-        if (section.getBoundingClientRect().top < window.innerHeight * 0.6) currentAssistant = section.id;
-      });
-      if (currentAssistant && currentAssistant !== lastAssistantSection) {
-        setAssistantSection(currentAssistant);
-        lastAssistantSection = currentAssistant;
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -381,7 +386,7 @@ export default function ProsonrisasPage() {
 
   return (
     <SiteShell title="Prosonrisas · Plan dental Humana">
-      <div className={`mh50-exp prosonrisas-page${assistantMinimized ? " bear-minimized" : ""}`} ref={rootRef}>
+      <div className="mh50-exp prosonrisas-page" ref={rootRef}>
         <div className="mh50-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh50-exp-hero" id="prosonrisas-inicio">
@@ -620,40 +625,98 @@ export default function ProsonrisasPage() {
           <div className="mh50-exp-finale-mark" aria-hidden="true"><span>PLAN</span><strong className="is-long">SONRISAS</strong></div>
         </section>
 
-        <div
-          id="prosonrisas-assistant-slot"
-          ref={assistantRef}
-          className={`prosonrisas-peek-assistant${assistantMinimized ? " is-minimized" : ""}`}
-        >
-          {!assistantMinimized && (
-            <div className="prosonrisas-peek-bubble" role="status">
-              <button
-                type="button"
-                className="prosonrisas-peek-close"
-                onClick={toggleAssistant}
-                aria-label="Minimizar asistente de Prosonrisas"
-              >
-                <X size={13} aria-hidden="true" />
-              </button>
-              <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
+        <div className="mh50-quick-actions">
+          {faqOpen && (
+            <div className="mh50-quick-faq" role="dialog" aria-label="Chat de preguntas frecuentes de Prosonrisas">
+              <div className="mh50-chat-header">
+                <span className="mh50-chat-avatar">
+                  <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={20} height={20} unoptimized aria-hidden="true" />
+                </span>
+                <div className="mh50-chat-header-text">
+                  <strong>Asistente Humana</strong>
+                  <span className="mh50-chat-status"><i /> En línea</span>
+                </div>
+                <button type="button" className="mh50-quick-faq-close" onClick={closeChat} aria-label="Cerrar chat">
+                  <X size={16} aria-hidden="true" />
+                </button>
+              </div>
+              <div className="mh50-chat-body">
+                {chatMessages.map((msg, i) => (
+                  <div key={i} className={`mh50-chat-row mh50-chat-row-${msg.role}`}>
+                    {msg.role === "bot" && (
+                      <span className="mh50-chat-avatar mh50-chat-avatar-sm">
+                        <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={14} height={14} unoptimized aria-hidden="true" />
+                      </span>
+                    )}
+                    <div className={`mh50-chat-bubble mh50-chat-bubble-${msg.role}`}>{msg.text}</div>
+                  </div>
+                ))}
+                {isTyping && (
+                  <div className="mh50-chat-row mh50-chat-row-bot">
+                    <span className="mh50-chat-avatar mh50-chat-avatar-sm">
+                      <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={14} height={14} unoptimized aria-hidden="true" />
+                    </span>
+                    <div className="mh50-chat-bubble mh50-chat-bubble-bot mh50-chat-typing">
+                      <span /><span /><span />
+                    </div>
+                  </div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
+              <div className="mh50-chat-suggestions">
+                {pendingFaqs.length > 0 ? (
+                  pendingFaqs.map((item) => (
+                    <button
+                      key={item.question}
+                      type="button"
+                      className="mh50-chat-chip"
+                      disabled={isTyping}
+                      onClick={() => askQuestion(item.question, item.answer)}
+                    >
+                      {item.question}
+                    </button>
+                  ))
+                ) : (
+                  <span className="mh50-chat-chip mh50-chat-chip-contact-label">¿Algo más específico?</span>
+                )}
+                <a className="mh50-chat-chip mh50-chat-chip-contact" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
+                  <MessageCircle size={14} aria-hidden="true" /> Hablar con un asesor
+                </a>
+              </div>
             </div>
           )}
           <button
             type="button"
-            className="prosonrisas-peek-figure"
-            onClick={toggleAssistant}
-            aria-label={assistantMinimized ? "Mostrar asistente de Prosonrisas" : "Minimizar asistente de Prosonrisas"}
+            className="mh50-quick-btn mh50-quick-btn-faq"
+            onClick={() => (faqOpen ? closeChat() : openChat())}
+            aria-label={faqOpen ? "Cerrar chat" : "Abrir chat de preguntas frecuentes"}
+            aria-expanded={faqOpen}
           >
             <Image
-              src="/images/planes/prosonrisas/prosonrisas-bear-peek.webp"
-              alt="Asistente virtual Prosonrisas"
-              width={417}
-              height={551}
+              src="/images/planes/mh50/mh50-faq-icon.webp"
+              alt=""
+              width={36}
+              height={36}
               unoptimized
-              className="prosonrisas-peek-image"
-              priority={false}
+              aria-hidden="true"
             />
           </button>
+          <a
+            className="mh50-quick-btn mh50-quick-btn-whatsapp"
+            href="https://wa.me/59324017002"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Escribir por WhatsApp"
+          >
+            <Image
+              src="/images/planes/mh50/mh50-whatsapp-icon.webp"
+              alt=""
+              width={34}
+              height={34}
+              unoptimized
+              aria-hidden="true"
+            />
+          </a>
         </div>
 
         <dialog className="mh50-exp-dialog" ref={dialogRef} onClose={() => setActiveChapterId(null)}>
