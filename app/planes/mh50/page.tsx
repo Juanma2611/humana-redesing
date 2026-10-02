@@ -28,7 +28,7 @@ type Chapter = {
   id: string;
   number: string;
   navLabel: string;
-  theme: "dark" | "light" | "blue" | "warm";
+  theme: "dark" | "light" | "blue" | "warm" | "beige";
   image: string;
   imageAlt: string;
   eyebrow: string;
@@ -86,7 +86,7 @@ const chapters: Chapter[] = [
     id: "medicinas",
     number: "03",
     navLabel: "Medicinas",
-    theme: "blue",
+    theme: "beige",
     image: "/mh50-medicinas.jpg",
     imageAlt: "Entrega de medicamentos en farmacia de la red de Humana",
     eyebrow: "MEDICINAS",

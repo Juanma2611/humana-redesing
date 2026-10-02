@@ -2036,6 +2036,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   --mh-deep: #0a2136;
   --mh-deep2: #0c3450;
   --mh-warm: #f6eee4;
+  --mh-beige: #efe2cb;
   --mh-muted: var(--muted-foreground);
   --mh-bright: color-mix(in srgb, var(--humana-sky) 68%, white 32%);
   --mh-shadow: 0 30px 80px rgba(7, 41, 63, .28);
@@ -2192,9 +2193,11 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh50-exp-chapter.theme-light { background: radial-gradient(circle at 88% 15%, rgba(16,167,219,.09), transparent 30%), #f7fcfe; }
 .mh50-exp-chapter.theme-blue { background: linear-gradient(135deg, var(--mh-navy), var(--mh-sky)); color: #fff; }
 .mh50-exp-chapter.theme-warm { background: radial-gradient(circle at 12% 85%, rgba(255,255,255,.35), transparent 32%), var(--mh-warm); }
+.mh50-exp-chapter.theme-beige { background: radial-gradient(circle at 90% 10%, rgba(255,255,255,.45), transparent 30%), var(--mh-beige); }
 .mh50-exp-chapter-number { position: absolute; font-weight: 900; font-size: clamp(170px, 30vw, 460px); letter-spacing: -.08em; line-height: .75; right: -20px; bottom: -14px; color: rgba(255,255,255,.045); pointer-events: none; }
 .mh50-exp-chapter.theme-light .mh50-exp-chapter-number,
-.mh50-exp-chapter.theme-warm .mh50-exp-chapter-number { color: rgba(7,92,146,.05); left: -20px; right: auto; }
+.mh50-exp-chapter.theme-warm .mh50-exp-chapter-number,
+.mh50-exp-chapter.theme-beige .mh50-exp-chapter-number { color: rgba(7,92,146,.05); left: -20px; right: auto; }
 .mh50-exp-chapter-image { height: min(64vh, 680px); min-height: 340px; border-radius: 32px; overflow: hidden; box-shadow: var(--mh-shadow); position: relative; }
 .mh50-exp-chapter-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,25,42,.2), transparent 45%); }
 .mh50-exp-chapter-image img { object-fit: cover; }
@@ -2211,8 +2214,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 
 .mh50-exp-pharmacy-note { display: block; margin: 6px 0 2px; }
 .mh50-exp-pharmacy-note::before { display: none; }
-.mh50-exp-pharmacy-logos { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(22px,3.4vw,40px); max-width: 640px; margin-top: 16px; }
-.mh50-exp-pharmacy-logos img { width: auto; height: 68px; max-width: 280px; object-fit: contain; }
+.mh50-exp-pharmacy-logos { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(18px,2.6vw,30px); max-width: 560px; margin-top: 16px; }
+.mh50-exp-pharmacy-logos img { width: auto; height: 46px; max-width: 200px; object-fit: contain; }
 
 /* BENEFICIOS ---------------------------------------------------------------*/
 .mh50-exp-included { padding: clamp(70px, 8vw, 120px) clamp(16px, 5vw, 72px); background: #f4fafc; }
@@ -2378,7 +2381,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh50-exp-finale-mark strong { font-size: 50vw; }
   .mh50-exp-finale-actions { flex-direction: column; align-items: stretch; }
   .mh50-exp-waiting-copy h2 { font-size: 40px; }
-  .mh50-exp-pharmacy-logos { max-width: none; }
+  .mh50-exp-pharmacy-logos { max-width: none; gap: 16px; }
+  .mh50-exp-pharmacy-logos img { height: 34px; max-width: 150px; }
   .mh50-exp-compass-core { width: 170px; }
   .mh50-exp-compass-core strong { font-size: 36px; }
 }
