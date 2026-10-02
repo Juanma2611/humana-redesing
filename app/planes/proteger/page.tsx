@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   Banknote, Cross, FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
-  Layers3, MessageCircle, Phone, PhoneCall, Pill, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Stethoscope, Users, Wallet, X,
+  Layers3, Mail, MessageCircle, PhoneCall, Pill, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Stethoscope, Users, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
@@ -151,7 +151,7 @@ const combinationBenefits = [
 const contactChannels = [
   { icon: MessageCircle, label: "WhatsApp", value: "+593 2401 7002", href: "https://wa.me/59324017002" },
   { icon: PhoneCall, label: "Línea gratuita", value: "1800 48 62 62", href: "tel:1800486262" },
-  { icon: Phone, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
+  { icon: Mail, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
 ];
 
 /* Asistente virtual: el oso Humana, con enfoque de respaldo económico

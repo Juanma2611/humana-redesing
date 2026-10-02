@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Baby, BadgeCheck, Building2, CircleDollarSign, Gem, HeartPulse, MessageCircle,
-  Phone, PhoneCall, Pill, ScanEye, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Smile, Sparkles, Stethoscope, Syringe, Users, X,
+  Baby, BadgeCheck, Building2, CircleDollarSign, Gem, HeartPulse, Mail, MessageCircle,
+  PhoneCall, Pill, ScanEye, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Smile, Sparkles, Stethoscope, Syringe, Users, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
@@ -223,7 +223,7 @@ const redDental = [
 const contactChannels = [
   { icon: MessageCircle, label: "WhatsApp", value: "+593 2401 7002", href: "https://wa.me/59324017002" },
   { icon: PhoneCall, label: "Línea gratuita", value: "1800 48 62 62", href: "tel:1800486262" },
-  { icon: Phone, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
+  { icon: Mail, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
 ];
 
 const assistantMessages: Record<string, string> = {
