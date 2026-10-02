@@ -154,21 +154,31 @@ const contactChannels = [
   { icon: Mail, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
 ];
 
-/* Asistente virtual: el oso Humana, con enfoque de respaldo económico
-   complementario para Proteger. Mismo personaje que PH15/PH30/MH50/MH150;
-   solo cambian los mensajes. */
-const assistantMessages: Record<string, string> = {
-  "proteger-inicio": "Hola, soy tu asistente Humana. Estoy aquí para ayudarte.",
-  "proteger-esencia": "Cuando la salud exige más, Proteger complementa tu plan médico.",
-  "proteger-respaldo": "Proteger entra en acción cuando los gastos médicos son muy altos.",
-  "proteger-robotica": "Cobertura del 100% para procedimientos con cirugía robótica.",
-  "proteger-trasplantes": "Respaldo para trasplante de órganos y un seguro de vida.",
-  "proteger-prevencion": "Un chequeo médico anual sin costo y asistencias HU PLUS.",
-  "proteger-carencias": "Aquí puedes ver cuándo empieza a aplicar cada cobertura desde tu afiliación.",
-  "proteger-cierre": "¿Listo para proteger tu futuro? Cotiza Proteger ahora.",
-};
-
-const ASSISTANT_STORAGE_KEY = "proteger-bear-assistant-minimized";
+/* Preguntas frecuentes del panel rápido (botón de ayuda), con datos reales
+   del plan ya presentes en esta misma página (carencias, coberturas y
+   canales de contacto). */
+const quickFaqs = [
+  {
+    question: "¿Cuándo puedo empezar a usar mi cobertura?",
+    answer: "¡Buena pregunta! ⏱️ El chequeo médico y las asistencias están disponibles desde el día 0, atención ambulatoria desde los 30 días, maternidad desde los 60 días, y hospitalaria y discapacidades desde los 90 días de afiliación.",
+  },
+  {
+    question: "¿Cómo funciona Proteger?",
+    answer: "Proteger complementa tu plan médico base 💙: una vez aplicado el deducible que elijas ($5.000, $10.000 o $20.000), la cobertura hospitalaria y ambulatoria opera al 100% hasta el monto contratado.",
+  },
+  {
+    question: "¿Qué cubre la cirugía robótica?",
+    answer: "Proteger cubre el 100% en procedimientos con cirugía robótica 🤖, una vez aplicado tu deducible.",
+  },
+  {
+    question: "¿Puedo combinarlo con mi plan actual?",
+    answer: "¡Claro que sí! 🙌 Los gastos de tu plan base sirven para cubrir el deducible de Proteger, y puedes presentar reembolsos en los dos planes.",
+  },
+  {
+    question: "¿Cómo contacto a Humana?",
+    answer: "¡Con gusto! 😊 Puedes escribirnos por WhatsApp al +593 2401 7002, llamar a nuestra línea gratuita 1800 48 62 62, o enviarnos un correo a servicioalcliente@humana.med.ec.",
+  },
+];
 
 /* ---------------------------------------------------------------------- */
 /* Página                                                                  */
@@ -178,11 +188,13 @@ export default function ProtegerPage() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const assistantRef = useRef<HTMLDivElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
-  const [assistantSection, setAssistantSection] = useState("proteger-inicio");
-  const [assistantMinimized, setAssistantMinimized] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<{ role: "bot" | "user"; text: string }[]>([]);
+  const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
 
   const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
 
@@ -194,27 +206,34 @@ export default function ProtegerPage() {
 
   const handleQuoteClick = () => setQuoted(true);
 
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(ASSISTANT_STORAGE_KEY);
-      if (stored === "1") setAssistantMinimized(true);
-      else if (stored === null && window.matchMedia("(max-width: 768px)").matches) setAssistantMinimized(true);
-    } catch {
-      /* localStorage no disponible (modo privado, etc.): se ignora y el asistente queda visible */
-    }
-  }, []);
+  const CHAT_GREETING = "¡Hola! 👋 Soy tu asistente de Humana para Proteger. Toca una de estas preguntas y te respondo al instante 😊";
+  const pendingFaqs = quickFaqs.filter((item) => !askedQuestions.includes(item.question));
 
-  const toggleAssistant = () => {
-    setAssistantMinimized((current) => {
-      const next = !current;
-      try {
-        window.localStorage.setItem(ASSISTANT_STORAGE_KEY, next ? "1" : "0");
-      } catch {
-        /* noop */
-      }
-      return next;
-    });
+  const openChat = () => {
+    setFaqOpen(true);
+    if (chatMessages.length === 0) {
+      setChatMessages([{ role: "bot", text: CHAT_GREETING }]);
+    }
   };
+  const closeChat = () => {
+    setFaqOpen(false);
+    setChatMessages([]);
+    setAskedQuestions([]);
+    setIsTyping(false);
+  };
+  const askQuestion = (question: string, answer: string) => {
+    setChatMessages((msgs) => [...msgs, { role: "user", text: question }]);
+    setAskedQuestions((asked) => [...asked, question]);
+    setIsTyping(true);
+    window.setTimeout(() => {
+      setIsTyping(false);
+      setChatMessages((msgs) => [...msgs, { role: "bot", text: answer }]);
+    }, 700 + Math.random() * 500);
+  };
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [chatMessages, isTyping]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -225,10 +244,6 @@ export default function ProtegerPage() {
       .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
       .filter((el): el is HTMLElement => !!el);
     let lastCurrent = "";
-    let lastAssistantSection = "";
-    const assistantSections = Array.from(root.querySelectorAll<HTMLElement>("[id^='proteger-']")).filter(
-      (el) => el.id in assistantMessages,
-    );
 
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -248,15 +263,6 @@ export default function ProtegerPage() {
           navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
         }
         lastCurrent = current;
-      }
-
-      let currentAssistant = assistantSections[0]?.id ?? "";
-      assistantSections.forEach((section) => {
-        if (section.getBoundingClientRect().top < window.innerHeight * 0.6) currentAssistant = section.id;
-      });
-      if (currentAssistant && currentAssistant !== lastAssistantSection) {
-        setAssistantSection(currentAssistant);
-        lastAssistantSection = currentAssistant;
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -294,7 +300,7 @@ export default function ProtegerPage() {
 
   return (
     <SiteShell title="Proteger · Cobertura complementaria Humana">
-      <div className={`mh50-exp proteger-page${assistantMinimized ? " bear-minimized" : ""}`} ref={rootRef}>
+      <div className="mh50-exp proteger-page" ref={rootRef}>
         <div className="mh50-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh50-exp-hero" id="proteger-inicio">
@@ -460,40 +466,98 @@ export default function ProtegerPage() {
           <div className="mh50-exp-finale-mark" aria-hidden="true"><span>PLAN</span><strong className="is-long">PROTEGER</strong></div>
         </section>
 
-        <div
-          id="proteger-assistant-slot"
-          ref={assistantRef}
-          className={`proteger-peek-assistant${assistantMinimized ? " is-minimized" : ""}`}
-        >
-          {!assistantMinimized && (
-            <div className="proteger-peek-bubble" role="status">
-              <button
-                type="button"
-                className="proteger-peek-close"
-                onClick={toggleAssistant}
-                aria-label="Minimizar asistente Humana"
-              >
-                <X size={13} aria-hidden="true" />
-              </button>
-              <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
+        <div className="mh50-quick-actions">
+          {faqOpen && (
+            <div className="mh50-quick-faq" role="dialog" aria-label="Chat de preguntas frecuentes de Proteger">
+              <div className="mh50-chat-header">
+                <span className="mh50-chat-avatar">
+                  <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={20} height={20} unoptimized aria-hidden="true" />
+                </span>
+                <div className="mh50-chat-header-text">
+                  <strong>Asistente Humana</strong>
+                  <span className="mh50-chat-status"><i /> En línea</span>
+                </div>
+                <button type="button" className="mh50-quick-faq-close" onClick={closeChat} aria-label="Cerrar chat">
+                  <X size={16} aria-hidden="true" />
+                </button>
+              </div>
+              <div className="mh50-chat-body">
+                {chatMessages.map((msg, i) => (
+                  <div key={i} className={`mh50-chat-row mh50-chat-row-${msg.role}`}>
+                    {msg.role === "bot" && (
+                      <span className="mh50-chat-avatar mh50-chat-avatar-sm">
+                        <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={14} height={14} unoptimized aria-hidden="true" />
+                      </span>
+                    )}
+                    <div className={`mh50-chat-bubble mh50-chat-bubble-${msg.role}`}>{msg.text}</div>
+                  </div>
+                ))}
+                {isTyping && (
+                  <div className="mh50-chat-row mh50-chat-row-bot">
+                    <span className="mh50-chat-avatar mh50-chat-avatar-sm">
+                      <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={14} height={14} unoptimized aria-hidden="true" />
+                    </span>
+                    <div className="mh50-chat-bubble mh50-chat-bubble-bot mh50-chat-typing">
+                      <span /><span /><span />
+                    </div>
+                  </div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
+              <div className="mh50-chat-suggestions">
+                {pendingFaqs.length > 0 ? (
+                  pendingFaqs.map((item) => (
+                    <button
+                      key={item.question}
+                      type="button"
+                      className="mh50-chat-chip"
+                      disabled={isTyping}
+                      onClick={() => askQuestion(item.question, item.answer)}
+                    >
+                      {item.question}
+                    </button>
+                  ))
+                ) : (
+                  <span className="mh50-chat-chip mh50-chat-chip-contact-label">¿Algo más específico?</span>
+                )}
+                <a className="mh50-chat-chip mh50-chat-chip-contact" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
+                  <MessageCircle size={14} aria-hidden="true" /> Hablar con un asesor
+                </a>
+              </div>
             </div>
           )}
           <button
             type="button"
-            className="proteger-peek-figure"
-            onClick={toggleAssistant}
-            aria-label={assistantMinimized ? "Mostrar asistente Humana" : "Minimizar asistente Humana"}
+            className="mh50-quick-btn mh50-quick-btn-faq"
+            onClick={() => (faqOpen ? closeChat() : openChat())}
+            aria-label={faqOpen ? "Cerrar chat" : "Abrir chat de preguntas frecuentes"}
+            aria-expanded={faqOpen}
           >
             <Image
-              src="/images/planes/proteger/proteger-bear-peek.webp"
-              alt="Asistente virtual Humana"
-              width={402}
-              height={620}
+              src="/images/planes/mh50/mh50-faq-icon.webp"
+              alt=""
+              width={36}
+              height={36}
               unoptimized
-              className="proteger-peek-image"
-              priority={false}
+              aria-hidden="true"
             />
           </button>
+          <a
+            className="mh50-quick-btn mh50-quick-btn-whatsapp"
+            href="https://wa.me/59324017002"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Escribir por WhatsApp"
+          >
+            <Image
+              src="/images/planes/mh50/mh50-whatsapp-icon.webp"
+              alt=""
+              width={34}
+              height={34}
+              unoptimized
+              aria-hidden="true"
+            />
+          </a>
         </div>
 
         <dialog className="mh50-exp-dialog" ref={dialogRef} onClose={() => setActiveChapterId(null)}>

@@ -2371,7 +2371,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @media (max-width: 560px) {
   .mh50-exp-hero-line { font-size: 32px; }
   .mh50-exp-hero-body { font-size: 15px; }
-  .mh50-exp-hero-actions { flex-direction: column; align-items: stretch; }
+  .mh50-exp-hero-actions { flex-direction: column; align-items: stretch; padding-right: 72px; }
   .mh50-exp-display { font-size: 58px; }
   .mh50-exp-moments-copy h2, .mh50-exp-benefits-head h2 { font-size: 46px; }
   .mh50-exp-signals { grid-template-columns: 1fr 1fr; }
@@ -2760,7 +2760,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @media (max-width: 560px) {
   .ph15-exp-hero-line { font-size: 32px; }
   .ph15-exp-hero-body { font-size: 15px; }
-  .ph15-exp-hero-actions { flex-direction: column; align-items: stretch; }
+  .ph15-exp-hero-actions { flex-direction: column; align-items: stretch; padding-right: 72px; }
   .ph15-exp-display { font-size: 58px; }
   .ph15-exp-moments-copy h2, .ph15-exp-benefits-head h2 { font-size: 46px; }
   .ph15-exp-signals { grid-template-columns: 1fr 1fr; }
@@ -3077,7 +3077,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @media (max-width: 560px) {
   .ph30-exp-hero-line { font-size: 32px; }
   .ph30-exp-hero-body { font-size: 15px; }
-  .ph30-exp-hero-actions { flex-direction: column; align-items: stretch; }
+  .ph30-exp-hero-actions { flex-direction: column; align-items: stretch; padding-right: 72px; }
   .ph30-exp-display { font-size: 58px; }
   .ph30-exp-moments-copy h2, .ph30-exp-benefits-head h2 { font-size: 46px; }
   .ph30-exp-signals { grid-template-columns: 1fr 1fr; }
@@ -3399,7 +3399,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @media (max-width: 560px) {
   .mh150-exp-hero-line { font-size: 32px; }
   .mh150-exp-hero-body { font-size: 15px; }
-  .mh150-exp-hero-actions { flex-direction: column; align-items: stretch; }
+  .mh150-exp-hero-actions { flex-direction: column; align-items: stretch; padding-right: 72px; }
   .mh150-exp-display { font-size: 58px; }
   .mh150-exp-moments-copy h2, .mh150-exp-benefits-head h2 { font-size: 46px; }
   .mh150-exp-signals { grid-template-columns: 1fr 1fr; }
@@ -3756,7 +3756,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 @media (max-width: 560px) {
   .mh80-exp-hero-copy h1.mh80-exp-hero-line { font-size: 40px; line-height: 1.04; }
   .mh80-exp-hero-body { font-size: 14px; max-width: 92%; }
-  .mh80-exp-hero-actions { flex-direction: column; align-items: stretch; }
+  .mh80-exp-hero-actions { flex-direction: column; align-items: stretch; padding-right: 72px; }
   .mh80-exp-hero-actions .mh80-robotic-cta { min-height: 56px; font-size: 16px; font-weight: 760; }
   .mh80-exp-display { font-size: 58px; }
   .mh80-exp-moments-copy h2, .mh80-exp-benefits-head h2 { font-size: 46px; }
@@ -4164,7 +4164,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-hero-hologram-readout strong { font-size: 20px; color: #6ec8ee; letter-spacing: -.02em; }
 .mh80-hero-hologram-readout small { font-size: 10px; letter-spacing: .06em; color: rgba(234,246,255,.6); text-transform: uppercase; }
 .mh80-hero-hologram-readout.r1 { top: 4%; left: -6%; animation-delay: .3s; }
-.mh80-hero-hologram-readout.r2 { bottom: 8%; right: -8%; animation-delay: 1.6s; }
+.mh80-hero-hologram-readout.r2 { bottom: 24%; right: 4%; animation-delay: 1.6s; }
 @media (max-width: 980px) {
   .mh80-hero-hologram {
     position: relative; z-index: 1; inset: auto; top: auto; right: auto; transform: none;
@@ -4175,214 +4175,6 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh80-hero-hologram-ring, .mh80-hero-hologram-core, .mh80-hero-hologram-beam, .mh80-hero-hologram-readout { animation: none !important; }
 }
 
-/* ============================================================ */
-/* Oso Humana — avatar de acompañamiento de marca                 */
-/* Compartido por PH15, PH30, MH50 y MH150 (mismo personaje,      */
-/* solo cambian los mensajes de cada plan). MH80 y Prosonrisas    */
-/* conservan sus propios asistentes (robot / diente).             */
-/* ============================================================ */
-
-.humana-bear-assistant {
-  position: fixed; left: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-}
-.humana-bear-figure {
-  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
-  display: block; animation: humanaBearFloat 4s ease-in-out infinite;
-}
-.humana-bear-image {
-  width: clamp(150px, 13vw, 220px); height: auto; display: block;
-  filter: drop-shadow(0 20px 35px rgba(11,128,189,.3));
-  transition: transform .3s ease;
-}
-.humana-bear-figure:hover .humana-bear-image { transform: scale(1.05); }
-.humana-bear-assistant.is-minimized .humana-bear-image { width: 72px; }
-@keyframes humanaBearFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-18px); }
-}
-.humana-bear-bubble {
-  position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
-  border-radius: 18px 18px 18px 4px; background: rgba(255,255,255,.9);
-  border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(14px);
-  box-shadow: 0 20px 44px rgba(4,20,34,.2); color: #12314a;
-}
-.humana-bear-bubble p { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 550; animation: humanaBearAssistantFade .35s ease; }
-@keyframes humanaBearAssistantFade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
-.humana-bear-close {
-  position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; border-radius: 50%;
-  border: 0; background: rgba(11,128,189,.1); color: #0b80bd;
-  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
-}
-.humana-bear-close:hover { background: rgba(11,128,189,.18); }
-@media (max-width: 768px) {
-  /* En móvil el asistente es una barra horizontal pegada al borde inferior
-     (como un widget de chat), para no tapar el contenido de la página con
-     una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
-     grandes que el resto del sitio para que se note y se lea con claridad. */
-  .humana-bear-assistant { left: 14px; bottom: 20px; gap: 12px; }
-  .humana-bear-image { width: 140px; }
-  /* Minimizado, se reduce a una insignia pequeña (no el oso de cuerpo
-     entero) para que, al hacer scroll, nunca alcance a tapar una línea de
-     texto o un ítem de lista en la esquina inferior izquierda. */
-  .humana-bear-assistant.is-minimized { left: 10px; bottom: 14px; }
-  .humana-bear-assistant.is-minimized .humana-bear-figure {
-    animation: none; border-radius: 50%; background: #fff;
-    box-shadow: 0 8px 22px rgba(4,20,34,.3);
-    overflow: hidden; width: 46px; height: 46px; display: flex;
-    align-items: flex-start; justify-content: center;
-  }
-  .humana-bear-assistant.is-minimized .humana-bear-image { width: 62px; max-width: none; flex: none; margin-top: 2px; }
-  .humana-bear-bubble {
-    max-width: 78vw; padding: 16px 34px 18px 18px;
-    border-radius: 20px 20px 20px 4px;
-  }
-  .humana-bear-bubble::after {
-    content: ""; position: absolute; bottom: -9px; left: 30px;
-    width: 20px; height: 20px; background: rgba(255,255,255,.9);
-    border-left: 1px solid rgba(11,128,189,.2); border-bottom: 1px solid rgba(11,128,189,.2);
-    border-bottom-left-radius: 4px; transform: rotate(-45deg);
-  }
-  .humana-bear-bubble p {
-    font-size: 14.5px; line-height: 1.45; font-weight: 600;
-    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .humana-bear-figure { animation: none; }
-}
-
-/* ============================================================ */
-/* Asistente de Proteger — variante de prueba: el oso asoma desde */
-/* el borde derecho de la pantalla (solo medio cuerpo visible),   */
-/* en vez del personaje completo flotando en la esquina inferior   */
-/* izquierda que usan los demás planes. Clases propias             */
-/* (proteger-peek-*) para no afectar a ningún otro plan.           */
-/* ============================================================ */
-.proteger-peek-assistant {
-  position: fixed; right: 0; bottom: clamp(18vh, 24vh, 30vh); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
-}
-.proteger-peek-figure {
-  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
-  display: block; animation: protegerPeekFloat 4s ease-in-out infinite;
-}
-.proteger-peek-image {
-  width: clamp(90px, 8vw, 130px); height: auto; display: block;
-  filter: drop-shadow(0 16px 28px rgba(7,63,96,.3));
-  transition: transform .3s ease, width .25s ease;
-}
-.proteger-peek-figure:hover .proteger-peek-image { transform: translateX(-4px); }
-.proteger-peek-assistant.is-minimized .proteger-peek-image { width: 56px; }
-@keyframes protegerPeekFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.proteger-peek-bubble {
-  position: relative; max-width: 190px; padding: 12px 26px 12px 16px;
-  border-radius: 16px 4px 16px 16px; background: rgba(255,255,255,.92);
-  border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(14px);
-  box-shadow: 0 16px 36px rgba(4,20,34,.18); color: #12314a;
-  margin-right: clamp(6px, 1.6vw, 18px);
-  /* La burbuja va arriba de la cabeza del oso (no a su costado), así que
-     entra con un leve desplazamiento hacia abajo en vez del slide lateral
-     que usábamos cuando estaba a la izquierda del personaje. */
-  animation: protegerPeekBubbleIn .32s cubic-bezier(.22,1,.36,1) both;
-}
-.proteger-peek-bubble p { margin: 0; font-size: 12px; line-height: 1.45; font-weight: 550; }
-@keyframes protegerPeekBubbleIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.proteger-peek-close {
-  position: absolute; top: 7px; right: 7px; width: 16px; height: 16px; border-radius: 50%;
-  border: 0; background: rgba(11,128,189,.1); color: #0b80bd;
-  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
-}
-.proteger-peek-close:hover { background: rgba(11,128,189,.18); }
-@media (max-width: 768px) {
-  .proteger-peek-assistant { bottom: clamp(16vh, 20vh, 26vh); gap: 2px; }
-  .proteger-peek-image { width: 68px; }
-  .proteger-peek-assistant.is-minimized { bottom: 14vh; }
-  .proteger-peek-assistant.is-minimized .proteger-peek-figure {
-    animation: none; border-radius: 50% 0 0 50%; background: #fff;
-    box-shadow: 0 8px 22px rgba(4,20,34,.3);
-    overflow: hidden; width: 42px; height: 42px; display: flex;
-    align-items: center; justify-content: flex-start;
-  }
-  .proteger-peek-assistant.is-minimized .proteger-peek-image { width: 56px; max-width: none; flex: none; }
-  .proteger-peek-bubble {
-    max-width: 58vw; padding: 11px 24px 11px 14px;
-    margin-right: clamp(4px, 1.5vw, 12px);
-  }
-  .proteger-peek-bubble p {
-    font-size: 11.5px; line-height: 1.4;
-    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .proteger-peek-figure { animation: none; }
-}
-
-/* ============================================================ */
-/* Asistente de MH80 — misma variante "asoma desde el borde        */
-/* derecho" que Proteger, con el robot futurista en vez del oso     */
-/* superhéroe. Clases propias (mh80-peek-*) para no interferir con  */
-/* el resto de clases mh80-* ya existentes en la página.            */
-/* ============================================================ */
-.mh80-peek-assistant {
-  position: fixed; right: 0; bottom: clamp(18vh, 24vh, 30vh); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
-}
-.mh80-peek-figure {
-  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
-  display: block; animation: protegerPeekFloat 4s ease-in-out infinite;
-}
-.mh80-peek-image {
-  width: clamp(90px, 8vw, 130px); height: auto; display: block;
-  filter: drop-shadow(0 16px 28px rgba(7,63,96,.3));
-  transition: transform .3s ease, width .25s ease;
-}
-.mh80-peek-figure:hover .mh80-peek-image { transform: translateX(-4px); }
-.mh80-peek-assistant.is-minimized .mh80-peek-image { width: 56px; }
-.mh80-peek-bubble {
-  position: relative; max-width: 190px; padding: 12px 26px 12px 16px;
-  border-radius: 16px 4px 16px 16px; background: rgba(255,255,255,.92);
-  border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(14px);
-  box-shadow: 0 16px 36px rgba(4,20,34,.18); color: #12314a;
-  margin-right: clamp(6px, 1.6vw, 18px);
-  animation: protegerPeekBubbleIn .32s cubic-bezier(.22,1,.36,1) both;
-}
-.mh80-peek-bubble p { margin: 0; font-size: 12px; line-height: 1.45; font-weight: 550; }
-.mh80-peek-close {
-  position: absolute; top: 7px; right: 7px; width: 16px; height: 16px; border-radius: 50%;
-  border: 0; background: rgba(11,128,189,.1); color: #0b80bd;
-  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
-}
-.mh80-peek-close:hover { background: rgba(11,128,189,.18); }
-@media (max-width: 768px) {
-  .mh80-peek-assistant { bottom: clamp(16vh, 20vh, 26vh); gap: 2px; }
-  .mh80-peek-image { width: 68px; }
-  .mh80-peek-assistant.is-minimized { bottom: 14vh; }
-  .mh80-peek-assistant.is-minimized .mh80-peek-figure {
-    animation: none; border-radius: 50% 0 0 50%; background: #fff;
-    box-shadow: 0 8px 22px rgba(4,20,34,.3);
-    overflow: hidden; width: 42px; height: 42px; display: flex;
-    align-items: center; justify-content: flex-start;
-  }
-  .mh80-peek-assistant.is-minimized .mh80-peek-image { width: 56px; max-width: none; flex: none; }
-  .mh80-peek-bubble {
-    max-width: 58vw; padding: 11px 24px 11px 14px;
-    margin-right: clamp(4px, 1.5vw, 12px);
-  }
-  .mh80-peek-bubble p {
-    font-size: 11.5px; line-height: 1.4;
-    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mh80-peek-figure { animation: none; }
-}
 
 /* ============================================================ */
 /* MH50 — prueba sin personaje: dos botones redondos fijos en vez  */
@@ -4504,158 +4296,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh50-quick-faq { animation: none; }
 }
 
-/* ============================================================ */
-/* Asistente de Prosonrisas — misma variante "asoma desde el       */
-/* borde derecho" que Proteger, MH80 y MH50, con el oso dentista.  */
-/* Clases propias (prosonrisas-peek-*) en vez de las anteriores     */
-/* prosonrisas-assistant-* (mascota diente), que quedan sin uso.    */
-/* ============================================================ */
-.prosonrisas-peek-assistant {
-  position: fixed; right: 0; bottom: clamp(18vh, 24vh, 30vh); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
-}
-.prosonrisas-peek-figure {
-  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
-  display: block; animation: protegerPeekFloat 4s ease-in-out infinite;
-}
-.prosonrisas-peek-image {
-  width: clamp(90px, 8vw, 130px); height: auto; display: block;
-  filter: drop-shadow(0 16px 28px rgba(16,167,219,.3));
-  transition: transform .3s ease, width .25s ease;
-}
-.prosonrisas-peek-figure:hover .prosonrisas-peek-image { transform: translateX(-4px); }
-.prosonrisas-peek-assistant.is-minimized .prosonrisas-peek-image { width: 56px; }
-.prosonrisas-peek-bubble {
-  position: relative; max-width: 190px; padding: 12px 26px 12px 16px;
-  border-radius: 16px 4px 16px 16px; background: rgba(255,255,255,.92);
-  border: 1px solid rgba(16,167,219,.22); backdrop-filter: blur(14px);
-  box-shadow: 0 16px 36px rgba(4,20,34,.18); color: #12314a;
-  margin-right: clamp(6px, 1.6vw, 18px);
-  animation: protegerPeekBubbleIn .32s cubic-bezier(.22,1,.36,1) both;
-}
-.prosonrisas-peek-bubble p { margin: 0; font-size: 12px; line-height: 1.45; font-weight: 550; }
-.prosonrisas-peek-close {
-  position: absolute; top: 7px; right: 7px; width: 16px; height: 16px; border-radius: 50%;
-  border: 0; background: rgba(16,167,219,.1); color: #0b80bd;
-  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
-}
-.prosonrisas-peek-close:hover { background: rgba(16,167,219,.18); }
-@media (max-width: 768px) {
-  .prosonrisas-peek-assistant { bottom: clamp(16vh, 20vh, 26vh); gap: 2px; }
-  .prosonrisas-peek-image { width: 68px; }
-  .prosonrisas-peek-assistant.is-minimized { bottom: 14vh; }
-  .prosonrisas-peek-assistant.is-minimized .prosonrisas-peek-figure {
-    animation: none; border-radius: 50% 0 0 50%; background: #fff;
-    box-shadow: 0 8px 22px rgba(4,20,34,.3);
-    overflow: hidden; width: 42px; height: 42px; display: flex;
-    align-items: center; justify-content: flex-start;
-  }
-  .prosonrisas-peek-assistant.is-minimized .prosonrisas-peek-image { width: 56px; max-width: none; flex: none; }
-  .prosonrisas-peek-bubble {
-    max-width: 58vw; padding: 11px 24px 11px 14px;
-    margin-right: clamp(4px, 1.5vw, 12px);
-  }
-  .prosonrisas-peek-bubble p {
-    font-size: 11.5px; line-height: 1.4;
-    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .prosonrisas-peek-figure { animation: none; }
-}
-
-/* El oso familiar (PH15, PH30, MH150) vive en la esquina
-   inferior izquierda en estas tres páginas, porque la esquina derecha queda
-   reservada para otros accesos (central de ayuda, contacto). Como ahí sí
-   hay títulos, botones y datos (a diferencia de la derecha, que antes solo
-   tenía fotos decorativas), cada página reserva espacio a la izquierda en
-   sus secciones con columna izquierda para que el oso nunca quede encima
-   del texto, en escritorio. */
+/* Espaciado entre las cifras destacadas ("tres ideas") de cada plan. */
 @media (min-width: 769px) {
-  /* La reserva de espacio (y todo lo que depende de ella) solo se aplica
-     mientras el oso está visible en su tamaño completo. Si el usuario lo
-     minimiza o lo cierra, el contenido vuelve a ocupar el ancho normal en
-     vez de dejar un hueco vacío a la izquierda donde ya no hay nada. La
-     transición suaviza el cambio de ancho al minimizar/restaurar. */
-  .ph15-exp .ph15-exp-hero,
-  .ph15-exp .ph15-exp-essence,
-  .ph15-exp .ph15-exp-moments,
-  .ph15-exp .ph15-exp-waiting,
-  .ph15-exp .ph15-exp-vault,
-  .ph15-exp .ph15-exp-finale,
-  .ph30-exp .ph30-exp-hero,
-  .ph30-exp .ph30-exp-essence,
-  .ph30-exp .ph30-exp-moments,
-  .ph30-exp .ph30-exp-waiting,
-  .ph30-exp .ph30-exp-vault,
-  .ph30-exp .ph30-exp-finale,
-  .mh150-exp .mh150-exp-hero,
-  .mh150-exp .mh150-exp-essence,
-  .mh150-exp .mh150-exp-moments,
-  .mh150-exp .mh150-exp-waiting,
-  .mh150-exp .mh150-exp-vault,
-  .mh150-exp .mh150-exp-finale,
-  .business-page .mh50-exp-hero,
-  .business-page .mh50-exp-essence,
-  .business-page .mh50-exp-moments,
-  .business-page .mh50-exp-finale {
-    transition: padding-left .35s var(--premium-ease, ease);
-  }
-  .ph15-exp:not(.bear-minimized) .ph15-exp-hero,
-  .ph15-exp:not(.bear-minimized) .ph15-exp-essence,
-  .ph15-exp:not(.bear-minimized) .ph15-exp-moments,
-  .ph15-exp:not(.bear-minimized) .ph15-exp-waiting,
-  .ph15-exp:not(.bear-minimized) .ph15-exp-vault,
-  .ph15-exp:not(.bear-minimized) .ph15-exp-finale,
-  .ph30-exp:not(.bear-minimized) .ph30-exp-hero,
-  .ph30-exp:not(.bear-minimized) .ph30-exp-essence,
-  .ph30-exp:not(.bear-minimized) .ph30-exp-moments,
-  .ph30-exp:not(.bear-minimized) .ph30-exp-waiting,
-  .ph30-exp:not(.bear-minimized) .ph30-exp-vault,
-  .ph30-exp:not(.bear-minimized) .ph30-exp-finale,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-hero,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-essence,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-moments,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-waiting,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-vault,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-finale,
-  .business-page:not(.bear-minimized) .mh50-exp-hero,
-  .business-page:not(.bear-minimized) .mh50-exp-essence,
-  .business-page:not(.bear-minimized) .mh50-exp-moments,
-  .business-page:not(.bear-minimized) .mh50-exp-finale {
-    padding-left: clamp(300px, 23vw, 360px);
-  }
-
-  /* El bloque de impacto ("Somos parte del grupo...") no reserva espacio en
-     la sección en sí (su fondo es una foto a pantalla completa): el texto
-     vive en un bloque interno con su propio padding, así que la reserva se
-     aplica ahí para que el oso no tape el título ni las cifras, salvo
-     cuando está minimizado. */
-  .ph15-exp .ph15-exp-impact-copy,
-  .ph30-exp .ph30-exp-impact-copy,
-  .mh150-exp .mh150-exp-impact-copy {
-    transition: padding-left .35s var(--premium-ease, ease);
-  }
-  .ph15-exp:not(.bear-minimized) .ph15-exp-impact-copy,
-  .ph30-exp:not(.bear-minimized) .ph30-exp-impact-copy,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-impact-copy {
-    padding-left: clamp(320px, 25vw, 380px);
-  }
-
-  /* El mismo espacio que reserva el oso en escritorio deja menos ancho para
-     las tres cifras destacadas ("tres ideas"), y su tamaño (hasta 108px)
-     llegaba a cortarse contra el borde derecho en la tercera columna.
-     Se reduce un poco el tope del clamp solo mientras el oso ocupa ese
-     espacio; si está minimizado, hay ancho de sobra y no hace falta. */
-  .ph15-exp:not(.bear-minimized) .ph15-exp-stat strong,
-  .ph30-exp:not(.bear-minimized) .ph30-exp-stat strong,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-stat strong {
-    font-size: clamp(32px, 4.6vw, 82px);
-  }
-  .business-page:not(.bear-minimized) .mh50-exp-stat strong {
-    font-size: clamp(32px, 4.6vw, 82px);
-  }
-
   .mh50-page .mh50-exp-stat,
   .proteger-page .mh50-exp-stat,
   .ph15-exp-stat,
@@ -4675,104 +4317,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .business-page .mh50-exp-stat:not(:first-child) {
     padding-left: 2vw;
   }
-
-  /* Igual que el capítulo alterna imagen/texto de lado, el oso solo debe
-     empujar el contenido cuando el texto ("copy") cae en la columna
-     izquierda, es decir, en los capítulos "reverse". En los capítulos sin
-     alternar, la imagen ocupa la izquierda y no hay nada que tapar, así
-     que se deja el layout original (más ancho) para esos casos. */
-  .ph15-exp .ph15-exp-chapter.reverse,
-  .ph30-exp .ph30-exp-chapter.reverse,
-  .mh150-exp .mh150-exp-chapter.reverse,
-  .business-page .mh50-exp-chapter.reverse {
-    transition: padding-left .35s var(--premium-ease, ease);
-  }
-  .ph15-exp:not(.bear-minimized) .ph15-exp-chapter.reverse,
-  .ph30-exp:not(.bear-minimized) .ph30-exp-chapter.reverse,
-  .mh150-exp:not(.bear-minimized) .mh150-exp-chapter.reverse,
-  .business-page:not(.bear-minimized) .mh50-exp-chapter.reverse {
-    padding-left: clamp(300px, 23vw, 360px);
-  }
 }
-/* ============================================================ */
-/* Oso Humana Business — versión ejecutiva del oso, exclusiva      */
-/* del plan Humana Business. No reemplaza al robot MH80, al        */
-/* diente Prosonrisas ni al oso familiar PH15/PH30/MH50/MH150,     */
-/* que conservan sus propias clases.                               */
-/* ============================================================ */
-
-.humana-business-bear-assistant {
-  position: fixed; left: clamp(10px, 2.4vw, 40px); bottom: clamp(20px, 4vh, 48px); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-  animation: humanaBusinessBearAppear .6s var(--premium-ease, ease) both;
-}
-@keyframes humanaBusinessBearAppear {
-  from { opacity: 0; transform: translateY(18px) scale(.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-.humana-business-bear-figure {
-  border: 0; background: transparent; padding: 0; cursor: pointer; flex: none;
-  display: block; animation: humanaBusinessBearFloat 4s ease-in-out infinite;
-}
-.humana-business-bear-image {
-  width: clamp(150px, 13vw, 220px); height: auto; display: block;
-  filter: drop-shadow(0 20px 40px rgba(0,80,180,.25));
-  transition: transform .3s ease;
-}
-.humana-business-bear-figure:hover .humana-business-bear-image { transform: scale(1.04); }
-.humana-business-bear-assistant.is-minimized .humana-business-bear-image { width: 72px; }
-@keyframes humanaBusinessBearFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-.humana-business-bear-bubble {
-  position: relative; max-width: 250px; padding: 14px 30px 14px 18px;
-  border-radius: 18px 18px 18px 4px; background: rgba(255,255,255,.92);
-  border: 1px solid rgba(11,128,189,.2); backdrop-filter: blur(16px);
-  box-shadow: 0 20px 44px rgba(4,20,34,.2); color: #12314a;
-}
-.humana-business-bear-bubble p { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 550; animation: humanaBusinessBearFade .35s ease; }
-@keyframes humanaBusinessBearFade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
-.humana-business-bear-close {
-  position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; border-radius: 50%;
-  border: 0; background: rgba(11,128,189,.1); color: #0b80bd;
-  display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
-}
-.humana-business-bear-close:hover { background: rgba(11,128,189,.18); }
-@media (max-width: 768px) {
-  /* En móvil el asistente es una barra horizontal pegada al borde inferior
-     (como un widget de chat), para no tapar el contenido de la página con
-     una tarjeta flotante grande a media pantalla. Tamaño y tipografía más
-     grandes que el resto del sitio para que se note y se lea con claridad. */
-  .humana-business-bear-assistant { left: 14px; bottom: 20px; gap: 12px; }
-  .humana-business-bear-image { width: 140px; }
-  .humana-business-bear-assistant.is-minimized { left: 10px; bottom: 14px; }
-  .humana-business-bear-assistant.is-minimized .humana-business-bear-figure {
-    animation: none; border-radius: 50%; background: #fff;
-    box-shadow: 0 8px 22px rgba(4,20,34,.3);
-    overflow: hidden; width: 46px; height: 46px; display: flex;
-    align-items: flex-start; justify-content: center;
-  }
-  .humana-business-bear-assistant.is-minimized .humana-business-bear-image { width: 62px; max-width: none; flex: none; margin-top: 2px; }
-  .humana-business-bear-bubble {
-    max-width: 78vw; padding: 16px 34px 18px 18px;
-    border-radius: 20px 20px 20px 4px;
-  }
-  .humana-business-bear-bubble::after {
-    content: ""; position: absolute; bottom: -9px; left: 30px;
-    width: 20px; height: 20px; background: rgba(255,255,255,.92);
-    border-left: 1px solid rgba(11,128,189,.2); border-bottom: 1px solid rgba(11,128,189,.2);
-    border-bottom-left-radius: 4px; transform: rotate(-45deg);
-  }
-  .humana-business-bear-bubble p {
-    font-size: 14.5px; line-height: 1.45; font-weight: 600;
-    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .humana-business-bear-figure { animation: none; }
-}
-
 /* ============================================================ */
 /* Prosonrisas — decoración de fondo con siluetas dentales        */
 /* (diente, cepillo, espejo, destellos) en celeste + blanco,      */

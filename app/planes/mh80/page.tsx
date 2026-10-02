@@ -11,12 +11,10 @@ import {
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import {
-  assistantMessages, chapters, contactChannels, faqs, featuredBenefits, keyStats,
+  chapters, contactChannels, faqs, featuredBenefits, keyStats,
   otherConditions, preventionCoverages, rehabCoverages,
   robotSurgery, specialCases, waitingPeriods,
 } from "./mh80Data";
-
-const ASSISTANT_STORAGE_KEY = "mh80-assistant-minimized";
 
 /* Los 4 módulos de cobertura que pide mostrar la sección "Una protección
    diseñada alrededor de tu vida": Hospitalización, Atención ambulatoria,
@@ -40,35 +38,73 @@ function Icon({ name }: { name: keyof typeof iconMap }) {
   return <Cmp aria-hidden="true" />;
 }
 
+/* Preguntas frecuentes del panel rápido (botón de ayuda), con datos reales
+   del plan ya presentes en esta misma página (carencias, coberturas y
+   canales de contacto). */
+const quickFaqs = [
+  {
+    question: "¿Cuándo puedo empezar a usar mi cobertura?",
+    answer: "¡Buena pregunta! ⏱️ Depende del tipo de atención: 24 horas para emergencias, 30 días para atención ambulatoria, 60 días para maternidad y 90 días para hospitalización, contados desde el día en que te afilias.",
+  },
+  {
+    question: "¿Qué cubre la cirugía robótica?",
+    answer: "MH80 es el único plan del mercado con esta cobertura 🤖: 80% en procedimientos de cirugía robótica mínimamente invasiva, hasta la suma máxima contratada.",
+  },
+  {
+    question: "¿Qué cubre la hospitalización?",
+    answer: "Tienes un respaldo completo 🏥: 80% en Red Metrohumana y 70% por libre elección, sin límite de días hospitalarios.",
+  },
+  {
+    question: "¿Cómo funciona la cobertura de medicinas?",
+    answer: "Así de simple 💊: desde 70% en la red de farmacias de convenio de Humana, según el prestador y la modalidad de acceso.",
+  },
+  {
+    question: "¿Cómo contacto a Humana?",
+    answer: "¡Con gusto! 😊 Puedes escribirnos por WhatsApp al +593 2401 7002, llamar a nuestra línea gratuita 1800 48 62 62, o enviarnos un correo a servicioalcliente@humana.med.ec.",
+  },
+];
+
 export default function Mh80Page() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
-  const assistantRef = useRef<HTMLDivElement>(null);
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
   const [expandedModule, setExpandedModule] = useState<string | null>(null);
-  const [assistantSection, setAssistantSection] = useState("mh80-inicio");
-  const [assistantMinimized, setAssistantMinimized] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<{ role: "bot" | "user"; text: string }[]>([]);
+  const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
 
-  /* Prototipo del asistente virtual: recuerda si el cliente lo minimizó,
-     para no volver a mostrarlo grande en la misma sesión del navegador. */
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(ASSISTANT_STORAGE_KEY);
-      if (stored === "1") setAssistantMinimized(true);
-      else if (stored === null && window.matchMedia("(max-width: 768px)").matches) setAssistantMinimized(true);
-    } catch {
-      /* localStorage no disponible (modo privado, etc.): se ignora y el asistente queda visible */
+  const CHAT_GREETING = "¡Hola! 👋 Soy tu asistente de Humana para MH80. Toca una de estas preguntas y te respondo al instante 😊";
+  const pendingFaqs = quickFaqs.filter((item) => !askedQuestions.includes(item.question));
+
+  const openChat = () => {
+    setFaqOpen(true);
+    if (chatMessages.length === 0) {
+      setChatMessages([{ role: "bot", text: CHAT_GREETING }]);
     }
-  }, []);
-  const toggleAssistant = () => {
-    setAssistantMinimized((current) => {
-      const next = !current;
-      try { window.localStorage.setItem(ASSISTANT_STORAGE_KEY, next ? "1" : "0"); } catch { /* noop */ }
-      return next;
-    });
   };
+  const closeChat = () => {
+    setFaqOpen(false);
+    setChatMessages([]);
+    setAskedQuestions([]);
+    setIsTyping(false);
+  };
+  const askQuestion = (question: string, answer: string) => {
+    setChatMessages((msgs) => [...msgs, { role: "user", text: question }]);
+    setAskedQuestions((asked) => [...asked, question]);
+    setIsTyping(true);
+    window.setTimeout(() => {
+      setIsTyping(false);
+      setChatMessages((msgs) => [...msgs, { role: "bot", text: answer }]);
+    }, 700 + Math.random() * 500);
+  };
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [chatMessages, isTyping]);
 
   const handleQuoteClick = () => setQuoted(true);
   const toggleModule = (id: string) => setExpandedModule((current) => (current === id ? null : id));
@@ -99,9 +135,6 @@ export default function Mh80Page() {
       .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
       .filter((el): el is HTMLElement => !!el);
     let lastCurrent = "";
-    let lastAssistantSection = "";
-    const assistantSections = Array.from(root.querySelectorAll<HTMLElement>("[id^='mh80-']"))
-      .filter((el) => el.id in assistantMessages);
 
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -126,15 +159,6 @@ export default function Mh80Page() {
           navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
         }
         lastCurrent = current;
-      }
-
-      let currentAssistant = assistantSections[0]?.id ?? "";
-      assistantSections.forEach((section) => {
-        if (section.getBoundingClientRect().top < window.innerHeight * 0.6) currentAssistant = section.id;
-      });
-      if (currentAssistant && currentAssistant !== lastAssistantSection) {
-        setAssistantSection(currentAssistant);
-        lastAssistantSection = currentAssistant;
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -172,7 +196,7 @@ export default function Mh80Page() {
 
   return (
     <SiteShell title="MH80 · Plan Familiar Metrohumana 80.000">
-      <div className={`mh80-exp${assistantMinimized ? " bear-minimized" : ""}`} ref={rootRef}>
+      <div className="mh80-exp" ref={rootRef}>
         <div className="mh80-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
         <section className="mh80-exp-hero" id="mh80-inicio">
@@ -518,42 +542,98 @@ export default function Mh80Page() {
           <div className="mh80-exp-finale-mark" aria-hidden="true"><span>MH</span><strong>80</strong></div>
         </section>
 
-        {/* ASISTENTE VIRTUAL MH80 — personaje entregado por el cliente
-            (código JSX/CSS exacto, integrado tal cual con prefijo
-            "mh80-bot-" en las clases). Se mueve verticalmente según el
-            porcentaje de scroll (ver assistantRef en el efecto de arriba),
-            flota con la animación del cliente, cambia su mensaje según la
-            sección visible, y se puede minimizar (preferencia guardada en
-            localStorage). */}
-        <div
-          id="mh80-assistant-slot"
-          ref={assistantRef}
-          className={`mh80-peek-assistant${assistantMinimized ? " is-minimized" : ""}`}
-        >
-          {!assistantMinimized && (
-            <div className="mh80-peek-bubble" role="status">
-              <button type="button" className="mh80-peek-close" onClick={toggleAssistant} aria-label="Minimizar asistente de MH80">
-                <X size={13} aria-hidden="true" />
-              </button>
-              <p key={assistantSection}>{assistantMessages[assistantSection]}</p>
+        <div className="mh50-quick-actions">
+          {faqOpen && (
+            <div className="mh50-quick-faq" role="dialog" aria-label="Chat de preguntas frecuentes de MH80">
+              <div className="mh50-chat-header">
+                <span className="mh50-chat-avatar">
+                  <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={20} height={20} unoptimized aria-hidden="true" />
+                </span>
+                <div className="mh50-chat-header-text">
+                  <strong>Asistente Humana</strong>
+                  <span className="mh50-chat-status"><i /> En línea</span>
+                </div>
+                <button type="button" className="mh50-quick-faq-close" onClick={closeChat} aria-label="Cerrar chat">
+                  <X size={16} aria-hidden="true" />
+                </button>
+              </div>
+              <div className="mh50-chat-body">
+                {chatMessages.map((msg, i) => (
+                  <div key={i} className={`mh50-chat-row mh50-chat-row-${msg.role}`}>
+                    {msg.role === "bot" && (
+                      <span className="mh50-chat-avatar mh50-chat-avatar-sm">
+                        <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={14} height={14} unoptimized aria-hidden="true" />
+                      </span>
+                    )}
+                    <div className={`mh50-chat-bubble mh50-chat-bubble-${msg.role}`}>{msg.text}</div>
+                  </div>
+                ))}
+                {isTyping && (
+                  <div className="mh50-chat-row mh50-chat-row-bot">
+                    <span className="mh50-chat-avatar mh50-chat-avatar-sm">
+                      <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={14} height={14} unoptimized aria-hidden="true" />
+                    </span>
+                    <div className="mh50-chat-bubble mh50-chat-bubble-bot mh50-chat-typing">
+                      <span /><span /><span />
+                    </div>
+                  </div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
+              <div className="mh50-chat-suggestions">
+                {pendingFaqs.length > 0 ? (
+                  pendingFaqs.map((item) => (
+                    <button
+                      key={item.question}
+                      type="button"
+                      className="mh50-chat-chip"
+                      disabled={isTyping}
+                      onClick={() => askQuestion(item.question, item.answer)}
+                    >
+                      {item.question}
+                    </button>
+                  ))
+                ) : (
+                  <span className="mh50-chat-chip mh50-chat-chip-contact-label">¿Algo más específico?</span>
+                )}
+                <a className="mh50-chat-chip mh50-chat-chip-contact" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
+                  <MessageCircle size={14} aria-hidden="true" /> Hablar con un asesor
+                </a>
+              </div>
             </div>
           )}
           <button
             type="button"
-            className="mh80-peek-figure"
-            onClick={toggleAssistant}
-            aria-label={assistantMinimized ? "Mostrar asistente de MH80" : "Minimizar asistente de MH80"}
+            className="mh50-quick-btn mh50-quick-btn-faq"
+            onClick={() => (faqOpen ? closeChat() : openChat())}
+            aria-label={faqOpen ? "Cerrar chat" : "Abrir chat de preguntas frecuentes"}
+            aria-expanded={faqOpen}
           >
             <Image
-              src="/images/planes/mh80/mh80-robot-peek.webp"
-              alt="Asistente virtual MH80"
-              width={409}
-              height={610}
+              src="/images/planes/mh50/mh50-faq-icon.webp"
+              alt=""
+              width={36}
+              height={36}
               unoptimized
-              className="mh80-peek-image"
-              priority={false}
+              aria-hidden="true"
             />
           </button>
+          <a
+            className="mh50-quick-btn mh50-quick-btn-whatsapp"
+            href="https://wa.me/59324017002"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Escribir por WhatsApp"
+          >
+            <Image
+              src="/images/planes/mh50/mh50-whatsapp-icon.webp"
+              alt=""
+              width={34}
+              height={34}
+              unoptimized
+              aria-hidden="true"
+            />
+          </a>
         </div>
       </div>
     </SiteShell>
