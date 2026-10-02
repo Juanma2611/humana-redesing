@@ -453,7 +453,7 @@ export default function Mh50Page() {
                   <li className="mh50-exp-pharmacy-note">
                     <span className="mh50-exp-pharmacy-logos" aria-label="Farmacias afiliadas: Pharmacy's, Sana Sana, Medicity y Fybeca">
                       <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={978} height={328} unoptimized />
-                      <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={573} height={108} unoptimized />
+                      <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={1850} height={389} unoptimized />
                       <Image src="/farmacia-medicity.png" alt="Medicity" width={291} height={58} unoptimized />
                       <Image src="/farmacia-fybeca.png" alt="Farmacias Fybeca" width={598} height={222} unoptimized />
                     </span>
