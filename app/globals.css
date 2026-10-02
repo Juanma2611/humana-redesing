@@ -2318,7 +2318,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh50-exp-finale-rings::after { inset: 200px; }
 
 /* DIALOG ------------------------------------------------------------------ */
-.mh50-exp-dialog { width: min(600px, calc(100% - 30px)); border: 0; border-radius: 24px; padding: 44px; box-shadow: 0 30px 100px rgba(6,38,60,.4); color: var(--mh-ink); }
+.mh50-exp-dialog { margin: auto; max-height: 90vh; overflow-y: auto; width: min(600px, calc(100% - 30px)); border: 0; border-radius: 24px; padding: 44px; box-shadow: 0 30px 100px rgba(6,38,60,.4); color: var(--mh-ink); }
 .mh50-exp-dialog::backdrop { background: rgba(6,38,60,.72); backdrop-filter: blur(8px); }
 .mh50-exp-dialog h2 { font-size: 34px; margin: 18px 0; letter-spacing: -.02em; }
 .mh50-exp-dialog-body { line-height: 1.7; color: var(--mh-muted); }
@@ -2702,7 +2702,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .ph15-exp-finale-rings::after { inset: 200px; }
 
 /* DIALOG ------------------------------------------------------------------ */
-.ph15-exp-dialog { width: min(600px, calc(100% - 30px)); border: 0; border-radius: 24px; padding: 44px; box-shadow: 0 30px 100px rgba(6,38,60,.4); color: var(--ph-ink); }
+.ph15-exp-dialog { margin: auto; max-height: 90vh; overflow-y: auto; width: min(600px, calc(100% - 30px)); border: 0; border-radius: 24px; padding: 44px; box-shadow: 0 30px 100px rgba(6,38,60,.4); color: var(--ph-ink); }
 .ph15-exp-dialog::backdrop { background: rgba(6,38,60,.72); backdrop-filter: blur(8px); }
 .ph15-exp-dialog h2 { font-size: 34px; margin: 18px 0; letter-spacing: -.02em; }
 .ph15-exp-dialog-body { line-height: 1.7; color: var(--ph-muted); }
@@ -3019,7 +3019,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .ph30-exp-finale-rings::after { inset: 200px; }
 
 /* DIALOG ------------------------------------------------------------------ */
-.ph30-exp-dialog { width: min(600px, calc(100% - 30px)); border: 0; border-radius: 24px; padding: 44px; box-shadow: 0 30px 100px rgba(6,38,60,.4); color: var(--ph-ink); }
+.ph30-exp-dialog { margin: auto; max-height: 90vh; overflow-y: auto; width: min(600px, calc(100% - 30px)); border: 0; border-radius: 24px; padding: 44px; box-shadow: 0 30px 100px rgba(6,38,60,.4); color: var(--ph-ink); }
 .ph30-exp-dialog::backdrop { background: rgba(6,38,60,.72); backdrop-filter: blur(8px); }
 .ph30-exp-dialog h2 { font-size: 34px; margin: 18px 0; letter-spacing: -.02em; }
 .ph30-exp-dialog-body { line-height: 1.7; color: var(--ph-muted); }
@@ -3341,7 +3341,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh150-exp-finale-rings::after { inset: 200px; }
 
 /* DIALOG ------------------------------------------------------------------ */
-.mh150-exp-dialog { width: min(600px, calc(100% - 30px)); border: 0; border-radius: 24px; padding: 44px; box-shadow: 0 30px 100px rgba(6,38,60,.4); color: var(--mh150-ink); }
+.mh150-exp-dialog { margin: auto; max-height: 90vh; overflow-y: auto; width: min(600px, calc(100% - 30px)); border: 0; border-radius: 24px; padding: 44px; box-shadow: 0 30px 100px rgba(6,38,60,.4); color: var(--mh150-ink); }
 .mh150-exp-dialog::backdrop { background: rgba(6,38,60,.72); backdrop-filter: blur(8px); }
 .mh150-exp-dialog h2 { font-size: 34px; margin: 18px 0; letter-spacing: -.02em; }
 .mh150-exp-dialog-body { line-height: 1.7; color: var(--mh150-muted); }
@@ -3699,7 +3699,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .mh80-exp-finale-rings::after { inset: 200px; }
 
 /* DIALOG ------------------------------------------------------------------ */
-.mh80-exp-dialog { width: min(600px, calc(100% - 30px)); border: 0; border-radius: 24px; padding: 44px; box-shadow: 0 30px 100px rgba(6,38,60,.4); color: var(--ph-ink); }
+.mh80-exp-dialog { margin: auto; max-height: 90vh; overflow-y: auto; width: min(600px, calc(100% - 30px)); border: 0; border-radius: 24px; padding: 44px; box-shadow: 0 30px 100px rgba(6,38,60,.4); color: var(--ph-ink); }
 .mh80-exp-dialog::backdrop { background: rgba(6,38,60,.72); backdrop-filter: blur(8px); }
 .mh80-exp-dialog h2 { font-size: 34px; margin: 18px 0; letter-spacing: -.02em; }
 .mh80-exp-dialog-body { line-height: 1.7; color: var(--ph-muted); }
