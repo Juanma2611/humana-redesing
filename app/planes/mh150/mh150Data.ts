@@ -118,7 +118,7 @@ export const chapters: Chapter[] = [
     id: "medicinas",
     number: "03",
     navLabel: "Medicinas",
-    theme: "teal",
+    theme: "deep",
     image: "/images/planes/mh150/mh150-medicinas.jpg",
     imageAlt: "Farmacéutica asesorando a una clienta sobre su medicamento en una farmacia de la red Humana",
     eyebrow: "MEDICINAS",

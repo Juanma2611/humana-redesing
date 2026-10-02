@@ -2611,8 +2611,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 
 .ph15-exp-pharmacy-note { display: block; margin: 6px 0 2px; }
 .ph15-exp-pharmacy-note::before { display: none; }
-.ph15-exp-pharmacy-logos { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(20px,3vw,36px); max-width: 620px; margin-top: 14px; }
-.ph15-exp-pharmacy-logos img { width: auto; height: 48px; max-width: 230px; object-fit: contain; }
+.ph15-exp-pharmacy-logos { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(18px,2.6vw,30px); max-width: 560px; margin-top: 16px; }
+.ph15-exp-pharmacy-logos img { width: auto; height: 46px; max-width: 200px; object-fit: contain; }
 
 /* BENEFICIOS ---------------------------------------------------------------*/
 .ph15-exp-included { padding: clamp(70px, 8vw, 120px) clamp(16px, 5vw, 72px); background: #f4fafc; }
@@ -2770,7 +2770,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .ph15-exp-finale-mark strong { font-size: 50vw; }
   .ph15-exp-finale-actions { flex-direction: column; align-items: stretch; }
   .ph15-exp-waiting-copy h2 { font-size: 40px; }
-  .ph15-exp-pharmacy-logos { max-width: none; }
+  .ph15-exp-pharmacy-logos { max-width: none; gap: 16px; }
+  .ph15-exp-pharmacy-logos img { height: 34px; max-width: 150px; }
   .ph15-exp-compass-core { width: 170px; }
   .ph15-exp-compass-core strong { font-size: 36px; }
 }
@@ -2927,8 +2928,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 
 .ph30-exp-pharmacy-note { display: block; margin: 6px 0 2px; }
 .ph30-exp-pharmacy-note::before { display: none; }
-.ph30-exp-pharmacy-logos { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(20px,3vw,36px); max-width: 620px; margin-top: 14px; }
-.ph30-exp-pharmacy-logos img { width: auto; height: 48px; max-width: 230px; object-fit: contain; }
+.ph30-exp-pharmacy-logos { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(18px,2.6vw,30px); max-width: 560px; margin-top: 16px; }
+.ph30-exp-pharmacy-logos img { width: auto; height: 46px; max-width: 200px; object-fit: contain; }
 
 /* BENEFICIOS ---------------------------------------------------------------*/
 .ph30-exp-included { padding: clamp(70px, 8vw, 120px) clamp(16px, 5vw, 72px); background: #f4fafc; }
@@ -3086,7 +3087,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .ph30-exp-finale-mark strong { font-size: 50vw; }
   .ph30-exp-finale-actions { flex-direction: column; align-items: stretch; }
   .ph30-exp-waiting-copy h2 { font-size: 40px; }
-  .ph30-exp-pharmacy-logos { max-width: none; }
+  .ph30-exp-pharmacy-logos { max-width: none; gap: 16px; }
+  .ph30-exp-pharmacy-logos img { height: 34px; max-width: 150px; }
   .ph30-exp-compass-core { width: 170px; }
   .ph30-exp-compass-core strong { font-size: 36px; }
 }
@@ -3245,8 +3247,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 
 .mh150-exp-pharmacy-note { display: block; margin: 6px 0 2px; }
 .mh150-exp-pharmacy-note::before { display: none; }
-.mh150-exp-pharmacy-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; max-width: 620px; margin-top: 14px; }
-.mh150-exp-pharmacy-logos img { width: auto; height: 48px; max-width: 230px; object-fit: contain; }
+.mh150-exp-pharmacy-logos { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(18px,2.6vw,30px); max-width: 560px; margin-top: 16px; }
+.mh150-exp-pharmacy-logos img { width: auto; height: 46px; max-width: 200px; object-fit: contain; }
 .mh150-exp-pharmacy-chip { display: inline-flex; align-items: center; padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--mh150-navy); background: rgba(7,92,146,.08); border: 1px solid rgba(7,92,146,.16); }
 .mh150-exp-chapter.theme-teal .mh150-exp-pharmacy-chip,
 .mh150-exp-chapter.theme-dark .mh150-exp-pharmacy-chip { color: #fff; background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.24); }
@@ -3407,7 +3409,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .mh150-exp-finale-mark strong { font-size: 50vw; }
   .mh150-exp-finale-actions { flex-direction: column; align-items: stretch; }
   .mh150-exp-waiting-copy h2 { font-size: 40px; }
-  .mh150-exp-pharmacy-logos { max-width: none; }
+  .mh150-exp-pharmacy-logos { max-width: none; gap: 16px; }
+  .mh150-exp-pharmacy-logos img { height: 34px; max-width: 150px; }
   .mh150-exp-compass-core { width: 170px; }
   .mh150-exp-compass-core strong { font-size: 36px; }
 }

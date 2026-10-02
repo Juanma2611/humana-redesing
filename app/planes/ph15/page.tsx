@@ -298,10 +298,10 @@ export default function Ph15Page() {
                 {c.id === "medicinas" && (
                   <li className="ph15-exp-pharmacy-note">
                     <span className="ph15-exp-pharmacy-logos" aria-label="Farmacias afiliadas: Pharmacy's, Sana Sana, Medicity y Fybeca">
-                      <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={178} height={60} unoptimized />
-                      <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={200} height={38} unoptimized />
-                      <Image src="/farmacia-medicity.png" alt="Medicity" width={150} height={88} unoptimized />
-                      <Image src="/farmacia-fybeca.png" alt="Farmacias Fybeca" width={150} height={100} unoptimized />
+                      <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={978} height={328} unoptimized />
+                      <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={1850} height={389} unoptimized />
+                      <Image src="/farmacia-medicity.png" alt="Medicity" width={291} height={58} unoptimized />
+                      <Image src="/farmacia-fybeca.png" alt="Farmacias Fybeca" width={598} height={222} unoptimized />
                     </span>
                   </li>
                 )}
