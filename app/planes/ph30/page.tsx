@@ -305,6 +305,16 @@ export default function Ph30Page() {
               <p className="ph30-exp-lead">{c.lead}</p>
               <ul>
                 {c.essentials.map((item) => <li key={item}>{item}</li>)}
+                {c.id === "medicinas" && (
+                  <li className="ph30-exp-pharmacy-note">
+                    <span className="ph30-exp-pharmacy-logos" aria-label="Farmacias afiliadas: Pharmacy's, Sana Sana, Medicity y Fybeca">
+                      <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={978} height={328} unoptimized />
+                      <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={1850} height={389} unoptimized />
+                      <Image src="/farmacia-medicity.png" alt="Medicity" width={291} height={58} unoptimized />
+                      <Image src="/farmacia-fybeca.png" alt="Farmacias Fybeca" width={598} height={222} unoptimized />
+                    </span>
+                  </li>
+                )}
               </ul>
               <button type="button" className="ph30-exp-text-button" onClick={() => openDialog(c.id)}>
                 Ver detalles completos <span>↗</span>

@@ -13,7 +13,7 @@ import { SiteShell } from "@/components/site-shell";
 import { PoseRotatingImage } from "@/components/PoseRotatingImage";
 import {
   chapters, contactChannels, essenceStats, faqItems, featuredBenefits,
-  otherConditions, pharmacyPartners, planIdentity, preventionCoverages,
+  otherConditions, planIdentity, preventionCoverages,
   rehabCoverages, specialCases, waitingPeriods,
 } from "./mh150Data";
 
@@ -309,10 +309,11 @@ export default function Mh150Page() {
                 {c.essentials.map((item) => <li key={item}>{item}</li>)}
               </ul>
               {c.id === "medicinas" && (
-                <div className="mh150-exp-pharmacy-logos" aria-label="Farmacias de la Red Humana">
-                  {pharmacyPartners.map((name) => (
-                    <span key={name} className="mh150-exp-pharmacy-chip">{name}</span>
-                  ))}
+                <div className="mh150-exp-pharmacy-logos" aria-label="Farmacias afiliadas: Pharmacy's, Sana Sana, Medicity y Fybeca">
+                  <Image src="/farmacia-pharmacys.png" alt="Pharmacy's" width={978} height={328} unoptimized />
+                  <Image src="/farmacia-sanasana.png" alt="Farmacias Sana Sana" width={1850} height={389} unoptimized />
+                  <Image src="/farmacia-medicity.png" alt="Medicity" width={291} height={58} unoptimized />
+                  <Image src="/farmacia-fybeca.png" alt="Farmacias Fybeca" width={598} height={222} unoptimized />
                 </div>
               )}
               <button type="button" className="mh150-exp-text-button" onClick={() => openDialog(c.id)}>
