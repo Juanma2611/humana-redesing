@@ -431,7 +431,7 @@ export default function Ph15Page() {
             <p>Cotiza PH15 y empieza a cuidarte hoy, con el respaldo de Humana.</p>
             <div className="ph15-exp-finale-actions">
               <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotizar PH15</button>
-              <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
+              <Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="ph15-exp-confirm" role="status">

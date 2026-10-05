@@ -105,7 +105,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
             </button>
             <div className="nav-plans-menu" role="menu">
               {plansMenu.map(({ segment, label, icon: Icon }) => (
-                <Link key={segment} href={`/planes?segment=${segment}`} role="menuitem" onClick={closeMenus}>
+                <Link key={segment} href={`/planes-medicos?segment=${segment}`} role="menuitem" onClick={closeMenus}>
                   <span className="nav-plans-menu-icon"><Icon size={17} aria-hidden="true" /></span>
                   <span>{label}</span>
                 </Link>
@@ -113,7 +113,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
             </div>
           </div>
           <Link href="/encontrar-plan">Para ti</Link>
-          <Link href="/empresas">Empresas</Link>
+          <Link href="/planes-medicos/empresas">Empresas</Link>
           <Link href="/conocenos">Conócenos</Link>
           <Link href="/beneficios">Beneficios</Link>
           <Link href="/red-medica">Red médica</Link>
@@ -123,7 +123,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
         <div className="header-actions">
           <div className="help-mini"><Headphones size={18} /><span>¿Necesitas ayuda?<strong>02 395 7400</strong></span></div>
           <Link className="login-link bordered" href="/cliente">MiHumana</Link>
-          <Link className="primary-button small" href="/planes"><ShoppingCart size={15} /> Cotiza tu plan</Link>
+          <Link className="primary-button small" href="/planes-medicos"><ShoppingCart size={15} /> Cotiza tu plan</Link>
         </div>
         <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menú">{menuOpen ? <X /> : <Menu />}</button>
       </header>
@@ -134,11 +134,11 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
             <Image src="/humana-logo-oficial.png" alt="Humana · Cobertura Médica Integral" width={746} height={334} unoptimized />
             <div><strong>Tu bienestar, acompañado siempre.</strong><p>Más de 200.000 personas y empresas confían en Humana.</p></div>
           </div>
-          <div className="footer-trust-actions"><Link href="/cliente"><ShieldCheck /> Ya soy cliente</Link><Link href="/planes">Conocer planes</Link></div>
+          <div className="footer-trust-actions"><Link href="/cliente"><ShieldCheck /> Ya soy cliente</Link><Link href="/planes-medicos">Conocer planes</Link></div>
         </div>
 
         <div className="footer-main-grid">
-          <section className="footer-link-column" aria-labelledby="footer-explora"><h2 id="footer-explora">Descubre Humana</h2><Link href="/conocenos">¿Por qué Humana?</Link><Link href="/planes">Planes médicos</Link><Link href="/planes?segment=dental">ProSonrisas</Link><Link href="/empresas">Empresas</Link><Link href="/beneficios">Beneficios</Link><a href="/blog">Bienestar</a></section>
+          <section className="footer-link-column" aria-labelledby="footer-explora"><h2 id="footer-explora">Descubre Humana</h2><Link href="/conocenos">¿Por qué Humana?</Link><Link href="/planes-medicos">Planes médicos</Link><Link href="/planes-medicos?segment=dental">ProSonrisas</Link><Link href="/planes-medicos/empresas">Empresas</Link><Link href="/beneficios">Beneficios</Link><a href="/blog">Bienestar</a></section>
           <section className="footer-link-column" aria-labelledby="footer-plan"><h2 id="footer-plan">Usa tu plan</h2><Link href="/cliente">MiHumana</Link><Link href="/servicios/reembolsos">Reembolsos</Link><Link href="/servicios/autorizaciones">Autorizaciones</Link><Link href="/red-medica">Red médica</Link><Link href="/servicios">Centro de servicios</Link></section>
 
           <section className="footer-office-card" id="oficinas" aria-labelledby="footer-offices">

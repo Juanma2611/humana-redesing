@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Ambulance, Banknote, BarChart3, Briefcase, Building2, Check, CircleDollarSign, Handshake, HeartPulse, Home as HomeIcon,
   LineChart, Mail, MessageCircle, PenLine, PhoneCall, Pill, PieChart, ShieldCheck, ShieldPlus, Stethoscope, Target, TrendingUp,
@@ -425,6 +425,46 @@ export default function HumanaBusinessClient() {
           </section>
         ))}
 
+        <section className="content-section plan-hub-intro mh50-exp-reveal" id="business-incluye" style={{ maxWidth: 820 }}>
+          <h2>Todo lo que incluye tu Plan Humana Business</h2>
+          <ul className="plan-faq-checklist" style={{ textAlign: "left", maxWidth: 640, margin: "24px auto 0" }}>
+            {mainPoints.map((point) => (
+              <li key={point}><Check size={18} /><span>{point}</span></li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="content-section" style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px 48px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 16 }}>
+            {infoImages.map((img) => (
+              <figure key={img.src} style={{ margin: 0, borderRadius: 16, overflow: "hidden", position: "relative", aspectRatio: "4/3", background: "#eef8fc" }}>
+                <Image src={img.src} alt={img.alt} fill sizes="200px" unoptimized style={{ objectFit: "cover" }} />
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section className="content-section" id="business-cuadro" style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px 64px" }}>
+          <div className="plan-detail-table-wrap" style={{ background: "#fff", borderRadius: 20, padding: 24 }}>
+            <h2 style={{ marginTop: 0 }}>Cuadro de coberturas a elección del cliente</h2>
+            <table className="plan-detail-table">
+              <tbody>
+                {cuadroA.map((row) => (
+                  <React.Fragment key={row.label}>
+                    {row.section && (
+                      <tr className="plan-table-section"><th scope="row">{row.section}</th></tr>
+                    )}
+                    <tr>
+                      <th scope="row">{row.label}</th>
+                      <td>{row.value}</td>
+                    </tr>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         <section className="business-contact-box mh50-exp-reveal">
           <div>
             <h3>¿Listo para armar el plan de tu empresa?</h3>
@@ -447,7 +487,7 @@ export default function HumanaBusinessClient() {
               <button type="button" className="primary-button" onClick={handleQuoteClick}>Solicita información</button>
               <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
               <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
-              <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
+              <Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="mh50-exp-confirm" role="status">

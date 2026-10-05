@@ -585,7 +585,7 @@ export default function Mh50Page() {
             <p>Cotiza el plan más elegido de Humana y empieza a proteger a los tuyos hoy mismo.</p>
             <div className="mh50-exp-finale-actions">
               <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotizar MH50</button>
-              <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
+              <Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="mh50-exp-confirm" role="status">

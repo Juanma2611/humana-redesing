@@ -29,7 +29,7 @@ export default function About() {
         <span className="kicker">¿Por qué Humana?</span>
         <h1>Más de 30 años cuidando lo que más importa.</h1>
         <p>Salud, bienestar y respaldo para las personas, familias y empresas del Ecuador.</p>
-        <div className="about-hero-actions"><Link className="primary-button" href="/planes">Conoce nuestros planes <ArrowRight size={18} /></Link><Link className="secondary-button" href="#nuestra-historia">Nuestra historia</Link></div>
+        <div className="about-hero-actions"><Link className="primary-button" href="/planes-medicos">Conoce nuestros planes <ArrowRight size={18} /></Link><Link className="secondary-button" href="#nuestra-historia">Nuestra historia</Link></div>
         <div className="about-trust"><UsersRound /><span><strong>Más de 200.000</strong> personas y empresas confían en Humana</span></div>
       </div>
     </section>
@@ -60,6 +60,6 @@ export default function About() {
       <div className="about-values-grid">{values.map(({ icon: Icon, title, copy }) => <article key={title}><span><Icon /></span><h3>{title}</h3><p>{copy}</p></article>)}</div>
     </section>
 
-    <section className="about-purpose"><Network /><div><span className="kicker light">Nuestro compromiso</span><h2>Tu salud no se vive en partes.</h2><p>Por eso conectamos prevención, atención y respaldo para acompañarte cuando lo necesites.</p></div><Link className="white-button" href="/planes">Encuentra tu plan <ArrowRight size={18} /></Link></section>
+    <section className="about-purpose"><Network /><div><span className="kicker light">Nuestro compromiso</span><h2>Tu salud no se vive en partes.</h2><p>Por eso conectamos prevención, atención y respaldo para acompañarte cuando lo necesites.</p></div><Link className="white-button" href="/planes-medicos">Encuentra tu plan <ArrowRight size={18} /></Link></section>
   </SiteShell>;
 }

@@ -91,7 +91,7 @@ export default function PlanFinder() {
       </div> : <div key="plan-result" className="result-card recommendation-result">
         <div className="result-icon"><ResultIcon size={34} /></div><span className="kicker">Tu recomendación</span><h2>{result.name}</h2><p>{result.reason}</p>
         <div className="result-points">{result.points.map(point => <span key={point}><Check /> {point}</span>)}</div>
-        {answers.dentalAddOn === "yes" && resultKey !== "prosonrisas" && <div className="dental-addon-result"><span><SmilePlus /></span><div><small>Complemento recomendado</small><h3>Agrega ProSonrisas</h3><p>Protección dental con alternativas de 36 o 50 procedimientos desde $6,63 por persona.</p></div><Link href="/planes?segment=dental&plan=prosonrisas">Ver plan dental <ArrowRight /></Link></div>}
+        {answers.dentalAddOn === "yes" && resultKey !== "prosonrisas" && <div className="dental-addon-result"><span><SmilePlus /></span><div><small>Complemento recomendado</small><h3>Agrega ProSonrisas</h3><p>Protección dental con alternativas de 36 o 50 procedimientos desde $6,63 por persona.</p></div><Link href="/planes-medicos?segment=dental&plan=prosonrisas">Ver plan dental <ArrowRight /></Link></div>}
         {resultKey === "advisor" && <div className="result-warning"><Sparkles size={19} /><p>La documentación no confirma por sí sola la edad máxima de ingreso. Un asesor debe revisar tu caso antes de recomendar un producto.</p></div>}
         <div className="result-actions"><Link className="primary-button" href={resultHref}>{resultKey === "advisor" ? "Hablar con un asesor" : "Ver este plan"}<ArrowRight size={18} /></Link><button className="secondary-button" onClick={reset}><RotateCcw size={18} /> Empezar de nuevo</button></div>
       </div>}
