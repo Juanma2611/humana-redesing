@@ -7,7 +7,7 @@ const personaPlans = [
   {
     slug: "plan-individual-y-familiar",
     name: "Plan Individual y Familiar",
-    image: "/familia-humana.png",
+    image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-INDIVIDUAL-FAMILIAR.png",
     items: [
       "Planes desde $15.000 a $150.000 de cobertura anual",
       <>La red médica más completa del mercado, y <strong>la mejor cobertura en medicinas</strong></>,
@@ -19,7 +19,7 @@ const personaPlans = [
   {
     slug: "plan-proteger",
     name: "Plan Proteger",
-    image: "/humana-historia-hero.png",
+    image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-PROTEGER.png",
     items: [
       <>El complemento perfecto para tu <strong>cobertura personal o corporativa</strong> hasta $500.000 en caso de <strong>enfermedades o accidentes graves</strong>.</>,
       "Atención en los mejores hospitales y clínicas en convenio con Humana.",
@@ -30,7 +30,7 @@ const personaPlans = [
   {
     slug: "plan-prosonrisas",
     name: "Plan Prosonrisas",
-    image: "/humana-prosonrisas-hero.png",
+    image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-PROSONRISAS.png",
     items: [
       <>Los mejores <strong>centros odontológicos</strong> a nivel nacional</>,
       <>Evaluaciones, consultas, <strong>diagnósticos</strong>, blanqueamientos</>,

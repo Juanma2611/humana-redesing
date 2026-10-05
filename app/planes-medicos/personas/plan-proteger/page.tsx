@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Banknote, Cross, FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
+  Ambulance, Banknote, Cross, Droplets, FlaskConical, HandHeart, HeartHandshake, HeartPulse, Home as HomeIcon,
   Layers3, Mail, MessageCircle, PhoneCall, Pill, ShieldCheck, ShieldPlus, ShoppingCart, Sparkles, Stethoscope, Users, Wallet, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
@@ -48,7 +48,7 @@ const chapters: Chapter[] = [
     eyebrow: "GRAN RESPALDO ECONÓMICO",
     title: "Una enfermedad grave no debería cambiar tu futuro.",
     lead: "Proteger entra en acción justo cuando los gastos médicos superan lo que tu plan base puede cubrir.",
-    essentials: ["Hospitalización 100% tras deducible", "Cuarto y alimento hasta el monto de cobertura", "Deducibles a elegir: $5.000 · $10.000 · $20.000"],
+    essentials: ["Hospitalización 100% tras deducible", "Cuarto y alimento hasta el monto de cobertura", "Deducibles a elegir: $5.000 · $10.000 · $20.000", "Cobertura durante toda tu vida, sin límite de edad", "Atención en los mejores hospitales y clínicas en convenio, o por libre elección"],
     dialogTitle: "Gran respaldo económico",
     dialogLead: "Una vez aplicado el deducible elegido, la cobertura hospitalaria y ambulatoria opera al 100% hasta el monto contratado.",
     chips: [
@@ -94,7 +94,7 @@ const chapters: Chapter[] = [
     chips: [
       { icon: Cross, text: "Trasplante de órganos: hasta $250.000" },
       { icon: Sparkles, text: "Cirugía reconstructiva oncológica 100%, incluye implantes" },
-      { icon: HeartHandshake, text: "Seguro de vida $5.000 (titulares y dependientes +18)" },
+      { icon: HeartHandshake, text: "Seguro de vida $5.000 (titulares y dependientes de 18 a 64 años)" },
       { icon: ShieldPlus, text: "Muerte natural, accidental u homicidio" },
     ],
   },
@@ -116,6 +116,108 @@ const chapters: Chapter[] = [
       { icon: Stethoscope, text: "Vigencia de 90 días tras la carta de autorización" },
       { icon: HandHeart, text: "Asistencias HU PLUS: personales, hogar y mascotas" },
       { icon: Sparkles, text: "Sin carencia" },
+    ],
+  },
+];
+
+/* Principales beneficios del plan Proteger (contenido oficial) */
+const featuredBenefits = [
+  { icon: Cross, title: "Cobertura para cirugía reconstructiva y rehabilitación" },
+  { icon: HeartPulse, title: "Cobertura integral de trasplante de órganos" },
+  { icon: Droplets, title: "Cobertura para diálisis y hemodiálisis" },
+  { icon: HeartHandshake, title: "Cuidados paliativos" },
+  { icon: Sparkles, title: "Terapia de rehabilitación" },
+  { icon: Ambulance, title: "Ambulancia terrestre" },
+];
+
+/* Chequeo médico anual Metrored (beneficio especial, contenido oficial) */
+const checkupItems = [
+  "Uroanálisis EMO", "Biometría hemática", "Glucosa", "Triglicéridos", "Colesterol", "HDL - LDL",
+  "Consulta médica general o pediatra", "Coproparasitario simple", "Chequeo Optometría", "Profilaxis dental (certificado)",
+];
+const checkupConditions = [
+  "Uno al año por contrato para titular o dependientes afiliados.",
+  "Aplica con carta de autorización que la recibirá en el lapso de 8 horas hábiles luego del ingreso de la solicitud.",
+  "Sin carencia.",
+  "Vigencia para utilizar chequeo 90 días luego de la emisión de tu plan.",
+  "Chequeo médico se lo realiza en la red centros médicos Metrored en Quito o Guayaquil.",
+];
+
+/* Asistencia Hu Assist Plus (contenido oficial) */
+const huPlusCategories = ["Personal", "Mascotas", "Hogar"];
+
+/* Preguntas frecuentes oficiales del Plan Proteger (sección visible) */
+const officialFaqs = [
+  {
+    question: "¿Qué cubre el Plan Proteger de Humana?",
+    answer: [
+      "El Plan Proteger está diseñado para ofrecer protección ante enfermedades y accidentes graves hasta $500.000 de cobertura vitalicia. La cobertura incluye:",
+    ],
+    checklist: [
+      "Hospitalización por emergencias y cirugías complejas",
+      "Terapias intensivas",
+      "Tratamientos de enfermedades catastróficas (como cáncer)",
+      "Cobertura de medicamentos y materiales médicos",
+      "Cobertura por accidentes graves",
+      "Honorarios médicos especializados",
+    ],
+  },
+  {
+    question: "¿Cuánto cuesta el Plan Proteger y qué formas de pago están disponibles?",
+    answer: [
+      "El costo del plan es desde $19.26 por persona. Puedes pagar con tarjetas de crédito, débito, transferencias bancarias o débito automático. También puedes elegir pagos mensuales, trimestrales o anuales para mayor comodidad.",
+    ],
+  },
+  {
+    question: "¿Qué enfermedades graves están cubiertas en el plan?",
+    answer: [
+      "El plan cubre el tratamiento de enfermedades graves y catastróficas que se hayan desarrollado y presentado dentro de su vigencia, incluyendo entre otras: cáncer, infarto, insuficiencia renal crónica, enfermedades cardiovasculares complejas, cirugías mayores y accidentes con trauma severo.",
+    ],
+  },
+  {
+    question: "¿Desde cuándo entra en vigencia la cobertura?",
+    answer: [
+      "La cobertura entra en vigencia una vez completado el proceso de afiliación y confirmación del pago. Algunos tratamientos específicos pueden estar sujetos a períodos de carencia, que te serán detallados en el contrato y cubiertos luego de superado el deducible:",
+    ],
+    checklist: [
+      "Emergencia médica vital: 24 horas",
+      "Ambulatoria (atención que no requiere hospitalización): luego de 30 días",
+      "Hospitalaria: 90 días",
+      "Enfermedades preexistentes declaradas: desde el mes 24 hasta 20 salarios básicos",
+    ],
+  },
+  {
+    question: "¿Cómo funcionan los deducibles y cómo afectan mi cobertura?",
+    answer: [
+      "El Plan Proteger tiene tres opciones de deducible: $5.000, $10.000 y $20.000. La cobertura se activará una vez que hayas alcanzado el valor del deducible seleccionado. Esto significa que deberás asumir los costos iniciales hasta completar el deducible, y luego Humana cubrirá los gastos médicos restantes según las condiciones de tu plan.",
+    ],
+  },
+  {
+    question: "¿Este plan funciona como un seguro médico o es un complemento?",
+    answer: [
+      "El Plan Proteger funciona como un complemento a tu cobertura personal o corporativa. Si ya tienes un plan médico o un seguro privado, puedes usar el Plan Proteger para cubrir los gastos que excedan los límites de tu cobertura principal o para afrontar emergencias médicas graves que no estén contempladas en tu seguro básico.",
+    ],
+  },
+  {
+    question: "¿Qué diferencia hay entre el Plan Proteger y un seguro médico tradicional?",
+    answer: [
+      "El Plan Proteger está enfocado en la cobertura de gastos mayores relacionados con enfermedades y accidentes graves, mientras que los seguros médicos tradicionales suelen enfocarse en servicios ambulatorios y atención general.",
+    ],
+  },
+  {
+    question: "¿El plan cubre atenciones fuera de la red de Humana?",
+    answer: [
+      "Sí, el plan cubre atenciones fuera de la red mediante un sistema de reembolso. El porcentaje y los montos de cobertura varían según las condiciones del contrato y el tipo de servicio médico recibido.",
+    ],
+  },
+  {
+    question: "¿Cómo puedo afiliarme al Plan Proteger?",
+    answer: ["Puedes afiliarte de manera rápida y sencilla:"],
+    checklist: [
+      "Accede al cotizador en línea.",
+      "Selecciona el plan que se ajuste a tus necesidades.",
+      "Completa el formulario y realiza el pago.",
+      "Recibirás la confirmación por correo electrónico y el detalle de tu cobertura.",
     ],
   },
 ];
@@ -190,6 +292,8 @@ export default function ProtegerPage() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
+  const [called, setCalled] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [faqOpen, setFaqOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState<{ role: "bot" | "user"; text: string }[]>([]);
   const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
@@ -314,7 +418,8 @@ export default function ProtegerPage() {
             </p>
             <div className="mh50-exp-hero-actions">
               <a className="primary-button" href="#proteger-cierre"><ShoppingCart size={18} /> Cotiza ahora</a>
-              <a className="ghost-button" href="#proteger-cobertura">Conoce sus beneficios</a>
+              <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
+              <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
             </div>
           </div>
           <div className="mh50-exp-gallery" aria-label="Momentos de protección Proteger">
@@ -376,6 +481,25 @@ export default function ProtegerPage() {
           </section>
         ))}
 
+        <section className="mh50-exp-included" id="proteger-beneficios" style={{ position: "relative" }}>
+          <div className="mh50-exp-benefits-panel">
+            <div className="mh50-exp-benefits-head mh50-exp-reveal">
+              <span className="mh50-exp-eyebrow light">PRINCIPALES BENEFICIOS</span>
+              <h2>Más formas de acompañarte.</h2>
+              <p>Ventajas que forman parte de tu plan Proteger.</p>
+            </div>
+            <div className="mh50-exp-benefits-grid" role="list" aria-label="Beneficios incluidos en el plan Proteger">
+              {featuredBenefits.map(({ icon: Icon, title }, i) => (
+                <article className="mh50-exp-reveal" style={{ "--reveal-delay": `${(i % 6) * 60}ms` } as React.CSSProperties} role="listitem" key={title}>
+                  <span className="mh50-exp-benefit-symbol" aria-hidden="true"><Icon /></span>
+                  <h3>{title}</h3>
+                  <span className="mh50-exp-benefit-arrow" aria-hidden="true">›</span>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="mh50-exp-waiting" id="proteger-carencias">
           <div className="mh50-exp-waiting-copy mh50-exp-reveal">
             <span className="mh50-exp-eyebrow">CARENCIAS PROTEGER</span>
@@ -424,6 +548,77 @@ export default function ProtegerPage() {
                 ))}
               </div>
             </details>
+            <details>
+              <summary>Beneficio especial: chequeo médico anual Metrored <span>+</span></summary>
+              <div className="mh50-exp-accordion-grid">
+                {checkupItems.map((item) => (
+                  <article key={item}><HeartPulse /><strong>Incluido</strong><span>{item}</span></article>
+                ))}
+                <article><Sparkles /><strong>10</strong><span>Número de procedimientos del chequeo</span></article>
+              </div>
+              <p className="mh50-exp-waiting-note" style={{ marginTop: 16 }}>
+                Solicita tu chequeo al 1800 Humana (48 62 62) o mediante{" "}
+                <a href="https://wa.me/59324017002" target="_blank" rel="noreferrer">WhatsApp</a>.
+              </p>
+              <ul style={{ marginTop: 10, paddingLeft: 20, color: "inherit" }}>
+                {checkupConditions.map((condition) => <li key={condition}>{condition}</li>)}
+              </ul>
+            </details>
+            <details>
+              <summary>Asistencia Hu Assist Plus <span>+</span></summary>
+              <div className="mh50-exp-accordion-grid">
+                {huPlusCategories.map((category) => (
+                  <article key={category}><HandHeart /><strong>{category}</strong><span>Asistencia incluida</span></article>
+                ))}
+              </div>
+              <p className="mh50-exp-waiting-note" style={{ marginTop: 16 }}>
+                Como usuario de este plan, tiene acceso a la Asistencia Hu Assist Plus. Para activarla puede llamar al{" "}
+                1800 Humana (48 62 62), o comunicarse con nosotros mediante{" "}
+                <a href="https://wa.me/59324017002" target="_blank" rel="noreferrer">WhatsApp</a>.{" "}
+                Más información:{" "}
+                <a href="https://servicio.humana.med.ec/hc/es/articles/34038006726541-Asistencia-Hu-Plus" target="_blank" rel="noreferrer">
+                  servicio.humana.med.ec
+                </a>.
+              </p>
+            </details>
+          </div>
+        </section>
+
+        <section className="content-section plan-detail-faq-section" id="proteger-faq" style={{ maxWidth: 1100, margin: "0 auto", padding: "64px 24px" }}>
+          <div className="plan-detail-faq-layout" style={{ gridTemplateColumns: "1fr" }}>
+            <div>
+              <h2>Preguntas frecuentes Plan Proteger</h2>
+              <div className="plan-faq-accordion">
+                {officialFaqs.map((faq, index) => {
+                  const isOpen = openFaqIndex === index;
+                  return (
+                    <div className={`plan-faq-item ${isOpen ? "open" : ""}`} key={faq.question}>
+                      <button
+                        type="button"
+                        className="plan-faq-trigger"
+                        onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                        aria-expanded={isOpen}
+                      >
+                        <span>{faq.question}</span>
+                        <Sparkles size={16} aria-hidden="true" />
+                      </button>
+                      {isOpen && (
+                        <div className="plan-faq-content">
+                          {faq.answer.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                          {faq.checklist && (
+                            <ul className="plan-faq-checklist">
+                              {faq.checklist.map((item) => (
+                                <li key={item}><ShieldCheck size={16} /><span>{item}</span></li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -447,11 +642,18 @@ export default function ProtegerPage() {
             <p>Combina Proteger con tu plan médico actual y accede a un respaldo económico adicional cuando más lo necesites.</p>
             <div className="mh50-exp-finale-actions">
               <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotiza ahora</button>
+              <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
+              <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
               <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="mh50-exp-confirm" role="status">
                 <ShieldCheck /> <span>Solicitud demostrativa registrada. Un asesor de Humana te contactará. No se envió información real.</span>
+              </div>
+            )}
+            {called && (
+              <div className="mh50-exp-confirm" role="status">
+                <ShieldCheck /> <span>Solicitud de llamada demostrativa registrada. No se envió información real.</span>
               </div>
             )}
             <div className="mh50-exp-contact">

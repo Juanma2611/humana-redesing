@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
-  Baby, BadgeCheck, Building2, CircleDollarSign, Gem, HeartPulse, Mail, MessageCircle,
+  Baby, BadgeCheck, Building2, Check, CircleDollarSign, Gem, HeartPulse, Mail, MessageCircle,
   PhoneCall, Pill, ScanEye, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Smile, Sparkles, Stethoscope, Syringe, Users, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
@@ -76,18 +76,122 @@ const planOptions = [
   {
     id: "plus",
     name: "Prosonrisas Plus",
-    price: "$6,60",
-    priceNote: "tarifa comercial por persona, incluye seguro campesino",
-    summary: "La base esencial para cuidar tu sonrisa, con cobertura ambulatoria completa.",
-    features: ["Consultas, rayos-X y profilaxis sin copago", "Restauraciones con 10% de copago", "Cirugía y endodoncia con 20% de copago", "Odontopediatría hasta los 14 años, 11 meses, 29 días"],
+    price: "$6,63",
+    priceNote: "tarifa referencial por persona",
+    summary: "36 procedimientos: la base esencial para cuidar tu sonrisa, con cobertura ambulatoria completa.",
+    features: ["Restauraciones (calzas) incluidas", "Cirugía parcial incluida", "Endodoncia incluida", "Consulta con el especialista: 100%", "Odontopediatría parcial"],
   },
   {
     id: "full",
     name: "Prosonrisas Full",
-    price: "$27,97",
-    priceNote: "tarifa comercial por persona, incluye seguro campesino",
-    summary: "Cobertura ampliada que suma periodoncia y un blanqueamiento dental anual.",
-    features: ["Todo lo de Prosonrisas Plus", "Periodoncia incluida (20% de copago)", "1 blanqueamiento dental anual, hasta 3 sesiones", "Urgencia dental preautorizada sin copago"],
+    price: "$23,08",
+    priceNote: "tarifa referencial por persona",
+    summary: "50 procedimientos: el plan dental más completo, suma periodoncia y blanqueamiento.",
+    features: ["Todo lo de Prosonrisas Plus", "Cirugía 100%", "Odontopediatría 100%", "Periodoncia incluida", "Blanqueamiento dental incluido"],
+  },
+];
+
+/* Tabla resumen oficial Plus vs. Full */
+const summaryTable = [
+  { label: "Nº de procedimientos", plus: "36", full: "50" },
+  { label: "Restauraciones (calzas)", plus: "check", full: "check" },
+  { label: "Cirugía", plus: "Parcial", full: "100%" },
+  { label: "Endodoncia", plus: "check", full: "check" },
+  { label: "Consulta con el especialista", plus: "100%", full: "100%" },
+  { label: "Odontopediatría", plus: "Parcial", full: "100%" },
+  { label: "Periodoncia", plus: "x", full: "check" },
+  { label: "Blanqueamiento", plus: "x", full: "check" },
+  { label: "Precios", plus: "$6.63", full: "$23.08" },
+];
+
+/* Tabla "Coberturas al detalle" oficial */
+const detailTable: { section?: string; label: string; plus: string; full: string }[] = [
+  { label: "Examen clínico y diagnóstico", plus: "check", full: "check" },
+  { label: "Radiografías Periapicales (por diente)", plus: "check", full: "check" },
+  { label: "Profilaxis (limpieza bucal)", plus: "check", full: "check" },
+  { label: "Educación para la higiene bucal", plus: "check", full: "check" },
+  { label: "Consulta con el especialista", plus: "100%", full: "100%" },
+  { label: "Emergencias", plus: "check", full: "check" },
+  { label: "Urgencias", plus: "check", full: "check" },
+  { label: "Restauraciones (calzas)", plus: "check", full: "check" },
+  { section: "CIRUGÍA", label: "Extracción de terceros molares erupcionados", plus: "check", full: "check" },
+  { label: "Extracción de terceros molares incluidos y semincluidos", plus: "x", full: "check" },
+  { label: "Extracciones simples", plus: "check", full: "check" },
+  { label: "Otras cirugías de tejidos blandos y duros", plus: "check", full: "check" },
+  { section: "ODONTOPEDIATRÍA", label: "Extracciones pediátricas", plus: "check", full: "check" },
+  { label: "Tratamientos endodónticos (tratamiento de conducto) en niños", plus: "x", full: "check" },
+  { label: "Restauraciones (Calzas)", plus: "check", full: "check" },
+  { label: "Sellantes de fosas y fisuras", plus: "check", full: "check" },
+  { label: "Fluorización", plus: "check", full: "check" },
+  { section: "ESTÉTICA DENTAL", label: "Blanqueamiento dental", plus: "x", full: "check" },
+  { section: "PERIODONCIA", label: "Tratamientos de encía para eliminación de cálculo subgingival", plus: "x", full: "check" },
+  { label: "Remoción cálculos supragingivales", plus: "check", full: "check" },
+  { label: "Tratamientos quirúrgicos de encía", plus: "x", full: "check" },
+  { section: "ENDODONCIA (tratamiento de conducto)", label: "Endodoncia de dientes anteriores", plus: "check", full: "check" },
+  { label: "Endodoncia de dientes premolares", plus: "check", full: "check" },
+  { label: "Endodoncia de dientes molares", plus: "check", full: "check" },
+];
+
+function DetailCell({ value }: { value: string }) {
+  if (value === "check") return <Check size={16} className="cell-check" aria-label="Incluido" />;
+  if (value === "x") return <X size={16} className="cell-x" aria-label="No incluido" />;
+  return <>{value}</>;
+}
+
+/* Preguntas frecuentes oficiales del Plan Pro Sonrisas (sección visible) */
+const officialFaqs = [
+  {
+    question: "¿Qué cubre el Plan Dental Prosonrisas de Humana?",
+    answer: [
+      "El Plan Dental Prosonrisas cubre una variedad de servicios odontológicos, incluyendo limpiezas, consultas de rutina, tratamientos de caries, extracciones simples, urgencias odontológicas, radiografías y tratamientos preventivos. La cobertura varía según el tipo de plan (Plus o Full).",
+    ],
+  },
+  {
+    question: "¿Cuál es la diferencia entre el Plan Plus y el Plan Full?",
+    answer: [
+      "Plan Plus ($6.63 por persona): cubre 36 procedimientos básicos y preventivos, consultas y limpiezas.",
+      "Plan Full ($23.08 por persona): ofrece una cobertura más amplia, incluyendo 50 procedimientos especializados como endodoncia, periodoncia y blanqueamiento.",
+    ],
+  },
+  {
+    question: "¿Desde cuándo entra en vigencia la cobertura dental?",
+    answer: ["La cobertura entra en vigencia una vez completado el proceso de afiliación y confirmación del pago. Algunos tratamientos especializados pueden tener un período de carencia:"],
+    checklist: [
+      "Prestaciones básicas: luego de 24 horas — examen clínico y diagnóstico, rayos-X periapicales, profilaxis, consulta con especialista, emergencia preautorizada hasta $50 al año.",
+      "Restauraciones: luego de 30 días.",
+      "Procedimientos especializados: luego de 60 días — cirugías, endodoncia, odontopediatría, periodoncia.",
+      "Blanqueamiento dental: luego de 150 días.",
+    ],
+  },
+  {
+    question: "¿Puedo incluir a mi familia en el plan?",
+    answer: ["Sí, puedes incluir a cónyuge, hijos, padres y familiares hasta el cuarto grado de consanguinidad. Los valores detallados son por persona."],
+  },
+  {
+    question: "¿Qué sucede si necesito un tratamiento fuera de la red de prestadores?",
+    answer: ["La cobertura aplica solo en la red de centros odontológicos Red de Prestadores Humana S.A."],
+  },
+  {
+    question: "¿Cuánto cuesta el Plan Dental Prosonrisas y qué formas de pago aceptan?",
+    answer: [
+      "Plan Plus: desde $6.63 por persona. Plan Full: desde $23.08 por persona. Aceptamos pagos mediante tarjeta de crédito, débito, transferencia bancaria o débito automático.",
+    ],
+  },
+  {
+    question: "¿Cuántas citas y tratamientos puedo realizar en el año?",
+    answer: ["El número de citas y tratamientos varía según el plan contratado. Sin embargo, las limpiezas, consultas y tratamientos preventivos están disponibles de manera regular dentro de los límites establecidos por cada plan."],
+  },
+  {
+    question: "¿Qué tipo de urgencias odontológicas están cubiertas?",
+    answer: ["El plan cubre urgencias como dolor dental agudo, infecciones, fracturas dentales y extracciones de emergencia. No tienen cobertura los implantes dentales; la ortodoncia aplica precios preferenciales de cada prestador odontológico."],
+  },
+  {
+    question: "¿Cómo puedo agendar una cita con un odontólogo de la red?",
+    answer: ["Puedes agendar tus citas directamente al centro odontológico afiliado y se coordinará la cobertura directa, llamando a la línea de atención de cada centro odontológico."],
+  },
+  {
+    question: "¿Cómo puedo afiliarme al Plan Dental Prosonrisas?",
+    answer: ["Accede al cotizador en línea, selecciona el plan que se ajuste a tus necesidades, completa el formulario y realiza el pago. Recibirás la confirmación por correo electrónico."],
   },
 ];
 
@@ -262,8 +366,10 @@ export default function ProsonrisasPage() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
+  const [called, setCalled] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
   const [activePlan, setActivePlan] = useState(planOptions[1].id);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [faqOpen, setFaqOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState<{ role: "bot" | "user"; text: string }[]>([]);
   const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
@@ -401,7 +507,8 @@ export default function ProsonrisasPage() {
             </p>
             <div className="mh50-exp-hero-actions">
               <a className="primary-button" href="#prosonrisas-planes"><ShoppingCart size={18} /> Cotiza ahora</a>
-              <a className="ghost-button" href="#prosonrisas-especialistas">Conoce sus beneficios</a>
+              <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
+              <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
             </div>
           </div>
           <div className="mh50-exp-gallery" aria-label="Momentos de sonrisas protegidas">
@@ -464,6 +571,45 @@ export default function ProsonrisasPage() {
                 <article key={f}><ShieldCheck /><strong>Incluido</strong><span>{f}</span></article>
               ))}
             </div>
+          </div>
+
+          <div className="plan-detail-table-wrap mh50-exp-reveal" style={{ maxWidth: 720, margin: "40px auto 0", background: "#fff", borderRadius: 20, padding: 24 }}>
+            <h2 style={{ marginTop: 0 }}>Resumen</h2>
+            <table className="plan-detail-table">
+              <thead><tr><th></th><th>PLUS</th><th>FULL</th></tr></thead>
+              <tbody>
+                {summaryTable.map((row) => (
+                  <tr key={row.label}>
+                    <th scope="row">{row.label}</th>
+                    <td><DetailCell value={row.plus} /></td>
+                    <td><DetailCell value={row.full} /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="plan-detail-table-wrap mh50-exp-reveal" style={{ maxWidth: 720, margin: "28px auto 0", background: "#fff", borderRadius: 20, padding: 24 }}>
+            <h2 style={{ marginTop: 0 }}>Coberturas al detalle</h2>
+            <table className="plan-detail-table">
+              <thead><tr><th></th><th>Prosonrisas Plus</th><th>Prosonrisas Full</th></tr></thead>
+              <tbody>
+                {detailTable.map((row) => (
+                  <React.Fragment key={row.label}>
+                    {row.section && (
+                      <tr className="plan-table-section">
+                        <th scope="row">{row.section}</th>
+                      </tr>
+                    )}
+                    <tr>
+                      <th scope="row">{row.label}</th>
+                      <td><DetailCell value={row.plus} /></td>
+                      <td><DetailCell value={row.full} /></td>
+                    </tr>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
           </div>
         </section>
 
@@ -597,6 +743,44 @@ export default function ProsonrisasPage() {
           </div>
         </section>
 
+        <section className="content-section plan-detail-faq-section" id="prosonrisas-faq" style={{ maxWidth: 1100, margin: "0 auto", padding: "64px 24px" }}>
+          <div className="plan-detail-faq-layout" style={{ gridTemplateColumns: "1fr" }}>
+            <div>
+              <h2>Preguntas frecuentes Plan Pro Sonrisas</h2>
+              <div className="plan-faq-accordion">
+                {officialFaqs.map((faq, index) => {
+                  const isOpen = openFaqIndex === index;
+                  return (
+                    <div className={`plan-faq-item ${isOpen ? "open" : ""}`} key={faq.question}>
+                      <button
+                        type="button"
+                        className="plan-faq-trigger"
+                        onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                        aria-expanded={isOpen}
+                      >
+                        <span>{faq.question}</span>
+                        <Sparkles size={16} aria-hidden="true" />
+                      </button>
+                      {isOpen && (
+                        <div className="plan-faq-content">
+                          {faq.answer.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                          {faq.checklist && (
+                            <ul className="plan-faq-checklist">
+                              {faq.checklist.map((item) => (
+                                <li key={item}><ShieldCheck size={16} /><span>{item}</span></li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="mh50-exp-finale" id="prosonrisas-cierre">
           <div className="mh50-exp-finale-rings" aria-hidden="true" />
           <DentalDecor tone="on-dark" />
@@ -606,11 +790,18 @@ export default function ProsonrisasPage() {
             <p>Elige entre Prosonrisas Plus y Full, y empieza a cuidar tu sonrisa y la de tu familia hoy mismo.</p>
             <div className="mh50-exp-finale-actions">
               <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotiza ahora</button>
+              <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
+              <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
               <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="mh50-exp-confirm" role="status">
                 <ShieldCheck /> <span>Solicitud demostrativa registrada. Un asesor de Humana te contactará. No se envió información real.</span>
+              </div>
+            )}
+            {called && (
+              <div className="mh50-exp-confirm" role="status">
+                <ShieldCheck /> <span>Solicitud de llamada demostrativa registrada. No se envió información real.</span>
               </div>
             )}
             <div className="mh50-exp-contact">
