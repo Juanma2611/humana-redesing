@@ -26,7 +26,7 @@ export default function PlanesMedicosPage() {
         <article className="plan-hub-card">
           <div className="plan-hub-card-media">
             <Image
-              src="/familia-humana.png"
+              src="https://humana.med.ec/wp-content/uploads/2026/09/PERSONAS_medio_v2.jpg"
               alt="Personas y familias protegidas por un plan médico Humana"
               fill
               sizes="(max-width: 760px) 100vw, 50vw"
@@ -49,7 +49,7 @@ export default function PlanesMedicosPage() {
         <article className="plan-hub-card">
           <div className="plan-hub-card-media">
             <Image
-              src="/humana-business-team-v2.png"
+              src="https://humana.med.ec/wp-content/uploads/2025/09/EMPRESAS_medio.jpg"
               alt="Equipo de colaboradores protegido por un plan médico Humana"
               fill
               sizes="(max-width: 760px) 100vw, 50vw"

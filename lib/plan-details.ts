@@ -250,7 +250,7 @@ export const planDetails: PlanDetail[] = [
     description: [
       "Plan integral para ti y tu familia con una cobertura de hasta $50.000 anuales por persona. Cuentas con una importante red de prestadores de servicios médicos, como Northospital en Quito, el Hospital Clínica San Francisco en Guayaquil y otros en el resto del país.",
     ],
-    heroImage: "/mh50-hospitalizacion.jpg",
+    heroImage: "https://humana.med.ec/wp-content/uploads/2020/12/1-practi-humana-50-215.png",
     coverageTables: [
       {
         title: "Cobertura",
