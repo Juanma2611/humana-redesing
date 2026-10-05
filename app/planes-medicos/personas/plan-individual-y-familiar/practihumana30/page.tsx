@@ -442,7 +442,7 @@ export default function Ph30Page() {
             <p>Cotiza PH30 y da un paso más en la protección tuya y de tu familia, con el respaldo de Humana.</p>
             <div className="ph30-exp-finale-actions">
               <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotizar PH30</button>
-              <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
+              <Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="ph30-exp-confirm" role="status">

@@ -55,9 +55,9 @@ export default function Home() {
         <h1>Tu bienestar.<br /><span>Nuestra prioridad.</span></h1>
         <p>Planes para ti, tu familia o tu empresa, con orientación clara para que encuentres lo que necesitas sin complicaciones.</p>
         <div className="hero-actions">
-          <Link className="primary-button" href="/planes">Encuentra tu plan <ArrowRight size={18} /></Link>
+          <Link className="primary-button" href="/planes-medicos">Encuentra tu plan <ArrowRight size={18} /></Link>
           <div className="hero-actions-secondary">
-            <Link className="secondary-button" href="/planes#asesor"><MessageCircle size={18} /> Hablar con un asesor</Link>
+            <Link className="secondary-button" href="/planes-medicos#asesor"><MessageCircle size={18} /> Hablar con un asesor</Link>
             <Link className="client-button" href="/cliente"><UserRound size={18} /> Ya soy cliente</Link>
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function Home() {
 
     <section className="home-official-section home-blog" aria-labelledby="home-blog-title">
       <div className="section-heading centered"><span className="kicker">Información para cuidarte</span><a href="/blog"><h2 id="home-blog-title" className="home-blog-title">BLOG <span>humana</span></h2></a></div>
-      <div className="home-blog-grid">{blogArticles.map(article => <article className="card-clickable" key={article.title}><Link className="card-cover-link" href={`/blog/${article.slug}`} aria-label={article.title} /><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | Bienestar</span><p>{article.copy}</p><div className="home-blog-actions"><span className="card-cover-cta">Leer más <ArrowRight /></span><Link className="primary-button small card-above-cover" href="/planes"><ShoppingCart size={16} /> Cotizar en 1 minuto <ArrowRight size={16} /></Link></div></div></article>)}</div>
+      <div className="home-blog-grid">{blogArticles.map(article => <article className="card-clickable" key={article.title}><Link className="card-cover-link" href={`/blog/${article.slug}`} aria-label={article.title} /><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | Bienestar</span><p>{article.copy}</p><div className="home-blog-actions"><span className="card-cover-cta">Leer más <ArrowRight /></span><Link className="primary-button small card-above-cover" href="/planes-medicos"><ShoppingCart size={16} /> Cotizar en 1 minuto <ArrowRight size={16} /></Link></div></div></article>)}</div>
       <div className="home-blog-viewall"><a className="secondary-button" href="/blog">Ver todos los blogs <ArrowRight size={18} /></a></div>
     </section>
 

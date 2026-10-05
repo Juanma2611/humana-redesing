@@ -131,7 +131,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
               <span className="blog-app-kicker">¿Aún no tienes un plan?</span>
               <strong><Building2 size={18} /> Compra online</strong>
               <p>Adquiere tu plan médico de forma fácil, segura y 100% digital.</p>
-              <Link className="primary-button small" href="/planes"><ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} /></Link>
+              <Link className="primary-button small" href="/planes-medicos"><ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} /></Link>
             </div>
           </aside>
         </div>

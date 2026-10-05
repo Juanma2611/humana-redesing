@@ -1,7 +1,15 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Building2, UsersRound } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+import PlanSelector from "./PlanSelector";
+
+export const metadata: Metadata = {
+  title: "Planes médicos - Humana S.A.",
+  description:
+    "Soluciones de salud personalizadas que se adaptan a tus necesidades específicas, ofreciendo tranquilidad y acceso preferencial a servicios médicos de calidad para individuos, familias y organizaciones de todos los tamaños.",
+};
 
 export default function PlanesMedicosPage() {
   return (
@@ -63,12 +71,14 @@ export default function PlanesMedicosPage() {
               La solución de protección para tus empleados y sus familias. Humana te ofrece excelentes
               beneficios acordes a las necesidades de tu empresa para atraer y retener el talento.
             </p>
-            <Link className="primary-button" href="/empresas">
+            <Link className="primary-button" href="/planes-medicos/empresas">
               Ver planes <ArrowRight size={18} />
             </Link>
           </div>
         </article>
       </section>
+
+      <PlanSelector />
     </SiteShell>
   );
 }

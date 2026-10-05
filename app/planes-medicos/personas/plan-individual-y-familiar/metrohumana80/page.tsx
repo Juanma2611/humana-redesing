@@ -538,7 +538,7 @@ export default function Mh80Page() {
               ))}
             </div>
             <p className="mh80-exp-trust"><Users /> Más de 200.000 personas y empresas confían en Humana.</p>
-            <Link className="mh80-exp-finale-back" href="/planes">Ver todos los planes</Link>
+            <Link className="mh80-exp-finale-back" href="/planes-medicos">Ver todos los planes</Link>
           </div>
           <div className="mh80-exp-finale-mark" aria-hidden="true"><span>MH</span><strong>80</strong></div>
         </section>

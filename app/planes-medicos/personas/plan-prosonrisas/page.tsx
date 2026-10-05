@@ -793,7 +793,7 @@ export default function ProsonrisasPage() {
               <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotiza ahora</button>
               <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
               <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
-              <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
+              <Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="mh50-exp-confirm" role="status">

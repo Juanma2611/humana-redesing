@@ -471,7 +471,7 @@ export default function Mh150Page() {
               ))}
             </div>
             <p className="mh150-exp-trust"><Users /> Más de 200.000 personas y empresas confían en Humana.</p>
-            <p style={{ marginTop: 8 }}><Link className="ghost-button" href="/planes">Ver todos los planes</Link></p>
+            <p style={{ marginTop: 8 }}><Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link></p>
           </div>
           <div className="mh150-exp-finale-mark" aria-hidden="true"><span>MH</span><strong>150</strong></div>
         </section>

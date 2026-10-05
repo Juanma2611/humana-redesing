@@ -118,7 +118,7 @@ export default function Client() {
       </div>
 
       <aside className="client-dashboard-side">
-        <section className="coverage-balance"><div><ShieldCheck /><span><small>Saldo de {member.name}</small><strong>{money.format(planAvailable)}</strong></span></div><Progress value={(planAvailable / 50000) * 100} /><p>de $50.000 de cobertura máxima en este perfil demostrativo.</p><Link href="/planes?segment=familiar&plan=mh50">Ver coberturas del MH50 <ArrowRight /></Link></section>
+        <section className="coverage-balance"><div><ShieldCheck /><span><small>Saldo de {member.name}</small><strong>{money.format(planAvailable)}</strong></span></div><Progress value={(planAvailable / 50000) * 100} /><p>de $50.000 de cobertura máxima en este perfil demostrativo.</p><Link href="/planes-medicos?segment=familiar&plan=mh50">Ver coberturas del MH50 <ArrowRight /></Link></section>
         <section className="status-panel"><h2>Solicitudes recientes</h2><div><CheckCircle2 /><span><strong>Reembolso #Demo-104</strong><small>Revisión completada</small></span></div><div><FileHeart /><span><strong>Autorización #Demo-087</strong><small>Documentos recibidos</small></span></div><Link href="/servicios">Ver todos los servicios <ArrowRight size={16} /></Link><p>Información ficticia para demostrar el funcionamiento del perfil.</p></section>
         <section className="plan-reminder"><UserRound /><div><strong>Tu plan conoce tus datos</strong><p>En la versión final, deducibles, topes y beneficiarios se cargarían automáticamente.</p></div></section>
       </aside>
