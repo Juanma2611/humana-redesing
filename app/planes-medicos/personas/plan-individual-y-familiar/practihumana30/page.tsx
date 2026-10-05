@@ -195,6 +195,7 @@ export default function Ph30Page() {
 
         <section className="ph30-exp-hero" id="ph30-inicio">
           <div className="ph30-exp-hero-copy">
+            <Image className="plan-official-logo" src="https://humana.med.ec/wp-content/uploads/2020/12/1-practi-humana-30-215.png" alt="Logo PractiHumana 30" width={120} height={48} unoptimized />
             <span className="ph30-exp-eyebrow light">PLAN CLÁSICO · PRACTIHUMANA</span>
             <h1>PH<span>30</span></h1>
             <p className="ph30-exp-hero-line">Más respaldo.<br />Más tranquilidad.</p>

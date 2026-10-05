@@ -4523,6 +4523,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .business-contact-box p { margin: 0; max-width: 480px; color: var(--mh-muted); font-size: 15px; line-height: 1.6; }
 .business-contact-box-actions { display: flex; flex-wrap: wrap; gap: 12px; flex: none; }
 .business-contact-box-actions .ghost-button { color: var(--mh-navy); border-color: rgba(7,92,146,.35); }
+.plan-official-logo { height: 40px; width: auto; object-fit: contain; margin-bottom: 14px; background: #fff; padding: 6px 10px; border-radius: 8px; }
+
 .secondary-button.small { min-height: 43px; padding: 0 18px; border-radius: 10px; font-size: 14px; }
 .secondary-button.whatsapp { color: #146a4d; border-color: #b9e4d4; background: #ecfaf5; }
 .secondary-button.whatsapp:hover { background: #e0f7ee; }

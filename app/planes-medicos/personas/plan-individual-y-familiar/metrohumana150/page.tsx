@@ -195,6 +195,7 @@ export default function Mh150Page() {
 
         <section className="mh150-exp-hero" id="mh150-inicio">
           <div className="mh150-exp-hero-copy">
+            <Image className="plan-official-logo" src="https://humana.med.ec/wp-content/uploads/2020/12/1-metro-humana-150-215.png" alt="Logo MetroHumana 150" width={120} height={48} unoptimized />
             <span className="mh150-exp-eyebrow light">PLAN FAMILIAR MH150</span>
             <h1>MH<span>150</span></h1>
             <p className="mh150-exp-hero-line">El respaldo que tu familia<br />necesita cuando más importa.</p>

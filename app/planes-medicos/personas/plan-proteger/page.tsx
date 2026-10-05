@@ -409,6 +409,7 @@ export default function ProtegerPage() {
 
         <section className="mh50-exp-hero" id="proteger-inicio">
           <div className="mh50-exp-hero-copy">
+            <Image className="plan-official-logo" src="https://humana.med.ec/wp-content/uploads/2025/10/proteger-logo-2025.png" alt="Logo Plan Proteger" width={120} height={48} unoptimized />
             <span className="mh50-exp-eyebrow light">PLAN PROTEGER · HUMANA</span>
             <h1 className="is-long">Prote<span>ger</span></h1>
             <p className="mh50-exp-hero-line">Tu respaldo financiero<br />frente a lo inesperado.</p>

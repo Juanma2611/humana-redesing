@@ -195,6 +195,7 @@ export default function Ph15Page() {
 
         <section className="ph15-exp-hero" id="ph15-inicio">
           <div className="ph15-exp-hero-copy">
+            <Image className="plan-official-logo" src="https://humana.med.ec/wp-content/uploads/2020/11/logo-15PH-preferido.png" alt="Logo PractiHumana 15" width={120} height={48} unoptimized />
             <span className="ph15-exp-eyebrow light">PLAN PREFERIDO · PRACTIHUMANA</span>
             <h1>PH<span>15</span></h1>
             <p className="ph15-exp-hero-line">Empieza a cuidarte<br />hoy mismo.</p>
