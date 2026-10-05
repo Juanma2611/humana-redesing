@@ -562,10 +562,28 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .network-help-grid a { margin-top:13px; display:flex; align-items:center; gap:6px; color:#087cac; font-size:12px; font-weight:800; }
 .network-help-grid a svg { width:15px; }
 
+.benefits-section {
+  position:relative; overflow:hidden;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(16,167,219,.14), transparent 32%),
+    radial-gradient(circle at 95% 18%, rgba(18,166,162,.13), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(7,92,146,.08), transparent 40%),
+    linear-gradient(180deg, #f4fafd 0%, #eef8fc 55%, #f7fbfd 100%);
+}
+.benefits-section::before {
+  content:""; position:absolute; top:-120px; right:-120px; width:360px; height:360px; border-radius:50%;
+  background:radial-gradient(circle, rgba(16,167,219,.18), transparent 70%); pointer-events:none;
+}
+.benefits-section::after {
+  content:""; position:absolute; bottom:-140px; left:-100px; width:380px; height:380px; border-radius:50%;
+  background:radial-gradient(circle, rgba(18,166,162,.14), transparent 70%); pointer-events:none;
+}
+.benefits-section > * { position:relative; z-index:1; }
 .benefits-hub { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
 .benefits-hub article {
-  position:relative; padding:27px; border:1px solid rgba(11,128,189,.14); border-radius:19px;
-  background:linear-gradient(165deg,#ffffff 0%,#f3fafd 100%);
+  position:relative; padding:27px; border:1px solid rgba(11,128,189,.12); border-radius:19px;
+  background:#ffffff;
+  box-shadow:0 16px 40px rgba(7,63,96,.07);
   overflow:hidden;
 }
 .benefits-hub article::before {
