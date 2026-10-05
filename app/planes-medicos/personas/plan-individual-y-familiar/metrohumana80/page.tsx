@@ -202,6 +202,7 @@ export default function Mh80Page() {
         <section className="mh80-exp-hero" id="mh80-inicio">
           <div className="mh80-particles" aria-hidden="true" />
           <div className="mh80-exp-hero-copy">
+            <Image className="plan-official-logo" src="https://humana.med.ec/wp-content/uploads/2020/12/1-metro-humana-80-215.png" alt="Logo MetroHumana 80" width={120} height={48} unoptimized />
             <span className="mh80-robotic-hero-badge"><Cpu size={14} aria-hidden="true" /> MH80 · TECNOLOGÍA MÉDICA AVANZADA</span>
             <h1 className="mh80-exp-hero-line">La medicina del futuro ahora protege a tu familia.</h1>
             <p className="mh80-exp-hero-body">

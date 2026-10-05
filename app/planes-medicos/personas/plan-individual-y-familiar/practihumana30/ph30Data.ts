@@ -35,7 +35,7 @@ export const planIdentity = {
   type: "Individual",
   modality: "Mixta",
   network: "Practihumana",
-  tariff: "Hospital Metropolitano -25%",
+  tariff: "Northospital (Quito) / Hospital Clínica San Francisco (Guayaquil)",
   maxCoverage: "$30.000",
   deductible: "$60",
 };
@@ -89,7 +89,7 @@ export const chapters: Chapter[] = [
     eyebrow: "HOSPITALIZACIÓN",
     title: "El siguiente nivel de respaldo.",
     lead: "Habitación, cirugía, medicamentos, cuidados intensivos y rehabilitación, sin límite de días de hospitalización.",
-    essentials: ["90% en Red Humana", "80% por libre elección", "Sin límite de días"],
+    essentials: ["90% en Red Humana", "80% por libre elección", "Sin límite de días", "Hospitales referenciales: Northospital (Quito) / Hospital Clínica San Francisco (Guayaquil)"],
     dialogTitle: "Hospitalización",
     dialogLead: "Cobertura hospitalaria completa: habitación, visita médica, cirugía, terapia intensiva, medicamentos, insumos, apoyo psicológico, rehabilitación y cuidados paliativos, sin límite de días internado.",
     detailItems: [

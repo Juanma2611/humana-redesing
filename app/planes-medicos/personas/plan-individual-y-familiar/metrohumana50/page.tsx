@@ -358,6 +358,7 @@ export default function Mh50Page() {
 
         <section className="mh50-exp-hero" id="mh50-inicio">
           <div className="mh50-exp-hero-copy">
+            <Image className="plan-official-logo" src="https://humana.med.ec/wp-content/uploads/2020/12/1-metro-humana-50-215.png" alt="Logo MetroHumana 50" width={120} height={48} unoptimized />
             <span className="mh50-exp-eyebrow light">PLAN FULL · METROHUMANA</span>
             <h1>MH<span>50</span></h1>
             <p className="mh50-exp-hero-line">Protección que crece<br />con tu familia.</p>

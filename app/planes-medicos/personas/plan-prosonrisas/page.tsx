@@ -498,6 +498,7 @@ export default function ProsonrisasPage() {
         <section className="mh50-exp-hero" id="prosonrisas-inicio">
           <DentalDecor tone="on-dark" />
           <div className="mh50-exp-hero-copy">
+            <Image className="plan-official-logo" src="https://humana.med.ec/wp-content/uploads/2025/10/prosonrisas-logo-2025.png" alt="Logo Plan Prosonrisas" width={120} height={48} unoptimized />
             <span className="mh50-exp-eyebrow light">PLAN DENTAL · PROSONRISAS</span>
             <h1 className="is-long">Pro<span>sonrisas</span></h1>
             <p className="mh50-exp-hero-line">Una sonrisa saludable<br />transforma tu vida.</p>
