@@ -159,13 +159,19 @@ export const planDetails: PlanDetail[] = [
           { label: "Seguro de vida", values: ["check", "check", "check", "check", "check"] },
           { label: "Asistencia exequial", values: ["check", "check", "check", "check", "check"] },
           { label: "Ambulancia terrestre", values: ["check", "check", "check", "check", "check"] },
-          { label: "Médico a domicilio", values: ["x", "x", "check", "check", "check"] },
+          { label: "Médico a domicilio", values: ["check", "check", "check", "check", "check"] },
           { label: "Asistencia en viaje", values: ["x", "x", "check", "check", "check"] },
           { label: "Teleconsulta", values: ["check", "check", "check", "check", "check"] },
           { label: "Medicinas a domicilio", values: ["check", "check", "check", "check", "check"] },
         ],
       },
     ],
+    // ⚠️ Nota para el equipo (no mostrar al público): el sitio oficial tiene una inconsistencia
+    // entre esta tabla comparativa y la pestaña propia de MH80 dentro de la misma página oficial:
+    // la pestaña indica deducible $100 y 90% en hospitalización/exámenes, mientras que la tabla
+    // comparativa y la página propia de MH80 (metrohumana80/) indican $200 y 80%. Aquí se usan
+    // los valores de la página propia de MH80 ($200 / 80%) tal como pidió el equipo comercial.
+    // Pendiente de validar y unificar con Comercial antes de corregir el sitio oficial.
     faqTitle: "Preguntas Frecuentes del Plan Individual y Familiar",
     faqs: [
       {
@@ -174,14 +180,94 @@ export const planDetails: PlanDetail[] = [
           "El Plan Individual y Familiar de Humana ofrece una cobertura de salud integral, incluyendo consultas médicas, hospitalización, cirugías, exámenes de laboratorio, imágenes, emergencias, medicinas y atención preventiva. También cubre maternidad y atención médica para niños, dependiendo del plan contratado.",
         ],
       },
-      { question: "¿Cuáles son los beneficios de afiliarme a este plan?" },
-      { question: "¿Cuánto cuesta el plan y qué formas de pago aceptan?" },
-      { question: "¿Desde qué momento entra en vigencia mi cobertura?" },
-      { question: "¿Puedo incluir a mis hijos o cónyuge en el plan?" },
-      { question: "¿Puedo usar el plan si estoy fuera de mi ciudad o en otro país?" },
-      { question: "¿En qué lugares puedo recibir atención médica u hospitalaria?" },
-      { question: "¿Cómo funcionan los reembolsos si me atiendo fuera de la red de Humana?" },
-      { question: "¿Cómo puedo afiliarme y qué requisitos necesito?" },
+      {
+        question: "¿Cuáles son los beneficios de afiliarme a este plan?",
+        answer: [
+          "Este plan te brinda seguridad y tranquilidad con acceso a una amplia red de prestadores de salud en todo el país, atención médica de calidad, reembolsos en caso de atención fuera de la red, cobertura en emergencias y descuentos en farmacias y laboratorios aliados.",
+        ],
+      },
+      {
+        question: "¿Cuánto cuesta el plan y qué formas de pago aceptan?",
+        answer: [
+          "El costo del plan varía según la edad, sexo y el número de personas incluidas en la cobertura. Aceptamos pagos con tarjetas de crédito, débito, transferencias bancarias y débitos automáticos para mayor comodidad. También ofrecemos opciones de pago mensual, trimestral o anual.",
+        ],
+      },
+      {
+        question: "¿Desde qué momento entra en vigencia mi cobertura?",
+        answer: [
+          "La cobertura de salud inicia una vez finalizado el proceso de afiliación y aprobado el contrato. Sin embargo, algunos beneficios tienen períodos de carencia, como la cobertura de maternidad y cirugías programadas. Vas a poder usar el plan luego de los siguientes tiempos de espera:",
+          "Emergencia médica vital: 24 horas.",
+          "Ambulatoria (atención que no requiere hospitalización): luego de 30 días.",
+          "Hospitalaria: 90 días.",
+          "Maternidad (inicio): planificar inicio de embarazo luego de 60 días.",
+          "Discapacidades declaradas: 90 días.",
+          "Enfermedades preexistentes declaradas: Planes metrohumana desde el 7mo mes · Planes practihumana desde el mes 24.",
+          "Montos y coberturas para preexistencias y discapacidades aplican según condiciones del plan contratado.",
+        ],
+      },
+      {
+        question: "¿Puedo incluir a mis hijos o cónyuge en el plan?",
+        answer: [
+          "Sí, este plan está diseñado para cubrir a toda la familia. Puedes incluir a tu cónyuge, hijos y otros dependientes hasta el 4to grado de consanguinidad, asegurando su acceso a servicios de salud de calidad.",
+        ],
+      },
+      {
+        question: "¿Puedo usar el plan si estoy fuera de mi ciudad o en otro país?",
+        answer: [
+          "Sí, en caso de emergencias médicas, Humana cuenta con una cobertura de asistencia internacional y reembolsos para atenciones fuera de la red nacional, según las condiciones de tu plan.",
+        ],
+      },
+      {
+        question: "¿En qué lugares puedo recibir atención médica u hospitalaria?",
+        answer: [
+          "Puedes consultar la red de prestadores desde nuestra página web o aplicación móvil. También contamos con líneas de atención al cliente que te ayudarán a encontrar el médico o centro más cercano, pero debes tomar en cuenta lo siguiente:",
+          "Plan metrohumana: puedes acceder al Hospital Metropolitano y a más de 20 hospitales a nivel nacional. Puedes recibir atención con tus médicos de confianza o de convenio y acceder a los mejores centros médicos a nivel nacional.",
+          "Plan practihumana: para una mejor atención puedes acceder a 14 hospitales en convenio y usar la red de médicos y centros médicos exclusivos para esta cobertura. Con este plan no es recomendable usar hospitales o médicos fuera de la red direccionada.",
+        ],
+      },
+      {
+        question: "¿Cómo funcionan los reembolsos si me atiendo fuera de la red de Humana?",
+        answer: [
+          "Si te atiendes en un centro médico fuera de nuestra red, puedes solicitar un reembolso enviando los documentos requeridos a través de nuestros canales digitales o sucursales. La cobertura y el porcentaje de reembolso dependerán del plan contratado.",
+        ],
+      },
+      {
+        question: "¿Cómo puedo afiliarme y qué requisitos necesito?",
+        answer: [
+          "El proceso es sencillo. Solo necesitas presentar tu cédula y llenar la solicitud de afiliación. Puedes hacerlo en línea, en nuestras oficinas o con un asesor comercial. Si se requiere evaluación médica, te lo informaremos en el proceso.",
+        ],
+      },
     ],
+  },
+  {
+    // Practihumana50: existe como URL propia en el sitio oficial, pero no aparece en la
+    // tabla comparativa ni en la navegación "Planes individuales" de /plan-individual-y-familiar/.
+    // Por eso no se enlaza desde ningún menú ni desde esa tabla comparativa en este sitio tampoco.
+    slug: "practihumana50",
+    name: "Practihumana50",
+    eyebrow: "Planes médicos para Personas",
+    title: "Practihumana50",
+    description: [
+      "Plan integral para ti y tu familia con una cobertura de hasta $50.000 anuales por persona. Cuentas con una importante red de prestadores de servicios médicos, como Northospital en Quito, el Hospital Clínica San Francisco en Guayaquil y otros en el resto del país.",
+    ],
+    heroImage: "/mh50-hospitalizacion.jpg",
+    coverageTables: [
+      {
+        title: "Cobertura",
+        columns: ["Practihumana50"],
+        rows: [
+          { label: "Cobertura anual por persona", values: ["$50.000"] },
+          { label: "Deducible anual por persona", values: ["$80"] },
+          { label: "Red Humana", values: ["Practihumana"] },
+          { label: "Hospitales referenciales", values: ["Northospital (Quito) / Hospital Clínica San Francisco (Guayaquil)"] },
+          { label: "Hospitalización, cobertura de hasta el", values: ["90%"] },
+          { label: "Consultas médicas desde", values: ["$4,50"] },
+          { label: "Exámenes de diagnóstico, cobertura de hasta el", values: ["90%"] },
+          { label: "Medicinas, cobertura de hasta el", values: ["90%"] },
+        ],
+      },
+    ],
+    faqTitle: "",
+    faqs: [],
   },
 ];
