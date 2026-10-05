@@ -17,7 +17,7 @@ const services = [
 
 export default function Services() {
   return <SiteShell title="Servicios para clientes"><PageHero eyebrow="Usa tu plan sin complicarte" title="¿Qué necesitas hacer hoy?" description="Los servicios están organizados por tarea para que una persona nueva sepa inmediatamente dónde entrar." imageSrc="/servicios-clientes-hero.webp" imageAlt="Afiliada utilizando los servicios digitales de Humana con acompañamiento" imagePosition="center" />
-    <section className="content-section"><div className="service-grid">{services.map(({icon:Icon,title,copy,href}) => <Link id={href.startsWith("#") ? href.slice(1) : undefined} className="service-card" href={href} key={title}><Icon /><div><h2>{title}</h2><p>{copy}</p></div><ArrowRight /></Link>)}</div>
+    <section className="content-section servicios-section"><div className="service-grid">{services.map(({icon:Icon,title,copy,href}) => <Link id={href.startsWith("#") ? href.slice(1) : undefined} className="service-card" href={href} key={title}><Icon /><div><h2>{title}</h2><p>{copy}</p></div><ArrowRight /></Link>)}</div>
       <div className="journey-panel"><Activity /><div><h2>¿No sabes qué trámite necesitas?</h2><p>Describe tu situación con palabras simples y el centro de ayuda te conduciría al proceso correcto.</p></div><Link className="primary-button" href="/cliente">Ver MiHumana demo</Link></div>
     </section></SiteShell>;
 }
