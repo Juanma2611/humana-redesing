@@ -161,7 +161,6 @@ p { text-wrap:pretty; }
 .guide-steps p { margin: 0; color: rgba(255,255,255,.82); font-size: 16px; line-height: 1.5; }
 .guide-steps strong { display: block; color: white; font-size: 18px; margin-bottom: 2px; }
 
-.benefits-section { background: #f5fbfd; margin-top: 92px; }
 .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .benefit-grid article { padding: 30px 0 6px; border-top: 3px solid #94daed; }
 .benefit-grid article > svg { color: var(--humana-blue); }
@@ -565,18 +564,18 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .benefits-section {
   position:relative; overflow:hidden;
   background:
-    radial-gradient(circle at 8% 8%, rgba(16,167,219,.14), transparent 32%),
-    radial-gradient(circle at 95% 18%, rgba(18,166,162,.13), transparent 30%),
-    radial-gradient(circle at 50% 100%, rgba(7,92,146,.08), transparent 40%),
-    linear-gradient(180deg, #f4fafd 0%, #eef8fc 55%, #f7fbfd 100%);
+    radial-gradient(circle at 8% 4%, rgba(11,128,189,.32), transparent 38%),
+    radial-gradient(circle at 96% 14%, rgba(18,166,162,.24), transparent 34%),
+    radial-gradient(circle at 46% 102%, rgba(7,92,146,.22), transparent 44%),
+    linear-gradient(180deg, #e3f1f9 0%, #dcedf7 55%, #e9f4fa 100%);
 }
 .benefits-section::before {
-  content:""; position:absolute; top:-120px; right:-120px; width:360px; height:360px; border-radius:50%;
-  background:radial-gradient(circle, rgba(16,167,219,.18), transparent 70%); pointer-events:none;
+  content:""; position:absolute; top:-130px; right:-130px; width:400px; height:400px; border-radius:50%;
+  background:radial-gradient(circle, rgba(11,128,189,.38), transparent 70%); pointer-events:none;
 }
 .benefits-section::after {
-  content:""; position:absolute; bottom:-140px; left:-100px; width:380px; height:380px; border-radius:50%;
-  background:radial-gradient(circle, rgba(18,166,162,.14), transparent 70%); pointer-events:none;
+  content:""; position:absolute; bottom:-150px; left:-110px; width:420px; height:420px; border-radius:50%;
+  background:radial-gradient(circle, rgba(18,166,162,.28), transparent 70%); pointer-events:none;
 }
 .benefits-section > * { position:relative; z-index:1; }
 .benefits-hub { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
