@@ -166,9 +166,9 @@ export function PlanDetailView({ plan }: { plan: PlanDetail }) {
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link>
         <span>»</span>
-        <Link href="/planes">Planes médicos</Link>
+        <Link href="/planes-medicos">Planes médicos</Link>
         <span>»</span>
-        <Link href="/planes">Planes médicos para Personas</Link>
+        <Link href="/planes-medicos/personas">Planes médicos para Personas</Link>
         <span>»</span>
         <span>{plan.title}</span>
       </nav>
@@ -308,8 +308,12 @@ export function PlanDetailView({ plan }: { plan: PlanDetail }) {
       <section className="content-section plan-detail-faq-section">
         <div className="plan-detail-faq-layout">
           <div>
-            <h2>{plan.faqTitle}</h2>
-            <FaqAccordion plan={plan} />
+            {plan.faqs.length > 0 && (
+              <>
+                <h2>{plan.faqTitle}</h2>
+                <FaqAccordion plan={plan} />
+              </>
+            )}
           </div>
           <LeadForm />
         </div>

@@ -3,7 +3,11 @@ import { PlanDetailView } from "@/components/plan-detail-view";
 import { planDetails } from "@/lib/plan-details";
 
 export function generateStaticParams() {
-  return planDetails.map((plan) => ({ slug: plan.slug }));
+  // "individual-familiar" y "proteger" ahora tienen rutas propias bajo
+  // /planes-medicos/personas/, alineadas con la jerarquía del sitio oficial.
+  return planDetails
+    .filter((plan) => plan.slug !== "individual-familiar" && plan.slug !== "proteger")
+    .map((plan) => ({ slug: plan.slug }));
 }
 
 export default async function PlanDetailPage({ params }: { params: Promise<{ slug: string }> }) {
