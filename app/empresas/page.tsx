@@ -33,7 +33,7 @@ export default function Companies() {
           <ul><li><UsersRound /><b>Empleados protegidos</b></li><li><WalletCards /><b>Cobertura configurable</b></li><li><HeartHandshake /><b>Familiares opcionales</b></li><li><Stethoscope /><b>Teleconsulta y atención</b></li></ul>
           <div className="business-coverage"><small>Opciones de cobertura</small><strong>$10K · $20K · $50K</strong><span>por colaborador</span></div>
           <button type="button" className="sales-buy" onClick={() => setMessage("Cotización empresarial demostrativa. No se enviaron datos.")}><ShoppingCart size={17} /> Cotizar para mi empresa <ArrowRight /></button>
-          <Link className="sales-more" href="/planes/business">Ver ficha completa <ArrowRight /></Link>
+          <Link className="sales-more" href="/planes-medicos/empresas/pequenas-y-medianas/plan-humana-business">Ver ficha completa <ArrowRight /></Link>
         </article>
 
         <div className="business-detail-panel"><span className="sales-eyebrow">Todo claro, en pocos pasos</span><h3>¿Qué incluye?</h3><Accordion type="single" collapsible defaultValue="business-0">
