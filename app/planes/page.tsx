@@ -109,7 +109,7 @@ const fullPlanPages: Record<string, string> = {
   mh150: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana150",
   proteger: "/planes-medicos/personas/plan-proteger",
   prosonrisas: "/planes-medicos/personas/plan-prosonrisas",
-  business: "/planes/business",
+  business: "/planes-medicos/empresas/pequenas-y-medianas/plan-humana-business",
 };
 
 function planHeroImage(plan: Plan) {

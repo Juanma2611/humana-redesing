@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Ambulance, Banknote, BarChart3, Briefcase, Building2, CircleDollarSign, Handshake, HeartPulse, Home as HomeIcon,
+  Ambulance, Banknote, BarChart3, Briefcase, Building2, Check, CircleDollarSign, Handshake, HeartPulse, Home as HomeIcon,
   LineChart, Mail, MessageCircle, PenLine, PhoneCall, Pill, PieChart, ShieldCheck, ShieldPlus, Stethoscope, Target, TrendingUp,
   Users, Video, WalletCards, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+import { cuadroA } from "@/lib/empresa-cuadros";
 
 /* ---------------------------------------------------------------------- */
 /* Decoración de fondo: siluetas de oficina (edificio, maletín, lápiz,     */
@@ -40,9 +41,32 @@ function BusinessDecor({ tone }: { tone: "on-dark" | "on-light" }) {
 /* ---------------------------------------------------------------------- */
 
 const essenceStats = [
+  { value: "Desde $42", label: "precios competitivos\npor colaborador" },
   { value: "200K+", label: "afiliados confían\nen Humana" },
-  { value: "$46M", label: "en reembolsos de gastos\nmédicos el último año" },
   { value: "170K+", label: "afiliados respaldados\na nivel nacional" },
+];
+
+/* Lista principal oficial del Plan Humana Business (9 puntos) */
+const mainPoints = [
+  "Amplia red de prestadores en el país",
+  "Cobertura de maternidad a elección de la empresa",
+  "Elección de deducibles y copagos",
+  "Coberturas a nivel corporativo",
+  "Variedad de opciones y combinaciones",
+  "Suscripción simple y sin declaración de salud",
+  "Un plan de medicina prepagada con nivel de coberturas corporativas, flexible y asequible",
+  "Cobertura integral: telemedicina, consultas presenciales, exámenes preventivos, ayudas técnicas, y más",
+  "Aplicación de periodo de carencia para cobertura de preexistencias sin límite",
+];
+
+/* Imágenes informativas oficiales (contienen mensaje dentro de la imagen) */
+const infoImages = [
+  { src: "https://humana.med.ec/wp-content/uploads/2025/10/ARMA-TU-PLAN-A-LA-MEDIDA-DE-TU-EMPRESA.png", alt: "Arma tu plan a la medida de tu empresa" },
+  { src: "https://humana.med.ec/wp-content/uploads/2025/10/precios-competitivos-desde-42.png", alt: "Precios competitivos desde $42" },
+  { src: "https://humana.med.ec/wp-content/uploads/2025/10/limite-de-coberturas-1.png", alt: "Límite de coberturas" },
+  { src: "https://humana.med.ec/wp-content/uploads/2025/10/deducible.png", alt: "Deducible" },
+  { src: "https://humana.med.ec/wp-content/uploads/2025/10/a-eleccion.png", alt: "A elección" },
+  { src: "https://humana.med.ec/wp-content/uploads/2025/10/copagos.png", alt: "Copagos" },
 ];
 
 const configOptions = [
@@ -79,7 +103,7 @@ const chapters: Chapter[] = [
     eyebrow: "ARMA TU PLAN A LA MEDIDA",
     title: "Se puede seleccionar los beneficios, coberturas, porcentajes y copagos.",
     lead: "A diferencia de un plan corporativo tradicional negociado a la medida, Humana Business te permite combinar los atributos según las necesidades de tu empresa.",
-    essentials: ["Límites desde $10.000, $20.000 o $50.000", "Deducibles de $100, $150 o $180", "Preexistencias cubiertas tras 3 meses, hasta el monto máximo"],
+    essentials: ["Límites desde $10.000, $20.000 o $50.000", "Deducibles de $100, $150 o $180", "Periodo de carencia para preexistencias, cobertura sin límite", "Suscripción simple y sin declaración de salud"],
     dialogTitle: "Arma tu plan a la medida",
     dialogLead: "El producto está diseñado para que la pequeña y mediana empresa pueda realizar combinaciones de diferentes atributos según sus necesidades, con precios competitivos.",
     chips: [
@@ -188,12 +212,13 @@ const quickFaqs = [
   },
 ];
 
-export default function HumanaBusinessPage() {
+export default function HumanaBusinessClient() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
+  const [called, setCalled] = useState(false);
   const [faqOpen, setFaqOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState<{ role: "bot" | "user"; text: string }[]>([]);
   const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
@@ -318,8 +343,9 @@ export default function HumanaBusinessPage() {
               inversión para las empresas, sin las complejidades de un plan corporativo tradicional.
             </p>
             <div className="mh50-exp-hero-actions">
-              <a className="primary-button" href="#business-cierre">Solicita asesoría empresarial</a>
-              <a className="ghost-button" href="#business-arma-plan">Conoce sus beneficios</a>
+              <a className="primary-button" href="#business-cierre">Solicita información</a>
+              <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
+              <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
             </div>
           </div>
           <div className="mh50-exp-gallery" aria-label="Momentos de bienestar empresarial">
@@ -418,12 +444,19 @@ export default function HumanaBusinessPage() {
             <h2>El bienestar de tus colaboradores impulsa tu empresa.</h2>
             <p>Arma el plan ideal para tu empresa y empieza a cuidar a tu equipo hoy mismo.</p>
             <div className="mh50-exp-finale-actions">
-              <button type="button" className="primary-button" onClick={handleQuoteClick}>Solicita asesoría empresarial</button>
+              <button type="button" className="primary-button" onClick={handleQuoteClick}>Solicita información</button>
+              <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
+              <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
               <Link className="ghost-button" href="/planes">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="mh50-exp-confirm" role="status">
                 <ShieldCheck /> <span>Solicitud demostrativa registrada. Un asesor empresarial de Humana te contactará. No se envió información real.</span>
+              </div>
+            )}
+            {called && (
+              <div className="mh50-exp-confirm" role="status">
+                <ShieldCheck /> <span>Solicitud de llamada demostrativa registrada. No se envió información real.</span>
               </div>
             )}
             <div className="mh50-exp-contact">
