@@ -114,7 +114,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
           </div>
           <Link href="/encontrar-plan">Para ti</Link>
           <Link href="/planes-medicos/empresas">Empresas</Link>
-          <Link href="/conocenos">Conócenos</Link>
+          <Link href="/por-que-humana">Nosotros</Link>
           <Link href="/beneficios">Beneficios</Link>
           <Link href="/red-medica">Red médica</Link>
           <Link href="/servicios">Servicios para clientes</Link>
@@ -138,7 +138,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
         </div>
 
         <div className="footer-main-grid">
-          <section className="footer-link-column" aria-labelledby="footer-explora"><h2 id="footer-explora">Descubre Humana</h2><Link href="/conocenos">¿Por qué Humana?</Link><Link href="/planes-medicos">Planes médicos</Link><Link href="/planes-medicos?segment=dental">ProSonrisas</Link><Link href="/planes-medicos/empresas">Empresas</Link><Link href="/beneficios">Beneficios</Link><a href="/blog">Bienestar</a></section>
+          <section className="footer-link-column" aria-labelledby="footer-explora"><h2 id="footer-explora">Descubre Humana</h2><Link href="/por-que-humana">¿Por qué Humana?</Link><Link href="/planes-medicos">Planes médicos</Link><Link href="/planes-medicos?segment=dental">ProSonrisas</Link><Link href="/planes-medicos/empresas">Empresas</Link><Link href="/beneficios">Beneficios</Link><a href="/blog">Bienestar</a></section>
           <section className="footer-link-column" aria-labelledby="footer-plan"><h2 id="footer-plan">Usa tu plan</h2><Link href="/cliente">MiHumana</Link><Link href="/servicios/reembolsos">Reembolsos</Link><Link href="/servicios/autorizaciones">Autorizaciones</Link><Link href="/red-medica">Red médica</Link><Link href="/servicios">Centro de servicios</Link></section>
 
           <section className="footer-office-card" id="oficinas" aria-labelledby="footer-offices">
