@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   ArrowRight, Briefcase, ClipboardList, HeartHandshake, HeartPulse,
-  Hospital, Lock, MapPin, Newspaper, ShieldAlert, Stethoscope,
+  Hospital, Lock, MapPin, Network, Newspaper, ShieldAlert, Stethoscope,
 } from "lucide-react";
 
 const relatedLinks = [
@@ -85,6 +85,25 @@ export function InstitutionalExploreCards({ currentHref }: { currentHref?: strin
             <ArrowRight className="explore-arrow" size={18} />
           </Link>
         ))}
+      </div>
+    </section>
+  );
+}
+
+// CTA de cierre genérico, reutilizado literal del texto ya aprobado en el
+// hub /por-que-humana/ ("Tu salud no se vive en partes."). Se usa en las
+// páginas institucionales que no tienen su propio CTA de cierre, para no
+// inventar copy nuevo y mantener una sección de color antes de "Explora".
+export function InstitutionalClosingCta() {
+  return (
+    <section className="content-section" style={{ padding: "0 clamp(24px,7vw,110px) 72px" }}>
+      <div className="institutional-cta">
+        <Network />
+        <div style={{ flex: 1 }}>
+          <h2>Tu salud no se vive en partes.</h2>
+          <p>Por eso conectamos prevención, atención y respaldo para acompañarte cuando lo necesites.</p>
+        </div>
+        <Link className="white-button" href="/planes-medicos/">Encuentra tu plan <ArrowRight size={18} /></Link>
       </div>
     </section>
   );

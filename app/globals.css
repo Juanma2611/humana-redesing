@@ -112,6 +112,14 @@ p { text-wrap:pretty; }
 .hero-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(245,251,254,.98) 0%, rgba(245,251,254,.95) 30%, rgba(245,251,254,.72) 52%, rgba(245,251,254,.28) 70%, rgba(255,255,255,0) 100%); }
 .hero-content { width: min(560px, 46%); margin-left: clamp(24px, 7vw, 110px); position: relative; z-index: 2; padding: 110px 0 110px; }
 .kicker { color: var(--humana-blue); font-weight: 800; font-size: 13px; letter-spacing: .09em; text-transform: uppercase; }
+/* Párrafos de columna ancha (hero, intro institucional): justificados en
+   escritorio con guionado automático para evitar huecos irregulares.
+   NUNCA en títulos, etiquetas, cifras, botones, tarjetas angostas o listas
+   cortas, y nunca en celular (se alinean a la izquierda). */
+.text-justify-wide { text-align: left; }
+@media (min-width: 701px) {
+  .text-justify-wide { text-align: justify; hyphens: auto; text-justify: inter-word; }
+}
 .eyebrow { color: var(--humana-blue); font-weight: 750; font-size: 12px; letter-spacing: .13em; text-transform: uppercase; display: inline-flex; gap: 8px; align-items: center; margin-bottom: 8px; }
 .hero h1 { margin: 0; color: #073b60; font-size: clamp(50px, 5.8vw, 82px); line-height: .94; letter-spacing: -.052em; font-weight: 800; }
 .hero h1 span { color: var(--humana-sky); }
@@ -4585,6 +4593,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .institutional-hero-inner { position: relative; z-index: 1; max-width: 1180px; margin: auto; display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
 .institutional-hero-media { position: relative; width: 100%; aspect-ratio: 4/3; border-radius: 26px; overflow: hidden; box-shadow: var(--premium-shadow-hover); }
 .institutional-hero-media img { object-fit: cover; }
+/* Variante para páginas que solo tienen un logo (no foto de fachada): fondo
+   blanco y el logo contenido, sin recortar ni estirar. */
+.institutional-hero-media.is-logo { background: #fff; display: flex; align-items: center; justify-content: center; padding: 40px; }
+.institutional-hero-media.is-logo img { object-fit: contain; }
 .institutional-hero-copy h1 { margin: 10px 0 18px; color: #073b60; font-size: clamp(36px,4.2vw,56px); line-height: 1.04; letter-spacing: -.04em; }
 .institutional-hero-copy p { margin: 0 0 14px; color: #3f5f73; font-size: 17px; line-height: 1.7; }
 .institutional-cta {

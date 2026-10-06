@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
-import { InstitutionalBreadcrumb, InstitutionalRelatedLinks, officialContactChannels } from "@/components/institutional-nav";
+import { InstitutionalBreadcrumb, InstitutionalClosingCta, InstitutionalExploreCards, officialContactChannels } from "@/components/institutional-nav";
 
 // Texto legal copiado literal del sitio oficial (humana.med.ec), extraído el 6 de
 // octubre de 2026. No resumir, no reescribir, no reordenar. Cualquier cambio a este
@@ -12,33 +12,67 @@ export const metadata: Metadata = {
     "Consulta la política de protección de datos personales de MEDIECUADOR HUMANA S.A. y conoce cómo resguardamos tu información.",
 };
 
+const sections = [
+  { id: "seccion-1", title: "1. RESPONSABLE DEL TRATAMIENTO DE DATOS PERSONALES" },
+  { id: "seccion-2", title: "2. DEFINICIONES" },
+  { id: "seccion-3", title: "3. FUENTES DE RECOLECCIÓN DE DATOS PERSONALES" },
+  { id: "seccion-4", title: "4. ENLACES Y APLICACIÓN PREFERENTE" },
+  { id: "seccion-5", title: "5. FINALIDAD DEL TRATAMIENTO DE LOS DATOS PERSONALES" },
+  { id: "seccion-6", title: "6. BASE LEGITIMADORA DE TRATAMIENTO" },
+  { id: "seccion-7", title: "7. PRINCIPIOS Y DISPOSICIONES RECTORAS" },
+  { id: "seccion-8", title: "8. COMUNICACIONES O TRANSFERENCIA INTERNACIONAL A TERCEROS" },
+  { id: "seccion-9", title: "9. EJERCICIO DE DERECHOS SOBRE LOS DATOS PERSONALES" },
+  { id: "seccion-10", title: "10. EL TIEMPO DE CONSERVACIÓN DE LOS DATOS PERSONALES" },
+  { id: "seccion-11", title: "11. MEDIDAS DE SEGURIDAD" },
+  { id: "seccion-12", title: "12. CANALES DE ACCESO A EJERCICIO DE DERECHOS" },
+  { id: "seccion-13", title: "13. PROCEDIMIENTO PARA EJERCICIO DE DERECHOS DE DATOS PERSONALES" },
+  { id: "seccion-14", title: "14. DE LA MODIFICACIÓN DE LA POLÍTICA" },
+  { id: "seccion-15", title: "15. VIGENCIA DE LA POLÍTICA" },
+];
+
 export default function PoliticaProteccionDatosPage() {
   return (
     <SiteShell title="Política de protección de datos personales">
       <InstitutionalBreadcrumb page="Política de protección de datos" />
 
-      <section className="content-section plan-hub-intro" style={{ maxWidth: 900 }}>
-        <h1>Política de protección de datos personales de Medicina para el Ecuador, MEDIECUADOR HUMANA S.A.</h1>
+      {/* Plantilla institucional (aprobada en Humana S.A.), adaptada para un
+          documento legal: hero de borde a borde con el H1, el primer
+          párrafo introductorio, y un índice con enlaces ancla a cada
+          sección (todo el texto sigue visible más abajo, sin acordeón). */}
+      <section className="institutional-hero">
+        <div className="institutional-hero-inner" style={{ gridTemplateColumns: "1fr" }}>
+          <div className="institutional-hero-copy" style={{ maxWidth: 860 }}>
+            <span className="kicker">¿Quiénes somos?</span>
+            <h1 style={{ fontSize: "clamp(28px,3.4vw,42px)" }}>Política de protección de datos personales de Medicina para el Ecuador, MEDIECUADOR HUMANA S.A.</h1>
+            <p className="text-justify-wide">
+              MEDICINA PARA EL ECUADOR, MEDIECUADOR HUMANA S.A (en adelante «HUMANA») ha desarrollado esta
+              Política de Privacidad en Materia de Protección de Datos Personales (en adelante «Política»)
+              con la finalidad de determinar y detallar los niveles de protección de datos personales que
+              trata, en estricto cumplimiento de los principios, derechos y obligaciones determinados en
+              las normas ecuatorianas.
+            </p>
+          </div>
+        </div>
+        <nav aria-label="Índice de secciones" className="plan-hub-card" style={{ maxWidth: 1180, margin: "32px auto 0", padding: 24 }}>
+          <strong style={{ display: "block", color: "#073b60", marginBottom: 12 }}>Índice</strong>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "6px 24px" }}>
+            {sections.map((s) => (
+              <a key={s.id} href={`#${s.id}`} style={{ color: "var(--humana-blue)", fontSize: 14, textDecoration: "none" }}>{s.title}</a>
+            ))}
+          </div>
+        </nav>
       </section>
 
-      <section className="content-section" style={{ maxWidth: 860, margin: "0 auto", padding: "0 24px 48px", textAlign: "left" }}>
-        <p>
-          MEDICINA PARA EL ECUADOR, MEDIECUADOR HUMANA S.A (en adelante &laquo;HUMANA&raquo;) ha
-          desarrollado esta Política de Privacidad en Materia de Protección de Datos Personales (en
-          adelante &laquo;Política&raquo;) con la finalidad de determinar y detallar los niveles de
-          protección de datos personales que trata, en estricto cumplimiento de los principios, derechos y
-          obligaciones determinados en las normas ecuatorianas.
-        </p>
-
-        <h2>1. RESPONSABLE DEL TRATAMIENTO DE DATOS PERSONALES</h2>
-        <p>
+      <section className="content-section" style={{ maxWidth: 860, margin: "0 auto", padding: "64px 24px", textAlign: "left" }}>
+        <h2 id="seccion-1">1. RESPONSABLE DEL TRATAMIENTO DE DATOS PERSONALES</h2>
+        <p className="text-justify-wide">
           HUMANA es el responsable de tratamiento de sus datos personales, se encuentra domiciliada en la
           provincia de Pichincha, cantón Quito, ciudad de Quito, calle Río Amazonas Número N33 e
           Inglaterra, Edificio Stratta.
         </p>
 
-        <h2>2. DEFINICIONES</h2>
-        <p>Salvo que el contexto requiera otra cosa, los términos siguientes tendrán los significados que se señalan a continuación:</p>
+        <h2 id="seccion-2">2. DEFINICIONES</h2>
+        <p className="text-justify-wide">Salvo que el contexto requiera otra cosa, los términos siguientes tendrán los significados que se señalan a continuación:</p>
         <ul className="plan-faq-checklist">
           <li><strong>Base de datos:</strong> Conjunto estructurado de datos cualquiera que fuera la forma, modalidad de creación, almacenamiento, organización, tipo de soporte, tratamiento, procesamiento, localización o acceso, centralizado, descentralizado o repartido de forma funcional o geográfica.</li>
           <li><strong>Dato personal:</strong> Dato que identifica o hace identificable a una persona natural, directa o indirectamente.</li>
@@ -52,8 +86,8 @@ export default function PoliticaProteccionDatosPage() {
           <li><strong>Vulneración de la seguridad de los datos personales:</strong> Incidente de seguridad que afecta la confidencialidad, disponibilidad o integridad de los datos personales.</li>
         </ul>
 
-        <h2>3. FUENTES DE RECOLECCIÓN DE DATOS PERSONALES</h2>
-        <p>Los datos personales que son tratados por HUMANA pueden provenir de las siguientes modalidades y fuentes:</p>
+        <h2 id="seccion-3">3. FUENTES DE RECOLECCIÓN DE DATOS PERSONALES</h2>
+        <p className="text-justify-wide">Los datos personales que son tratados por HUMANA pueden provenir de las siguientes modalidades y fuentes:</p>
         <h3>MODALIDADES</h3>
         <ol>
           <li><strong>Datos entregados por su titular de datos personales:</strong> El titular entrega datos los cuales se declara son completos, correctos y actualizados.</li>
@@ -75,8 +109,8 @@ export default function PoliticaProteccionDatosPage() {
           </li>
         </ol>
 
-        <h2>4. ENLACES Y APLICACIÓN PREFERENTE</h2>
-        <p>
+        <h2 id="seccion-4">4. ENLACES Y APLICACIÓN PREFERENTE</h2>
+        <p className="text-justify-wide">
           El sitio web de HUMANA podrá incluir hipervínculos o enlaces que permita acceder a páginas web de
           terceros aliados distintos a HUMANA. Los titulares de dichos sitios web dispondrán de sus propias
           políticas de privacidad, políticas de cookies y términos y condiciones. Los Clientes se
@@ -94,15 +128,15 @@ export default function PoliticaProteccionDatosPage() {
           <li><strong>Datos personales de terceros / proveedores/socios comerciales</strong> datos de personas o miembros del personal de los proveedores, por ejemplo, información de contacto, información contenida en correos electrónicos y otras comunicaciones comerciales, información sobre cuentas bancarias; datos de productos y servicios contratados, características de los productos y servicios contratados, contratos, facturación, consultas, peticiones y reclamaciones realizadas, entre otros.</li>
           <li><strong>Datos personales de usuarios de páginas web</strong>, por ejemplo, direcciones IP, datos de localización, datos de archivos de registro, información de contacto. Datos de usuario y contraseña para registro y acceso en Apps o plataformas web de HUMANA.</li>
         </ul>
-        <p>Los datos de salud señalados de forma previa en este apartado serán tratados cumpliendo los principios de confidencialidad y secreto profesional conforme lo estipula la Ley.</p>
-        <p>
+        <p className="text-justify-wide">Los datos de salud señalados de forma previa en este apartado serán tratados cumpliendo los principios de confidencialidad y secreto profesional conforme lo estipula la Ley.</p>
+        <p className="text-justify-wide">
           Los datos recolectados se almacenarán y/o procesarán en los servidores ubicados un data center,
           ya sean propios, o contratados con terceros y/o proveedores, localizados dentro o fuera del país
           que cumplan con las características de puerto seguro, y que garanticen todas las medidas de
           seguridad de la información.
         </p>
 
-        <h2>5. FINALIDAD DEL TRATAMIENTO DE LOS DATOS PERSONALES</h2>
+        <h2 id="seccion-5">5. FINALIDAD DEL TRATAMIENTO DE LOS DATOS PERSONALES</h2>
 
         <h3>1. Socios comerciales, proveedores, aliados estratégicos para brindar los servicios:</h3>
         <ul className="plan-faq-checklist">
@@ -173,15 +207,15 @@ export default function PoliticaProteccionDatosPage() {
           <li>El tratamiento de datos personales sensibles, particularmente datos de salud, en virtud de la realización exámenes médicos ocupacionales anuales, información que constará en el file del Colaborador y tratamiento de manera reservado.</li>
         </ul>
 
-        <h2>6. BASE LEGITIMADORA DE TRATAMIENTO</h2>
+        <h2 id="seccion-6">6. BASE LEGITIMADORA DE TRATAMIENTO</h2>
         <ul className="plan-faq-checklist">
           <li>Cumplimiento contractual.</li>
           <li>Consentimiento previo de titular de datos personales.</li>
         </ul>
 
-        <h2>7. PRINCIPIOS Y DISPOSICIONES RECTORAS QUE HUMANA, SUS COLABORADORES Y SOCIOS COMERCIALES APLICARÁN PARA EL ADECUADO TRATAMIENTO DE LOS DATOS PERSONALES</h2>
+        <h2 id="seccion-7">7. PRINCIPIOS Y DISPOSICIONES RECTORAS QUE HUMANA, SUS COLABORADORES Y SOCIOS COMERCIALES APLICARÁN PARA EL ADECUADO TRATAMIENTO DE LOS DATOS PERSONALES</h2>
         <h3>PRINCIPIOS</h3>
-        <p>Los principios que regirán el tratamiento de datos personales en la compañía desde su recopilación serán los establecidos en la Ley Orgánica de Protección de Datos Personal del Ecuador.</p>
+        <p className="text-justify-wide">Los principios que regirán el tratamiento de datos personales en la compañía desde su recopilación serán los establecidos en la Ley Orgánica de Protección de Datos Personal del Ecuador.</p>
         <h3>DISPOSICIONES</h3>
         <ol>
           <li>El Cliente, colaborador o proveedor que proporcione datos falsos, quedará excluido de nuestra red de forma permanente; además HUMANA se reserva tomar las medidas judiciales o extrajudiciales que ameriten.</li>
@@ -189,17 +223,17 @@ export default function PoliticaProteccionDatosPage() {
           <li>Únicamente se recolectarán datos que sean necesarios para el giro del negocio y siempre que se cuente con consentimiento de su titular de datos personales, con excepción de mandato legal u orden de autoridad competente.</li>
         </ol>
 
-        <h2>8. COMUNICACIONES O TRANSFERENCIA INTERNACIONAL A TERCEROS DETERMINADOS QUE ACCEDEN A DATOS PERSONALES</h2>
-        <p>HUMANA no venderá, intercambiará, alquilará ni compartirá la información personal del titular de datos personales excepto en las formas establecidas en esta Política.</p>
-        <p>HUMANA compartirá información con:</p>
+        <h2 id="seccion-8">8. COMUNICACIONES O TRANSFERENCIA INTERNACIONAL A TERCEROS DETERMINADOS QUE ACCEDEN A DATOS PERSONALES</h2>
+        <p className="text-justify-wide">HUMANA no venderá, intercambiará, alquilará ni compartirá la información personal del titular de datos personales excepto en las formas establecidas en esta Política.</p>
+        <p className="text-justify-wide">HUMANA compartirá información con:</p>
         <ul className="plan-faq-checklist">
           <li>Proveedores de servicios como: auditores externos, prestadores de servicios de salud, profesionales de salud, comprador o vendedor potencial de activos de la compañía, proveedores, entre otros.</li>
           <li>Autoridades con las cuales debe actuar, para garantizar el cumplimiento de la Ley.</li>
           <li>Mediante la autorización del titular de datos personales: a cualquiera de las sociedades controladas, controlantes y/o vinculadas con HUMANA, a cualquier título y en el momento, forma y condiciones que estime pertinente.</li>
         </ul>
 
-        <h2>9. EJERCICIO DE DERECHOS SOBRE LOS DATOS PERSONALES</h2>
-        <p>El titular, beneficiario y/o contratante podrá ejercer los siguientes derechos en relación con el tratamiento de sus datos personales recabados por el responsable HUMANA:</p>
+        <h2 id="seccion-9">9. EJERCICIO DE DERECHOS SOBRE LOS DATOS PERSONALES</h2>
+        <p className="text-justify-wide">El titular, beneficiario y/o contratante podrá ejercer los siguientes derechos en relación con el tratamiento de sus datos personales recabados por el responsable HUMANA:</p>
         <ol>
           <li><strong>Derecho de información:</strong> el titular de datos podrá consultar respecto a sus datos personales los fines del tratamiento, la base legal para el tratamiento, tipo de tratamiento, tiempo de conservación, existencia de una base de datos en la que constan sus datos personales, origen de los datos cuando no se hayan obtenido directamente del titular, tratamientos ulteriores, identidad y datos de contacto del responsable y delegado del tratamiento de datos personales, transferencias o comunicaciones nacionales o internacionales, consecuencias para el titular de los datos personales de su entrega o negativa a ello, efecto de suministrar datos personales erróneos o inexactos, posibilidad de revocar el consentimiento, la existencia y forma en la que pueden hacerse efectivos sus derechos, mecanismos para hacer efectivo su derecho a la portabilidad, medio y forma de realizar sus reclamos ante el responsable del tratamiento de datos personales y Autoridad de Protección de Datos Personales y, existencia de valoraciones y decisiones automatizadas, incluida la elaboración de perfiles.</li>
           <li><strong>Derecho de acceso:</strong> El titular de datos personales tiene derecho a conocer y a obtener, gratuitamente, del responsable de tratamiento acceso a todos sus datos personales y a su información, sin necesidad de presentar justificación alguna y deberá ser atendido dentro del plazo de quince (15) días.</li>
@@ -211,34 +245,34 @@ export default function PoliticaProteccionDatosPage() {
           <li><strong>Derecho a no ser objeto de una decisión basada única o parcialmente en valoraciones automatizadas:</strong> incluida la elaboración de perfiles, que produzcan efectos jurídicos en él o que atenten contra sus derechos y libertades fundamentales.</li>
         </ol>
 
-        <h2>10. EL TIEMPO DE CONSERVACIÓN DE LOS DATOS PERSONALES</h2>
-        <p>Los datos personales de los titulares de datos personales se conservarán durante el tiempo necesario para cumplir con las finalidades contratadas.</p>
+        <h2 id="seccion-10">10. EL TIEMPO DE CONSERVACIÓN DE LOS DATOS PERSONALES</h2>
+        <p className="text-justify-wide">Los datos personales de los titulares de datos personales se conservarán durante el tiempo necesario para cumplir con las finalidades contratadas.</p>
 
-        <h2>11. MEDIDAS DE SEGURIDAD</h2>
-        <p>
+        <h2 id="seccion-11">11. MEDIDAS DE SEGURIDAD</h2>
+        <p className="text-justify-wide">
           HUMANA cumplirá con todas las medidas técnicas, físicas, legales y organizativas aplicables para
           la protección de los datos personales. Se utilizará los estándares de la industria para la
           protección de la confidencialidad de la información. HUMANA no puede garantizar la vulneración de
           sus sistemas, por interceptaciones ilegales no autorizadas, que hayan violentado dichas medidas.
         </p>
 
-        <h2>12. CANALES DE ACCESO A EJERCICIO DE DERECHOS</h2>
-        <p>
+        <h2 id="seccion-12">12. CANALES DE ACCESO A EJERCICIO DE DERECHOS</h2>
+        <p className="text-justify-wide">
           El titular de datos personales podrá ejercer sus derechos, comunicándose con HUMANA a través del{" "}
           <a href="https://humana.med.ec/archivos/formularios/formulario-de-ejercicio-de-derechos.pdf" target="_blank" rel="noreferrer">formulario de ejercicio de derechos</a>.
         </p>
-        <p>
+        <p className="text-justify-wide">
           Alternativamente, como titular de datos personales podrías comunicar directamente tu requerimiento
           al siguiente correo: <a href="mailto:yoprotejomisdatos@humana.med.ec">yoprotejomisdatos@humana.med.ec</a>
         </p>
 
-        <h2>13. PROCEDIMIENTO PARA EJERCICIO DE DERECHOS DE DATOS PERSONALES</h2>
-        <p>
+        <h2 id="seccion-13">13. PROCEDIMIENTO PARA EJERCICIO DE DERECHOS DE DATOS PERSONALES</h2>
+        <p className="text-justify-wide">
           Todas las solicitudes o peticiones de ejercicio de derechos de datos personales deberán ser
           dirigidas al área encargada de protección de datos de HUMANA con nombre de asunto – Protección
           Datos Personales.
         </p>
-        <p>
+        <p className="text-justify-wide">
           El titular podrá ejercer sus derechos sobre sus datos personales en cualquier momento, y HUMANA
           deberá atender la consulta en el plazo máximo de quince (15) días contados a partir de la fecha de
           recibo de la misma. HUMANA podrá requerir la aclaración o ampliación de la información al titular,
@@ -246,19 +280,19 @@ export default function PoliticaProteccionDatosPage() {
           titular contará con el término de diez (10) días, a partir del día siguiente al que recibió la
           notificación, para aclarar o completar.
         </p>
-        <p>
+        <p className="text-justify-wide">
           En el caso de que el titular aclare o complete dentro del término concedido, la solicitud será
           atendida por HUMANA, dentro del plazo correspondiente. El requerimiento que no sea atendido podrá
           ser archivado mediante notificación debidamente fundamentada al titular. Esto no impide la
           presentación de una nueva solicitud por parte del titular.
         </p>
-        <p>
+        <p className="text-justify-wide">
           Los Titulares podrán en todo momento rectificar, conocer y actualizar sus datos, entre otros,
           frente a datos parciales, inexactos, incompletos, fraccionados, que induzcan a error, o aquellos
           cuyo tratamiento esté expresamente prohibido o no haya sido autorizado. Así mismo, el Titular o su
           representante podrán solicitar la corrección o actualización de sus datos.
         </p>
-        <p>La comunicación que será tramitada mediante solicitud escrita en donde se incluyan los siguientes datos:</p>
+        <p className="text-justify-wide">La comunicación que será tramitada mediante solicitud escrita en donde se incluyan los siguientes datos:</p>
         <ul className="plan-faq-checklist">
           <li>Identificación del Titular o del representante (Nombres y apellidos completos, número de cédula de identidad o pasaporte y dirección domiciliaria o electrónica para notificaciones). Así también se incluirán los datos de la o del representado.</li>
           <li>Descripción clara y precisa de datos personales respecto de los cuales se busca ejercer alguno de los derechos y cualquier elemento que facilite la localización de los datos personales en la institución, mediante los cuales usted haya provisto.</li>
@@ -267,8 +301,8 @@ export default function PoliticaProteccionDatosPage() {
           <li>Incluir documentos que acreditan identidad y representación legal.</li>
         </ul>
 
-        <h2>14. DE LA MODIFICACIÓN DE LA POLÍTICA</h2>
-        <p>
+        <h2 id="seccion-14">14. DE LA MODIFICACIÓN DE LA POLÍTICA</h2>
+        <p className="text-justify-wide">
           HUMANA podrá modificar esta Política y/o las prácticas de envío de e-mails. En caso de que HUMANA
           modifique la Política, éste notificará al titular de datos personales publicando una versión
           actualizada de la Política en esta sección o mediante el envío de un e-mail o informándolo en la
@@ -279,8 +313,8 @@ export default function PoliticaProteccionDatosPage() {
           momento de recabarse.
         </p>
 
-        <h2>15. VIGENCIA DE LA POLÍTICA</h2>
-        <p>
+        <h2 id="seccion-15">15. VIGENCIA DE LA POLÍTICA</h2>
+        <p className="text-justify-wide">
           La presente Política empezará a regir a partir del mes de septiembre de 2023. Datos Personales que
           sean almacenados, utilizados o transmitidos permanecerán en las bases de datos de HUMANA durante
           el tiempo que sea necesario para cumplir con las finalidades expuestas en este documento o para
@@ -288,9 +322,9 @@ export default function PoliticaProteccionDatosPage() {
         </p>
       </section>
 
-      <section className="content-section" style={{ maxWidth: 860, margin: "0 auto", padding: "0 24px 64px" }}>
-        <div className="plan-hub-card" style={{ padding: 24 }}>
-          <h3>Canales de comunicación</h3>
+      <section className="institutional-topic-section">
+        <div className="plan-hub-card" style={{ maxWidth: 820, margin: "0 auto", padding: 24, position: "relative", zIndex: 1 }}>
+          <h2 style={{ fontSize: 19, margin: "0 0 10px", color: "#073b60" }}>Canales de comunicación</h2>
           <ul className="plan-faq-checklist">
             {officialContactChannels.map((channel) => (
               <li key={channel.label}><strong>{channel.label}:</strong> {channel.value}</li>
@@ -299,7 +333,9 @@ export default function PoliticaProteccionDatosPage() {
         </div>
       </section>
 
-      <InstitutionalRelatedLinks />
+      <InstitutionalClosingCta />
+
+      <InstitutionalExploreCards currentHref="/por-que-humana/politica-de-proteccion-de-datos/" />
     </SiteShell>
   );
 }

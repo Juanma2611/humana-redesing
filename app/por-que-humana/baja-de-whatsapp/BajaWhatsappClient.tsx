@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AlertTriangle } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
-import { InstitutionalBreadcrumb, InstitutionalRelatedLinks } from "@/components/institutional-nav";
+import { InstitutionalBreadcrumb, InstitutionalExploreCards } from "@/components/institutional-nav";
 
 // ⚠️ Esta URL se enlaza desde campañas de WhatsApp activas: no debe cambiar
 // aunque se reestructuren otras rutas. El envío del formulario está PENDIENTE
@@ -16,13 +16,21 @@ export default function BajaWhatsappClient() {
     <SiteShell title="Baja de WhatsApp">
       <InstitutionalBreadcrumb page="Baja de WhatsApp" />
 
-      <section className="content-section plan-hub-intro" style={{ maxWidth: 760 }}>
-        <h1>Baja de WhatsApp</h1>
-        <p>Indícanos si deseas darte de baja de nuestras comunicaciones:</p>
+      {/* Plantilla institucional (aprobada en Humana S.A.): hero de borde a
+          borde. Esta página no tiene foto propia, así que el hero es de una
+          sola columna centrada. */}
+      <section className="institutional-hero">
+        <div className="institutional-hero-inner" style={{ gridTemplateColumns: "1fr" }}>
+          <div className="institutional-hero-copy" style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
+            <span className="kicker">¿Quiénes somos?</span>
+            <h1>Baja de WhatsApp</h1>
+            <p>Indícanos si deseas darte de baja de nuestras comunicaciones:</p>
+          </div>
+        </div>
       </section>
 
-      <section className="content-section" style={{ maxWidth: 520, margin: "0 auto", padding: "0 24px 64px" }}>
-        <div className="plan-lead-form" style={{ padding: 32 }}>
+      <section className="content-section" style={{ padding: "64px clamp(24px,7vw,110px)" }}>
+        <div className="plan-lead-form" style={{ padding: 32, maxWidth: 520, margin: "0 auto" }}>
           <div style={{ display: "flex", gap: 10, alignItems: "flex-start", background: "#fff4e5", border: "1px solid #f3cf8a", borderRadius: 12, padding: 14, marginBottom: 20 }}>
             <AlertTriangle size={18} color="#a3690b" style={{ flexShrink: 0, marginTop: 2 }} />
             <p style={{ margin: 0, fontSize: 13.5, color: "#7a4e07" }}>
@@ -52,7 +60,7 @@ export default function BajaWhatsappClient() {
         </div>
       </section>
 
-      <InstitutionalRelatedLinks />
+      <InstitutionalExploreCards currentHref="/por-que-humana/baja-de-whatsapp/" />
     </SiteShell>
   );
 }
