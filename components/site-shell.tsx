@@ -112,12 +112,12 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
               ))}
             </div>
           </div>
-          <Link href="/encontrar-plan">Para ti</Link>
+          <Link href="/cotizador">Para ti</Link>
           <Link href="/planes-medicos/empresas">Empresas</Link>
           <Link href="/por-que-humana">Nosotros</Link>
           <Link href="/beneficios">Beneficios</Link>
-          <Link href="/red-medica">Red médica</Link>
-          <Link href="/servicios">Servicios para clientes</Link>
+          <Link href="/directorio">Red médica</Link>
+          <Link href="/medihumana">Servicios para clientes</Link>
           <a href="/blog">Bienestar</a>
         </nav>
         <div className="header-actions">
@@ -139,7 +139,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
 
         <div className="footer-main-grid">
           <section className="footer-link-column" aria-labelledby="footer-explora"><h2 id="footer-explora">Descubre Humana</h2><Link href="/por-que-humana">¿Por qué Humana?</Link><Link href="/planes-medicos">Planes médicos</Link><Link href="/planes-medicos?segment=dental">ProSonrisas</Link><Link href="/planes-medicos/empresas">Empresas</Link><Link href="/beneficios">Beneficios</Link><a href="/blog">Bienestar</a></section>
-          <section className="footer-link-column" aria-labelledby="footer-plan"><h2 id="footer-plan">Usa tu plan</h2><Link href="/cliente">MiHumana</Link><Link href="/servicios/reembolsos">Reembolsos</Link><Link href="/servicios/autorizaciones">Autorizaciones</Link><Link href="/red-medica">Red médica</Link><Link href="/servicios">Centro de servicios</Link></section>
+          <section className="footer-link-column" aria-labelledby="footer-plan"><h2 id="footer-plan">Usa tu plan</h2><Link href="/cliente">MiHumana</Link><Link href="/servicios/reembolsos">Reembolsos</Link><Link href="/servicios/autorizaciones">Autorizaciones</Link><Link href="/directorio">Red médica</Link><Link href="/medihumana">Centro de servicios</Link></section>
 
           <section className="footer-office-card" id="oficinas" aria-labelledby="footer-offices">
             <div className="footer-card-heading"><span><Building2 /></span><div><small>Estamos cerca</small><h2 id="footer-offices">Nuestras oficinas</h2></div></div>
@@ -152,7 +152,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
 
           <section className="footer-digital-card" aria-labelledby="footer-digital">
             <div className="footer-card-heading"><span><Smartphone /></span><div><small>Todo en un solo lugar</small><h2 id="footer-digital">Servicios digitales</h2></div></div>
-            <div className="footer-service-links"><Link href="/cliente">Portal de afiliados</Link><Link href="/cliente">Pago en línea</Link><Link href="/red-medica">Agendar cita médica</Link></div>
+            <div className="footer-service-links"><Link href="/cliente">Portal de afiliados</Link><Link href="/cliente">Pago en línea</Link><Link href="/directorio">Agendar cita médica</Link></div>
             <p>Descarga MiHumana</p>
             <div className="footer-apps"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><Image src="/badges/google-play-badge.png" alt="Disponible en Google Play" width={897} height={240} unoptimized /></a><a href="https://apps.apple.com/ec/app/mi-humana/id1468370810" target="_blank" rel="noreferrer"><Image src="/badges/app-store-badge.png" alt="Disponible en el App Store" width={841} height={240} unoptimized /></a></div>
           </section>
