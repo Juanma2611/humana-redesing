@@ -40,8 +40,6 @@ const revealSelectors = [
   ".business-product-layout > *",
   ".about-hero-copy > *",
   ".about-numbers article",
-  ".about-story > *",
-  ".about-timeline article",
   ".about-ecosystem-heading > *",
   ".about-ecosystem-grid article",
   ".about-values-grid article",

@@ -90,7 +90,12 @@ export default function PorQueHumanaPage() {
     </section>
 
     <section className="about-story" id="nuestra-historia">
-      <div className="about-story-intro"><span className="kicker">Quiénes somos</span><h2>Una historia construida alrededor de las personas.</h2><p>Humana es una compañía ecuatoriana de medicina prepagada que, desde 1994, acompaña a sus afiliados financiando el acceso a servicios de salud y atención médica.</p></div>
+      <div className="about-story-intro">
+        <span className="kicker">Quiénes somos</span>
+        <h2>Una historia construida alrededor de las personas.</h2>
+        <p>Humana es una compañía ecuatoriana de medicina prepagada que, desde 1994, acompaña a sus afiliados financiando el acceso a servicios de salud y atención médica.</p>
+        <div className="about-story-chip"><UsersRound color="#fff" size={22} /><div><strong>+30 años</strong><span>Experiencia en salud</span></div></div>
+      </div>
       <div className="about-timeline">
         <article><span>1994</span><div><h3>Comenzamos a cuidar</h3><p>Humana inicia su historia en Quito con el propósito de proteger la salud y el bienestar.</p></div></article>
         <article><span>+30</span><div><h3>Crecemos con Ecuador</h3><p>Décadas de experiencia nos permiten comprender las necesidades de personas, familias y empresas.</p></div></article>
