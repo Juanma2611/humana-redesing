@@ -166,9 +166,9 @@ export function PlanDetailView({ plan }: { plan: PlanDetail }) {
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link>
         <span>»</span>
-        <Link href="/planes-medicos-medicos">Planes médicos</Link>
+        <Link href="/planes-medicos">Planes médicos</Link>
         <span>»</span>
-        <Link href="/planes-medicos-medicos/personas">Planes médicos para Personas</Link>
+        <Link href="/planes-medicos/personas">Planes médicos para Personas</Link>
         <span>»</span>
         <span>{plan.title}</span>
       </nav>
@@ -179,6 +179,9 @@ export function PlanDetailView({ plan }: { plan: PlanDetail }) {
           <div className="plan-detail-hero-shade" />
         </div>
         <div className="plan-detail-hero-copy">
+          {plan.logo && (
+            <Image className="plan-official-logo" src={plan.logo} alt={`Logo ${plan.title}`} width={120} height={48} unoptimized />
+          )}
           <span className="kicker">{plan.eyebrow}</span>
           <h1>{plan.title}</h1>
           {plan.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}

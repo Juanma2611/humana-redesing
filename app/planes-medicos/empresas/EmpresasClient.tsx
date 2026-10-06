@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import {
-  ArrowRight, Building2, Check, Factory, HeartHandshake, MessageCircle, Phone,
+  ArrowRight, Building2, Check, Factory, HeartHandshake, MessageCircle, Phone, PhoneCall,
   ShoppingCart, SlidersHorizontal, Stethoscope, UsersRound, WalletCards,
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -33,8 +33,11 @@ export default function EmpresasClient() {
           </p>
           <div>
             <a className="primary-button" href="#empresas-tarjetas">Ver planes <ArrowRight /></a>
-            <button className="secondary-button" type="button" onClick={() => setMessage("Asesoría empresarial demostrativa. No se enviaron datos.")}>
-              <MessageCircle /> Hablar con un asesor
+            <a className="secondary-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
+              <MessageCircle /> WhatsApp
+            </a>
+            <button className="secondary-button" type="button" onClick={() => setMessage("Llamada empresarial demostrativa. No se enviaron datos.")}>
+              <PhoneCall /> Solicitar llamada
             </button>
           </div>
         </div>

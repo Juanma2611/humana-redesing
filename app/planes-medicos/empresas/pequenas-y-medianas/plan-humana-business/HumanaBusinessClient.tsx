@@ -329,6 +329,13 @@ export default function HumanaBusinessClient() {
 
   return (
     <SiteShell title="Humana Business · Plan empresarial">
+      <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
+        <Link href="/">Inicio</Link><span>»</span>
+        <Link href="/planes-medicos">Planes médicos</Link><span>»</span>
+        <Link href="/planes-medicos/empresas">Planes médicos para Empresas</Link><span>»</span>
+        <Link href="/planes-medicos/empresas/pequenas-y-medianas">Planes médicos para Pequeñas y Medianas Empresas</Link><span>»</span>
+        <span>Plan Humana Business</span>
+      </nav>
       <div className="mh50-exp business-page" ref={rootRef}>
         <div className="mh50-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
@@ -336,7 +343,7 @@ export default function HumanaBusinessClient() {
           <BusinessDecor tone="on-dark" />
           <div className="mh50-exp-hero-copy">
             <span className="mh50-exp-eyebrow light">PLAN EMPRESARIAL · HUMANA BUSINESS</span>
-            <h1 className="is-long">Busi<span>ness</span></h1>
+            <h1 className="is-long">Plan Humana <span>Business</span></h1>
             <p className="mh50-exp-hero-line">Cuida a tu equipo,<br />fortalece tu negocio.</p>
             <p className="mh50-exp-hero-body">
               Si tu gente está bien, tu negocio crecerá bien. Cuidar el capital humano es la mejor

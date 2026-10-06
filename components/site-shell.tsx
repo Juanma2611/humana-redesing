@@ -154,12 +154,20 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
             <div className="footer-card-heading"><span><Smartphone /></span><div><small>Todo en un solo lugar</small><h2 id="footer-digital">Servicios digitales</h2></div></div>
             <div className="footer-service-links"><Link href="/cliente">Portal de afiliados</Link><Link href="/cliente">Pago en línea</Link><Link href="/red-medica">Agendar cita médica</Link></div>
             <p>Descarga MiHumana</p>
-            <div className="footer-apps"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><Image src="/badges/google-play-badge.png" alt="Disponible en Google Play" width={897} height={240} unoptimized /></a><a href="https://apps.apple.com/ec/search?term=mi%20humana" target="_blank" rel="noreferrer"><Image src="/badges/app-store-badge.png" alt="Disponible en el App Store" width={841} height={240} unoptimized /></a></div>
+            <div className="footer-apps"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><Image src="/badges/google-play-badge.png" alt="Disponible en Google Play" width={897} height={240} unoptimized /></a><a href="https://apps.apple.com/ec/app/mi-humana/id1468370810" target="_blank" rel="noreferrer"><Image src="/badges/app-store-badge.png" alt="Disponible en el App Store" width={841} height={240} unoptimized /></a></div>
           </section>
         </div>
 
         <div className="footer-meta-grid">
-          <section><h2>Normativa y privacidad</h2><div className="footer-inline-links"><span>Lineamientos sanitarios</span><span>Ley de medicina prepagada</span><span>Protección de datos</span><span>Política de cookies</span></div></section>
+          {/* ⚠️ Los PDF de "Lineamientos sanitarios" y "Ley de medicina prepagada" usan
+              nombres de archivo supuestos bajo humana.med.ec/archivos/varios/; confirmar
+              el nombre exacto con el equipo web antes de publicar. */}
+          <section><h2>Normativa y privacidad</h2><div className="footer-inline-links">
+            <a href="https://humana.med.ec/archivos/varios/lineamientos-sanitarios.pdf" target="_blank" rel="noreferrer">Lineamientos sanitarios</a>
+            <a href="https://humana.med.ec/archivos/varios/ley-de-medicina-prepagada.pdf" target="_blank" rel="noreferrer">Ley de medicina prepagada</a>
+            <Link href="/por-que-humana/politica-de-proteccion-de-datos">Protección de datos</Link>
+            <Link href="/politica-de-cookies">Política de cookies</Link>
+          </div></section>
           <section><h2>Pago seguro</h2><div className="footer-payment-brands" aria-label="Medios de pago">{paymentBrands.map(({name,image,width}) => <span key={name} className="payment-chip"><Image src={image} alt={name} width={width} height={40} unoptimized /></span>)}</div></section>
         </div>
 

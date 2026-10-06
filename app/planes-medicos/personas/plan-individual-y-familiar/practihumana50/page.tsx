@@ -1,6 +1,9 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PlanDetailView } from "@/components/plan-detail-view";
 import { planDetails } from "@/lib/plan-details";
+
+export const metadata: Metadata = { title: "Practihumana50 - Humana S.A." };
 
 // Página existente en el sitio oficial como URL propia, pero sin aparecer en la
 // navegación "Planes individuales" ni en la tabla comparativa de

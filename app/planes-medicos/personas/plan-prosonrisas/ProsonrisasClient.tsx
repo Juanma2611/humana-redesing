@@ -1,0 +1,936 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Baby, BadgeCheck, Building2, Check, CircleDollarSign, Gem, HeartPulse, Mail, MessageCircle,
+  PhoneCall, Pill, ScanEye, Scissors, ShieldCheck, ShieldPlus, ShoppingCart, Smile, Sparkles, Stethoscope, Syringe, Users, X,
+} from "lucide-react";
+import { SiteShell } from "@/components/site-shell";
+
+/* ---------------------------------------------------------------------- */
+/* Decoración de fondo: siluetas dentales (diente, cepillo, espejo,        */
+/* burbuja) muy sutiles, para darle a Prosonrisas una identidad propia     */
+/* celeste + blanco, amigable, distinta del resto de planes médicos.       */
+/* ---------------------------------------------------------------------- */
+
+function ToothShape(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 64 64" fill="none" {...props}>
+      <path
+        d="M32 6c-7 0-9 5-13 5-6 0-10 6-10 14 0 9 4 16 7 24 2 5 4 8 7 8 4 0 3-11 9-11s5 11 9 11c3 0 5-3 7-8 3-8 7-15 7-24 0-8-4-14-10-14-4 0-6-5-13-5Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+function ToothbrushShape(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 120 32" fill="none" {...props}>
+      <rect x="0" y="12" width="70" height="9" rx="4.5" fill="currentColor" />
+      <rect x="66" y="2" width="50" height="20" rx="8" fill="currentColor" />
+      <rect x="72" y="0" width="6" height="9" rx="2" fill="currentColor" />
+      <rect x="84" y="0" width="6" height="9" rx="2" fill="currentColor" />
+      <rect x="96" y="0" width="6" height="9" rx="2" fill="currentColor" />
+      <rect x="108" y="0" width="6" height="9" rx="2" fill="currentColor" />
+    </svg>
+  );
+}
+
+function DentalMirrorShape(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 40 110" fill="none" {...props}>
+      <rect x="16" y="20" width="8" height="86" rx="4" fill="currentColor" />
+      <circle cx="20" cy="14" r="14" fill="none" stroke="currentColor" strokeWidth="5" />
+    </svg>
+  );
+}
+
+function DentalDecor({ tone }: { tone: "on-dark" | "on-light" }) {
+  return (
+    <div className={`prosonrisas-dental-decor ${tone}`} aria-hidden="true">
+      <ToothShape className="deco deco-tooth-1" />
+      <ToothShape className="deco deco-tooth-2" />
+      <ToothbrushShape className="deco deco-brush" />
+      <DentalMirrorShape className="deco deco-mirror" />
+      <Sparkles className="deco deco-sparkle-1" />
+      <Sparkles className="deco deco-sparkle-2" />
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------------- */
+/* Datos reales del plan Prosonrisas, extraídos de la presentación         */
+/* oficial 2024 del producto (Prosonrisas Plus / Prosonrisas Full).        */
+/* ---------------------------------------------------------------------- */
+
+const essenceStats = [
+  { value: "2", label: "alternativas para elegir:\nPlus y Full" },
+  { value: "0", label: "preexistencias ni topes\nde consulta" },
+  { value: "2.000+", label: "médicos en la red\ndental nacional" },
+];
+
+const planOptions = [
+  {
+    id: "plus",
+    name: "Prosonrisas Plus",
+    price: "$6,63",
+    priceNote: "tarifa referencial por persona",
+    summary: "36 procedimientos: la base esencial para cuidar tu sonrisa, con cobertura ambulatoria completa.",
+    features: ["Restauraciones (calzas) incluidas", "Cirugía parcial incluida", "Endodoncia incluida", "Consulta con el especialista: 100%", "Odontopediatría parcial"],
+  },
+  {
+    id: "full",
+    name: "Prosonrisas Full",
+    price: "$23,08",
+    priceNote: "tarifa referencial por persona",
+    summary: "50 procedimientos: el plan dental más completo, suma periodoncia y blanqueamiento.",
+    features: ["Todo lo de Prosonrisas Plus", "Cirugía 100%", "Odontopediatría 100%", "Periodoncia incluida", "Blanqueamiento dental incluido"],
+  },
+];
+
+/* Tabla resumen oficial Plus vs. Full */
+const summaryTable = [
+  { label: "Nº de procedimientos", plus: "36", full: "50" },
+  { label: "Restauraciones (calzas)", plus: "check", full: "check" },
+  { label: "Cirugía", plus: "Parcial", full: "100%" },
+  { label: "Endodoncia", plus: "check", full: "check" },
+  { label: "Consulta con el especialista", plus: "100%", full: "100%" },
+  { label: "Odontopediatría", plus: "Parcial", full: "100%" },
+  { label: "Periodoncia", plus: "x", full: "check" },
+  { label: "Blanqueamiento", plus: "x", full: "check" },
+  { label: "Precios", plus: "$6.63", full: "$23.08" },
+];
+
+/* Tabla "Coberturas al detalle" oficial */
+const detailTable: { section?: string; label: string; plus: string; full: string }[] = [
+  { label: "Examen clínico y diagnóstico", plus: "check", full: "check" },
+  { label: "Radiografías Periapicales (por diente)", plus: "check", full: "check" },
+  { label: "Profilaxis (limpieza bucal)", plus: "check", full: "check" },
+  { label: "Educación para la higiene bucal", plus: "check", full: "check" },
+  { label: "Consulta con el especialista", plus: "100%", full: "100%" },
+  { label: "Emergencias", plus: "check", full: "check" },
+  { label: "Urgencias", plus: "check", full: "check" },
+  { label: "Restauraciones (calzas)", plus: "check", full: "check" },
+  { section: "CIRUGÍA", label: "Extracción de terceros molares erupcionados", plus: "check", full: "check" },
+  { label: "Extracción de terceros molares incluidos y semincluidos", plus: "x", full: "check" },
+  { label: "Extracciones simples", plus: "check", full: "check" },
+  { label: "Otras cirugías de tejidos blandos y duros", plus: "check", full: "check" },
+  { section: "ODONTOPEDIATRÍA", label: "Extracciones pediátricas", plus: "check", full: "check" },
+  { label: "Tratamientos endodónticos (tratamiento de conducto) en niños", plus: "x", full: "check" },
+  { label: "Restauraciones (Calzas)", plus: "check", full: "check" },
+  { label: "Sellantes de fosas y fisuras", plus: "check", full: "check" },
+  { label: "Fluorización", plus: "check", full: "check" },
+  { section: "ESTÉTICA DENTAL", label: "Blanqueamiento dental", plus: "x", full: "check" },
+  { section: "PERIODONCIA", label: "Tratamientos de encía para eliminación de cálculo subgingival", plus: "x", full: "check" },
+  { label: "Remoción cálculos supragingivales", plus: "check", full: "check" },
+  { label: "Tratamientos quirúrgicos de encía", plus: "x", full: "check" },
+  { section: "ENDODONCIA (tratamiento de conducto)", label: "Endodoncia de dientes anteriores", plus: "check", full: "check" },
+  { label: "Endodoncia de dientes premolares", plus: "check", full: "check" },
+  { label: "Endodoncia de dientes molares", plus: "check", full: "check" },
+];
+
+function DetailCell({ value }: { value: string }) {
+  if (value === "check") return <Check size={16} className="cell-check" aria-label="Incluido" />;
+  if (value === "x") return <X size={16} className="cell-x" aria-label="No incluido" />;
+  return <>{value}</>;
+}
+
+/* Preguntas frecuentes oficiales del Plan Pro Sonrisas (sección visible) */
+const officialFaqs = [
+  {
+    question: "¿Qué cubre el Plan Dental Prosonrisas de Humana?",
+    answer: [
+      "El Plan Dental Prosonrisas cubre una variedad de servicios odontológicos, incluyendo limpiezas, consultas de rutina, tratamientos de caries, extracciones simples, urgencias odontológicas, radiografías y tratamientos preventivos. La cobertura varía según el tipo de plan (Plus o Full).",
+    ],
+  },
+  {
+    question: "¿Cuál es la diferencia entre el Plan Plus y el Plan Full?",
+    answer: [
+      "Plan Plus ($6.63 por persona): cubre 36 procedimientos básicos y preventivos, consultas y limpiezas.",
+      "Plan Full ($23.08 por persona): ofrece una cobertura más amplia, incluyendo 50 procedimientos especializados como endodoncia, periodoncia y blanqueamiento.",
+    ],
+  },
+  {
+    question: "¿Desde cuándo entra en vigencia la cobertura dental?",
+    answer: ["La cobertura entra en vigencia una vez completado el proceso de afiliación y confirmación del pago. Algunos tratamientos especializados pueden tener un período de carencia:"],
+    checklist: [
+      "Prestaciones básicas: luego de 24 horas — examen clínico y diagnóstico, rayos-X periapicales, profilaxis, consulta con especialista, emergencia preautorizada hasta $50 al año.",
+      "Restauraciones: luego de 30 días.",
+      "Procedimientos especializados: luego de 60 días — cirugías, endodoncia, odontopediatría, periodoncia.",
+      "Blanqueamiento dental: luego de 150 días.",
+    ],
+  },
+  {
+    question: "¿Puedo incluir a mi familia en el plan?",
+    answer: ["Sí, puedes incluir a cónyuge, hijos, padres y familiares hasta el cuarto grado de consanguinidad. Los valores detallados son por persona."],
+  },
+  {
+    question: "¿Qué sucede si necesito un tratamiento fuera de la red de prestadores?",
+    answer: ["La cobertura aplica solo en la red de centros odontológicos Red de Prestadores Humana S.A."],
+  },
+  {
+    question: "¿Cuánto cuesta el Plan Dental Prosonrisas y qué formas de pago aceptan?",
+    answer: [
+      "Plan Plus: desde $6.63 por persona. Plan Full: desde $23.08 por persona. Aceptamos pagos mediante tarjeta de crédito, débito, transferencia bancaria o débito automático.",
+    ],
+  },
+  {
+    question: "¿Cuántas citas y tratamientos puedo realizar en el año?",
+    answer: ["El número de citas y tratamientos varía según el plan contratado. Sin embargo, las limpiezas, consultas y tratamientos preventivos están disponibles de manera regular dentro de los límites establecidos por cada plan."],
+  },
+  {
+    question: "¿Qué tipo de urgencias odontológicas están cubiertas?",
+    answer: ["El plan cubre urgencias como dolor dental agudo, infecciones, fracturas dentales y extracciones de emergencia. No tienen cobertura los implantes dentales; la ortodoncia aplica precios preferenciales de cada prestador odontológico."],
+  },
+  {
+    question: "¿Cómo puedo agendar una cita con un odontólogo de la red?",
+    answer: ["Puedes agendar tus citas directamente al centro odontológico afiliado y se coordinará la cobertura directa, llamando a la línea de atención de cada centro odontológico."],
+  },
+  {
+    question: "¿Cómo puedo afiliarme al Plan Dental Prosonrisas?",
+    answer: ["Accede al cotizador en línea, selecciona el plan que se ajuste a tus necesidades, completa el formulario y realiza el pago. Recibirás la confirmación por correo electrónico."],
+  },
+];
+
+type Chapter = {
+  id: string;
+  number: string;
+  navLabel: string;
+  theme: "dark" | "light" | "blue" | "warm";
+  image: string;
+  imageAlt: string;
+  eyebrow: string;
+  title: string;
+  lead: string;
+  essentials: string[];
+  dialogTitle: string;
+  dialogLead: string;
+  chips: { icon: typeof ShieldPlus; text: string }[];
+};
+
+const chapters: Chapter[] = [
+  {
+    id: "especialistas",
+    number: "01",
+    navLabel: "Especialistas",
+    theme: "dark",
+    image: "/images/planes/prosonrisas/prosonrisas-equipo.jpg",
+    imageAlt: "Equipo de especialistas odontológicos de la red Prosonrisas",
+    eyebrow: "ESPECIALISTAS ODONTOLÓGICOS",
+    title: "Cuida tu sonrisa con especialistas y beneficios pensados para ti.",
+    lead: "Mejores especialistas a nivel nacional, con evaluaciones, diagnósticos y consultas sin costo.",
+    essentials: ["Examen clínico y diagnóstico sin copago", "Consulta con especialista sin copago", "Limpiezas dentales ilimitadas y rayos-X sin costo"],
+    dialogTitle: "Especialistas odontológicos",
+    dialogLead: "Acceso a la red de especialistas más amplia del país, con evaluaciones y diagnósticos gratuitos desde la primera consulta.",
+    chips: [
+      { icon: Stethoscope, text: "Examen clínico y diagnóstico: 0% copago" },
+      { icon: ScanEye, text: "Rayos-X periapicales y panorámica: 0% copago" },
+      { icon: Sparkles, text: "Profilaxis (limpieza bucal): 0% copago" },
+      { icon: BadgeCheck, text: "Consulta con especialista: 0% copago" },
+    ],
+  },
+  {
+    id: "restauraciones",
+    number: "02",
+    navLabel: "Restauraciones y cirugía",
+    theme: "blue",
+    image: "/images/planes/prosonrisas/prosonrisas-tratamiento.jpg",
+    imageAlt: "Tratamiento odontológico con un especialista",
+    eyebrow: "RESTAURACIONES Y CIRUGÍA",
+    title: "Una amplia gama de procedimientos, sin sorpresas.",
+    lead: "Restauraciones, extracciones y cirugías menores con copagos claros desde el primer momento.",
+    essentials: ["Restauración de resina: 10% de copago", "Extracciones y cirugía: 20% de copago", "Sin límite en sublímites/topes"],
+    dialogTitle: "Restauraciones y cirugía",
+    dialogLead: "Restauración simple, compuesta y compleja de resina, además de procedimientos quirúrgicos como extracciones, frenectomías y remodelado óseo.",
+    chips: [
+      { icon: Sparkles, text: "Restauración de resina: 10% copago" },
+      { icon: Scissors, text: "Extracciones simples y de remanentes: 20% copago" },
+      { icon: ShieldPlus, text: "Ventana quirúrgica para ortodoncia: 20% copago" },
+      { icon: BadgeCheck, text: "Carencia de 30 a 60 días según procedimiento" },
+    ],
+  },
+  {
+    id: "endodoncia",
+    number: "03",
+    navLabel: "Endodoncia y periodoncia",
+    theme: "light",
+    image: "/images/planes/prosonrisas/prosonrisas-odontopediatria.jpg",
+    imageAlt: "Odontopediatra atendiendo a un niño",
+    eyebrow: "ENDODONCIA, PERIODONCIA Y NIÑOS",
+    title: "Tratamientos de mayor complejidad, también cubiertos.",
+    lead: "Endodoncia en Plus y Full, periodoncia incluida en Full, y una cobertura pediátrica completa hasta los 14 años.",
+    essentials: ["Endodoncia: 20% de copago", "Periodoncia incluida en Prosonrisas Full", "Odontopediatría hasta los 14 años, 11 meses, 29 días"],
+    dialogTitle: "Endodoncia, periodoncia y odontopediatría",
+    dialogLead: "Endodoncia en anteriores, molares y premolares, tratamiento periodontal completo en Prosonrisas Full, y cobertura pediátrica con extracciones, restauraciones, sellantes y fluorización.",
+    chips: [
+      { icon: Stethoscope, text: "Endodoncia en anteriores, molares y premolares: 20% copago" },
+      { icon: HeartPulse, text: "Periodoncia: raspado, curetaje y mantenimiento (solo Full)" },
+      { icon: Baby, text: "Odontopediatría: extracciones, sellantes y fluorización" },
+      { icon: ShieldPlus, text: "Cobertura hasta los 14 años, 11 meses y 29 días" },
+    ],
+  },
+  {
+    id: "diferenciales",
+    number: "04",
+    navLabel: "Beneficios diferenciales",
+    theme: "warm",
+    image: "/humana-prosonrisas-hero.png",
+    imageAlt: "Familia sonriendo, protegida por Prosonrisas",
+    eyebrow: "BENEFICIOS DIFERENCIALES",
+    title: "Un plan sin preexistencias ni límites de consulta.",
+    lead: "Extiende tu plan a toda tu familia y seres queridos, sin restricciones de parentesco.",
+    essentials: ["Sin preexistencias ni topes de consulta", "Extensión a familia y seres queridos", "Los mejores precios del mercado"],
+    dialogTitle: "Beneficios diferenciales",
+    dialogLead: "Un producto pensado para que el cliente elija el plan de su preferencia, con la red de profesionales dentales más amplia del país.",
+    chips: [
+      { icon: ShieldCheck, text: "Sin preexistencias ni topes de consulta" },
+      { icon: Users, text: "Extensión sin restricciones de parentesco" },
+      { icon: Gem, text: "Los mejores precios del mercado" },
+      { icon: Building2, text: "Red más amplia de profesionales dentales del país" },
+    ],
+  },
+];
+
+/* Beneficios sin costo adicional incluidos en Prosonrisas */
+const featuredBenefits = [
+  { icon: BadgeCheck, title: "Mejores especialistas a nivel nacional" },
+  { icon: Stethoscope, title: "Evaluaciones y diagnósticos gratis" },
+  { icon: Sparkles, title: "Limpiezas dentales ilimitadas" },
+  { icon: ScanEye, title: "Rayos-X sin costo" },
+  { icon: CircleDollarSign, title: "Los mejores precios del mercado" },
+  { icon: ShieldCheck, title: "Sin preexistencias" },
+];
+
+/* Carencias generales de Prosonrisas */
+const waitingPeriods = [
+  { days: "0", title: "Evaluaciones y consultas" },
+  { days: "30", title: "Restauraciones y odontopediatría" },
+  { days: "60", title: "Cirugía, endodoncia y periodoncia" },
+];
+
+const glossary = [
+  { icon: Sparkles, value: "Sellantes", label: "Película que se coloca en los surcos de los dientes para prevenir caries" },
+  { icon: Syringe, value: "Fluorización", label: "Gel con flúor para mineralizar los dientes y disminuir el riesgo de caries" },
+  { icon: Scissors, value: "Restauración", label: "Reconstrucción de una porción de diente afectada por caries o fractura" },
+  { icon: Smile, value: "Blanqueamiento dental", label: "Aclaramiento de los dientes, máximo uno al año (Prosonrisas Full)" },
+];
+
+const redDental = [
+  { icon: Users, value: "2.000+", label: "Médicos en convenio a nivel nacional" },
+  { icon: Building2, value: "96", label: "Clínicas y hospitales de la red" },
+  { icon: Pill, value: "1.200+", label: "Puntos de venta de farmacia" },
+];
+
+const contactChannels = [
+  { icon: MessageCircle, label: "WhatsApp", value: "+593 2401 7002", href: "https://wa.me/59324017002" },
+  { icon: PhoneCall, label: "Línea gratuita", value: "1800 48 62 62", href: "tel:1800486262" },
+  { icon: Mail, label: "Correo", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
+];
+
+/* Preguntas frecuentes del panel rápido (botón de ayuda), con datos reales
+   del plan ya presentes en esta misma página (carencias, red dental y
+   canales de contacto). */
+const quickFaqs = [
+  {
+    question: "¿Cuándo puedo empezar a usar mi cobertura?",
+    answer: "¡Buena pregunta! ⏱️ Las evaluaciones y consultas están disponibles desde el día 0, restauraciones y odontopediatría desde los 30 días, y cirugía, endodoncia y periodoncia desde los 60 días de afiliación.",
+  },
+  {
+    question: "¿Qué especialistas puedo consultar?",
+    answer: "Tienes acceso a especialistas odontológicos 🦷: odontología general, ortodoncia, periodoncia y más, en nuestra red dental.",
+  },
+  {
+    question: "¿Cuántos puntos de red dental tengo disponibles?",
+    answer: "¡Una red bien amplia! 😊 Más de 2.000 médicos en convenio a nivel nacional, 96 clínicas y hospitales, y más de 1.200 puntos de venta de farmacia.",
+  },
+  {
+    question: "¿Cuál es la diferencia entre Plus y Full?",
+    answer: "Ambos planes cubren tu salud dental 💙, y Prosonrisas Full suma beneficios adicionales como el blanqueamiento dental, máximo uno al año.",
+  },
+  {
+    question: "¿Cómo contacto a Humana?",
+    answer: "¡Con gusto! 😊 Puedes escribirnos por WhatsApp al +593 2401 7002, llamar a nuestra línea gratuita 1800 48 62 62, o enviarnos un correo a servicioalcliente@humana.med.ec.",
+  },
+];
+
+/* ---------------------------------------------------------------------- */
+/* Página                                                                  */
+/* ---------------------------------------------------------------------- */
+
+export default function ProsonrisasClient() {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLSpanElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
+  const [quoted, setQuoted] = useState(false);
+  const [called, setCalled] = useState(false);
+  const [benefitIndex, setBenefitIndex] = useState(0);
+  const [activePlan, setActivePlan] = useState(planOptions[1].id);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [faqOpen, setFaqOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<{ role: "bot" | "user"; text: string }[]>([]);
+  const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
+  const selectedPlan = planOptions.find((p) => p.id === activePlan) ?? planOptions[0];
+
+  const openDialog = (id: string) => {
+    setActiveChapterId(id);
+    dialogRef.current?.showModal();
+  };
+  const closeDialog = () => dialogRef.current?.close();
+
+  const handleQuoteClick = () => setQuoted(true);
+
+  const CHAT_GREETING = "¡Hola! 👋 Soy tu asistente de Humana para Prosonrisas. Toca una de estas preguntas y te respondo al instante 😊";
+  const pendingFaqs = quickFaqs.filter((item) => !askedQuestions.includes(item.question));
+
+  const openChat = () => {
+    setFaqOpen(true);
+    if (chatMessages.length === 0) {
+      setChatMessages([{ role: "bot", text: CHAT_GREETING }]);
+    }
+  };
+  const closeChat = () => {
+    setFaqOpen(false);
+    setChatMessages([]);
+    setAskedQuestions([]);
+    setIsTyping(false);
+  };
+  const askQuestion = (question: string, answer: string) => {
+    setChatMessages((msgs) => [...msgs, { role: "user", text: question }]);
+    setAskedQuestions((asked) => [...asked, question]);
+    setIsTyping(true);
+    window.setTimeout(() => {
+      setIsTyping(false);
+      setChatMessages((msgs) => [...msgs, { role: "bot", text: answer }]);
+    }, 700 + Math.random() * 500);
+  };
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [chatMessages, isTyping]);
+
+  const goToBenefit = (i: number) => setBenefitIndex(((i % featuredBenefits.length) + featuredBenefits.length) % featuredBenefits.length);
+  const prevBenefit = () => goToBenefit(benefitIndex - 1);
+  const nextBenefit = () => goToBenefit(benefitIndex + 1);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setBenefitIndex((i) => (i + 1) % featuredBenefits.length);
+    }, 3000);
+    return () => window.clearInterval(timer);
+  }, [benefitIndex]);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const navLinks = Array.from(root.querySelectorAll<HTMLAnchorElement>("[data-chapter-link]"));
+    const chapterSections = navLinks
+      .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
+      .filter((el): el is HTMLElement => !!el);
+    let lastCurrent = "";
+
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (progressRef.current) {
+        progressRef.current.style.width = `${max ? (window.scrollY / max) * 100 : 0}%`;
+      }
+      let current = "";
+      chapterSections.forEach((section) => {
+        if (section.getBoundingClientRect().top < window.innerHeight * 0.52) current = section.id;
+      });
+      navLinks.forEach((link) => link.classList.toggle("is-active", link.dataset.chapterLink === current));
+      if (current && current !== lastCurrent) {
+        const activeLink = navLinks.find((link) => link.dataset.chapterLink === current);
+        const navContainer = activeLink?.parentElement;
+        if (activeLink && navContainer) {
+          const targetLeft = activeLink.offsetLeft - navContainer.clientWidth / 2 + activeLink.clientWidth / 2;
+          navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
+        }
+        lastCurrent = current;
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      root.classList.remove("is-motion-ready");
+      root.querySelectorAll(".mh50-exp-reveal").forEach((el) => el.classList.add("is-visible"));
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+
+    root.classList.add("is-motion-ready");
+    const revealNodes = Array.from(root.querySelectorAll<HTMLElement>(".mh50-exp-reveal"));
+    const revealObserver = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      }),
+      { threshold: 0.12, rootMargin: "0px 0px -5% 0px" },
+    );
+    revealNodes.forEach((el) => revealObserver.observe(el));
+
+    const safetyTimer = window.setTimeout(() => {
+      revealNodes.forEach((el) => el.classList.add("is-visible"));
+    }, 2400);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      revealObserver.disconnect();
+      window.clearTimeout(safetyTimer);
+    };
+  }, []);
+
+  return (
+    <SiteShell title="Prosonrisas · Plan dental Humana">
+      <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
+        <Link href="/">Inicio</Link><span>»</span>
+        <Link href="/planes-medicos">Planes médicos</Link><span>»</span>
+        <Link href="/planes-medicos/personas">Planes médicos para Personas</Link><span>»</span>
+        <span>Plan Prosonrisas</span>
+      </nav>
+      <div className="mh50-exp prosonrisas-page" ref={rootRef}>
+        <div className="mh50-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
+
+        <section className="mh50-exp-hero" id="prosonrisas-inicio">
+          <DentalDecor tone="on-dark" />
+          <div className="mh50-exp-hero-copy">
+            <Image className="plan-official-logo" src="https://humana.med.ec/wp-content/uploads/2025/10/prosonrisas-logo-2025.png" alt="Logo Plan Prosonrisas" width={120} height={48} unoptimized />
+            <span className="mh50-exp-eyebrow light">PLAN DENTAL · PROSONRISAS</span>
+            <h1 className="is-long">Plan dental <span>Prosonrisas</span></h1>
+            <p className="mh50-exp-hero-line">Una sonrisa saludable<br />transforma tu vida.</p>
+            <p className="mh50-exp-hero-body">
+              Cuida tu sonrisa con especialistas y beneficios pensados para ti y tu familia, con la red
+              dental más amplia del país y sin preexistencias.
+            </p>
+            <div className="mh50-exp-hero-actions">
+              <a className="primary-button" href="#prosonrisas-planes"><ShoppingCart size={18} /> Cotiza ahora</a>
+              <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
+              <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
+            </div>
+          </div>
+          <div className="mh50-exp-gallery" aria-label="Momentos de sonrisas protegidas">
+            <figure className="mh50-exp-photo card-a">
+              <Image src="/images/planes/prosonrisas/prosonrisas-equipo.jpg" alt="Equipo de especialistas odontológicos de la red Prosonrisas" fill sizes="(max-width: 980px) 60vw, 30vw" unoptimized />
+            </figure>
+            <figure className="mh50-exp-photo card-b">
+              <Image src="/images/planes/prosonrisas/prosonrisas-tratamiento.jpg" alt="Consulta odontológica con un especialista" fill sizes="(max-width: 980px) 54vw, 26vw" unoptimized />
+            </figure>
+            <figure className="mh50-exp-photo card-c">
+              <Image src="/images/planes/prosonrisas/prosonrisas-odontopediatria.jpg" alt="Odontopediatra atendiendo a un niño" fill sizes="(max-width: 980px) 55vw, 26vw" unoptimized />
+            </figure>
+          </div>
+          <a className="mh50-exp-scroll-cue" href="#prosonrisas-esencia"><span />Desliza para descubrir</a>
+        </section>
+
+        <section className="mh50-exp-essence" id="prosonrisas-esencia">
+          <DentalDecor tone="on-dark" />
+          <div className="mh50-exp-eyebrow light mh50-exp-reveal">PROSONRISAS EN TRES IDEAS</div>
+          <h2 className="mh50-exp-display mh50-exp-reveal">Volvió Prosonrisas,<br />tu plan dental.</h2>
+          <div className="mh50-exp-stat-stage">
+            {essenceStats.map((stat) => (
+              <article className="mh50-exp-stat mh50-exp-reveal" key={stat.value}>
+                <strong>{stat.value}</strong>
+                <p>{stat.label.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mh50-exp-fineprint mh50-exp-reveal">Información resumida para fines demostrativos. Aplican las condiciones del plan.</p>
+        </section>
+
+        <section className="mh50-exp-moments" id="prosonrisas-planes">
+          <DentalDecor tone="on-light" />
+          <span className="mh50-exp-giant-word" aria-hidden="true">SONRÍE</span>
+          <div className="mh50-exp-moments-copy mh50-exp-reveal">
+            <span className="mh50-exp-eyebrow">ELIGE TU ALTERNATIVA</span>
+            <h2>Prosonrisas Plus<br />o Prosonrisas Full.</h2>
+            <p>Dos alternativas pensadas para distintas necesidades. Compara y elige la que mejor se ajuste a ti.</p>
+          </div>
+          <div className="mh50-exp-accordions mh50-exp-reveal" style={{ maxWidth: 720, margin: "0 auto" }}>
+            <div className="mh50-exp-plan-toggle">
+              {planOptions.map((p) => (
+                <button
+                  type="button"
+                  key={p.id}
+                  className={activePlan === p.id ? "is-active" : ""}
+                  onClick={() => setActivePlan(p.id)}
+                >
+                  <span>{p.price}</span>{p.name}
+                </button>
+              ))}
+            </div>
+            <div className="mh50-exp-accordion-grid on-light" style={{ gridTemplateColumns: "1fr" }}>
+              <article>
+                <Smile />
+                <strong>{selectedPlan.name} · {selectedPlan.price}/persona</strong>
+                <span>{selectedPlan.summary} ({selectedPlan.priceNote})</span>
+              </article>
+              {selectedPlan.features.map((f) => (
+                <article key={f}><ShieldCheck /><strong>Incluido</strong><span>{f}</span></article>
+              ))}
+            </div>
+          </div>
+
+          <div className="plan-detail-table-wrap mh50-exp-reveal" style={{ maxWidth: 720, margin: "40px auto 0", background: "#fff", borderRadius: 20, padding: 24 }}>
+            <h2 style={{ marginTop: 0 }}>Resumen</h2>
+            <table className="plan-detail-table">
+              <thead><tr><th></th><th>PLUS</th><th>FULL</th></tr></thead>
+              <tbody>
+                {summaryTable.map((row) => (
+                  <tr key={row.label}>
+                    <th scope="row">{row.label}</th>
+                    <td><DetailCell value={row.plus} /></td>
+                    <td><DetailCell value={row.full} /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="plan-detail-table-wrap mh50-exp-reveal" style={{ maxWidth: 720, margin: "28px auto 0", background: "#fff", borderRadius: 20, padding: 24 }}>
+            <h2 style={{ marginTop: 0 }}>Coberturas al detalle</h2>
+            <table className="plan-detail-table">
+              <thead><tr><th></th><th>Prosonrisas Plus</th><th>Prosonrisas Full</th></tr></thead>
+              <tbody>
+                {detailTable.map((row) => (
+                  <React.Fragment key={row.label}>
+                    {row.section && (
+                      <tr className="plan-table-section">
+                        <th scope="row">{row.section}</th>
+                      </tr>
+                    )}
+                    <tr>
+                      <th scope="row">{row.label}</th>
+                      <td><DetailCell value={row.plus} /></td>
+                      <td><DetailCell value={row.full} /></td>
+                    </tr>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <nav className="mh50-exp-chapter-nav" aria-label="Capítulos de cobertura de Prosonrisas">
+          {chapters.map((c) => (
+            <a key={c.id} href={`#prosonrisas-${c.id}`} data-chapter-link={`prosonrisas-${c.id}`}><span>{c.number}</span>{c.navLabel}</a>
+          ))}
+          <a href="#prosonrisas-incluido" data-chapter-link="prosonrisas-incluido"><span>05</span>Beneficios</a>
+          <a href="#prosonrisas-carencias" data-chapter-link="prosonrisas-carencias"><span>06</span>Carencias</a>
+        </nav>
+
+        {chapters.map((c, i) => (
+          <section
+            key={c.id}
+            id={`prosonrisas-${c.id}`}
+            className={`mh50-exp-chapter theme-${c.theme}${i % 2 === 1 ? " reverse" : ""}`}
+          >
+            <DentalDecor tone={c.theme === "dark" || c.theme === "blue" ? "on-dark" : "on-light"} />
+            <div className="mh50-exp-chapter-number" aria-hidden="true">{c.number}</div>
+            <div className="mh50-exp-chapter-image mh50-exp-reveal">
+              <Image src={c.image} alt={c.imageAlt} fill sizes="(max-width: 980px) 100vw, 45vw" unoptimized />
+            </div>
+            <div className="mh50-exp-chapter-copy mh50-exp-reveal">
+              <span className={`mh50-exp-eyebrow${c.theme === "dark" || c.theme === "blue" ? " light" : ""}`}>{c.eyebrow}</span>
+              <h2>{c.title}</h2>
+              <p className="mh50-exp-lead">{c.lead}</p>
+              <ul>
+                {c.essentials.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+              <button type="button" className="mh50-exp-text-button" onClick={() => openDialog(c.id)}>
+                Explorar detalles <span>↗</span>
+              </button>
+            </div>
+          </section>
+        ))}
+
+        <section className="mh50-exp-included" id="prosonrisas-incluido" style={{ position: "relative" }}>
+          <DentalDecor tone="on-light" />
+          <div className="mh50-exp-benefits-panel">
+            <div className="mh50-exp-benefits-head mh50-exp-reveal">
+              <span className="mh50-exp-eyebrow light">PRINCIPALES BENEFICIOS</span>
+              <h2>Más formas de cuidar tu sonrisa.</h2>
+              <p>Ventajas que forman parte de tu plan Prosonrisas, sin costo adicional.</p>
+            </div>
+            <div className="mh50-exp-benefits-grid" role="list" aria-label="Beneficios incluidos en el plan Prosonrisas">
+              {featuredBenefits.map(({ icon: Icon, title }, i) => (
+                <article className="mh50-exp-reveal" style={{ "--reveal-delay": `${(i % 6) * 60}ms` } as React.CSSProperties} role="listitem" key={title}>
+                  <span className="mh50-exp-benefit-symbol" aria-hidden="true"><Icon /></span>
+                  <h3>{title}</h3>
+                  <span className="mh50-exp-benefit-arrow" aria-hidden="true">›</span>
+                </article>
+              ))}
+            </div>
+            <div className="mh50-exp-benefits-carousel" role="list" aria-label="Beneficios incluidos en el plan Prosonrisas">
+              <div className="mh50-exp-benefits-carousel-track" style={{ transform: `translateX(-${benefitIndex * 100}%)` }}>
+                {featuredBenefits.map(({ icon: Icon, title }) => (
+                  <article className="mh50-exp-benefits-carousel-card" role="listitem" key={title}>
+                    <span className="mh50-exp-benefit-symbol" aria-hidden="true"><Icon /></span>
+                    <h3>{title}</h3>
+                  </article>
+                ))}
+              </div>
+              <div className="mh50-exp-benefits-carousel-controls">
+                <button type="button" onClick={prevBenefit} aria-label="Beneficio anterior">‹</button>
+                <div className="mh50-exp-benefits-carousel-dots">
+                  {featuredBenefits.map(({ title }, i) => (
+                    <button type="button" key={title} className={i === benefitIndex ? "active" : ""} aria-label={`Ir al beneficio ${title}`} onClick={() => goToBenefit(i)} />
+                  ))}
+                </div>
+                <button type="button" onClick={nextBenefit} aria-label="Siguiente beneficio">›</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mh50-exp-waiting" id="prosonrisas-carencias">
+          <DentalDecor tone="on-light" />
+          <div className="mh50-exp-waiting-copy mh50-exp-reveal">
+            <span className="mh50-exp-eyebrow">CARENCIAS PROSONRISAS</span>
+            <h2>Tu cobertura, clara desde el inicio.</h2>
+            <p>Estos son los periodos generales antes de utilizar determinadas prestaciones del plan.</p>
+          </div>
+          <div className="mh50-exp-waiting-grid" role="list" aria-label="Periodos generales de carencia del plan Prosonrisas">
+            {waitingPeriods.map((w, i) => (
+              <article className="mh50-exp-waiting-card mh50-exp-reveal" style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties} role="listitem" key={w.title}>
+                <div className="mh50-exp-waiting-num"><strong>{w.days}</strong><span>días</span></div>
+                <h3>{w.title}</h3>
+              </article>
+            ))}
+          </div>
+          <p className="mh50-exp-waiting-note mh50-exp-reveal">La urgencia y emergencia dental preautorizada tiene vigencia de 24 horas. Aplican las condiciones particulares del contrato.</p>
+        </section>
+
+        <section className="mh50-exp-vault" id="prosonrisas-detalles" style={{ position: "relative" }}>
+          <DentalDecor tone="on-dark" />
+          <div className="mh50-exp-vault-copy mh50-exp-reveal">
+            <span className="mh50-exp-eyebrow light">CLARIDAD ANTES DE ELEGIR</span>
+            <h2>Los detalles importan.<br />Por eso están aquí.</h2>
+            <p>Consulta el glosario de términos dentales y la red que respalda tu plan Prosonrisas.</p>
+          </div>
+          <div className="mh50-exp-accordions mh50-exp-reveal">
+            <details>
+              <summary>Glosario de términos importantes <span>+</span></summary>
+              <div className="mh50-exp-accordion-grid">
+                {glossary.map(({ icon: Icon, value, label }) => (
+                  <article key={label}><Icon /><strong>{value}</strong><span>{label}</span></article>
+                ))}
+              </div>
+            </details>
+            <details>
+              <summary>Más profesionales para cuidar tu sonrisa <span>+</span></summary>
+              <div className="mh50-exp-accordion-grid">
+                {redDental.map(({ icon: Icon, value, label }) => (
+                  <article key={label}><Icon /><strong>{value}</strong><span>{label}</span></article>
+                ))}
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <section className="mh50-exp-impact" id="prosonrisas-esencia-grupo">
+          <Image src="/mh50-metrofraternidad.jpg" alt="Niños en un entorno comunitario de atención médica" fill sizes="100vw" unoptimized />
+          <div className="mh50-exp-impact-overlay" />
+          <DentalDecor tone="on-dark" />
+          <div className="mh50-exp-impact-copy mh50-exp-reveal">
+            <span className="mh50-exp-eyebrow light">NUESTRA ESENCIA</span>
+            <h2>30 años de experiencia cuidando la salud de los ecuatorianos.</h2>
+            <p>Prosonrisas forma parte del grupo más importante en prestaciones médicas de Ecuador: Conclina C.A.</p>
+            <strong>2.000+</strong>
+            <span>médicos en la red dental nacional</span>
+          </div>
+        </section>
+
+        <section className="content-section plan-detail-faq-section" id="prosonrisas-faq" style={{ maxWidth: 1100, margin: "0 auto", padding: "64px 24px" }}>
+          <div className="plan-detail-faq-layout" style={{ gridTemplateColumns: "1fr" }}>
+            <div>
+              <h2>Preguntas frecuentes Plan Pro Sonrisas</h2>
+              <div className="plan-faq-accordion">
+                {officialFaqs.map((faq, index) => {
+                  const isOpen = openFaqIndex === index;
+                  return (
+                    <div className={`plan-faq-item ${isOpen ? "open" : ""}`} key={faq.question}>
+                      <button
+                        type="button"
+                        className="plan-faq-trigger"
+                        onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                        aria-expanded={isOpen}
+                      >
+                        <span>{faq.question}</span>
+                        <Sparkles size={16} aria-hidden="true" />
+                      </button>
+                      {isOpen && (
+                        <div className="plan-faq-content">
+                          {faq.answer.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                          {faq.checklist && (
+                            <ul className="plan-faq-checklist">
+                              {faq.checklist.map((item) => (
+                                <li key={item}><ShieldCheck size={16} /><span>{item}</span></li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mh50-exp-finale" id="prosonrisas-cierre">
+          <div className="mh50-exp-finale-rings" aria-hidden="true" />
+          <DentalDecor tone="on-dark" />
+          <div className="mh50-exp-finale-copy mh50-exp-reveal">
+            <span className="mh50-exp-eyebrow light">PROSONRISAS · PLAN DENTAL</span>
+            <h2>Una sonrisa saludable transforma tu vida.</h2>
+            <p>Elige entre Prosonrisas Plus y Full, y empieza a cuidar tu sonrisa y la de tu familia hoy mismo.</p>
+            <div className="mh50-exp-finale-actions">
+              <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotiza ahora</button>
+              <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
+              <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
+              <Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link>
+            </div>
+            {quoted && (
+              <div className="mh50-exp-confirm" role="status">
+                <ShieldCheck /> <span>Solicitud demostrativa registrada. Un asesor de Humana te contactará. No se envió información real.</span>
+              </div>
+            )}
+            {called && (
+              <div className="mh50-exp-confirm" role="status">
+                <ShieldCheck /> <span>Solicitud de llamada demostrativa registrada. No se envió información real.</span>
+              </div>
+            )}
+            <div className="mh50-exp-contact">
+              {contactChannels.map(({ icon: Icon, label, value, href }) => (
+                <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+                  <Icon /> <span><small>{label}</small><strong>{value}</strong></span>
+                </a>
+              ))}
+            </div>
+            <p className="mh50-exp-trust"><Users /> Más de 200.000 personas y empresas confían en Humana.</p>
+          </div>
+          <div className="mh50-exp-finale-mark" aria-hidden="true"><span>PLAN</span><strong className="is-long">SONRISAS</strong></div>
+        </section>
+
+        <div className="mh50-quick-actions">
+          {faqOpen && (
+            <div className="mh50-quick-faq" role="dialog" aria-label="Chat de preguntas frecuentes de Prosonrisas">
+              <div className="mh50-chat-header">
+                <span className="mh50-chat-avatar">
+                  <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={20} height={20} unoptimized aria-hidden="true" />
+                </span>
+                <div className="mh50-chat-header-text">
+                  <strong>Asistente Humana</strong>
+                  <span className="mh50-chat-status"><i /> En línea</span>
+                </div>
+                <button type="button" className="mh50-quick-faq-close" onClick={closeChat} aria-label="Cerrar chat">
+                  <X size={16} aria-hidden="true" />
+                </button>
+              </div>
+              <div className="mh50-chat-body">
+                {chatMessages.map((msg, i) => (
+                  <div key={i} className={`mh50-chat-row mh50-chat-row-${msg.role}`}>
+                    {msg.role === "bot" && (
+                      <span className="mh50-chat-avatar mh50-chat-avatar-sm">
+                        <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={14} height={14} unoptimized aria-hidden="true" />
+                      </span>
+                    )}
+                    <div className={`mh50-chat-bubble mh50-chat-bubble-${msg.role}`}>{msg.text}</div>
+                  </div>
+                ))}
+                {isTyping && (
+                  <div className="mh50-chat-row mh50-chat-row-bot">
+                    <span className="mh50-chat-avatar mh50-chat-avatar-sm">
+                      <Image src="/images/planes/mh50/mh50-faq-icon.webp" alt="" width={14} height={14} unoptimized aria-hidden="true" />
+                    </span>
+                    <div className="mh50-chat-bubble mh50-chat-bubble-bot mh50-chat-typing">
+                      <span /><span /><span />
+                    </div>
+                  </div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
+              <div className="mh50-chat-suggestions">
+                {pendingFaqs.length > 0 ? (
+                  pendingFaqs.map((item) => (
+                    <button
+                      key={item.question}
+                      type="button"
+                      className="mh50-chat-chip"
+                      disabled={isTyping}
+                      onClick={() => askQuestion(item.question, item.answer)}
+                    >
+                      {item.question}
+                    </button>
+                  ))
+                ) : (
+                  <span className="mh50-chat-chip mh50-chat-chip-contact-label">¿Algo más específico?</span>
+                )}
+                <a className="mh50-chat-chip mh50-chat-chip-contact" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">
+                  <MessageCircle size={14} aria-hidden="true" /> Hablar con un asesor
+                </a>
+              </div>
+            </div>
+          )}
+          <button
+            type="button"
+            className="mh50-quick-btn mh50-quick-btn-faq"
+            onClick={() => (faqOpen ? closeChat() : openChat())}
+            aria-label={faqOpen ? "Cerrar chat" : "Abrir chat de preguntas frecuentes"}
+            aria-expanded={faqOpen}
+          >
+            <Image
+              src="/images/planes/mh50/mh50-faq-icon.webp"
+              alt=""
+              width={36}
+              height={36}
+              unoptimized
+              aria-hidden="true"
+            />
+          </button>
+          <a
+            className="mh50-quick-btn mh50-quick-btn-whatsapp"
+            href="https://wa.me/59324017002"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Escribir por WhatsApp"
+          >
+            <Image
+              src="/images/planes/mh50/mh50-whatsapp-icon.webp"
+              alt=""
+              width={34}
+              height={34}
+              unoptimized
+              aria-hidden="true"
+            />
+          </a>
+        </div>
+
+        <dialog className="mh50-exp-dialog" ref={dialogRef} onClose={() => setActiveChapterId(null)}>
+          <button type="button" className="mh50-exp-dialog-close" onClick={closeDialog} aria-label="Cerrar">×</button>
+          <span className="mh50-exp-eyebrow">DETALLE DEL PLAN</span>
+          <h2>{activeChapter?.dialogTitle}</h2>
+          <div className="mh50-exp-dialog-body">
+            <p>{activeChapter?.dialogLead}</p>
+            <ul>
+              {activeChapter?.chips.map(({ icon: Icon, text }) => (
+                <li key={text}><Icon /> <span>{text}</span></li>
+              ))}
+            </ul>
+          </div>
+        </dialog>
+      </div>
+    </SiteShell>
+  );
+}
