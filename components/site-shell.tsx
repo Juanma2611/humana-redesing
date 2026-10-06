@@ -121,7 +121,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
           <a href="/blog">Bienestar</a>
         </nav>
         <div className="header-actions">
-          <div className="help-mini"><Headphones size={18} /><span>¿Necesitas ayuda?<strong>02 395 7400</strong></span></div>
+          <div className="help-mini"><Headphones size={18} /><span>¿Necesitas ayuda?<strong>1800 HUMANA (48 62 62)</strong></span></div>
           <Link className="login-link bordered" href="/cliente">MiHumana</Link>
           <Link className="primary-button small" href="/planes-medicos"><ShoppingCart size={15} /> Cotiza tu plan</Link>
         </div>

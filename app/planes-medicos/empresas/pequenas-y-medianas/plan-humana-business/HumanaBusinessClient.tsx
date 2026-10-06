@@ -70,8 +70,8 @@ const infoImages = [
 ];
 
 const configOptions = [
-  { icon: WalletCards, value: "$10.000 · $20.000 · $50.000", label: "Límites de cobertura a elegir por colaborador" },
-  { icon: Banknote, value: "$100 · $150 · $180", label: "Deducible por persona, a elegir" },
+  { icon: WalletCards, value: "$10.000", label: "Cobertura por colaborador" },
+  { icon: Banknote, value: "$50 · $80 · $100", label: "Deducible por persona, a elegir" },
   { icon: HeartPulse, value: "A elección", label: "Cobertura de maternidad" },
   { icon: CircleDollarSign, value: "60% · 70% · 80% · 90%", label: "Copagos hospitalario y ambulatorio" },
 ];
@@ -103,12 +103,12 @@ const chapters: Chapter[] = [
     eyebrow: "ARMA TU PLAN A LA MEDIDA",
     title: "Se puede seleccionar los beneficios, coberturas, porcentajes y copagos.",
     lead: "A diferencia de un plan corporativo tradicional negociado a la medida, Humana Business te permite combinar los atributos según las necesidades de tu empresa.",
-    essentials: ["Límites desde $10.000, $20.000 o $50.000", "Deducibles de $100, $150 o $180", "Periodo de carencia para preexistencias, cobertura sin límite", "Suscripción simple y sin declaración de salud"],
+    essentials: ["Cobertura por enfermedad de $10.000", "Deducibles de $50, $80 o $100", "Periodo de carencia para preexistencias, cobertura sin límite", "Suscripción simple y sin declaración de salud"],
     dialogTitle: "Arma tu plan a la medida",
     dialogLead: "El producto está diseñado para que la pequeña y mediana empresa pueda realizar combinaciones de diferentes atributos según sus necesidades, con precios competitivos.",
     chips: [
-      { icon: WalletCards, text: "Límites de cobertura: $10.000 · $20.000 · $50.000" },
-      { icon: Banknote, text: "Deducible: $100 · $150 · $180 por persona" },
+      { icon: WalletCards, text: "Cobertura por enfermedad: $10.000" },
+      { icon: Banknote, text: "Deducible: $50 · $80 · $100 por persona" },
       { icon: HeartPulse, text: "Cobertura de maternidad a elección" },
       { icon: CircleDollarSign, text: "Copagos hospitalario y ambulatorio: 60% a 90%" },
     ],

@@ -159,7 +159,7 @@ const plans: Plan[] = [
     ], waits: ["24 h emergencias", "30 días ambulatorio", "60 días maternidad", "90 días hospitalario"],
   },
   {
-    id: "mh80", segment: ["familiar"], name: "MH80 Control", family: "Metrohumana", headline: "Tecnología que cuida", ideal: "Atención especializada",
+    id: "mh80", segment: ["familiar"], name: "Metrohumana80", family: "Metrohumana", headline: "Tecnología que cuida", ideal: "Atención especializada",
     limit: "$80.000", limitNote: "por incapacidad", deductible: "$200", network: "Metrohumana", icon: ScanHeart,
     benefits: [{ icon: ScanHeart, label: "Cirugía robótica" }, { icon: Hospital, label: "80% hospitalario en red" }, { icon: Stethoscope, label: "Consultas desde $4" }, { icon: HeartHandshake, label: "Psicología y nutrición" }],
     includedBenefits: fullIncludedBenefits,
@@ -208,7 +208,7 @@ const plans: Plan[] = [
   },
   {
     id: "business", segment: ["empresa"], name: "Humana Business", family: "Empresas", headline: "Tu equipo cuidado. Tu empresa crece.", ideal: "Pequeñas y medianas empresas",
-    limit: "$10K · $20K · $50K", limitNote: "opciones por colaborador", deductible: "$100 · $150 · $180", network: "Configurable", icon: Building2, business: true,
+    limit: "$10.000", limitNote: "cobertura por colaborador", deductible: "$50 · $80 · $100", network: "Metrohumana", icon: Building2, business: true,
     benefits: [{ icon: UsersRound, label: "Protección para empleados" }, { icon: Layers3, label: "Familiares opcionales" }, { icon: WalletCards, label: "Cobertura configurable" }, { icon: Phone, label: "Teleconsulta" }],
     details: [
       { title: "Configura el plan", icon: WalletCards, items: ["Coberturas de $10.000, $20.000 o $50.000", "Deducibles de $100, $150 o $180", "Porcentajes configurables", "Maternidad opcional"] },
