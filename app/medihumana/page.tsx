@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 };
 
 const services = [
-  {icon:ReceiptText,title:"Reembolsos",copy:"Conoce requisitos, simula una solicitud y revisa el proceso.",href:"/servicios/reembolsos"},
-  {icon:ShieldCheck,title:"Autorizaciones",copy:"Identifica cuándo se necesita autorización y cómo gestionarla.",href:"/servicios/autorizaciones"},
-  {icon:Hospital,title:"Red de prestadores",copy:"Busca atención por ciudad, especialidad y tipo de servicio.",href:"/directorio"},
+  {icon:ReceiptText,title:"Reembolsos",copy:"Conoce requisitos, simula una solicitud y revisa el proceso.",href:"/servicios/reembolsos/"},
+  {icon:ShieldCheck,title:"Autorizaciones",copy:"Identifica cuándo se necesita autorización y cómo gestionarla.",href:"/servicios/autorizaciones/"},
+  {icon:Hospital,title:"Red de prestadores",copy:"Busca atención por ciudad, especialidad y tipo de servicio.",href:"/directorio/"},
   {icon:FileText,title:"Formularios",copy:"Ubica formularios frecuentes sin recorrer varias páginas.",href:"#formularios"},
   {icon:ClipboardList,title:"Contratos y certificados",copy:"Actualización de datos, certificados e información del contrato.",href:"#contratos"},
   {icon:Video,title:"Teleconsulta",copy:"Acceso orientativo a atención médica remota.",href:"#teleconsulta"},
