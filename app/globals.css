@@ -4549,7 +4549,17 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .plan-hub-card-list li { padding-left: 18px; position: relative; }
 .plan-hub-card-list li::before { content: ""; position: absolute; left: 0; top: 9px; width: 7px; height: 7px; border-radius: 50%; background: var(--humana-sky); }
 .plan-hub-card-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+/* Piloto pase de diseño — grilla de tarjetas "Sigue explorando" (Grupo Conócenos) */
+.institutional-explore-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
+.institutional-stat-row { display: flex; flex-wrap: wrap; gap: 14px 32px; justify-content: center; margin: 28px 0 40px; }
+.institutional-stat-row article { text-align: center; }
+.institutional-stat-row strong { display: block; color: var(--humana-blue); font-size: 30px; line-height: 1; letter-spacing: -.03em; }
+.institutional-stat-row span { display: block; margin-top: 6px; color: #5e7384; font-size: 13.5px; font-weight: 600; }
+.institutional-topic-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); margin: 32px 0 48px; }
+.institutional-topic-grid .plan-hub-card { padding: 26px; }
+.institutional-topic-grid .plan-hub-card-icon { margin-bottom: 14px; }
 @media (max-width: 900px) {
+  .institutional-explore-grid, .institutional-topic-grid { grid-template-columns: 1fr; }
   .plan-hub-grid, .plan-hub-grid-personas { grid-template-columns: 1fr; }
 }
 
