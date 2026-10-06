@@ -11,18 +11,18 @@ import { blogArticlesWithSlug as blogArticles } from "@/lib/blog-articles";
 import { HospitalCarousel } from "@/components/hospital-carousel";
 
 const quickServices = [
-  { image: "/icons/red-prestadores.png", title: "Red de prestadores", copy: "La red de prestadores que te garantiza una atención médica de calidad", cta: "Ver Directorio", href: "/red-medica" },
-  { image: "/icons/formularios.png", title: "Descarga de formularios", copy: "Descarga los formularios necesarios para realizar tus trámites", cta: "Formularios", href: "/servicios" },
+  { image: "/icons/red-prestadores.png", title: "Red de prestadores", copy: "La red de prestadores que te garantiza una atención médica de calidad", cta: "Ver Directorio", href: "/directorio" },
+  { image: "/icons/formularios.png", title: "Descarga de formularios", copy: "Descarga los formularios necesarios para realizar tus trámites", cta: "Formularios", href: "/medihumana" },
   { image: "/icons/portal-broker.png", title: "Portal de Bróker", copy: "Optimiza tu trabajo en una sola plataforma y transforma la experiencia", cta: "Ver más", href: "/portal-broker", logo: true },
   { image: "/icons/cotizar-plan.png", title: "Cotizar un plan", copy: "Encuentra una amplia gama de Planes médicos en un único sitio.", cta: "Cotizar ahora", href: "/planes", featured: true },
 ];
 
 const channels = [
-  { icon: SiWhatsapp, label: "WhatsApp", href: "/servicios", brandColor: "#0b80bd", brandSize: 26 },
+  { icon: SiWhatsapp, label: "WhatsApp", href: "/medihumana", brandColor: "#0b80bd", brandSize: 26 },
   { icon: Monitor, label: "Oficina virtual", href: "/cliente" },
-  { icon: ClipboardList, label: "Formulario", href: "/servicios" },
+  { icon: ClipboardList, label: "Formulario", href: "/medihumana" },
   { icon: MapPin, label: "Oficinas", href: "#oficinas" },
-  { icon: Mail, label: "Correo", href: "/servicios" },
+  { icon: Mail, label: "Correo", href: "/medihumana" },
   { icon: Phone, label: "1800 humana (48 62 62)", href: "tel:1800486262" },
 ];
 
@@ -77,7 +77,7 @@ export default function Home() {
     </section>
 
     <section className="guide-section">
-      <div className="guide-copy"><span className="kicker light">Tu cobertura ideal</span><h2>No tienes que conocer todos los planes para elegir bien.</h2><p>Responde preguntas simples y recibe una orientación inicial de acuerdo con tu etapa de vida y prioridades.</p><Link className="white-button" href="/encontrar-plan">Comenzar recomendador <ArrowRight size={18} /></Link></div>
+      <div className="guide-copy"><span className="kicker light">Tu cobertura ideal</span><h2>No tienes que conocer todos los planes para elegir bien.</h2><p>Responde preguntas simples y recibe una orientación inicial de acuerdo con tu etapa de vida y prioridades.</p><Link className="white-button" href="/cotizador">Comenzar recomendador <ArrowRight size={18} /></Link></div>
       <div className="guide-steps"><div><span>1</span><p><strong>Cuéntanos</strong> a quién deseas proteger</p></div><div><span>2</span><p><strong>Define</strong> qué es más importante para ti</p></div><div><span>3</span><p><strong>Recibe</strong> una sugerencia para comparar</p></div></div>
     </section>
 
@@ -89,7 +89,7 @@ export default function Home() {
 
     <section className="home-digital-band">
       <article><span className="kicker light">Trámites digitales</span><h2>Reembolso Online, qué lindo vivir en esta época</h2><p>Con HUMANA EXPRESS puedes hacer tus reembolsos 100% online, más rápido y desde donde quieras. Ten el control de tu plan médico.</p><Link className="white-button" href="/servicios/reembolsos"><RotateCcw /> Reembolso online</Link><Link className="home-text-link" href="/servicios/reembolsos">Instrucciones de acceso <ArrowRight /></Link></article>
-      <article><span className="kicker light">Central de ayuda</span><h2>Humana Contigo</h2><p>Antes de ir al médico o solicitar un examen de laboratorio, de ingresar al hospital o comprar medicinas, te recomendamos conocer a fondo las posibilidades que te ofrece tu plan.</p><Link className="white-button" href="/servicios">Acceder a la Central de Ayuda <ArrowRight /></Link></article>
+      <article><span className="kicker light">Central de ayuda</span><h2>Humana Contigo</h2><p>Antes de ir al médico o solicitar un examen de laboratorio, de ingresar al hospital o comprar medicinas, te recomendamos conocer a fondo las posibilidades que te ofrece tu plan.</p><Link className="white-button" href="/medihumana">Acceder a la Central de Ayuda <ArrowRight /></Link></article>
     </section>
 
     <section className="home-official-section home-included" aria-labelledby="home-benefits-title">

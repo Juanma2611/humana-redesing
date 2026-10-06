@@ -3,12 +3,12 @@ import { ArrowRight, HeartHandshake, House, Luggage, MessageSquareText, Pill, Sm
 import { PageHero, SiteShell } from "@/components/site-shell";
 
 const items = [
-  {icon:Video,title:"Teleconsulta médica",copy:"Recibe orientación médica a distancia cuando el servicio esté incluido en tu plan.",href:"/servicios#teleconsulta"},
-  {icon:House,title:"Médico a domicilio",copy:"Conoce cómo solicitar atención en casa y las condiciones aplicables.",href:"/servicios"},
-  {icon:Pill,title:"Red de farmacias",copy:"Ubica opciones para adquirir medicinas con la modalidad disponible en tu cobertura.",href:"/servicios#farmacias"},
-  {icon:Luggage,title:"Asistencia en viajes",copy:"Consulta el respaldo disponible cuando necesitas atención fuera de tu ciudad o país.",href:"/servicios#urgencias"},
+  {icon:Video,title:"Teleconsulta médica",copy:"Recibe orientación médica a distancia cuando el servicio esté incluido en tu plan.",href:"/medihumana#teleconsulta"},
+  {icon:House,title:"Médico a domicilio",copy:"Conoce cómo solicitar atención en casa y las condiciones aplicables.",href:"/medihumana"},
+  {icon:Pill,title:"Red de farmacias",copy:"Ubica opciones para adquirir medicinas con la modalidad disponible en tu cobertura.",href:"/medihumana#farmacias"},
+  {icon:Luggage,title:"Asistencia en viajes",copy:"Consulta el respaldo disponible cuando necesitas atención fuera de tu ciudad o país.",href:"/medihumana#urgencias"},
   {icon:Smile,title:"Atención dental",copy:"Explora servicios odontológicos y prestadores habilitados.",href:"/planes"},
-  {icon:Stethoscope,title:"Red médica",copy:"Busca profesionales, centros y servicios por ubicación y especialidad.",href:"/red-medica"},
+  {icon:Stethoscope,title:"Red médica",copy:"Busca profesionales, centros y servicios por ubicación y especialidad.",href:"/directorio"},
 ];
 
 export default function Benefits() {

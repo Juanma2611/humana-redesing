@@ -70,7 +70,7 @@ export default function HumanaSaPage() {
             Adquiere tu plan médico de forma fácil, segura y 100% digital. ¿Quieres saber cómo funciona el
             sistema de compra online? Es un modo seguro y rápido de contratar tu plan.
           </p>
-          <Link className="primary-button" href="/encontrar-plan">
+          <Link className="primary-button" href="/cotizador">
             <ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} />
           </Link>
         </div>

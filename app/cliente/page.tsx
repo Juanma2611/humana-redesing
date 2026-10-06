@@ -109,7 +109,7 @@ export default function Client() {
               <dl className="calculation-detail"><div><dt>Valor estimado</dt><dd>{money.format(result.invoice)}</dd></div><div><dt>Deducible aplicado</dt><dd>{money.format(result.deductibleApplied)}</dd></div><div><dt>{result.coverage === null ? "Copago fijo" : "Cobertura aplicada"}</dt><dd>{result.coverage === null ? money.format(result.copay) : `${result.coverage}%`}</dd></div>{result.eligible !== result.invoice && <div><dt>Monto sujeto a cobertura</dt><dd>{money.format(result.eligible)}</dd></div>}</dl>
               <div className="deductible-result"><span><strong>Deducible anual de {member.name}</strong><small>{money.format(member.deductibleUsed)} utilizado · {money.format(Math.max(0, annualDeductible - member.deductibleUsed))} pendiente</small></span><Progress value={(Math.min(annualDeductible, member.deductibleUsed) / annualDeductible) * 100} /></div>
               <p className="simulation-disclaimer">La liquidación final depende de pertinencia médica, autorización, carencias, saldo disponible y condiciones del contrato.</p>
-              <div className="simulator-next-actions"><Link href="/red-medica">Buscar prestador <ArrowRight /></Link><Link href="/servicios/autorizaciones">Revisar autorización <ArrowRight /></Link></div>
+              <div className="simulator-next-actions"><Link href="/directorio">Buscar prestador <ArrowRight /></Link><Link href="/servicios/autorizaciones">Revisar autorización <ArrowRight /></Link></div>
             </aside>
           </div>
         </section>
@@ -119,7 +119,7 @@ export default function Client() {
 
       <aside className="client-dashboard-side">
         <section className="coverage-balance"><div><ShieldCheck /><span><small>Saldo de {member.name}</small><strong>{money.format(planAvailable)}</strong></span></div><Progress value={(planAvailable / 50000) * 100} /><p>de $50.000 de cobertura máxima en este perfil demostrativo.</p><Link href="/planes-medicos?segment=familiar&plan=mh50">Ver coberturas del MH50 <ArrowRight /></Link></section>
-        <section className="status-panel"><h2>Solicitudes recientes</h2><div><CheckCircle2 /><span><strong>Reembolso #Demo-104</strong><small>Revisión completada</small></span></div><div><FileHeart /><span><strong>Autorización #Demo-087</strong><small>Documentos recibidos</small></span></div><Link href="/servicios">Ver todos los servicios <ArrowRight size={16} /></Link><p>Información ficticia para demostrar el funcionamiento del perfil.</p></section>
+        <section className="status-panel"><h2>Solicitudes recientes</h2><div><CheckCircle2 /><span><strong>Reembolso #Demo-104</strong><small>Revisión completada</small></span></div><div><FileHeart /><span><strong>Autorización #Demo-087</strong><small>Documentos recibidos</small></span></div><Link href="/medihumana">Ver todos los servicios <ArrowRight size={16} /></Link><p>Información ficticia para demostrar el funcionamiento del perfil.</p></section>
         <section className="plan-reminder"><UserRound /><div><strong>Tu plan conoce tus datos</strong><p>En la versión final, deducibles, topes y beneficiarios se cargarían automáticamente.</p></div></section>
       </aside>
     </section>

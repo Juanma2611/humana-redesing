@@ -57,7 +57,7 @@ export default async function Blog() {
 
         <div className="blog-sidebar-card">
           <strong>Canales de comunicación:</strong>
-          <ul className="blog-channel-list">{channels.map(({icon:Icon,label,value,brandColor}) => <li key={value}><span><Icon style={brandColor ? { color: brandColor } : undefined} /></span><p>{label} <Link href="/servicios">{value}</Link></p></li>)}</ul>
+          <ul className="blog-channel-list">{channels.map(({icon:Icon,label,value,brandColor}) => <li key={value}><span><Icon style={brandColor ? { color: brandColor } : undefined} /></span><p>{label} <Link href="/medihumana">{value}</Link></p></li>)}</ul>
         </div>
 
         <div className="blog-sidebar-card blog-buy-card">
