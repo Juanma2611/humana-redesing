@@ -62,6 +62,10 @@ const officialServices = [
     title: "Programa de pacientes Covid",
     image: "https://humana.med.ec/wp-content/uploads/2024/08/programa-pacientes-covid-v2.png",
     copy: "Si presentas síntomas o ya cuentas con una prueba de hisopado RT-PCR positiva, comunícate con los siguientes números para incluirte en nuestro programa de atención ambulatoria.",
+    phones: [
+      { src: "https://humana.med.ec/wp-content/uploads/2021/06/telefono-metrored.png", alt: "Teléfono Metrored" },
+      { src: "https://humana.med.ec/wp-content/uploads/2021/06/telefono-medilink.png", alt: "Teléfono Medilink", href: "https://api.whatsapp.com/send?phone=593993183975" },
+    ],
     button: { label: "Ver condiciones de uso", href: "https://servicio.humana.med.ec/hc/es/articles/4403176927757-Programa-de-pacientes-Covid" },
   },
   {
@@ -106,6 +110,14 @@ export default function MedihumanaPage() {
           <div style={{ flex: 1, minWidth: 260 }}>
             <h2 style={{ marginTop: 0 }}>{service.title}</h2>
             {service.copy && <p>{service.copy}</p>}
+            {service.phones && (
+              <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginBottom: 12 }}>
+                {service.phones.map((phone) => {
+                  const img = <Image key={phone.src} src={phone.src} alt={phone.alt} width={200} height={60} unoptimized style={{ objectFit: "contain", height: "auto" }} />;
+                  return phone.href ? <a key={phone.src} href={phone.href} target="_blank" rel="noreferrer">{img}</a> : img;
+                })}
+              </div>
+            )}
             {service.list && (
               <>
                 {service.listTitle && <strong>{service.listTitle}</strong>}
