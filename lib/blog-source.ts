@@ -1,61 +1,46 @@
-import { sanityQuery } from "@/lib/sanity";
-import { allBlogArticles, type BlogBodyBlock } from "@/lib/blog-articles";
+import { provisionalBlogPosts } from "@/lib/blog-articles";
+import { blogCatalog, findCatalogEntry, getCategoryLabel } from "@/lib/blog-catalog";
+// Posts reales importados desde WordPress (ver scripts/import-wordpress-posts.ts).
+// Vacío hasta que se corra el importador; a partir de ahí, estos posts
+// reemplazan a los provisionales con el mismo slug.
+import { importedBlogPosts } from "@/lib/blog-posts-imported.generated";
 
 export type BlogArticle = {
   slug: string;
+  category: string;
+  categoryLabel: string;
   title: string;
   date: string;
-  category: string;
   image: string;
   copy: string;
-  body?: BlogBodyBlock[];
+  body: typeof provisionalBlogPosts[number]["body"];
+  provisional: boolean;
 };
 
-type SanityBlogPost = {
-  slug: string;
-  title: string;
-  date?: string;
-  category?: string;
-  image?: string;
-  excerpt?: string;
-  body?: Array<{ _type: "h3" | "p" | "ul"; text?: string; items?: string[] }>;
-};
-
-const MONTHS: Record<string, number> = { ene: 0, feb: 1, mar: 2, abr: 3, may: 4, jun: 5, jul: 6, ago: 7, sep: 8, oct: 9, nov: 10, dic: 11 };
-const FALLBACK_IMAGE = "/blog/blog-01.jpg";
-
-// Fechas con el formato del sitio: "Sep 11, 2026".
-function dateValue(date: string) {
-  const match = /^(\w{3})\w*\s+(\d{1,2}),\s*(\d{4})$/.exec(date.trim());
-  if (!match) return 0;
-  return Date.UTC(Number(match[3]), MONTHS[match[1].toLowerCase()] ?? 0, Number(match[2]));
+// Solo los posts con contenido disponible (importado o provisional) generan
+// artículo visible. El resto del catálogo oficial (ver lib/blog-catalog.ts)
+// queda "pendiente de contenido oficial": no tiene página ni aparece en
+// ningún listado. Un post importado siempre reemplaza a su versión provisional.
+export function getAllBlogArticles(): BlogArticle[] {
+  const importedSlugs = new Set(importedBlogPosts.map((p) => p.slug));
+  const provisional = provisionalBlogPosts
+    .filter((p) => !importedSlugs.has(p.slug))
+    .map((post) => ({ ...post, categoryLabel: getCategoryLabel(post.category) }));
+  const imported = importedBlogPosts.map((post) => ({ ...post, categoryLabel: getCategoryLabel(post.category) }));
+  return [...imported, ...provisional];
 }
 
-const originalOrder = new Map(allBlogArticles.map((a, i) => [a.slug, i]));
-
-function toArticle(post: SanityBlogPost): BlogArticle {
-  return {
-    slug: post.slug,
-    title: post.title,
-    date: post.date ?? "",
-    category: post.category ?? "",
-    image: post.image || FALLBACK_IMAGE,
-    copy: post.excerpt ?? "",
-    body: post.body?.map(block =>
-      block._type === "ul" ? { type: "ul", items: block.items ?? [] } : { type: block._type, text: block.text ?? "" },
-    ),
-  };
+export function getBlogArticlesByCategory(category: string): BlogArticle[] {
+  return getAllBlogArticles().filter((a) => a.category === category);
 }
 
-// Más recientes primero; en la misma fecha se respeta el orden original del sitio.
-function byDate(a: BlogArticle, b: BlogArticle) {
-  return dateValue(b.date) - dateValue(a.date) || (originalOrder.get(a.slug) ?? -1) - (originalOrder.get(b.slug) ?? -1);
+export function getBlogArticle(category: string, slug: string): BlogArticle | undefined {
+  const entry = findCatalogEntry(category, slug);
+  if (!entry) return undefined;
+  return getAllBlogArticles().find((a) => a.category === category && a.slug === slug);
 }
 
-export async function getBlogArticles(): Promise<BlogArticle[]> {
-  const posts = await sanityQuery<SanityBlogPost[]>(
-    `*[_type == "blogPost" && defined(slug.current)]{"slug": slug.current, title, date, category, image, excerpt, body}`,
-  );
-  if (!posts?.length) return allBlogArticles;
-  return posts.map(toArticle).sort(byDate);
+export function pendingCount(): number {
+  const visibleSlugs = new Set(getAllBlogArticles().map((p) => p.slug));
+  return blogCatalog.filter((p) => !visibleSlugs.has(p.slug)).length;
 }
