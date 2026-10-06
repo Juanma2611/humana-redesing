@@ -16,8 +16,8 @@ const channels = [
 ];
 
 const planDetailHrefs: Record<string, string> = {
-  proteger: "/planes-medicos/personas/plan-proteger",
-  "individual-familiar": "/planes-medicos/personas/plan-individual-y-familiar",
+  proteger: "/planes-medicos/personas/plan-proteger/",
+  "individual-familiar": "/planes-medicos/personas/plan-individual-y-familiar/",
 };
 
 const planCtas: Record<string, string[]> = {
@@ -40,7 +40,7 @@ export default async function Blog() {
         </div>
 
         <div className="blog-listing-grid blog-plan-grid">
-          {blogPlans.map(plan => <article key={plan.title} className={plan.detailSlug ? "blog-plan-card card-clickable" : "blog-plan-card"}>{plan.detailSlug && <Link className="card-cover-link" href={planDetailHrefs[plan.detailSlug] ?? "/planes-medicos"} aria-label={plan.title} />}<div className="home-blog-image"><Image src={plan.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{plan.title}</h3><span>{plan.date} | {plan.category}</span><p>{plan.copy}</p><div className="home-blog-actions">{planCtas[plan.title]?.map((cta, i) => <Link key={cta} className={i === 0 && planCtas[plan.title].length > 1 ? "primary-button small card-above-cover" : "card-above-cover"} href="/planes-medicos">{cta} <ArrowRight size={16} /></Link>)}</div></div></article>)}
+          {blogPlans.map(plan => <article key={plan.title} className={plan.detailSlug ? "blog-plan-card card-clickable" : "blog-plan-card"}>{plan.detailSlug && <Link className="card-cover-link" href={planDetailHrefs[plan.detailSlug] ?? "/planes-medicos"} aria-label={plan.title} />}<div className="home-blog-image"><Image src={plan.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{plan.title}</h3><span>{plan.date} | {plan.category}</span><p>{plan.copy}</p><div className="home-blog-actions">{planCtas[plan.title]?.map((cta, i) => <Link key={cta} className={i === 0 && planCtas[plan.title].length > 1 ? "primary-button small card-above-cover" : "card-above-cover"} href="/planes-medicos/">{cta} <ArrowRight size={16} /></Link>)}</div></div></article>)}
         </div>
 
         <div className="blog-listing-grid">
@@ -57,7 +57,7 @@ export default async function Blog() {
 
         <div className="blog-sidebar-card">
           <strong>Canales de comunicación:</strong>
-          <ul className="blog-channel-list">{channels.map(({icon:Icon,label,value,brandColor}) => <li key={value}><span><Icon style={brandColor ? { color: brandColor } : undefined} /></span><p>{label} <Link href="/medihumana">{value}</Link></p></li>)}</ul>
+          <ul className="blog-channel-list">{channels.map(({icon:Icon,label,value,brandColor}) => <li key={value}><span><Icon style={brandColor ? { color: brandColor } : undefined} /></span><p>{label} <Link href="/medihumana/">{value}</Link></p></li>)}</ul>
         </div>
 
         <div className="blog-sidebar-card blog-buy-card">
@@ -65,7 +65,7 @@ export default async function Blog() {
           <strong><Building2 size={18} /> Compra online</strong>
           <p>Adquiere tu plan médico de forma fácil, segura y 100% digital.</p>
           <p>¿Quieres saber cómo funciona el sistema de compra online? Es un modo seguro y rápido de contratar tu plan.</p>
-          <Link className="primary-button small" href="/planes-medicos"><ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} /></Link>
+          <Link className="primary-button small" href="/planes-medicos/"><ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} /></Link>
         </div>
       </aside>
     </section>

@@ -3,7 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 
-export const metadata: Metadata = { title: "Registro de vacunación recibido - Humana S.A." };
+export const metadata: Metadata = {
+  title: "Registro de vacunación recibido - Humana S.A.",
+  description: "Confirmación de registro de vacunación en Medihumana. Pronto nos pondremos en contacto contigo.",
+};
 
 const services = [
   { label: "Médico a domicilio", href: "https://servicio.humana.med.ec/hc/es/articles/4402813434253-M%C3%A9dico-a-domicilio" },
@@ -21,7 +24,7 @@ export default function RegistroVacunacionRecibidoPage() {
     <SiteShell title="Registro de vacunación recibido">
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link><span>»</span>
-        <Link href="/medihumana">Medihumana</Link><span>»</span>
+        <Link href="/medihumana/">Medihumana</Link><span>»</span>
         <span>Registro de vacunación recibido</span>
       </nav>
 

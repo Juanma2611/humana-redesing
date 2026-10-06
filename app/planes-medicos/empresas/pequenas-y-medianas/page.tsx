@@ -6,6 +6,7 @@ import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
   title: "Planes médicos para Pequeñas y Medianas Empresas - Humana S.A.",
+  description: "Planes médicos de Humana para pequeñas y medianas empresas: Humana Business para equipos de 25 a 45 colaboradores y Plan Pyme para equipos de 5 a 25 colaboradores.",
 };
 
 export default function PequenasYMedianasPage() {
@@ -14,9 +15,9 @@ export default function PequenasYMedianasPage() {
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link>
         <span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link>
+        <Link href="/planes-medicos/">Planes médicos</Link>
         <span>»</span>
-        <Link href="/planes-medicos/empresas">Planes médicos para Empresas</Link>
+        <Link href="/planes-medicos/empresas/">Planes médicos para Empresas</Link>
         <span>»</span>
         <span>Planes médicos para Pequeñas y Medianas Empresas</span>
       </nav>
@@ -43,7 +44,7 @@ export default function PequenasYMedianasPage() {
               La combinación perfecta entre cobertura completa y la flexibilidad de elegir lo que
               necesitas. <strong>De 25 a 45 colaboradores.</strong>
             </p>
-            <Link className="primary-button" href="/planes-medicos/empresas/pequenas-y-medianas/plan-humana-business">
+            <Link className="primary-button" href="/planes-medicos/empresas/pequenas-y-medianas/plan-humana-business/">
               Ver planes <ArrowRight size={18} />
             </Link>
           </div>
@@ -66,7 +67,7 @@ export default function PequenasYMedianasPage() {
               Beneficios de salud accesibles y valiosos para pequeñas empresas.{" "}
               <strong>De 5 hasta 25 colaboradores.</strong>
             </p>
-            <Link className="primary-button" href="/planes-medicos/empresas/pequenas-y-medianas/plan-empresarial">
+            <Link className="primary-button" href="/planes-medicos/empresas/pequenas-y-medianas/plan-empresarial/">
               Ver planes <ArrowRight size={18} />
             </Link>
           </div>

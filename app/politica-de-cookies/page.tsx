@@ -4,7 +4,10 @@ import { SiteShell } from "@/components/site-shell";
 // Texto legal copiado literal del sitio oficial (humana.med.ec), extraído el 6 de
 // octubre de 2026. No resumir, no reescribir. Cualquier cambio debe aprobarlo el área legal.
 
-export const metadata: Metadata = { title: "Política de Cookies - Humana S.A." };
+export const metadata: Metadata = {
+  title: "Política de Cookies - Humana S.A.",
+  description: "Política de Cookies de Humana S.A.: qué son las cookies, cómo las utilizamos y cómo modificar su configuración en tu navegador.",
+};
 
 export default function PoliticaCookiesPage() {
   return (

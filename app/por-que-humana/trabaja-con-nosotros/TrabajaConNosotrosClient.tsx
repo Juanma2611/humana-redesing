@@ -101,7 +101,7 @@ export default function TrabajaConNosotrosClient() {
               <input type="checkbox" required />
               <span>
                 Declaro haber leído y acepto la{" "}
-                <Link href="/por-que-humana/politica-de-proteccion-de-datos">Política de Protección de Datos Personales</Link>{" "}
+                <Link href="/por-que-humana/politica-de-proteccion-de-datos/">Política de Protección de Datos Personales</Link>{" "}
                 y autorizo el tratamiento de mis datos personales
               </span>
             </label>

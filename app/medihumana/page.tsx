@@ -94,7 +94,7 @@ export default function MedihumanaPage() {
     <PageHero eyebrow="Usa tu plan sin complicarte" title="Medihumana" description="Medihumana es el conjunto de servicios exclusivos que Humana coordina para que puedas recibir todas las prestaciones médicas y farmacéuticas a las que tienes acceso con tu plan. Atendemos todas tus consultas y requerimientos las 24 horas al día los 7 días de la semana." imageSrc="/servicios-clientes-hero.webp" imageAlt="Afiliada utilizando los servicios digitales de Humana con acompañamiento" imagePosition="center" />
 
     <section className="content-section servicios-section"><div className="service-grid">{services.map(({icon:Icon,title,copy,href}) => <Link id={href.startsWith("#") ? href.slice(1) : undefined} className="service-card" href={href} key={title}><Icon /><div><h2>{title}</h2><p>{copy}</p></div><ArrowRight /></Link>)}</div>
-      <div className="journey-panel"><Activity /><div><h2>¿No sabes qué trámite necesitas?</h2><p>Describe tu situación con palabras simples y el centro de ayuda te conduciría al proceso correcto.</p></div><Link className="primary-button" href="/cliente">Ver MiHumana demo</Link></div>
+      <div className="journey-panel"><Activity /><div><h2>¿No sabes qué trámite necesitas?</h2><p>Describe tu situación con palabras simples y el centro de ayuda te conduciría al proceso correcto.</p></div><Link className="primary-button" href="/cliente/">Ver MiHumana demo</Link></div>
     </section>
 
     <section className="content-section" style={{ maxWidth: 900, margin: "0 auto", padding: "24px 24px 64px" }}>

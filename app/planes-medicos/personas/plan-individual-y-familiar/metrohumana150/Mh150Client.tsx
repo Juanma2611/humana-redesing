@@ -192,9 +192,9 @@ export default function Mh150Client() {
     <SiteShell title="MH150 · Plan Premium MetroHumana 150.000">
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link><span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link><span>»</span>
-        <Link href="/planes-medicos/personas">Planes médicos para Personas</Link><span>»</span>
-        <Link href="/planes-medicos/personas/plan-individual-y-familiar">Plan Individual y Familiar Cobertura de Salud en Ecuador</Link><span>»</span>
+        <Link href="/planes-medicos/">Planes médicos</Link><span>»</span>
+        <Link href="/planes-medicos/personas/">Planes médicos para Personas</Link><span>»</span>
+        <Link href="/planes-medicos/personas/plan-individual-y-familiar/">Plan Individual y Familiar Cobertura de Salud en Ecuador</Link><span>»</span>
         <span>Metrohumana150</span>
       </nav>
       <div className="mh150-exp" ref={rootRef}>
@@ -478,7 +478,7 @@ export default function Mh150Client() {
               ))}
             </div>
             <p className="mh150-exp-trust"><Users /> Más de 200.000 personas y empresas confían en Humana.</p>
-            <p style={{ marginTop: 8 }}><Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link></p>
+            <p style={{ marginTop: 8 }}><Link className="ghost-button" href="/planes-medicos/">Ver todos los planes</Link></p>
           </div>
           <div className="mh150-exp-finale-mark" aria-hidden="true"><span>MH</span><strong>150</strong></div>
         </section>

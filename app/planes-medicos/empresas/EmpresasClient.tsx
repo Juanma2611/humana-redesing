@@ -55,7 +55,7 @@ export default function EmpresasClient() {
             <span className="plan-hub-card-icon"><Factory /></span>
             <h3>Grandes</h3>
             <p>Diseñado para grandes empresas con más de 100 empleados, nuestro plan ofrece beneficios premium y soluciones integrales que protegen la salud de tus colaboradores.</p>
-            <Link className="primary-button" href="/planes-medicos/empresas/plan-corporativo">Ver planes <ArrowRight size={18} /></Link>
+            <Link className="primary-button" href="/planes-medicos/empresas/plan-corporativo/">Ver planes <ArrowRight size={18} /></Link>
           </div>
         </article>
         <article className="plan-hub-card">
@@ -66,7 +66,7 @@ export default function EmpresasClient() {
             <span className="plan-hub-card-icon"><Building2 /></span>
             <h3>Pequeñas y medianas</h3>
             <p>Soluciones equilibradas en planes médicos para medianas y pequeñas empresas, desde 5 hasta 99 colaboradores.</p>
-            <Link className="primary-button" href="/planes-medicos/empresas/pequenas-y-medianas">Ver planes <ArrowRight size={18} /></Link>
+            <Link className="primary-button" href="/planes-medicos/empresas/pequenas-y-medianas/">Ver planes <ArrowRight size={18} /></Link>
           </div>
         </article>
       </section>
@@ -82,7 +82,7 @@ export default function EmpresasClient() {
             <ul><li><UsersRound /><b>Empleados protegidos</b></li><li><WalletCards /><b>Cobertura configurable</b></li><li><HeartHandshake /><b>Familiares opcionales</b></li><li><Stethoscope /><b>Teleconsulta y atención</b></li></ul>
             <div className="business-coverage"><small>Cobertura</small><strong>$10.000</strong><span>por colaborador</span></div>
             <button type="button" className="sales-buy" onClick={() => setMessage("Cotización empresarial demostrativa. No se enviaron datos.")}><ShoppingCart size={17} /> Cotizar para mi empresa <ArrowRight /></button>
-            <Link className="sales-more" href="/planes-medicos/empresas/pequenas-y-medianas/plan-humana-business">Ver ficha completa <ArrowRight /></Link>
+            <Link className="sales-more" href="/planes-medicos/empresas/pequenas-y-medianas/plan-humana-business/">Ver ficha completa <ArrowRight /></Link>
           </article>
 
           <div className="business-detail-panel">

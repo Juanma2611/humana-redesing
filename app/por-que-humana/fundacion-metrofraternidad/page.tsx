@@ -3,7 +3,10 @@ import Image from "next/image";
 import { SiteShell } from "@/components/site-shell";
 import { InstitutionalBreadcrumb, InstitutionalRelatedLinks } from "@/components/institutional-nav";
 
-export const metadata: Metadata = { title: "Fundación Metrofraternidad - Humana S.A." };
+export const metadata: Metadata = {
+  title: "Fundación Metrofraternidad - Humana S.A.",
+  description: "Humana junto a Fundación Metrofraternidad brinda cirugías de alta complejidad, atención a la ceguera infantil y brigadas médicas a niños y jóvenes de escasos recursos.",
+};
 
 const programs = [
   {

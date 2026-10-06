@@ -192,9 +192,9 @@ export default function Ph15Client() {
     <SiteShell title="PH15 · Plan Preferido Practihumana 15.000">
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link><span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link><span>»</span>
-        <Link href="/planes-medicos/personas">Planes médicos para Personas</Link><span>»</span>
-        <Link href="/planes-medicos/personas/plan-individual-y-familiar">Plan Individual y Familiar Cobertura de Salud en Ecuador</Link><span>»</span>
+        <Link href="/planes-medicos/">Planes médicos</Link><span>»</span>
+        <Link href="/planes-medicos/personas/">Planes médicos para Personas</Link><span>»</span>
+        <Link href="/planes-medicos/personas/plan-individual-y-familiar/">Plan Individual y Familiar Cobertura de Salud en Ecuador</Link><span>»</span>
         <span>Practihumana15</span>
       </nav>
       <div className="ph15-exp" ref={rootRef}>
@@ -438,7 +438,7 @@ export default function Ph15Client() {
             <p>Cotiza PH15 y empieza a cuidarte hoy, con el respaldo de Humana.</p>
             <div className="ph15-exp-finale-actions">
               <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotizar PH15</button>
-              <Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link>
+              <Link className="ghost-button" href="/planes-medicos/">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="ph15-exp-confirm" role="status">

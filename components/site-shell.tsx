@@ -92,7 +92,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
     <main data-page-title={title}>
       <MotionOrchestrator />
       <div className="prototype-bar">
-        <div className="prototype-portals"><Link href="https://humana.med.ec/portal-prestador/">Portal Prestador</Link><Link href="/portal-broker">Portal Bróker</Link></div>
+        <div className="prototype-portals"><Link href="https://humana.med.ec/portal-prestador/">Portal Prestador</Link><Link href="/portal-broker/">Portal Bróker</Link></div>
       </div>
       <header className="site-header full-header">
         <Link className="brand" href="/" aria-label="Humana, inicio">
@@ -112,18 +112,18 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
               ))}
             </div>
           </div>
-          <Link href="/cotizador">Para ti</Link>
-          <Link href="/planes-medicos/empresas">Empresas</Link>
-          <Link href="/por-que-humana">Nosotros</Link>
-          <Link href="/beneficios">Beneficios</Link>
-          <Link href="/directorio">Red médica</Link>
-          <Link href="/medihumana">Servicios para clientes</Link>
-          <a href="/blog">Bienestar</a>
+          <Link href="/cotizador/">Para ti</Link>
+          <Link href="/planes-medicos/empresas/">Empresas</Link>
+          <Link href="/por-que-humana/">Nosotros</Link>
+          <Link href="/beneficios/">Beneficios</Link>
+          <Link href="/directorio/">Red médica</Link>
+          <Link href="/medihumana/">Servicios para clientes</Link>
+          <a href="/blog/">Bienestar</a>
         </nav>
         <div className="header-actions">
           <div className="help-mini"><Headphones size={18} /><span>¿Necesitas ayuda?<strong>1800 HUMANA (48 62 62)</strong></span></div>
-          <Link className="login-link bordered" href="/cliente">MiHumana</Link>
-          <Link className="primary-button small" href="/planes-medicos"><ShoppingCart size={15} /> Cotiza tu plan</Link>
+          <Link className="login-link bordered" href="/cliente/">MiHumana</Link>
+          <Link className="primary-button small" href="/cotizador/"><ShoppingCart size={15} /> Cotiza tu plan</Link>
         </div>
         <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menú">{menuOpen ? <X /> : <Menu />}</button>
       </header>
@@ -134,12 +134,12 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
             <Image src="/humana-logo-oficial.png" alt="Humana · Cobertura Médica Integral" width={746} height={334} unoptimized />
             <div><strong>Tu bienestar, acompañado siempre.</strong><p>Más de 200.000 personas y empresas confían en Humana.</p></div>
           </div>
-          <div className="footer-trust-actions"><Link href="/cliente"><ShieldCheck /> Ya soy cliente</Link><Link href="/planes-medicos">Conocer planes</Link></div>
+          <div className="footer-trust-actions"><Link href="/cliente/"><ShieldCheck /> Ya soy cliente</Link><Link href="/planes-medicos/">Conocer planes</Link></div>
         </div>
 
         <div className="footer-main-grid">
-          <section className="footer-link-column" aria-labelledby="footer-explora"><h2 id="footer-explora">Descubre Humana</h2><Link href="/por-que-humana">¿Por qué Humana?</Link><Link href="/planes-medicos">Planes médicos</Link><Link href="/planes-medicos?segment=dental">ProSonrisas</Link><Link href="/planes-medicos/empresas">Empresas</Link><Link href="/beneficios">Beneficios</Link><a href="/blog">Bienestar</a></section>
-          <section className="footer-link-column" aria-labelledby="footer-plan"><h2 id="footer-plan">Usa tu plan</h2><Link href="/cliente">MiHumana</Link><Link href="/servicios/reembolsos">Reembolsos</Link><Link href="/servicios/autorizaciones">Autorizaciones</Link><Link href="/directorio">Red médica</Link><Link href="/medihumana">Centro de servicios</Link></section>
+          <section className="footer-link-column" aria-labelledby="footer-explora"><h2 id="footer-explora">Descubre Humana</h2><Link href="/por-que-humana/">¿Por qué Humana?</Link><Link href="/planes-medicos/">Planes médicos</Link><Link href="/planes-medicos/?segment=dental">ProSonrisas</Link><Link href="/planes-medicos/empresas/">Empresas</Link><Link href="/beneficios/">Beneficios</Link><a href="/blog/">Bienestar</a></section>
+          <section className="footer-link-column" aria-labelledby="footer-plan"><h2 id="footer-plan">Usa tu plan</h2><Link href="/cliente/">MiHumana</Link><Link href="/servicios/reembolsos/">Reembolsos</Link><Link href="/servicios/autorizaciones/">Autorizaciones</Link><Link href="/directorio/">Red médica</Link><Link href="/medihumana/">Centro de servicios</Link></section>
 
           <section className="footer-office-card" id="oficinas" aria-labelledby="footer-offices">
             <div className="footer-card-heading"><span><Building2 /></span><div><small>Estamos cerca</small><h2 id="footer-offices">Nuestras oficinas</h2></div></div>
@@ -152,21 +152,19 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
 
           <section className="footer-digital-card" aria-labelledby="footer-digital">
             <div className="footer-card-heading"><span><Smartphone /></span><div><small>Todo en un solo lugar</small><h2 id="footer-digital">Servicios digitales</h2></div></div>
-            <div className="footer-service-links"><Link href="/cliente">Portal de afiliados</Link><Link href="/cliente">Pago en línea</Link><Link href="/directorio">Agendar cita médica</Link></div>
+            <div className="footer-service-links"><Link href="/cliente/">Portal de afiliados</Link><Link href="/cliente/">Pago en línea</Link><Link href="/directorio/">Agendar cita médica</Link></div>
             <p>Descarga MiHumana</p>
             <div className="footer-apps"><a href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer"><Image src="/badges/google-play-badge.png" alt="Disponible en Google Play" width={897} height={240} unoptimized /></a><a href="https://apps.apple.com/ec/app/mi-humana/id1468370810" target="_blank" rel="noreferrer"><Image src="/badges/app-store-badge.png" alt="Disponible en el App Store" width={841} height={240} unoptimized /></a></div>
           </section>
         </div>
 
         <div className="footer-meta-grid">
-          {/* ⚠️ Los PDF de "Lineamientos sanitarios" y "Ley de medicina prepagada" usan
-              nombres de archivo supuestos bajo humana.med.ec/archivos/varios/; confirmar
-              el nombre exacto con el equipo web antes de publicar. */}
           <section><h2>Normativa y privacidad</h2><div className="footer-inline-links">
-            <a href="https://humana.med.ec/archivos/varios/lineamientos-sanitarios.pdf" target="_blank" rel="noreferrer">Lineamientos sanitarios</a>
-            <a href="https://humana.med.ec/archivos/varios/ley-de-medicina-prepagada.pdf" target="_blank" rel="noreferrer">Ley de medicina prepagada</a>
-            <Link href="/por-que-humana/politica-de-proteccion-de-datos">Protección de datos</Link>
-            <Link href="/politica-de-cookies">Política de cookies</Link>
+            <a href="https://humana.med.ec/archivos/varios/Acuerdo-Ministerial-00139-2023-Lineamientos-para-la-aprobacion-de-las-condiciones-sanitarias-.pdf" target="_blank" rel="noreferrer">Lineamientos sanitarios</a>
+            <a href="https://humana.med.ec/archivos/varios/LEY-ORGANICA-MEDICINA-PREPAGADA.pdf" target="_blank" rel="noreferrer">Ley de medicina prepagada</a>
+            <a href="https://humana.med.ec/archivos/varios/tarifa-cero.pdf" target="_blank" rel="noreferrer">Tarifa 0 (cero)</a>
+            <Link href="/por-que-humana/politica-de-proteccion-de-datos/">Protección de datos</Link>
+            <Link href="/politica-de-cookies/">Política de cookies</Link>
           </div></section>
           <section><h2>Pago seguro</h2><div className="footer-payment-brands" aria-label="Medios de pago">{paymentBrands.map(({name,image,width}) => <span key={name} className="payment-chip"><Image src={image} alt={name} width={width} height={40} unoptimized /></span>)}</div></section>
         </div>

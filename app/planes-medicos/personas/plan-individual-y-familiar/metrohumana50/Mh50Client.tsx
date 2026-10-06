@@ -355,9 +355,9 @@ export default function Mh50Client() {
     <SiteShell title="MH50 · Plan Full Metrohumana 50.000">
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link><span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link><span>»</span>
-        <Link href="/planes-medicos/personas">Planes médicos para Personas</Link><span>»</span>
-        <Link href="/planes-medicos/personas/plan-individual-y-familiar">Plan Individual y Familiar Cobertura de Salud en Ecuador</Link><span>»</span>
+        <Link href="/planes-medicos/">Planes médicos</Link><span>»</span>
+        <Link href="/planes-medicos/personas/">Planes médicos para Personas</Link><span>»</span>
+        <Link href="/planes-medicos/personas/plan-individual-y-familiar/">Plan Individual y Familiar Cobertura de Salud en Ecuador</Link><span>»</span>
         <span>Metrohumana50</span>
       </nav>
       <div className="mh50-exp mh50-page" ref={rootRef}>
@@ -592,7 +592,7 @@ export default function Mh50Client() {
             <p>Cotiza el plan más elegido de Humana y empieza a proteger a los tuyos hoy mismo.</p>
             <div className="mh50-exp-finale-actions">
               <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotizar MH50</button>
-              <Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link>
+              <Link className="ghost-button" href="/planes-medicos/">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="mh50-exp-confirm" role="status">

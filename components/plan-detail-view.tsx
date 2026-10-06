@@ -22,7 +22,7 @@ const benefitIcons: Record<string, typeof HeartPulse> = {
 function ActionButtons({ plan, onDemo }: { plan: PlanDetail; onDemo: (message: string) => void }) {
   return (
     <div className="plan-detail-actions">
-      <Link className="primary-button" href="/planes-medicos">
+      <Link className="primary-button" href="/planes-medicos/">
         <ShoppingCart size={16} /> {plan.slug === "proteger" ? "Cotizar plan" : "Cotizar online"} <ArrowRight size={16} />
       </Link>
       <button
@@ -166,9 +166,9 @@ export function PlanDetailView({ plan }: { plan: PlanDetail }) {
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link>
         <span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link>
+        <Link href="/planes-medicos/">Planes médicos</Link>
         <span>»</span>
-        <Link href="/planes-medicos/personas">Planes médicos para Personas</Link>
+        <Link href="/planes-medicos/personas/">Planes médicos para Personas</Link>
         <span>»</span>
         <span>{plan.title}</span>
       </nav>

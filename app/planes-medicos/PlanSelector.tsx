@@ -101,16 +101,16 @@ function coverageDisplay(item: string) {
 }
 
 const fullPlanPages: Record<string, string> = {
-  mh50: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana50",
-  ph15: "/planes-medicos/personas/plan-individual-y-familiar/practihumana15",
-  ph30: "/planes-medicos/personas/plan-individual-y-familiar/practihumana30",
-  mh80: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana80",
-  mh150: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana150",
-  proteger: "/planes-medicos/personas/plan-proteger",
-  prosonrisas: "/planes-medicos/personas/plan-prosonrisas",
-  business: "/planes-medicos/empresas/pequenas-y-medianas/plan-humana-business",
-  pyme: "/planes-medicos/empresas/pequenas-y-medianas/plan-empresarial",
-  corporativo: "/planes-medicos/empresas/plan-corporativo",
+  mh50: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana50/",
+  ph15: "/planes-medicos/personas/plan-individual-y-familiar/practihumana15/",
+  ph30: "/planes-medicos/personas/plan-individual-y-familiar/practihumana30/",
+  mh80: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana80/",
+  mh150: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana150/",
+  proteger: "/planes-medicos/personas/plan-proteger/",
+  prosonrisas: "/planes-medicos/personas/plan-prosonrisas/",
+  business: "/planes-medicos/empresas/pequenas-y-medianas/plan-humana-business/",
+  pyme: "/planes-medicos/empresas/pequenas-y-medianas/plan-empresarial/",
+  corporativo: "/planes-medicos/empresas/plan-corporativo/",
 };
 
 function planHeroImage(plan: Plan) {

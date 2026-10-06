@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { InstitutionalBreadcrumb, InstitutionalRelatedLinks, officialContactChannels } from "@/components/institutional-nav";
 
-export const metadata: Metadata = { title: "Canal de Reporte Confidencial - Humana S.A." };
+export const metadata: Metadata = {
+  title: "Canal de Reporte Confidencial - Humana S.A.",
+  description: "Canal de Reporte Confidencial de Grupo Conclina para informar sobre eventos irregulares o actividades ilícitas de forma confidencial.",
+};
 
 const testimonies = [
   "Apropiación indebida de fondos y activos.",

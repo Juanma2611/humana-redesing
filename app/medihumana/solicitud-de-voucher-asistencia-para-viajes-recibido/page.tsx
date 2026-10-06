@@ -25,7 +25,7 @@ export default function VoucherRecibidoPage() {
     <SiteShell title="Solicitud de Voucher asistencia para viajes recibido">
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link><span>»</span>
-        <Link href="/medihumana">Medihumana</Link><span>»</span>
+        <Link href="/medihumana/">Medihumana</Link><span>»</span>
         <span>Solicitud de Voucher asistencia para viajes recibido</span>
       </nav>
 

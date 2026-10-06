@@ -65,11 +65,11 @@ export default function PlanPymeClient() {
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link>
         <span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link>
+        <Link href="/planes-medicos/">Planes médicos</Link>
         <span>»</span>
-        <Link href="/planes-medicos/empresas">Planes médicos para Empresas</Link>
+        <Link href="/planes-medicos/empresas/">Planes médicos para Empresas</Link>
         <span>»</span>
-        <Link href="/planes-medicos/empresas/pequenas-y-medianas">Planes médicos para Pequeñas y Medianas Empresas</Link>
+        <Link href="/planes-medicos/empresas/pequenas-y-medianas/">Planes médicos para Pequeñas y Medianas Empresas</Link>
         <span>»</span>
         <span>Plan Pyme</span>
       </nav>

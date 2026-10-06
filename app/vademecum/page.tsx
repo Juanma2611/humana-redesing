@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 
-export const metadata: Metadata = { title: "Vademecum - Humana S.A." };
+export const metadata: Metadata = {
+  title: "Vademecum - Humana S.A.",
+  description: "Accede al Vademecum de Medicamentos de Humana a través de nuestra Central de ayuda con tu usuario registrado.",
+};
 
 export default function VademecumPage() {
   return (

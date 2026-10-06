@@ -48,7 +48,7 @@ export default function PlanesMedicosPage() {
               Humana te presenta una amplia gama de planes individuales, familiares y para coberturas
               específicas que te ayudarán a mantenerte seguro en tu camino de vida.
             </p>
-            <Link className="primary-button" href="/planes-medicos/personas">
+            <Link className="primary-button" href="/planes-medicos/personas/">
               Ver planes <ArrowRight size={18} />
             </Link>
           </div>
@@ -71,7 +71,7 @@ export default function PlanesMedicosPage() {
               La solución de protección para tus empleados y sus familias. Humana te ofrece excelentes
               beneficios acordes a las necesidades de tu empresa para atraer y retener el talento.
             </p>
-            <Link className="primary-button" href="/planes-medicos/empresas">
+            <Link className="primary-button" href="/planes-medicos/empresas/">
               Ver planes <ArrowRight size={18} />
             </Link>
           </div>

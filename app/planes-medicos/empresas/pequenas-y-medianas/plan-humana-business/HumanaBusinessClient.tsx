@@ -331,9 +331,9 @@ export default function HumanaBusinessClient() {
     <SiteShell title="Humana Business · Plan empresarial">
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link><span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link><span>»</span>
-        <Link href="/planes-medicos/empresas">Planes médicos para Empresas</Link><span>»</span>
-        <Link href="/planes-medicos/empresas/pequenas-y-medianas">Planes médicos para Pequeñas y Medianas Empresas</Link><span>»</span>
+        <Link href="/planes-medicos/">Planes médicos</Link><span>»</span>
+        <Link href="/planes-medicos/empresas/">Planes médicos para Empresas</Link><span>»</span>
+        <Link href="/planes-medicos/empresas/pequenas-y-medianas/">Planes médicos para Pequeñas y Medianas Empresas</Link><span>»</span>
         <span>Plan Humana Business</span>
       </nav>
       <div className="mh50-exp business-page" ref={rootRef}>
@@ -494,7 +494,7 @@ export default function HumanaBusinessClient() {
               <button type="button" className="primary-button" onClick={handleQuoteClick}>Solicita información</button>
               <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
               <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
-              <Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link>
+              <Link className="ghost-button" href="/planes-medicos/">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="mh50-exp-confirm" role="status">
