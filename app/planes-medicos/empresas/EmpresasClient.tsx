@@ -10,7 +10,7 @@ import {
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const businessDetails = [
-  { icon: SlidersHorizontal, title: "Configura la cobertura", items: ["$10.000, $20.000 o $50.000 por persona", "Deducibles de $100, $150 o $180", "Porcentajes configurables", "Maternidad opcional"] },
+  { icon: SlidersHorizontal, title: "Configura la cobertura", items: ["$10.000 de cobertura por enfermedad", "Deducibles de $50, $80 o $100", "Porcentajes configurables", "Maternidad opcional"] },
   { icon: UsersRound, title: "Cuida a tus colaboradores", items: ["Red ambulatoria con copagos", "Extensión a familiares", "Farmacias en convenio", "Opciones según contratación"] },
   { icon: Stethoscope, title: "Atención cercana", items: ["Teleconsulta", "Médico a domicilio", "Ambulancia terrestre", "Red médica según configuración"] },
   { icon: Building2, title: "Valor para tu empresa", items: ["Bienestar para el equipo", "Beneficio laboral competitivo", "Opciones escalables", "Acompañamiento empresarial"] },
@@ -80,7 +80,7 @@ export default function EmpresasClient() {
             <span className="sales-plan-badge">Plan empresarial</span>
             <div className="business-card-title"><span><HeartHandshake /></span><div><small>Protección para tu equipo</small><h3>Humana Business</h3></div></div>
             <ul><li><UsersRound /><b>Empleados protegidos</b></li><li><WalletCards /><b>Cobertura configurable</b></li><li><HeartHandshake /><b>Familiares opcionales</b></li><li><Stethoscope /><b>Teleconsulta y atención</b></li></ul>
-            <div className="business-coverage"><small>Opciones de cobertura</small><strong>$10K · $20K · $50K</strong><span>por colaborador</span></div>
+            <div className="business-coverage"><small>Cobertura</small><strong>$10.000</strong><span>por colaborador</span></div>
             <button type="button" className="sales-buy" onClick={() => setMessage("Cotización empresarial demostrativa. No se enviaron datos.")}><ShoppingCart size={17} /> Cotizar para mi empresa <ArrowRight /></button>
             <Link className="sales-more" href="/planes-medicos/empresas/pequenas-y-medianas/plan-humana-business">Ver ficha completa <ArrowRight /></Link>
           </article>

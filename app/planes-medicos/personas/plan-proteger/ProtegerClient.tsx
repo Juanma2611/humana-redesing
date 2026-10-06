@@ -571,7 +571,7 @@ export default function ProtegerClient() {
               </div>
             </details>
             <details>
-              <summary>Preexistencias y discapacidad <span>+</span></summary>
+              <summary>Preexistencias y discapacidad (montos referenciales) <span>+</span></summary>
               <div className="mh50-exp-accordion-grid">
                 {preexistingConditions.map(({ icon: Icon, value, label }) => (
                   <article key={label}><Icon /><strong>{value}</strong><span>{label}</span></article>
@@ -667,7 +667,7 @@ export default function ProtegerClient() {
             <span className="mh50-exp-eyebrow light">RESPALDO A NIVEL NACIONAL</span>
             <h2>Somos parte del grupo más importante en prestaciones médicas de Ecuador.</h2>
             <p>Más de 250 grupos corporativos y empresas reconocidas confían en Humana, respaldados por Conclina C.A.</p>
-            <strong>170.000+</strong>
+            <strong>200.000+</strong>
             <span>afiliados respaldados a nivel nacional</span>
           </div>
         </section>
