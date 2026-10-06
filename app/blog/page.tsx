@@ -1,10 +1,15 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Building2, ClipboardList, Mail, MapPin, Monitor, Phone, ShoppingCart } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 import { PageHero, SiteShell } from "@/components/site-shell";
-import { blogPlans } from "@/lib/blog-articles";
-import { getBlogArticles } from "@/lib/blog-source";
+import { getAllBlogArticles } from "@/lib/blog-source";
+
+export const metadata: Metadata = {
+  title: "Blog Humana - Humana S.A.",
+  description: "Contenido de salud, bienestar y prevención de Humana para cuidar de ti y tu familia.",
+};
 
 const channels = [
   { icon: SiWhatsapp, label: "Canal de atención por WhatsApp", value: "+593 2401 7002", brandColor: "#0b80bd" },
@@ -15,36 +20,18 @@ const channels = [
   { icon: Phone, label: "El teléfono", value: "1800 humana (48 62 62)" },
 ];
 
-const planDetailHrefs: Record<string, string> = {
-  proteger: "/planes-medicos/personas/plan-proteger/",
-  "individual-familiar": "/planes-medicos/personas/plan-individual-y-familiar/",
-};
+export default function Blog() {
+  const articles = getAllBlogArticles();
 
-const planCtas: Record<string, string[]> = {
-  "Plan Proteger": ["Cotizar online", "Solicitar llamada"],
-  "Humana Kids": ["Solicitar llamada"],
-  "Plan Jóvenes": ["Cotizar online", "Solicitar llamada"],
-  "Plan Prosonrisas": ["Cotizar online", "Solicitar llamada"],
-  "Individual y Familiar": ["Solicitar llamada"],
-};
-
-export default async function Blog() {
-  const articles = await getBlogArticles();
-  const firstArticles = articles.slice(0, 4);
-  const restArticles = articles.slice(4);
   return <SiteShell title="Bienestar"><PageHero eyebrow="Blog Humana" title="Aprende, cuida y vive mejor" description="Contenido de salud y protección conectado con acciones útiles, sin interrumpir la lectura." imageSrc="/bienestar-hero.webp" imageAlt="Familia disfrutando una caminata saludable en un parque" imagePosition="center" />
     <section className="content-section blog-listing">
       <div className="blog-listing-main">
-        <div className="blog-listing-grid">
-          {firstArticles.map(article => <article className="card-clickable" key={article.title}><Link className="card-cover-link" href={`/blog/${article.slug}`} aria-label={article.title} /><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | {article.category}</span><p>{article.copy}</p><div className="home-blog-actions"><span className="card-cover-cta">Leer más <ArrowRight /></span></div></div></article>)}
-        </div>
-
-        <div className="blog-listing-grid blog-plan-grid">
-          {blogPlans.map(plan => <article key={plan.title} className={plan.detailSlug ? "blog-plan-card card-clickable" : "blog-plan-card"}>{plan.detailSlug && <Link className="card-cover-link" href={planDetailHrefs[plan.detailSlug] ?? "/planes-medicos"} aria-label={plan.title} />}<div className="home-blog-image"><Image src={plan.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{plan.title}</h3><span>{plan.date} | {plan.category}</span><p>{plan.copy}</p><div className="home-blog-actions">{planCtas[plan.title]?.map((cta, i) => <Link key={cta} className={i === 0 && planCtas[plan.title].length > 1 ? "primary-button small card-above-cover" : "card-above-cover"} href="/planes-medicos/">{cta} <ArrowRight size={16} /></Link>)}</div></div></article>)}
+        <div className="article-provisional-notice" role="note" style={{ marginBottom: 24 }}>
+          Los posts de este blog están en migración desde WordPress. Por ahora solo se muestran los que ya tienen contenido (provisional, pendiente de reemplazo por el texto oficial).
         </div>
 
         <div className="blog-listing-grid">
-          {restArticles.map(article => <article className="card-clickable" key={article.title}><Link className="card-cover-link" href={`/blog/${article.slug}`} aria-label={article.title} /><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | {article.category}</span><p>{article.copy}</p><div className="home-blog-actions"><span className="card-cover-cta">Leer más <ArrowRight /></span></div></div></article>)}
+          {articles.map(article => <article className="card-clickable" key={article.slug}><Link className="card-cover-link" href={`/blog/${article.category}/${article.slug}/`} aria-label={article.title} /><div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div><div className="home-blog-copy"><h3>{article.title}</h3><span>{article.date} | {article.categoryLabel}</span><p>{article.copy}</p><div className="home-blog-actions"><span className="card-cover-cta">Leer más <ArrowRight /></span></div></div></article>)}
         </div>
       </div>
 

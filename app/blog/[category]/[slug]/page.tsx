@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -5,7 +6,15 @@ import { ArrowRight, Building2, ClipboardList, Globe, Mail, MapPin, Monitor, Pho
 import { SiWhatsapp } from "react-icons/si";
 import { SiteShell } from "@/components/site-shell";
 import { contactBlocks, type BlogBodyBlock } from "@/lib/blog-articles";
-import { getBlogArticles } from "@/lib/blog-source";
+import { getAllBlogArticles, getBlogArticle } from "@/lib/blog-source";
+import { getCategoryLabel } from "@/lib/blog-catalog";
+
+export async function generateMetadata({ params }: { params: Promise<{ category: string; slug: string }> }): Promise<Metadata> {
+  const { category, slug } = await params;
+  const article = getBlogArticle(category, slug);
+  if (!article) return {};
+  return { title: `${article.title} - Blog Humana - Humana S.A.`, description: article.copy };
+}
 
 const channels = [
   { icon: SiWhatsapp, label: "Canal de atención por WhatsApp", value: "+593 2401 7002", brandColor: "#0b80bd" },
@@ -27,7 +36,7 @@ const contactIcons: Record<string, React.ComponentType<{ size?: number }>> = {
 };
 
 export async function generateStaticParams() {
-  return (await getBlogArticles()).map(article => ({ slug: article.slug }));
+  return getAllBlogArticles().map((article) => ({ category: article.category, slug: article.slug }));
 }
 
 function renderBody(body: BlogBodyBlock[] | undefined, fallback: string) {
@@ -41,13 +50,12 @@ function renderBody(body: BlogBodyBlock[] | undefined, fallback: string) {
   });
 }
 
-export default async function BlogArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const articles = await getBlogArticles();
-  const article = articles.find(a => a.slug === slug);
+export default async function BlogArticlePage({ params }: { params: Promise<{ category: string; slug: string }> }) {
+  const { category, slug } = await params;
+  const article = getBlogArticle(category, slug);
   if (!article) notFound();
 
-  const related = articles.filter(a => a.slug !== slug).slice(0, 3);
+  const related = getAllBlogArticles().filter((a) => a.slug !== slug).slice(0, 3);
 
   return (
     <SiteShell title="Bienestar">
@@ -57,7 +65,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
           <span>»</span>
           <Link href="/blog/">Blog</Link>
           <span>»</span>
-          <Link href="/blog/">{article.category}</Link>
+          <Link href={`/blog/category/${category}/`}>{getCategoryLabel(category)}</Link>
           <span>»</span>
           <span>{article.title}</span>
         </nav>
@@ -68,9 +76,13 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
               <h1>{article.title}</h1>
               <div className="article-meta">
                 <span>{article.date}</span>
-                <span className="article-category">{article.category}</span>
+                <span className="article-category">{article.categoryLabel}</span>
               </div>
             </header>
+
+            <div className="article-provisional-notice" role="note">
+              Contenido provisional — en revisión de diseño. Será reemplazado por el texto oficial migrado desde WordPress.
+            </div>
 
             <div className="article-hero-image">
               <Image src={article.image} alt={article.title} fill sizes="(max-width: 900px) 100vw, 820px" unoptimized />
@@ -113,7 +125,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
                   <li key={item.slug}>
                     <div className="article-related-thumb"><Image src={item.image} alt="" fill sizes="72px" unoptimized /></div>
                     <div className="article-related-copy">
-                      <Link href={`/blog/${item.slug}`}>{item.title}</Link>
+                      <Link href={`/blog/${item.category}/${item.slug}/`}>{item.title}</Link>
                       <span>{item.date}</span>
                       <p>{item.copy.slice(0, 80)}…</p>
                     </div>
