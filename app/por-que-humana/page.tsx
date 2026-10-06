@@ -6,7 +6,7 @@ import {
   Network, ShieldCheck, Sparkles, Stethoscope, UsersRound,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
-import { InstitutionalRelatedLinks } from "@/components/institutional-nav";
+import { InstitutionalExploreCards } from "@/components/institutional-nav";
 
 export const metadata: Metadata = {
   title: "¿Quiénes somos? - Humana S.A.",
@@ -35,35 +35,45 @@ export default function PorQueHumanaPage() {
       <span>¿Quiénes somos?</span>
     </nav>
 
-    <section className="content-section plan-hub-intro" style={{ maxWidth: 860 }}>
-      <div style={{ position: "relative", width: 160, height: 64, margin: "0 auto 20px" }}>
-        <Image src="https://humana.med.ec/wp-content/uploads/2022/11/conclina-logo.png" alt="Logo Conclina" fill sizes="160px" unoptimized style={{ objectFit: "contain" }} />
-      </div>
-      <h1>¿Quiénes somos?</h1>
-      <p>
-        <strong>Humana S.A.</strong> es una compañía de salud prepagada, que forma parte del grupo más
-        importante en prestaciones médicas, <strong>Conclina C.A.</strong>, al que también pertenece el
-        Hospital Metropolitano, Fundación Metrofraternidad, y Metrored.
-      </p>
-      <p>
-        Nuestra trayectoria en el mercado ecuatoriano desde 1994 nos ha permitido cuidar del tesoro más
-        preciado: <strong>la salud y el bienestar de miles de familias ecuatorianas.</strong> Actualmente
-        contamos con <Link href="/somos-parte-de-la-red-humana/">más de 200.000 afiliados</Link> a nivel
-        nacional.
-      </p>
-      <p>
-        El respeto por el ser humano ha sido nuestra principal misión, donde la <strong>ética</strong>, la{" "}
-        <strong>calidez</strong> y la <strong>integridad</strong> han marcado los valores en el servicio
-        que damos a todos los ecuatorianos.
-      </p>
-    </section>
+    {/*
+      Piloto pase de diseño (Grupo Conócenos): se fusiona visualmente el
+      bloque de intro (logo + H1 + 3 párrafos) con el hero de imagen que
+      antes venía después, para que la página abra con una sola pieza visual
+      en vez de dos secciones de estilo distinto seguidas. No se quita, ni
+      resume, ni reescribe ningún texto: se mantiene el mismo H1, los mismos
+      3 párrafos, y el mismo H2+párrafo+acciones+trust badge que ya existían,
+      solo se reordena el contenedor visual.
 
-    <InstitutionalRelatedLinks />
-
+      Nota de cifras (pendiente de validar con Comercial, NO se unifica):
+      esta página usa "Más de 200.000" (texto oficial de esta página), pero
+      /por-que-humana/humana-sa/ usa "cerca de 250.000". Es una
+      inconsistencia que ya existe en el sitio oficial; cada página conserva
+      su cifra tal cual.
+    */}
     <section className="about-hero">
       <Image src="/humana-historia-hero.png" alt="Familia ecuatoriana recibiendo orientación de una profesional de salud" fill priority sizes="100vw" unoptimized />
       <div className="about-hero-shade" />
       <div className="about-hero-copy">
+        <div style={{ position: "relative", width: 140, height: 56, marginBottom: 18 }}>
+          <Image src="https://humana.med.ec/wp-content/uploads/2022/11/conclina-logo.png" alt="Logo Conclina" fill sizes="140px" unoptimized style={{ objectFit: "contain", objectPosition: "left" }} />
+        </div>
+        <h1>¿Quiénes somos?</h1>
+        <p>
+          <strong>Humana S.A.</strong> es una compañía de salud prepagada, que forma parte del grupo más
+          importante en prestaciones médicas, <strong>Conclina C.A.</strong>, al que también pertenece el
+          Hospital Metropolitano, Fundación Metrofraternidad, y Metrored.
+        </p>
+        <p>
+          Nuestra trayectoria en el mercado ecuatoriano desde 1994 nos ha permitido cuidar del tesoro más
+          preciado: <strong>la salud y el bienestar de miles de familias ecuatorianas.</strong> Actualmente
+          contamos con <Link href="/somos-parte-de-la-red-humana/">más de 200.000 afiliados</Link> a nivel
+          nacional.
+        </p>
+        <p>
+          El respeto por el ser humano ha sido nuestra principal misión, donde la <strong>ética</strong>, la{" "}
+          <strong>calidez</strong> y la <strong>integridad</strong> han marcado los valores en el servicio
+          que damos a todos los ecuatorianos.
+        </p>
         <span className="kicker">¿Por qué Humana?</span>
         <h2>Más de 30 años cuidando lo que más importa.</h2>
         <p>Salud, bienestar y respaldo para las personas, familias y empresas del Ecuador.</p>
@@ -97,6 +107,8 @@ export default function PorQueHumanaPage() {
       <div className="section-heading centered"><span className="kicker">Nuestra forma de cuidar</span><h2>Humanos en cada decisión.</h2><p>El respeto por el ser humano guía nuestro servicio.</p></div>
       <div className="about-values-grid">{values.map(({ icon: Icon, title, copy }) => <article key={title}><span><Icon /></span><h3>{title}</h3><p>{copy}</p></article>)}</div>
     </section>
+
+    <InstitutionalExploreCards />
 
     <section className="about-purpose"><Network /><div><span className="kicker light">Nuestro compromiso</span><h2>Tu salud no se vive en partes.</h2><p>Por eso conectamos prevención, atención y respaldo para acompañarte cuando lo necesites.</p></div><Link className="white-button" href="/planes-medicos/">Encuentra tu plan <ArrowRight size={18} /></Link></section>
   </SiteShell>;
