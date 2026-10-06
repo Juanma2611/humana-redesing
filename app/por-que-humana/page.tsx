@@ -58,18 +58,18 @@ export default function PorQueHumanaPage() {
           <Image src="https://humana.med.ec/wp-content/uploads/2022/11/conclina-logo.png" alt="Logo Conclina" fill sizes="140px" unoptimized style={{ objectFit: "contain", objectPosition: "left" }} />
         </div>
         <h1>¿Quiénes somos?</h1>
-        <p>
+        <p className="text-justify-wide">
           <strong>Humana S.A.</strong> es una compañía de salud prepagada, que forma parte del grupo más
           importante en prestaciones médicas, <strong>Conclina C.A.</strong>, al que también pertenece el
           Hospital Metropolitano, Fundación Metrofraternidad, y Metrored.
         </p>
-        <p>
+        <p className="text-justify-wide">
           Nuestra trayectoria en el mercado ecuatoriano desde 1994 nos ha permitido cuidar del tesoro más
           preciado: <strong>la salud y el bienestar de miles de familias ecuatorianas.</strong> Actualmente
           contamos con <Link href="/somos-parte-de-la-red-humana/">más de 200.000 afiliados</Link> a nivel
           nacional.
         </p>
-        <p>
+        <p className="text-justify-wide">
           El respeto por el ser humano ha sido nuestra principal misión, donde la <strong>ética</strong>, la{" "}
           <strong>calidez</strong> y la <strong>integridad</strong> han marcado los valores en el servicio
           que damos a todos los ecuatorianos.
@@ -94,7 +94,7 @@ export default function PorQueHumanaPage() {
       <div className="about-story-intro">
         <span className="kicker">Quiénes somos</span>
         <h2>Una historia construida alrededor de las personas.</h2>
-        <p>Humana es una compañía ecuatoriana de medicina prepagada que, desde 1994, acompaña a sus afiliados financiando el acceso a servicios de salud y atención médica.</p>
+        <p className="text-justify-wide">Humana es una compañía ecuatoriana de medicina prepagada que, desde 1994, acompaña a sus afiliados financiando el acceso a servicios de salud y atención médica.</p>
         <div className="about-story-chip"><UsersRound color="#fff" size={22} /><div><strong>+30 años</strong><span>Experiencia en salud</span></div></div>
       </div>
       <div className="about-timeline">

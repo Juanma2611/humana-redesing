@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { MapPin } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
-import { InstitutionalBreadcrumb, InstitutionalRelatedLinks } from "@/components/institutional-nav";
+import { InstitutionalBreadcrumb, InstitutionalClosingCta, InstitutionalExploreCards } from "@/components/institutional-nav";
 
 export const metadata: Metadata = {
   title: "Metrored - Humana S.A.",
@@ -50,44 +49,60 @@ export default function MetroredPage() {
     <SiteShell title="Metrored">
       <InstitutionalBreadcrumb page="Metrored" />
 
-      <section className="content-section plan-hub-intro" style={{ maxWidth: 860 }}>
-        <div style={{ position: "relative", width: 200, height: 72, margin: "0 auto 20px" }}>
-          <Image src="https://humana.med.ec/wp-content/uploads/2020/12/metrored-logo-humana-medicina-prepagada.png" alt="Logo Metrored" fill sizes="200px" unoptimized style={{ objectFit: "contain" }} />
+      {/* Plantilla institucional (aprobada en Humana S.A.): hero de borde a
+          borde. No hay foto propia de Metrored para la columna de imagen,
+          así que usa el logo oficial contenido en vez de inventar una
+          fotografía. */}
+      <section className="institutional-hero">
+        <div className="institutional-hero-inner">
+          <div className="institutional-hero-media is-logo">
+            <Image src="https://humana.med.ec/wp-content/uploads/2020/12/metrored-logo-humana-medicina-prepagada.png" alt="Logo Metrored" fill sizes="(max-width: 900px) 100vw, 45vw" unoptimized />
+          </div>
+          <div className="institutional-hero-copy">
+            <span className="kicker">¿Quiénes somos?</span>
+            <h1>Metrored</h1>
+            <p className="text-justify-wide">
+              Centros Médicos Metrored es la más moderna red de servicios médicos ambulatorios del
+              Ecuador. La red pertenece a Metroambulat S.A., una empresa del grupo Conclina CA – Hospital
+              Metropolitano, líder en el mercado de salud privada desde 1985.
+            </p>
+            <a className="primary-button" href="https://www.metrored.med.ec/servicios/untitledcitas-medicas" target="_blank" rel="noreferrer">
+              Agendar cita en Metrored <ArrowRight size={16} />
+            </a>
+            <p className="text-justify-wide" style={{ marginTop: 18 }}>
+              Metrored ofrece servicios médicos ambulatorios en centros médicos, centros de toma de
+              muestras para laboratorio ubicados junto a farmacias Fybeca y dispensarios médicos ubicados
+              dentro de la empresa con la que Metroambulat S.A. tiene convenio.
+            </p>
+            <p style={{ margin: "10px 0 0" }}><strong>Consultas Médicas:</strong> Metrored brinda en sus centros médicos atención ambulatoria en diversas especialidades médicas.</p>
+            <p style={{ margin: "6px 0 0" }}><strong>Centros Médicos:</strong> Metrored siempre busca estar más cerca de ti y proporciona centros médicos en Quito como en Guayaquil.</p>
+            <p style={{ margin: "6px 0 0" }}><strong>Salud Ocupacional:</strong> Metroambulat es el servicio de atención médica ocupacional para las empresas de Ecuador.</p>
+          </div>
         </div>
-        <h1>Metrored</h1>
-        <p>
-          Centros Médicos Metrored es la más moderna red de servicios médicos ambulatorios del Ecuador. La
-          red pertenece a Metroambulat S.A., una empresa del grupo Conclina CA – Hospital Metropolitano,
-          líder en el mercado de salud privada desde 1985.
-        </p>
-        <a className="primary-button" href="https://www.metrored.med.ec/servicios/untitledcitas-medicas" target="_blank" rel="noreferrer">
-          Agendar cita en Metrored
-        </a>
-        <p style={{ marginTop: 20 }}>
-          Metrored ofrece servicios médicos ambulatorios en centros médicos, centros de toma de muestras
-          para laboratorio ubicados junto a farmacias Fybeca y dispensarios médicos ubicados dentro de la
-          empresa con la que Metroambulat S.A. tiene convenio.
-        </p>
-        <p><strong>Consultas Médicas:</strong> Metrored brinda en sus centros médicos atención ambulatoria en diversas especialidades médicas.</p>
-        <p><strong>Centros Médicos:</strong> Metrored siempre busca estar más cerca de ti y proporciona centros médicos en Quito como en Guayaquil.</p>
-        <p><strong>Salud Ocupacional:</strong> Metroambulat es el servicio de atención médica ocupacional para las empresas de Ecuador.</p>
       </section>
 
-      <section className="content-section" style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px 48px" }}>
-        <h2>Quito</h2>
-        <div className="plan-hub-grid plan-hub-grid-personas" style={{ marginTop: 20 }}>
+      <section className="content-section" style={{ padding: "64px clamp(24px,7vw,110px)" }}>
+        <div className="section-heading centered" style={{ marginBottom: 28 }}>
+          <span className="kicker">Dónde encontrarnos</span>
+          <h2>Quito</h2>
+        </div>
+        <div className="plan-hub-grid plan-hub-grid-personas" style={{ maxWidth: 1180, margin: "0 auto" }}>
           {quitoCenters.map((center) => <CenterCard key={center.name} center={center} />)}
         </div>
       </section>
 
-      <section className="content-section" style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px 48px" }}>
-        <h2>Guayaquil</h2>
-        <div className="plan-hub-grid plan-hub-grid-personas" style={{ marginTop: 20 }}>
+      <section className="institutional-topic-section">
+        <div className="section-heading centered" style={{ marginBottom: 28, position: "relative", zIndex: 1 }}>
+          <h2>Guayaquil</h2>
+        </div>
+        <div className="plan-hub-grid plan-hub-grid-personas" style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 1 }}>
           {guayaquilCenters.map((center) => <CenterCard key={center.name} center={center} />)}
         </div>
       </section>
 
-      <InstitutionalRelatedLinks />
+      <InstitutionalClosingCta />
+
+      <InstitutionalExploreCards currentHref="/por-que-humana/metrored/" />
     </SiteShell>
   );
 }

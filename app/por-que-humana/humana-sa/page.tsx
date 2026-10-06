@@ -66,7 +66,7 @@ export default function HumanaSaPage() {
           <div className="institutional-hero-copy">
             <span className="kicker">¿Quiénes somos?</span>
             <h1>Humana S.A.</h1>
-            <p>
+            <p className="text-justify-wide">
               Humana S.A. es una empresa prestadora de servicios integrales de salud y bienestar. Desde
               1994, cuidamos el bienestar de nuestros clientes financiando sus necesidades de salud, por
               eso garantizamos el acceso a los mejores prestadores y proveedores del país con un servicio
@@ -74,7 +74,7 @@ export default function HumanaSaPage() {
               misión, donde la ética, la calidez y la integridad han marcado los valores en el servicio
               que damos a todos los ecuatorianos.
             </p>
-            <p>
+            <p className="text-justify-wide">
               Formamos parte del grupo más importante en prestaciones médicas en Ecuador, Conclina C.A.,
               que está conformado por el Hospital Metropolitano, Humana y Metrored. Esta importante red se
               ha convertido en sinónimo de excelencia, seguridad, calidad, eficiencia e innovación.

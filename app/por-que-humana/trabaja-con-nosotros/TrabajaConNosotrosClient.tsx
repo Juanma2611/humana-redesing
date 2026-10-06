@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { AlertTriangle } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
-import { InstitutionalBreadcrumb, InstitutionalRelatedLinks } from "@/components/institutional-nav";
+import { InstitutionalBreadcrumb, InstitutionalExploreCards } from "@/components/institutional-nav";
 
 // ⚠️ La lista de cargos cambia según las vacantes abiertas; confirmar con Talento Humano
 // antes de publicar. Copiada tal cual del sitio oficial el 6 de octubre de 2026.
@@ -27,19 +27,24 @@ export default function TrabajaConNosotrosClient() {
     <SiteShell title="Trabaja con nosotros">
       <InstitutionalBreadcrumb page="Trabaja con nosotros" />
 
-      <section className="content-section plan-hub-intro" style={{ maxWidth: 860 }}>
-        <h1>Trabaja con nosotros</h1>
-        <p>Déjanos tus datos y envíanos tu hoja de vida, contaremos contigo para próximas candidaturas.</p>
-      </section>
-
-      <section className="content-section" style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px 24px" }}>
-        <div style={{ position: "relative", width: "100%", aspectRatio: "16/7", borderRadius: 20, overflow: "hidden" }}>
-          <Image src="https://humana.med.ec/wp-content/uploads/2025/10/buscamos-talento-mas-humano.jpg" alt="Buscamos talento más humano" fill sizes="760px" unoptimized style={{ objectFit: "cover" }} />
+      {/* Plantilla institucional (aprobada en Humana S.A.): hero de borde a
+          borde con foto real, en vez de un hueco de imagen con mucho blanco
+          alrededor. */}
+      <section className="institutional-hero">
+        <div className="institutional-hero-inner">
+          <div className="institutional-hero-media">
+            <Image src="https://humana.med.ec/wp-content/uploads/2025/10/buscamos-talento-mas-humano.jpg" alt="Buscamos talento más humano" fill sizes="(max-width: 900px) 100vw, 45vw" unoptimized style={{ objectFit: "cover" }} />
+          </div>
+          <div className="institutional-hero-copy">
+            <span className="kicker">¿Quiénes somos?</span>
+            <h1>Trabaja con nosotros</h1>
+            <p className="text-justify-wide">Déjanos tus datos y envíanos tu hoja de vida, contaremos contigo para próximas candidaturas.</p>
+          </div>
         </div>
       </section>
 
-      <section className="content-section" style={{ maxWidth: 640, margin: "0 auto", padding: "0 24px 64px" }}>
-        <div className="plan-lead-form" style={{ padding: 32 }}>
+      <section className="content-section" style={{ padding: "64px clamp(24px,7vw,110px)" }}>
+        <div className="plan-lead-form" style={{ padding: 32, maxWidth: 640, margin: "0 auto" }}>
           <div style={{ display: "flex", gap: 10, alignItems: "flex-start", background: "#fff4e5", border: "1px solid #f3cf8a", borderRadius: 12, padding: 14, marginBottom: 20 }}>
             <AlertTriangle size={18} color="#a3690b" style={{ flexShrink: 0, marginTop: 2 }} />
             <p style={{ margin: 0, fontSize: 13.5, color: "#7a4e07" }}>
@@ -117,7 +122,7 @@ export default function TrabajaConNosotrosClient() {
         </div>
       </section>
 
-      <InstitutionalRelatedLinks />
+      <InstitutionalExploreCards currentHref="/por-que-humana/trabaja-con-nosotros/" />
     </SiteShell>
   );
 }
