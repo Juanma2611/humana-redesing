@@ -47,7 +47,7 @@ export default function PlanesMedicosPersonasPage() {
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link>
         <span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link>
+        <Link href="/planes-medicos/">Planes médicos</Link>
         <span>»</span>
         <span>Planes médicos para Personas</span>
       </nav>

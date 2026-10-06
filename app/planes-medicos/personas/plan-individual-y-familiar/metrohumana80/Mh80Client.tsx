@@ -198,9 +198,9 @@ export default function Mh80Client() {
     <SiteShell title="MH80 · Plan Familiar Metrohumana 80.000">
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link><span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link><span>»</span>
-        <Link href="/planes-medicos/personas">Planes médicos para Personas</Link><span>»</span>
-        <Link href="/planes-medicos/personas/plan-individual-y-familiar">Plan Individual y Familiar Cobertura de Salud en Ecuador</Link><span>»</span>
+        <Link href="/planes-medicos/">Planes médicos</Link><span>»</span>
+        <Link href="/planes-medicos/personas/">Planes médicos para Personas</Link><span>»</span>
+        <Link href="/planes-medicos/personas/plan-individual-y-familiar/">Plan Individual y Familiar Cobertura de Salud en Ecuador</Link><span>»</span>
         <span>Metrohumana80</span>
       </nav>
       <div className="mh80-exp" ref={rootRef}>
@@ -546,7 +546,7 @@ export default function Mh80Client() {
               ))}
             </div>
             <p className="mh80-exp-trust"><Users /> Más de 200.000 personas y empresas confían en Humana.</p>
-            <Link className="mh80-exp-finale-back" href="/planes-medicos">Ver todos los planes</Link>
+            <Link className="mh80-exp-finale-back" href="/planes-medicos/">Ver todos los planes</Link>
           </div>
           <div className="mh80-exp-finale-mark" aria-hidden="true"><span>MH</span><strong>80</strong></div>
         </section>

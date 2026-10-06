@@ -36,9 +36,9 @@ export default function PlanCorporativoClient() {
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link>
         <span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link>
+        <Link href="/planes-medicos/">Planes médicos</Link>
         <span>»</span>
-        <Link href="/planes-medicos/empresas">Planes médicos para Empresas</Link>
+        <Link href="/planes-medicos/empresas/">Planes médicos para Empresas</Link>
         <span>»</span>
         <span>Plan Corporativo</span>
       </nav>

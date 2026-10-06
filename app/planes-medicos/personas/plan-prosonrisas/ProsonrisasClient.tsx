@@ -133,8 +133,8 @@ const detailTable: { section?: string; label: string; plus: string; full: string
 ];
 
 function DetailCell({ value }: { value: string }) {
-  if (value === "check") return <Check size={16} className="cell-check" aria-label="Incluido" />;
-  if (value === "x") return <X size={16} className="cell-x" aria-label="No incluido" />;
+  if (value === "check") return <Check size={16} className="cell-check" aria-label="Sí" role="img" />;
+  if (value === "x") return <X size={16} className="cell-x" aria-label="No" role="img" />;
   return <>{value}</>;
 }
 
@@ -494,8 +494,8 @@ export default function ProsonrisasClient() {
     <SiteShell title="Prosonrisas · Plan dental Humana">
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link><span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link><span>»</span>
-        <Link href="/planes-medicos/personas">Planes médicos para Personas</Link><span>»</span>
+        <Link href="/planes-medicos/">Planes médicos</Link><span>»</span>
+        <Link href="/planes-medicos/personas/">Planes médicos para Personas</Link><span>»</span>
         <span>Plan Prosonrisas</span>
       </nav>
       <div className="mh50-exp prosonrisas-page" ref={rootRef}>
@@ -799,7 +799,7 @@ export default function ProsonrisasClient() {
               <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotiza ahora</button>
               <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
               <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
-              <Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link>
+              <Link className="ghost-button" href="/planes-medicos/">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="mh50-exp-confirm" role="status">

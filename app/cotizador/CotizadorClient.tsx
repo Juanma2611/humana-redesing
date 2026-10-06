@@ -117,7 +117,7 @@ export default function CotizadorClient() {
       </div> : <div key="plan-result" className="result-card recommendation-result">
         <div className="result-icon"><ResultIcon size={34} /></div><span className="kicker">Tu recomendación</span><h2>{result.name}</h2><p>{result.reason}</p>
         <div className="result-points">{result.points.map(point => <span key={point}><Check /> {point}</span>)}</div>
-        {answers.dentalAddOn === "yes" && resultKey !== "prosonrisas" && <div className="dental-addon-result"><span><SmilePlus /></span><div><small>Complemento recomendado</small><h3>Agrega ProSonrisas</h3><p>Protección dental con alternativas de 36 o 50 procedimientos desde $6,63 por persona.</p></div><Link href="/planes-medicos?segment=dental&plan=prosonrisas">Ver plan dental <ArrowRight /></Link></div>}
+        {answers.dentalAddOn === "yes" && resultKey !== "prosonrisas" && <div className="dental-addon-result"><span><SmilePlus /></span><div><small>Complemento recomendado</small><h3>Agrega ProSonrisas</h3><p>Protección dental con alternativas de 36 o 50 procedimientos desde $6,63 por persona.</p></div><Link href="/planes-medicos/?segment=dental&plan=prosonrisas">Ver plan dental <ArrowRight /></Link></div>}
         {resultKey === "advisor" && <div className="result-warning"><Sparkles size={19} /><p>La documentación no confirma por sí sola la edad máxima de ingreso. Un asesor debe revisar tu caso antes de recomendar un producto.</p></div>}
         <div className="result-actions"><Link className="primary-button" href={resultHref}>{resultKey === "advisor" ? "Hablar con un asesor" : "Ver este plan"}<ArrowRight size={18} /></Link><button className="secondary-button" onClick={reset}><RotateCcw size={18} /> Empezar de nuevo</button></div>
       </div>}
@@ -148,10 +148,15 @@ export default function CotizadorClient() {
       <p>Claro que sí, registrar sus enfermedades preexistentes (cirugías, hospitalizaciones, enfermedades crónicas o recurrentes) le garantiza acceder a la cobertura en los plazos y montos establecidos según el plan adquirido.</p>
 
       <h4>¿En qué hospitales o prestadores médicos puede recibir atención?</h4>
-      <p><strong>Plan Individual, Familiar e infantil</strong> (Plan Individual y Familiar y Humana Kids): Red Practihumana y Red Metrohumana, según el plan. Recibirás atención de forma directa pagando el porcentaje de cobertura establecida por tu plan, o vía reembolso según los valores normales y acostumbrados.</p>
-      <p><strong>Cobertura contra el Cáncer y Gastos mayores</strong> (Plan Renacer y Plan Proteger): Red Metrohumana, pagando el porcentaje de cobertura una vez superado el deducible.</p>
-      <p><strong>Cobertura dental</strong> (Plan Prosonrisas): red exclusiva de centros odontológicos en convenio, sin reembolso ni aplicación de deducibles.</p>
+      <p>Existen dos tipos de red según el plan elegido:</p>
+      <p><strong>Plan Individual, Familiar e infantil</strong> (aplica para Plan Individual y Familiar y Humana Kids)</p>
+      <p><strong>Red Practihumana:</strong> Red de hospitales, médicos, centros médicos específicos donde puedes recibir atención de forma directa pagando el porcentaje de cobertura establecida por su plan. Si aplica cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para tu plan.</p>
+      <p><strong>Red Metrohumana:</strong> Es la más amplia y completa, ya que aplica toda la red de hospitales, médicos, centros médicos que forman parte de nuestro convenio. Recibirás atención de forma directa pagando el porcentaje de cobertura establecida por tu plan. Si aplicas cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para tu plan.</p>
       <a className="secondary-button small" href="https://red.humana.med.ec/RedHumana" target="_blank" rel="noreferrer">Conozca la red</a>
+      <p><strong>Cobertura contra el Cáncer y Gastos mayores</strong> (aplica para Plan Renacer y Plan Proteger)</p>
+      <p><strong>Red Metrohumana:</strong> Es la más amplia, ya que aplica toda la red de hospitales, médicos, centros médicos que forman parte de nuestro convenio. Recibirá atención de forma directa pagando el porcentaje de cobertura establecida por su plan una vez superado el deducible. Si aplica cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para su plan.</p>
+      <p><strong>Cobertura dental</strong> (aplica para Plan Prosonrisas)</p>
+      <p><strong>Red dental:</strong> Accede a una red exclusiva de centros odontológicos en convenio, donde paga solo el % que le corresponde, sin reembolso o aplicación de deducibles.</p>
 
       <h4>¿Desde cuándo puede usar su plan?</h4>
       <p><strong>Plan Individual, Infantil y Gastos mayores</strong> (Plan Individual y Familiar, Humana Kids y Plan Proteger):</p>
@@ -180,12 +185,18 @@ export default function CotizadorClient() {
       </ul>
 
       <h4>¿Qué es la firma electrónica?</h4>
-      <p>Es un certificado legal, ágil, ecológico y seguro, con la misma validez que la firma manuscrita según la Ley de Comercio Electrónico. Se envía un PIN al e-mail para facilitar la firma, sin trámites tradicionales.</p>
+      <ul className="plan-faq-checklist">
+        <li>La firma electrónica de documentos digitales, es un certificado legal, que se produce de manera ágil, ecológica y siempre bajo la más estricta seguridad.</li>
+        <li>Es la equivalencia de la firma manuscrita ya que tiene la misma validez legal y está amparada en la Ley de Comercio Electrónico.</li>
+        <li>Se envía un pin al e-mail mediante el cual se facilita dicha firma electrónica, sin necesidad de los complicados trámites tradicionales.</li>
+      </ul>
 
       <h4>¿Cómo solicitar reversos o anulaciones de compras?</h4>
-      <p><strong>Botón de pago Paymentez:</strong> compras antes de 17h39 se reversan hasta las 17h40 del mismo día; desde 17h41 hasta las 17h39 del día siguiente. Fuera de ese lapso, devolución manual de 5 días hábiles.</p>
-      <p><strong>Botón de pago Place to Pay:</strong> compras del mismo día se reversan hasta las 23h59. Fuera de ese lapso, devolución manual de 5 días hábiles.</p>
-      <p>Reverso automático: escriba a <a href="mailto:servicioalcliente@humana.med.ec">servicioalcliente@humana.med.ec</a>. Anulación de contrato: solicítela por nuestra <a href="https://servicio.humana.med.ec/" target="_blank" rel="noreferrer">central de ayuda</a>.</p>
+      <p><strong>Reversos automáticos compra:</strong> Las compras realizadas el mismo día y que no hayan sido integradas a nuestro sistema, podrán ser reversadas de manera automática de la siguiente manera:</p>
+      <p><strong>Botón de pago Paymentez:</strong> Compras realizadas antes de 17h39 se las podrá reversar hasta las 17h40 del mismo día, compras desde las 17h41 se las puede reversar hasta las 17h39 del día siguiente. Compras que no se hayan podido reversar en ese lapso, ingresarán a devolución manual de 5 días hábiles.</p>
+      <p><strong>Botón de pago Place to Pay:</strong> Compras realizadas el mismo día se podrán reversar hasta las 23h59 del mismo día. Compras que no se hayan podido reversar en ese lapso, ingresarán a devolución manual de 5 días hábiles.</p>
+      <p>Si necesita un reverso automático puede escribirnos a: <a href="mailto:servicioalcliente@humana.med.ec">servicioalcliente@humana.med.ec</a></p>
+      <p><strong>Anulación contrato:</strong> Si desea solicitar la anulación de una compra ya suscrita en nuestro sistema, le recomendamos solicitarla por medio de nuestra <a href="https://servicio.humana.med.ec/" target="_blank" rel="noreferrer">central de ayuda</a>.</p>
     </section>
 
     <section className="content-section" style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px 48px" }}>

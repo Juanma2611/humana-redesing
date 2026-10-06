@@ -5,7 +5,10 @@ import { ArrowRight, ShoppingCart } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { InstitutionalBreadcrumb, InstitutionalRelatedLinks } from "@/components/institutional-nav";
 
-export const metadata: Metadata = { title: "Humana S.A. - Humana S.A." };
+export const metadata: Metadata = {
+  title: "Humana S.A. - Humana S.A.",
+  description: "Humana S.A. es una empresa prestadora de servicios integrales de salud y bienestar, parte de Conclina C.A., con cerca de 250.000 afiliados en Ecuador.",
+};
 
 export default function HumanaSaPage() {
   return (
@@ -70,7 +73,7 @@ export default function HumanaSaPage() {
             Adquiere tu plan médico de forma fácil, segura y 100% digital. ¿Quieres saber cómo funciona el
             sistema de compra online? Es un modo seguro y rápido de contratar tu plan.
           </p>
-          <Link className="primary-button" href="/cotizador">
+          <Link className="primary-button" href="/cotizador/">
             <ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} />
           </Link>
         </div>

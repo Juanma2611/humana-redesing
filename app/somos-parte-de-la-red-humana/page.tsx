@@ -4,7 +4,10 @@ import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
-export const metadata: Metadata = { title: "Somos parte de la red Humana - Humana S.A." };
+export const metadata: Metadata = {
+  title: "Somos parte de la red Humana - Humana S.A.",
+  description: "Consulta autorizaciones, copagos, reembolsos y todos los servicios de Humana: médico a domicilio, teleconsultas, ambulancia y más.",
+};
 
 const topics = [
   { label: "Autorizaciones", href: "https://servicio.humana.med.ec/hc/es/categories/360006583511-AUTORIZACIONES" },

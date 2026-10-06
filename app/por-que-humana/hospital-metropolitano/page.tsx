@@ -3,7 +3,10 @@ import Image from "next/image";
 import { SiteShell } from "@/components/site-shell";
 import { InstitutionalBreadcrumb, InstitutionalRelatedLinks } from "@/components/institutional-nav";
 
-export const metadata: Metadata = { title: "Hospital Metropolitano - Humana S.A." };
+export const metadata: Metadata = {
+  title: "Hospital Metropolitano - Humana S.A.",
+  description: "El Hospital Metropolitano es el complejo médico hospitalario más completo y moderno del Ecuador, certificado con la ISO 9001:2000.",
+};
 
 export default function HospitalMetropolitanoPage() {
   return (

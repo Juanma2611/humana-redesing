@@ -10,6 +10,7 @@ import { InstitutionalRelatedLinks } from "@/components/institutional-nav";
 
 export const metadata: Metadata = {
   title: "¿Quiénes somos? - Humana S.A.",
+  description: "Humana S.A. es una compañía de salud prepagada que forma parte de Conclina C.A. Desde 1994 cuidamos la salud y el bienestar de más de 200.000 afiliados en Ecuador.",
 };
 
 const values = [
@@ -47,7 +48,7 @@ export default function PorQueHumanaPage() {
       <p>
         Nuestra trayectoria en el mercado ecuatoriano desde 1994 nos ha permitido cuidar del tesoro más
         preciado: <strong>la salud y el bienestar de miles de familias ecuatorianas.</strong> Actualmente
-        contamos con <Link href="/somos-parte-de-la-red-humana">más de 200.000 afiliados</Link> a nivel
+        contamos con <Link href="/somos-parte-de-la-red-humana/">más de 200.000 afiliados</Link> a nivel
         nacional.
       </p>
       <p>
@@ -66,7 +67,7 @@ export default function PorQueHumanaPage() {
         <span className="kicker">¿Por qué Humana?</span>
         <h2>Más de 30 años cuidando lo que más importa.</h2>
         <p>Salud, bienestar y respaldo para las personas, familias y empresas del Ecuador.</p>
-        <div className="about-hero-actions"><Link className="primary-button" href="/planes-medicos">Conoce nuestros planes <ArrowRight size={18} /></Link><Link className="secondary-button" href="#nuestra-historia">Nuestra historia</Link></div>
+        <div className="about-hero-actions"><Link className="primary-button" href="/planes-medicos/">Conoce nuestros planes <ArrowRight size={18} /></Link><Link className="secondary-button" href="#nuestra-historia">Nuestra historia</Link></div>
         <div className="about-trust"><UsersRound /><span><strong>Más de 200.000</strong> personas y empresas confían en Humana</span></div>
       </div>
     </section>
@@ -97,6 +98,6 @@ export default function PorQueHumanaPage() {
       <div className="about-values-grid">{values.map(({ icon: Icon, title, copy }) => <article key={title}><span><Icon /></span><h3>{title}</h3><p>{copy}</p></article>)}</div>
     </section>
 
-    <section className="about-purpose"><Network /><div><span className="kicker light">Nuestro compromiso</span><h2>Tu salud no se vive en partes.</h2><p>Por eso conectamos prevención, atención y respaldo para acompañarte cuando lo necesites.</p></div><Link className="white-button" href="/planes-medicos">Encuentra tu plan <ArrowRight size={18} /></Link></section>
+    <section className="about-purpose"><Network /><div><span className="kicker light">Nuestro compromiso</span><h2>Tu salud no se vive en partes.</h2><p>Por eso conectamos prevención, atención y respaldo para acompañarte cuando lo necesites.</p></div><Link className="white-button" href="/planes-medicos/">Encuentra tu plan <ArrowRight size={18} /></Link></section>
   </SiteShell>;
 }

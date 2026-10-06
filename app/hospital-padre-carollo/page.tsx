@@ -4,7 +4,10 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
-export const metadata: Metadata = { title: "Hospital Padre Carollo - Humana S.A." };
+export const metadata: Metadata = {
+  title: "Hospital Padre Carollo - Humana S.A.",
+  description: "Beneficios exclusivos para afiliados de Humana en el Hospital Padre Carollo Quito, adquiridos a través del bróker Unibroker.",
+};
 
 const benefits = [
   "Cobertura Hospitalaria al 100% en el Hospital Padre Carollo Quito",

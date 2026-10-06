@@ -44,7 +44,7 @@ export default function DirectorioClient() {
       <div><strong style={{ fontSize: 32, color: "#073b60" }}>811</strong><p style={{ margin: 0, color: "#3f5f73" }}>Centros Médicos</p></div>
     </section>
     <PageHero eyebrow="Red de prestadores" title="Red de prestadores Humana S.A." description="Explora el tipo de atención que necesitas y prepara tu búsqueda en la Red Humana." imageSrc="/red-medica-hero.webp" imageAlt="Equipo médico de Humana colaborando en un centro de salud moderno" imagePosition="center">
-      <div className="network-hero-actions"><a className="primary-button" href={officialNetworkUrl} target="_blank" rel="noreferrer">Consultar Red Humana <ArrowRight /></a><Link className="secondary-button" href="/servicios/autorizaciones">¿Necesitas autorización?</Link></div>
+      <div className="network-hero-actions"><a className="primary-button" href={officialNetworkUrl} target="_blank" rel="noreferrer">Consultar Red Humana <ArrowRight /></a><Link className="secondary-button" href="/servicios/autorizaciones/">¿Necesitas autorización?</Link></div>
     </PageHero>
 
     <section className="content-section network-premium">
@@ -102,7 +102,7 @@ export default function DirectorioClient() {
       <div className="network-help-grid">
         <article><span><HeartPulse /></span><div><small>Antes de atenderte</small><h2>Confirma tu cobertura</h2><p>La inclusión de un prestador, el porcentaje y las condiciones pueden variar según el plan contratado.</p></div></article>
         <article><span><Building2 /></span><div><small>Información del prestador</small><h2>Revisa los datos vigentes</h2><p>Consulta ubicación, especialidad y disponibilidad directamente en la Red Humana.</p></div></article>
-        <article><span><ShieldCheck /></span><div><small>Atención planificada</small><h2>Valida autorizaciones</h2><p>Algunos exámenes o procedimientos pueden requerir una autorización previa.</p><Link href="/servicios/autorizaciones">Conocer el proceso <ArrowRight /></Link></div></article>
+        <article><span><ShieldCheck /></span><div><small>Atención planificada</small><h2>Valida autorizaciones</h2><p>Algunos exámenes o procedimientos pueden requerir una autorización previa.</p><Link href="/servicios/autorizaciones/">Conocer el proceso <ArrowRight /></Link></div></article>
       </div>
     </section>
   </SiteShell>;

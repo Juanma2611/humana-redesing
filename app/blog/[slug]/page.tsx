@@ -55,9 +55,9 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
         <nav className="article-breadcrumb" aria-label="Breadcrumb">
           <Link href="/">Inicio</Link>
           <span>»</span>
-          <Link href="/blog">Blog</Link>
+          <Link href="/blog/">Blog</Link>
           <span>»</span>
-          <Link href="/blog">{article.category}</Link>
+          <Link href="/blog/">{article.category}</Link>
           <span>»</span>
           <span>{article.title}</span>
         </nav>
@@ -124,14 +124,14 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
 
             <div className="blog-sidebar-card">
               <strong>Canales de comunicación:</strong>
-              <ul className="blog-channel-list">{channels.map(({ icon: Icon, label, value, brandColor }) => <li key={value}><span><Icon style={brandColor ? { color: brandColor } : undefined} /></span><p>{label} <Link href="/medihumana">{value}</Link></p></li>)}</ul>
+              <ul className="blog-channel-list">{channels.map(({ icon: Icon, label, value, brandColor }) => <li key={value}><span><Icon style={brandColor ? { color: brandColor } : undefined} /></span><p>{label} <Link href="/medihumana/">{value}</Link></p></li>)}</ul>
             </div>
 
             <div className="blog-sidebar-card blog-buy-card">
               <span className="blog-app-kicker">¿Aún no tienes un plan?</span>
               <strong><Building2 size={18} /> Compra online</strong>
               <p>Adquiere tu plan médico de forma fácil, segura y 100% digital.</p>
-              <Link className="primary-button small" href="/planes-medicos"><ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} /></Link>
+              <Link className="primary-button small" href="/planes-medicos/"><ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} /></Link>
             </div>
           </aside>
         </div>

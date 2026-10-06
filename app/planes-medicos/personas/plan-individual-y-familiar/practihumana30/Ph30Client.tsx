@@ -192,9 +192,9 @@ export default function Ph30Client() {
     <SiteShell title="PH30 · Plan Clásico Practihumana 30.000">
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Inicio</Link><span>»</span>
-        <Link href="/planes-medicos">Planes médicos</Link><span>»</span>
-        <Link href="/planes-medicos/personas">Planes médicos para Personas</Link><span>»</span>
-        <Link href="/planes-medicos/personas/plan-individual-y-familiar">Plan Individual y Familiar Cobertura de Salud en Ecuador</Link><span>»</span>
+        <Link href="/planes-medicos/">Planes médicos</Link><span>»</span>
+        <Link href="/planes-medicos/personas/">Planes médicos para Personas</Link><span>»</span>
+        <Link href="/planes-medicos/personas/plan-individual-y-familiar/">Plan Individual y Familiar Cobertura de Salud en Ecuador</Link><span>»</span>
         <span>Practihumana30</span>
       </nav>
       <div className="ph30-exp" ref={rootRef}>
@@ -449,7 +449,7 @@ export default function Ph30Client() {
             <p>Cotiza PH30 y da un paso más en la protección tuya y de tu familia, con el respaldo de Humana.</p>
             <div className="ph30-exp-finale-actions">
               <button type="button" className="primary-button" onClick={handleQuoteClick}><ShoppingCart size={18} /> Cotizar PH30</button>
-              <Link className="ghost-button" href="/planes-medicos">Ver todos los planes</Link>
+              <Link className="ghost-button" href="/planes-medicos/">Ver todos los planes</Link>
             </div>
             {quoted && (
               <div className="ph30-exp-confirm" role="status">

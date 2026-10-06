@@ -18,7 +18,7 @@ export function InstitutionalBreadcrumb({ page }: { page: string }) {
     <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
       <Link href="/">Inicio</Link>
       <span>»</span>
-      <Link href="/por-que-humana">¿Quiénes somos?</Link>
+      <Link href="/por-que-humana/">¿Quiénes somos?</Link>
       <span>»</span>
       <span>{page}</span>
     </nav>
