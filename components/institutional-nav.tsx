@@ -80,7 +80,7 @@ export function InstitutionalExploreCards({ currentHref }: { currentHref?: strin
             <span className="plan-hub-card-icon" style={{ flexShrink: 0 }}><Icon size={22} /></span>
             <span style={{ flex: 1 }}>
               <strong style={{ display: "block", color: "#073b60", fontSize: 16, marginBottom: 4 }}>{label}</strong>
-              <span style={{ display: "block", color: "#5e7384", fontSize: 14, lineHeight: 1.5 }}>{copy}</span>
+              <span style={{ display: "block", color: "#3f5f73", fontSize: 14, lineHeight: 1.5 }}>{copy}</span>
             </span>
             <ArrowRight className="explore-arrow" size={18} />
           </Link>

@@ -90,6 +90,7 @@ export default function PorQueHumanaPage() {
     </section>
 
     <section className="about-story" id="nuestra-historia">
+     <div className="about-story-inner">
       <div className="about-story-intro">
         <span className="kicker">Quiénes somos</span>
         <h2>Una historia construida alrededor de las personas.</h2>
@@ -101,6 +102,7 @@ export default function PorQueHumanaPage() {
         <article><span>+30</span><div><h3>Crecemos con Ecuador</h3><p>Décadas de experiencia nos permiten comprender las necesidades de personas, familias y empresas.</p></div></article>
         <article><span>Hoy</span><div><h3>Más de 200.000 personas y empresas confían en Humana</h3><p>Seguimos evolucionando para ofrecer una experiencia más clara, cercana y útil.</p></div></article>
       </div>
+     </div>
     </section>
 
     <section className="about-ecosystem">

@@ -87,7 +87,7 @@ export default function HumanaSaPage() {
         {stats.map((s) => <article key={s.value}><strong>{s.value}</strong><span>{s.label}</span></article>)}
       </div>
 
-      <section className="content-section" style={{ padding: "64px clamp(24px,7vw,110px) 48px" }}>
+      <section className="institutional-topic-section">
         <div className="institutional-topic-grid" style={{ maxWidth: 1180, margin: "0 auto" }}>
           {topics.map(({ icon: Icon, title, paragraphs }) => (
             <article className="plan-hub-card" key={title}>
