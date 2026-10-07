@@ -60,8 +60,6 @@ const quickFaqs = [
 export default function Ph15Client() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
   const [quoted, setQuoted] = useState(false);
   const [benefitIndex, setBenefitIndex] = useState(0);
   const [faqOpen, setFaqOpen] = useState(false);
@@ -70,13 +68,6 @@ export default function Ph15Client() {
   const [isTyping, setIsTyping] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const activeChapter = chapters.find((c) => c.id === activeChapterId) ?? null;
-
-  const openDialog = (id: string) => {
-    setActiveChapterId(id);
-    dialogRef.current?.showModal();
-  };
-  const closeDialog = () => dialogRef.current?.close();
   const handleQuoteClick = () => setQuoted(true);
 
   const CHAT_GREETING = "¡Hola! 👋 Soy tu asistente de Humana para PH15. Toca una de estas preguntas y te respondo al instante 😊";
@@ -281,6 +272,7 @@ export default function Ph15Client() {
           ))}
           <a href="#ph15-incluido" data-chapter-link="ph15-incluido"><span>06</span>Beneficios</a>
           <a href="#ph15-carencias" data-chapter-link="ph15-carencias"><span>07</span>Carencias</a>
+          <a href="#ph15-faq" data-chapter-link="ph15-faq"><span>08</span>Preguntas frecuentes</a>
         </nav>
 
         {chapters.map((c, i) => (
@@ -310,9 +302,15 @@ export default function Ph15Client() {
                   </li>
                 )}
               </ul>
-              <button type="button" className="ph15-exp-text-button" onClick={() => openDialog(c.id)}>
-                Ver detalles completos <span>↗</span>
-              </button>
+              <p className="ph15-exp-lead" style={{ fontSize: 15, opacity: 0.8, marginTop: 4 }}>{c.dialogLead}</p>
+              <ul className="ph15-exp-detail-grid" aria-label={`Detalle de cobertura: ${c.dialogTitle}`}>
+                {c.detailItems.map((item) => (
+                  <li className="ph15-exp-detail-card" key={item.label}>
+                    <strong>{item.value}</strong>
+                    <span>{item.label}</span>
+                  </li>
+                ))}
+              </ul>
               {c.conditions.length > 0 && (
                 <details style={{ marginTop: 26 }}>
                   <summary style={{ cursor: "pointer", fontWeight: 700, fontSize: 14 }}>Condiciones y topes adicionales</summary>
@@ -427,6 +425,21 @@ export default function Ph15Client() {
                 ))}
               </div>
             </details>
+          </div>
+        </section>
+
+        <section className="ph15-exp-faq" id="ph15-faq">
+          <div className="ph15-exp-faq-head ph15-exp-reveal">
+            <span className="ph15-exp-eyebrow">PREGUNTAS FRECUENTES</span>
+            <h2>Lo que más preguntan sobre PH15.</h2>
+          </div>
+          <div className="ph15-exp-faq-grid">
+            {quickFaqs.map((item, i) => (
+              <article className="ph15-exp-faq-card ph15-exp-reveal" style={{ "--reveal-delay": `${(i % 4) * 70}ms` } as React.CSSProperties} key={item.question}>
+                <h3>{item.question}</h3>
+                <p>{item.answer}</p>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -550,20 +563,6 @@ export default function Ph15Client() {
             />
           </a>
         </div>
-
-        <dialog className="ph15-exp-dialog" ref={dialogRef} onClose={() => setActiveChapterId(null)}>
-          <button type="button" className="ph15-exp-dialog-close" onClick={closeDialog} aria-label="Cerrar">×</button>
-          <span className="ph15-exp-eyebrow">DETALLE DEL PLAN</span>
-          <h2>{activeChapter?.dialogTitle}</h2>
-          <div className="ph15-exp-dialog-body">
-            <p>{activeChapter?.dialogLead}</p>
-            <ul>
-              {activeChapter?.detailItems.map((item) => (
-                <li key={item.label}><ShieldPlus /> <span><strong>{item.value}</strong> · {item.label}</span></li>
-              ))}
-            </ul>
-          </div>
-        </dialog>
       </div>
     </SiteShell>
   );

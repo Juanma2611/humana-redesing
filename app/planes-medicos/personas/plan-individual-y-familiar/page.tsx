@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PlanDetailView } from "@/components/plan-detail-view";
+import { IndividualFamiliarView } from "./IndividualFamiliarView";
 import { planDetails } from "@/lib/plan-details";
 
 export const metadata: Metadata = {
@@ -13,5 +13,5 @@ export default function PlanIndividualYFamiliarPage() {
   const plan = planDetails.find((p) => p.slug === "individual-familiar");
   if (!plan) notFound();
 
-  return <PlanDetailView plan={plan} />;
+  return <IndividualFamiliarView plan={plan} />;
 }
