@@ -23,8 +23,10 @@ const segments: Segment[] = [
 
 type Plan = {
   id: string; name: string; family: string; href: string; image: string; imageAlt: string;
-  stats: { label: string; value: string; note?: string }[]; essentials: string[];
+  stats: { label: string; value: string; note?: string }[]; essentials: string[]; compareHref?: string;
 };
+
+const pequenasYMedianasHref = "/planes-medicos/empresas/pequenas-y-medianas/";
 
 const pyme: Plan = {
   id: "pyme", name: "Plan Pyme", family: "Empresas · 5 a 25 colaboradores",
@@ -33,14 +35,16 @@ const pyme: Plan = {
   imageAlt: "Equipo de una pequeña empresa protegido por Plan Pyme",
   stats: [{ label: "Cobertura MH10", value: "$10.000" }, { label: "Cobertura MH5", value: "$5.000" }, { label: "Red", value: "Metrohumana" }],
   essentials: ["Atención médica oportuna y personalizada", "Acceso a la red más amplia de prestadores del país", "Médicos y medicinas a domicilio", "Extensión de coberturas a familiares"],
+  compareHref: pequenasYMedianasHref,
 };
 const business: Plan = {
   id: "business", name: "Humana Business", family: "Empresas · 25 a 45 colaboradores",
   href: "/planes-medicos/empresas/pequenas-y-medianas/plan-humana-business/",
-  image: "https://humana.med.ec/wp-content/uploads/2025/09/plan-para-empresa-humana-medicina-prepagada.jpg",
-  imageAlt: "Equipo de colaboradores protegido por Humana Business",
+  image: "/images/planes/business/business-oficina.jpg",
+  imageAlt: "Oficina de un equipo protegido por Humana Business",
   stats: [{ label: "Cobertura", value: "$10.000", note: "por colaborador" }, { label: "Deducible", value: "$50 · $80 · $100" }, { label: "Maternidad", value: "A elección" }],
   essentials: ["Amplia red de prestadores en el país", "Cobertura de maternidad a elección de la empresa", "Elección de deducibles y copagos", "Coberturas a nivel corporativo"],
+  compareHref: pequenasYMedianasHref,
 };
 const corporativo: Plan = {
   id: "corporativo", name: "Plan Corporativo", family: "Empresas · desde 50 colaboradores",
@@ -72,6 +76,9 @@ function PlanBlock({ plan, reverse }: { plan: Plan; reverse?: boolean }) {
           <Link className="sales-buy" href="/cotizador/"><ShoppingCart size={17} /> Cotiza para tu empresa <ArrowRight size={16} /></Link>
           <Link className="sales-more" href={plan.href}>Conoce más acerca del plan <ChevronRight size={16} /></Link>
         </div>
+        {plan.compareHref && (
+          <Link className="pm-biz-compare-link" href={plan.compareHref}>Ver todos los planes para pequeñas y medianas empresas <ChevronRight size={14} /></Link>
+        )}
       </div>
     </article>
   );
@@ -97,9 +104,9 @@ export default function EmpresasExperience() {
   }, []);
 
   return (
-    <section className="sales-plans" id="elige-plan">
+    <section className="sales-plans pm-biz-plans" id="elige-plan">
       <div className="sales-title-row">
-        <div><span className="sales-eyebrow">Bienestar que impulsa a tu equipo</span><h2>¿Qué tamaño tiene tu empresa?</h2></div>
+        <div><span className="sales-eyebrow">Empresas Humana</span><h2>¿Qué tamaño tiene tu empresa?</h2></div>
       </div>
 
       <div className="sales-plans-layout">
@@ -112,8 +119,8 @@ export default function EmpresasExperience() {
         </nav>
 
         <div className="sales-plans-content">
-          <div className="plan-editorial-flow">
-            <section id="pyme" ref={(el) => { targets.current.pyme = el; }} className="plan-editorial-hero">
+          <div className="plan-editorial-flow pm-biz-flow">
+            <section id="pyme" ref={(el) => { targets.current.pyme = el; }} className="plan-editorial-hero pm-biz-hero">
               <Image src="https://humana.med.ec/wp-content/uploads/2025/09/plan-pyme-humana-medicina-prepagada.jpg" alt="Equipo de una pequeña empresa" fill sizes="100vw" unoptimized className="plan-editorial-hero-photo" />
               <div className="plan-editorial-hero-overlay" />
               <div className="plan-editorial-hero-copy">
@@ -127,7 +134,7 @@ export default function EmpresasExperience() {
             </section>
             <PlanBlock plan={pyme} />
 
-            <section id="business" ref={(el) => { targets.current.business = el; }} className="plan-editorial-hero">
+            <section id="business" ref={(el) => { targets.current.business = el; }} className="plan-editorial-hero pm-biz-hero">
               <Image src="https://humana.med.ec/wp-content/uploads/2025/09/plan-para-empresa-humana-medicina-prepagada.jpg" alt="Equipo de colaboradores protegido por Humana Business" fill sizes="100vw" unoptimized className="plan-editorial-hero-photo" />
               <div className="plan-editorial-hero-overlay" />
               <div className="plan-editorial-hero-copy">
@@ -141,7 +148,7 @@ export default function EmpresasExperience() {
             </section>
             <PlanBlock plan={business} reverse />
 
-            <section id="corporativo" ref={(el) => { targets.current.corporativo = el; }} className="plan-editorial-hero">
+            <section id="corporativo" ref={(el) => { targets.current.corporativo = el; }} className="plan-editorial-hero pm-biz-hero">
               <Image src="https://humana.med.ec/wp-content/uploads/2021/03/las-empresas-disenan-su-plan.png" alt="Las empresas diseñan su plan corporativo" fill sizes="100vw" unoptimized className="plan-editorial-hero-photo" />
               <div className="plan-editorial-hero-overlay" />
               <div className="plan-editorial-hero-copy">

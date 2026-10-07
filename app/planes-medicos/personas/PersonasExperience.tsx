@@ -102,8 +102,9 @@ function PlanBlock({ plan, reverse }: { plan: Plan; reverse?: boolean }) {
   );
 }
 
-function CategoryHero({ id, eyebrow, title, description, image, imageAlt, sectionRef }: {
-  id: string; eyebrow: string; title: string; description: string; image: string; imageAlt: string; sectionRef: (el: HTMLElement | null) => void;
+function CategoryHero({ id, eyebrow, title, description, bullets, image, imageAlt, sectionRef, compareAll }: {
+  id: string; eyebrow: string; title: string; description: string; bullets?: string[]; image: string; imageAlt: string;
+  sectionRef: (el: HTMLElement | null) => void; compareAll?: boolean;
 }) {
   return (
     <section id={id} ref={sectionRef} className="plan-editorial-hero">
@@ -113,8 +114,18 @@ function CategoryHero({ id, eyebrow, title, description, image, imageAlt, sectio
         <span className="plan-editorial-eyebrow">{eyebrow}</span>
         <h2>{title}</h2>
         <p>{description}</p>
+        {bullets && (
+          <ul className="plan-faq-checklist" style={{ margin: "0 0 20px" }}>
+            {bullets.map((item) => <li key={item}><Check size={15} />{item}</li>)}
+          </ul>
+        )}
         <div className="plan-editorial-hero-actions">
           <Link className="sales-buy" href="/cotizador/"><ShoppingCart size={17} /> Cotiza tu plan <ArrowRight size={16} /></Link>
+          {compareAll && (
+            <Link className="plan-editorial-secondary" href="/planes-medicos/personas/plan-individual-y-familiar/">
+              Comparar los 5 planes <ChevronRight size={16} />
+            </Link>
+          )}
         </div>
       </div>
     </section>
@@ -161,7 +172,9 @@ export default function PersonasExperience() {
               id="familiar" sectionRef={(el) => { targets.current.familiar = el; }}
               eyebrow="Línea familiar" title="MetroHumana"
               description="Planes de la red Metrohumana: MH50, MH80 y MH150, con cobertura por incapacidad para ti y tu familia."
-              image="/familia-humana.png" imageAlt="Familia disfrutando un momento juntos, protegida por MetroHumana"
+              bullets={["Planes desde $15.000 a $150.000 de cobertura anual", "La red médica más completa del mercado, y la mejor cobertura en medicinas", "Más beneficios: seguro de vida, asistencia exequial, etc."]}
+              image="/mh50-maternidad.jpg" imageAlt="Familia protegida por la línea MetroHumana"
+              compareAll
             />
             <PlanBlock plan={mh50} />
             <PlanBlock plan={mh80} reverse />
@@ -171,7 +184,9 @@ export default function PersonasExperience() {
               id="individual" sectionRef={(el) => { targets.current.individual = el; }}
               eyebrow="Línea individual" title="PractiHumana"
               description="Planes de la red Practihumana: PH15 y PH30, con cobertura anual para empezar a cuidarte."
-              image="/plan-ph15-hero.jpeg" imageAlt="Persona joven sonriendo, protegida por un plan PractiHumana"
+              bullets={["Planes desde $15.000 a $150.000 de cobertura anual", "La red médica más completa del mercado, y la mejor cobertura en medicinas", "Más beneficios: seguro de vida, asistencia exequial, etc."]}
+              image="/ph15-consultas.jpg" imageAlt="Consulta médica cercana, línea PractiHumana"
+              compareAll
             />
             <PlanBlock plan={ph15} />
             <PlanBlock plan={ph30} reverse />
@@ -180,6 +195,7 @@ export default function PersonasExperience() {
               id="dental" sectionRef={(el) => { targets.current.dental = el; }}
               eyebrow="ProSonrisas" title="ProSonrisas"
               description="Cuidado dental para ti y tu familia, con dos alternativas: Plus y Full."
+              bullets={["Los mejores centros odontológicos a nivel nacional", "Evaluaciones, consultas, diagnósticos, blanqueamientos", "Rayos X y limpiezas dentales, sin deducibles y reembolsos"]}
               image="/images/planes/prosonrisas/prosonrisas-tratamiento.jpg" imageAlt="Atención odontológica de un paciente sonriendo"
             />
             <PlanBlock plan={prosonrisas} />
@@ -188,6 +204,7 @@ export default function PersonasExperience() {
               id="proteger" sectionRef={(el) => { targets.current.proteger = el; }}
               eyebrow="Protección extra" title="Proteger"
               description="Respaldo complementario para gastos médicos de gran alcance, una vez superado el deducible."
+              bullets={["El complemento perfecto para tu cobertura personal o corporativa hasta $500.000 en caso de enfermedades o accidentes graves", "Atención en los mejores hospitales y clínicas en convenio con Humana"]}
               image="/humana-historia-hero.png" imageAlt="Familia con respaldo del Plan Proteger"
             />
             <PlanBlock plan={proteger} reverse />
