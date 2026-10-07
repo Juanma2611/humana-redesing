@@ -55,6 +55,33 @@ const corporativo: Plan = {
   essentials: ["Reportería y control de siniestralidad", "Asesoría y atención personalizada", "Medios electrónicos para consulta de información", "No existen períodos de carencia: uso inmediato del plan"],
 };
 
+/* Cuadro de categoría: dos mitades separadas de verdad (no una foto con
+   degradado encima). Mitad de texto = fondo azul oscuro sólido; mitad de
+   foto = imagen limpia, sin velo. La única transición es un degradado
+   corto (ver .pm-biz-seam en globals.css) de ~70px en el borde de la
+   mitad de texto, que nunca llega a cubrir la foto. */
+function PlanCategoryCard({ id, eyebrow, title, description, image, imageAlt, sectionRef }: {
+  id: string; eyebrow: string; title: string; description: string; image: string; imageAlt: string;
+  sectionRef: (el: HTMLElement | null) => void;
+}) {
+  return (
+    <section id={id} ref={sectionRef} className="pm-biz-card">
+      <div className="pm-biz-card-text">
+        <span className="plan-editorial-eyebrow">{eyebrow}</span>
+        <h2>{title}</h2>
+        <p>{description}</p>
+        <div className="plan-editorial-hero-actions">
+          <Link className="sales-buy" href="/cotizador/"><ShoppingCart size={17} /> Cotiza para tu empresa <ArrowRight size={16} /></Link>
+        </div>
+        <span className="pm-biz-seam" aria-hidden="true" />
+      </div>
+      <div className="pm-biz-card-media">
+        <Image src={image} alt={imageAlt} fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized style={{ objectFit: "cover" }} />
+      </div>
+    </section>
+  );
+}
+
 function PlanBlock({ plan, reverse }: { plan: Plan; reverse?: boolean }) {
   return (
     <article id={`plan-${plan.id}`} className={`plan-editorial-block${reverse ? " reverse" : ""}`}>
@@ -130,50 +157,32 @@ export default function EmpresasExperience() {
               <p>Soluciones equilibradas en planes médicos para medianas y pequeñas empresas, desde 5 hasta 99 colaboradores.</p>
               <Link className="pm-biz-compare-link" href={pequenasYMedianasHref}>Ver el hub de pequeñas y medianas empresas <ChevronRight size={14} /></Link>
             </div>
-            <section id="pyme" ref={(el) => { targets.current.pyme = el; }} className="plan-editorial-hero pm-biz-hero">
-              <Image src="https://humana.med.ec/wp-content/uploads/2025/09/plan-pyme-humana-medicina-prepagada.jpg" alt="Equipo de una pequeña empresa" fill sizes="100vw" unoptimized className="plan-editorial-hero-photo" />
-              <div className="plan-editorial-hero-overlay" />
-              <div className="plan-editorial-hero-copy">
-                <span className="plan-editorial-eyebrow">Pequeñas empresas</span>
-                <h2>Plan Pyme</h2>
-                <p>Beneficios de salud accesibles y valiosos para pequeñas empresas, de 5 hasta 25 colaboradores.</p>
-                <div className="plan-editorial-hero-actions">
-                  <Link className="sales-buy" href="/cotizador/"><ShoppingCart size={17} /> Cotiza para tu empresa <ArrowRight size={16} /></Link>
-                </div>
-              </div>
-            </section>
+            <PlanCategoryCard
+              id="pyme" sectionRef={(el) => { targets.current.pyme = el; }}
+              eyebrow="Pequeñas empresas" title="Plan Pyme"
+              description="Beneficios de salud accesibles y valiosos para pequeñas empresas, de 5 hasta 25 colaboradores."
+              image="https://humana.med.ec/wp-content/uploads/2025/09/plan-pyme-humana-medicina-prepagada.jpg" imageAlt="Equipo de una pequeña empresa"
+            />
             <PlanBlock plan={pyme} />
 
-            <section id="business" ref={(el) => { targets.current.business = el; }} className="plan-editorial-hero pm-biz-hero">
-              <Image src="https://humana.med.ec/wp-content/uploads/2025/09/plan-para-empresa-humana-medicina-prepagada.jpg" alt="Equipo de colaboradores protegido por Humana Business" fill sizes="100vw" unoptimized className="plan-editorial-hero-photo" />
-              <div className="plan-editorial-hero-overlay" />
-              <div className="plan-editorial-hero-copy">
-                <span className="plan-editorial-eyebrow">Medianas empresas</span>
-                <h2>Humana Business</h2>
-                <p>La combinación perfecta entre cobertura completa y la flexibilidad de elegir lo que necesitas, de 25 a 45 colaboradores.</p>
-                <div className="plan-editorial-hero-actions">
-                  <Link className="sales-buy" href="/cotizador/"><ShoppingCart size={17} /> Cotiza para tu empresa <ArrowRight size={16} /></Link>
-                </div>
-              </div>
-            </section>
+            <PlanCategoryCard
+              id="business" sectionRef={(el) => { targets.current.business = el; }}
+              eyebrow="Medianas empresas" title="Humana Business"
+              description="La combinación perfecta entre cobertura completa y la flexibilidad de elegir lo que necesitas, de 25 a 45 colaboradores."
+              image="https://humana.med.ec/wp-content/uploads/2025/09/plan-para-empresa-humana-medicina-prepagada.jpg" imageAlt="Equipo de colaboradores protegido por Humana Business"
+            />
             <PlanBlock plan={business} reverse />
 
-            <section id="corporativo" ref={(el) => { targets.current.corporativo = el; }} className="plan-editorial-hero pm-biz-hero">
-              <Image src="https://humana.med.ec/wp-content/uploads/2021/03/las-empresas-disenan-su-plan.png" alt="Las empresas diseñan su plan corporativo" fill sizes="100vw" unoptimized className="plan-editorial-hero-photo" />
-              <div className="plan-editorial-hero-overlay" />
-              <div className="plan-editorial-hero-copy">
-                <span className="plan-editorial-eyebrow">Grandes empresas</span>
-                <h2>Plan Corporativo</h2>
-                {/* Texto oficial de la tarjeta "Grandes Empresas" del hub. El "más
-                    de 100 empleados" de este texto no coincide con el "desde 50
-                    empleados" que usa el bloque del plan más abajo; no se
-                    unifican, queda pendiente de validar con Comercial. */}
-                <p>Diseñado para grandes empresas con más de 100 empleados, nuestro plan ofrece beneficios premium y soluciones integrales que protegen la salud de tus colaboradores.</p>
-                <div className="plan-editorial-hero-actions">
-                  <Link className="sales-buy" href="/cotizador/"><ShoppingCart size={17} /> Cotiza para tu empresa <ArrowRight size={16} /></Link>
-                </div>
-              </div>
-            </section>
+            {/* Texto oficial de la tarjeta "Grandes Empresas" del hub. El "más
+                de 100 empleados" de este texto no coincide con el "desde 50
+                empleados" que usa el bloque del plan más abajo; no se
+                unifican, queda pendiente de validar con Comercial. */}
+            <PlanCategoryCard
+              id="corporativo" sectionRef={(el) => { targets.current.corporativo = el; }}
+              eyebrow="Grandes empresas" title="Plan Corporativo"
+              description="Diseñado para grandes empresas con más de 100 empleados, nuestro plan ofrece beneficios premium y soluciones integrales que protegen la salud de tus colaboradores."
+              image="https://humana.med.ec/wp-content/uploads/2021/03/las-empresas-disenan-su-plan.png" imageAlt="Las empresas diseñan su plan corporativo"
+            />
             <PlanBlock plan={corporativo} />
           </div>
         </div>

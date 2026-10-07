@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, Briefcase, Building2, MessageCircle, ShoppingCart, UsersRound } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import EmpresasExperience from "./EmpresasExperience";
 
@@ -23,9 +25,26 @@ export default function PlanesMedicosEmpresasPage() {
 
       <section className="pm-biz-topHero">
         <div className="pm-biz-topHero-shapes" aria-hidden="true" />
+        <div className="pm-biz-topHero-grid" aria-hidden="true" />
         <div className="pm-biz-topHero-inner">
-          <span className="pm-biz-topHero-kicker">Bienestar que impulsa a tu equipo</span>
-          <h1>Planes médicos para Empresas</h1>
+          <div className="pm-biz-topHero-copy">
+            <span className="pm-biz-topHero-kicker">Bienestar que impulsa a tu equipo</span>
+            <h1>Planes médicos para Empresas</h1>
+            <div className="pm-biz-topHero-actions">
+              <Link className="primary-button" href="/cotizador/"><ShoppingCart size={16} /> Cotiza para tu empresa <ArrowRight size={16} /></Link>
+              <a className="pm-hero-ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={16} /> Hablar con un asesor</a>
+            </div>
+            <div className="pm-chip-row">
+              <span className="pm-chip"><Briefcase size={15} aria-hidden="true" /> Plan Pyme · 5 a 25 colaboradores</span>
+              <span className="pm-chip"><UsersRound size={15} aria-hidden="true" /> Humana Business · 25 a 45 colaboradores</span>
+              <span className="pm-chip"><Building2 size={15} aria-hidden="true" /> Plan Corporativo · desde 50 empleados</span>
+            </div>
+          </div>
+          <div className="pm-biz-topHero-visual">
+            <div className="pm-biz-topHero-photo">
+              <Image src="/images/planes/business/business-industrial.jpg" alt="Entorno empresarial protegido por Humana" fill sizes="(max-width: 980px) 100vw, 45vw" unoptimized style={{ objectFit: "cover" }} />
+            </div>
+          </div>
         </div>
       </section>
 
