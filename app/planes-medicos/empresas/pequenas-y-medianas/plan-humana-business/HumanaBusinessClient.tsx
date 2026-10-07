@@ -5,7 +5,7 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Ambulance, Banknote, BarChart3, Briefcase, Building2, Check, CircleDollarSign, Handshake, HeartPulse, Home as HomeIcon,
-  LineChart, Mail, MessageCircle, PenLine, PhoneCall, Pill, PieChart, ShieldCheck, ShieldPlus, Stethoscope, Target, TrendingUp,
+  LineChart, Mail, MessageCircle, PenLine, PhoneCall, Pill, PieChart, ShieldPlus, Stethoscope, Target, TrendingUp,
   Users, Video, WalletCards, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
@@ -217,8 +217,6 @@ export default function HumanaBusinessClient() {
   const progressRef = useRef<HTMLSpanElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
-  const [quoted, setQuoted] = useState(false);
-  const [called, setCalled] = useState(false);
   const [faqOpen, setFaqOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState<{ role: "bot" | "user"; text: string }[]>([]);
   const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
@@ -232,8 +230,6 @@ export default function HumanaBusinessClient() {
     dialogRef.current?.showModal();
   };
   const closeDialog = () => dialogRef.current?.close();
-
-  const handleQuoteClick = () => setQuoted(true);
 
   const CHAT_GREETING = "¡Hola! 👋 Soy tu asistente de Humana para Business. Toca una de estas preguntas y te respondo al instante 😊";
   const pendingFaqs = quickFaqs.filter((item) => !askedQuestions.includes(item.question));
@@ -352,7 +348,7 @@ export default function HumanaBusinessClient() {
             <div className="mh50-exp-hero-actions">
               <a className="primary-button" href="#business-cierre">Solicita información</a>
               <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
-              <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
+              <a className="ghost-button" href="tel:1800486262"><PhoneCall size={18} /> Solicitar llamada</a>
             </div>
           </div>
           <div className="mh50-exp-gallery" aria-label="Momentos de bienestar empresarial">
@@ -479,7 +475,7 @@ export default function HumanaBusinessClient() {
           </div>
           <div className="business-contact-box-actions">
             <a className="primary-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">Contáctate con nosotros</a>
-            <button type="button" className="ghost-button" onClick={handleQuoteClick}>Personaliza tu plan Humana Business</button>
+            <a className="ghost-button" href="#business-arma-plan">Personaliza tu plan Humana Business</a>
           </div>
         </section>
 
@@ -491,21 +487,11 @@ export default function HumanaBusinessClient() {
             <h2>El bienestar de tus colaboradores impulsa tu empresa.</h2>
             <p>Arma el plan ideal para tu empresa y empieza a cuidar a tu equipo hoy mismo.</p>
             <div className="mh50-exp-finale-actions">
-              <button type="button" className="primary-button" onClick={handleQuoteClick}>Solicita información</button>
+              <a className="primary-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">Solicita información</a>
               <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
-              <button type="button" className="ghost-button" onClick={() => setCalled(true)}><PhoneCall size={18} /> Solicitar llamada</button>
-              <Link className="ghost-button" href="/planes-medicos/">Ver todos los planes</Link>
+              <a className="ghost-button" href="tel:1800486262"><PhoneCall size={18} /> Solicitar llamada</a>
+              <Link className="ghost-button" href="/planes-medicos/empresas/">Ver todos los planes</Link>
             </div>
-            {quoted && (
-              <div className="mh50-exp-confirm" role="status">
-                <ShieldCheck /> <span>Solicitud demostrativa registrada. Un asesor empresarial de Humana te contactará. No se envió información real.</span>
-              </div>
-            )}
-            {called && (
-              <div className="mh50-exp-confirm" role="status">
-                <ShieldCheck /> <span>Solicitud de llamada demostrativa registrada. No se envió información real.</span>
-              </div>
-            )}
             <div className="mh50-exp-contact">
               {contactChannels.map(({ icon: Icon, label, value, href }) => (
                 <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
