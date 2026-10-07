@@ -4729,6 +4729,40 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .pm-biz-topHero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
 .pm-biz-topHero-visual { position: relative; }
 .pm-biz-topHero-photo { position: relative; width: 100%; aspect-ratio: 16/11; border-radius: 24px; overflow: hidden; box-shadow: 0 26px 60px rgba(2,10,17,.5); border: 1px solid rgba(255,255,255,.16); }
+
+/* Hero de /planes-medicos/empresas/pequenas-y-medianas/: misma familia
+   corporativa que .pm-biz-topHero (azul profundo, retícula fina, acento
+   teal), pero de una sola columna y altura contenida (sin foto, es un
+   hub intermedio, no la página principal de Empresas). */
+.pm-pym-hero { position: relative; overflow: hidden; padding: clamp(40px,5vw,60px) clamp(24px,7vw,110px); background: linear-gradient(150deg,#031420 0%,#052033 32%,#073b60 68%,#075c92 100%); color: #fff; }
+.pm-pym-hero-shapes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.pm-pym-hero-shapes::before { content:""; position:absolute; top:-140px; right:-100px; width:360px; height:360px; border-radius:50%; border: 1px solid rgba(124,224,219,.3); }
+.pm-pym-hero-shapes::after { content:""; position:absolute; bottom:-160px; left:-80px; width:300px; height:300px; border-radius:50%; border: 1px solid rgba(255,255,255,.12); }
+.pm-pym-hero-grid { position: absolute; inset: 0; pointer-events: none; background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 48px), repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 48px); -webkit-mask-image: radial-gradient(ellipse 70% 100% at 0% 50%, rgba(0,0,0,.9), transparent 75%); mask-image: radial-gradient(ellipse 70% 100% at 0% 50%, rgba(0,0,0,.9), transparent 75%); }
+.pm-pym-hero-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
+.pm-pym-hero-inner h1 { margin: 0; color: #fff; font-size: clamp(30px,3.8vw,44px); line-height: 1.08; letter-spacing: -.03em; font-weight: 780; }
+
+/* Sección de tarjetas Pyme/Business: fondo suave de marca (no blanco
+   plano), con un detalle decorativo sutil, alternando con el azul del
+   hero/cierre. Dos tarjetas de igual tamaño, alineadas en el contenedor
+   de 1180px, con el mismo acabado (sombra/borde/hover) que los cuadros
+   de /planes-medicos/. */
+.pm-pym-section { position: relative; overflow: hidden; padding: clamp(56px,7vw,88px) clamp(24px,7vw,110px); background: var(--humana-ice); }
+.pm-pym-section::before { content:""; position:absolute; top:-120px; right:-100px; width:340px; height:340px; border-radius:50%; background: radial-gradient(circle, rgba(11,128,189,.1), transparent 70%); pointer-events: none; }
+.pm-pym-grid { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
+.pm-pym-card { height: 100%; display: flex; flex-direction: column; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: var(--premium-shadow); border: 1px solid rgba(7,46,73,.08); transition: transform .35s var(--premium-ease), box-shadow .35s var(--premium-ease); }
+.pm-pym-card:hover { transform: translateY(-5px); box-shadow: var(--premium-shadow-hover); }
+.pm-pym-card-media { position: relative; width: 100%; aspect-ratio: 16/10; overflow: hidden; }
+.pm-pym-card-media img { transition: transform .5s var(--premium-ease); }
+.pm-pym-card:hover .pm-pym-card-media img { transform: scale(1.05); }
+.pm-pym-card-copy { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 28px 28px 30px; }
+.pm-pym-card-copy h2 { margin: 2px 0 0; font-size: 24px; letter-spacing: -.02em; color: #073b60; }
+.pm-pym-card-copy p { margin: 0; color: #3f5f73; font-size: 15px; line-height: 1.6; flex: 1; }
+.pm-pym-card-copy .primary-button { margin-top: auto; }
+.pm-pym-back-link { display: inline-block; margin-top: 22px; color: rgba(255,255,255,.85); font-size: 14px; font-weight: 650; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 900px) {
+  .pm-pym-grid { grid-template-columns: 1fr; }
+}
 @media (max-width: 900px) {
   .pm-biz-topHero-inner { grid-template-columns: 1fr; }
   .pm-biz-topHero-visual { order: -1; }
@@ -4743,6 +4777,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .pm-chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 .pm-chip { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.24); backdrop-filter: blur(12px); color: #fff; font-size: 13px; font-weight: 650; }
 .pm-chip svg { color: #7ce0db; flex-shrink: 0; }
+.pm-pym-card .pm-chip { background: var(--humana-ice); border-color: rgba(7,46,73,.14); backdrop-filter: none; color: var(--humana-navy); }
+.pm-pym-card .pm-chip svg { color: var(--humana-blue); }
 @media (max-width: 640px) { .pm-chip-row { gap: 8px; } .pm-chip { font-size: 12.5px; padding: 9px 14px; } }
 
 /* Cuadro de categoría de Empresas: dos mitades REALES en vez de una foto
