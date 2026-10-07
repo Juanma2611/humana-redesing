@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Ambulance, Banknote, Briefcase, HeartHandshake, HeartPulse, MessageCircle,
-  PhoneCall, ShieldCheck, Stethoscope, TrendingUp, Users, WalletCards,
+  Accessibility, Ambulance, Banknote, Baby, Briefcase, FlaskConical, Gift, HeartHandshake, HeartPulse,
+  Hospital, MessageCircle, PhoneCall, Pill, ShieldAlert, ShieldCheck, Stethoscope, TrendingUp, UserRound,
+  Users, WalletCards,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
-import { cuadroA, cuadroB } from "@/lib/empresa-cuadros";
+import { cuadroA, cuadroB, groupCuadroBySection } from "@/lib/empresa-cuadros";
 
 /* Misma familia visual y estructura que Humana Business
    (plan-humana-business/HumanaBusinessClient.tsx), con los datos oficiales
@@ -109,6 +110,43 @@ const chapters: Chapter[] = [
   },
 ];
 
+/* Cuadro de coberturas rediseñado como tarjetas por categoría (en vez de
+   una sola tabla larga), comparando MH 10.000 y MH 5.000 lado a lado.
+   Mismos datos de lib/empresa-cuadros.ts, solo reestructurados. */
+const categoryIcons: Record<string, typeof Hospital> = {
+  "DATOS GENERALES": WalletCards,
+  "HOSPITALIZACIÓN": Hospital,
+  "AMBULATORIA": Stethoscope,
+  "MEDICINAS": Pill,
+  "EXÁMENES DE DIAGNÓSTICO": FlaskConical,
+  "EMERGENCIA POR ACCIDENTE": Ambulance,
+  "MATERNIDAD": Baby,
+  "PREEXISTENCIAS": ShieldAlert,
+  "ADULTO MAYOR": UserRound,
+  "PERSONAS CON DISCAPACIDAD": Accessibility,
+  "BENEFICIOS INCLUIDOS": Gift,
+};
+
+const fullWidthCategories = new Set(["AMBULATORIA", "MEDICINAS"]);
+
+const slugify = (text: string) => text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-");
+
+const categoriesA = groupCuadroBySection(cuadroA);
+const categoriesB = groupCuadroBySection(cuadroB);
+const coverageCategories = categoriesA.map((cat, i) => ({
+  section: cat.section,
+  rows: cat.rows.map((row, j) => ({ label: row.label, mh10: row.value, mh5: categoriesB[i].rows[j].value })),
+}));
+
+const essentialsList = [
+  { icon: WalletCards, label: "Cobertura por enfermedad", mh10: "$10.000", mh5: "$5.000" },
+  { icon: Banknote, label: "Deducible anual por persona", mh10: "$50, $80 o $100", mh5: "$50, $80 o $100" },
+  { icon: ShieldCheck, label: "Hospitalización en Red Hospitalaria Metrohumana", mh10: "90%", mh5: "90%" },
+  { icon: Ambulance, label: "Emergencia por accidente al 100%, sin deducible", mh10: "$1.000", mh5: "$500" },
+  { icon: HeartPulse, label: "Seguro de vida para el titular", mh10: "$5.000", mh5: "$5.000" },
+  { icon: HeartHandshake, label: "Asistencia exequial", mh10: "Incluida", mh5: "Incluida" },
+];
+
 const navSections = [
   { id: "elige", number: "01", label: "Elige tu plan" },
   ...chapters.map((c) => ({ id: c.id, number: c.number, label: c.navLabel })),
@@ -123,9 +161,13 @@ export default function PlanPymeClient() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const [activePlan, setActivePlan] = useState<"mh10" | "mh5">("mh10");
-  const [activeCuadro, setActiveCuadro] = useState<"a" | "b">("a");
+  const [activeCategory, setActiveCategory] = useState<string>(coverageCategories[0]?.section ?? "");
+  const cuadroRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const navSlotRef = useRef<HTMLDivElement>(null);
+  const [navDocked, setNavDocked] = useState(false);
+  const [navHeight, setNavHeight] = useState(0);
   const selected = activePlan === "mh10" ? mh10 : mh5;
-  const cuadro = activeCuadro === "a" ? cuadroA : cuadroB;
 
   useEffect(() => {
     const root = rootRef.current;
@@ -170,6 +212,46 @@ export default function PlanPymeClient() {
     revealNodes.forEach((el) => revealObserver.observe(el));
     const safetyTimer = window.setTimeout(() => revealNodes.forEach((el) => el.classList.add("is-visible")), 2400);
     return () => { window.removeEventListener("scroll", onScroll); revealObserver.disconnect(); window.clearTimeout(safetyTimer); };
+  }, []);
+
+  /* Scrollspy del índice de categorías del cuadro de coberturas: resalta
+     la tarjeta visible y centra su enlace en la barra deslizable. */
+  useEffect(() => {
+    const container = cuadroRef.current;
+    const nav = navRef.current;
+    const slot = navSlotRef.current;
+    if (!container || !nav || !slot) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const cards = Array.from(container.querySelectorAll<HTMLElement>("[data-category-card]"));
+    if (!cards.length) return;
+
+    const height = nav.getBoundingClientRect().height;
+    setNavHeight(height);
+    const slotTop = slot.getBoundingClientRect().top + window.scrollY;
+
+    const onScroll = () => {
+      const dockTop = window.innerWidth <= 760 ? 74 : 88;
+      const sectionBottom = container.getBoundingClientRect().bottom;
+      const docked = window.scrollY + dockTop >= slotTop && sectionBottom > dockTop + height;
+      setNavDocked(docked);
+
+      let current = activeCategory;
+      cards.forEach((card) => { if (card.getBoundingClientRect().top < window.innerHeight * 0.4) current = card.dataset.categoryCard ?? current; });
+      setActiveCategory((prev) => {
+        if (prev === current) return prev;
+        const link = container.querySelector<HTMLAnchorElement>(`[data-category-link="${current}"]`);
+        const navContainer = link?.parentElement;
+        if (link && navContainer) {
+          const targetLeft = link.offsetLeft - navContainer.clientWidth / 2 + link.clientWidth / 2;
+          navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
+        }
+        return current;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -269,25 +351,86 @@ export default function PlanPymeClient() {
           </section>
         ))}
 
-        <section className="content-section" id="pyme-cuadro" style={{ maxWidth: 820, margin: "0 auto", padding: "64px 24px 24px" }}>
-          <div className="plan-detail-table-wrap" style={{ background: "#fff", borderRadius: 20, padding: 24 }}>
-            <h2 style={{ marginTop: 0 }}>Cuadro de coberturas a elección del cliente</h2>
-            <div style={{ display: "flex", gap: 10, marginBottom: 16 }}>
-              <button type="button" className={`ghost-button${activeCuadro === "a" ? " is-active" : ""}`} onClick={() => setActiveCuadro("a")}>MetroHumana 10.000</button>
-              <button type="button" className={`ghost-button${activeCuadro === "b" ? " is-active" : ""}`} onClick={() => setActiveCuadro("b")}>MetroHumana 5.000</button>
+        <section className="pyme-cuadro" id="pyme-cuadro" ref={cuadroRef}>
+          <div className="pyme-cuadro-essentials">
+            <span className="mh50-exp-eyebrow light">LO ESENCIAL</span>
+            <h2>Lo esencial del Plan Pyme, de un vistazo.</h2>
+            <div className="pyme-cuadro-essentials-grid">
+              {essentialsList.map(({ icon: Icon, label, mh10: v10, mh5: v5 }) => (
+                <article key={label}>
+                  <Icon aria-hidden="true" />
+                  {v10 === v5 ? (
+                    <strong>{v10}</strong>
+                  ) : (
+                    <span className="pyme-cuadro-essentials-dual">
+                      <span><strong>{v10}</strong><small>MH 10.000</small></span>
+                      <span><strong>{v5}</strong><small>MH 5.000</small></span>
+                    </span>
+                  )}
+                  <span>{label}</span>
+                </article>
+              ))}
             </div>
-            <table className="plan-detail-table">
-              <tbody>
-                {cuadro.map((row, i) => (
-                  <tr key={`${row.label}-${i}`}>
-                    <th scope="row">{row.section ? <><strong>{row.section}</strong><br />{row.label}</> : row.label}</th>
-                    <td>{row.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
-          <p style={{ marginTop: 24, color: "#3f5f73", fontSize: 14.5 }}>
+
+          <div className="pyme-cuadro-index-slot" ref={navSlotRef} style={navDocked ? { height: navHeight } : undefined}>
+            <nav
+              className={`pyme-cuadro-index${navDocked ? " is-docked" : ""}`}
+              aria-label="Categorías del cuadro de coberturas"
+              ref={navRef}
+            >
+              {coverageCategories.map((cat) => {
+                const slug = slugify(cat.section);
+                return (
+                  <a key={slug} href={`#pyme-cat-${slug}`} data-category-link={slug} className={activeCategory === slug ? "is-active" : ""}>
+                    {cat.section.charAt(0) + cat.section.slice(1).toLowerCase()}
+                  </a>
+                );
+              })}
+            </nav>
+          </div>
+
+          <div className="pyme-cuadro-grid">
+            {coverageCategories.map((cat) => {
+              const slug = slugify(cat.section);
+              const Icon = categoryIcons[cat.section] ?? WalletCards;
+              return (
+                <article
+                  className={`pyme-cuadro-card${fullWidthCategories.has(cat.section) ? " is-wide" : ""}`}
+                  id={`pyme-cat-${slug}`}
+                  data-category-card={slug}
+                  key={cat.section}
+                >
+                  <header>
+                    <Icon aria-hidden="true" />
+                    <h3>{cat.section.charAt(0) + cat.section.slice(1).toLowerCase()}</h3>
+                  </header>
+                  <div className="pyme-cuadro-card-columns">
+                    <span />
+                    <span>MH 10.000</span>
+                    <span>MH 5.000</span>
+                  </div>
+                  <dl>
+                    {cat.rows.map((row) => (
+                      <div className="pyme-cuadro-row" key={row.label}>
+                        <dt>{row.label}</dt>
+                        {row.mh10 === row.mh5 ? (
+                          <dd className="pyme-cuadro-value-single">{row.mh10}</dd>
+                        ) : (
+                          <>
+                            <dd>{row.mh10}</dd>
+                            <dd>{row.mh5}</dd>
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </dl>
+                </article>
+              );
+            })}
+          </div>
+
+          <p className="pyme-cuadro-footnote">
             <strong>Exámenes de diagnóstico:</strong> cancelan únicamente el 10% del valor de los exámenes.{" "}
             <strong>Medicinas:</strong> al comprar en las farmacias de la red, pagan únicamente del 10% o 30% del valor de los medicamentos.
           </p>
