@@ -29,6 +29,17 @@ export default function PlanesMedicosEmpresasPage() {
         </div>
       </section>
 
+      {/* Texto oficial del hub (habla también de Personas, por eso va en
+          posición secundaria, debajo del hero, y no como mensaje principal). */}
+      <section className="content-section" style={{ maxWidth: 820, margin: "0 auto", padding: "40px 24px 0", textAlign: "center" }}>
+        <h2 style={{ fontSize: "clamp(22px,2.6vw,30px)", color: "#073b60", margin: "0 0 12px" }}>Cobertura Integral para Personas y Empresas</h2>
+        <p style={{ color: "#3f5f73", fontSize: 16, lineHeight: 1.7, margin: 0 }}>
+          Soluciones de salud personalizadas que se adaptan a tus necesidades específicas, ofreciendo
+          tranquilidad y acceso preferencial a servicios médicos de calidad para individuos, familias y
+          organizaciones de todos los tamaños.
+        </p>
+      </section>
+
       <EmpresasExperience />
     </SiteShell>
   );

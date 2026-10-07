@@ -120,6 +120,16 @@ export default function EmpresasExperience() {
 
         <div className="sales-plans-content">
           <div className="plan-editorial-flow pm-biz-flow">
+            {/* Texto oficial del hub de empresas (tarjeta "Pequeñas y Medianas"),
+                introducción común a Plan Pyme y Humana Business. Nota: el rango
+                "5 hasta 99 colaboradores" de este texto oficial no coincide con
+                los rangos mostrados por los bloques (5-25 Pyme, 25-45 Business);
+                no se unifican, queda pendiente de validar con Comercial. */}
+            <div className="pm-biz-intro">
+              <h3>Pequeñas y Medianas</h3>
+              <p>Soluciones equilibradas en planes médicos para medianas y pequeñas empresas, desde 5 hasta 99 colaboradores.</p>
+              <Link className="pm-biz-compare-link" href={pequenasYMedianasHref}>Ver el hub de pequeñas y medianas empresas <ChevronRight size={14} /></Link>
+            </div>
             <section id="pyme" ref={(el) => { targets.current.pyme = el; }} className="plan-editorial-hero pm-biz-hero">
               <Image src="https://humana.med.ec/wp-content/uploads/2025/09/plan-pyme-humana-medicina-prepagada.jpg" alt="Equipo de una pequeña empresa" fill sizes="100vw" unoptimized className="plan-editorial-hero-photo" />
               <div className="plan-editorial-hero-overlay" />
@@ -154,7 +164,11 @@ export default function EmpresasExperience() {
               <div className="plan-editorial-hero-copy">
                 <span className="plan-editorial-eyebrow">Grandes empresas</span>
                 <h2>Plan Corporativo</h2>
-                <p>Un contrato corporativo personalizado, diseñado en función del plan específico de cada empresa, desde 50 empleados.</p>
+                {/* Texto oficial de la tarjeta "Grandes Empresas" del hub. El "más
+                    de 100 empleados" de este texto no coincide con el "desde 50
+                    empleados" que usa el bloque del plan más abajo; no se
+                    unifican, queda pendiente de validar con Comercial. */}
+                <p>Diseñado para grandes empresas con más de 100 empleados, nuestro plan ofrece beneficios premium y soluciones integrales que protegen la salud de tus colaboradores.</p>
                 <div className="plan-editorial-hero-actions">
                   <Link className="sales-buy" href="/cotizador/"><ShoppingCart size={17} /> Cotiza para tu empresa <ArrowRight size={16} /></Link>
                 </div>
