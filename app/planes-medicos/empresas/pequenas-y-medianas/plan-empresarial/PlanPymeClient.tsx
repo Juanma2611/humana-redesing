@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   Accessibility, Ambulance, Banknote, Baby, Briefcase, FlaskConical, Gift, HeartHandshake, HeartPulse,
   Hospital, MessageCircle, PhoneCall, Pill, ShieldAlert, ShieldCheck, Stethoscope, TrendingUp, UserRound,
-  Users, WalletCards,
+  Users, WalletCards, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { cuadroA, cuadroB, groupCuadroBySection } from "@/lib/empresa-cuadros";
@@ -127,8 +127,6 @@ const categoryIcons: Record<string, typeof Hospital> = {
   "BENEFICIOS INCLUIDOS": Gift,
 };
 
-const fullWidthCategories = new Set(["AMBULATORIA", "MEDICINAS"]);
-
 const slugify = (text: string) => text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-");
 
 const categoriesA = groupCuadroBySection(cuadroA);
@@ -162,11 +160,10 @@ export default function PlanPymeClient() {
   const progressRef = useRef<HTMLSpanElement>(null);
   const [activePlan, setActivePlan] = useState<"mh10" | "mh5">("mh10");
   const [activeCategory, setActiveCategory] = useState<string>(coverageCategories[0]?.section ?? "");
-  const cuadroRef = useRef<HTMLDivElement>(null);
-  const navRef = useRef<HTMLElement>(null);
-  const navSlotRef = useRef<HTMLDivElement>(null);
-  const [navDocked, setNavDocked] = useState(false);
-  const [navHeight, setNavHeight] = useState(0);
+  const [cuadroOpen, setCuadroOpen] = useState(false);
+  const cuadroDialogRef = useRef<HTMLDialogElement>(null);
+  const cuadroContentRef = useRef<HTMLDivElement>(null);
+  const cuadroOpenBtnRef = useRef<HTMLButtonElement>(null);
   const selected = activePlan === "mh10" ? mh10 : mh5;
 
   useEffect(() => {
@@ -214,32 +211,46 @@ export default function PlanPymeClient() {
     return () => { window.removeEventListener("scroll", onScroll); revealObserver.disconnect(); window.clearTimeout(safetyTimer); };
   }, []);
 
-  /* Scrollspy del índice de categorías del cuadro de coberturas: resalta
-     la tarjeta visible y centra su enlace en la barra deslizable. */
+  /* Panel del cuadro de coberturas: <dialog> nativo. Todo su contenido ya
+     está en el HTML desde el SSR; abrir/cerrar solo cambia su visibilidad
+     (showModal/close), sin cargar ni generar nada por JS. */
   useEffect(() => {
-    const container = cuadroRef.current;
-    const nav = navRef.current;
-    const slot = navSlotRef.current;
-    if (!container || !nav || !slot) return;
+    const dialog = cuadroDialogRef.current;
+    if (!dialog) return;
+    const onClose = () => {
+      setCuadroOpen(false);
+      cuadroOpenBtnRef.current?.focus();
+    };
+    dialog.addEventListener("close", onClose);
+    return () => dialog.removeEventListener("close", onClose);
+  }, []);
+
+  useEffect(() => {
+    const dialog = cuadroDialogRef.current;
+    if (!dialog) return;
+    if (cuadroOpen && !dialog.open) dialog.showModal();
+    if (!cuadroOpen && dialog.open) dialog.close();
+  }, [cuadroOpen]);
+
+  /* Scrollspy del índice de categorías dentro del panel: resalta la
+     categoría visible y centra su enlace en la barra deslizable. */
+  useEffect(() => {
+    if (!cuadroOpen) return;
+    const content = cuadroContentRef.current;
+    if (!content) return;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const cards = Array.from(container.querySelectorAll<HTMLElement>("[data-category-card]"));
+    const cards = Array.from(content.querySelectorAll<HTMLElement>("[data-category-card]"));
     if (!cards.length) return;
 
-    const height = nav.getBoundingClientRect().height;
-    setNavHeight(height);
-    const slotTop = slot.getBoundingClientRect().top + window.scrollY;
-
     const onScroll = () => {
-      const dockTop = window.innerWidth <= 760 ? 74 : 88;
-      const sectionBottom = container.getBoundingClientRect().bottom;
-      const docked = window.scrollY + dockTop >= slotTop && sectionBottom > dockTop + height;
-      setNavDocked(docked);
-
+      const contentTop = content.getBoundingClientRect().top;
       let current = activeCategory;
-      cards.forEach((card) => { if (card.getBoundingClientRect().top < window.innerHeight * 0.4) current = card.dataset.categoryCard ?? current; });
+      cards.forEach((card) => {
+        if (card.getBoundingClientRect().top - contentTop < content.clientHeight * 0.35) current = card.dataset.categoryCard ?? current;
+      });
       setActiveCategory((prev) => {
         if (prev === current) return prev;
-        const link = container.querySelector<HTMLAnchorElement>(`[data-category-link="${current}"]`);
+        const link = content.parentElement?.querySelector<HTMLAnchorElement>(`[data-category-link="${current}"]`);
         const navContainer = link?.parentElement;
         if (link && navContainer) {
           const targetLeft = link.offsetLeft - navContainer.clientWidth / 2 + link.clientWidth / 2;
@@ -248,11 +259,11 @@ export default function PlanPymeClient() {
         return current;
       });
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
+    content.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => content.removeEventListener("scroll", onScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [cuadroOpen]);
 
   return (
     <SiteShell title="Plan Pyme">
@@ -351,7 +362,7 @@ export default function PlanPymeClient() {
           </section>
         ))}
 
-        <section className="pyme-cuadro" id="pyme-cuadro" ref={cuadroRef}>
+        <section className="pyme-cuadro" id="pyme-cuadro">
           <div className="pyme-cuadro-essentials">
             <span className="mh50-exp-eyebrow light">LO ESENCIAL</span>
             <h2>Lo esencial del Plan Pyme, de un vistazo.</h2>
@@ -373,67 +384,98 @@ export default function PlanPymeClient() {
             </div>
           </div>
 
-          <div className="pyme-cuadro-index-slot" ref={navSlotRef} style={navDocked ? { height: navHeight } : undefined}>
-            <nav
-              className={`pyme-cuadro-index${navDocked ? " is-docked" : ""}`}
-              aria-label="Categorías del cuadro de coberturas"
-              ref={navRef}
+          <div className="pyme-cuadro-cta">
+            <button
+              type="button"
+              className="pyme-cuadro-open-btn"
+              ref={cuadroOpenBtnRef}
+              aria-expanded={cuadroOpen}
+              aria-controls="pyme-cuadro-dialog"
+              onClick={() => setCuadroOpen(true)}
             >
-              {coverageCategories.map((cat) => {
-                const slug = slugify(cat.section);
-                return (
-                  <a key={slug} href={`#pyme-cat-${slug}`} data-category-link={slug} className={activeCategory === slug ? "is-active" : ""}>
-                    {cat.section.charAt(0) + cat.section.slice(1).toLowerCase()}
-                  </a>
-                );
-              })}
-            </nav>
+              <FlaskConical aria-hidden="true" />
+              Ver más acerca del cuadro de coberturas
+            </button>
           </div>
 
-          <div className="pyme-cuadro-grid">
-            {coverageCategories.map((cat) => {
-              const slug = slugify(cat.section);
-              const Icon = categoryIcons[cat.section] ?? WalletCards;
-              return (
-                <article
-                  className={`pyme-cuadro-card${fullWidthCategories.has(cat.section) ? " is-wide" : ""}`}
-                  id={`pyme-cat-${slug}`}
-                  data-category-card={slug}
-                  key={cat.section}
-                >
-                  <header>
-                    <Icon aria-hidden="true" />
-                    <h3>{cat.section.charAt(0) + cat.section.slice(1).toLowerCase()}</h3>
-                  </header>
-                  <div className="pyme-cuadro-card-columns">
-                    <span />
-                    <span>MH 10.000</span>
-                    <span>MH 5.000</span>
-                  </div>
-                  <dl>
-                    {cat.rows.map((row) => (
-                      <div className="pyme-cuadro-row" key={row.label}>
-                        <dt>{row.label}</dt>
-                        {row.mh10 === row.mh5 ? (
-                          <dd className="pyme-cuadro-value-single">{row.mh10}</dd>
-                        ) : (
-                          <>
-                            <dd>{row.mh10}</dd>
-                            <dd>{row.mh5}</dd>
-                          </>
-                        )}
-                      </div>
-                    ))}
-                  </dl>
-                </article>
-              );
-            })}
-          </div>
+          {/* Todo el cuadro completo (ambos planes, todas las categorías y filas)
+             está renderizado en el HTML desde la carga inicial: el <dialog> solo
+             lo oculta visualmente hasta que se abre, no lo carga por JS. */}
+          <dialog
+            id="pyme-cuadro-dialog"
+            className="pyme-cuadro-dialog"
+            data-plan={activePlan}
+            ref={cuadroDialogRef}
+            aria-labelledby="pyme-cuadro-dialog-title"
+            onClick={(e) => { if (e.target === cuadroDialogRef.current) setCuadroOpen(false); }}
+          >
+            <div className="pyme-cuadro-dialog-inner">
+              <header className="pyme-cuadro-dialog-head">
+                <h2 id="pyme-cuadro-dialog-title">Cuadro de coberturas · Plan Pyme</h2>
+                <button type="button" className="pyme-cuadro-dialog-close" onClick={() => setCuadroOpen(false)} aria-label="Cerrar">
+                  <X aria-hidden="true" />
+                </button>
+              </header>
 
-          <p className="pyme-cuadro-footnote">
-            <strong>Exámenes de diagnóstico:</strong> cancelan únicamente el 10% del valor de los exámenes.{" "}
-            <strong>Medicinas:</strong> al comprar en las farmacias de la red, pagan únicamente del 10% o 30% del valor de los medicamentos.
-          </p>
+              <div className="pyme-cuadro-dialog-toggle" role="group" aria-label="Elige el plan a mostrar">
+                <button type="button" className={activePlan === "mh10" ? "is-active" : ""} onClick={() => setActivePlan("mh10")}>MH 10.000</button>
+                <button type="button" className={activePlan === "mh5" ? "is-active" : ""} onClick={() => setActivePlan("mh5")}>MH 5.000</button>
+              </div>
+
+              <div className="pyme-cuadro-dialog-body">
+                <nav className="pyme-cuadro-dialog-index" aria-label="Categorías del cuadro de coberturas">
+                  {coverageCategories.map((cat) => {
+                    const slug = slugify(cat.section);
+                    return (
+                      <a
+                        key={slug}
+                        href={`#pyme-cat-${slug}`}
+                        data-category-link={slug}
+                        className={activeCategory === slug ? "is-active" : ""}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          cuadroContentRef.current?.querySelector(`#pyme-cat-${slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }}
+                      >
+                        {cat.section.charAt(0) + cat.section.slice(1).toLowerCase()}
+                      </a>
+                    );
+                  })}
+                </nav>
+
+                <div className="pyme-cuadro-dialog-content" ref={cuadroContentRef}>
+                  {coverageCategories.map((cat) => {
+                    const slug = slugify(cat.section);
+                    const Icon = categoryIcons[cat.section] ?? WalletCards;
+                    return (
+                      <section className="pyme-cuadro-dialog-category" id={`pyme-cat-${slug}`} data-category-card={slug} key={cat.section}>
+                        <h3><Icon aria-hidden="true" />{cat.section.charAt(0) + cat.section.slice(1).toLowerCase()}</h3>
+                        <dl>
+                          {cat.rows.map((row) => (
+                            <div className="pyme-cuadro-dialog-row" key={row.label}>
+                              <dt>{row.label}</dt>
+                              <dd data-plan-value="mh10">{row.mh10}</dd>
+                              <dd data-plan-value="mh5">{row.mh5}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                      </section>
+                    );
+                  })}
+
+                  <p className="pyme-cuadro-dialog-footnote">
+                    <strong>Exámenes de diagnóstico:</strong> cancelan únicamente el 10% del valor de los exámenes.{" "}
+                    <strong>Medicinas:</strong> al comprar en las farmacias de la red, pagan únicamente del 10% o 30% del valor de los medicamentos.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pyme-cuadro-dialog-actions">
+                <a className="primary-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer" onClick={() => setCuadroOpen(false)}>Solicitar información</a>
+                <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
+              </div>
+            </div>
+          </dialog>
         </section>
 
         <section className="business-contact-box mh50-exp-reveal">
