@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import PersonasExperience from "./PersonasExperience";
@@ -21,8 +22,19 @@ export default function PlanesMedicosPersonasPage() {
         <span>Planes médicos para Personas</span>
       </nav>
 
-      <section className="content-section plan-hub-intro">
-        <h1>Planes médicos para Personas</h1>
+      <section className="pm-personas-hero">
+        <div className="pm-personas-hero-shapes" aria-hidden="true" />
+        <div className="pm-personas-hero-inner">
+          <div className="pm-personas-hero-copy">
+            <span className="pm-personas-hero-kicker">Para ti y tu familia</span>
+            <h1>Planes médicos para Personas</h1>
+          </div>
+          <div className="pm-personas-hero-visual">
+            <div className="pm-personas-hero-photo">
+              <Image src="/images/planes/mh150/mh150-hospitalizacion.jpg" alt="Persona protegida por un plan médico Humana" fill sizes="(max-width: 980px) 100vw, 45vw" unoptimized style={{ objectFit: "cover" }} />
+            </div>
+          </div>
+        </div>
       </section>
 
       <PersonasExperience />

@@ -21,15 +21,12 @@ export default function PlanesMedicosEmpresasPage() {
         <span>Planes médicos para Empresas</span>
       </nav>
 
-      <section className="content-section plan-hub-intro">
-        <span className="kicker" style={{ display: "block", marginBottom: 6 }}>Bienestar que impulsa a tu equipo</span>
-        <h1>Planes médicos para Empresas</h1>
-        <h2>Cobertura Integral para Personas y Empresas</h2>
-        <p>
-          Soluciones de salud personalizadas que se adaptan a tus necesidades específicas, ofreciendo
-          tranquilidad y acceso preferencial a servicios médicos de calidad para individuos, familias y
-          organizaciones de todos los tamaños.
-        </p>
+      <section className="pm-biz-topHero">
+        <div className="pm-biz-topHero-shapes" aria-hidden="true" />
+        <div className="pm-biz-topHero-inner">
+          <span className="pm-biz-topHero-kicker">Bienestar que impulsa a tu equipo</span>
+          <h1>Planes médicos para Empresas</h1>
+        </div>
       </section>
 
       <EmpresasExperience />

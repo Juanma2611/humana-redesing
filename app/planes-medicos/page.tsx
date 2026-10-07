@@ -30,6 +30,8 @@ export default async function PlanesMedicosPage({ searchParams }: { searchParams
 
       <section className="pm-hero">
         <div className="pm-hero-shapes" aria-hidden="true" />
+        <div className="pm-hero-arc" aria-hidden="true" />
+        <div className="pm-hero-lines" aria-hidden="true" />
         <div className="pm-hero-inner">
           <div className="pm-hero-copy">
             <span className="pm-hero-kicker">Planes médicos Humana</span>
@@ -42,21 +44,23 @@ export default async function PlanesMedicosPage({ searchParams }: { searchParams
             </p>
             <div className="pm-hero-actions">
               <Link className="primary-button" href="/cotizador/"><ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} /></Link>
-              <a className="pm-hero-ghost-button" href="tel:18004862862"><PhoneCall size={16} /> Solicitar llamada</a>
+              <a className="pm-hero-ghost-button" href="tel:1800486262"><PhoneCall size={16} /> Solicitar llamada</a>
               <a className="pm-hero-ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={16} /> WhatsApp</a>
+            </div>
+            <div className="pm-hero-stats">
+              <div className="pm-hero-stat">
+                <UsersRound size={20} aria-hidden="true" />
+                <div><strong>+200.000</strong><span>personas y empresas confían en Humana</span></div>
+              </div>
+              <div className="pm-hero-stat">
+                <ShieldCheck size={20} aria-hidden="true" />
+                <div><strong>$15.000 – $150.000</strong><span>de cobertura anual según el plan</span></div>
+              </div>
             </div>
           </div>
           <div className="pm-hero-visual">
             <div className="pm-hero-photo">
               <Image src="/familia-humana.png" alt="Familia disfrutando un momento juntos, protegida por Humana" fill sizes="(max-width: 980px) 100vw, 45vw" unoptimized style={{ objectFit: "cover" }} />
-            </div>
-            <div className="pm-hero-float pm-hero-float-trust">
-              <UsersRound size={20} aria-hidden="true" />
-              <div><strong>+200.000</strong><span>personas y empresas confían en Humana</span></div>
-            </div>
-            <div className="pm-hero-float pm-hero-float-range">
-              <ShieldCheck size={20} aria-hidden="true" />
-              <div><strong>$15.000 – $150.000</strong><span>de cobertura anual según el plan</span></div>
             </div>
           </div>
         </div>
@@ -118,7 +122,7 @@ export default async function PlanesMedicosPage({ searchParams }: { searchParams
           <p>Cotiza en línea, solicita una llamada o escríbenos por WhatsApp.</p>
           <div className="pm-hub-closing-actions">
             <Link className="primary-button" href="/cotizador/"><ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} /></Link>
-            <a className="secondary-button light" href="tel:18004862862"><PhoneCall size={16} /> Solicitar llamada</a>
+            <a className="secondary-button light" href="tel:1800486262"><PhoneCall size={16} /> Solicitar llamada</a>
             <a className="secondary-button green" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={16} /> WhatsApp</a>
           </div>
         </div>
