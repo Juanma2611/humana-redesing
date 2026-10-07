@@ -4747,13 +4747,18 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
    hero/cierre. Dos tarjetas de igual tamaño, alineadas en el contenedor
    de 1180px, con el mismo acabado (sombra/borde/hover) que los cuadros
    de /planes-medicos/. */
-.pm-pym-section { position: relative; overflow: hidden; padding: clamp(56px,7vw,88px) clamp(24px,7vw,110px); background: var(--humana-ice); }
-.pm-pym-section::before { content:""; position:absolute; top:-120px; right:-100px; width:340px; height:340px; border-radius:50%; background: radial-gradient(circle, rgba(11,128,189,.1), transparent 70%); pointer-events: none; }
+/* Continúa el azul profundo del hero hacia un celeste medio, con la misma
+   retícula fina y formas difuminadas teal/azul, para que el contraste con
+   las tarjetas blancas sea evidente (nada de fondo casi blanco). */
+.pm-pym-section { position: relative; overflow: hidden; padding: clamp(56px,7vw,88px) clamp(24px,7vw,110px); background: linear-gradient(180deg,#052033 0%,#0b4f78 22%,#0b7ab0 58%,#10a7db 100%); }
+.pm-pym-section::before { content:""; position:absolute; inset:0; pointer-events:none; background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 48px), repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 48px); -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.85), transparent 65%); mask-image: linear-gradient(180deg, rgba(0,0,0,.85), transparent 65%); }
+.pm-pym-section::after { content:""; position:absolute; bottom:-220px; left:-140px; width:520px; height:520px; border-radius:50%; background: radial-gradient(circle, rgba(18,166,162,.35), transparent 70%); pointer-events: none; }
+.pm-pym-section-glow { position: absolute; top: -160px; right: -120px; width: 440px; height: 440px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.14), transparent 70%); pointer-events: none; }
 .pm-pym-grid { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
-.pm-pym-card { height: 100%; display: flex; flex-direction: column; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: var(--premium-shadow); border: 1px solid rgba(7,46,73,.08); transition: transform .35s var(--premium-ease), box-shadow .35s var(--premium-ease); }
-.pm-pym-card:hover { transform: translateY(-5px); box-shadow: var(--premium-shadow-hover); }
+.pm-pym-card { height: 100%; display: flex; flex-direction: column; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(2,15,25,.35); border: 1px solid rgba(255,255,255,.4); transition: transform .35s var(--premium-ease), box-shadow .35s var(--premium-ease); }
+.pm-pym-card:hover { transform: translateY(-5px); box-shadow: 0 36px 86px rgba(2,15,25,.42); }
 .pm-pym-card-media { position: relative; width: 100%; aspect-ratio: 16/10; overflow: hidden; }
-.pm-pym-card-media img { transition: transform .5s var(--premium-ease); }
+.pm-pym-card-media img { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover; object-position: center; transition: transform .5s var(--premium-ease); }
 .pm-pym-card:hover .pm-pym-card-media img { transform: scale(1.05); }
 .pm-pym-card-copy { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 28px 28px 30px; }
 .pm-pym-card-copy h2 { margin: 2px 0 0; font-size: 24px; letter-spacing: -.02em; color: #073b60; }

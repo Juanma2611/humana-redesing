@@ -63,6 +63,7 @@ export default function PequenasYMedianasPage() {
       </section>
 
       <section className="pm-pym-section">
+        <div className="pm-pym-section-glow" aria-hidden="true" />
         <div className="pm-pym-grid">
           {plans.map(({ id, name, icon: Icon, chip, image, imageAlt, description, href }) => (
             <article className="pm-pym-card" key={id}>
