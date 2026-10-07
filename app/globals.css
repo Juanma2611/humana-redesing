@@ -4926,10 +4926,13 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 
 /* ------------------------------------------------------------------------ */
-/* Cuadro de coberturas de Plan Pyme: tarjetas por categoría en vez de una  */
-/* sola tabla larga. Sobrio y corporativo (azul profundo + blanco, acento   */
-/* teal mínimo), con MH 10.000 y MH 5.000 comparados lado a lado.          */
-/* Patrón reutilizable: se aplicará a Humana Business cuando se apruebe.    */
+/* Cuadro de coberturas de Plan Pyme: franja "Lo esencial" en el flujo de   */
+/* la página + cuadro completo movido a un <dialog> nativo que se abre a   */
+/* pedido ("Ver más..."). Todo el contenido del panel va en el HTML desde  */
+/* el SSR (requisito SEO); el <dialog> solo lo oculta visualmente hasta    */
+/* que se abre. Sobrio y corporativo (azul profundo + blanco, acento teal  */
+/* mínimo). Patrón reutilizable: se aplicará a Humana Business cuando se   */
+/* apruebe.                                                                 */
 /* ------------------------------------------------------------------------ */
 .pyme-cuadro { padding: clamp(56px,7vw,88px) clamp(24px,7vw,110px); background: #f5f8fa; }
 
@@ -4945,36 +4948,56 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .pyme-cuadro-essentials-dual strong { font-size: 19px; color: #fff; font-weight: 740; letter-spacing: -.01em; }
 .pyme-cuadro-essentials-dual small { font-size: 9.5px; letter-spacing: .04em; color: #7ce0db; text-transform: uppercase; font-weight: 700; }
 
-.pyme-cuadro-index-slot { max-width: 1180px; margin: 0 auto 28px; }
-.pyme-cuadro-index { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 6px; background: rgba(245,248,250,.92); backdrop-filter: blur(10px); border: 1px solid #dfe8ed; border-radius: 14px; }
-.pyme-cuadro-index.is-docked { position: fixed; top: 88px; left: 50%; transform: translateX(-50%); width: min(1180px, calc(100% - 48px)); z-index: 19; box-shadow: 0 16px 36px rgba(7,63,96,.14); }
-@media (max-width: 760px) { .pyme-cuadro-index.is-docked { top: 74px; width: calc(100% - 32px); } }
-.pyme-cuadro-index::-webkit-scrollbar { display: none; }
-.pyme-cuadro-index a { flex: none; padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 650; color: #52697a; white-space: nowrap; transition: background .25s ease, color .25s ease; }
-.pyme-cuadro-index a.is-active { background: #073b60; color: #fff; }
+.pyme-cuadro-cta { display: flex; justify-content: center; }
+.pyme-cuadro-open-btn { display: inline-flex; align-items: center; gap: 10px; margin: 32px auto 0; padding: 14px 28px; border-radius: 12px; border: 1px solid #c9dbe4; background: #fff; color: #073b60; font: inherit; font-weight: 680; font-size: 14.5px; letter-spacing: -.005em; box-shadow: 0 10px 24px rgba(7,63,96,.08); cursor: pointer; transition: border-color .25s var(--premium-ease,ease), box-shadow .25s var(--premium-ease,ease), transform .25s var(--premium-ease,ease); }
+.pyme-cuadro-open-btn:hover { border-color: #0b80bd; box-shadow: 0 14px 30px rgba(7,63,96,.14); transform: translateY(-1px); }
+.pyme-cuadro-open-btn svg { width: 17px; height: 17px; color: #0b80bd; }
 
-.pyme-cuadro-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
-.pyme-cuadro-card { grid-column: span 1; background: #fff; border: 1px solid #e3eaee; border-radius: 20px; padding: clamp(22px,2.6vw,30px); box-shadow: 0 10px 30px rgba(7,46,73,.05); scroll-margin-top: 64px; }
-.pyme-cuadro-card.is-wide { grid-column: 1 / -1; }
-.pyme-cuadro-card header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid #e3eaee; }
-.pyme-cuadro-card header svg { width: 20px; height: 20px; color: #0b80bd; flex-shrink: 0; }
-.pyme-cuadro-card h3 { margin: 0; font-size: 16px; font-weight: 760; letter-spacing: -.01em; color: #073b60; text-transform: none; }
-.pyme-cuadro-card-columns { display: grid; grid-template-columns: minmax(0,1fr) 110px 110px; gap: 12px; padding: 0 0 8px; }
-.pyme-cuadro-card-columns span:nth-child(2), .pyme-cuadro-card-columns span:nth-child(3) { font-size: 10px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; color: #8098a8; text-align: right; }
-.pyme-cuadro-card dl { margin: 0; }
-.pyme-cuadro-row { display: grid; grid-template-columns: minmax(0,1fr) 110px 110px; gap: 12px; align-items: baseline; padding: 11px 0; border-top: 1px solid #eef2f4; }
-.pyme-cuadro-card dl > .pyme-cuadro-row:first-child { border-top: 0; }
-.pyme-cuadro-row dt { margin: 0; font-size: 13.5px; line-height: 1.5; color: #44606f; }
-.pyme-cuadro-row dd { margin: 0; font-size: 14.5px; font-weight: 700; color: #073b60; text-align: right; letter-spacing: -.01em; }
-.pyme-cuadro-row dd.pyme-cuadro-value-single { grid-column: 2 / span 2; }
+/* Panel (dialog) con el cuadro completo --------------------------------- */
+.pyme-cuadro-dialog { border: none; padding: 0; width: min(1040px, 94vw); height: min(780px, 88vh); max-width: none; max-height: none; border-radius: 22px; background: #fff; color: var(--humana-ink, #12314a); box-shadow: 0 40px 100px rgba(5,32,51,.35); }
+.pyme-cuadro-dialog::backdrop { background: rgba(5,22,36,.6); backdrop-filter: blur(3px); }
+.pyme-cuadro-dialog-inner { display: flex; flex-direction: column; height: 100%; }
+.pyme-cuadro-dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 24px 30px 18px; border-bottom: 1px solid #e3ecf1; }
+.pyme-cuadro-dialog-head h2 { margin: 0; font-size: clamp(18px,2vw,22px); font-weight: 760; letter-spacing: -.015em; color: #073b60; }
+.pyme-cuadro-dialog-close { flex: none; display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid #dbe8ed; background: #f5f8fa; color: #44606f; cursor: pointer; transition: background .2s ease, color .2s ease; }
+.pyme-cuadro-dialog-close:hover { background: #073b60; color: #fff; border-color: #073b60; }
+.pyme-cuadro-dialog-close svg { width: 18px; height: 18px; }
 
-.pyme-cuadro-footnote { max-width: 1180px; margin: 28px auto 0; color: #5e7384; font-size: 13px; line-height: 1.7; }
+.pyme-cuadro-dialog-toggle { display: flex; gap: 8px; padding: 18px 30px 0; flex: none; }
+.pyme-cuadro-dialog-toggle button { flex: 1; padding: 10px 16px; border-radius: 10px; border: 1px solid #dbe8ed; background: #f5f8fa; color: #44606f; font: inherit; font-weight: 680; font-size: 13.5px; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+.pyme-cuadro-dialog-toggle button.is-active { background: #073b60; border-color: #073b60; color: #fff; }
 
-@media (max-width: 900px) {
-  .pyme-cuadro-grid { grid-template-columns: 1fr; }
-  .pyme-cuadro-card.is-wide { grid-column: auto; }
-}
-@media (max-width: 560px) {
-  .pyme-cuadro-card-columns, .pyme-cuadro-row { grid-template-columns: minmax(0,1fr) 72px 72px; gap: 8px; }
-  .pyme-cuadro-row dd, .pyme-cuadro-card-columns span { font-size: 12.5px; }
+.pyme-cuadro-dialog-body { flex: 1; display: flex; min-height: 0; padding-top: 16px; }
+.pyme-cuadro-dialog-index { flex: 0 0 196px; overflow-y: auto; padding: 4px 14px 24px 30px; display: flex; flex-direction: column; gap: 2px; border-right: 1px solid #e3ecf1; }
+.pyme-cuadro-dialog-index a { padding: 10px 12px; border-radius: 10px; font-size: 13px; font-weight: 650; color: #52697a; transition: background .2s ease, color .2s ease; }
+.pyme-cuadro-dialog-index a.is-active { background: #073b60; color: #fff; }
+
+.pyme-cuadro-dialog-content { flex: 1; overflow-y: auto; padding: 4px 30px 8px; }
+.pyme-cuadro-dialog-category { padding: 22px 0; border-top: 1px solid #eef3f6; scroll-margin-top: 12px; }
+.pyme-cuadro-dialog-category:first-child { border-top: 0; padding-top: 4px; }
+.pyme-cuadro-dialog-category h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font-size: 15.5px; font-weight: 760; letter-spacing: -.01em; color: #073b60; }
+.pyme-cuadro-dialog-category h3 svg { width: 18px; height: 18px; color: #0b80bd; flex-shrink: 0; }
+.pyme-cuadro-dialog-category dl { margin: 0; }
+.pyme-cuadro-dialog-row { display: grid; grid-template-columns: minmax(0,1fr) 130px; gap: 14px; align-items: baseline; padding: 10px 0; border-top: 1px solid #f0f4f7; }
+.pyme-cuadro-dialog-category dl > .pyme-cuadro-dialog-row:first-child { border-top: 0; }
+.pyme-cuadro-dialog-row dt { margin: 0; font-size: 13.5px; line-height: 1.5; color: #44606f; }
+.pyme-cuadro-dialog-row dd { margin: 0; font-size: 14.5px; font-weight: 720; color: #073b60; text-align: right; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.pyme-cuadro-dialog-row dd[data-plan-value] { display: none; }
+.pyme-cuadro-dialog[data-plan="mh10"] .pyme-cuadro-dialog-row dd[data-plan-value="mh10"],
+.pyme-cuadro-dialog[data-plan="mh5"] .pyme-cuadro-dialog-row dd[data-plan-value="mh5"] { display: block; }
+
+.pyme-cuadro-dialog-footnote { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid #eef3f6; color: #5e7384; font-size: 12.5px; line-height: 1.7; }
+
+.pyme-cuadro-dialog-actions { flex: none; display: flex; flex-wrap: wrap; gap: 12px; padding: 18px 30px; border-top: 1px solid #e3ecf1; }
+
+@media (max-width: 760px) {
+  .pyme-cuadro-dialog { width: 100vw; height: 100dvh; border-radius: 0; }
+  .pyme-cuadro-dialog-head { padding: 20px 20px 14px; }
+  .pyme-cuadro-dialog-toggle { padding: 14px 20px 0; }
+  .pyme-cuadro-dialog-body { flex-direction: column; }
+  .pyme-cuadro-dialog-index { flex: none; flex-direction: row; overflow-x: auto; overflow-y: visible; white-space: nowrap; border-right: none; border-bottom: 1px solid #e3ecf1; padding: 10px 20px; scrollbar-width: none; }
+  .pyme-cuadro-dialog-index::-webkit-scrollbar { display: none; }
+  .pyme-cuadro-dialog-index a { flex: none; }
+  .pyme-cuadro-dialog-content { padding: 4px 20px 16px; -webkit-overflow-scrolling: touch; }
+  .pyme-cuadro-dialog-actions { padding: 16px 20px; }
 }
