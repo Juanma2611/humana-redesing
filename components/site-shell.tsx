@@ -2,18 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Building2, ChevronDown, Clock3, HeartPulse, Headphones, Layers3, MapPin, Menu, MessageCircle, ShieldCheck, ShoppingCart, Smartphone, SmilePlus, UsersRound, X } from "lucide-react";
+import { Building2, ChevronDown, Clock3, Headphones, MapPin, Menu, MessageCircle, ShieldCheck, ShoppingCart, Smartphone, UsersRound, X } from "lucide-react";
 import { SiFacebook, SiInstagram, SiTiktok, SiYoutube } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 import { MotionOrchestrator } from "@/components/motion-orchestrator";
 
 const plansMenu = [
-  { segment: "individual", label: "Individual", icon: HeartPulse },
-  { segment: "familiar", label: "Familiar", icon: UsersRound },
-  { segment: "dental", label: "ProSonrisas", icon: SmilePlus },
-  { segment: "empresa", label: "Empresas", icon: Building2 },
-  { segment: "proteger", label: "Protección extra", icon: Layers3 },
+  { href: "/planes-medicos/personas/", label: "Personas", icon: UsersRound },
+  { href: "/planes-medicos/empresas/", label: "Empresas", icon: Building2 },
 ] as const;
 
 const footerOffices = {
@@ -100,12 +97,22 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
         </Link>
         <nav className={menuOpen ? "nav-open" : ""} aria-label="Navegación principal">
           <div className={`nav-plans-dropdown${plansOpen ? " open" : ""}`} ref={plansDropdownRef}>
-            <button type="button" className="nav-plans-trigger" aria-haspopup="true" aria-expanded={plansOpen} onClick={() => setPlansOpen((open) => !open)}>
-              Planes <ChevronDown size={14} className="nav-plans-caret" aria-hidden="true" />
-            </button>
+            <div className="nav-plans-trigger">
+              <Link href="/planes-medicos/" className="nav-plans-trigger-link" onClick={closeMenus}>Planes</Link>
+              <button
+                type="button"
+                className="nav-plans-caret-btn"
+                aria-haspopup="true"
+                aria-expanded={plansOpen}
+                aria-label={plansOpen ? "Ocultar submenú de Planes" : "Mostrar submenú de Planes"}
+                onClick={() => setPlansOpen((open) => !open)}
+              >
+                <ChevronDown size={14} className="nav-plans-caret" aria-hidden="true" />
+              </button>
+            </div>
             <div className="nav-plans-menu" role="menu">
-              {plansMenu.map(({ segment, label, icon: Icon }) => (
-                <Link key={segment} href={`/planes-medicos?segment=${segment}`} role="menuitem" onClick={closeMenus}>
+              {plansMenu.map(({ href, label, icon: Icon }) => (
+                <Link key={href} href={href} role="menuitem" onClick={closeMenus}>
                   <span className="nav-plans-menu-icon"><Icon size={17} aria-hidden="true" /></span>
                   <span>{label}</span>
                 </Link>
@@ -138,7 +145,7 @@ export function SiteShell({ children, title = "Prototipo navegable" }: { childre
         </div>
 
         <div className="footer-main-grid">
-          <section className="footer-link-column" aria-labelledby="footer-explora"><h2 id="footer-explora">Descubre Humana</h2><Link href="/por-que-humana/">¿Por qué Humana?</Link><Link href="/planes-medicos/">Planes médicos</Link><Link href="/planes-medicos/?segment=dental">ProSonrisas</Link><Link href="/planes-medicos/empresas/">Empresas</Link><Link href="/beneficios/">Beneficios</Link><a href="/blog/">Bienestar</a></section>
+          <section className="footer-link-column" aria-labelledby="footer-explora"><h2 id="footer-explora">Descubre Humana</h2><Link href="/por-que-humana/">¿Por qué Humana?</Link><Link href="/planes-medicos/">Planes médicos</Link><Link href="/planes-medicos/personas/plan-prosonrisas/">ProSonrisas</Link><Link href="/planes-medicos/empresas/">Empresas</Link><Link href="/beneficios/">Beneficios</Link><a href="/blog/">Bienestar</a></section>
           <section className="footer-link-column" aria-labelledby="footer-plan"><h2 id="footer-plan">Usa tu plan</h2><Link href="/cliente/">MiHumana</Link><Link href="/servicios/reembolsos/">Reembolsos</Link><Link href="/servicios/autorizaciones/">Autorizaciones</Link><Link href="/directorio/">Red médica</Link><Link href="/medihumana/">Centro de servicios</Link></section>
 
           <section className="footer-office-card" id="oficinas" aria-labelledby="footer-offices">
