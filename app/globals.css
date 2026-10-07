@@ -4777,6 +4777,25 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .pm-biz-plans .sales-eyebrow { color: var(--humana-navy); }
 .pm-biz-plans .sales-segments a.active { background: linear-gradient(135deg,#052e49,#0b80bd); }
 
+/* Bloque compacto de cierre en /planes-medicos/personas/: texto oficial
+   de las 3 tarjetas originales (Individual y Familiar, Proteger,
+   Prosonrisas), movido aquí para que los heros de categoría quedaran con
+   una sola frase. Diseño sobrio, texto pequeño, sin competir con los
+   bloques de plan de arriba. */
+.pm-includes { margin-top: 56px; padding: 36px clamp(20px,4vw,40px); border-radius: 26px; background: var(--humana-ice); border: 1px solid rgba(7,92,146,.08); }
+.pm-includes-inner { max-width: 1040px; margin: 0 auto; }
+.pm-includes h2 { margin: 0 0 22px; color: #073b60; font-size: 18px; font-weight: 800; text-align: center; }
+.pm-includes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.pm-includes-col { padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid rgba(7,92,146,.1); }
+.pm-includes-col h3 { margin: 0 0 10px; color: #073b60; font-size: 14px; font-weight: 750; }
+.pm-includes-col ul { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.pm-includes-col li { display: flex; align-items: flex-start; gap: 7px; color: #5e7384; font-size: 12.5px; line-height: 1.5; }
+.pm-includes-col li svg { flex-shrink: 0; margin-top: 2px; color: var(--humana-teal); }
+.pm-includes-col a { display: inline-flex; align-items: center; gap: 4px; color: var(--humana-blue); font-size: 12.5px; font-weight: 700; }
+@media (max-width: 760px) {
+  .pm-includes-grid { grid-template-columns: 1fr; }
+}
+
 .pm-hub-closing { padding: clamp(56px,7vw,88px) clamp(24px,7vw,110px); background: linear-gradient(135deg,#075c92,#0b80bd); color: #fff; text-align: center; }
 .pm-hub-closing-inner { max-width: 640px; margin: 0 auto; }
 .pm-hub-closing h2 { margin: 0 0 10px; font-size: clamp(26px,3vw,36px); color: #fff; }
