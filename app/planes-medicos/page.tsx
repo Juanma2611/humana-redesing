@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Building2, MessageCircle, PhoneCall, ShoppingCart, UsersRound } from "lucide-react";
+import { permanentRedirect } from "next/navigation";
+import { headers } from "next/headers";
+import { ArrowRight, Building2, MessageCircle, PhoneCall, ShieldCheck, ShoppingCart, UsersRound } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+import { resolveLegacyPlanTarget } from "@/lib/legacy-plan-redirect";
 
 export const metadata: Metadata = {
   title: "Planes médicos - Humana S.A.",
@@ -11,7 +14,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://humana.med.ec/planes-medicos/" },
 };
 
-export default function PlanesMedicosPage() {
+export default async function PlanesMedicosPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  await headers();
+  const params = await searchParams;
+  const legacyTarget = resolveLegacyPlanTarget(params);
+  if (legacyTarget) permanentRedirect(legacyTarget);
+
   return (
     <SiteShell title="Planes médicos">
       <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
@@ -20,19 +28,36 @@ export default function PlanesMedicosPage() {
         <span>Planes médicos</span>
       </nav>
 
-      <section className="institutional-hero">
-        <div className="institutional-hero-inner">
-          <div className="institutional-hero-media">
-            <Image src="/familia-humana.png" alt="Familia disfrutando un momento juntos, protegida por Humana" fill sizes="(max-width: 900px) 100vw, 45vw" unoptimized style={{ objectFit: "cover" }} />
-          </div>
-          <div className="institutional-hero-copy">
+      <section className="pm-hero">
+        <div className="pm-hero-shapes" aria-hidden="true" />
+        <div className="pm-hero-inner">
+          <div className="pm-hero-copy">
+            <span className="pm-hero-kicker">Planes médicos Humana</span>
             <h1>Planes médicos</h1>
-            <h2 style={{ fontSize: 22, margin: "4px 0 14px", color: "#073b60" }}>Cobertura Integral para Personas y Empresas</h2>
-            <p className="text-justify-wide">
+            <h2>Cobertura Integral para Personas y Empresas</h2>
+            <p>
               Soluciones de salud personalizadas que se adaptan a tus necesidades específicas, ofreciendo
               tranquilidad y acceso preferencial a servicios médicos de calidad para individuos, familias y
               organizaciones de todos los tamaños.
             </p>
+            <div className="pm-hero-actions">
+              <Link className="primary-button" href="/cotizador/"><ShoppingCart size={16} /> Cotizar online <ArrowRight size={16} /></Link>
+              <a className="pm-hero-ghost-button" href="tel:18004862862"><PhoneCall size={16} /> Solicitar llamada</a>
+              <a className="pm-hero-ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={16} /> WhatsApp</a>
+            </div>
+          </div>
+          <div className="pm-hero-visual">
+            <div className="pm-hero-photo">
+              <Image src="/familia-humana.png" alt="Familia disfrutando un momento juntos, protegida por Humana" fill sizes="(max-width: 980px) 100vw, 45vw" unoptimized style={{ objectFit: "cover" }} />
+            </div>
+            <div className="pm-hero-float pm-hero-float-trust">
+              <UsersRound size={20} aria-hidden="true" />
+              <div><strong>+200.000</strong><span>personas y empresas confían en Humana</span></div>
+            </div>
+            <div className="pm-hero-float pm-hero-float-range">
+              <ShieldCheck size={20} aria-hidden="true" />
+              <div><strong>$15.000 – $150.000</strong><span>de cobertura anual según el plan</span></div>
+            </div>
           </div>
         </div>
       </section>
@@ -87,7 +112,7 @@ export default function PlanesMedicosPage() {
         </div>
       </section>
 
-      <section className="pm-hub-closing">
+      <section className="pm-hub-closing" id="asesor">
         <div className="pm-hub-closing-inner">
           <h2>¿Listo para encontrar tu plan?</h2>
           <p>Cotiza en línea, solicita una llamada o escríbenos por WhatsApp.</p>
