@@ -136,15 +136,6 @@ const coverageCategories = categoriesA.map((cat, i) => ({
   rows: cat.rows.map((row, j) => ({ label: row.label, mh10: row.value, mh5: categoriesB[i].rows[j].value })),
 }));
 
-const essentialsList = [
-  { icon: WalletCards, label: "Cobertura por enfermedad", mh10: "$10.000", mh5: "$5.000" },
-  { icon: Banknote, label: "Deducible anual por persona", mh10: "$50, $80 o $100", mh5: "$50, $80 o $100" },
-  { icon: ShieldCheck, label: "Hospitalización en Red Hospitalaria Metrohumana", mh10: "90%", mh5: "90%" },
-  { icon: Ambulance, label: "Emergencia por accidente al 100%, sin deducible", mh10: "$1.000", mh5: "$500" },
-  { icon: HeartPulse, label: "Seguro de vida para el titular", mh10: "$5.000", mh5: "$5.000" },
-  { icon: HeartHandshake, label: "Asistencia exequial", mh10: "Incluida", mh5: "Incluida" },
-];
-
 const navSections = [
   { id: "elige", number: "01", label: "Elige tu plan" },
   ...chapters.map((c) => ({ id: c.id, number: c.number, label: c.navLabel })),
@@ -230,6 +221,14 @@ export default function PlanPymeClient() {
     if (!dialog) return;
     if (cuadroOpen && !dialog.open) dialog.showModal();
     if (!cuadroOpen && dialog.open) dialog.close();
+  }, [cuadroOpen]);
+
+  /* Bloquea el scroll de la página de fondo mientras el panel está abierto. */
+  useEffect(() => {
+    if (!cuadroOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prevOverflow; };
   }, [cuadroOpen]);
 
   /* Scrollspy del índice de categorías dentro del panel: resalta la
@@ -363,28 +362,10 @@ export default function PlanPymeClient() {
         ))}
 
         <section className="pyme-cuadro" id="pyme-cuadro">
-          <div className="pyme-cuadro-essentials">
-            <span className="mh50-exp-eyebrow light">LO ESENCIAL</span>
-            <h2>Lo esencial del Plan Pyme, de un vistazo.</h2>
-            <div className="pyme-cuadro-essentials-grid">
-              {essentialsList.map(({ icon: Icon, label, mh10: v10, mh5: v5 }) => (
-                <article key={label}>
-                  <Icon aria-hidden="true" />
-                  {v10 === v5 ? (
-                    <strong>{v10}</strong>
-                  ) : (
-                    <span className="pyme-cuadro-essentials-dual">
-                      <span><strong>{v10}</strong><small>MH 10.000</small></span>
-                      <span><strong>{v5}</strong><small>MH 5.000</small></span>
-                    </span>
-                  )}
-                  <span>{label}</span>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          <div className="pyme-cuadro-cta">
+          <div className="pyme-cuadro-intro">
+            <span className="mh50-exp-eyebrow">CUADRO DE COBERTURAS</span>
+            <h2>Cuadro de coberturas</h2>
+            <p>Compara en detalle MH 10.000 y MH 5.000, categoría por categoría.</p>
             <button
               type="button"
               className="pyme-cuadro-open-btn"
@@ -426,6 +407,7 @@ export default function PlanPymeClient() {
                 <nav className="pyme-cuadro-dialog-index" aria-label="Categorías del cuadro de coberturas">
                   {coverageCategories.map((cat) => {
                     const slug = slugify(cat.section);
+                    const Icon = categoryIcons[cat.section] ?? WalletCards;
                     return (
                       <a
                         key={slug}
@@ -437,6 +419,7 @@ export default function PlanPymeClient() {
                           cuadroContentRef.current?.querySelector(`#pyme-cat-${slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
                         }}
                       >
+                        <Icon aria-hidden="true" strokeWidth={1.6} />
                         {cat.section.charAt(0) + cat.section.slice(1).toLowerCase()}
                       </a>
                     );
