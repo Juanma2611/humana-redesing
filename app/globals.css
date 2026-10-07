@@ -4924,3 +4924,57 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .business-contact-box-actions { width: 100%; }
   .business-contact-box-actions a, .business-contact-box-actions button { width: 100%; text-align: center; }
 }
+
+/* ------------------------------------------------------------------------ */
+/* Cuadro de coberturas de Plan Pyme: tarjetas por categoría en vez de una  */
+/* sola tabla larga. Sobrio y corporativo (azul profundo + blanco, acento   */
+/* teal mínimo), con MH 10.000 y MH 5.000 comparados lado a lado.          */
+/* Patrón reutilizable: se aplicará a Humana Business cuando se apruebe.    */
+/* ------------------------------------------------------------------------ */
+.pyme-cuadro { padding: clamp(56px,7vw,88px) clamp(24px,7vw,110px); background: #f5f8fa; }
+
+.pyme-cuadro-essentials { max-width: 1180px; margin: 0 auto 40px; padding: clamp(32px,4vw,48px) clamp(24px,4vw,48px); border-radius: 26px; background: linear-gradient(150deg,#052033 0%,#073b60 70%,#0b5c8c 100%); color: #fff; box-shadow: 0 24px 60px rgba(5,32,51,.3); }
+.pyme-cuadro-essentials h2 { margin: 10px 0 30px; font-size: clamp(22px,2.6vw,32px); letter-spacing: -.02em; color: #fff; font-weight: 760; max-width: 620px; }
+.pyme-cuadro-essentials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; overflow: hidden; gap: 1px; }
+.pyme-cuadro-essentials-grid article { background: rgba(5,32,51,.55); padding: 22px 20px; display: flex; flex-direction: column; gap: 10px; min-height: 128px; }
+.pyme-cuadro-essentials-grid svg { width: 20px; height: 20px; color: #7ce0db; }
+.pyme-cuadro-essentials-grid > article > strong { font-size: 25px; letter-spacing: -.02em; color: #fff; font-weight: 740; }
+.pyme-cuadro-essentials-grid span:last-child { font-size: 12px; line-height: 1.4; color: rgba(255,255,255,.7); margin-top: auto; }
+.pyme-cuadro-essentials-dual { display: flex; gap: 14px; }
+.pyme-cuadro-essentials-dual > span { display: flex; flex-direction: column; }
+.pyme-cuadro-essentials-dual strong { font-size: 19px; color: #fff; font-weight: 740; letter-spacing: -.01em; }
+.pyme-cuadro-essentials-dual small { font-size: 9.5px; letter-spacing: .04em; color: #7ce0db; text-transform: uppercase; font-weight: 700; }
+
+.pyme-cuadro-index-slot { max-width: 1180px; margin: 0 auto 28px; }
+.pyme-cuadro-index { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 6px; background: rgba(245,248,250,.92); backdrop-filter: blur(10px); border: 1px solid #dfe8ed; border-radius: 14px; }
+.pyme-cuadro-index.is-docked { position: fixed; top: 88px; left: 50%; transform: translateX(-50%); width: min(1180px, calc(100% - 48px)); z-index: 19; box-shadow: 0 16px 36px rgba(7,63,96,.14); }
+@media (max-width: 760px) { .pyme-cuadro-index.is-docked { top: 74px; width: calc(100% - 32px); } }
+.pyme-cuadro-index::-webkit-scrollbar { display: none; }
+.pyme-cuadro-index a { flex: none; padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 650; color: #52697a; white-space: nowrap; transition: background .25s ease, color .25s ease; }
+.pyme-cuadro-index a.is-active { background: #073b60; color: #fff; }
+
+.pyme-cuadro-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+.pyme-cuadro-card { grid-column: span 1; background: #fff; border: 1px solid #e3eaee; border-radius: 20px; padding: clamp(22px,2.6vw,30px); box-shadow: 0 10px 30px rgba(7,46,73,.05); scroll-margin-top: 64px; }
+.pyme-cuadro-card.is-wide { grid-column: 1 / -1; }
+.pyme-cuadro-card header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid #e3eaee; }
+.pyme-cuadro-card header svg { width: 20px; height: 20px; color: #0b80bd; flex-shrink: 0; }
+.pyme-cuadro-card h3 { margin: 0; font-size: 16px; font-weight: 760; letter-spacing: -.01em; color: #073b60; text-transform: none; }
+.pyme-cuadro-card-columns { display: grid; grid-template-columns: minmax(0,1fr) 110px 110px; gap: 12px; padding: 0 0 8px; }
+.pyme-cuadro-card-columns span:nth-child(2), .pyme-cuadro-card-columns span:nth-child(3) { font-size: 10px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; color: #8098a8; text-align: right; }
+.pyme-cuadro-card dl { margin: 0; }
+.pyme-cuadro-row { display: grid; grid-template-columns: minmax(0,1fr) 110px 110px; gap: 12px; align-items: baseline; padding: 11px 0; border-top: 1px solid #eef2f4; }
+.pyme-cuadro-card dl > .pyme-cuadro-row:first-child { border-top: 0; }
+.pyme-cuadro-row dt { margin: 0; font-size: 13.5px; line-height: 1.5; color: #44606f; }
+.pyme-cuadro-row dd { margin: 0; font-size: 14.5px; font-weight: 700; color: #073b60; text-align: right; letter-spacing: -.01em; }
+.pyme-cuadro-row dd.pyme-cuadro-value-single { grid-column: 2 / span 2; }
+
+.pyme-cuadro-footnote { max-width: 1180px; margin: 28px auto 0; color: #5e7384; font-size: 13px; line-height: 1.7; }
+
+@media (max-width: 900px) {
+  .pyme-cuadro-grid { grid-template-columns: 1fr; }
+  .pyme-cuadro-card.is-wide { grid-column: auto; }
+}
+@media (max-width: 560px) {
+  .pyme-cuadro-card-columns, .pyme-cuadro-row { grid-template-columns: minmax(0,1fr) 72px 72px; gap: 8px; }
+  .pyme-cuadro-row dd, .pyme-cuadro-card-columns span { font-size: 12.5px; }
+}

@@ -49,3 +49,17 @@ const cuadroBOverrides: Record<string, string> = {
 export const cuadroB: CuadroSection[] = cuadroA.map((row) =>
   row.label in cuadroBOverrides ? { ...row, value: cuadroBOverrides[row.label] } : row,
 );
+
+// Agrupa un cuadro plano (con marcadores "section" intermitentes) en
+// categorías, para presentarlo como tarjetas en vez de una sola tabla
+// larga. No cambia ningún dato: solo reestructura la misma información.
+export type CuadroCategory = { section: string; rows: { label: string; value: string }[] };
+
+export function groupCuadroBySection(cuadro: CuadroSection[]): CuadroCategory[] {
+  const categories: CuadroCategory[] = [];
+  for (const row of cuadro) {
+    if (row.section) categories.push({ section: row.section, rows: [] });
+    categories[categories.length - 1].rows.push({ label: row.label, value: row.value });
+  }
+  return categories;
+}
