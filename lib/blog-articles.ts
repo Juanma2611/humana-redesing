@@ -934,7 +934,7 @@ export const contactBlocks = [
   { icon: "store", label: "Conoce más en:", value: "humana.med.ec/planes-medicos/", href: "https://humana.med.ec/planes-medicos/" },
   { icon: "mail", label: "Correo:", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
   { icon: "whatsapp", label: "WhatsApp:", value: "+593 2401 7802", href: "https://wa.me/59324017802" },
-  { icon: "phone", label: "Atención Telefónica:", value: "1800 HUMANA (48 62 62)", href: "tel:18004862626" },
+  { icon: "phone", label: "Atención Telefónica:", value: "1800 HUMANA (48 62 62)", href: "tel:1800486262" },
   { icon: "globe", label: "Oficina Virtual:", value: "humana.med.ec/oficina-virtual", href: "https://humana.med.ec/oficina-virtual" },
   { icon: "app", label: "Descarga la app:", value: "\"Mi Humana\" en App Store o Google Play", href: "https://apps.apple.com/ec/search?term=mi%20humana" },
   { icon: "quote", label: "Cotiza tu nuevo plan:", value: "humana.med.ec/cotizador/", href: "https://humana.med.ec/cotizador/" },

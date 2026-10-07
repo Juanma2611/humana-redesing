@@ -115,5 +115,5 @@ export const officialContactChannels = [
   { label: "Formulario de Contacto", value: "humana.med.ec/formulario-de-contacto", href: "https://servicio.humana.med.ec/hc/es/requests/new" },
   { label: "Oficinas y centros de atención", value: "Ver ubicación", href: "https://servicio.humana.med.ec/hc/es/articles/4402730217741--Quieres-conocer-nuestros-puntos-de-servicio-" },
   { label: "Correo electrónico", value: "servicioalcliente@humana.med.ec", href: "mailto:servicioalcliente@humana.med.ec" },
-  { label: "Teléfono", value: "1800 humana (48 62 62)", href: "tel:18004862862" },
+  { label: "Teléfono", value: "1800 humana (48 62 62)", href: "tel:1800486262" },
 ];
