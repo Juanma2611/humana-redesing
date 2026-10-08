@@ -123,10 +123,6 @@ const coverageCategories = categoriesA.map((cat, i) => ({
   rows: cat.rows.map((row, j) => ({ label: row.label, mh10: row.value, mh5: categoriesB[i].rows[j].value })),
 }));
 
-/* Selección breve de categorías para el índice del recuadro de la página
-   (no es exhaustiva: el cuadro completo, con las 11, vive en el panel). */
-const cardIndexSections = ["HOSPITALIZACIÓN", "AMBULATORIA", "MEDICINAS", "MATERNIDAD", "EMERGENCIA POR ACCIDENTE"];
-
 const navSections = [
   { id: "elige", number: "01", label: "Elige tu plan" },
   ...chapters.map((c) => ({ id: c.id, number: c.number, label: c.navLabel })),
@@ -366,32 +362,19 @@ export default function PlanPymeClient() {
         ))}
 
         <section className="pyme-cuadro" id="pyme-cuadro">
-          <div className="pyme-cuadro-card">
-            <div className="pyme-cuadro-card-grid">
-              <div className="pyme-cuadro-card-copy">
-                <span className="pyme-cuadro-card-eyebrow">PLAN PYME · DETALLE</span>
-                <h2>Cuadro de coberturas</h2>
-                <p>Compara en detalle MH 10.000 y MH 5.000, categoría por categoría.</p>
-              </div>
-              <div className="pyme-cuadro-card-index">
-                <ul>
-                  {cardIndexSections.map((section) => (
-                    <li key={section}>{titleCase(section)}</li>
-                  ))}
-                </ul>
-                <button
-                  type="button"
-                  className="pyme-cuadro-open-btn"
-                  ref={cuadroOpenBtnRef}
-                  aria-expanded={cuadroOpen}
-                  aria-controls="pyme-cuadro-dialog"
-                  onClick={() => setCuadroOpen(true)}
-                >
-                  Ver más acerca del cuadro de coberturas
-                  <ArrowRight aria-hidden="true" />
-                </button>
-              </div>
-            </div>
+          <div className="pyme-cuadro-cta">
+            <p>¿Quieres conocer el detalle de las coberturas?</p>
+            <button
+              type="button"
+              className="pyme-cuadro-open-btn"
+              ref={cuadroOpenBtnRef}
+              aria-expanded={cuadroOpen}
+              aria-controls="pyme-cuadro-dialog"
+              onClick={() => setCuadroOpen(true)}
+            >
+              Ver cuadro de coberturas
+              <ArrowRight aria-hidden="true" />
+            </button>
           </div>
 
           {/* Todo el cuadro completo (ambos planes, todas las categorías y filas)
