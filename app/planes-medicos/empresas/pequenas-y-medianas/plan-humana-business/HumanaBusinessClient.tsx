@@ -258,7 +258,7 @@ export default function HumanaBusinessClient() {
         <span>Plan Humana Business</span>
       </nav>
 
-      <div className="biz-page" ref={rootRef}>
+      <div className="biz-page" data-accent="blue" ref={rootRef}>
         {/* Hero ------------------------------------------------------- */}
         <section className="biz-hero" id="business-inicio">
           <div className="biz-hero-copy">
@@ -280,7 +280,7 @@ export default function HumanaBusinessClient() {
         </section>
 
         {/* Franja de cifras clave -------------------------------------- */}
-        <section className="biz-section is-light">
+        <section className="biz-section is-color">
           <div className="biz-container">
             <div className="biz-section-head biz-reveal">
               <span className="biz-eyebrow">HUMANA BUSINESS EN TRES IDEAS</span>
@@ -298,7 +298,7 @@ export default function HumanaBusinessClient() {
         </section>
 
         {/* Arma tu plan a la medida: fila limpia de 5 datos --------------- */}
-        <section className="biz-section is-white" id="business-arma-plan">
+        <section className="biz-section is-light" id="business-arma-plan">
           <div className="biz-container">
             <div className="biz-section-head biz-reveal">
               <span className="biz-eyebrow">ARMA TU PLAN A LA MEDIDA</span>
@@ -319,7 +319,7 @@ export default function HumanaBusinessClient() {
         {/* Capítulos de beneficio (una idea por sección) ----------------- */}
         {chapters.map((c, i) => (
           c.image ? (
-            <section className={`biz-section ${i % 2 === 0 ? "is-light" : "is-white"}`} id={`business-${c.id}`} key={c.id}>
+            <section className={`biz-section ${i % 2 === 0 ? "is-dark" : "is-light"}`} id={`business-${c.id}`} key={c.id}>
               <div className="biz-container">
                 <div className={`biz-feature${i % 2 === 1 ? " reverse" : ""}`}>
                   <figure className="biz-feature-media biz-reveal">
@@ -359,7 +359,7 @@ export default function HumanaBusinessClient() {
         ))}
 
         {/* Todo lo que incluye ------------------------------------------- */}
-        <section className="biz-section is-white" id="business-incluye">
+        <section className="biz-section is-dark" id="business-incluye">
           <div className="biz-container">
             <div className="biz-section-head biz-reveal">
               <h2>Todo lo que incluye tu Plan Humana Business</h2>
@@ -466,7 +466,7 @@ export default function HumanaBusinessClient() {
         </section>
 
         {/* Cierre único --------------------------------------------------- */}
-        <section className="biz-section is-dark" id="business-cierre">
+        <section className="biz-section is-dark is-close" id="business-cierre">
           <div className="biz-container biz-close">
             <div className="biz-section-head biz-reveal">
               <span className="biz-eyebrow">HUMANA BUSINESS · PLAN EMPRESARIAL</span>
