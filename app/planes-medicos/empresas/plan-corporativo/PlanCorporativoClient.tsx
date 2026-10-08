@@ -96,7 +96,7 @@ export default function PlanCorporativoClient() {
         <span>Plan Corporativo</span>
       </nav>
 
-      <div className="biz-page" ref={rootRef}>
+      <div className="biz-page" data-accent="navy" ref={rootRef}>
         {/* Hero ------------------------------------------------------- */}
         <section className="biz-hero" id="corporativo-inicio">
           <div className="biz-hero-copy">
@@ -124,7 +124,7 @@ export default function PlanCorporativoClient() {
         </section>
 
         {/* Franja de cifras clave -------------------------------------- */}
-        <section className="biz-section is-light">
+        <section className="biz-section is-color">
           <div className="biz-container">
             <div className="biz-section-head biz-reveal">
               <span className="biz-eyebrow">PLAN CORPORATIVO EN TRES IDEAS</span>
@@ -143,7 +143,7 @@ export default function PlanCorporativoClient() {
 
         {/* Capítulos (una idea por sección, sin repetir la única foto) --- */}
         {chapters.map((c, i) => (
-          <section className={`biz-section ${i % 2 === 0 ? "is-white" : "is-light"}`} id={`corporativo-${c.id}`} key={c.id}>
+          <section className={`biz-section ${i % 2 === 0 ? "is-light" : "is-dark"}`} id={`corporativo-${c.id}`} key={c.id}>
             <div className="biz-container">
               <div className="biz-feature-text biz-reveal">
                 <span className="biz-feature-num">{c.number}</span>
@@ -161,7 +161,7 @@ export default function PlanCorporativoClient() {
         ))}
 
         {/* Beneficios adicionales ------------------------------------ */}
-        <section className="biz-section is-white" id="corporativo-beneficios">
+        <section className="biz-section is-light" id="corporativo-beneficios">
           <div className="biz-container">
             <div className="biz-section-head biz-reveal">
               <h2>Beneficios adicionales de los Planes Corporativos</h2>
@@ -179,7 +179,7 @@ export default function PlanCorporativoClient() {
         </section>
 
         {/* Cierre único --------------------------------------------------- */}
-        <section className="biz-section is-dark" id="corporativo-cierre">
+        <section className="biz-section is-dark is-close" id="corporativo-cierre">
           <div className="biz-container biz-close">
             <div className="biz-section-head biz-reveal">
               <span className="biz-eyebrow">PLAN CORPORATIVO · PLAN EMPRESARIAL</span>

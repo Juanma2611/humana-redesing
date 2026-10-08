@@ -225,7 +225,7 @@ export default function PlanPymeClient() {
         <span>Plan Pyme</span>
       </nav>
 
-      <div className="biz-page" ref={rootRef}>
+      <div className="biz-page" data-accent="teal" ref={rootRef}>
         {/* Hero ------------------------------------------------------- */}
         <section className="biz-hero" id="pyme-inicio">
           <div className="biz-hero-copy">
@@ -248,7 +248,7 @@ export default function PlanPymeClient() {
         </section>
 
         {/* Franja de cifras clave -------------------------------------- */}
-        <section className="biz-section is-light">
+        <section className="biz-section is-color">
           <div className="biz-container">
             <div className="biz-section-head biz-reveal">
               <span className="biz-eyebrow">PLAN PYME EN TRES IDEAS</span>
@@ -266,7 +266,7 @@ export default function PlanPymeClient() {
         </section>
 
         {/* Elige tu plan: MH10 / MH5 ------------------------------------ */}
-        <section className="biz-section is-white" id="pyme-elige">
+        <section className="biz-section is-light" id="pyme-elige">
           <div className="biz-container">
             <div className="biz-section-head biz-reveal">
               <span className="biz-eyebrow">ELIGE TU PLAN</span>
@@ -288,8 +288,8 @@ export default function PlanPymeClient() {
         </section>
 
         {/* Capítulos de beneficio (una idea por sección) ----------------- */}
-        {chapters.map((c) => (
-          <section className="biz-section is-light" id={`pyme-${c.id}`} key={c.id}>
+        {chapters.map((c, i) => (
+          <section className={`biz-section ${i % 2 === 0 ? "is-dark" : "is-light"}`} id={`pyme-${c.id}`} key={c.id}>
             <div className="biz-container">
               <div className="biz-feature-text biz-reveal">
                 <span className="biz-feature-num">{c.number}</span>
@@ -413,7 +413,7 @@ export default function PlanPymeClient() {
         </section>
 
         {/* Cierre único --------------------------------------------------- */}
-        <section className="biz-section is-dark" id="pyme-cierre">
+        <section className="biz-section is-dark is-close" id="pyme-cierre">
           <div className="biz-container biz-close">
             <div className="biz-section-head biz-reveal">
               <span className="biz-eyebrow">PLAN PYME · PLAN EMPRESARIAL</span>
