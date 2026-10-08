@@ -96,7 +96,7 @@ export default function PlanCorporativoClient() {
         <span>Plan Corporativo</span>
       </nav>
 
-      <div className="biz-page" data-accent="navy" ref={rootRef}>
+      <div className="biz-page" data-accent="blue" ref={rootRef}>
         {/* Hero ------------------------------------------------------- */}
         <section className="biz-hero" id="corporativo-inicio">
           <div className="biz-hero-copy">
