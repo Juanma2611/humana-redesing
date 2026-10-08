@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  Accessibility, Ambulance, Banknote, Baby, Briefcase, FlaskConical, Gift, HeartHandshake, HeartPulse,
-  Hospital, MessageCircle, PhoneCall, Pill, ShieldAlert, ShieldCheck, Stethoscope, TrendingUp, UserRound,
+  Ambulance, ArrowRight, Banknote, Briefcase, HeartHandshake, HeartPulse,
+  MessageCircle, PhoneCall, ShieldCheck, Stethoscope, TrendingUp,
   Users, WalletCards, X,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
@@ -110,24 +110,11 @@ const chapters: Chapter[] = [
   },
 ];
 
-/* Cuadro de coberturas rediseñado como tarjetas por categoría (en vez de
-   una sola tabla larga), comparando MH 10.000 y MH 5.000 lado a lado.
-   Mismos datos de lib/empresa-cuadros.ts, solo reestructurados. */
-const categoryIcons: Record<string, typeof Hospital> = {
-  "DATOS GENERALES": WalletCards,
-  "HOSPITALIZACIÓN": Hospital,
-  "AMBULATORIA": Stethoscope,
-  "MEDICINAS": Pill,
-  "EXÁMENES DE DIAGNÓSTICO": FlaskConical,
-  "EMERGENCIA POR ACCIDENTE": Ambulance,
-  "MATERNIDAD": Baby,
-  "PREEXISTENCIAS": ShieldAlert,
-  "ADULTO MAYOR": UserRound,
-  "PERSONAS CON DISCAPACIDAD": Accessibility,
-  "BENEFICIOS INCLUIDOS": Gift,
-};
-
+/* Cuadro de coberturas rediseñado como documento por categoría (en vez de
+   una sola tabla larga), comparando MH 10.000 y MH 5.000. Mismos datos de
+   lib/empresa-cuadros.ts, solo reestructurados. */
 const slugify = (text: string) => text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-");
+const titleCase = (text: string) => text.charAt(0) + text.slice(1).toLowerCase();
 
 const categoriesA = groupCuadroBySection(cuadroA);
 const categoriesB = groupCuadroBySection(cuadroB);
@@ -135,6 +122,10 @@ const coverageCategories = categoriesA.map((cat, i) => ({
   section: cat.section,
   rows: cat.rows.map((row, j) => ({ label: row.label, mh10: row.value, mh5: categoriesB[i].rows[j].value })),
 }));
+
+/* Selección breve de categorías para el índice del recuadro de la página
+   (no es exhaustiva: el cuadro completo, con las 11, vive en el panel). */
+const cardIndexSections = ["HOSPITALIZACIÓN", "AMBULATORIA", "MEDICINAS", "MATERNIDAD", "EMERGENCIA POR ACCIDENTE"];
 
 const navSections = [
   { id: "elige", number: "01", label: "Elige tu plan" },
@@ -152,6 +143,7 @@ export default function PlanPymeClient() {
   const [activePlan, setActivePlan] = useState<"mh10" | "mh5">("mh10");
   const [activeCategory, setActiveCategory] = useState<string>(coverageCategories[0]?.section ?? "");
   const [cuadroOpen, setCuadroOpen] = useState(false);
+  const [cuadroVisible, setCuadroVisible] = useState(false);
   const cuadroDialogRef = useRef<HTMLDialogElement>(null);
   const cuadroContentRef = useRef<HTMLDivElement>(null);
   const cuadroOpenBtnRef = useRef<HTMLButtonElement>(null);
@@ -204,22 +196,34 @@ export default function PlanPymeClient() {
 
   /* Panel del cuadro de coberturas: <dialog> nativo. Todo su contenido ya
      está en el HTML desde el SSR; abrir/cerrar solo cambia su visibilidad
-     (showModal/close), sin cargar ni generar nada por JS. */
+     (showModal/close), sin cargar ni generar nada por JS. El cierre se
+     anima (fade + leve desplazamiento) antes de soltar el <dialog>. */
+  const closeCuadro = () => {
+    setCuadroVisible(false);
+    window.setTimeout(() => setCuadroOpen(false), 220);
+  };
+
   useEffect(() => {
     const dialog = cuadroDialogRef.current;
     if (!dialog) return;
     const onClose = () => {
       setCuadroOpen(false);
+      setCuadroVisible(false);
       cuadroOpenBtnRef.current?.focus();
     };
+    const onCancel = (e: Event) => { e.preventDefault(); closeCuadro(); };
     dialog.addEventListener("close", onClose);
-    return () => dialog.removeEventListener("close", onClose);
+    dialog.addEventListener("cancel", onCancel);
+    return () => { dialog.removeEventListener("close", onClose); dialog.removeEventListener("cancel", onCancel); };
   }, []);
 
   useEffect(() => {
     const dialog = cuadroDialogRef.current;
     if (!dialog) return;
-    if (cuadroOpen && !dialog.open) dialog.showModal();
+    if (cuadroOpen && !dialog.open) {
+      dialog.showModal();
+      requestAnimationFrame(() => requestAnimationFrame(() => setCuadroVisible(true)));
+    }
     if (!cuadroOpen && dialog.open) dialog.close();
   }, [cuadroOpen]);
 
@@ -362,21 +366,32 @@ export default function PlanPymeClient() {
         ))}
 
         <section className="pyme-cuadro" id="pyme-cuadro">
-          <div className="pyme-cuadro-intro">
-            <span className="mh50-exp-eyebrow">CUADRO DE COBERTURAS</span>
-            <h2>Cuadro de coberturas</h2>
-            <p>Compara en detalle MH 10.000 y MH 5.000, categoría por categoría.</p>
-            <button
-              type="button"
-              className="pyme-cuadro-open-btn"
-              ref={cuadroOpenBtnRef}
-              aria-expanded={cuadroOpen}
-              aria-controls="pyme-cuadro-dialog"
-              onClick={() => setCuadroOpen(true)}
-            >
-              <FlaskConical aria-hidden="true" />
-              Ver más acerca del cuadro de coberturas
-            </button>
+          <div className="pyme-cuadro-card">
+            <div className="pyme-cuadro-card-grid">
+              <div className="pyme-cuadro-card-copy">
+                <span className="pyme-cuadro-card-eyebrow">PLAN PYME · DETALLE</span>
+                <h2>Cuadro de coberturas</h2>
+                <p>Compara en detalle MH 10.000 y MH 5.000, categoría por categoría.</p>
+              </div>
+              <div className="pyme-cuadro-card-index">
+                <ul>
+                  {cardIndexSections.map((section) => (
+                    <li key={section}>{titleCase(section)}</li>
+                  ))}
+                </ul>
+                <button
+                  type="button"
+                  className="pyme-cuadro-open-btn"
+                  ref={cuadroOpenBtnRef}
+                  aria-expanded={cuadroOpen}
+                  aria-controls="pyme-cuadro-dialog"
+                  onClick={() => setCuadroOpen(true)}
+                >
+                  Ver más acerca del cuadro de coberturas
+                  <ArrowRight aria-hidden="true" />
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Todo el cuadro completo (ambos planes, todas las categorías y filas)
@@ -384,30 +399,33 @@ export default function PlanPymeClient() {
              lo oculta visualmente hasta que se abre, no lo carga por JS. */}
           <dialog
             id="pyme-cuadro-dialog"
-            className="pyme-cuadro-dialog"
+            className={`pyme-cuadro-dialog${cuadroVisible ? " is-visible" : ""}`}
             data-plan={activePlan}
             ref={cuadroDialogRef}
             aria-labelledby="pyme-cuadro-dialog-title"
-            onClick={(e) => { if (e.target === cuadroDialogRef.current) setCuadroOpen(false); }}
+            onClick={(e) => { if (e.target === cuadroDialogRef.current) closeCuadro(); }}
           >
             <div className="pyme-cuadro-dialog-inner">
               <header className="pyme-cuadro-dialog-head">
-                <h2 id="pyme-cuadro-dialog-title">Cuadro de coberturas · Plan Pyme</h2>
-                <button type="button" className="pyme-cuadro-dialog-close" onClick={() => setCuadroOpen(false)} aria-label="Cerrar">
-                  <X aria-hidden="true" />
-                </button>
+                <div className="pyme-cuadro-dialog-head-copy">
+                  <span className="pyme-cuadro-dialog-eyebrow">CUADRO DE COBERTURAS</span>
+                  <h2 id="pyme-cuadro-dialog-title">Cuadro de coberturas · Plan Pyme</h2>
+                </div>
+                <div className="pyme-cuadro-dialog-head-actions">
+                  <div className="pyme-cuadro-dialog-toggle" role="group" aria-label="Elige el plan a mostrar">
+                    <button type="button" className={activePlan === "mh10" ? "is-active" : ""} onClick={() => setActivePlan("mh10")}>MH 10.000</button>
+                    <button type="button" className={activePlan === "mh5" ? "is-active" : ""} onClick={() => setActivePlan("mh5")}>MH 5.000</button>
+                  </div>
+                  <button type="button" className="pyme-cuadro-dialog-close" onClick={closeCuadro} aria-label="Cerrar">
+                    <X aria-hidden="true" />
+                  </button>
+                </div>
               </header>
-
-              <div className="pyme-cuadro-dialog-toggle" role="group" aria-label="Elige el plan a mostrar">
-                <button type="button" className={activePlan === "mh10" ? "is-active" : ""} onClick={() => setActivePlan("mh10")}>MH 10.000</button>
-                <button type="button" className={activePlan === "mh5" ? "is-active" : ""} onClick={() => setActivePlan("mh5")}>MH 5.000</button>
-              </div>
 
               <div className="pyme-cuadro-dialog-body">
                 <nav className="pyme-cuadro-dialog-index" aria-label="Categorías del cuadro de coberturas">
-                  {coverageCategories.map((cat) => {
+                  {coverageCategories.map((cat, i) => {
                     const slug = slugify(cat.section);
-                    const Icon = categoryIcons[cat.section] ?? WalletCards;
                     return (
                       <a
                         key={slug}
@@ -419,26 +437,30 @@ export default function PlanPymeClient() {
                           cuadroContentRef.current?.querySelector(`#pyme-cat-${slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
                         }}
                       >
-                        <Icon aria-hidden="true" strokeWidth={1.6} />
-                        {cat.section.charAt(0) + cat.section.slice(1).toLowerCase()}
+                        <span className="pyme-cuadro-dialog-index-num">{String(i + 1).padStart(2, "0")}</span>
+                        {titleCase(cat.section)}
                       </a>
                     );
                   })}
                 </nav>
 
                 <div className="pyme-cuadro-dialog-content" ref={cuadroContentRef}>
-                  {coverageCategories.map((cat) => {
+                  {coverageCategories.map((cat, i) => {
                     const slug = slugify(cat.section);
-                    const Icon = categoryIcons[cat.section] ?? WalletCards;
                     return (
                       <section className="pyme-cuadro-dialog-category" id={`pyme-cat-${slug}`} data-category-card={slug} key={cat.section}>
-                        <h3><Icon aria-hidden="true" />{cat.section.charAt(0) + cat.section.slice(1).toLowerCase()}</h3>
+                        <header className="pyme-cuadro-dialog-category-head">
+                          <span className="pyme-cuadro-dialog-category-num">{String(i + 1).padStart(2, "0")}</span>
+                          <h3>{titleCase(cat.section)}</h3>
+                        </header>
                         <dl>
                           {cat.rows.map((row) => (
                             <div className="pyme-cuadro-dialog-row" key={row.label}>
                               <dt>{row.label}</dt>
-                              <dd data-plan-value="mh10">{row.mh10}</dd>
-                              <dd data-plan-value="mh5">{row.mh5}</dd>
+                              <dd className="pyme-cuadro-dialog-value">
+                                <span data-plan-value="mh10">{row.mh10}</span>
+                                <span data-plan-value="mh5">{row.mh5}</span>
+                              </dd>
                             </div>
                           ))}
                         </dl>
@@ -454,7 +476,7 @@ export default function PlanPymeClient() {
               </div>
 
               <div className="pyme-cuadro-dialog-actions">
-                <a className="primary-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer" onClick={() => setCuadroOpen(false)}>Solicitar información</a>
+                <a className="primary-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer" onClick={closeCuadro}>Solicitar información</a>
                 <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
               </div>
             </div>
