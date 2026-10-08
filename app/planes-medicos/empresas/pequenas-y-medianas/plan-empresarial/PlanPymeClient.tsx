@@ -225,7 +225,7 @@ export default function PlanPymeClient() {
         <span>Plan Pyme</span>
       </nav>
 
-      <div className="biz-page" data-accent="teal" ref={rootRef}>
+      <div className="biz-page" data-accent="blue" ref={rootRef}>
         {/* Hero ------------------------------------------------------- */}
         <section className="biz-hero" id="pyme-inicio">
           <div className="biz-hero-copy">
@@ -279,9 +279,9 @@ export default function PlanPymeClient() {
                 <button type="button" className={activePlan === "mh5" ? "is-active" : ""} onClick={() => setActivePlan("mh5")}>{mh5.name}</button>
               </div>
             </div>
-            <div className="biz-figures biz-reveal">
-              {selected.items.map(({ icon: Icon, label, value }) => (
-                <article key={label}><Icon aria-hidden="true" /><strong>{value}</strong><span>{label}</span></article>
+            <div className="biz-stats biz-reveal">
+              {selected.items.map(({ label, value }) => (
+                <article key={label}><strong>{value}</strong><p>{label}</p></article>
               ))}
             </div>
           </div>
