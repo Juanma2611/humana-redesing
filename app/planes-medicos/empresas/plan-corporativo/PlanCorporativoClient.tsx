@@ -3,56 +3,35 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import {
-  Ambulance, Building2, Clock3, CreditCard, Handshake, HeartHandshake,
-  Hospital, LineChart, MessageCircle, PhoneCall, Users,
-} from "lucide-react";
+import { Ambulance, ArrowRight, Check, HeartHandshake, MessageCircle, PhoneCall, Users } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
-/* Misma familia visual y estructura que Humana Business
-   (plan-humana-business/HumanaBusinessClient.tsx), con los datos oficiales
-   del Plan Corporativo ya existentes en el sitio. Sin cuadro de
-   coberturas: el plan no tiene montos fijos. Solo hay una fotografía
-   oficial propia ("Las empresas diseñan su plan"), reutilizada en el hero
-   y en los 4 capítulos (se avisó al usuario). */
-
-function CorporativoDecor({ tone }: { tone: "on-dark" | "on-light" }) {
-  return (
-    <div className={`business-decor ${tone}`} aria-hidden="true">
-      <Building2 className="deco deco-building" />
-      <LineChart className="deco deco-linechart" />
-      <Handshake className="deco deco-handshake" />
-      <Hospital className="deco deco-chart" />
-      <CreditCard className="deco deco-briefcase" />
-      <Clock3 className="deco deco-target" />
-    </div>
-  );
-}
+/* Rediseño tipo Apple (sobrio, blanco/gris muy claro + marino, una idea
+   por sección), misma familia visual que Plan Pyme y Humana Business.
+   Mismos textos y datos oficiales del Plan Corporativo ya existentes en
+   el sitio. Sin cuadro de coberturas: el plan no tiene montos fijos.
+   La única fotografía oficial del plan se usa una sola vez, en el hero;
+   los capítulos van sin imagen (en vez de repetir la misma foto). */
 
 const essenceStats = [
-  { value: "Desde 50", label: "colaboradores\npara acceder al plan" },
-  { value: "0", label: "períodos de carencia,\nuso inmediato" },
-  { value: "A medida", label: "contrato personalizado\npor empresa" },
+  { value: "Desde 50", label: "colaboradores para acceder al plan" },
+  { value: "0", label: "períodos de carencia, uso inmediato" },
+  { value: "A medida", label: "contrato personalizado por empresa" },
 ];
 
-type Chapter = {
-  id: string; number: string; navLabel: string; theme: "dark" | "light" | "blue" | "warm";
-  image: string; imageAlt: string; eyebrow: string; title: string; lead: string; essentials: string[];
-};
+type Chapter = { id: string; number: string; eyebrow: string; title: string; lead: string; essentials: string[] };
 
 const CORP_IMAGE = "https://humana.med.ec/wp-content/uploads/2021/03/las-empresas-disenan-su-plan.png";
 
 const chapters: Chapter[] = [
   {
-    id: "montos", number: "01", navLabel: "Montos de cobertura", theme: "dark",
-    image: CORP_IMAGE, imageAlt: "Las empresas diseñan su plan corporativo",
+    id: "montos", number: "01",
     eyebrow: "MONTOS DE COBERTURA", title: "Un contrato a la medida de tu empresa.",
     lead: "Al ser un Contrato Corporativo personalizado no existe un monto fijo, todos los valores van en función de su Plan específico.",
     essentials: ["Contrato corporativo 100% personalizado", "Montos definidos según el plan específico de cada empresa"],
   },
   {
-    id: "carencias", number: "02", navLabel: "Periodos de carencia", theme: "blue",
-    image: CORP_IMAGE, imageAlt: "Las empresas diseñan su plan corporativo",
+    id: "carencias", number: "02",
     eyebrow: "PERIODOS DE CARENCIA", title: "Cobertura desde el primer día.",
     lead: "No existen períodos de carencia: tu empresa puede hacer uso del plan de forma inmediata.",
     essentials: [
@@ -62,15 +41,13 @@ const chapters: Chapter[] = [
     ],
   },
   {
-    id: "credito", number: "03", navLabel: "Crédito hospitalario", theme: "light",
-    image: CORP_IMAGE, imageAlt: "Las empresas diseñan su plan corporativo",
+    id: "credito", number: "03",
     eyebrow: "CRÉDITO HOSPITALARIO", title: "Respaldo hospitalario sin trámites de más.",
     lead: "Hospitalización y honorarios médicos con crédito preautorizado o cobertura vía reembolso en cualquier hospital de tu red.",
     essentials: ["Crédito preautorizado en hospitalización", "Honorarios médicos cubiertos", "Cobertura vía reembolso en cualquier hospital de tu red"],
   },
   {
-    id: "aliado", number: "04", navLabel: "Aliado Humana", theme: "warm",
-    image: CORP_IMAGE, imageAlt: "Las empresas diseñan su plan corporativo",
+    id: "aliado", number: "04",
     eyebrow: "ALIADO HUMANA", title: "Más que un plan médico, un aliado para tu empresa.",
     lead: "Al ser un aliado de Humana, usted y sus colaboradores además podrán obtener:",
     essentials: ["Reportería y control de siniestralidad", "Asesoría y atención personalizada", "Medios electrónicos para consulta de información"],
@@ -78,18 +55,8 @@ const chapters: Chapter[] = [
 ];
 
 const additionalBenefits = [
-  {
-    icon: Ambulance,
-    title: "Ambulancia terrestre",
-    image: "https://humana.med.ec/wp-content/uploads/2020/11/beneficios-asistencias-logos-para-la-web-01.png",
-    href: "https://servicio.humana.med.ec/hc/es/articles/4402736531597-Ambulancia-terrestre",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Asistencia exequial",
-    image: "https://humana.med.ec/wp-content/uploads/2020/11/beneficios-asistencias-logos-para-la-web-03.png",
-    href: "https://servicio.humana.med.ec/hc/es/articles/4402813461389-Asistencia-Exequial",
-  },
+  { icon: Ambulance, title: "Ambulancia terrestre", href: "https://servicio.humana.med.ec/hc/es/articles/4402736531597-Ambulancia-terrestre" },
+  { icon: HeartHandshake, title: "Asistencia exequial", href: "https://servicio.humana.med.ec/hc/es/articles/4402813461389-Asistencia-Exequial" },
 ];
 
 const contactChannels = [
@@ -99,51 +66,25 @@ const contactChannels = [
 
 export default function PlanCorporativoClient() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const navLinks = Array.from(root.querySelectorAll<HTMLAnchorElement>("[data-chapter-link]"));
-    const sections = navLinks
-      .map((link) => root.querySelector<HTMLElement>(`#${link.dataset.chapterLink}`))
-      .filter((el): el is HTMLElement => !!el);
-    let lastCurrent = "";
-
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      if (progressRef.current) progressRef.current.style.width = `${max ? (window.scrollY / max) * 100 : 0}%`;
-      let current = "";
-      sections.forEach((section) => { if (section.getBoundingClientRect().top < window.innerHeight * 0.52) current = section.id; });
-      navLinks.forEach((link) => link.classList.toggle("is-active", link.dataset.chapterLink === current));
-      if (current && current !== lastCurrent) {
-        const activeLink = navLinks.find((link) => link.dataset.chapterLink === current);
-        const navContainer = activeLink?.parentElement;
-        if (activeLink && navContainer) {
-          const targetLeft = activeLink.offsetLeft - navContainer.clientWidth / 2 + activeLink.clientWidth / 2;
-          navContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: reducedMotion ? "auto" : "smooth" });
-        }
-        lastCurrent = current;
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
     if (reducedMotion || !("IntersectionObserver" in window)) {
       root.classList.remove("is-motion-ready");
-      root.querySelectorAll(".mh50-exp-reveal").forEach((el) => el.classList.add("is-visible"));
-      return () => window.removeEventListener("scroll", onScroll);
+      root.querySelectorAll(".biz-reveal").forEach((el) => el.classList.add("is-visible"));
+      return;
     }
     root.classList.add("is-motion-ready");
-    const revealNodes = Array.from(root.querySelectorAll<HTMLElement>(".mh50-exp-reveal"));
+    const revealNodes = Array.from(root.querySelectorAll<HTMLElement>(".biz-reveal"));
     const revealObserver = new IntersectionObserver(
       (entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); revealObserver.unobserve(entry.target); } }),
       { threshold: 0.12, rootMargin: "0px 0px -5% 0px" },
     );
     revealNodes.forEach((el) => revealObserver.observe(el));
     const safetyTimer = window.setTimeout(() => revealNodes.forEach((el) => el.classList.add("is-visible")), 2400);
-    return () => { window.removeEventListener("scroll", onScroll); revealObserver.disconnect(); window.clearTimeout(safetyTimer); };
+    return () => { revealObserver.disconnect(); window.clearTimeout(safetyTimer); };
   }, []);
 
   return (
@@ -154,126 +95,110 @@ export default function PlanCorporativoClient() {
         <Link href="/planes-medicos/empresas/">Planes médicos para Empresas</Link><span>»</span>
         <span>Plan Corporativo</span>
       </nav>
-      <div className="mh50-exp business-page" ref={rootRef}>
-        <div className="mh50-exp-progress" aria-hidden="true"><span ref={progressRef} /></div>
 
-        <section className="mh50-exp-hero" id="corporativo-inicio">
-          <CorporativoDecor tone="on-dark" />
-          <div className="mh50-exp-hero-copy">
-            <span className="mh50-exp-eyebrow light">PLAN EMPRESARIAL · PLAN CORPORATIVO</span>
-            <h1 className="is-long">Plan <span>Corporativo</span></h1>
-            <p className="mh50-exp-hero-line">Tu empresa diseña<br />su propio plan.</p>
-            <p className="mh50-exp-hero-body">
+      <div className="biz-page" ref={rootRef}>
+        {/* Hero ------------------------------------------------------- */}
+        <section className="biz-hero" id="corporativo-inicio">
+          <div className="biz-hero-copy">
+            <span className="biz-eyebrow">PLAN EMPRESARIAL · PLAN CORPORATIVO</span>
+            <h1>Plan <span>Corporativo</span></h1>
+            <p className="biz-hero-line">Tu empresa diseña su propio plan.</p>
+            <p className="biz-hero-body">
               El plan corporativo se ajustará a las necesidades de presupuesto y coberturas de su empresa
               (a partir de 50 empleados). Un plan diseñado de acuerdo a sus necesidades, totalmente
               personalizable.
             </p>
-            <p className="mh50-exp-hero-body">
+            <p className="biz-hero-body">
               En nuestra cartera de clientes corporativos tenemos importantes empresas del país en
               sectores como el financiero, petrolero, telecomunicaciones, automotriz, industrial,
               servicios, salud, entre otros.
             </p>
-            <div className="mh50-exp-hero-actions">
-              <a className="primary-button" href="#corporativo-cierre">Solicita información</a>
-              <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
-              <a className="ghost-button" href="tel:1800486262"><PhoneCall size={18} /> Solicitar llamada</a>
+            <div className="biz-hero-actions">
+              <a className="biz-btn-primary" href="#corporativo-cierre">Solicita información</a>
+              <a className="biz-btn-link" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">Hablar con un asesor <ArrowRight aria-hidden="true" /></a>
             </div>
           </div>
-          <div className="mh50-exp-gallery" aria-label="Plan Corporativo">
-            <figure className="mh50-exp-photo card-a">
-              <Image src={CORP_IMAGE} alt="Las empresas diseñan su plan" fill sizes="(max-width: 980px) 90vw, 50vw" unoptimized />
-            </figure>
-          </div>
-          <a className="mh50-exp-scroll-cue" href="#corporativo-esencia"><span />Desliza para descubrir</a>
+          <figure className="biz-hero-image">
+            <Image src={CORP_IMAGE} alt="Las empresas diseñan su plan corporativo" fill sizes="(max-width: 980px) 100vw, 1180px" unoptimized />
+          </figure>
         </section>
 
-        <section className="mh50-exp-essence" id="corporativo-esencia">
-          <CorporativoDecor tone="on-dark" />
-          <div className="mh50-exp-eyebrow light mh50-exp-reveal">PLAN CORPORATIVO EN TRES IDEAS</div>
-          <h2 className="mh50-exp-display mh50-exp-reveal">Un plan diseñado<br />junto a tu empresa.</h2>
-          <div className="mh50-exp-stat-stage">
-            {essenceStats.map((stat) => (
-              <article className="mh50-exp-stat mh50-exp-reveal" key={stat.value}>
-                <strong>{stat.value}</strong>
-                <p>{stat.label.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}</p>
-              </article>
-            ))}
+        {/* Franja de cifras clave -------------------------------------- */}
+        <section className="biz-section is-light">
+          <div className="biz-container">
+            <div className="biz-section-head biz-reveal">
+              <span className="biz-eyebrow">PLAN CORPORATIVO EN TRES IDEAS</span>
+              <h2>Un plan diseñado junto a tu empresa.</h2>
+            </div>
+            <div className="biz-stats biz-reveal">
+              {essenceStats.map((stat) => (
+                <article key={stat.value}>
+                  <strong>{stat.value}</strong>
+                  <p>{stat.label}</p>
+                </article>
+              ))}
+            </div>
           </div>
-          <p className="mh50-exp-fineprint mh50-exp-reveal">Información resumida para fines demostrativos. Aplican las condiciones del contrato corporativo.</p>
         </section>
 
-        <nav className="mh50-exp-chapter-nav" aria-label="Capítulos del Plan Corporativo">
-          {chapters.map((c) => (
-            <a key={c.id} href={`#corporativo-${c.id}`} data-chapter-link={`corporativo-${c.id}`}><span>{c.number}</span>{c.navLabel}</a>
-          ))}
-        </nav>
-
+        {/* Capítulos (una idea por sección, sin repetir la única foto) --- */}
         {chapters.map((c, i) => (
-          <section key={c.id} id={`corporativo-${c.id}`} className={`mh50-exp-chapter theme-${c.theme}${i % 2 === 1 ? " reverse" : ""}`}>
-            <CorporativoDecor tone={c.theme === "dark" || c.theme === "blue" ? "on-dark" : "on-light"} />
-            <div className="mh50-exp-chapter-number" aria-hidden="true">{c.number}</div>
-            <div className="mh50-exp-chapter-image mh50-exp-reveal">
-              <Image src={c.image} alt={c.imageAlt} fill sizes="(max-width: 980px) 100vw, 45vw" unoptimized />
-            </div>
-            <div className="mh50-exp-chapter-copy mh50-exp-reveal">
-              <span className={`mh50-exp-eyebrow${c.theme === "dark" || c.theme === "blue" ? " light" : ""}`}>{c.eyebrow}</span>
-              <h2>{c.title}</h2>
-              <p className="mh50-exp-lead">{c.lead}</p>
-              <ul>
-                {c.essentials.map((item) => <li key={item}>{item}</li>)}
-              </ul>
+          <section className={`biz-section ${i % 2 === 0 ? "is-white" : "is-light"}`} id={`corporativo-${c.id}`} key={c.id}>
+            <div className="biz-container">
+              <div className="biz-feature-text biz-reveal">
+                <span className="biz-feature-num">{c.number}</span>
+                <span className="biz-eyebrow">{c.eyebrow}</span>
+                <h2>{c.title}</h2>
+                <p>{c.lead}</p>
+                <ul className="biz-checklist is-single">
+                  {c.essentials.map((item) => (
+                    <li key={item}><Check aria-hidden="true" /><span>{item}</span></li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </section>
         ))}
 
-        <section className="content-section plan-hub-intro mh50-exp-reveal" id="corporativo-beneficios" style={{ maxWidth: 820 }}>
-          <h2>Beneficios adicionales de los Planes Corporativos</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20, marginTop: 24, textAlign: "left" }}>
-            {additionalBenefits.map(({ icon: Icon, title, image, href }) => (
-              <a key={title} href={href} target="_blank" rel="noreferrer" className="plan-hub-card" style={{ padding: 24, textDecoration: "none", color: "inherit" }}>
-                <div style={{ position: "relative", width: 56, height: 56 }}>
-                  <Image src={image} alt={title} fill sizes="56px" unoptimized style={{ objectFit: "contain" }} />
-                </div>
-                <h3 style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 12 }}><Icon size={18} /> {title}</h3>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <section className="business-contact-box mh50-exp-reveal">
-          <div>
-            <h3>Diseñemos juntos el plan de tu empresa.</h3>
-            <p>Un asesor corporativo te contactará con una propuesta personalizada.</p>
-          </div>
-          <div className="business-contact-box-actions">
-            <a className="primary-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">Contáctate con nosotros</a>
-            <a className="ghost-button" href="#corporativo-montos">Explorar detalles</a>
-          </div>
-        </section>
-
-        <section className="mh50-exp-finale" id="corporativo-cierre">
-          <div className="mh50-exp-finale-rings" aria-hidden="true" />
-          <CorporativoDecor tone="on-dark" />
-          <div className="mh50-exp-finale-copy mh50-exp-reveal">
-            <span className="mh50-exp-eyebrow light">PLAN CORPORATIVO · PLAN EMPRESARIAL</span>
-            <h2>Diseñemos juntos el plan de tu empresa.</h2>
-            <p>Un asesor corporativo te contactará con una propuesta personalizada.</p>
-            <div className="mh50-exp-finale-actions">
-              <a className="primary-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">Solicita información</a>
-              <a className="ghost-button" href="https://wa.me/59324017002" target="_blank" rel="noreferrer"><MessageCircle size={18} /> WhatsApp</a>
-              <a className="ghost-button" href="tel:1800486262"><PhoneCall size={18} /> Solicitar llamada</a>
-              <Link className="ghost-button" href="/planes-medicos/empresas/">Ver todos los planes</Link>
+        {/* Beneficios adicionales ------------------------------------ */}
+        <section className="biz-section is-white" id="corporativo-beneficios">
+          <div className="biz-container">
+            <div className="biz-section-head biz-reveal">
+              <h2>Beneficios adicionales de los Planes Corporativos</h2>
             </div>
-            <div className="mh50-exp-contact">
-              {contactChannels.map(({ icon: Icon, label, value, href }) => (
-                <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
-                  <Icon /> <span><small>{label}</small><strong>{value}</strong></span>
+            <div className="biz-benefit-cards biz-reveal">
+              {additionalBenefits.map(({ icon: Icon, title, href }) => (
+                <a key={title} href={href} target="_blank" rel="noreferrer" className="biz-benefit-card">
+                  <Icon aria-hidden="true" />
+                  <h3>{title}</h3>
+                  <span className="biz-btn-link">Ver detalles <ArrowRight aria-hidden="true" /></span>
                 </a>
               ))}
             </div>
-            <p className="mh50-exp-trust"><Users /> Más de 200.000 personas y empresas confían en Humana.</p>
           </div>
-          <div className="mh50-exp-finale-mark" aria-hidden="true"><span>PLAN</span><strong>CORP</strong></div>
+        </section>
+
+        {/* Cierre único --------------------------------------------------- */}
+        <section className="biz-section is-dark" id="corporativo-cierre">
+          <div className="biz-container biz-close">
+            <div className="biz-section-head biz-reveal">
+              <span className="biz-eyebrow">PLAN CORPORATIVO · PLAN EMPRESARIAL</span>
+              <h2>Diseñemos juntos el plan de tu empresa.</h2>
+              <p>Un asesor corporativo te contactará con una propuesta personalizada.</p>
+            </div>
+            <div className="biz-close-actions biz-reveal">
+              <a className="biz-btn-primary" href="https://wa.me/59324017002" target="_blank" rel="noreferrer">Solicita información</a>
+              <Link className="biz-btn-link" href="/planes-medicos/empresas/">Ver todos los planes <ArrowRight aria-hidden="true" /></Link>
+            </div>
+            <div className="biz-close-contact biz-reveal">
+              {contactChannels.map(({ icon: Icon, label, value, href }) => (
+                <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+                  <Icon aria-hidden="true" size={16} /> <span><small>{label}</small><strong>{value}</strong></span>
+                </a>
+              ))}
+            </div>
+            <p className="biz-trust biz-reveal"><Users aria-hidden="true" /> Más de 200.000 personas y empresas confían en Humana.</p>
+          </div>
         </section>
       </div>
     </SiteShell>
