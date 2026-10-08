@@ -5018,3 +5018,70 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .pyme-cuadro-dialog-value span { text-align: left; }
   .pyme-cuadro-dialog-actions { padding: 16px 20px; }
 }
+
+/* ------------------------------------------------------------------------ */
+/* Escala tipográfica compartida de las páginas de Empresas (Plan Pyme,     */
+/* Plan Corporativo, Humana Business — todas con el wrapper .business-page) */
+/* más fina y elegante que el sistema base .mh50-exp* (pensado para MH50/   */
+/* PH15/etc., que no se tocan). Solo tamaños y espaciados: ningún texto,    */
+/* estructura, color, imagen, URL, title, meta ni H1 textual cambia.        */
+/* ------------------------------------------------------------------------ */
+.business-page .mh50-exp-hero-copy h1,
+.business-page .mh50-exp-hero-copy h1.is-long {
+  font-size: clamp(34px, 3.6vw, 48px); line-height: 1.1; letter-spacing: -.02em;
+  font-weight: 650; font-variation-settings: "wght" 650; margin: 14px 0 16px;
+}
+.business-page .mh50-exp-hero-line { font-size: clamp(19px, 1.7vw, 22px); line-height: 1.35; font-weight: 650; }
+.business-page .mh50-exp-hero-body { font-size: 16px; line-height: 1.6; }
+.business-page .mh50-exp-hero { min-height: auto; padding: clamp(96px, 9vw, 130px) clamp(20px, 7vw, 110px) 64px; }
+
+.business-page .mh50-exp-essence { min-height: auto; padding: clamp(56px, 6vw, 88px) clamp(20px, 7vw, 110px); }
+.business-page .mh50-exp-display {
+  font-size: clamp(28px, 2.6vw, 32px); line-height: 1.18; letter-spacing: -.015em;
+  font-weight: 650; font-variation-settings: "wght" 650; margin: 10px 0 32px;
+}
+.business-page .mh50-exp-stat strong { font-size: clamp(28px, 2.4vw, 32px); letter-spacing: -.02em; }
+.business-page .mh50-exp-stat p { font-size: 13px; }
+.business-page .mh50-exp-fineprint { font-size: 13px; }
+
+.business-page .mh50-exp-moments { min-height: auto; padding: clamp(56px, 6vw, 88px) clamp(20px, 8vw, 130px); }
+.business-page .mh50-exp-moments-copy h2 {
+  font-size: clamp(28px, 2.6vw, 32px); line-height: 1.18; letter-spacing: -.015em;
+  font-weight: 650; font-variation-settings: "wght" 650; margin: 10px 0 16px;
+}
+.business-page .mh50-exp-moments-copy > p { font-size: 16px; line-height: 1.6; }
+.business-page .mh50-exp-plan-toggle button { font-size: 15px; padding: 12px 20px; }
+.business-page .mh50-exp-plan-toggle button span { font-size: 13px; }
+.business-page .mh50-exp-accordion-grid article strong { font-size: 19px; }
+.business-page .mh50-exp-accordion-grid article span { font-size: 15px; }
+
+.business-page .mh50-exp-chapter { min-height: auto; padding: clamp(56px, 6vw, 88px) clamp(20px, 8vw, 130px); }
+.business-page .mh50-exp-chapter-copy h2 {
+  font-size: clamp(28px, 2.6vw, 32px); line-height: 1.18; letter-spacing: -.015em;
+  font-weight: 650; font-variation-settings: "wght" 650; margin: 14px 0 16px;
+}
+.business-page .mh50-exp-chapter-copy .mh50-exp-lead { font-size: 16px; line-height: 1.6; max-width: 540px; }
+.business-page .mh50-exp-chapter-copy ul { font-size: 15px; margin: 22px 0; }
+.business-page .mh50-exp-chapter-number { font-size: clamp(80px, 12vw, 180px); }
+
+.business-page .business-contact-box h3 { font-size: clamp(26px, 2.6vw, 32px); }
+.business-page .business-contact-box p { font-size: 16px; line-height: 1.6; }
+
+.business-page .mh50-exp-finale { min-height: auto; padding: clamp(56px, 6vw, 88px) clamp(20px, 8vw, 130px); }
+.business-page .mh50-exp-finale-copy h2 {
+  font-size: clamp(28px, 2.6vw, 32px); line-height: 1.18; letter-spacing: -.015em;
+  font-weight: 650; font-variation-settings: "wght" 650; margin: 14px 0 16px;
+}
+.business-page .mh50-exp-finale-copy > p { font-size: 16px; line-height: 1.6; }
+
+@media (max-width: 760px) {
+  .business-page .mh50-exp-hero-copy h1,
+  .business-page .mh50-exp-hero-copy h1.is-long { font-size: clamp(30px, 8vw, 38px); }
+  .business-page .mh50-exp-hero-line { font-size: 19px; }
+  .business-page .mh50-exp-display,
+  .business-page .mh50-exp-moments-copy h2,
+  .business-page .mh50-exp-chapter-copy h2,
+  .business-page .mh50-exp-finale-copy h2 { font-size: 26px; }
+  .business-page .mh50-exp-chapter-number { font-size: 38vw; }
+  .business-page .mh50-exp-stat strong { font-size: 26px; }
+}
