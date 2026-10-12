@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import { CheckCircle2 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
@@ -29,10 +29,8 @@ export default function VoucherRecibidoPage() {
         <span>Solicitud de Voucher asistencia para viajes recibido</span>
       </nav>
 
-      <section className="content-section plan-hub-intro" style={{ maxWidth: 760 }}>
-        <div style={{ position: "relative", width: "100%", aspectRatio: "16/6", borderRadius: 20, overflow: "hidden", marginBottom: 24 }}>
-          <Image src="https://humana.med.ec/wp-content/uploads/2022/07/cabecera-medihumana-central-de-ayuda.png" alt="Medihumana - Central de ayuda" fill sizes="760px" unoptimized style={{ objectFit: "cover" }} />
-        </div>
+      <section className="content-section plan-hub-intro" style={{ maxWidth: 640 }}>
+        <div className="confirmation-check"><CheckCircle2 aria-hidden="true" /></div>
         <h1>Solicitud de Voucher asistencia para viajes recibido</h1>
         <p>
           Su requerimiento está siendo procesado. Si toda la información está correcta, un agente de
@@ -40,7 +38,13 @@ export default function VoucherRecibidoPage() {
         </p>
         <p>En caso de requerir alguna confirmación, le contactaremos para continuar el trámite.</p>
         <p>Reciba un cordial saludo de Humana S.A.</p>
-        <a className="primary-button" href="https://servicio.humana.med.ec/hc/es/articles/4402811871629-Voucher-asistencia-para-viajes" target="_blank" rel="noreferrer">
+        <a
+          className="primary-button"
+          style={{ marginTop: 24 }}
+          href="https://servicio.humana.med.ec/hc/es/articles/4402811871629-Voucher-asistencia-para-viajes"
+          target="_blank"
+          rel="noreferrer"
+        >
           Nueva solicitud
         </a>
       </section>
