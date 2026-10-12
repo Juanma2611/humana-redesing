@@ -5309,6 +5309,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 
 /* Tarjetas de beneficio (Corporativo) ------------------------------------ */
 .biz-benefit-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 760px; margin: 44px auto 0; }
+@media (min-width: 761px) { .biz-benefit-cards.cols-3 { grid-template-columns: repeat(3, 1fr); max-width: 1040px; } }
 .biz-benefit-card { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; padding: 48px 32px; border: 1px solid #e3e3e6; border-radius: 24px; background: #fff; transition: transform .3s var(--premium-ease), box-shadow .3s var(--premium-ease), border-color .3s var(--premium-ease); }
 .biz-benefit-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--biz-accent, var(--humana-teal)); opacity: .5; transition: opacity .3s ease; }
 .biz-benefit-card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(7,63,96,.12); border-color: #c9dbe4; }
@@ -5321,6 +5322,14 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .biz-hero-stat { display: inline-flex; align-items: baseline; gap: 12px; margin: 24px auto 0; padding: 14px 24px; border-radius: 18px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 .biz-hero-stat strong { font-size: clamp(28px, 3vw, 34px); font-weight: 700; letter-spacing: -.02em; color: #fff; }
 .biz-hero-stat span { font-size: 13px; color: rgba(255,255,255,.72); max-width: 160px; line-height: 1.35; text-align: left; }
+
+/* Fila de 3 cifras en tarjetas glass dentro del hero (Directorio) -------- */
+.biz-hero-stats { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 36px; }
+.biz-hero-stats article { position: relative; flex: 1 1 180px; max-width: 220px; text-align: center; padding: 28px 20px 24px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28); border-radius: 18px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.biz-hero-stats article::before { content: ""; position: absolute; top: 0; left: 24px; right: 24px; height: 2px; border-radius: 2px; background: var(--biz-accent, #7ce0db); }
+.biz-hero-stats strong { display: block; font-size: clamp(30px, 3.2vw, 36px); font-weight: 700; letter-spacing: -.02em; color: #fff; }
+.biz-hero-stats p { margin: 8px 0 0; font-size: 14px; color: rgba(255,255,255,.82); line-height: 1.5; }
+@media (max-width: 600px) { .biz-hero-stats article { flex: 1 1 45%; } }
 
 /* Accesos rápidos tipo "glass" sobre fondo navy (Medihumana) ------------- */
 .medi-quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 36px; text-align: left; }
@@ -5351,6 +5360,60 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* Chip blanco para logos/imágenes de contacto (teléfonos Covid), legible
    sobre cualquiera de los 3 fondos. */
 .biz-phone-chip { display: inline-flex; align-items: center; padding: 10px 16px; border-radius: 12px; background: #fff; box-shadow: 0 8px 20px rgba(7,63,96,.12); }
+
+/* Acordeón de preguntas frecuentes con <details> nativo, todo el texto
+   en el HTML (Cotizador). Fondo claro por defecto; variante oscura si
+   el bloque se coloca sobre is-dark/is-brand. */
+.biz-faq { border-top: 1px solid var(--border); max-width: 820px; margin: 32px auto 0; }
+.biz-faq details { border-bottom: 1px solid var(--border); }
+.biz-faq summary { list-style: none; cursor: pointer; padding: 20px 4px; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-weight: 700; font-size: 17px; color: #12314a; }
+.biz-faq summary::-webkit-details-marker { display: none; }
+.biz-faq summary .biz-faq-plus { flex-shrink: 0; font-size: 22px; line-height: 1; color: var(--humana-blue); transition: transform .25s var(--premium-ease); }
+.biz-faq details[open] summary .biz-faq-plus { transform: rotate(45deg); }
+.biz-faq-content { padding: 0 4px 22px; color: #3a3a3c; font-size: 16px; line-height: 1.7; }
+.biz-faq-content p { margin: 0 0 14px; }
+.biz-faq-content p:last-child { margin-bottom: 0; }
+.biz-faq-content ul, .biz-faq-content ol { margin: 0 0 14px; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; }
+.biz-faq-content a { color: var(--humana-blue); text-decoration: underline; }
+.biz-section.is-dark .biz-faq, .biz-section.is-brand .biz-faq { border-top-color: rgba(255,255,255,.18); }
+.biz-section.is-dark .biz-faq details, .biz-section.is-brand .biz-faq details { border-bottom-color: rgba(255,255,255,.18); }
+.biz-section.is-dark .biz-faq summary, .biz-section.is-brand .biz-faq summary { color: #fff; }
+.biz-section.is-dark .biz-faq-content, .biz-section.is-brand .biz-faq-content { color: rgba(255,255,255,.85); }
+.biz-section.is-dark .biz-faq-content a, .biz-section.is-brand .biz-faq-content a { color: #7ce0db; }
+
+/* Lista numerada visual (ej. los 8 pasos de uso de una red) ------------- */
+.biz-step-list { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 32px; }
+.biz-step-list li { display: grid; grid-template-columns: 32px 1fr; align-items: start; gap: 14px; font-size: 16px; line-height: 1.5; }
+.biz-step-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; background: var(--biz-accent, var(--humana-teal)); color: #fff; }
+@media (max-width: 640px) { .biz-step-list { grid-template-columns: 1fr; } }
+
+/* Lista de párrafos con viñeta y enlaces en línea. .plan-faq-checklist usa
+   display:flex por <li>, que rompe el texto cuando el <li> trae un enlace
+   inline en medio de la oración (cada hijo directo se vuelve un ítem de
+   flex aparte). Esta variante mantiene el <li> en flujo normal de bloque. */
+.biz-text-list { list-style: disc; margin: 14px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 12px; }
+.biz-text-list li { line-height: 1.6; }
+.biz-section.is-dark .biz-text-list a, .biz-section.is-brand .biz-text-list a { color: #7ce0db; }
+
+/* Franja de prestadores (nombre en chip, sin logo todavía) -------------- */
+.biz-provider-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 36px; }
+.biz-provider-chip { padding: 12px 22px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); color: #fff; font-size: 14.5px; font-weight: 600; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.biz-section.is-light .biz-provider-chip { background: #fff; border-color: var(--border); color: #12314a; box-shadow: 0 8px 20px rgba(7,63,96,.06); }
+
+/* Formulario de contacto visual (demo) sobre fondo oscuro --------------- */
+.biz-lead-form { max-width: 520px; margin: 36px auto 0; padding: 32px; border-radius: 24px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.biz-section.is-light .biz-lead-form { background: #fff; border-color: var(--border); box-shadow: var(--premium-shadow); }
+.biz-lead-form form { display: flex; flex-direction: column; gap: 14px; }
+.biz-lead-form label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: rgba(255,255,255,.85); }
+.biz-section.is-light .biz-lead-form label { color: #33546a; }
+.biz-lead-form input, .biz-lead-form select { min-height: 46px; border-radius: 12px; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.95); padding: 0 14px; font-size: 14px; color: #12314a; font-weight: 500; font-family: inherit; }
+.biz-lead-form input:focus, .biz-lead-form select:focus { outline: 2px solid var(--humana-sky); outline-offset: 1px; }
+.biz-lead-form button[type="submit"] { margin-top: 6px; }
+.biz-lead-success { display: flex; gap: 10px; align-items: flex-start; color: #7ce0db; font-size: 14px; line-height: 1.6; }
+.biz-section.is-light .biz-lead-success { color: #0e8c88; }
+.biz-lead-success svg { flex-shrink: 0; margin-top: 2px; }
+.biz-lead-disclaimer { margin: 18px 0 0; font-size: 11.5px; color: rgba(255,255,255,.55); text-align: center; }
+.biz-section.is-light .biz-lead-disclaimer { color: #9db0bc; }
 
 /* Cierre único ------------------------------------------------------------*/
 .biz-close-actions { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 28px; flex-wrap: wrap; }
