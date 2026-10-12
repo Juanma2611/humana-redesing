@@ -33,6 +33,8 @@ type OfficialService = {
   group: string;
   title: string;
   image: string;
+  imageAlt: string;
+  imagePosition?: string;
   copy?: string | null;
   list?: string[];
   listTitle?: string;
@@ -50,7 +52,8 @@ const officialServices: OfficialService[] = [
     id: "medico-a-domicilio",
     group: "ATENCIÓN MÉDICA",
     title: "Médico a domicilio",
-    image: "https://humana.med.ec/wp-content/uploads/2024/08/medico-a-domicilio-v2.png",
+    image: "/images/medihumana/medico-a-domicilio.webp",
+    imageAlt: "Enfermera tomando la presión arterial a una señora en la sala de su casa",
     copy: "Recibirás una asistencia médica oportuna, de calidad y segura en la comodidad de tu hogar o lugar donde requieras de atención. Una vez realizado el diagnóstico el médico determinará si es necesario el traslado a una clínica o a un hospital de nuestra red. De lo contrario, prescribirá medicinas y podrá adquirirlas en la farmacia en convenio más cercana.",
     button: { label: "Más información", href: "https://servicio.humana.med.ec/hc/es/articles/4402813434253-M%C3%A9dico-a-domicilio" },
   },
@@ -58,7 +61,8 @@ const officialServices: OfficialService[] = [
     id: "teleconsultas",
     group: "ATENCIÓN MÉDICA",
     title: "Teleconsulta médica",
-    image: "https://humana.med.ec/wp-content/uploads/2024/08/teleconsulta-medica-v2.png",
+    image: "/images/medihumana/teleconsulta.webp",
+    imageAlt: "Mujer en videollamada desde su celular con una doctora de Humana",
     copy: "Conoce nuestro servicio de TELECONSULTA para medicina general, medicina interna y pediatría, estas consultas serán por vía telefónica.",
     buttons: [
       { label: "Agendar cita en Metrored", href: "https://www.metrored.med.ec/servicios/untitledcitas-medicas" },
@@ -69,7 +73,9 @@ const officialServices: OfficialService[] = [
     id: "ambulancia",
     group: "ATENCIÓN MÉDICA",
     title: "Ambulancia terrestre",
-    image: "https://humana.med.ec/wp-content/uploads/2024/08/ambulancia-terrestre-v2.png",
+    image: "/images/medihumana/ambulancia.webp",
+    imageAlt: "Paramédicos preparando una camilla junto a una ambulancia terrestre",
+    imagePosition: "center 35%",
     copy: "Recibirás una asistencia médica oportuna, de calidad y segura en la comodidad de tu hogar. Una vez realizado el diagnóstico el médico determinará si es necesario el traslado a una clínica o a un hospital de nuestra red. De lo contrario, prescribirá medicinas y podrá adquirirlas en la farmacia en convenio más cercana.",
     button: { label: "Más información", href: "https://servicio.humana.med.ec/hc/es/articles/4402736531597-Ambulancia-terrestre" },
   },
@@ -77,7 +83,8 @@ const officialServices: OfficialService[] = [
     id: "vacunacion-infantil",
     group: "PROGRAMAS DE SALUD",
     title: "Plan de vacunación infantil",
-    image: "https://humana.med.ec/wp-content/uploads/2024/08/plan-de-vacunacion-infantil-v2.png",
+    image: "/images/medihumana/vacunacion-infantil.webp",
+    imageAlt: "Enfermera vacunando a un bebé en brazos de su mamá",
     list: [
       "Acceso solo para infantes (niñas y niños) hasta 23 meses de edad activos en el contrato.",
       "El Titular debe completar correctamente todos los campos del formulario.",
@@ -91,7 +98,8 @@ const officialServices: OfficialService[] = [
     id: "covid-19",
     group: "PROGRAMAS DE SALUD",
     title: "Programa de pacientes Covid",
-    image: "https://humana.med.ec/wp-content/uploads/2024/08/programa-pacientes-covid-v2.png",
+    image: "/images/medihumana/programa-pacientes.webp",
+    imageAlt: "Médica con mascarilla auscultando a un paciente en consultorio",
     copy: "Si presentas síntomas o ya cuentas con una prueba de hisopado RT-PCR positiva, comunícate con los siguientes números para incluirte en nuestro programa de atención ambulatoria.",
     phones: [
       { src: "https://humana.med.ec/wp-content/uploads/2021/06/telefono-metrored.png", alt: "Teléfono Metrored" },
@@ -103,7 +111,8 @@ const officialServices: OfficialService[] = [
     id: "medicacion-continua",
     group: "PROGRAMAS DE SALUD",
     title: "Plan de medicación continua",
-    image: "https://humana.med.ec/wp-content/uploads/2024/08/plan-de-medicacion-continua-v2.png",
+    image: "/images/medihumana/medicacion-continua.webp",
+    imageAlt: "Farmacéutico entregando una caja de medicinas a un afiliado adulto mayor",
     copy: "Se considera pacientes crónicos a aquellos que padecen afecciones de larga duración que precisan medicación continua, como diabetes o hipertensión, epilepsia u osteoporosis. El Plan de medicación continua está diseñado para todos los afiliados que toman medicación de manera continua, ofreciendo la acumulación y canje de beneficios a través de la compra en los puntos de venta autorizados.",
     button: { label: "Más información", href: "https://servicio.humana.med.ec/hc/es/sections/360013986011-Plan-de-medicaci%C3%B3n-Continua" },
   },
@@ -111,7 +120,9 @@ const officialServices: OfficialService[] = [
     id: "autorizaciones",
     group: "TRÁMITES Y RED",
     title: "Autorizaciones",
-    image: "https://humana.med.ec/wp-content/uploads/2024/08/autorizaciones-v2.png",
+    image: "/images/medihumana/autorizaciones.webp",
+    imageAlt: "Asesora de Humana explicando una autorización a una pareja de afiliados con una tablet",
+    imagePosition: "center 30%",
     list: ["Uso de autorizaciones", "Autorizaciones emergentes", "Autorizaciones ambulatorias", "Autorizaciones hospitalarias", "Autorizaciones de asistencias"],
     button: { label: "Ver todas las autorizaciones", href: "https://servicio.humana.med.ec/hc/es/categories/360006583511-AUTORIZACIONES" },
   },
@@ -119,7 +130,9 @@ const officialServices: OfficialService[] = [
     id: "red-de-prestadores",
     group: "TRÁMITES Y RED",
     title: "Red de prestadores",
-    image: "https://humana.med.ec/wp-content/uploads/2024/08/red-de-prestadores-v2.png",
+    image: "/images/medihumana/red-de-prestadores.webp",
+    imageAlt: "Equipo de médicos y enfermeras de la red de prestadores caminando por un pasillo de hospital",
+    imagePosition: "center 25%",
     copy: "Humana pone al servicio de sus afiliados la red de prestadores médicos más representativa y confiable del país, garantizando una atención médica de calidad. Para acceder a nuestra red de prestadores modalidad cerrada o de la Red Humana ingrese a Red Humana o comuníquese con el 1800 HUMANA (48 62 62).",
     button: { label: "Visita nuestra red", href: "https://red.humana.med.ec/RedHumana" },
   },
@@ -176,7 +189,14 @@ export default function MedihumanaPage() {
             <div className="biz-container">
               <div className={`biz-feature${i % 2 === 1 ? " reverse" : ""}`}>
                 <figure className="biz-feature-media">
-                  <Image src={service.image} alt={service.title} fill sizes="(max-width: 860px) 100vw, 50vw" unoptimized />
+                  <Image
+                    src={service.image}
+                    alt={service.imageAlt}
+                    fill
+                    sizes="(max-width: 860px) 100vw, 50vw"
+                    unoptimized
+                    style={service.imagePosition ? { objectPosition: service.imagePosition } : undefined}
+                  />
                 </figure>
                 <div className="biz-feature-copy">
                   <span className="biz-eyebrow">{service.group}</span>
