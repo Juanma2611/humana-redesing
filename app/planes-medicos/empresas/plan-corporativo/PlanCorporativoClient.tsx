@@ -10,8 +10,9 @@ import { SiteShell } from "@/components/site-shell";
    por sección), misma familia visual que Plan Pyme y Humana Business.
    Mismos textos y datos oficiales del Plan Corporativo ya existentes en
    el sitio. Sin cuadro de coberturas: el plan no tiene montos fijos.
-   La única fotografía oficial del plan se usa una sola vez, en el hero;
-   los capítulos van sin imagen (en vez de repetir la misma foto). */
+   La fotografía oficial "las empresas diseñan su plan" se mantiene y se
+   usa una sola vez, junto a "Beneficios adicionales"; el hero y los
+   cuatro capítulos usan las fotos propias del plan. */
 
 const essenceStats = [
   { value: "Desde 50", label: "colaboradores para acceder al plan" },
@@ -19,9 +20,31 @@ const essenceStats = [
   { value: "A medida", label: "contrato personalizado por empresa" },
 ];
 
-type Chapter = { id: string; number: string; eyebrow: string; title: string; lead: string; essentials: string[] };
+type Chapter = {
+  id: string; number: string; eyebrow: string; title: string; lead: string; essentials: string[];
+  image: string; imageAlt: string;
+};
 
-const CORP_IMAGE = "https://humana.med.ec/wp-content/uploads/2021/03/las-empresas-disenan-su-plan.png";
+const CORP_HERO_IMAGE = "/images/planes/corporativo/corporativo-hero";
+const CORP_DESIGN_IMAGE = "https://humana.med.ec/wp-content/uploads/2021/03/las-empresas-disenan-su-plan.png";
+
+/* Foto + respaldo: <picture> con fuente WebP y <img> JPG de respaldo,
+   posicionado en modo "fill" (como next/image) para llenar el recuadro
+   con object-fit: cover ya definido en .biz-hero-image/.biz-feature-media. */
+function PlanPhoto({ base, alt, eager = false }: { base: string; alt: string; eager?: boolean }) {
+  return (
+    <picture>
+      <source srcSet={`${base}.webp`} type="image/webp" />
+      <img
+        src={`${base}.jpg`}
+        alt={alt}
+        loading={eager ? "eager" : "lazy"}
+        decoding={eager ? "sync" : "async"}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+      />
+    </picture>
+  );
+}
 
 const chapters: Chapter[] = [
   {
@@ -29,6 +52,7 @@ const chapters: Chapter[] = [
     eyebrow: "MONTOS DE COBERTURA", title: "Un contrato a la medida de tu empresa.",
     lead: "Al ser un Contrato Corporativo personalizado no existe un monto fijo, todos los valores van en función de su Plan específico.",
     essentials: ["Contrato corporativo 100% personalizado", "Montos definidos según el plan específico de cada empresa"],
+    image: "/images/planes/corporativo/corporativo-01-montos", imageAlt: "Equipo directivo reunido en una sala corporativa diseñando su plan a la medida",
   },
   {
     id: "carencias", number: "02",
@@ -39,18 +63,21 @@ const chapters: Chapter[] = [
       "Continuidad de cobertura para enfermedades preexistentes y/o congénitas",
       "Aplica para el titular y dependientes que vienen de la vigencia anterior, o al ingreso de toda la empresa a Humana",
     ],
+    image: "/images/planes/corporativo/corporativo-02-carencias", imageAlt: "Ejecutivos revisando en equipo la cobertura inmediata de su plan corporativo",
   },
   {
     id: "credito", number: "03",
     eyebrow: "CRÉDITO HOSPITALARIO", title: "Respaldo hospitalario sin trámites de más.",
     lead: "Hospitalización y honorarios médicos con crédito preautorizado o cobertura vía reembolso en cualquier hospital de tu red.",
     essentials: ["Crédito preautorizado en hospitalización", "Honorarios médicos cubiertos", "Cobertura vía reembolso en cualquier hospital de tu red"],
+    image: "/images/planes/corporativo/corporativo-03-credito", imageAlt: "Colaboradores revisando un documento de crédito hospitalario en oficina",
   },
   {
     id: "aliado", number: "04",
     eyebrow: "ALIADO HUMANA", title: "Más que un plan médico, un aliado para tu empresa.",
     lead: "Al ser un aliado de Humana, usted y sus colaboradores además podrán obtener:",
     essentials: ["Reportería y control de siniestralidad", "Asesoría y atención personalizada", "Medios electrónicos para consulta de información"],
+    image: "/images/planes/corporativo/corporativo-04-aliado", imageAlt: "Paciente siendo atendido en recepción como aliado de Humana",
   },
 ];
 
@@ -119,7 +146,7 @@ export default function PlanCorporativoClient() {
             </div>
           </div>
           <figure className="biz-hero-image">
-            <Image src={CORP_IMAGE} alt="Las empresas diseñan su plan corporativo" fill sizes="(max-width: 980px) 100vw, 1180px" unoptimized />
+            <PlanPhoto base={CORP_HERO_IMAGE} alt="Directivo de una empresa cliente de Humana en sus oficinas corporativas" eager />
           </figure>
         </section>
 
@@ -141,39 +168,50 @@ export default function PlanCorporativoClient() {
           </div>
         </section>
 
-        {/* Capítulos (una idea por sección, sin repetir la única foto) --- */}
+        {/* Capítulos (una idea por sección) ------------------------------ */}
         {chapters.map((c, i) => (
           <section className={`biz-section ${i % 2 === 0 ? "is-light" : "is-dark"}`} id={`corporativo-${c.id}`} key={c.id}>
             <div className="biz-container">
-              <div className="biz-feature-text biz-reveal">
-                <span className="biz-feature-num">{c.number}</span>
-                <span className="biz-eyebrow">{c.eyebrow}</span>
-                <h2>{c.title}</h2>
-                <p>{c.lead}</p>
-                <ul className="biz-checklist is-single">
-                  {c.essentials.map((item) => (
-                    <li key={item}><Check aria-hidden="true" /><span>{item}</span></li>
-                  ))}
-                </ul>
+              <div className={`biz-feature${i % 2 === 1 ? " reverse" : ""}`}>
+                <figure className="biz-feature-media biz-reveal">
+                  <PlanPhoto base={c.image} alt={c.imageAlt} />
+                </figure>
+                <div className="biz-feature-copy biz-reveal">
+                  <span className="biz-feature-num">{c.number}</span>
+                  <span className="biz-eyebrow">{c.eyebrow}</span>
+                  <h2>{c.title}</h2>
+                  <p>{c.lead}</p>
+                  <ul className="biz-checklist is-single">
+                    {c.essentials.map((item) => (
+                      <li key={item}><Check aria-hidden="true" /><span>{item}</span></li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </section>
         ))}
 
-        {/* Beneficios adicionales ------------------------------------ */}
+        {/* Beneficios adicionales: junto a la foto oficial "las empresas
+           diseñan su plan" (contenido oficial del sitio, no se elimina). --- */}
         <section className="biz-section is-light" id="corporativo-beneficios">
           <div className="biz-container">
-            <div className="biz-section-head biz-reveal">
-              <h2>Beneficios adicionales de los Planes Corporativos</h2>
-            </div>
-            <div className="biz-benefit-cards biz-reveal">
-              {additionalBenefits.map(({ icon: Icon, title, href }) => (
-                <a key={title} href={href} target="_blank" rel="noreferrer" className="biz-benefit-card">
-                  <Icon aria-hidden="true" />
-                  <h3>{title}</h3>
-                  <span className="biz-btn-link">Ver detalles <ArrowRight aria-hidden="true" /></span>
-                </a>
-              ))}
+            <div className="biz-feature biz-reveal">
+              <figure className="biz-feature-media biz-reveal">
+                <Image src={CORP_DESIGN_IMAGE} alt="Las empresas diseñan su plan corporativo" fill sizes="(max-width: 860px) 100vw, 50vw" unoptimized />
+              </figure>
+              <div className="biz-feature-copy biz-reveal">
+                <h2>Beneficios adicionales de los Planes Corporativos</h2>
+                <div className="biz-benefit-cards" style={{ gridTemplateColumns: "1fr", maxWidth: "none", margin: "28px 0 0" }}>
+                  {additionalBenefits.map(({ icon: Icon, title, href }) => (
+                    <a key={title} href={href} target="_blank" rel="noreferrer" className="biz-benefit-card">
+                      <Icon aria-hidden="true" />
+                      <h3>{title}</h3>
+                      <span className="biz-btn-link">Ver detalles <ArrowRight aria-hidden="true" /></span>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
