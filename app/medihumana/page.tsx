@@ -15,13 +15,14 @@ export const metadata: Metadata = {
 
 /* Bloque oficial "Haz clic y accede a nuestros servicios": solo estos 8
    accesos (mismo set que ya se usa en las páginas de confirmación de
-   Medihumana). Cada uno lleva a su sección dentro de esta misma página. */
+   Medihumana). Cada uno lleva a su sección dentro de esta misma página,
+   en el mismo orden agrupado que las secciones de abajo. */
 const quickAccess = [
-  { icon: Ambulance, label: "Ambulancia", href: "#ambulancia" },
-  { icon: Video, label: "Teleconsultas", href: "#teleconsultas" },
   { icon: House, label: "Médico a domicilio", href: "#medico-a-domicilio" },
-  { icon: ShieldCheck, label: "Programa de pacientes Covid-19", href: "#covid-19" },
+  { icon: Video, label: "Teleconsultas", href: "#teleconsultas" },
+  { icon: Ambulance, label: "Ambulancia", href: "#ambulancia" },
   { icon: Syringe, label: "Plan de vacunación infantil", href: "#vacunacion-infantil" },
+  { icon: ShieldCheck, label: "Programa de pacientes Covid-19", href: "#covid-19" },
   { icon: Pill, label: "Plan de medicación continua", href: "#medicacion-continua" },
   { icon: ShieldCheck, label: "Autorizaciones", href: "#autorizaciones" },
   { icon: Hospital, label: "Red de Prestadores", href: "#red-de-prestadores" },
@@ -29,6 +30,7 @@ const quickAccess = [
 
 type OfficialService = {
   id: string;
+  group: string;
   title: string;
   image: string;
   copy?: string | null;
@@ -40,18 +42,21 @@ type OfficialService = {
 };
 
 /* Contenido oficial de los 8 servicios (texto, imágenes y enlaces tal
-   como ya estaban verificados en el sitio). Orden igual al del bloque
-   de accesos rápidos de arriba. */
+   como ya estaban verificados en el sitio), agrupados en 3 familias:
+   atención médica directa, programas de salud, y trámites/red. Cada
+   grupo comparte el mismo eyebrow para que se lean como conjunto. */
 const officialServices: OfficialService[] = [
   {
-    id: "ambulancia",
-    title: "Ambulancia terrestre",
-    image: "https://humana.med.ec/wp-content/uploads/2024/08/ambulancia-terrestre-v2.png",
-    copy: "Recibirás una asistencia médica oportuna, de calidad y segura en la comodidad de tu hogar. Una vez realizado el diagnóstico el médico determinará si es necesario el traslado a una clínica o a un hospital de nuestra red. De lo contrario, prescribirá medicinas y podrá adquirirlas en la farmacia en convenio más cercana.",
-    button: { label: "Más información", href: "https://servicio.humana.med.ec/hc/es/articles/4402736531597-Ambulancia-terrestre" },
+    id: "medico-a-domicilio",
+    group: "ATENCIÓN MÉDICA",
+    title: "Médico a domicilio",
+    image: "https://humana.med.ec/wp-content/uploads/2024/08/medico-a-domicilio-v2.png",
+    copy: "Recibirás una asistencia médica oportuna, de calidad y segura en la comodidad de tu hogar o lugar donde requieras de atención. Una vez realizado el diagnóstico el médico determinará si es necesario el traslado a una clínica o a un hospital de nuestra red. De lo contrario, prescribirá medicinas y podrá adquirirlas en la farmacia en convenio más cercana.",
+    button: { label: "Más información", href: "https://servicio.humana.med.ec/hc/es/articles/4402813434253-M%C3%A9dico-a-domicilio" },
   },
   {
     id: "teleconsultas",
+    group: "ATENCIÓN MÉDICA",
     title: "Teleconsulta médica",
     image: "https://humana.med.ec/wp-content/uploads/2024/08/teleconsulta-medica-v2.png",
     copy: "Conoce nuestro servicio de TELECONSULTA para medicina general, medicina interna y pediatría, estas consultas serán por vía telefónica.",
@@ -61,25 +66,16 @@ const officialServices: OfficialService[] = [
     ],
   },
   {
-    id: "medico-a-domicilio",
-    title: "Médico a domicilio",
-    image: "https://humana.med.ec/wp-content/uploads/2024/08/medico-a-domicilio-v2.png",
-    copy: "Recibirás una asistencia médica oportuna, de calidad y segura en la comodidad de tu hogar o lugar donde requieras de atención. Una vez realizado el diagnóstico el médico determinará si es necesario el traslado a una clínica o a un hospital de nuestra red. De lo contrario, prescribirá medicinas y podrá adquirirlas en la farmacia en convenio más cercana.",
-    button: { label: "Más información", href: "https://servicio.humana.med.ec/hc/es/articles/4402813434253-M%C3%A9dico-a-domicilio" },
-  },
-  {
-    id: "covid-19",
-    title: "Programa de pacientes Covid",
-    image: "https://humana.med.ec/wp-content/uploads/2024/08/programa-pacientes-covid-v2.png",
-    copy: "Si presentas síntomas o ya cuentas con una prueba de hisopado RT-PCR positiva, comunícate con los siguientes números para incluirte en nuestro programa de atención ambulatoria.",
-    phones: [
-      { src: "https://humana.med.ec/wp-content/uploads/2021/06/telefono-metrored.png", alt: "Teléfono Metrored" },
-      { src: "https://humana.med.ec/wp-content/uploads/2021/06/telefono-medilink.png", alt: "Teléfono Medilink", href: "https://api.whatsapp.com/send?phone=593993183975" },
-    ],
-    button: { label: "Ver condiciones de uso", href: "https://servicio.humana.med.ec/hc/es/articles/4403176927757-Programa-de-pacientes-Covid" },
+    id: "ambulancia",
+    group: "ATENCIÓN MÉDICA",
+    title: "Ambulancia terrestre",
+    image: "https://humana.med.ec/wp-content/uploads/2024/08/ambulancia-terrestre-v2.png",
+    copy: "Recibirás una asistencia médica oportuna, de calidad y segura en la comodidad de tu hogar. Una vez realizado el diagnóstico el médico determinará si es necesario el traslado a una clínica o a un hospital de nuestra red. De lo contrario, prescribirá medicinas y podrá adquirirlas en la farmacia en convenio más cercana.",
+    button: { label: "Más información", href: "https://servicio.humana.med.ec/hc/es/articles/4402736531597-Ambulancia-terrestre" },
   },
   {
     id: "vacunacion-infantil",
+    group: "PROGRAMAS DE SALUD",
     title: "Plan de vacunación infantil",
     image: "https://humana.med.ec/wp-content/uploads/2024/08/plan-de-vacunacion-infantil-v2.png",
     list: [
@@ -92,7 +88,20 @@ const officialServices: OfficialService[] = [
     button: { label: "Completar la solicitud", href: "https://servicio.humana.med.ec/hc/es/articles/4403717589517-Plan-de-vacunaci%C3%B3n-infantil" },
   },
   {
+    id: "covid-19",
+    group: "PROGRAMAS DE SALUD",
+    title: "Programa de pacientes Covid",
+    image: "https://humana.med.ec/wp-content/uploads/2024/08/programa-pacientes-covid-v2.png",
+    copy: "Si presentas síntomas o ya cuentas con una prueba de hisopado RT-PCR positiva, comunícate con los siguientes números para incluirte en nuestro programa de atención ambulatoria.",
+    phones: [
+      { src: "https://humana.med.ec/wp-content/uploads/2021/06/telefono-metrored.png", alt: "Teléfono Metrored" },
+      { src: "https://humana.med.ec/wp-content/uploads/2021/06/telefono-medilink.png", alt: "Teléfono Medilink", href: "https://api.whatsapp.com/send?phone=593993183975" },
+    ],
+    button: { label: "Ver condiciones de uso", href: "https://servicio.humana.med.ec/hc/es/articles/4403176927757-Programa-de-pacientes-Covid" },
+  },
+  {
     id: "medicacion-continua",
+    group: "PROGRAMAS DE SALUD",
     title: "Plan de medicación continua",
     image: "https://humana.med.ec/wp-content/uploads/2024/08/plan-de-medicacion-continua-v2.png",
     copy: "Se considera pacientes crónicos a aquellos que padecen afecciones de larga duración que precisan medicación continua, como diabetes o hipertensión, epilepsia u osteoporosis. El Plan de medicación continua está diseñado para todos los afiliados que toman medicación de manera continua, ofreciendo la acumulación y canje de beneficios a través de la compra en los puntos de venta autorizados.",
@@ -100,6 +109,7 @@ const officialServices: OfficialService[] = [
   },
   {
     id: "autorizaciones",
+    group: "TRÁMITES Y RED",
     title: "Autorizaciones",
     image: "https://humana.med.ec/wp-content/uploads/2024/08/autorizaciones-v2.png",
     list: ["Uso de autorizaciones", "Autorizaciones emergentes", "Autorizaciones ambulatorias", "Autorizaciones hospitalarias", "Autorizaciones de asistencias"],
@@ -107,6 +117,7 @@ const officialServices: OfficialService[] = [
   },
   {
     id: "red-de-prestadores",
+    group: "TRÁMITES Y RED",
     title: "Red de prestadores",
     image: "https://humana.med.ec/wp-content/uploads/2024/08/red-de-prestadores-v2.png",
     copy: "Humana pone al servicio de sus afiliados la red de prestadores médicos más representativa y confiable del país, garantizando una atención médica de calidad. Para acceder a nuestra red de prestadores modalidad cerrada o de la Red Humana ingrese a Red Humana o comuníquese con el 1800 HUMANA (48 62 62).",
@@ -114,7 +125,10 @@ const officialServices: OfficialService[] = [
   },
 ];
 
-const bgClass = (i: number) => (i % 3 === 0 ? "is-dark" : i % 3 === 1 ? "is-light" : "is-color");
+/* 3 fondos alternados, nunca dos iguales seguidos: navy oscuro, azul de
+   marca oscuro (.is-brand, variante sin el extremo celeste claro de
+   .is-color) y gris azulado #f4f7fb. Nada de blanco plano. */
+const bgClass = (i: number) => (i % 3 === 0 ? "is-dark" : i % 3 === 1 ? "is-light" : "is-brand");
 
 export default function MedihumanaPage() {
   return (
@@ -124,7 +138,7 @@ export default function MedihumanaPage() {
       </nav>
 
       <div className="biz-page" data-accent="blue">
-        {/* Hero ------------------------------------------------------- */}
+        {/* Hero + accesos rápidos, misma placa navy ----------------------- */}
         <section className="biz-hero" id="medihumana-inicio">
           <div className="biz-hero-copy">
             <span className="biz-eyebrow">USA TU PLAN SIN COMPLICARTE</span>
@@ -139,42 +153,44 @@ export default function MedihumanaPage() {
               <span>los 7 días de la semana</span>
             </div>
           </div>
+
+          <div className="biz-container" style={{ marginTop: 56 }}>
+            <div className="biz-section-head">
+              <h2>Haz clic y accede a nuestros servicios</h2>
+            </div>
+            <div className="medi-quick-grid">
+              {quickAccess.map(({ icon: Icon, label, href }) => (
+                <Link className="medi-quick-card" href={href} key={label}>
+                  <span className="medi-quick-icon"><Icon aria-hidden="true" /></span>
+                  <span className="medi-quick-label">{label}</span>
+                  <ArrowRight className="medi-quick-arrow" aria-hidden="true" />
+                </Link>
+              ))}
+            </div>
+          </div>
         </section>
 
-        {/* Haz clic y accede a nuestros servicios ------------------------ */}
-        <section className="content-section servicios-section">
-          <div className="section-heading centered" style={{ marginBottom: 28 }}>
-            <h2>Haz clic y accede a nuestros servicios</h2>
-          </div>
-          <div className="service-grid">
-            {quickAccess.map(({ icon: Icon, label, href }) => (
-              <Link className="service-card" href={href} key={label}>
-                <Icon />
-                <div><h3 style={{ margin: 0 }}>{label}</h3></div>
-                <ArrowRight />
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* Los 8 servicios oficiales, bloques alternados ------------------ */}
+        {/* Los 8 servicios oficiales, agrupados y alternados -------------- */}
         {officialServices.map((service, i) => (
           <section className={`biz-section ${bgClass(i)}`} id={service.id} key={service.id}>
             <div className="biz-container">
               <div className={`biz-feature${i % 2 === 1 ? " reverse" : ""}`}>
                 <figure className="biz-feature-media">
-                  <Image src={service.image} alt={service.title} fill sizes="(max-width: 860px) 100vw, 50vw" unoptimized style={{ objectFit: "contain", padding: 24 }} />
+                  <Image src={service.image} alt={service.title} fill sizes="(max-width: 860px) 100vw, 50vw" unoptimized />
                 </figure>
                 <div className="biz-feature-copy">
+                  <span className="biz-eyebrow">{service.group}</span>
                   <h2>{service.title}</h2>
 
                   {service.copy && <p className="text-justify-wide">{service.copy}</p>}
 
                   {service.phones && (
-                    <div style={{ display: "flex", gap: 16, flexWrap: "wrap", margin: "4px 0 20px" }}>
+                    <div style={{ display: "flex", gap: 14, flexWrap: "wrap", margin: "4px 0 20px" }}>
                       {service.phones.map((phone) => {
                         const img = (
-                          <Image key={phone.src} src={phone.src} alt={phone.alt} width={200} height={60} unoptimized style={{ objectFit: "contain", height: "auto" }} />
+                          <span className="biz-phone-chip" key={phone.src}>
+                            <Image src={phone.src} alt={phone.alt} width={180} height={48} unoptimized style={{ objectFit: "contain", width: "auto", height: 32 }} />
+                          </span>
                         );
                         return phone.href ? <a key={phone.src} href={phone.href} target="_blank" rel="noreferrer">{img}</a> : img;
                       })}
