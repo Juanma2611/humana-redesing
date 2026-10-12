@@ -146,7 +146,7 @@ export default function PlanCorporativoClient() {
             </div>
           </div>
           <figure className="biz-hero-image">
-            <PlanPhoto base={CORP_HERO_IMAGE} alt="Directivo de una empresa cliente de Humana en sus oficinas corporativas" eager />
+            <PlanPhoto base={CORP_HERO_IMAGE} alt="Directivos sellando un acuerdo corporativo con Humana en el lobby de su empresa" eager />
           </figure>
         </section>
 
