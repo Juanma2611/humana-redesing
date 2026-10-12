@@ -44,8 +44,25 @@ function renderBody(body: BlogBodyBlock[] | undefined, fallback: string) {
     return <p>{fallback}</p>;
   }
   return body.map((block, i) => {
+    if (block.type === "h2") return <h2 key={i}>{block.text}</h2>;
     if (block.type === "h3") return <h3 key={i}>{block.text}</h3>;
     if (block.type === "ul") return <ul key={i}>{block.items?.map((item, j) => <li key={j}>{item}</li>)}</ul>;
+    if (block.type === "quote") {
+      return (
+        <blockquote className="article-quote" key={i}>
+          <p>{block.text}</p>
+          {block.cite && <cite>{block.cite}</cite>}
+        </blockquote>
+      );
+    }
+    if (block.type === "cta") {
+      return (
+        <div className="article-inline-cta" key={i}>
+          <p>{block.text}</p>
+          <Link className="primary-button small" href={block.href}>{block.label} <ArrowRight size={16} /></Link>
+        </div>
+      );
+    }
     return <p key={i}>{block.text}</p>;
   });
 }
@@ -81,7 +98,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ ca
             </header>
 
             <div className="article-provisional-notice" role="note">
-              Contenido provisional — en revisión de diseño. Será reemplazado por el texto oficial migrado desde WordPress.
+              Artículo de muestra — contenido de referencia para mostrar el diseño del blog, no es un post oficial de Humana.
             </div>
 
             <div className="article-hero-image">

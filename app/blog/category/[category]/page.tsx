@@ -51,10 +51,9 @@ export default async function BlogCategoryPage({ params }: { params: Promise<{ c
               ))}
             </div>
           ) : (
-            <p style={{ padding: "24px 0" }}>Todavía no hay posts publicados en esta categoría. Los posts oficiales están pendientes de recibir su contenido desde WordPress.</p>
+            <p style={{ padding: "24px 0" }}>Todavía no hay artículos de muestra en esta categoría.</p>
           )}
-          {/* Sin paginación por ahora (pocos posts visibles). Agregar cuando
-              el importador cargue el resto de los 125 posts oficiales. */}
+          {/* Sin paginación: solo hay 3 artículos de muestra en total. */}
         </div>
       </section>
     </SiteShell>
