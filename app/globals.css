@@ -4858,6 +4858,10 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .plan-hub-intro h2 { font-size: clamp(20px, 2.2vw, 26px); color: var(--humana-navy); margin: 0 0 14px; }
 .plan-hub-intro p { color: #3f5f73; font-size: 16px; line-height: 1.6; margin: 0; }
 
+/* Ícono de confirmación (páginas de "solicitud recibida") --------------- */
+.confirmation-check { display: flex; align-items: center; justify-content: center; width: 72px; height: 72px; margin: 0 auto 22px; border-radius: 50%; background: linear-gradient(135deg, var(--humana-teal), var(--humana-blue)); color: #fff; box-shadow: 0 16px 36px rgba(18,166,162,.3); }
+.confirmation-check svg { width: 34px; height: 34px; stroke-width: 2.4; }
+
 .plan-hub-grid { display: grid; gap: 28px; grid-template-columns: repeat(2, 1fr); padding: 36px 0 64px; }
 .plan-hub-grid-personas { grid-template-columns: repeat(3, 1fr); }
 .plan-hub-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--premium-shadow); transition: transform .35s var(--premium-ease), box-shadow .35s var(--premium-ease); display: flex; flex-direction: column; }
@@ -5294,6 +5298,21 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .biz-benefit-card svg { width: 24px; height: 24px; color: #fff; background: linear-gradient(135deg, var(--humana-navy), var(--biz-accent, var(--humana-teal))); border-radius: 14px; padding: 12px; box-sizing: content-box; stroke-width: 1.5; }
 .biz-benefit-card h3 { margin: 0; font-size: 21px; font-weight: 650; font-variation-settings: "wght" 650; color: #1d1d1f; }
 .biz-benefit-card .biz-btn-link { font-size: 15px; }
+
+/* Dato destacado dentro del hero (ej. "24/7") ---------------------------- */
+.biz-hero-stat { display: inline-flex; align-items: baseline; gap: 12px; margin: 24px auto 0; padding: 14px 24px; border-radius: 18px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.biz-hero-stat strong { font-size: clamp(28px, 3vw, 34px); font-weight: 700; letter-spacing: -.02em; color: #fff; }
+.biz-hero-stat span { font-size: 13px; color: rgba(255,255,255,.72); max-width: 160px; line-height: 1.35; text-align: left; }
+
+/* Tarjeta de lista con línea de acento (Autorizaciones, Vacunación infantil) */
+.biz-list-card { border-left: 3px solid var(--biz-accent, var(--humana-teal)); background: rgba(255,255,255,.04); border-radius: 0 16px 16px 0; padding: 20px 24px; margin: 22px 0; }
+.biz-section.is-light .biz-list-card, .biz-section.is-light .biz-feature-copy .biz-list-card { background: #fff; box-shadow: 0 10px 30px rgba(7,63,96,.06); }
+.biz-list-card strong { display: block; margin-bottom: 10px; font-size: 15px; color: var(--humana-navy); }
+.biz-section.is-dark .biz-list-card strong, .biz-section.is-color .biz-list-card strong { color: #fff; }
+.biz-list-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.biz-list-card li { font-size: 15px; line-height: 1.5; color: #4a5a68; padding-left: 16px; position: relative; }
+.biz-list-card li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--biz-accent, var(--humana-teal)); }
+.biz-section.is-dark .biz-list-card li, .biz-section.is-color .biz-list-card li { color: rgba(255,255,255,.8); }
 
 /* Cierre único ------------------------------------------------------------*/
 .biz-close-actions { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 28px; flex-wrap: wrap; }

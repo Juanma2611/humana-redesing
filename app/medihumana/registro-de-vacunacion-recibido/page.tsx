@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import { CheckCircle2 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
@@ -28,13 +28,20 @@ export default function RegistroVacunacionRecibidoPage() {
         <span>Registro de vacunación recibido</span>
       </nav>
 
-      <section className="content-section plan-hub-intro" style={{ maxWidth: 760 }}>
-        <div style={{ position: "relative", width: "100%", aspectRatio: "16/6", borderRadius: 20, overflow: "hidden", marginBottom: 24 }}>
-          <Image src="https://humana.med.ec/wp-content/uploads/2022/03/contigo-desde-hoy-y-para-siempre-small-v2-1.png" alt="Contigo desde hoy y para siempre" fill sizes="760px" unoptimized style={{ objectFit: "cover" }} />
-        </div>
+      <section className="content-section plan-hub-intro" style={{ maxWidth: 640 }}>
+        <div className="confirmation-check"><CheckCircle2 aria-hidden="true" /></div>
         <h1>Registro de vacunación recibido</h1>
         <p>Gracias por registrarse, hemos recibido su solicitud y pronto le contactaremos.</p>
         <p>Reciba un cordial saludo de Humana.</p>
+        <a
+          className="primary-button"
+          style={{ marginTop: 24 }}
+          href="https://servicio.humana.med.ec/hc/es/articles/4403717589517-Plan-de-vacunaci%C3%B3n-infantil"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Completar la solicitud
+        </a>
       </section>
 
       <section className="content-section" style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px 64px" }}>
