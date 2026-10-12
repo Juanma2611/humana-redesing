@@ -5604,6 +5604,85 @@ ul.legal-list { list-style: disc; }
   .legal-footer-box { flex-direction: column; align-items: flex-start; }
 }
 
+/* ============================================================
+   App y Directorio — hero con foto, mockup de celular, tarjetas
+   glass, línea de tiempo horizontal y tarjetas de precio.
+   ============================================================ */
+
+/* Hero de foto completa con degradado navy encima (Directorio) --------- */
+.biz-hero-photo { position: relative; overflow: hidden; min-height: 560px; display: flex; align-items: center; padding: 72px clamp(24px, 6vw, 60px); }
+.biz-hero-photo-img { object-fit: cover; object-position: center 30%; z-index: 0; }
+.biz-hero-photo-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(5,32,51,.72) 0%, rgba(7,58,92,.82) 55%, rgba(5,32,51,.95) 100%);
+}
+.biz-hero-photo-content { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; text-align: center; color: #fff; }
+.biz-hero-photo-content .biz-eyebrow { color: #7ce0db; }
+.biz-hero-photo-content h1 { margin: 16px 0 18px; font-size: clamp(40px, 4.2vw, 56px); line-height: 1.1; letter-spacing: -.02em; font-weight: 650; font-variation-settings: "wght" 650; color: #fff; }
+.biz-hero-photo-content h1 span { color: #7ce0db; }
+.biz-hero-photo-content .biz-hero-body { color: rgba(255,255,255,.85); }
+.biz-hero-photo-content .biz-hero-actions { margin-top: 24px; }
+.biz-hero-photo-content .biz-hero-stats { margin-top: 40px; }
+.biz-hero-photo-content .biz-btn-primary { background: #fff; color: #073b60; }
+@media (max-width: 760px) { .biz-hero-photo { min-height: 0; padding: 48px 20px 56px; } }
+
+/* Mockup de celular en CSS (sin texto ni capturas reales) --------------- */
+.app-phone-mock { width: 220px; aspect-ratio: 9 / 19; border-radius: 38px; background: linear-gradient(160deg, #0b2e4a, #063453); border: 9px solid #0a1f33; box-shadow: 0 40px 80px rgba(0,0,0,.4), 0 0 60px rgba(16,167,219,.22); position: relative; }
+.app-phone-mock::before { content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 64px; height: 16px; background: #0a1f33; border-radius: 10px; z-index: 3; }
+.app-phone-screen { position: absolute; inset: 12px; border-radius: 26px; background: #f4f7fb; padding: 30px 14px 16px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+.app-phone-bar { height: 9px; border-radius: 5px; background: linear-gradient(90deg, var(--humana-blue), var(--humana-sky)); }
+.app-phone-bar.short { width: 55%; }
+.app-phone-card { height: 42px; border-radius: 12px; background: #fff; box-shadow: 0 6px 14px rgba(7,63,96,.1); display: flex; align-items: center; gap: 8px; padding: 0 10px; }
+.app-phone-card span { width: 20px; height: 20px; border-radius: 7px; background: linear-gradient(135deg, var(--humana-teal), var(--humana-sky)); flex-shrink: 0; }
+.app-phone-card::after { content: ""; flex: 1; height: 7px; border-radius: 4px; background: #e3ecf1; }
+.app-phone-dots { display: flex; gap: 6px; margin-top: auto; justify-content: center; }
+.app-phone-dots span { width: 6px; height: 6px; border-radius: 50%; background: #d0dbe3; }
+.app-phone-dots span:first-child { background: var(--humana-teal); width: 16px; border-radius: 4px; }
+.app-phone-float { position: absolute; left: -28px; bottom: -36px; z-index: 2; }
+@media (max-width: 860px) { .app-phone-float { position: static; margin: 28px auto 0; } }
+
+/* Tarjetas glass de función (App) --------------------------------------- */
+.biz-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+.biz-feature-grid-card {
+  padding: 28px 26px; border-radius: 20px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: transform .25s var(--premium-ease), background .25s ease;
+}
+.biz-feature-grid-card:hover { transform: translateY(-4px); background: rgba(255,255,255,.13); }
+.biz-feature-grid-icon { width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--humana-teal), var(--humana-sky)); color: #fff; margin-bottom: 16px; }
+.biz-feature-grid-icon svg { width: 22px; height: 22px; }
+.biz-feature-grid-card h3 { margin: 0 0 10px; font-size: 19px; font-weight: 650; font-variation-settings: "wght" 650; color: #fff; }
+.biz-feature-grid-card p { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.78); }
+@media (max-width: 900px) { .biz-feature-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .biz-feature-grid { grid-template-columns: 1fr; } }
+
+/* Dato destacado centrado (Red Reembolso, sin foto) ---------------------- */
+.biz-stat-block { text-align: center; max-width: 560px; margin: 0 auto; }
+.biz-stat-block strong { display: block; font-size: clamp(48px, 6vw, 72px); font-weight: 700; letter-spacing: -.03em; color: #fff; line-height: 1; margin-bottom: 14px; }
+
+/* Tarjetas de precio (copagos Red Preferida) ----------------------------- */
+.biz-price-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 620px; margin: 36px auto 0; }
+.biz-price-card { padding: 32px 28px; border-radius: 22px; background: #fff; border: 1px solid #e3e3e6; text-align: center; box-shadow: var(--premium-shadow); }
+.biz-price-card strong { display: block; font-size: clamp(36px, 4vw, 44px); font-weight: 700; color: var(--humana-navy); letter-spacing: -.02em; }
+.biz-price-card span { display: block; margin-top: 10px; font-size: 15px; font-weight: 650; color: #1d1d1f; }
+.biz-price-card small { display: block; margin-top: 6px; font-size: 13px; color: #6e6e73; }
+@media (max-width: 560px) { .biz-price-cards { grid-template-columns: 1fr; } }
+
+/* Línea de tiempo horizontal (8 pasos), vertical en móvil ---------------- */
+.biz-timeline { display: flex; align-items: flex-start; gap: 0; margin-top: 44px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+.biz-timeline-step { flex: 1; position: relative; text-align: center; padding: 0 10px; }
+.biz-timeline-num { width: 36px; height: 36px; margin: 0 auto 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; background: var(--biz-accent, var(--humana-teal)); color: #fff; position: relative; z-index: 1; }
+.biz-timeline-step:not(:last-child)::after { content: ""; position: absolute; top: 18px; left: calc(50% + 24px); right: calc(-50% + 24px); height: 2px; background: var(--border); }
+.biz-section.is-dark .biz-timeline-step:not(:last-child)::after, .biz-section.is-brand .biz-timeline-step:not(:last-child)::after { background: rgba(255,255,255,.22); }
+.biz-timeline-step p { margin: 0; font-size: 14px; line-height: 1.45; color: #3a3a3c; }
+.biz-section.is-dark .biz-timeline-step p, .biz-section.is-brand .biz-timeline-step p { color: rgba(255,255,255,.82); }
+@media (max-width: 860px) {
+  .biz-timeline { flex-direction: column; align-items: stretch; gap: 20px; max-width: 420px; }
+  .biz-timeline-step { display: flex; align-items: flex-start; gap: 14px; text-align: left; padding: 0; }
+  .biz-timeline-num { margin: 0; flex-shrink: 0; }
+  .biz-timeline-step:not(:last-child)::after { top: 36px; left: 17px; right: auto; bottom: -20px; width: 2px; height: 20px; }
+  .biz-timeline-step p { padding-top: 6px; }
+}
+
 @media print {
   .site-header, .prototype-bar, .site-footer,
   .legal-mobile-index, .legal-sidebar, .legal-print-btn, .legal-back-to-index,

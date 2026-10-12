@@ -27,6 +27,23 @@ const sections = [
   { icon: CalendarCheck, title: "Agendamiento de citas", copy: "Ahora puede agendar sus citas médicas en Metrored directamente desde la aplicación. Puede realizar el pago de la consulta médica en la app o presencialmente." },
 ];
 
+/* Mockup de celular en CSS puro (marco + pantalla con formas de marca,
+   sin texto inventado ni capturas reales de la app). */
+function PhoneMock() {
+  return (
+    <div className="app-phone-mock" aria-hidden="true">
+      <div className="app-phone-screen">
+        <div className="app-phone-bar" />
+        <div className="app-phone-bar short" />
+        <div className="app-phone-card"><span /></div>
+        <div className="app-phone-card"><span /></div>
+        <div className="app-phone-card"><span /></div>
+        <div className="app-phone-dots"><span /><span /><span /></div>
+      </div>
+    </div>
+  );
+}
+
 export default function AppPage() {
   return (
     <SiteShell title="MiHumana APP">
@@ -46,32 +63,52 @@ export default function AppPage() {
               <a className="biz-btn-primary" href="https://apps.apple.com/ec/app/mi-humana/id1468370810" target="_blank" rel="noreferrer">App Store</a>
             </div>
           </div>
-          <figure className="biz-hero-image">
-            <Image src="https://humana.med.ec/wp-content/uploads/2024/09/mujer-celular-app-mi-humana.jpg" alt="Mujer usando la app MiHumana en su celular" fill sizes="(max-width: 980px) 100vw, 1180px" unoptimized />
+          <figure className="biz-hero-image" style={{ position: "relative" }}>
+            <Image src="/images/app/app-hero.webp" alt="Mujer revisando la app MiHumana en su celular, tomando un café en una terraza" fill sizes="(max-width: 980px) 100vw, 1180px" unoptimized />
+            <div className="app-phone-float"><PhoneMock /></div>
           </figure>
         </section>
 
         {/* Las 6 funciones ------------------------------------------------- */}
-        <section className="biz-section is-light">
+        <section className="biz-section is-dark">
           <div className="biz-container">
             <div className="biz-section-head">
               <span className="biz-eyebrow">TODO EN UN SOLO LUGAR</span>
               <h2>Lo que puedes hacer desde la app</h2>
             </div>
-            <div className="biz-benefit-cards cols-3">
+            <div className="biz-feature-grid">
               {sections.map(({ icon: Icon, title, copy }) => (
-                <div key={title} className="biz-benefit-card" style={{ textAlign: "left", alignItems: "flex-start" }}>
-                  <Icon aria-hidden="true" />
+                <div key={title} className="biz-feature-grid-card">
+                  <div className="biz-feature-grid-icon"><Icon aria-hidden="true" /></div>
                   <h3>{title}</h3>
-                  <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "#3a3a3c" }}>{copy}</p>
+                  <p>{copy}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
+        {/* Franja con foto + texto oficial corto --------------------------- */}
+        <section className="biz-section is-light">
+          <div className="biz-container">
+            <div className="biz-feature">
+              <figure className="biz-feature-media">
+                <Image src="/images/app/app-funciones.webp" alt="Padre e hija revisando juntos la app MiHumana en el celular" fill sizes="(max-width: 860px) 100vw, 50vw" unoptimized />
+              </figure>
+              <div className="biz-feature-copy">
+                <span className="biz-eyebrow">MIHUMANA APP</span>
+                <h2>Todos los servicios en tu celular</h2>
+                <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 8 }}>
+                  <a className="biz-btn-primary" href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer">Google Play</a>
+                  <a className="biz-btn-primary" href="https://apps.apple.com/ec/app/mi-humana/id1468370810" target="_blank" rel="noreferrer">App Store</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Más recursos -------------------------------------------------- */}
-        <section className="biz-section is-dark">
+        <section className="biz-section is-brand">
           <div className="biz-container">
             <div className="biz-section-head">
               <h2>Más recursos dentro de la app</h2>
