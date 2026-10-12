@@ -13,10 +13,16 @@ import { cuadroA, groupCuadroBySection } from "@/lib/empresa-cuadros";
    en el sitio. El cuadro de coberturas usa el mismo patrón aprobado en
    Plan Pyme (enlace + panel), con los datos de cuadroA (un solo plan). */
 
+/* "170K+ afiliados respaldados a nivel nacional" se retiró: no tiene
+   fuente oficial rastreable (sin comentario ni commit que lo origine) y
+   contradecía el dato oficial de "200.000 personas y empresas confían en
+   Humana" (CLAUDE.md sección 4, repetido en todo el sitio). En su lugar,
+   dato oficial ya presente en esta página (mainPoints) que no se repite
+   en la franja "Arma tu plan". Pendiente de confirmar con Comercial. */
 const essenceStats = [
-  { value: "Desde $42", label: "precios competitivos por colaborador" },
+  { value: "Desde $42", label: "Precios competitivos" },
   { value: "200K+", label: "afiliados confían en Humana" },
-  { value: "170K+", label: "afiliados respaldados a nivel nacional" },
+  { value: "Sin declaración de salud", label: "Suscripción simple" },
 ];
 
 /* Los 5 datos de "Arma tu plan a la medida de tu empresa": verificados
