@@ -370,6 +370,28 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .home-link-grid a:hover { border-color:#7ccce5; transform:translateY(-2px); }
 .home-link-grid svg { color:var(--humana-sky); }
 
+.cotizador-quiz-row { max-width: 1540px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 360px 1fr; gap: 8px; align-items: start; }
+.cotizador-quiz-media { position: relative; width: 100%; aspect-ratio: 3/4; border-radius: 26px; overflow: hidden; box-shadow: var(--premium-shadow); margin-top: 64px; }
+.cotizador-quiz-media img { object-fit: cover; }
+.cotizador-quiz-row .wizard-wrap { padding-left: 0; padding-right: 0; }
+@media (max-width: 1080px) {
+  .cotizador-quiz-row { grid-template-columns: 1fr; padding: 0; }
+  .cotizador-quiz-media { display: none; }
+}
+
+.cotizador-testimonial-card { padding: 20px; border-radius: 18px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.cotizador-testimonial-card p { margin: 0 0 14px; font-style: italic; color: rgba(255,255,255,.88); font-size: 15px; line-height: 1.6; }
+.cotizador-testimonial-card strong { color: #fff; font-size: 14px; }
+
+.cotizador-lead-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; max-width: 980px; margin: 36px auto 0; }
+.cotizador-lead-row .biz-lead-form { margin: 0; }
+.cotizador-lead-media { position: relative; width: 100%; aspect-ratio: 4/5; border-radius: 24px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+.cotizador-lead-media img { object-fit: cover; }
+@media (max-width: 860px) {
+  .cotizador-lead-row { grid-template-columns: 1fr; }
+  .cotizador-lead-media { aspect-ratio: 16/10; max-width: 420px; margin: 0 auto; }
+}
+
 .wizard-wrap { max-width:1180px; margin:auto; padding:64px 24px 90px; display:grid; grid-template-columns:1fr 310px; gap:30px; align-items:start; }
 .wizard-card, .result-card { min-height:560px; padding:38px; border:1px solid #dce9ef; border-radius:25px; background:#fff; box-shadow:0 20px 60px rgba(13,73,109,.09); }
 .wizard-top { display:flex; justify-content:space-between; align-items:center; color:#708491; font-size:14px; }
@@ -5627,18 +5649,18 @@ ul.legal-list { list-style: disc; }
 @media (max-width: 760px) { .biz-hero-photo { min-height: 0; padding: 48px 20px 56px; } }
 
 /* Mockup de celular en CSS (sin texto ni capturas reales) --------------- */
-.app-phone-mock { width: 220px; aspect-ratio: 9 / 19; border-radius: 38px; background: linear-gradient(160deg, #0b2e4a, #063453); border: 9px solid #0a1f33; box-shadow: 0 40px 80px rgba(0,0,0,.4), 0 0 60px rgba(16,167,219,.22); position: relative; }
-.app-phone-mock::before { content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 64px; height: 16px; background: #0a1f33; border-radius: 10px; z-index: 3; }
-.app-phone-screen { position: absolute; inset: 12px; border-radius: 26px; background: #f4f7fb; padding: 30px 14px 16px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
-.app-phone-bar { height: 9px; border-radius: 5px; background: linear-gradient(90deg, var(--humana-blue), var(--humana-sky)); }
+.app-phone-mock { width: 170px; aspect-ratio: 9 / 19; border-radius: 30px; background: linear-gradient(160deg, #0b2e4a, #063453); border: 7px solid #0a1f33; box-shadow: 0 32px 64px rgba(0,0,0,.4), 0 0 48px rgba(16,167,219,.22); position: relative; }
+.app-phone-mock::before { content: ""; position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 50px; height: 12px; background: #0a1f33; border-radius: 8px; z-index: 3; }
+.app-phone-screen { position: absolute; inset: 9px; border-radius: 20px; background: #f4f7fb; padding: 23px 11px 12px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+.app-phone-bar { height: 7px; border-radius: 4px; background: linear-gradient(90deg, var(--humana-blue), var(--humana-sky)); }
 .app-phone-bar.short { width: 55%; }
-.app-phone-card { height: 42px; border-radius: 12px; background: #fff; box-shadow: 0 6px 14px rgba(7,63,96,.1); display: flex; align-items: center; gap: 8px; padding: 0 10px; }
-.app-phone-card span { width: 20px; height: 20px; border-radius: 7px; background: linear-gradient(135deg, var(--humana-teal), var(--humana-sky)); flex-shrink: 0; }
-.app-phone-card::after { content: ""; flex: 1; height: 7px; border-radius: 4px; background: #e3ecf1; }
-.app-phone-dots { display: flex; gap: 6px; margin-top: auto; justify-content: center; }
-.app-phone-dots span { width: 6px; height: 6px; border-radius: 50%; background: #d0dbe3; }
-.app-phone-dots span:first-child { background: var(--humana-teal); width: 16px; border-radius: 4px; }
-.app-phone-float { position: absolute; left: -28px; bottom: -36px; z-index: 2; }
+.app-phone-card { height: 32px; border-radius: 9px; background: #fff; box-shadow: 0 5px 11px rgba(7,63,96,.1); display: flex; align-items: center; gap: 6px; padding: 0 8px; }
+.app-phone-card span { width: 16px; height: 16px; border-radius: 5px; background: linear-gradient(135deg, var(--humana-teal), var(--humana-sky)); flex-shrink: 0; }
+.app-phone-card::after { content: ""; flex: 1; height: 5px; border-radius: 3px; background: #e3ecf1; }
+.app-phone-dots { display: flex; gap: 5px; margin-top: auto; justify-content: center; }
+.app-phone-dots span { width: 5px; height: 5px; border-radius: 50%; background: #d0dbe3; }
+.app-phone-dots span:first-child { background: var(--humana-teal); width: 12px; border-radius: 3px; }
+.app-phone-float { position: absolute; left: -22px; bottom: -28px; z-index: 2; }
 @media (max-width: 860px) { .app-phone-float { position: static; margin: 28px auto 0; } }
 
 /* Tarjetas glass de función (App) --------------------------------------- */

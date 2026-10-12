@@ -136,41 +136,14 @@ export default function CotizadorClient() {
           <p className="biz-hero-body">Preguntas simples. Una recomendación clara.</p>
         </div>
       </section>
-
-      {/* Planes oficiales ------------------------------------------- */}
-      <section className="biz-section is-light">
-        <div className="biz-container">
-          <div className="biz-section-head">
-            <span className="biz-eyebrow">NUESTROS PLANES</span>
-            <h2>Elige el plan que se ajusta a ti</h2>
-          </div>
-          <div className="plan-hub-grid plan-hub-grid-personas" style={{ marginTop: 40 }}>
-            {[
-              { name: "Individual y Familiar", copy: "Cobertura para ti y toda tu familia con la red médica más amplia del Ecuador. Cobertura desde $15.000 hasta $150.000. Para todas las edades.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-INDIVIDUAL-FAMILIAR.png", cat: null },
-              { name: "Plan Prosonrisas", copy: "Plan dental para ti y tu familia. Desde $6,63 al mes por persona. Para todas las edades.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-PROSONRISAS.png", cat: "dental" },
-              { name: "Plan Jóvenes", copy: "De 18 a 35 años. Cobertura accesible diseñada para la independencia desde $58,27 al mes. Cobertura de $15.000.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-JOVENES.png", cat: "empaquetado" },
-              { name: "Humana Kids", copy: "La versión especializada de nuestro plan familiar para menores de edad desde $79,54 al mes. Incluye control de niño sano y vacunas. De 0 a 17 años.", image: "https://humana.med.ec/wp-content/uploads/2026/08/HUMANA-KIDS.png", cat: null },
-              { name: "Plan Proteger", copy: "Plan de gastos médicos mayores para enfermedades o accidentes graves, desde $25,82 al mes. Se activa una vez superado el deducible. Hasta $500.000 de cobertura por incapacidad.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-PROTEGER.png", cat: "proteger" },
-            ].map((plan) => (
-              <article className="plan-hub-card" key={plan.name}>
-                <div className="plan-hub-card-media"><Image src={plan.image} alt={plan.name} fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div>
-                <div className="plan-hub-card-copy">
-                  <h4>{plan.name}</h4>
-                  <p>{plan.copy}</p>
-                  <div className="plan-hub-card-actions">
-                    {plan.cat && <a className="primary-button small" href={`https://online.humana.med.ec/app/precotizacion/data-contratante?cat=${plan.cat}`} target="_blank" rel="noreferrer">Cotizar online</a>}
-                    <a className="secondary-button small" href="#hablemos-de-tu-plan"><PhoneCall size={14} /> Solicitar llamada</a>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
 
-    {/* Recomendador: NO TOCAR — aprobado tal cual está. --------------- */}
-    <section className="wizard-wrap">
+    <div className="cotizador-quiz-row">
+      <figure className="cotizador-quiz-media" aria-hidden="true">
+        <Image src="/images/cotizador/cotizador-quiz-familia.webp" alt="Familia revisando su cobertura médica en una tablet" fill sizes="(max-width: 980px) 100vw, 360px" unoptimized />
+      </figure>
+      {/* Recomendador: NO TOCAR — aprobado tal cual está. --------------- */}
+      <section className="wizard-wrap">
       {!finished && question ? <div key="plan-questions" className="wizard-card">
         <div className="wizard-top"><button onClick={() => step > 0 && setStep(step - 1)} disabled={step === 0}><ArrowLeft size={18} /> Volver</button><span>Paso {step + 1} de {questions.length}</span></div>
         <Progress value={((step + 1) / questions.length) * 100} className="wizard-progress" />
@@ -187,9 +160,41 @@ export default function CotizadorClient() {
         <div className="result-actions"><Link className="primary-button" href={resultHref}>{resultKey === "advisor" ? "Hablar con un asesor" : "Ver este plan"}<ArrowRight size={18} /></Link><button className="secondary-button" onClick={reset}><RotateCcw size={18} /> Empezar de nuevo</button></div>
       </div>}
       <aside className="wizard-aside"><h3>Así encontramos tu opción</h3><ol><li><span>1</span><div><strong>Tu realidad</strong><p>A quién deseas proteger.</p></div></li><li><span>2</span><div><strong>Tus prioridades</strong><p>Qué atención valoras más.</p></div></li><li><span>3</span><div><strong>Tu sonrisa</strong><p>Si también quieres protección dental.</p></div></li><li><span>4</span><div><strong>Tu resultado</strong><p>Una recomendación clara para explorar.</p></div></li></ol></aside>
-    </section>
+      </section>
+    </div>
 
     <div className="biz-page" data-accent="blue">
+      {/* Planes oficiales ------------------------------------------- */}
+      <section className="biz-section is-light">
+        <div className="biz-container">
+          <div className="biz-section-head">
+            <span className="biz-eyebrow">O ELIGE DIRECTAMENTE TU PLAN</span>
+            <h2>Elige el plan que se ajusta a ti</h2>
+          </div>
+          <div className="plan-hub-grid plan-hub-grid-personas" style={{ marginTop: 40 }}>
+            {[
+              { name: "Individual y Familiar", copy: "Cobertura para ti y toda tu familia con la red médica más amplia del Ecuador. Cobertura desde $15.000 hasta $150.000. Para todas las edades.", image: "/images/planes/mh150/mh150-hospitalizacion.jpg", imageAlt: "Persona protegida por un plan médico Humana", cat: null },
+              { name: "Plan Prosonrisas", copy: "Plan dental para ti y tu familia. Desde $6,63 al mes por persona. Para todas las edades.", image: "/images/planes/prosonrisas/prosonrisas-equipo.jpg", imageAlt: "Equipo de especialistas odontológicos de la red Prosonrisas", cat: "dental" },
+              { name: "Plan Jóvenes", copy: "De 18 a 35 años. Cobertura accesible diseñada para la independencia desde $58,27 al mes. Cobertura de $15.000.", image: "/images/cotizador/plan-jovenes.webp", imageAlt: "Joven caminando por la ciudad revisando su celular", cat: "empaquetado" },
+              { name: "Humana Kids", copy: "La versión especializada de nuestro plan familiar para menores de edad desde $79,54 al mes. Incluye control de niño sano y vacunas. De 0 a 17 años.", image: "/images/cotizador/humana-kids.webp", imageAlt: "Pediatra atendiendo a un niño acompañado de su madre", cat: null },
+              { name: "Plan Proteger", copy: "Plan de gastos médicos mayores para enfermedades o accidentes graves, desde $25,82 al mes. Se activa una vez superado el deducible. Hasta $500.000 de cobertura por incapacidad.", image: "/images/planes/mh80/mh80-photo-cirugia-robotica.jpg", imageAlt: "Cirugía robótica de alta precisión", cat: "proteger" },
+            ].map((plan) => (
+              <article className="plan-hub-card" key={plan.name}>
+                <div className="plan-hub-card-media"><Image src={plan.image} alt={plan.imageAlt} fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div>
+                <div className="plan-hub-card-copy">
+                  <h4>{plan.name}</h4>
+                  <p>{plan.copy}</p>
+                  <div className="plan-hub-card-actions">
+                    {plan.cat && <a className="primary-button small" href={`https://online.humana.med.ec/app/precotizacion/data-contratante?cat=${plan.cat}`} target="_blank" rel="noreferrer">Cotizar online</a>}
+                    <a className="secondary-button small" href="#hablemos-de-tu-plan"><PhoneCall size={14} /> Solicitar llamada</a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* La Red Humana que nos ayuda a cuidarte ------------------------ */}
       <section className="biz-section is-dark">
         <div className="biz-container">
@@ -228,7 +233,12 @@ export default function CotizadorClient() {
             <h2>¡Hablemos de tu plan!</h2>
             <p>Déjanos tus datos y un asesor de Humana te contacta.</p>
           </div>
-          <LeadForm />
+          <div className="cotizador-lead-row">
+            <figure className="cotizador-lead-media" aria-hidden="true">
+              <Image src="/images/cotizador/cotizador-asesora.webp" alt="Asesora de Humana atendiendo una llamada en el centro de contacto" fill sizes="(max-width: 860px) 100vw, 420px" unoptimized />
+            </figure>
+            <LeadForm />
+          </div>
         </div>
       </section>
 
@@ -390,8 +400,8 @@ export default function CotizadorClient() {
               ["Excelente atención, hoy hice uso de teleconsulta y me atendieron muy bien tanto por el chat, la llamada del médico, el envío por wp de la receta y sus indicaciones.", "Jhoset P. L."],
               ["Excelente atención de primera muy humanos.", "José David I. D."],
             ].map(([quote, author]) => (
-              <div key={author} className="plan-hub-card" style={{ padding: 20 }}>
-                <p style={{ fontStyle: "italic" }}>&ldquo;{quote}&rdquo;</p>
+              <div key={author} className="cotizador-testimonial-card">
+                <p>&ldquo;{quote}&rdquo;</p>
                 <strong>{author}</strong>
               </div>
             ))}
