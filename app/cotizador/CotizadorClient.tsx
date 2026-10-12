@@ -261,7 +261,7 @@ export default function CotizadorClient() {
                 <p><strong>Red Practihumana:</strong> Red de hospitales, médicos, centros médicos específicos donde puedes recibir atención de forma directa pagando el porcentaje de cobertura establecida por su plan. Si aplica cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para tu plan.</p>
                 <p><strong>Red Metrohumana:</strong> Es la más amplia y completa, ya que aplica toda la red de hospitales, médicos, centros médicos que forman parte de nuestro convenio. Recibirás atención de forma directa pagando el porcentaje de cobertura establecida por tu plan. Si aplicas cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para tu plan.</p>
                 <p><a href="https://red.humana.med.ec/RedHumana" target="_blank" rel="noreferrer">Conozca la red</a></p>
-                <p><strong>Cobertura contra el Cáncer y Gastos mayores</strong> (aplica para Plan Renacer y Plan Proteger)</p>
+                <p><strong>Cobertura contra el Cáncer y Gastos mayores</strong> (aplica para Plan Proteger)</p>
                 <p><strong>Red Metrohumana:</strong> Es la más amplia, ya que aplica toda la red de hospitales, médicos, centros médicos que forman parte de nuestro convenio. Recibirá atención de forma directa pagando el porcentaje de cobertura establecida por su plan una vez superado el deducible. Si aplica cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para su plan.</p>
                 <p><strong>Cobertura dental</strong> (aplica para Plan Prosonrisas)</p>
                 <p><strong>Red dental:</strong> Accede a una red exclusiva de centros odontológicos en convenio, donde paga solo el % que le corresponde, sin reembolso o aplicación de deducibles.</p>
@@ -279,7 +279,6 @@ export default function CotizadorClient() {
                   <li>Cobertura de enfermedades preexistentes (montos referenciales): desde el mes 7 al 12 hasta $540 · desde el mes 13 al 24 hasta $1.350 · desde el mes 25 hasta 20 salarios básicos unificados</li>
                   <li>Discapacidades: hasta 20 salarios básicos unificados · declaradas luego de 90 días</li>
                 </ul>
-                <p><strong>Cobertura contra el cáncer</strong> (Plan Renacer): emergencias relacionadas con cáncer y diagnóstico de cáncer, luego de 180 días.</p>
                 <p><strong>Cobertura dental</strong> (Plan Prosonrisas): prestaciones básicas 24 horas, procedimientos específicos luego de 60 días, preexistencias (montos referenciales) igual a los tramos del plan individual.</p>
                 <p>Visite nuestra <a href="https://servicio.humana.med.ec/" target="_blank" rel="noreferrer">central de ayuda</a> para recibir asesoría personalizada.</p>
               </div>
