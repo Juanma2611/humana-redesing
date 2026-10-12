@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -50,9 +49,28 @@ const mh5 = {
 
 type Chapter = {
   id: string; number: string; eyebrow: string; title: string; lead: string; essentials: string[];
+  image?: string; imageAlt?: string;
 };
 
-const PYME_IMAGE = "https://humana.med.ec/wp-content/uploads/2025/09/plan-pyme-humana-medicina-prepagada.jpg";
+const PYME_IMAGE = "/images/planes/pyme/pyme-hero";
+
+/* Foto + respaldo: <picture> con fuente WebP y <img> JPG de respaldo,
+   posicionado en modo "fill" (como next/image) para llenar el recuadro
+   con object-fit: cover ya definido en .biz-hero-image/.biz-feature-media. */
+function PlanPhoto({ base, alt, eager = false }: { base: string; alt: string; eager?: boolean }) {
+  return (
+    <picture>
+      <source srcSet={`${base}.webp`} type="image/webp" />
+      <img
+        src={`${base}.jpg`}
+        alt={alt}
+        loading={eager ? "eager" : "lazy"}
+        decoding={eager ? "sync" : "async"}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+      />
+    </picture>
+  );
+}
 
 const chapters: Chapter[] = [
   {
@@ -65,6 +83,7 @@ const chapters: Chapter[] = [
       "Acceso a más de 750 doctores a nivel nacional",
       "Consultorios de médicos especialistas del más alto nivel",
     ],
+    image: "/images/planes/pyme/pyme-02-atencion", imageAlt: "Doctor atendiendo a un paciente en una consulta de la red ambulatoria de Humana",
   },
   {
     id: "colaboradores", number: "03",
@@ -78,6 +97,7 @@ const chapters: Chapter[] = [
       "Extensión de coberturas a familiares.",
       "Seguro de vida para el titular.",
     ],
+    image: "/images/planes/pyme/pyme-03-colaboradores", imageAlt: "Colaboradores de una pequeña empresa respaldados por el Plan Pyme",
   },
   {
     id: "empresa", number: "04",
@@ -89,6 +109,7 @@ const chapters: Chapter[] = [
       "Incremento de la productividad.",
       "Deducción de impuestos.",
     ],
+    image: "/images/planes/pyme/pyme-04-empresa", imageAlt: "Equipo directivo revisando los resultados del bienestar de su empresa",
   },
 ];
 
@@ -243,7 +264,7 @@ export default function PlanPymeClient() {
             </div>
           </div>
           <figure className="biz-hero-image">
-            <Image src={PYME_IMAGE} alt="Equipo de una pequeña o mediana empresa protegido por Plan Pyme" fill sizes="(max-width: 980px) 100vw, 1180px" unoptimized />
+            <PlanPhoto base={PYME_IMAGE} alt="Equipo de una pequeña o mediana empresa protegido por Plan Pyme" eager />
           </figure>
         </section>
 
@@ -268,18 +289,22 @@ export default function PlanPymeClient() {
         {/* Elige tu plan: MH10 / MH5 ------------------------------------ */}
         <section className="biz-section is-light" id="pyme-elige">
           <div className="biz-container">
-            <div className="biz-section-head biz-reveal">
-              <span className="biz-eyebrow">ELIGE TU PLAN</span>
-              <h2>MH10 o MH5, según lo que tu equipo necesita.</h2>
-              <p>Dos alternativas de Metrohumana para pequeñas empresas, con la misma red y beneficios, y distinto monto de cobertura.</p>
-            </div>
-            <div className="biz-reveal" style={{ display: "flex", justifyContent: "center", marginTop: 36 }}>
-              <div className="biz-segmented" role="group" aria-label="Elige el plan a mostrar">
-                <button type="button" className={activePlan === "mh10" ? "is-active" : ""} onClick={() => setActivePlan("mh10")}>{mh10.name}</button>
-                <button type="button" className={activePlan === "mh5" ? "is-active" : ""} onClick={() => setActivePlan("mh5")}>{mh5.name}</button>
+            <div className="biz-feature biz-reveal">
+              <figure className="biz-feature-media biz-reveal">
+                <PlanPhoto base="/images/planes/pyme/pyme-01-plan" alt="Empresario eligiendo el plan médico ideal para su equipo" />
+              </figure>
+              <div className="biz-feature-copy biz-reveal">
+                <span className="biz-feature-num">01</span>
+                <span className="biz-eyebrow">ELIGE TU PLAN</span>
+                <h2>MH10 o MH5, según lo que tu equipo necesita.</h2>
+                <p>Dos alternativas de Metrohumana para pequeñas empresas, con la misma red y beneficios, y distinto monto de cobertura.</p>
+                <div className="biz-segmented" role="group" aria-label="Elige el plan a mostrar">
+                  <button type="button" className={activePlan === "mh10" ? "is-active" : ""} onClick={() => setActivePlan("mh10")}>{mh10.name}</button>
+                  <button type="button" className={activePlan === "mh5" ? "is-active" : ""} onClick={() => setActivePlan("mh5")}>{mh5.name}</button>
+                </div>
               </div>
             </div>
-            <div className="biz-stats biz-reveal">
+            <div className="biz-stats biz-reveal" style={{ marginTop: 40 }}>
               {selected.items.map(({ label, value }) => (
                 <article key={label}><strong>{value}</strong><p>{label}</p></article>
               ))}
@@ -289,21 +314,44 @@ export default function PlanPymeClient() {
 
         {/* Capítulos de beneficio (una idea por sección) ----------------- */}
         {chapters.map((c, i) => (
-          <section className={`biz-section ${i % 2 === 0 ? "is-dark" : "is-light"}`} id={`pyme-${c.id}`} key={c.id}>
-            <div className="biz-container">
-              <div className="biz-feature-text biz-reveal">
-                <span className="biz-feature-num">{c.number}</span>
-                <span className="biz-eyebrow">{c.eyebrow}</span>
-                <h2>{c.title}</h2>
-                <p>{c.lead}</p>
-                <ul className="biz-checklist is-single">
-                  {c.essentials.map((item) => (
-                    <li key={item}><Check aria-hidden="true" /><span>{item}</span></li>
-                  ))}
-                </ul>
+          c.image ? (
+            <section className={`biz-section ${i % 2 === 0 ? "is-dark" : "is-light"}`} id={`pyme-${c.id}`} key={c.id}>
+              <div className="biz-container">
+                <div className={`biz-feature${i % 2 === 1 ? " reverse" : ""}`}>
+                  <figure className="biz-feature-media biz-reveal">
+                    <PlanPhoto base={c.image} alt={c.imageAlt ?? ""} />
+                  </figure>
+                  <div className="biz-feature-copy biz-reveal">
+                    <span className="biz-feature-num">{c.number}</span>
+                    <span className="biz-eyebrow">{c.eyebrow}</span>
+                    <h2>{c.title}</h2>
+                    <p>{c.lead}</p>
+                    <ul className="biz-checklist is-single">
+                      {c.essentials.map((item) => (
+                        <li key={item}><Check aria-hidden="true" /><span>{item}</span></li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          ) : (
+            <section className={`biz-section ${i % 2 === 0 ? "is-dark" : "is-light"}`} id={`pyme-${c.id}`} key={c.id}>
+              <div className="biz-container">
+                <div className="biz-feature-text biz-reveal">
+                  <span className="biz-feature-num">{c.number}</span>
+                  <span className="biz-eyebrow">{c.eyebrow}</span>
+                  <h2>{c.title}</h2>
+                  <p>{c.lead}</p>
+                  <ul className="biz-checklist is-single">
+                    {c.essentials.map((item) => (
+                      <li key={item}><Check aria-hidden="true" /><span>{item}</span></li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </section>
+          )
         ))}
 
         {/* Cuadro de coberturas: enlace + panel (patrón aprobado) --------- */}
