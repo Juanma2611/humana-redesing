@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Building2, Check, HeartPulse, Layers3, PhoneCall, RotateCcw, ScanHeart, ShieldCheck, SmilePlus, Sparkles, UsersRound, WalletCards } from "lucide-react";
+import { ArrowLeft, ArrowRight, Building2, Check, HeartPulse, Layers3, PhoneCall, RotateCcw, ScanHeart, ShieldCheck, Sparkles, SmilePlus, UsersRound, WalletCards } from "lucide-react";
 import { useState } from "react";
-import { SiteShell, PageHero } from "@/components/site-shell";
+import { SiteShell } from "@/components/site-shell";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Progress } from "@/components/ui/progress";
 
@@ -53,6 +53,50 @@ const resultMap = {
   advisor: { name: "Asesoría personalizada", segment: "individual", icon: WalletCards, reason: "Por la etapa de vida indicada, necesitamos revisar continuidad, admisión y condiciones contigo.", points: ["Revisión de opciones", "Condiciones claras", "Acompañamiento humano"] },
 };
 
+/* Prestadores oficiales de la franja "La Red Humana que nos ayuda a
+   cuidarte". No tenemos acceso a los logos oficiales, así que se
+   muestran como nombre en una franja de chips (ver resumen al usuario
+   con el listado de archivos de logo que harían falta). */
+const networkProviders = [
+  "Metrored", "Hospital Metropolitano", "Omni Hospital", "Kennedy Grupo Hospitalario",
+  "Clínica Pasteur", "Hospital Vozandes", "Hospital Alcívar", "Hospital de los Valles",
+  "Hospital Clínica Mujer", "Axxis Hospital", "Hospital Pediátrico", "Hospital Clínica San Francisco",
+  "Novaclínica", "Clínica Integral", "Hospital del Río", "SIME",
+  "Corporación Médica Monte Sinaí", "Clínica Paucarbamba", "Centro Quirúrgico Metropolitano",
+  "Hospital San Juan de Dios", "Clínica Santa Ana", "Clínica María Auxiliadora",
+];
+
+const planInterestOptions = ["Individual y Familiar", "Plan Prosonrisas", "Plan Jóvenes", "Humana Kids", "Plan Proteger", "Humana Business", "Todavía no lo sé"];
+
+function LeadForm() {
+  const [submitted, setSubmitted] = useState(false);
+  return (
+    <div className="biz-lead-form" id="hablemos-de-tu-plan">
+      {submitted ? (
+        <div className="biz-lead-success" role="status">
+          <Check size={18} />
+          <span>¡Gracias! Formulario demostrativo: no se envió ningún dato real. En la versión oficial, un asesor de Humana te contactará.</span>
+        </div>
+      ) : (
+        <form onSubmit={(event) => { event.preventDefault(); setSubmitted(true); }}>
+          <label>Nombre y apellido<input type="text" name="name" required /></label>
+          <label>Teléfono<input type="tel" name="phone" required /></label>
+          <label>Correo electrónico<input type="email" name="email" required /></label>
+          <label>Ciudad<input type="text" name="city" /></label>
+          <label>Plan de interés
+            <select name="planInterest" defaultValue="">
+              <option value="" disabled>Selecciona una opción</option>
+              {planInterestOptions.map((option) => <option key={option} value={option}>{option}</option>)}
+            </select>
+          </label>
+          <button type="submit" className="primary-button">Solicitar llamada</button>
+        </form>
+      )}
+      <p className="biz-lead-disclaimer">Formulario demostrativo del prototipo. No envía información a ningún sistema.</p>
+    </div>
+  );
+}
+
 export default function CotizadorClient() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -82,29 +126,50 @@ export default function CotizadorClient() {
     <nav className="article-breadcrumb plan-detail-breadcrumb" aria-label="Breadcrumb">
       <Link href="/">Inicio</Link><span>»</span><span>Cotizador</span>
     </nav>
-    <PageHero eyebrow="Tu cobertura ideal" title="Cotizador" description="Preguntas simples. Una recomendación clara." />
 
-    <section className="content-section plan-hub-grid plan-hub-grid-personas" style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px 48px" }}>
-      {[
-        { name: "Individual y Familiar", copy: "Cobertura para ti y toda tu familia con la red médica más amplia del Ecuador. Cobertura desde $15.000 hasta $150.000. Para todas las edades.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-INDIVIDUAL-FAMILIAR.png", cat: null },
-        { name: "Plan Prosonrisas", copy: "Plan dental para ti y tu familia. Desde $6,63 al mes por persona. Para todas las edades.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-PROSONRISAS.png", cat: "dental" },
-        { name: "Plan Jóvenes", copy: "De 18 a 35 años. Cobertura accesible diseñada para la independencia desde $58,27 al mes. Cobertura de $15.000.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-JOVENES.png", cat: "empaquetado" },
-        { name: "Humana Kids", copy: "La versión especializada de nuestro plan familiar para menores de edad desde $79,54 al mes. Incluye control de niño sano y vacunas. De 0 a 17 años.", image: "https://humana.med.ec/wp-content/uploads/2026/08/HUMANA-KIDS.png", cat: null },
-        { name: "Plan Proteger", copy: "Plan de gastos médicos mayores para enfermedades o accidentes graves, desde $25,82 al mes. Se activa una vez superado el deducible. Hasta $500.000 de cobertura por incapacidad.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-PROTEGER.png", cat: "proteger" },
-      ].map((plan) => (
-        <article className="plan-hub-card" key={plan.name}>
-          <div className="plan-hub-card-media"><Image src={plan.image} alt={plan.name} fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div>
-          <div className="plan-hub-card-copy">
-            <h4>{plan.name}</h4>
-            <p>{plan.copy}</p>
-            <div className="plan-hub-card-actions">
-              {plan.cat && <a className="primary-button small" href={`https://online.humana.med.ec/app/precotizacion/data-contratante?cat=${plan.cat}`} target="_blank" rel="noreferrer">Cotizar online</a>}
-              <button type="button" className="secondary-button small" onClick={() => setStep(0)}><PhoneCall size={14} /> Solicitar llamada</button>
-            </div>
+    <div className="biz-page" data-accent="blue">
+      {/* Hero ------------------------------------------------------- */}
+      <section className="biz-hero" id="cotizador-inicio">
+        <div className="biz-hero-copy">
+          <span className="biz-eyebrow">TU COBERTURA IDEAL</span>
+          <h1>Cotizador</h1>
+          <p className="biz-hero-body">Preguntas simples. Una recomendación clara.</p>
+        </div>
+      </section>
+
+      {/* Planes oficiales ------------------------------------------- */}
+      <section className="biz-section is-light">
+        <div className="biz-container">
+          <div className="biz-section-head">
+            <span className="biz-eyebrow">NUESTROS PLANES</span>
+            <h2>Elige el plan que se ajusta a ti</h2>
           </div>
-        </article>
-      ))}
-    </section>
+          <div className="plan-hub-grid plan-hub-grid-personas" style={{ marginTop: 40 }}>
+            {[
+              { name: "Individual y Familiar", copy: "Cobertura para ti y toda tu familia con la red médica más amplia del Ecuador. Cobertura desde $15.000 hasta $150.000. Para todas las edades.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-INDIVIDUAL-FAMILIAR.png", cat: null },
+              { name: "Plan Prosonrisas", copy: "Plan dental para ti y tu familia. Desde $6,63 al mes por persona. Para todas las edades.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-PROSONRISAS.png", cat: "dental" },
+              { name: "Plan Jóvenes", copy: "De 18 a 35 años. Cobertura accesible diseñada para la independencia desde $58,27 al mes. Cobertura de $15.000.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-JOVENES.png", cat: "empaquetado" },
+              { name: "Humana Kids", copy: "La versión especializada de nuestro plan familiar para menores de edad desde $79,54 al mes. Incluye control de niño sano y vacunas. De 0 a 17 años.", image: "https://humana.med.ec/wp-content/uploads/2026/08/HUMANA-KIDS.png", cat: null },
+              { name: "Plan Proteger", copy: "Plan de gastos médicos mayores para enfermedades o accidentes graves, desde $25,82 al mes. Se activa una vez superado el deducible. Hasta $500.000 de cobertura por incapacidad.", image: "https://humana.med.ec/wp-content/uploads/2026/08/PLAN-PROTEGER.png", cat: "proteger" },
+            ].map((plan) => (
+              <article className="plan-hub-card" key={plan.name}>
+                <div className="plan-hub-card-media"><Image src={plan.image} alt={plan.name} fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized /></div>
+                <div className="plan-hub-card-copy">
+                  <h4>{plan.name}</h4>
+                  <p>{plan.copy}</p>
+                  <div className="plan-hub-card-actions">
+                    {plan.cat && <a className="primary-button small" href={`https://online.humana.med.ec/app/precotizacion/data-contratante?cat=${plan.cat}`} target="_blank" rel="noreferrer">Cotizar online</a>}
+                    <a className="secondary-button small" href="#hablemos-de-tu-plan"><PhoneCall size={14} /> Solicitar llamada</a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {/* Recomendador: NO TOCAR — aprobado tal cual está. --------------- */}
     <section className="wizard-wrap">
       {!finished && question ? <div key="plan-questions" className="wizard-card">
         <div className="wizard-top"><button onClick={() => step > 0 && setStep(step - 1)} disabled={step === 0}><ArrowLeft size={18} /> Volver</button><span>Paso {step + 1} de {questions.length}</span></div>
@@ -124,129 +189,216 @@ export default function CotizadorClient() {
       <aside className="wizard-aside"><h3>Así encontramos tu opción</h3><ol><li><span>1</span><div><strong>Tu realidad</strong><p>A quién deseas proteger.</p></div></li><li><span>2</span><div><strong>Tus prioridades</strong><p>Qué atención valoras más.</p></div></li><li><span>3</span><div><strong>Tu sonrisa</strong><p>Si también quieres protección dental.</p></div></li><li><span>4</span><div><strong>Tu resultado</strong><p>Una recomendación clara para explorar.</p></div></li></ol></aside>
     </section>
 
-    <section className="content-section" style={{ maxWidth: 900, margin: "0 auto", padding: "48px 24px" }}>
-      <h2>Protege tu salud en 4 pasos</h2>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16, marginTop: 20 }}>
-        {["Cotiza", "Selecciona plan", "Registra tus datos", "Pago seguro"].map((step, i) => (
-          <div key={step} className="plan-hub-card" style={{ padding: 20, textAlign: "center" }}>
-            <strong style={{ fontSize: 24, color: "#0b80bd" }}>{i + 1}</strong>
-            <p style={{ margin: "8px 0 0" }}>{step}</p>
+    <div className="biz-page" data-accent="blue">
+      {/* La Red Humana que nos ayuda a cuidarte ------------------------ */}
+      <section className="biz-section is-dark">
+        <div className="biz-container">
+          <div className="biz-section-head">
+            <span className="biz-eyebrow">RESPALDO NACIONAL</span>
+            <h2>La Red Humana que nos ayuda a cuidarte</h2>
           </div>
-        ))}
-      </div>
-    </section>
-
-    <section className="content-section" style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px 48px" }}>
-      <h3>Dudas sobre su plan</h3>
-
-      <h4>¿Qué debe saber antes de comprar en nuestra web?</h4>
-      <p>Su compra es 100% segura bajo normas de comercio electrónico y firma electrónica.</p>
-      <p>Una vez realizada la compra, recibe a su correo electrónico el respaldo de su pago, contrato aceptado y detalles de su registro.</p>
-      <p>La compra pasará a un proceso de revisión de nuestro equipo de servicio al cliente que puede tomar de 24 a 48 horas, si no hay novedades se integrará nuestro sistema. En caso de requerir información adicional, un asesor de servicio al cliente se pondría en contacto con usted.</p>
-
-      <h4>¿Si ha padecido de enfermedades crónicas o recurrentes es necesario informarlas?</h4>
-      <p>Claro que sí, registrar sus enfermedades preexistentes (cirugías, hospitalizaciones, enfermedades crónicas o recurrentes) le garantiza acceder a la cobertura en los plazos y montos establecidos según el plan adquirido.</p>
-
-      <h4>¿En qué hospitales o prestadores médicos puede recibir atención?</h4>
-      <p>Existen dos tipos de red según el plan elegido:</p>
-      <p><strong>Plan Individual, Familiar e infantil</strong> (aplica para Plan Individual y Familiar y Humana Kids)</p>
-      <p><strong>Red Practihumana:</strong> Red de hospitales, médicos, centros médicos específicos donde puedes recibir atención de forma directa pagando el porcentaje de cobertura establecida por su plan. Si aplica cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para tu plan.</p>
-      <p><strong>Red Metrohumana:</strong> Es la más amplia y completa, ya que aplica toda la red de hospitales, médicos, centros médicos que forman parte de nuestro convenio. Recibirás atención de forma directa pagando el porcentaje de cobertura establecida por tu plan. Si aplicas cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para tu plan.</p>
-      <a className="secondary-button small" href="https://red.humana.med.ec/RedHumana" target="_blank" rel="noreferrer">Conozca la red</a>
-      <p><strong>Cobertura contra el Cáncer y Gastos mayores</strong> (aplica para Plan Renacer y Plan Proteger)</p>
-      <p><strong>Red Metrohumana:</strong> Es la más amplia, ya que aplica toda la red de hospitales, médicos, centros médicos que forman parte de nuestro convenio. Recibirá atención de forma directa pagando el porcentaje de cobertura establecida por su plan una vez superado el deducible. Si aplica cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para su plan.</p>
-      <p><strong>Cobertura dental</strong> (aplica para Plan Prosonrisas)</p>
-      <p><strong>Red dental:</strong> Accede a una red exclusiva de centros odontológicos en convenio, donde paga solo el % que le corresponde, sin reembolso o aplicación de deducibles.</p>
-
-      <h4>¿Desde cuándo puede usar su plan?</h4>
-      <p><strong>Plan Individual, Infantil y Gastos mayores</strong> (Plan Individual y Familiar, Humana Kids y Plan Proteger):</p>
-      <ul className="plan-faq-checklist">
-        <li>Emergencia médica vital: 24 horas</li>
-        <li>Ambulatoria: luego de 30 días</li>
-        <li>Hospitalaria: luego de 90 días</li>
-        <li>Maternidad (inicio): planificar luego de 60 días</li>
-        <li>Cobertura de enfermedades preexistentes (montos referenciales): desde el mes 7 al 12 hasta $540 · desde el mes 13 al 24 hasta $1.350 · desde el mes 25 hasta 20 salarios básicos unificados</li>
-        <li>Discapacidades: hasta 20 salarios básicos unificados · declaradas luego de 90 días</li>
-      </ul>
-      <p><strong>Cobertura contra el cáncer</strong> (Plan Renacer): emergencias relacionadas con cáncer y diagnóstico de cáncer, luego de 180 días.</p>
-      <p><strong>Cobertura dental</strong> (Plan Prosonrisas): prestaciones básicas 24 horas, procedimientos específicos luego de 60 días, preexistencias (montos referenciales) igual a los tramos del plan individual.</p>
-      <p>Visite nuestra <a href="https://servicio.humana.med.ec/" target="_blank" rel="noreferrer">central de ayuda</a> para recibir asesoría personalizada.</p>
-
-      <h3>Dudas sobre su pago</h3>
-      <h4>¿Cuáles son las formas de pago disponibles?</h4>
-      <p>✔ Pago inicial: todas las tarjetas de crédito (Diners, Visa, Mastercard, Discover, American Express) nacionales e internacionales y tarjetas de débito (Visa o Mastercard) nacionales.</p>
-      <p>✔ Siguientes cuotas: tarjetas de crédito nacionales e internacionales aprobadas en nuestro comercio, o cuentas bancarias de ahorros o corrientes de bancos y cooperativas del país.</p>
-
-      <h4>¿En qué fechas se realizan los cobros mensuales?</h4>
-      <ul className="plan-faq-checklist">
-        <li>Vigencia del 1 al 15 del mes: primer día hábil de cada mes.</li>
-        <li>Del 16 al 21 del mes: los 15 de cada mes (día hábil).</li>
-        <li>Del 22 al fin de mes: los 22 de cada mes (día hábil).</li>
-      </ul>
-
-      <h4>¿Qué es la firma electrónica?</h4>
-      <ul className="plan-faq-checklist">
-        <li>La firma electrónica de documentos digitales, es un certificado legal, que se produce de manera ágil, ecológica y siempre bajo la más estricta seguridad.</li>
-        <li>Es la equivalencia de la firma manuscrita ya que tiene la misma validez legal y está amparada en la Ley de Comercio Electrónico.</li>
-        <li>Se envía un pin al e-mail mediante el cual se facilita dicha firma electrónica, sin necesidad de los complicados trámites tradicionales.</li>
-      </ul>
-
-      <h4>¿Cómo solicitar reversos o anulaciones de compras?</h4>
-      <p><strong>Reversos automáticos compra:</strong> Las compras realizadas el mismo día y que no hayan sido integradas a nuestro sistema, podrán ser reversadas de manera automática de la siguiente manera:</p>
-      <p><strong>Botón de pago Paymentez:</strong> Compras realizadas antes de 17h39 se las podrá reversar hasta las 17h40 del mismo día, compras desde las 17h41 se las puede reversar hasta las 17h39 del día siguiente. Compras que no se hayan podido reversar en ese lapso, ingresarán a devolución manual de 5 días hábiles.</p>
-      <p><strong>Botón de pago Place to Pay:</strong> Compras realizadas el mismo día se podrán reversar hasta las 23h59 del mismo día. Compras que no se hayan podido reversar en ese lapso, ingresarán a devolución manual de 5 días hábiles.</p>
-      <p>Si necesita un reverso automático puede escribirnos a: <a href="mailto:servicioalcliente@humana.med.ec">servicioalcliente@humana.med.ec</a></p>
-      <p><strong>Anulación contrato:</strong> Si desea solicitar la anulación de una compra ya suscrita en nuestro sistema, le recomendamos solicitarla por medio de nuestra <a href="https://servicio.humana.med.ec/" target="_blank" rel="noreferrer">central de ayuda</a>.</p>
-    </section>
-
-    <section className="content-section" style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px 48px" }}>
-      <h2>Beneficios incluidos en tu plan</h2>
-      <p>Ten el control siempre, nuestros servicios te acompañan para que te sientas tranquilo y protegido.</p>
-      <div className="plan-detail-table-wrap" style={{ background: "#fff", borderRadius: 20, padding: 24, marginTop: 16 }}>
-        <table className="plan-detail-table">
-          <tbody>
-            <tr><th scope="row">Médico a domicilio</th><td>Solicita un médico para que acuda en el lugar donde lo necesites.</td></tr>
-            <tr><th scope="row">Asistencia en viajes</th><td>Viaja seguro con cobertura por un monto máximo de $100.000.</td></tr>
-            <tr><th scope="row">Teleconsulta médica</th><td>Ilimitadas y sin costo, agendando tu cita en el 1800 48 62 62 o mediante APP.</td></tr>
-            <tr><th scope="row">Farmacia a domicilio</th><td>Solicita tus medicinas y aplica tu cobertura con Medicity, Pharmacys y Fybeca.</td></tr>
-            <tr><th scope="row">Ambulancia terrestre</th><td>Recibe asistencia médica oportuna en caso de emergencia.</td></tr>
-            <tr><th scope="row">Seguro de vida</th><td>Si en algún momento llegas a faltar, ofrecemos a tus familiares un importante apoyo.</td></tr>
-            <tr><th scope="row">Asistencia Exequial</th><td>Cobertura de sepelio con Jardines del Valle para titulares y dependientes.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <a className="secondary-button small" style={{ marginTop: 16, display: "inline-flex" }} href="https://servicio.humana.med.ec/hc/es/articles/4402807362573-Beneficios-Incluidos" target="_blank" rel="noreferrer">
-        Conoce todos los beneficios
-      </a>
-    </section>
-
-    <section className="content-section" style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px 48px" }}>
-      <h2>Tarifa cero</h2>
-      <ul className="plan-faq-checklist">
-        <li>Prestaciones de prevención primaria (aplica para los planes con Cobertura Integral de Medicina Prepagada).</li>
-        <li>El afiliado, para acceder a las prestaciones de tarifa 0, deberá pedir una preautorización en cualquier oficina de Humana.</li>
-        <li>Estas atenciones se darán únicamente en prestadores autorizados por Humana.</li>
-      </ul>
-      <a className="secondary-button small" href="https://planes.humana.med.ec/hubfs/Ver%20m%C3%A1s%20Planes%20suscriptor/Tarifa%20Cero/TARIFA-CERO.pdf" target="_blank" rel="noreferrer">Ver más</a>
-    </section>
-
-    <section className="content-section" style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px 64px" }}>
-      <h2>Nuestros clientes nos recomiendan</h2>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16, marginTop: 20 }}>
-        {[
-          ["El Sr que me atendió fue atento y eficiente. Tenía conocimiento del trámite y no se demoró. Gracias", "María Teresa S. P."],
-          ["Me indicó claramente el procedimiento a realizar, y me envió el correo al cual debía enviar la información. Excelente Servicio", "Xavier Antonio M. L."],
-          ["Fui atendida con amabilidad y respondió todas mis inquietudes facilitando mi proceso médico.", "Myriam Magdalena R. B."],
-          ["Excelente atención en un ambiente protegido con todas las medidas de bio seguridad.", "Marilú R. V."],
-          ["Excelente atención, hoy hice uso de teleconsulta y me atendieron muy bien tanto por el chat, la llamada del médico, el envío por wp de la receta y sus indicaciones.", "Jhoset P. L."],
-          ["Excelente atención de primera muy humanos.", "José David I. D."],
-        ].map(([quote, author]) => (
-          <div key={author} className="plan-hub-card" style={{ padding: 20 }}>
-            <p style={{ fontStyle: "italic" }}>&ldquo;{quote}&rdquo;</p>
-            <strong>{author}</strong>
+          <div className="biz-provider-grid">
+            {networkProviders.map((name) => <span className="biz-provider-chip" key={name}>{name}</span>)}
           </div>
-        ))}
-      </div>
-    </section>
+        </div>
+      </section>
+
+      {/* Protege tu salud en 4 pasos ------------------------------------ */}
+      <section className="biz-section is-light">
+        <div className="biz-container">
+          <div className="biz-section-head">
+            <h2>Protege tu salud en 4 pasos</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16, marginTop: 36, maxWidth: 900, marginLeft: "auto", marginRight: "auto" }}>
+            {["Cotiza", "Selecciona plan", "Registra tus datos", "Pago seguro"].map((label, i) => (
+              <div key={label} className="plan-hub-card" style={{ padding: 24, textAlign: "center" }}>
+                <strong style={{ fontSize: 28, color: "#0b80bd" }}>{i + 1}</strong>
+                <p style={{ margin: "10px 0 0" }}>{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ¡Hablemos de tu plan! ------------------------------------------- */}
+      <section className="biz-section is-dark">
+        <div className="biz-container">
+          <div className="biz-section-head">
+            <span className="biz-eyebrow">TE LLAMAMOS NOSOTROS</span>
+            <h2>¡Hablemos de tu plan!</h2>
+            <p>Déjanos tus datos y un asesor de Humana te contacta.</p>
+          </div>
+          <LeadForm />
+        </div>
+      </section>
+
+      {/* Preguntas frecuentes -------------------------------------------- */}
+      <section className="biz-section is-light">
+        <div className="biz-container">
+          <div className="biz-section-head">
+            <h2>Dudas sobre su plan</h2>
+          </div>
+          <div className="biz-faq">
+            <details>
+              <summary><span>¿Qué debe saber antes de comprar en nuestra web?</span><span className="biz-faq-plus" aria-hidden="true">+</span></summary>
+              <div className="biz-faq-content">
+                <p>Su compra es 100% segura bajo normas de comercio electrónico y firma electrónica.</p>
+                <p>Una vez realizada la compra, recibe a su correo electrónico el respaldo de su pago, contrato aceptado y detalles de su registro.</p>
+                <p>La compra pasará a un proceso de revisión de nuestro equipo de servicio al cliente que puede tomar de 24 a 48 horas, si no hay novedades se integrará nuestro sistema. En caso de requerir información adicional, un asesor de servicio al cliente se pondría en contacto con usted.</p>
+              </div>
+            </details>
+            <details>
+              <summary><span>¿Si ha padecido de enfermedades crónicas o recurrentes es necesario informarlas?</span><span className="biz-faq-plus" aria-hidden="true">+</span></summary>
+              <div className="biz-faq-content">
+                <p>Claro que sí, registrar sus enfermedades preexistentes (cirugías, hospitalizaciones, enfermedades crónicas o recurrentes) le garantiza acceder a la cobertura en los plazos y montos establecidos según el plan adquirido.</p>
+              </div>
+            </details>
+            <details>
+              <summary><span>¿En qué hospitales o prestadores médicos puede recibir atención?</span><span className="biz-faq-plus" aria-hidden="true">+</span></summary>
+              <div className="biz-faq-content">
+                <p>Existen dos tipos de red según el plan elegido:</p>
+                <p><strong>Plan Individual, Familiar e infantil</strong> (aplica para Plan Individual y Familiar y Humana Kids)</p>
+                <p><strong>Red Practihumana:</strong> Red de hospitales, médicos, centros médicos específicos donde puedes recibir atención de forma directa pagando el porcentaje de cobertura establecida por su plan. Si aplica cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para tu plan.</p>
+                <p><strong>Red Metrohumana:</strong> Es la más amplia y completa, ya que aplica toda la red de hospitales, médicos, centros médicos que forman parte de nuestro convenio. Recibirás atención de forma directa pagando el porcentaje de cobertura establecida por tu plan. Si aplicas cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para tu plan.</p>
+                <p><a href="https://red.humana.med.ec/RedHumana" target="_blank" rel="noreferrer">Conozca la red</a></p>
+                <p><strong>Cobertura contra el Cáncer y Gastos mayores</strong> (aplica para Plan Renacer y Plan Proteger)</p>
+                <p><strong>Red Metrohumana:</strong> Es la más amplia, ya que aplica toda la red de hospitales, médicos, centros médicos que forman parte de nuestro convenio. Recibirá atención de forma directa pagando el porcentaje de cobertura establecida por su plan una vez superado el deducible. Si aplica cobertura vía reembolso se cubrirá acorde a los valores normales y acostumbrados para su plan.</p>
+                <p><strong>Cobertura dental</strong> (aplica para Plan Prosonrisas)</p>
+                <p><strong>Red dental:</strong> Accede a una red exclusiva de centros odontológicos en convenio, donde paga solo el % que le corresponde, sin reembolso o aplicación de deducibles.</p>
+              </div>
+            </details>
+            <details>
+              <summary><span>¿Desde cuándo puede usar su plan?</span><span className="biz-faq-plus" aria-hidden="true">+</span></summary>
+              <div className="biz-faq-content">
+                <p><strong>Plan Individual, Infantil y Gastos mayores</strong> (Plan Individual y Familiar, Humana Kids y Plan Proteger):</p>
+                <ul>
+                  <li>Emergencia médica vital: 24 horas</li>
+                  <li>Ambulatoria: luego de 30 días</li>
+                  <li>Hospitalaria: luego de 90 días</li>
+                  <li>Maternidad (inicio): planificar luego de 60 días</li>
+                  <li>Cobertura de enfermedades preexistentes (montos referenciales): desde el mes 7 al 12 hasta $540 · desde el mes 13 al 24 hasta $1.350 · desde el mes 25 hasta 20 salarios básicos unificados</li>
+                  <li>Discapacidades: hasta 20 salarios básicos unificados · declaradas luego de 90 días</li>
+                </ul>
+                <p><strong>Cobertura contra el cáncer</strong> (Plan Renacer): emergencias relacionadas con cáncer y diagnóstico de cáncer, luego de 180 días.</p>
+                <p><strong>Cobertura dental</strong> (Plan Prosonrisas): prestaciones básicas 24 horas, procedimientos específicos luego de 60 días, preexistencias (montos referenciales) igual a los tramos del plan individual.</p>
+                <p>Visite nuestra <a href="https://servicio.humana.med.ec/" target="_blank" rel="noreferrer">central de ayuda</a> para recibir asesoría personalizada.</p>
+              </div>
+            </details>
+          </div>
+
+          <div className="biz-section-head" style={{ marginTop: 56 }}>
+            <h2>Dudas sobre su pago</h2>
+          </div>
+          <div className="biz-faq">
+            <details>
+              <summary><span>¿Cuáles son las formas de pago disponibles?</span><span className="biz-faq-plus" aria-hidden="true">+</span></summary>
+              <div className="biz-faq-content">
+                <p>✔ Pago inicial: todas las tarjetas de crédito (Diners, Visa, Mastercard, Discover, American Express) nacionales e internacionales y tarjetas de débito (Visa o Mastercard) nacionales.</p>
+                <p>✔ Siguientes cuotas: tarjetas de crédito nacionales e internacionales aprobadas en nuestro comercio, o cuentas bancarias de ahorros o corrientes de bancos y cooperativas del país.</p>
+              </div>
+            </details>
+            <details>
+              <summary><span>¿En qué fechas se realizan los cobros mensuales?</span><span className="biz-faq-plus" aria-hidden="true">+</span></summary>
+              <div className="biz-faq-content">
+                <ul>
+                  <li>Vigencia del 1 al 15 del mes: primer día hábil de cada mes.</li>
+                  <li>Del 16 al 21 del mes: los 15 de cada mes (día hábil).</li>
+                  <li>Del 22 al fin de mes: los 22 de cada mes (día hábil).</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary><span>¿Qué es la firma electrónica?</span><span className="biz-faq-plus" aria-hidden="true">+</span></summary>
+              <div className="biz-faq-content">
+                <ul>
+                  <li>La firma electrónica de documentos digitales, es un certificado legal, que se produce de manera ágil, ecológica y siempre bajo la más estricta seguridad.</li>
+                  <li>Es la equivalencia de la firma manuscrita ya que tiene la misma validez legal y está amparada en la Ley de Comercio Electrónico.</li>
+                  <li>Se envía un pin al e-mail mediante el cual se facilita dicha firma electrónica, sin necesidad de los complicados trámites tradicionales.</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary><span>¿Cómo solicitar reversos o anulaciones de compras?</span><span className="biz-faq-plus" aria-hidden="true">+</span></summary>
+              <div className="biz-faq-content">
+                <p><strong>Reversos automáticos compra:</strong> Las compras realizadas el mismo día y que no hayan sido integradas a nuestro sistema, podrán ser reversadas de manera automática de la siguiente manera:</p>
+                <p><strong>Botón de pago Paymentez:</strong> Compras realizadas antes de 17h39 se las podrá reversar hasta las 17h40 del mismo día, compras desde las 17h41 se las puede reversar hasta las 17h39 del día siguiente. Compras que no se hayan podido reversar en ese lapso, ingresarán a devolución manual de 5 días hábiles.</p>
+                <p><strong>Botón de pago Place to Pay:</strong> Compras realizadas el mismo día se podrán reversar hasta las 23h59 del mismo día. Compras que no se hayan podido reversar en ese lapso, ingresarán a devolución manual de 5 días hábiles.</p>
+                <p>Si necesita un reverso automático puede escribirnos a: <a href="mailto:servicioalcliente@humana.med.ec">servicioalcliente@humana.med.ec</a></p>
+                <p><strong>Anulación contrato:</strong> Si desea solicitar la anulación de una compra ya suscrita en nuestro sistema, le recomendamos solicitarla por medio de nuestra <a href="https://servicio.humana.med.ec/" target="_blank" rel="noreferrer">central de ayuda</a>.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      {/* Beneficios incluidos en tu plan ---------------------------------- */}
+      <section className="biz-section is-dark">
+        <div className="biz-container">
+          <div className="biz-section-head">
+            <h2>Beneficios incluidos en tu plan</h2>
+            <p>Ten el control siempre, nuestros servicios te acompañan para que te sientas tranquilo y protegido.</p>
+          </div>
+          <div className="plan-detail-table-wrap" style={{ background: "#fff", borderRadius: 20, padding: 24, marginTop: 32, maxWidth: 820, marginLeft: "auto", marginRight: "auto" }}>
+            <table className="plan-detail-table">
+              <tbody>
+                <tr><th scope="row">Médico a domicilio</th><td>Solicita un médico para que acuda en el lugar donde lo necesites.</td></tr>
+                <tr><th scope="row">Asistencia en viajes</th><td>Viaja seguro con cobertura por un monto máximo de $100.000.</td></tr>
+                <tr><th scope="row">Teleconsulta médica</th><td>Ilimitadas y sin costo, agendando tu cita en el 1800 48 62 62 o mediante APP.</td></tr>
+                <tr><th scope="row">Farmacia a domicilio</th><td>Solicita tus medicinas y aplica tu cobertura con Medicity, Pharmacys y Fybeca.</td></tr>
+                <tr><th scope="row">Ambulancia terrestre</th><td>Recibe asistencia médica oportuna en caso de emergencia.</td></tr>
+                <tr><th scope="row">Seguro de vida</th><td>Si en algún momento llegas a faltar, ofrecemos a tus familiares un importante apoyo.</td></tr>
+                <tr><th scope="row">Asistencia Exequial</th><td>Cobertura de sepelio con Jardines del Valle para titulares y dependientes.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style={{ textAlign: "center", marginTop: 20 }}>
+            <a className="biz-btn-primary" href="https://servicio.humana.med.ec/hc/es/articles/4402807362573-Beneficios-Incluidos" target="_blank" rel="noreferrer">
+              Conoce todos los beneficios
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Tarifa cero -------------------------------------------------------- */}
+      <section className="biz-section is-light">
+        <div className="biz-container">
+          <div className="biz-section-head">
+            <h2>Tarifa cero</h2>
+          </div>
+          <div style={{ maxWidth: 680, margin: "32px auto 0" }}>
+            <ul className="plan-faq-checklist">
+              <li>Prestaciones de prevención primaria (aplica para los planes con Cobertura Integral de Medicina Prepagada).</li>
+              <li>El afiliado, para acceder a las prestaciones de tarifa 0, deberá pedir una preautorización en cualquier oficina de Humana.</li>
+              <li>Estas atenciones se darán únicamente en prestadores autorizados por Humana.</li>
+            </ul>
+            <a className="secondary-button small" style={{ marginTop: 16 }} href="https://planes.humana.med.ec/hubfs/Ver%20m%C3%A1s%20Planes%20suscriptor/Tarifa%20Cero/TARIFA-CERO.pdf" target="_blank" rel="noreferrer">Ver más</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonios -------------------------------------------------------- */}
+      <section className="biz-section is-dark is-close">
+        <div className="biz-container">
+          <div className="biz-section-head">
+            <h2>Nuestros clientes nos recomiendan</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16, marginTop: 36 }}>
+            {[
+              ["El Sr que me atendió fue atento y eficiente. Tenía conocimiento del trámite y no se demoró. Gracias", "María Teresa S. P."],
+              ["Me indicó claramente el procedimiento a realizar, y me envió el correo al cual debía enviar la información. Excelente Servicio", "Xavier Antonio M. L."],
+              ["Fui atendida con amabilidad y respondió todas mis inquietudes facilitando mi proceso médico.", "Myriam Magdalena R. B."],
+              ["Excelente atención en un ambiente protegido con todas las medidas de bio seguridad.", "Marilú R. V."],
+              ["Excelente atención, hoy hice uso de teleconsulta y me atendieron muy bien tanto por el chat, la llamada del médico, el envío por wp de la receta y sus indicaciones.", "Jhoset P. L."],
+              ["Excelente atención de primera muy humanos.", "José David I. D."],
+            ].map(([quote, author]) => (
+              <div key={author} className="plan-hub-card" style={{ padding: 20 }}>
+                <p style={{ fontStyle: "italic" }}>&ldquo;{quote}&rdquo;</p>
+                <strong>{author}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   </SiteShell>;
 }

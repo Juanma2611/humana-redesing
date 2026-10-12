@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { CalendarCheck, Gauge, MapPin, Pill, ReceiptText, ShieldCheck } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
@@ -18,12 +19,12 @@ const specs = [
 ];
 
 const sections = [
-  { title: "Mi Red: Guía Médica Humana", copy: "Aproveche al máximo su cobertura usando la Red médica Humana. Mediante la APP puede encontrar los mejores prestadores bajo distintas categorías: Consulta médica · Hospitalización · Exámenes de Laboratorio e Imagen · Terapias · Centros odontológicos." },
-  { title: "Autorizaciones y Mi Plan", copy: "En esta sección puedes consultar la información básica sobre tus planes contratados, tal como: Estado de tus pagos · Fecha de vigencia · Datos de contacto · Periodos de carencia · Porcentajes de cobertura · Beneficiarios del plan · Listado de atenciones recibidas." },
-  { title: "Mis Reembolsos", copy: "Consulte el estado de sus reembolsos, descargando o enviando sus liquidaciones a su propio email. Si tiene dudas sobre algún trámite, ingrese al chat en línea o llame directamente a nuestro call center, uno de nuestros agentes le ayudará." },
-  { title: "Panel de control", copy: "Con la APP MiHumana tendrás a tu disposición: Consulta de coberturas, beneficiarios, tiempos de carencia… · Descarga de documentos · Lista de prestadores georeferenciados · Gestión de Reembolsos · Agendamiento de citas y consulta médica · Pago en línea · Solicitud de medicamentos, autorizaciones y certificado de afiliación · Consulta médica · Etc." },
-  { title: "Compra de medicinas", copy: "Por medio de la APP solicite sus medicamentos con cobertura directa SIN reembolso, mediante nuestros prestadores Medicity y Farmacias Económicas. Seleccione su ciudad, e introduzca los datos del formulario: Paciente · Fecha de emisión de la receta · Dirección · Foto de la receta original." },
-  { title: "Agendamiento de citas", copy: "Ahora puede agendar sus citas médicas en Metrored directamente desde la aplicación. Puede realizar el pago de la consulta médica en la app o presencialmente." },
+  { icon: MapPin, title: "Mi Red: Guía Médica Humana", copy: "Aproveche al máximo su cobertura usando la Red médica Humana. Mediante la APP puede encontrar los mejores prestadores bajo distintas categorías: Consulta médica · Hospitalización · Exámenes de Laboratorio e Imagen · Terapias · Centros odontológicos." },
+  { icon: ShieldCheck, title: "Autorizaciones y Mi Plan", copy: "En esta sección puedes consultar la información básica sobre tus planes contratados, tal como: Estado de tus pagos · Fecha de vigencia · Datos de contacto · Periodos de carencia · Porcentajes de cobertura · Beneficiarios del plan · Listado de atenciones recibidas." },
+  { icon: ReceiptText, title: "Mis Reembolsos", copy: "Consulte el estado de sus reembolsos, descargando o enviando sus liquidaciones a su propio email. Si tiene dudas sobre algún trámite, ingrese al chat en línea o llame directamente a nuestro call center, uno de nuestros agentes le ayudará." },
+  { icon: Gauge, title: "Panel de control", copy: "Con la APP MiHumana tendrás a tu disposición: Consulta de coberturas, beneficiarios, tiempos de carencia… · Descarga de documentos · Lista de prestadores georeferenciados · Gestión de Reembolsos · Agendamiento de citas y consulta médica · Pago en línea · Solicitud de medicamentos, autorizaciones y certificado de afiliación · Consulta médica · Etc." },
+  { icon: Pill, title: "Compra de medicinas", copy: "Por medio de la APP solicite sus medicamentos con cobertura directa SIN reembolso, mediante nuestros prestadores Medicity y Farmacias Económicas. Seleccione su ciudad, e introduzca los datos del formulario: Paciente · Fecha de emisión de la receta · Dirección · Foto de la receta original." },
+  { icon: CalendarCheck, title: "Agendamiento de citas", copy: "Ahora puede agendar sus citas médicas en Metrored directamente desde la aplicación. Puede realizar el pago de la consulta médica en la app o presencialmente." },
 ];
 
 export default function AppPage() {
@@ -33,46 +34,76 @@ export default function AppPage() {
         <Link href="/">Inicio</Link><span>»</span><span>APP</span>
       </nav>
 
-      <section className="content-section plan-hub-intro" style={{ maxWidth: 820 }}>
-        <h1>MiHumana APP</h1>
-        <p><strong>Todos los servicios en tu celular</strong></p>
-        <div style={{ position: "relative", width: "100%", maxWidth: 420, aspectRatio: "4/3", margin: "20px auto", borderRadius: 20, overflow: "hidden" }}>
-          <Image src="https://humana.med.ec/wp-content/uploads/2024/09/mujer-celular-app-mi-humana.jpg" alt="MiHumana APP" fill sizes="420px" unoptimized style={{ objectFit: "cover" }} />
-        </div>
-        <div className="plan-hub-card-actions" style={{ justifyContent: "center" }}>
-          <a className="primary-button" href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer">Google Play</a>
-          <a className="secondary-button" href="https://apps.apple.com/ec/app/mi-humana/id1468370810" target="_blank" rel="noreferrer">App Store</a>
-        </div>
-      </section>
-
-      <section className="content-section" style={{ maxWidth: 640, margin: "0 auto", padding: "0 24px 48px" }}>
-        <div className="plan-detail-table-wrap" style={{ background: "#fff", borderRadius: 20, padding: 24 }}>
-          <table className="plan-detail-table">
-            <thead><tr><th></th><th>Android</th><th>iOS</th></tr></thead>
-            <tbody>
-              {specs.map((row) => <tr key={row.label}><th scope="row">{row.label}</th><td>{row.android}</td><td>{row.ios}</td></tr>)}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="content-section" style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px 48px" }}>
-        {sections.map((s) => (
-          <div key={s.title} style={{ marginBottom: 24 }}>
-            <h2>{s.title}</h2>
-            <p>{s.copy}</p>
+      <div className="biz-page" data-accent="blue">
+        {/* Hero ------------------------------------------------------- */}
+        <section className="biz-hero" id="app-inicio">
+          <div className="biz-hero-copy">
+            <span className="biz-eyebrow">MIHUMANA APP</span>
+            <h1>MiHumana APP</h1>
+            <p className="biz-hero-line"><strong>Todos los servicios en tu celular</strong></p>
+            <div className="biz-hero-actions">
+              <a className="biz-btn-primary" href="https://play.google.com/store/apps/details?id=com.libelulasoft.humana" target="_blank" rel="noreferrer">Google Play</a>
+              <a className="biz-btn-primary" href="https://apps.apple.com/ec/app/mi-humana/id1468370810" target="_blank" rel="noreferrer">App Store</a>
+            </div>
           </div>
-        ))}
-      </section>
+          <figure className="biz-hero-image">
+            <Image src="https://humana.med.ec/wp-content/uploads/2024/09/mujer-celular-app-mi-humana.jpg" alt="Mujer usando la app MiHumana en su celular" fill sizes="(max-width: 980px) 100vw, 1180px" unoptimized />
+          </figure>
+        </section>
 
-      <section className="content-section" style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px 64px" }}>
-        <ul className="plan-faq-checklist">
-          <li>Todos los <a href="https://servicio.humana.med.ec/hc/es/articles/4402730448653-Descarga-de-Formularios" target="_blank" rel="noreferrer">documentos importantes</a> para realizar sus trámites, en formato PDF editable, tales como solicitar reembolso, pre-autorización de cirugía, autorizaciones de débito, y más.</li>
-          <li>Aproveche al máximo su cobertura usando la <a href="https://red.humana.med.ec/" target="_blank" rel="noreferrer">Red médica Humana</a>. Mediante la APP puede encontrar los mejores prestadores bajo distintas categorías, segmentados por ciudad, sector o especialidad.</li>
-          <li>Por medio de la app solicite sus medicamentos con cobertura directa SIN reembolsos, mediante nuestro aliado Medicity.</li>
-          <li>Obtenga el mejor beneficio de su cobertura médica, conociendo todas las prestaciones de su plan, sus deducibles y beneficios incluidos. Puede descargar el manual de uso de su plan.</li>
-        </ul>
-      </section>
+        {/* Las 6 funciones ------------------------------------------------- */}
+        <section className="biz-section is-light">
+          <div className="biz-container">
+            <div className="biz-section-head">
+              <span className="biz-eyebrow">TODO EN UN SOLO LUGAR</span>
+              <h2>Lo que puedes hacer desde la app</h2>
+            </div>
+            <div className="biz-benefit-cards cols-3">
+              {sections.map(({ icon: Icon, title, copy }) => (
+                <div key={title} className="biz-benefit-card" style={{ textAlign: "left", alignItems: "flex-start" }}>
+                  <Icon aria-hidden="true" />
+                  <h3>{title}</h3>
+                  <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "#3a3a3c" }}>{copy}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Más recursos -------------------------------------------------- */}
+        <section className="biz-section is-dark">
+          <div className="biz-container">
+            <div className="biz-section-head">
+              <h2>Más recursos dentro de la app</h2>
+            </div>
+            <div style={{ maxWidth: 760, margin: "32px auto 0" }}>
+              <ul className="biz-text-list">
+                <li>Todos los <a href="https://servicio.humana.med.ec/hc/es/articles/4402730448653-Descarga-de-Formularios" target="_blank" rel="noreferrer">documentos importantes</a> para realizar sus trámites, en formato PDF editable, tales como solicitar reembolso, pre-autorización de cirugía, autorizaciones de débito, y más.</li>
+                <li>Aproveche al máximo su cobertura usando la <a href="https://red.humana.med.ec/" target="_blank" rel="noreferrer">Red médica Humana</a>. Mediante la APP puede encontrar los mejores prestadores bajo distintas categorías, segmentados por ciudad, sector o especialidad.</li>
+                <li>Por medio de la app solicite sus medicamentos con cobertura directa SIN reembolsos, mediante nuestro aliado Medicity.</li>
+                <li>Obtenga el mejor beneficio de su cobertura médica, conociendo todas las prestaciones de su plan, sus deducibles y beneficios incluidos. Puede descargar el manual de uso de su plan.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Ficha técnica --------------------------------------------------- */}
+        <section className="biz-section is-light">
+          <div className="biz-container">
+            <div className="biz-section-head">
+              <h2>Ficha técnica</h2>
+            </div>
+            <div className="plan-detail-table-wrap" style={{ background: "#fff", borderRadius: 20, padding: 24, marginTop: 32, maxWidth: 640, marginLeft: "auto", marginRight: "auto" }}>
+              <table className="plan-detail-table">
+                <thead><tr><th></th><th>Android</th><th>iOS</th></tr></thead>
+                <tbody>
+                  {specs.map((row) => <tr key={row.label}><th scope="row">{row.label}</th><td>{row.android}</td><td>{row.ios}</td></tr>)}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
     </SiteShell>
   );
 }
