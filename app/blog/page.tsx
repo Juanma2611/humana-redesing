@@ -27,7 +27,7 @@ export default function Blog() {
     <section className="content-section blog-listing">
       <div className="blog-listing-main">
         <div className="article-provisional-notice" role="note" style={{ marginBottom: 24 }}>
-          Los posts de este blog están en migración desde WordPress. Por ahora solo se muestran los que ya tienen contenido (provisional, pendiente de reemplazo por el texto oficial).
+          Estos son artículos de muestra para mostrar el diseño del blog. Los posts oficiales se publicarán directamente en el sitio final.
         </div>
 
         <div className="blog-listing-grid">

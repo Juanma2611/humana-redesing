@@ -1,8 +1,9 @@
 import { provisionalBlogPosts } from "@/lib/blog-articles";
 import { blogCatalog, findCatalogEntry, getCategoryLabel } from "@/lib/blog-catalog";
 // Posts reales importados desde WordPress (ver scripts/import-wordpress-posts.ts).
-// Vacío hasta que se corra el importador; a partir de ahí, estos posts
-// reemplazan a los provisionales con el mismo slug.
+// Por decisión confirmada, los posts reales NO se migran a este proyecto:
+// pasarán de WordPress a WordPress directo en el sitio final. El importador
+// queda guardado sin usar, así que esta lista se mantiene vacía.
 import { importedBlogPosts } from "@/lib/blog-posts-imported.generated";
 
 export type BlogArticle = {
@@ -17,10 +18,10 @@ export type BlogArticle = {
   provisional: boolean;
 };
 
-// Solo los posts con contenido disponible (importado o provisional) generan
-// artículo visible. El resto del catálogo oficial (ver lib/blog-catalog.ts)
-// queda "pendiente de contenido oficial": no tiene página ni aparece en
-// ningún listado. Un post importado siempre reemplaza a su versión provisional.
+// Solo los 3 artículos de muestra (ver lib/blog-articles.ts) generan
+// página visible. El resto del catálogo oficial (ver lib/blog-catalog.ts)
+// queda sin página ni listado: es solo referencia de slugs/categorías
+// oficiales para cuando el sitio final tenga su propio contenido.
 export function getAllBlogArticles(): BlogArticle[] {
   const importedSlugs = new Set(importedBlogPosts.map((p) => p.slug));
   const provisional = provisionalBlogPosts
