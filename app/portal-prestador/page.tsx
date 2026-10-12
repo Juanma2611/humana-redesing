@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, FileText } from "lucide-react";
+import { ArrowRight, Building2, FileCheck2, Settings, UserCog } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
+import { ExpedienteChecklist } from "./ExpedienteChecklist";
 
 export const metadata: Metadata = {
   title: "Portal Prestador - Humana S.A.",
@@ -9,23 +11,17 @@ export const metadata: Metadata = {
     "GAIA es el portal donde los prestadores de salud administran su convenio y donde las instituciones que quieren integrarse a la red inician su proceso de…",
 };
 
-const requiredDocs = [
-  { code: "DOC-01", title: "RUC actualizado", copy: "Registro Único de Contribuyentes vigente de la institución." },
-  { code: "DOC-02", title: "Permiso de funcionamiento vigente", copy: "Uno por cada sucursal que quieras incorporar al convenio." },
-  { code: "DOC-03", title: "Tarifario de prestaciones", copy: "Debe presentarse en el formato que descargas desde el portal." },
-  { code: "DOC-04", title: "Staff médico", copy: "También en el formato del portal. Reúne estos datos de cada profesional antes de llenarlo: Registro SENESCYT · RUC · Cédula · Especialidad médica." },
-];
-
-const optionalDocs = [
-  { code: "OPC-01", title: "Póliza de responsabilidad civil", copy: "Suma respaldo a tu postulación, aunque no es requisito de ingreso." },
-  { code: "OPC-02", title: "Carta de presentación", copy: "Describe tu institución, trayectoria y capacidad instalada." },
+const steps = [
+  "Crea tus credenciales. Entra a Registro de prestador —la misma opción “No tengo cuenta” de la pantalla de acceso— para generar tu usuario y contraseña, y comenzar el registro como prestador interesado.",
+  "Completa el formulario. Llena el formulario de Prestador Interesado con los datos de tu institución y los servicios que ofreces. Detalla únicamente los servicios para los cuales tu permiso de funcionamiento te acredita.",
+  "Carga tus documentos. Adjunta en el formulario los cuatro documentos obligatorios. El tarifario y el staff médico se cargan en los formatos que el portal te entrega.",
 ];
 
 const areas = [
-  { code: "Área 01", title: "Gestión de servicios", items: ["Agregar nuevos servicios a la sucursal activa.", "Inactivar servicios vigentes del convenio de forma temporal.", "Inactivar servicios de forma permanente, según tus necesidades de gestión."] },
-  { code: "Área 02", title: "Administración de sucursales", items: ["Incorporar nuevas sucursales al convenio.", "Consultar y administrar las sucursales ya registradas."] },
-  { code: "Área 03", title: "Actualización del staff médico", items: ["Incluir personal médico en una o varias sucursales.", "Excluir personal médico de una o varias sucursales."] },
-  { code: "Área 04", title: "Documentación regulatoria", items: ["Actualizar el permiso de funcionamiento de cada sucursal.", "Cargar y mantener al día el resto de tu documentación."] },
+  { icon: Settings, title: "Gestión de servicios", items: ["Agregar nuevos servicios a la sucursal activa.", "Inactivar servicios vigentes del convenio de forma temporal.", "Inactivar servicios de forma permanente, según tus necesidades de gestión."] },
+  { icon: Building2, title: "Administración de sucursales", items: ["Incorporar nuevas sucursales al convenio.", "Consultar y administrar las sucursales ya registradas."] },
+  { icon: UserCog, title: "Actualización del staff médico", items: ["Incluir personal médico en una o varias sucursales.", "Excluir personal médico de una o varias sucursales."] },
+  { icon: FileCheck2, title: "Documentación regulatoria", items: ["Actualizar el permiso de funcionamiento de cada sucursal.", "Cargar y mantener al día el resto de tu documentación."] },
 ];
 
 export default function PortalPrestadorPage() {
@@ -35,87 +31,126 @@ export default function PortalPrestadorPage() {
         <Link href="/">Inicio</Link><span>»</span><span>Portal Prestador</span>
       </nav>
 
-      <section className="content-section plan-hub-intro" style={{ maxWidth: 860 }}>
-        <span className="plan-hub-card-icon" style={{ margin: "0 auto 12px" }}>GAIA</span>
-        <h1>Tu convenio con Humana, gestionado en línea.</h1>
-        <p>
-          GAIA es el portal donde los prestadores de salud administran su convenio y donde las
-          instituciones que quieren integrarse a la red inician su proceso de inclusión.
-        </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginTop: 24, textAlign: "left" }}>
-          <div className="plan-hub-card" style={{ padding: 20 }}><strong>Sin trámites presenciales</strong><p>Solicitudes, cargas y actualizaciones desde el portal.</p></div>
-          <div className="plan-hub-card" style={{ padding: 20 }}><strong>Documentación en línea</strong><p>Permisos, tarifario y staff médico siempre vigentes.</p></div>
-        </div>
-      </section>
-
-      <section className="content-section plan-hub-grid" style={{ maxWidth: 900 }}>
-        <article className="plan-hub-card">
-          <div className="plan-hub-card-copy">
-            <h3>Quiero ser prestador</h3>
-            <p><strong>Registro de prestador interesado.</strong> Inicia el proceso de negociación y evaluación para incorporarte a la red de prestadores de Humana.</p>
-            <a className="primary-button" href="https://gaia.humana.med.ec/registro-prestador" target="_blank" rel="noreferrer">Crear mis credenciales <ArrowRight size={16} /></a>
-            <p style={{ fontSize: 13, color: "#5e7384" }}>Equivale a la opción &quot;No tengo cuenta&quot; de la pantalla de acceso.</p>
+      <div className="biz-page" data-accent="teal">
+        {/* Hero ----------------------------------------------------------- */}
+        <section className="biz-hero" id="portal-prestador-inicio">
+          <div className="biz-hero-copy">
+            <span className="biz-eyebrow">GAIA</span>
+            <h1>Tu convenio con Humana, <span>gestionado en línea.</span></h1>
+            <p className="biz-hero-body">
+              GAIA es el portal donde los prestadores de salud administran su convenio y donde las
+              instituciones que quieren integrarse a la red inician su proceso de inclusión.
+            </p>
           </div>
-        </article>
-        <article className="plan-hub-card">
-          <div className="plan-hub-card-copy">
-            <h3>Ya tengo convenio</h3>
-            <p><strong>Portal Prestadores.</strong> Administra servicios, sucursales, staff médico y documentación regulatoria de tu convenio vigente.</p>
-            <a className="primary-button" href="https://portalprestador.humana.med.ec/auth/login" target="_blank" rel="noreferrer">Soy prestador <ArrowRight size={16} /></a>
-            <p style={{ fontSize: 13, color: "#5e7384" }}>Usa las credenciales asignadas a tu institución.</p>
-          </div>
-        </article>
-      </section>
-
-      <section className="content-section" style={{ maxWidth: 860, margin: "0 auto", padding: "48px 24px" }}>
-        <h2>Tres pasos para iniciar tu postulación</h2>
-        <p>El registro como prestador interesado abre tu proceso de negociación y evaluación con Humana. Completa los tres pasos en orden.</p>
-        <ol>
-          <li><strong>Paso 01 · Crea tus credenciales.</strong> Entra a Registro de prestador —la misma opción &quot;No tengo cuenta&quot; de la pantalla de acceso— para generar tu usuario y contraseña, y comenzar el registro como prestador interesado.</li>
-          <li><strong>Paso 02 · Completa el formulario.</strong> Llena el formulario de Prestador Interesado con los datos de tu institución y los servicios que ofreces. Detalla únicamente los servicios para los cuales tu permiso de funcionamiento te acredita.</li>
-          <li><strong>Paso 03 · Carga tus documentos.</strong> Adjunta en el formulario los cuatro documentos obligatorios. El tarifario y el staff médico se cargan en los formatos que el portal te entrega.</li>
-        </ol>
-      </section>
-
-      <section className="content-section" style={{ maxWidth: 860, margin: "0 auto", padding: "0 24px 48px" }}>
-        <h2>Prepara tu expediente</h2>
-        <p>Marca cada documento a medida que lo tengas listo. Cuando completes los obligatorios, estarás en condiciones de llenar el formulario sin interrupciones.</p>
-        <h3>Documentos obligatorios</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
-          {requiredDocs.map((doc) => (
-            <div key={doc.code} className="plan-hub-card" style={{ padding: 18 }}>
-              <FileText size={18} /> <strong>{doc.code} {doc.title}</strong><p>{doc.copy}</p>
+          <div className="biz-container" style={{ marginTop: 8 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16, maxWidth: 680, margin: "0 auto" }}>
+              <div className="biz-list-card"><strong>Sin trámites presenciales</strong><p style={{ margin: 0, color: "rgba(255,255,255,.85)", fontSize: 15 }}>Solicitudes, cargas y actualizaciones desde el portal.</p></div>
+              <div className="biz-list-card"><strong>Documentación en línea</strong><p style={{ margin: 0, color: "rgba(255,255,255,.85)", fontSize: 15 }}>Permisos, tarifario y staff médico siempre vigentes.</p></div>
             </div>
-          ))}
-        </div>
-        <h3 style={{ marginTop: 24 }}>Documentos opcionales</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
-          {optionalDocs.map((doc) => (
-            <div key={doc.code} className="plan-hub-card" style={{ padding: 18 }}>
-              <FileText size={18} /> <strong>{doc.code} {doc.title}</strong><p>{doc.copy}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="content-section" style={{ maxWidth: 860, margin: "0 auto", padding: "0 24px 48px" }}>
-        <h2>Qué puedes gestionar en el portal</h2>
-        <p>Con tu convenio activo, resuelves de forma ágil y directa los cambios que antes requerían trámite. Estas son las cuatro áreas disponibles.</p>
-        {areas.map((area) => (
-          <div key={area.code} style={{ marginTop: 16 }}>
-            <strong>{area.code} · {area.title}</strong>
-            <ul className="plan-faq-checklist">{area.items.map((item) => <li key={item}><Check size={16} /><span>{item}</span></li>)}</ul>
           </div>
-        ))}
-      </section>
+          <figure className="biz-hero-image">
+            <Image src="/images/portal-prestador/portal-prestador-hero.webp" alt="Administradora de un centro médico gestionando su convenio con Humana desde su computadora" fill sizes="(max-width: 1200px) 100vw, 1180px" unoptimized />
+          </figure>
+        </section>
 
-      <section className="sales-assurance">
-        <div><FileText /><span><strong>Todo listo para ingresar</strong><small>Si ya tienes convenio, entra con tus credenciales. Si vas a postular, crea tu cuenta desde el registro de prestador y continúa con el formulario.</small></span></div>
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <a className="ghost-button" href="https://gaia.humana.med.ec/registro-prestador" target="_blank" rel="noreferrer">Registrarme como prestador</a>
-          <a className="ghost-button" href="https://portalprestador.humana.med.ec/auth/login" target="_blank" rel="noreferrer">Ingresar al portal <ArrowRight size={16} /></a>
-        </div>
-      </section>
+        {/* Acceso: Quiero ser prestador / Ya tengo convenio ---------------- */}
+        <section className="biz-section is-light">
+          <div className="biz-container">
+            <div className="biz-section-head">
+              <span className="biz-eyebrow">INGRESA AL PORTAL</span>
+              <h2>Elige tu acceso</h2>
+            </div>
+            <div className="plan-hub-grid" style={{ marginTop: 40, maxWidth: 900, marginLeft: "auto", marginRight: "auto" }}>
+              <article className="plan-hub-card">
+                <div className="plan-hub-card-copy">
+                  <h3>Quiero ser prestador</h3>
+                  <p><strong>Registro de prestador interesado.</strong> Inicia el proceso de negociación y evaluación para incorporarte a la red de prestadores de Humana.</p>
+                  <a className="primary-button" href="https://gaia.humana.med.ec/registro-prestador" target="_blank" rel="noreferrer">Crear mis credenciales <ArrowRight size={16} /></a>
+                  <p style={{ fontSize: 13, color: "#5e7384" }}>Equivale a la opción &quot;No tengo cuenta&quot; de la pantalla de acceso.</p>
+                </div>
+              </article>
+              <article className="plan-hub-card">
+                <div className="plan-hub-card-copy">
+                  <h3>Ya tengo convenio</h3>
+                  <p><strong>Portal Prestadores.</strong> Administra servicios, sucursales, staff médico y documentación regulatoria de tu convenio vigente.</p>
+                  <a className="primary-button" href="https://portalprestador.humana.med.ec/auth/login" target="_blank" rel="noreferrer">Soy prestador <ArrowRight size={16} /></a>
+                  <p style={{ fontSize: 13, color: "#5e7384" }}>Usa las credenciales asignadas a tu institución.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        {/* Tres pasos: línea de tiempo -------------------------------------- */}
+        <section className="biz-section is-dark">
+          <div className="biz-container">
+            <div className="biz-section-head">
+              <span className="biz-eyebrow">POSTULACIÓN</span>
+              <h2>Tres pasos para iniciar tu postulación</h2>
+              <p>El registro como prestador interesado abre tu proceso de negociación y evaluación con Humana. Completa los tres pasos en orden.</p>
+            </div>
+            <ol className="biz-timeline" style={{ maxWidth: 900 }}>
+              {steps.map((text, i) => (
+                <li className="biz-timeline-step" key={text}>
+                  <span className="biz-timeline-num">{String(i + 1).padStart(2, "0")}</span>
+                  <p>{text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* Prepara tu expediente: checklist interactiva --------------------- */}
+        <section className="biz-section is-light">
+          <div className="biz-container">
+            <div className="biz-section-head">
+              <span className="biz-eyebrow">DOCUMENTACIÓN</span>
+              <h2>Prepara tu expediente</h2>
+              <p>Marca cada documento a medida que lo tengas listo. Cuando completes los obligatorios, estarás en condiciones de llenar el formulario sin interrupciones.</p>
+            </div>
+            <div style={{ maxWidth: 820, margin: "0 auto" }}>
+              <ExpedienteChecklist />
+            </div>
+          </div>
+        </section>
+
+        {/* Qué puedes gestionar en el portal -------------------------------- */}
+        <section className="biz-section is-brand">
+          <div className="biz-container">
+            <div className="biz-section-head">
+              <span className="biz-eyebrow">TU CONVENIO ACTIVO</span>
+              <h2>Qué puedes gestionar en el portal</h2>
+              <p>Con tu convenio activo, resuelves de forma ágil y directa los cambios que antes requerían trámite. Estas son las cuatro áreas disponibles.</p>
+            </div>
+            <div className="biz-feature-grid">
+              {areas.map(({ icon: Icon, title, items }) => (
+                <div key={title} className="biz-feature-grid-card">
+                  <div className="biz-feature-grid-icon"><Icon aria-hidden="true" /></div>
+                  <h3>{title}</h3>
+                  <ul className="biz-text-list" style={{ fontSize: 14.5, color: "rgba(255,255,255,.78)", marginTop: 10 }}>
+                    {items.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Cierre ------------------------------------------------------------ */}
+        <section className="biz-section is-dark is-close">
+          <div className="biz-container biz-close">
+            <div className="biz-section-head">
+              <span className="biz-eyebrow">GAIA</span>
+              <h2>Todo listo para ingresar.</h2>
+              <p>Si ya tienes convenio, entra con tus credenciales. Si vas a postular, crea tu cuenta desde el registro de prestador y continúa con el formulario.</p>
+            </div>
+            <div className="biz-close-actions">
+              <a className="biz-btn-primary" href="https://gaia.humana.med.ec/registro-prestador" target="_blank" rel="noreferrer">Registrarme como prestador <ArrowRight aria-hidden="true" /></a>
+              <a className="biz-btn-link" href="https://portalprestador.humana.med.ec/auth/login" target="_blank" rel="noreferrer">Ingresar al portal <ArrowRight aria-hidden="true" /></a>
+            </div>
+          </div>
+        </section>
+      </div>
     </SiteShell>
   );
 }

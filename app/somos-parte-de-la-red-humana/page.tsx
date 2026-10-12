@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ShieldCheck } from "lucide-react";
+import { ArrowRight, Phone, ReceiptText, ShieldCheck, Users, Activity, Syringe, Pill, ClipboardList, MapPin, Stethoscope, Ambulance, HeartPulse } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
@@ -10,21 +10,21 @@ export const metadata: Metadata = {
 };
 
 const topics = [
-  { label: "Autorizaciones", href: "https://servicio.humana.med.ec/hc/es/categories/360006583511-AUTORIZACIONES" },
-  { label: "Copago", href: "https://servicio.humana.med.ec/hc/es/articles/7467007406221-Farmacias-Puntos-de-venta" },
-  { label: "Reembolso", href: "https://servicio.humana.med.ec/hc/es/articles/4402788919693-Gestionar-tus-reembolsos" },
-  { label: "Contactos", href: "https://servicio.humana.med.ec/hc/es/articles/4417526509837-Conoce-nuestros-canales-de-comunicaci%C3%B3n" },
+  { icon: ClipboardList, label: "Autorizaciones", href: "https://servicio.humana.med.ec/hc/es/categories/360006583511-AUTORIZACIONES" },
+  { icon: ReceiptText, label: "Copago", href: "https://servicio.humana.med.ec/hc/es/articles/7467007406221-Farmacias-Puntos-de-venta" },
+  { icon: Activity, label: "Reembolso", href: "https://servicio.humana.med.ec/hc/es/articles/4402788919693-Gestionar-tus-reembolsos" },
+  { icon: Phone, label: "Contactos", href: "https://servicio.humana.med.ec/hc/es/articles/4417526509837-Conoce-nuestros-canales-de-comunicaci%C3%B3n" },
 ];
 
 const services = [
-  { label: "Médico a domicilio", href: "https://servicio.humana.med.ec/hc/es/articles/4402813434253-M%C3%A9dico-a-domicilio" },
-  { label: "Teleconsultas", href: "https://servicio.humana.med.ec/hc/es/articles/4402720816013-Teleconsulta-m%C3%A9dica" },
-  { label: "Ambulancia", href: "https://servicio.humana.med.ec/hc/es/articles/4402736531597-Ambulancia-terrestre" },
-  { label: "Programa de pacientes Covid-19", href: "https://servicio.humana.med.ec/hc/es/articles/4403176927757-Programa-de-pacientes-Covid" },
-  { label: "Plan de vacunación infantil", href: "https://servicio.humana.med.ec/hc/es/articles/4403717589517-Plan-de-vacunaci%C3%B3n-infantil" },
-  { label: "Plan de medicación continua", href: "https://servicio.humana.med.ec/hc/es/sections/360013986011-Plan-de-medicaci%C3%B3n-Continua" },
-  { label: "Autorizaciones", href: "https://servicio.humana.med.ec/hc/es/categories/360006583511-AUTORIZACIONES" },
-  { label: "Red de Prestadores", href: "https://red.humana.med.ec/RedHumana" },
+  { icon: Stethoscope, label: "Médico a domicilio", href: "https://servicio.humana.med.ec/hc/es/articles/4402813434253-M%C3%A9dico-a-domicilio" },
+  { icon: Users, label: "Teleconsultas", href: "https://servicio.humana.med.ec/hc/es/articles/4402720816013-Teleconsulta-m%C3%A9dica" },
+  { icon: Ambulance, label: "Ambulancia", href: "https://servicio.humana.med.ec/hc/es/articles/4402736531597-Ambulancia-terrestre" },
+  { icon: HeartPulse, label: "Programa de pacientes Covid-19", href: "https://servicio.humana.med.ec/hc/es/articles/4403176927757-Programa-de-pacientes-Covid" },
+  { icon: Syringe, label: "Plan de vacunación infantil", href: "https://servicio.humana.med.ec/hc/es/articles/4403717589517-Plan-de-vacunaci%C3%B3n-infantil" },
+  { icon: Pill, label: "Plan de medicación continua", href: "https://servicio.humana.med.ec/hc/es/sections/360013986011-Plan-de-medicaci%C3%B3n-Continua" },
+  { icon: ClipboardList, label: "Autorizaciones", href: "https://servicio.humana.med.ec/hc/es/categories/360006583511-AUTORIZACIONES" },
+  { icon: MapPin, label: "Red de Prestadores", href: "https://red.humana.med.ec/RedHumana" },
 ];
 
 export default function SomosParteRedHumanaPage() {
@@ -34,37 +34,68 @@ export default function SomosParteRedHumanaPage() {
         <Link href="/">Inicio</Link><span>»</span><span>Somos parte de la red Humana</span>
       </nav>
 
-      <section className="content-section plan-hub-intro" style={{ maxWidth: 760 }}>
-        <div style={{ position: "relative", width: "100%", aspectRatio: "16/7", borderRadius: 20, overflow: "hidden", marginBottom: 24 }}>
-          <Image src="https://humana.med.ec/wp-content/uploads/2022/08/para-que-todo-vaya.png" alt="Somos parte de la red Humana" fill sizes="760px" unoptimized style={{ objectFit: "cover" }} />
-        </div>
-        <h1>Somos parte de la red Humana</h1>
-      </section>
+      <div className="biz-page" data-accent="blue">
+        {/* Hero: foto completa + overlay navy ----------------------------- */}
+        <section className="biz-hero-photo" id="red-humana-inicio" style={{ minHeight: 420 }}>
+          <Image className="biz-hero-photo-img" src="/images/somos-parte-de-la-red-humana/somos-parte-hero.webp" alt="Enfermera y doctora conversando en la recepción de un hospital de la red Humana" fill sizes="100vw" unoptimized />
+          <div className="biz-hero-photo-overlay" />
+          <div className="biz-hero-photo-content">
+            <span className="biz-eyebrow">RED HUMANA</span>
+            <h1>Somos parte de la red Humana</h1>
+          </div>
+        </section>
 
-      <section className="content-section" style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px 48px" }}>
-        <h3>Haz clic en el tema que necesitas consultar:</h3>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 16 }}>
-          {topics.map((t) => (
-            <a key={t.label} href={t.href} target="_blank" rel="noreferrer" className="primary-button small">{t.label}</a>
-          ))}
-        </div>
-      </section>
+        {/* 4 consultas rápidas --------------------------------------------- */}
+        <section className="biz-section is-light">
+          <div className="biz-container">
+            <div className="biz-section-head">
+              <span className="biz-eyebrow">CONSULTAS RÁPIDAS</span>
+              <h2>Haz clic en el tema que necesitas consultar</h2>
+            </div>
+            <div className="medi-quick-grid">
+              {topics.map(({ icon: Icon, label, href }) => (
+                <a className="medi-quick-card" href={href} target="_blank" rel="noreferrer" key={label}>
+                  <span className="medi-quick-icon"><Icon aria-hidden="true" /></span>
+                  <span className="medi-quick-label">{label}</span>
+                  <ArrowRight className="medi-quick-arrow" aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      <section className="content-section" style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px 24px" }}>
-        <h2>Haz clic y accede a nuestros servicios</h2>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 16 }}>
-          {services.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="secondary-button small">{s.label}</a>
-          ))}
-        </div>
-      </section>
+        {/* 8 servicios, como en Medihumana ---------------------------------- */}
+        <section className="biz-section is-brand">
+          <div className="biz-container">
+            <div className="biz-section-head">
+              <span className="biz-eyebrow">TODOS LOS SERVICIOS</span>
+              <h2>Haz clic y accede a nuestros servicios</h2>
+            </div>
+            <div className="medi-quick-grid">
+              {services.map(({ icon: Icon, label, href }) => (
+                <a className="medi-quick-card" href={href} target="_blank" rel="noreferrer" key={`${label}-${href}`}>
+                  <span className="medi-quick-icon"><Icon aria-hidden="true" /></span>
+                  <span className="medi-quick-label">{label}</span>
+                  <ArrowRight className="medi-quick-arrow" aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      <section className="content-section" style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px 64px" }}>
-        <div className="plan-hub-card" style={{ padding: 24, display: "flex", gap: 14, alignItems: "center" }}>
-          <ShieldCheck size={28} />
-          <p style={{ margin: 0 }}>Para mayor información llama al: <strong>1800 HUMANA (48 62 62)</strong></p>
-        </div>
-      </section>
+        {/* Cierre: teléfono destacado ---------------------------------------- */}
+        <section className="biz-section is-dark is-close">
+          <div className="biz-container biz-close">
+            <div className="biz-section-head">
+              <span className="biz-eyebrow"><ShieldCheck size={14} style={{ display: "inline", verticalAlign: "-2px", marginRight: 6 }} aria-hidden="true" />¿NECESITAS AYUDA?</span>
+              <h2>Para mayor información llama al 1800 HUMANA (48 62 62)</h2>
+            </div>
+            <div className="biz-close-actions">
+              <a className="biz-btn-primary" href="tel:1800486262"><Phone size={18} aria-hidden="true" /> Llamar ahora</a>
+            </div>
+          </div>
+        </section>
+      </div>
     </SiteShell>
   );
 }
