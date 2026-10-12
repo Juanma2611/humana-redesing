@@ -5151,12 +5151,12 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* Retícula fina + grano, reutilizados en todas las secciones oscuras/de
    color de las tres páginas para que se sientan de la misma familia
    (::before = retícula, ::after = grano muy leve sobre el degradado). */
-.biz-hero, .biz-section.is-dark, .biz-section.is-color { position: relative; overflow: hidden; }
-.biz-hero::before, .biz-section.is-dark::before, .biz-section.is-color::before {
+.biz-hero, .biz-section.is-dark, .biz-section.is-color, .biz-section.is-brand { position: relative; overflow: hidden; }
+.biz-hero::before, .biz-section.is-dark::before, .biz-section.is-color::before, .biz-section.is-brand::before {
   content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .6; z-index: 0;
   background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 42px), repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 42px);
 }
-.biz-hero::after, .biz-section.is-dark::after, .biz-section.is-color::after {
+.biz-hero::after, .biz-section.is-dark::after, .biz-section.is-color::after, .biz-section.is-brand::after {
   content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .05; mix-blend-mode: overlay; z-index: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -5175,7 +5175,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 }
 .biz-section.is-dark.is-close { background-position: top right, 12% 88%, 88% 12%, center; }
 /* Contenido por encima de las capas decorativas. */
-.biz-hero > *, .biz-section.is-dark > *, .biz-section.is-color > * { position: relative; z-index: 1; }
+.biz-hero > *, .biz-section.is-dark > *, .biz-section.is-color > *, .biz-section.is-brand > * { position: relative; z-index: 1; }
 
 .biz-reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--premium-ease), transform .7s var(--premium-ease); }
 .biz-reveal.is-visible { opacity: 1; transform: translateY(0); }
@@ -5197,15 +5197,24 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
     linear-gradient(135deg, #075c92 0%, #0b80bd 55%, #0f93cf 100%);
   color: #fff;
 }
+/* Azul de marca oscuro: variante de is-color que se queda siempre en rango
+   oscuro (sin el extremo celeste claro de is-color), para alternar fondos
+   sin perder nunca el contraste del texto blanco (WCAG AA). */
+.biz-section.is-brand {
+  background:
+    radial-gradient(circle at 85% 18%, rgba(18,166,162,.25), transparent 45%),
+    linear-gradient(135deg, #063453 0%, #075c92 55%, #095e8f 100%);
+  color: #fff;
+}
 
 .biz-eyebrow { display: block; font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--humana-teal); margin-bottom: 14px; }
-.biz-hero .biz-eyebrow, .biz-section.is-dark .biz-eyebrow, .biz-section.is-color .biz-eyebrow { color: #7ce0db; }
+.biz-hero .biz-eyebrow, .biz-section.is-dark .biz-eyebrow, .biz-section.is-color .biz-eyebrow, .biz-section.is-brand .biz-eyebrow { color: #7ce0db; }
 
 .biz-section-head { max-width: 680px; margin: 0 auto; text-align: center; }
 .biz-section-head h2 { margin: 0 0 16px; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.16; letter-spacing: -.015em; font-weight: 650; font-variation-settings: "wght" 650; color: #1d1d1f; }
-.biz-section.is-dark .biz-section-head h2, .biz-section.is-color .biz-section-head h2 { color: #fff; }
-.biz-section-head p { margin: 0; font-size: clamp(18px, 1.6vw, 20px); line-height: 1.6; color: #6e6e73; }
-.biz-section.is-dark .biz-section-head p, .biz-section.is-color .biz-section-head p { color: rgba(255,255,255,.78); }
+.biz-hero .biz-section-head h2, .biz-section.is-dark .biz-section-head h2, .biz-section.is-color .biz-section-head h2, .biz-section.is-brand .biz-section-head h2 { color: #fff; }
+.biz-section-head p { margin: 0; font-size: clamp(18px, 1.6vw, 20px); line-height: 1.6; color: #3a3a3c; }
+.biz-hero .biz-section-head p, .biz-section.is-dark .biz-section-head p, .biz-section.is-color .biz-section-head p, .biz-section.is-brand .biz-section-head p { color: rgba(255,255,255,.85); }
 
 /* Hero ------------------------------------------------------------------ */
 .biz-hero { padding: clamp(56px, 7vw, 88px) clamp(24px, 6vw, 60px) clamp(64px, 8vw, 100px); text-align: center; }
@@ -5220,16 +5229,21 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .biz-hero-image img { border-radius: 28px; object-fit: cover; }
 
 /* Botones ----------------------------------------------------------------*/
-.biz-btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 30px; border-radius: 14px; background: var(--humana-navy); color: #fff; font-weight: 650; font-size: 16px; letter-spacing: -.005em; box-shadow: 0 14px 30px rgba(7,63,96,.2); transition: transform .3s var(--premium-ease), box-shadow .3s var(--premium-ease); }
+/* Especificidad .biz-page .biz-btn-primary (2 clases) necesaria para
+   ganarle a ".biz-page a { color: inherit }" (1 clase + 1 tipo): sin esto,
+   el botón pierde su texto blanco en cualquier sección clara (bug latente
+   que no se notaba porque ningún botón primario vivía antes en una
+   sección is-light; lo expuso Medihumana). */
+.biz-btn-primary, .biz-page .biz-btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 30px; border-radius: 14px; background: var(--humana-navy); color: #fff; font-weight: 650; font-size: 16px; letter-spacing: -.005em; box-shadow: 0 14px 30px rgba(7,63,96,.2); transition: transform .3s var(--premium-ease), box-shadow .3s var(--premium-ease); }
 .biz-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(7,63,96,.28); }
-.biz-hero .biz-btn-primary, .biz-section.is-dark .biz-btn-primary, .biz-section.is-color .biz-btn-primary { background: #fff; color: #073b60; }
-.biz-hero .biz-btn-primary:hover, .biz-section.is-dark .biz-btn-primary:hover, .biz-section.is-color .biz-btn-primary:hover { box-shadow: 0 20px 42px rgba(0,0,0,.3); }
+.biz-hero .biz-btn-primary, .biz-section.is-dark .biz-btn-primary, .biz-section.is-color .biz-btn-primary, .biz-section.is-brand .biz-btn-primary { background: #fff; color: #073b60; }
+.biz-hero .biz-btn-primary:hover, .biz-section.is-dark .biz-btn-primary:hover, .biz-section.is-color .biz-btn-primary:hover, .biz-section.is-brand .biz-btn-primary:hover { box-shadow: 0 20px 42px rgba(0,0,0,.3); }
 .biz-close .biz-btn-primary { box-shadow: 0 0 0 0 transparent; position: relative; }
 .biz-close .biz-btn-primary::after { content: ""; position: absolute; inset: -14px; z-index: -1; border-radius: 26px; background: var(--biz-accent-glow, rgba(18,166,162,.4)); filter: blur(18px); opacity: .9; }
-.biz-btn-link { display: inline-flex; align-items: center; gap: 7px; font-weight: 650; font-size: 16px; color: var(--humana-navy); }
+.biz-btn-link, .biz-page .biz-btn-link { display: inline-flex; align-items: center; gap: 7px; font-weight: 650; font-size: 16px; color: var(--humana-navy); }
 .biz-btn-link svg { width: 16px; height: 16px; transition: transform .25s var(--premium-ease); }
 .biz-btn-link:hover svg { transform: translateX(4px); }
-.biz-hero .biz-btn-link, .biz-section.is-dark .biz-btn-link, .biz-section.is-color .biz-btn-link { color: #fff; }
+.biz-hero .biz-btn-link, .biz-section.is-dark .biz-btn-link, .biz-section.is-color .biz-btn-link, .biz-section.is-brand .biz-btn-link { color: #fff; }
 
 /* Franja de cifras (essence) --------------------------------------------- */
 .biz-stats { display: flex; justify-content: center; flex-wrap: wrap; border-top: 1px solid #dcdce0; margin-top: 48px; }
@@ -5269,10 +5283,14 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .biz-feature-media img { border-radius: 24px; object-fit: cover; }
 .biz-feature-num { display: block; font-size: 13px; font-weight: 700; color: #9099a1; letter-spacing: .05em; margin-bottom: 10px; }
 .biz-feature-copy h2 { margin: 0 0 14px; font-size: clamp(30px, 3vw, 38px); line-height: 1.18; letter-spacing: -.015em; font-weight: 650; font-variation-settings: "wght" 650; color: #1d1d1f; }
-.biz-feature-copy > p { margin: 0 0 20px; font-size: 17px; line-height: 1.6; color: #6e6e73; max-width: 480px; }
-.biz-section.is-dark .biz-feature-copy h2, .biz-section.is-dark .biz-feature-text h2 { color: #fff; }
-.biz-section.is-dark .biz-feature-copy > p, .biz-section.is-dark .biz-feature-text > p { color: rgba(255,255,255,.75); }
-.biz-section.is-dark .biz-feature-num { color: rgba(255,255,255,.5); }
+.biz-feature-copy > p { margin: 0 0 20px; font-size: 17px; line-height: 1.6; color: #3a3a3c; max-width: 480px; }
+.biz-section.is-dark .biz-feature-copy h2, .biz-section.is-dark .biz-feature-text h2,
+.biz-section.is-color .biz-feature-copy h2, .biz-section.is-color .biz-feature-text h2,
+.biz-section.is-brand .biz-feature-copy h2, .biz-section.is-brand .biz-feature-text h2 { color: #fff; }
+.biz-section.is-dark .biz-feature-copy > p, .biz-section.is-dark .biz-feature-text > p,
+.biz-section.is-color .biz-feature-copy > p, .biz-section.is-color .biz-feature-text > p,
+.biz-section.is-brand .biz-feature-copy > p, .biz-section.is-brand .biz-feature-text > p { color: rgba(255,255,255,.85); }
+.biz-section.is-dark .biz-feature-num, .biz-section.is-color .biz-feature-num, .biz-section.is-brand .biz-feature-num { color: rgba(255,255,255,.6); }
 
 /* Checklist (viñetas finas, lista de "todo lo que incluye" y de beneficios) */
 .biz-checklist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 40px; }
@@ -5286,7 +5304,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* Sección de texto centrado (capítulos sin imagen propia) ---------------- */
 .biz-feature-text { max-width: 640px; margin: 0 auto; text-align: center; }
 .biz-feature-text h2 { margin: 0 0 14px; font-size: clamp(30px, 3vw, 38px); line-height: 1.18; letter-spacing: -.015em; font-weight: 650; font-variation-settings: "wght" 650; color: #1d1d1f; }
-.biz-feature-text > p { margin: 0; font-size: 17px; line-height: 1.6; color: #6e6e73; }
+.biz-feature-text > p { margin: 0; font-size: 17px; line-height: 1.6; color: #3a3a3c; }
 .biz-feature-text .biz-checklist { margin-top: 28px; text-align: left; }
 
 /* Tarjetas de beneficio (Corporativo) ------------------------------------ */
@@ -5304,15 +5322,35 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .biz-hero-stat strong { font-size: clamp(28px, 3vw, 34px); font-weight: 700; letter-spacing: -.02em; color: #fff; }
 .biz-hero-stat span { font-size: 13px; color: rgba(255,255,255,.72); max-width: 160px; line-height: 1.35; text-align: left; }
 
+/* Accesos rápidos tipo "glass" sobre fondo navy (Medihumana) ------------- */
+.medi-quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 36px; text-align: left; }
+.medi-quick-card {
+  display: flex; align-items: center; gap: 14px; padding: 16px 18px; min-height: 76px;
+  border-radius: 16px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); text-decoration: none; text-align: left;
+  transition: transform .25s var(--premium-ease), background .25s ease, border-color .25s ease;
+}
+.medi-quick-card:hover { transform: translateY(-3px); background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.32); }
+.medi-quick-icon { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--humana-teal), var(--humana-sky)); color: #fff; }
+.medi-quick-icon svg { width: 19px; height: 19px; stroke-width: 2; }
+.medi-quick-card span.medi-quick-label { flex: 1; font-size: 16px; line-height: 1.3; font-weight: 650; color: #fff; }
+.medi-quick-arrow { flex: 0 0 auto; width: 16px; height: 16px; color: rgba(255,255,255,.55); opacity: 0; transform: translateX(-4px); transition: opacity .25s ease, transform .25s ease; }
+.medi-quick-card:hover .medi-quick-arrow { opacity: 1; transform: translateX(0); }
+@media (max-width: 760px) { .medi-quick-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .medi-quick-card { padding: 14px; min-height: 68px; } .medi-quick-card span.medi-quick-label { font-size: 15px; } }
+
 /* Tarjeta de lista con línea de acento (Autorizaciones, Vacunación infantil) */
 .biz-list-card { border-left: 3px solid var(--biz-accent, var(--humana-teal)); background: rgba(255,255,255,.04); border-radius: 0 16px 16px 0; padding: 20px 24px; margin: 22px 0; }
 .biz-section.is-light .biz-list-card, .biz-section.is-light .biz-feature-copy .biz-list-card { background: #fff; box-shadow: 0 10px 30px rgba(7,63,96,.06); }
 .biz-list-card strong { display: block; margin-bottom: 10px; font-size: 15px; color: var(--humana-navy); }
-.biz-section.is-dark .biz-list-card strong, .biz-section.is-color .biz-list-card strong { color: #fff; }
+.biz-section.is-dark .biz-list-card strong, .biz-section.is-color .biz-list-card strong, .biz-section.is-brand .biz-list-card strong { color: #fff; }
 .biz-list-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.biz-list-card li { font-size: 15px; line-height: 1.5; color: #4a5a68; padding-left: 16px; position: relative; }
+.biz-list-card li { font-size: 15px; line-height: 1.5; color: #3a3a3c; padding-left: 16px; position: relative; }
 .biz-list-card li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--biz-accent, var(--humana-teal)); }
-.biz-section.is-dark .biz-list-card li, .biz-section.is-color .biz-list-card li { color: rgba(255,255,255,.8); }
+.biz-section.is-dark .biz-list-card li, .biz-section.is-color .biz-list-card li, .biz-section.is-brand .biz-list-card li { color: rgba(255,255,255,.85); }
+
+/* Chip blanco para logos/imágenes de contacto (teléfonos Covid), legible
+   sobre cualquiera de los 3 fondos. */
+.biz-phone-chip { display: inline-flex; align-items: center; padding: 10px 16px; border-radius: 12px; background: #fff; box-shadow: 0 8px 20px rgba(7,63,96,.12); }
 
 /* Cierre único ------------------------------------------------------------*/
 .biz-close-actions { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 28px; flex-wrap: wrap; }
@@ -5354,8 +5392,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   .biz-close-actions, .biz-close-contact, .biz-trust { justify-content: flex-start; }
 
   /* Patrones más ligeros en celular: misma familia, menos presencia. */
-  .biz-hero::before, .biz-section.is-dark::before, .biz-section.is-color::before { opacity: .35; }
-  .biz-hero::after, .biz-section.is-dark::after, .biz-section.is-color::after { opacity: .03; }
+  .biz-hero::before, .biz-section.is-dark::before, .biz-section.is-color::before, .biz-section.is-brand::before { opacity: .35; }
+  .biz-hero::after, .biz-section.is-dark::after, .biz-section.is-color::after, .biz-section.is-brand::after { opacity: .03; }
   .biz-hero, .biz-section.is-dark.is-close { background-size: 260px 260px, auto, auto, auto; }
 }
 
