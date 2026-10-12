@@ -19,14 +19,18 @@ const essenceStats = [
   { value: "170K+", label: "afiliados respaldados a nivel nacional" },
 ];
 
-/* Los 5 datos de "Arma tu plan a la medida": precio desde + los 4 atributos
-   configurables oficiales, ya presentes en el sitio (sin inventar cifras). */
+/* Los 5 datos de "Arma tu plan a la medida de tu empresa": verificados
+   contra el contenido oficial (cuadro MetroHumana 10.000). "Precios
+   competitivos" y "Copagos en medicinas" ajustados: no se confirma
+   "por colaborador" en el precio, y los porcentajes de copago
+   corresponden a medicinas (90% A, 70% B y otros prestadores, 60%
+   reembolso), no a hospitalario/ambulatorio. */
 const configFigures = [
-  { value: "Desde $42", label: "Precio competitivo por colaborador" },
+  { value: "Desde $42", label: "Precios competitivos" },
   { value: "$10.000", label: "Límite de cobertura por enfermedad" },
   { value: "$50 · $80 · $100", label: "Deducible por persona, a elegir" },
   { value: "A elección", label: "Cobertura de maternidad" },
-  { value: "60% a 90%", label: "Copagos hospitalario y ambulatorio" },
+  { value: "60% a 90%", label: "Copagos en medicinas" },
 ];
 
 /* Lista principal oficial del Plan Humana Business (9 puntos) */
@@ -302,7 +306,7 @@ export default function HumanaBusinessClient() {
           <div className="biz-container">
             <div className="biz-section-head biz-reveal">
               <span className="biz-eyebrow">ARMA TU PLAN A LA MEDIDA</span>
-              <h2>Configura la cobertura ideal para tu empresa.</h2>
+              <h2>Arma tu plan a la medida de tu empresa</h2>
               <p>Combina límites, deducibles, copagos y cobertura de maternidad según las necesidades de tu equipo.</p>
             </div>
             <div className="biz-stats biz-reveal">
@@ -557,11 +561,10 @@ export default function HumanaBusinessClient() {
           >
             <Image
               src="/images/planes/mh50/mh50-faq-icon.webp"
-              alt=""
+              alt="Preguntas frecuentes"
               width={36}
               height={36}
               unoptimized
-              aria-hidden="true"
             />
           </button>
           <a
@@ -573,11 +576,10 @@ export default function HumanaBusinessClient() {
           >
             <Image
               src="/images/planes/mh50/mh50-whatsapp-icon.webp"
-              alt=""
+              alt="Escríbenos por WhatsApp"
               width={34}
               height={34}
               unoptimized
-              aria-hidden="true"
             />
           </a>
         </div>
