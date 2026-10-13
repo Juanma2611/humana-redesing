@@ -5747,37 +5747,30 @@ ul.legal-list { list-style: disc; }
 .biz-notice.is-warning { background: rgba(255,193,7,.12); border-color: rgba(255,193,7,.35); }
 .biz-notice.is-warning svg { color: #ffc107; }
 
-/* Hospital Padre Carollo — hero dividido, logo, y beneficios (una tarjeta
-   destacada para el 100% + grilla de 4 con ícono). */
-.biz-padre-carollo-logo { position: relative; width: 140px; height: 58px; margin-bottom: 20px; background: #fff; border-radius: 14px; padding: 10px; }
-.biz-hero.is-split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; max-width: 1180px; margin: 0 auto; text-align: left; }
+/* Hospital Padre Carollo — hero dividido compacto, logo, y 5 tarjetas de
+   beneficio del mismo tamaño (3+2 centradas si no caben en una fila). */
+.pc-compact .biz-section { padding-top: clamp(56px, 6vw, 88px); padding-bottom: clamp(56px, 6vw, 88px); }
+.biz-padre-carollo-logo { position: relative; width: 120px; height: 50px; margin-bottom: 18px; background: #fff; border-radius: 12px; padding: 8px; overflow: hidden; }
+.biz-hero.is-split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; max-width: 1180px; margin: 0 auto; text-align: left; padding-top: clamp(40px, 5vw, 64px); padding-bottom: clamp(40px, 5vw, 64px); }
 .biz-hero.is-split .biz-hero-copy { max-width: none; margin: 0; }
-.biz-hero-split-media { position: relative; width: 100%; aspect-ratio: 4 / 3.1; border-radius: 28px; overflow: hidden; box-shadow: 0 40px 90px rgba(4,22,36,.42), 0 0 70px var(--biz-accent-glow, rgba(63,126,171,.28)); }
+.biz-hero-split-media { position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(4,22,36,.4), 0 0 60px var(--biz-accent-glow, rgba(63,126,171,.26)); }
 .biz-hero-split-media img { object-fit: cover; }
 @media (max-width: 900px) {
   .biz-hero.is-split { grid-template-columns: 1fr; text-align: center; }
   .biz-hero.is-split .biz-hero-copy { text-align: center; }
+  .biz-hero-split-media { max-width: 420px; margin: 0 auto; }
   .biz-padre-carollo-logo { margin-left: auto; margin-right: auto; }
   .biz-notice { margin-left: auto; margin-right: auto; }
 }
 
-.pc-benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 40px auto 0; }
-.pc-benefit-spotlight { grid-column: 1 / -1; display: flex; align-items: center; gap: 28px; padding: 36px 40px; border-radius: 24px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-.pc-benefit-spotlight strong { font-size: clamp(48px, 5vw, 64px); font-weight: 700; color: #fff; letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; display: block; }
-.pc-benefit-spotlight p { margin: 0; font-size: 17px; line-height: 1.55; color: rgba(255,255,255,.92); max-width: 520px; }
-.pc-benefit-card { padding: 28px 24px; border-radius: 20px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); text-align: center; }
-.pc-benefit-icon { width: 56px; height: 56px; margin: 0 auto 16px; border-radius: 16px; background: linear-gradient(135deg, var(--humana-teal), var(--humana-sky)); display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
-.pc-benefit-icon svg { width: 26px; height: 26px; }
-.pc-benefit-spotlight .pc-benefit-icon { width: 72px; height: 72px; border-radius: 20px; }
-.pc-benefit-spotlight .pc-benefit-icon svg { width: 34px; height: 34px; }
-.pc-benefit-card strong { display: block; font-size: 34px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.pc-benefits { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1100px; margin: 36px auto 0; }
+.pc-benefit-card { flex: 0 1 200px; padding: 26px 22px; border-radius: 20px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); text-align: center; }
+.pc-benefit-icon { width: 52px; height: 52px; margin: 0 auto 14px; border-radius: 14px; background: linear-gradient(135deg, var(--humana-teal), var(--humana-sky)); display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+.pc-benefit-icon svg { width: 24px; height: 24px; }
+.pc-benefit-card strong { display: block; font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
 .pc-benefit-card p { margin: 0; font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.9); }
-@media (max-width: 860px) {
-  .pc-benefits { grid-template-columns: repeat(2, 1fr); }
-  .pc-benefit-spotlight { flex-direction: column; text-align: center; }
-}
 @media (max-width: 560px) {
-  .pc-benefits { grid-template-columns: 1fr; }
+  .pc-benefit-card { flex-basis: 100%; }
 }
 
 /* H30/P15 — tarjetas de los 2 nombres de red en el hero, bloque de Red
@@ -5786,11 +5779,16 @@ ul.legal-list { list-style: disc; }
 .h30p15-name-card { padding: 16px 24px; border-radius: 16px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.26); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); text-align: left; min-width: 200px; }
 .h30p15-name-card strong { display: block; font-size: 17px; font-weight: 700; color: #fff; }
 .h30p15-name-card span { display: block; margin-top: 4px; font-size: 13.5px; color: rgba(255,255,255,.75); }
-.h30p15-ambulatoria { display: grid; grid-template-columns: .85fr 1.15fr; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto; }
-.h30p15-logo-card { position: relative; width: 100%; aspect-ratio: 16/9; background: #fff; border-radius: 18px; box-shadow: var(--premium-shadow); padding: 20px; }
-.h30p15-ambulatoria-text { margin: 0; font-size: 17px; line-height: 1.65; color: #3a3a3c; }
+.h30p15-ambulatoria-section { padding-top: clamp(32px, 4vw, 48px); padding-bottom: clamp(32px, 4vw, 48px); }
+.h30p15-ambulatoria { display: flex; align-items: center; gap: 32px; max-width: 980px; margin: 0 auto; flex-wrap: wrap; }
+.h30p15-ambulatoria-title { flex: 0 0 auto; }
+.h30p15-ambulatoria-title .biz-eyebrow { margin-bottom: 4px; }
+.h30p15-ambulatoria-title h2 { margin: 0; font-size: clamp(22px, 2.2vw, 26px); color: #073b60; white-space: nowrap; }
+.h30p15-logo-card { position: relative; width: 160px; height: 64px; flex-shrink: 0; background: #fff; border-radius: 14px; box-shadow: var(--premium-shadow); padding: 12px; }
+.h30p15-ambulatoria-text { margin: 0; font-size: 17px; line-height: 1.55; color: #3a3a3c; flex: 1 1 280px; }
 @media (max-width: 760px) {
-  .h30p15-ambulatoria { grid-template-columns: 1fr; text-align: center; }
+  .h30p15-ambulatoria { flex-direction: column; text-align: center; }
+  .h30p15-ambulatoria-title h2 { white-space: normal; }
 }
 .h30p15-plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; max-width: 1040px; margin: 36px auto 0; }
 .h30p15-plan-card { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 24px 20px; border-radius: 18px; background: #fff; border: 1px solid var(--border); box-shadow: var(--premium-shadow); text-align: center; }

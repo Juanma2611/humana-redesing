@@ -41,17 +41,15 @@ export default function H30P15Page() {
           </div>
         </section>
 
-        {/* Red Ambulatoria: dos columnas ------------------------------- */}
-        <section className="biz-section is-light">
+        {/* Red Ambulatoria: franja compacta ----------------------------- */}
+        <section className="biz-section is-light h30p15-ambulatoria-section">
           <div className="biz-container">
-            <div className="biz-section-head">
-              <span className="biz-eyebrow">COBERTURA AMBULATORIA</span>
-              <h2>Red Ambulatoria</h2>
-            </div>
             <div className="h30p15-ambulatoria">
-              <div className="h30p15-ambulatoria-logos">
-                <div className="h30p15-logo-card"><Image src="https://humana.med.ec/wp-content/uploads/2021/04/metrored-medilink-logos.png" alt="Logos Metrored y Medilink" fill sizes="320px" unoptimized style={{ objectFit: "contain" }} /></div>
+              <div className="h30p15-ambulatoria-title">
+                <span className="biz-eyebrow">COBERTURA AMBULATORIA</span>
+                <h2>Red Ambulatoria</h2>
               </div>
+              <div className="h30p15-logo-card"><Image src="https://humana.med.ec/wp-content/uploads/2021/04/metrored-medilink-logos.png" alt="Logos Metrored y Medilink" fill sizes="220px" unoptimized style={{ objectFit: "contain" }} /></div>
               <p className="h30p15-ambulatoria-text">En el resto de prestadores de Modalidad Cerrada de la Red CAM (Centros de Atención Médica) no aplica crédito ni cobertura vía reembolso.</p>
             </div>
           </div>

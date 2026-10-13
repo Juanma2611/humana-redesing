@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { AlertTriangle, ArrowRight, Building2, FlaskConical, Phone, ScanLine, SmilePlus, Stethoscope } from "lucide-react";
+import { ArrowRight, Building2, FlaskConical, Phone, ScanLine, SmilePlus, Stethoscope } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
@@ -9,7 +9,8 @@ export const metadata: Metadata = {
   description: "Beneficios exclusivos para afiliados de Humana en el Hospital Padre Carollo Quito, adquiridos a través del bróker Unibroker.",
 };
 
-const gridBenefits = [
+const benefits = [
+  { icon: Building2, stat: "100%", label: "Cobertura Hospitalaria en el Hospital Padre Carollo Quito" },
   { icon: Stethoscope, stat: "2", label: "Consultas médicas gratuitas de Medicina Familiar al año por contrato" },
   { icon: SmilePlus, stat: "1", label: "Profilaxis odontológica anual gratuita para el titular" },
   { icon: FlaskConical, stat: "6%", label: "Descuento en exámenes de laboratorio ambulatorias" },
@@ -23,8 +24,8 @@ export default function HospitalPadreCarolloPage() {
         <Link href="/">Inicio</Link><span>»</span><span>Hospital Padre Carollo</span>
       </nav>
 
-      <div className="biz-page" data-accent="navy">
-        {/* Hero dividido: texto + logo + aviso a la izquierda, foto a la derecha */}
+      <div className="biz-page pc-compact" data-accent="navy">
+        {/* Hero dividido: texto + logo a la izquierda, foto a la derecha */}
         <section className="biz-hero is-split" id="padre-carollo-inicio">
           <div className="biz-hero-copy">
             <div className="biz-padre-carollo-logo">
@@ -32,17 +33,14 @@ export default function HospitalPadreCarolloPage() {
             </div>
             <span className="biz-eyebrow">CONVENIO ESPECIAL</span>
             <h1>Hospital Padre Carollo</h1>
-            <div className="biz-notice is-warning">
-              <AlertTriangle size={20} aria-hidden="true" />
-              <p>Aplica únicamente para contratos adquiridos a través del bróker Unibroker en Hospital Padre Carollo Quito desde el 7 de febrero de 2022.</p>
-            </div>
+            <p className="biz-hero-body" style={{ margin: "12px 0 0" }}>Aplica únicamente para contratos adquiridos a través del bróker Unibroker en Hospital Padre Carollo Quito desde el 7 de febrero de 2022.</p>
           </div>
           <figure className="biz-hero-split-media">
             <Image src="/images/hospital-padre-carollo/padre-carollo-hero.webp" alt="Equipo médico conversando con una paciente hospitalizada junto a su esposo, con vista a las montañas de Quito" fill sizes="(max-width: 900px) 100vw, 540px" unoptimized />
           </figure>
         </section>
 
-        {/* Beneficios: tarjeta destacada para el 100% + grilla de 4 -------- */}
+        {/* Beneficios: 5 tarjetas del mismo tamaño --------------------------- */}
         <section className="biz-section is-brand">
           <div className="biz-container">
             <div className="biz-section-head">
@@ -50,14 +48,7 @@ export default function HospitalPadreCarolloPage() {
               <h2>Beneficios</h2>
             </div>
             <div className="pc-benefits">
-              <div className="pc-benefit-spotlight">
-                <div className="pc-benefit-icon"><Building2 aria-hidden="true" /></div>
-                <div>
-                  <strong>100%</strong>
-                  <p>Cobertura Hospitalaria en el Hospital Padre Carollo Quito</p>
-                </div>
-              </div>
-              {gridBenefits.map(({ icon: Icon, stat, label }) => (
+              {benefits.map(({ icon: Icon, stat, label }) => (
                 <div className="pc-benefit-card" key={label}>
                   <div className="pc-benefit-icon"><Icon aria-hidden="true" /></div>
                   <strong>{stat}</strong>
