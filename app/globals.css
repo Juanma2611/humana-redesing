@@ -5747,20 +5747,21 @@ ul.legal-list { list-style: disc; }
 .biz-notice.is-warning { background: rgba(255,193,7,.12); border-color: rgba(255,193,7,.35); }
 .biz-notice.is-warning svg { color: #ffc107; }
 
-/* Hospital Padre Carollo — hero dividido compacto, logo, y 5 tarjetas de
-   beneficio del mismo tamaño (3+2 centradas si no caben en una fila). */
+/* Hospital Padre Carollo — hero a pantalla completa (como Directorio, pero
+   con el texto alineado a la izquierda) y 5 tarjetas de beneficio del mismo
+   tamaño (3+2 centradas si no caben en una fila). */
 .pc-compact .biz-section { padding-top: clamp(56px, 6vw, 88px); padding-bottom: clamp(56px, 6vw, 88px); }
-.biz-padre-carollo-logo { position: relative; width: 120px; height: 50px; margin-bottom: 18px; background: #fff; border-radius: 12px; padding: 8px; overflow: hidden; }
-.biz-hero.is-split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; max-width: 1180px; margin: 0 auto; text-align: left; padding-top: clamp(40px, 5vw, 64px); padding-bottom: clamp(40px, 5vw, 64px); }
-.biz-hero.is-split .biz-hero-copy { max-width: none; margin: 0; }
-.biz-hero-split-media { position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(4,22,36,.4), 0 0 60px var(--biz-accent-glow, rgba(63,126,171,.26)); }
-.biz-hero-split-media img { object-fit: cover; }
-@media (max-width: 900px) {
-  .biz-hero.is-split { grid-template-columns: 1fr; text-align: center; }
-  .biz-hero.is-split .biz-hero-copy { text-align: center; }
-  .biz-hero-split-media { max-width: 420px; margin: 0 auto; }
-  .biz-padre-carollo-logo { margin-left: auto; margin-right: auto; }
-  .biz-notice { margin-left: auto; margin-right: auto; }
+.biz-hero-photo.is-fullscreen { min-height: calc(100vh - 88px); }
+.biz-hero-photo.is-fullscreen .biz-hero-photo-content { max-width: 1180px; width: 100%; margin: 0 auto; text-align: left; }
+.biz-hero-photo.is-fullscreen .biz-hero-body { max-width: 560px; margin-left: 0; margin-right: 0; }
+.biz-hero-scroll-indicator { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px; color: rgba(255,255,255,.65); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.biz-hero-scroll-indicator svg { animation: biz-scroll-bounce 1.8s ease-in-out infinite; }
+@keyframes biz-scroll-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+@media (max-width: 760px) {
+  .biz-hero-photo.is-fullscreen { min-height: 0; }
+  .biz-hero-photo.is-fullscreen .biz-hero-photo-content { text-align: center; }
+  .biz-hero-photo.is-fullscreen .biz-hero-body { margin-left: auto; margin-right: auto; }
+  .biz-hero-scroll-indicator { display: none; }
 }
 
 .pc-benefits { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1100px; margin: 36px auto 0; }
@@ -5776,9 +5777,7 @@ ul.legal-list { list-style: disc; }
 /* H30/P15 — tarjetas de los 2 nombres de red en el hero, bloque de Red
    Ambulatoria en dos columnas, y tarjetas de planes con botón. */
 .h30p15-name-cards { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
-.h30p15-name-card { padding: 16px 24px; border-radius: 16px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.26); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); text-align: left; min-width: 200px; }
-.h30p15-name-card strong { display: block; font-size: 17px; font-weight: 700; color: #fff; }
-.h30p15-name-card span { display: block; margin-top: 4px; font-size: 13.5px; color: rgba(255,255,255,.75); }
+.h30p15-name-card { padding: 14px 24px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.26); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); font-size: 15px; font-weight: 700; color: #fff; }
 .h30p15-ambulatoria-section { padding-top: clamp(32px, 4vw, 48px); padding-bottom: clamp(32px, 4vw, 48px); }
 .h30p15-ambulatoria { display: flex; align-items: center; gap: 32px; max-width: 980px; margin: 0 auto; flex-wrap: wrap; }
 .h30p15-ambulatoria-title { flex: 0 0 auto; }
