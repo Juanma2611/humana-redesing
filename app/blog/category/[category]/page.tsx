@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Newspaper } from "lucide-react";
-import { SiteShell } from "@/components/site-shell";
-import { BlogCard } from "@/components/blog-card";
+import { ArrowRight } from "lucide-react";
+import { PageHero, SiteShell } from "@/components/site-shell";
 import { blogCategories, getCategoryLabel } from "@/lib/blog-catalog";
 import { getBlogArticlesByCategory } from "@/lib/blog-source";
 
@@ -31,39 +31,31 @@ export default async function BlogCategoryPage({ params }: { params: Promise<{ c
         <Link href="/">Inicio</Link><span>»</span><Link href="/blog/">Blog</Link><span>»</span><span>{label}</span>
       </nav>
 
-      <div className="biz-page" data-accent="teal">
-        {/* Hero compacto --------------------------------------------------- */}
-        <section className="biz-hero">
-          <div className="biz-hero-copy">
-            <span className="biz-eyebrow">CATEGORÍA</span>
-            <h1>{label}</h1>
-          </div>
-        </section>
+      <PageHero eyebrow="Blog Humana" title={label} description={`Artículos de la categoría ${label}.`} imageSrc="/bienestar-hero.webp" imageAlt="Familia disfrutando una caminata saludable en un parque" imagePosition="center" />
 
-        <section className="biz-section is-light">
-          <div className="biz-container">
-            <nav className="blog-chip-row" aria-label="Filtrar por categoría">
-              <Link className="blog-chip" href="/blog/">Todas</Link>
-              {blogCategories.map((c) => (
-                <Link key={c.slug} className={c.slug === category ? "blog-chip is-active" : "blog-chip"} href={`/blog/category/${c.slug}/`}>{c.label}</Link>
+      <section className="content-section blog-listing">
+        <div className="blog-listing-main">
+          {articles.length > 0 ? (
+            <div className="blog-listing-grid">
+              {articles.map(article => (
+                <article className="card-clickable" key={article.slug}>
+                  <Link className="card-cover-link" href={`/blog/${article.category}/${article.slug}/`} aria-label={article.title} />
+                  <div className="home-blog-image"><Image src={article.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized /></div>
+                  <div className="home-blog-copy">
+                    <h3>{article.title}</h3>
+                    <span>{article.date} | {article.categoryLabel}</span>
+                    <p>{article.copy}</p>
+                    <div className="home-blog-actions"><span className="card-cover-cta">Leer más <ArrowRight /></span></div>
+                  </div>
+                </article>
               ))}
-            </nav>
-
-            {articles.length > 0 ? (
-              <div className="blog-card-grid">
-                {articles.map((article) => <BlogCard article={article} key={article.slug} />)}
-              </div>
-            ) : (
-              <div className="blog-empty-state">
-                <div className="blog-empty-icon"><Newspaper aria-hidden="true" /></div>
-                <h2>Pronto publicaremos artículos en esta categoría</h2>
-                <p>Estamos preparando contenido de {label.toLowerCase()} para acompañarte. Mientras tanto, explora el resto del blog.</p>
-                <Link className="primary-button" href="/blog/">Ver todos los artículos <ArrowRight size={18} /></Link>
-              </div>
-            )}
-          </div>
-        </section>
-      </div>
+            </div>
+          ) : (
+            <p style={{ padding: "24px 0" }}>Todavía no hay artículos de muestra en esta categoría.</p>
+          )}
+          {/* Sin paginación: solo hay 3 artículos de muestra en total. */}
+        </div>
+      </section>
     </SiteShell>
   );
 }
