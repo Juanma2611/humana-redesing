@@ -2201,6 +2201,19 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .h30p15-card-row span:last-child { font-weight: 700; color: #12314a; }
 .h30p15-card-row.is-na span:last-child { color: #a3690b; }
 
+/* H30/P15 — pestañas de ciudad + tabla con encabezado navy, filas
+   alternadas y celdas en pastilla (teal / ámbar). */
+.h30p15-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+.h30p15-tab { padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.06); color: rgba(255,255,255,.75); font-size: 14px; font-weight: 700; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+.h30p15-tab:hover { background: rgba(255,255,255,.12); color: #fff; }
+.h30p15-tab.is-active { background: #fff; color: var(--humana-navy); border-color: #fff; }
+.h30p15-table thead th { background: var(--humana-navy); color: #fff; }
+.h30p15-table tbody tr:nth-child(even) { background: var(--humana-ice); }
+.h30p15-table tbody th[scope="row"], .h30p15-table tbody td { color: #1d1d1f; }
+.h30p15-pill { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; }
+.h30p15-pill.is-ok { background: rgba(18,166,162,.12); color: #0a4f4c; }
+.h30p15-pill.is-na { background: rgba(163,105,11,.12); color: #7a4d08; }
+
 .plan-detail-tables { display:flex; flex-direction:column; gap:36px; }
 
 .plan-detail-notes { list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; }
@@ -5726,12 +5739,62 @@ ul.legal-list { list-style: disc; }
   .biz-timeline-step p { padding-top: 6px; }
 }
 
-/* Hospital Padre Carollo — aviso de condición oficial + grid de beneficios. */
-.biz-padre-carollo-notice { display: flex; gap: 12px; align-items: flex-start; max-width: 560px; margin: 24px auto 0; padding: 16px 20px; border-radius: 14px; background: rgba(255,193,7,.12); border: 1px solid rgba(255,193,7,.35); text-align: left; }
-.biz-padre-carollo-notice svg { flex-shrink: 0; color: #ffc107; margin-top: 2px; }
-.biz-padre-carollo-notice p { margin: 0; font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.9); }
-.biz-padre-carollo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 20px; max-width: 1040px; margin: 40px auto 0; }
-.biz-padre-carollo-grid .biz-price-card span { font-weight: 500; font-size: 14px; line-height: 1.5; color: #3a3a3c; }
+/* Aviso destacado genérico, reutilizable sobre fondo oscuro: variante de
+   advertencia (ámbar) y variante informativa (teal) por defecto. */
+.biz-notice { display: flex; gap: 12px; align-items: flex-start; max-width: 560px; margin: 24px auto 0; padding: 16px 20px; border-radius: 14px; background: rgba(18,166,162,.12); border: 1px solid rgba(18,166,162,.3); text-align: left; }
+.biz-notice svg { flex-shrink: 0; color: var(--humana-teal); margin-top: 2px; }
+.biz-notice p { margin: 0; font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.9); }
+.biz-notice.is-warning { background: rgba(255,193,7,.12); border-color: rgba(255,193,7,.35); }
+.biz-notice.is-warning svg { color: #ffc107; }
+
+/* Hospital Padre Carollo — hero dividido, logo, y beneficios (una tarjeta
+   destacada para el 100% + grilla de 4 con ícono). */
+.biz-padre-carollo-logo { position: relative; width: 140px; height: 58px; margin-bottom: 20px; background: #fff; border-radius: 14px; padding: 10px; }
+.biz-hero.is-split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; max-width: 1180px; margin: 0 auto; text-align: left; }
+.biz-hero.is-split .biz-hero-copy { max-width: none; margin: 0; }
+.biz-hero-split-media { position: relative; width: 100%; aspect-ratio: 4 / 3.1; border-radius: 28px; overflow: hidden; box-shadow: 0 40px 90px rgba(4,22,36,.42), 0 0 70px var(--biz-accent-glow, rgba(63,126,171,.28)); }
+.biz-hero-split-media img { object-fit: cover; }
+@media (max-width: 900px) {
+  .biz-hero.is-split { grid-template-columns: 1fr; text-align: center; }
+  .biz-hero.is-split .biz-hero-copy { text-align: center; }
+  .biz-padre-carollo-logo { margin-left: auto; margin-right: auto; }
+  .biz-notice { margin-left: auto; margin-right: auto; }
+}
+
+.pc-benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 40px auto 0; }
+.pc-benefit-spotlight { grid-column: 1 / -1; display: flex; align-items: center; gap: 28px; padding: 36px 40px; border-radius: 24px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.pc-benefit-spotlight strong { font-size: clamp(48px, 5vw, 64px); font-weight: 700; color: #fff; letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; display: block; }
+.pc-benefit-spotlight p { margin: 0; font-size: 17px; line-height: 1.55; color: rgba(255,255,255,.92); max-width: 520px; }
+.pc-benefit-card { padding: 28px 24px; border-radius: 20px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); text-align: center; }
+.pc-benefit-icon { width: 56px; height: 56px; margin: 0 auto 16px; border-radius: 16px; background: linear-gradient(135deg, var(--humana-teal), var(--humana-sky)); display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+.pc-benefit-icon svg { width: 26px; height: 26px; }
+.pc-benefit-spotlight .pc-benefit-icon { width: 72px; height: 72px; border-radius: 20px; }
+.pc-benefit-spotlight .pc-benefit-icon svg { width: 34px; height: 34px; }
+.pc-benefit-card strong { display: block; font-size: 34px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.pc-benefit-card p { margin: 0; font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.9); }
+@media (max-width: 860px) {
+  .pc-benefits { grid-template-columns: repeat(2, 1fr); }
+  .pc-benefit-spotlight { flex-direction: column; text-align: center; }
+}
+@media (max-width: 560px) {
+  .pc-benefits { grid-template-columns: 1fr; }
+}
+
+/* H30/P15 — tarjetas de los 2 nombres de red en el hero, bloque de Red
+   Ambulatoria en dos columnas, y tarjetas de planes con botón. */
+.h30p15-name-cards { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+.h30p15-name-card { padding: 16px 24px; border-radius: 16px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.26); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); text-align: left; min-width: 200px; }
+.h30p15-name-card strong { display: block; font-size: 17px; font-weight: 700; color: #fff; }
+.h30p15-name-card span { display: block; margin-top: 4px; font-size: 13.5px; color: rgba(255,255,255,.75); }
+.h30p15-ambulatoria { display: grid; grid-template-columns: .85fr 1.15fr; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto; }
+.h30p15-logo-card { position: relative; width: 100%; aspect-ratio: 16/9; background: #fff; border-radius: 18px; box-shadow: var(--premium-shadow); padding: 20px; }
+.h30p15-ambulatoria-text { margin: 0; font-size: 17px; line-height: 1.65; color: #3a3a3c; }
+@media (max-width: 760px) {
+  .h30p15-ambulatoria { grid-template-columns: 1fr; text-align: center; }
+}
+.h30p15-plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; max-width: 1040px; margin: 36px auto 0; }
+.h30p15-plan-card { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 24px 20px; border-radius: 18px; background: #fff; border: 1px solid var(--border); box-shadow: var(--premium-shadow); text-align: center; }
+.h30p15-plan-card strong { font-size: 16px; color: #12314a; }
 
 /* Vademecum — ruta visual tipo breadcrumb dentro de la Central de ayuda. */
 .vademecum-route { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 18px 0 0; padding: 10px 16px; border-radius: 12px; background: var(--humana-ice); }
