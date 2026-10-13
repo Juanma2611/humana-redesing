@@ -2159,6 +2159,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .secondary-button.green { background:#12a6a2; color:#fff; border:1px solid #12a6a2; }
 .secondary-button.green:hover { background:#0e8c88; }
 .secondary-button.light { background:var(--humana-ice); color:var(--humana-navy); border:1px solid #cfe6f0; }
+.secondary-button.purple { background:#6c5ba8; color:#fff; border:1px solid #6c5ba8; box-shadow:0 10px 22px rgba(108,91,168,.22); transition:background .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.secondary-button.purple:hover { background:#5a4a92; border-color:#5a4a92; box-shadow:0 14px 28px rgba(108,91,168,.3); }
 
 .plan-detail-hero { position:relative; min-height:320px; display:flex; align-items:flex-end; overflow:hidden; margin:18px clamp(24px,7vw,110px) 0; border-radius:28px; box-shadow:var(--premium-shadow); background:linear-gradient(135deg,#075c92,#0b80bd); }
 .plan-detail-hero-media { position:absolute; inset:0; }
