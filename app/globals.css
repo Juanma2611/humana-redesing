@@ -2207,7 +2207,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 .h30p15-tab { padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.06); color: rgba(255,255,255,.75); font-size: 14px; font-weight: 700; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease; }
 .h30p15-tab:hover { background: rgba(255,255,255,.12); color: #fff; }
 .h30p15-tab.is-active { background: #fff; color: var(--humana-navy); border-color: #fff; }
-.h30p15-table thead th { background: var(--humana-navy); color: #fff; }
+.h30p15-table.plan-detail-table thead th, .h30p15-table.plan-detail-table thead th:first-child { background: var(--humana-navy); color: #fff; }
 .h30p15-table tbody tr:nth-child(even) { background: var(--humana-ice); }
 .h30p15-table tbody th[scope="row"], .h30p15-table tbody td { color: #1d1d1f; }
 .h30p15-pill { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; }
