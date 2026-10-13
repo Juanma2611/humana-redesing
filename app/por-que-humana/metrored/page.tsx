@@ -36,7 +36,7 @@ function CenterCard({ center }: { center: { name: string; address: string; map: 
       <div className="plan-hub-card-copy">
         <h4>{center.name}</h4>
         <p style={{ color: "#3f5f73", fontSize: 14.5 }}>{center.address}</p>
-        <a className="secondary-button small" href={center.map} target="_blank" rel="noreferrer">
+        <a className="secondary-button small purple" href={center.map} target="_blank" rel="noreferrer">
           <MapPin size={16} /> Ver mapa
         </a>
       </div>
