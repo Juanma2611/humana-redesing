@@ -35,8 +35,8 @@ export default function H30P15Page() {
             <span className="biz-eyebrow">REDES PREFERENTES</span>
             <h1>Red Humano30 / Preciso15</h1>
             <div className="h30p15-name-cards">
-              <div className="h30p15-name-card"><strong>Humano 30</strong><span>Metrohumana 30.000</span></div>
-              <div className="h30p15-name-card"><strong>Preciso 15</strong><span>Practihumana 15.000</span></div>
+              <div className="h30p15-name-card">Metrohumana 30.000</div>
+              <div className="h30p15-name-card">Practihumana 15.000</div>
             </div>
           </div>
         </section>

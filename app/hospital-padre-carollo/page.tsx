@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Building2, FlaskConical, Phone, ScanLine, SmilePlus, Stethoscope } from "lucide-react";
+import { ArrowRight, Building2, ChevronDown, FlaskConical, Phone, ScanLine, SmilePlus, Stethoscope } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
@@ -25,19 +25,19 @@ export default function HospitalPadreCarolloPage() {
       </nav>
 
       <div className="biz-page pc-compact" data-accent="navy">
-        {/* Hero dividido: texto + logo a la izquierda, foto a la derecha */}
-        <section className="biz-hero is-split" id="padre-carollo-inicio">
-          <div className="biz-hero-copy">
-            <div className="biz-padre-carollo-logo">
-              <Image src="https://humana.med.ec/wp-content/uploads/2022/02/logo-padre-carollo.png" alt="Logo Hospital Padre Carollo" fill sizes="140px" unoptimized style={{ objectFit: "contain" }} />
-            </div>
+        {/* Hero a pantalla completa, foto full-bleed con overlay ------------ */}
+        <section className="biz-hero-photo is-fullscreen" id="padre-carollo-inicio">
+          <Image className="biz-hero-photo-img" src="/images/hospital-padre-carollo/padre-carollo-hero.webp" alt="Equipo médico conversando con una paciente hospitalizada junto a su esposo, con vista a las montañas de Quito" fill sizes="100vw" unoptimized />
+          <div className="biz-hero-photo-overlay" />
+          <div className="biz-hero-photo-content">
             <span className="biz-eyebrow">CONVENIO ESPECIAL</span>
             <h1>Hospital Padre Carollo</h1>
             <p className="biz-hero-body" style={{ margin: "12px 0 0" }}>Aplica únicamente para contratos adquiridos a través del bróker Unibroker en Hospital Padre Carollo Quito desde el 7 de febrero de 2022.</p>
           </div>
-          <figure className="biz-hero-split-media">
-            <Image src="/images/hospital-padre-carollo/padre-carollo-hero.webp" alt="Equipo médico conversando con una paciente hospitalizada junto a su esposo, con vista a las montañas de Quito" fill sizes="(max-width: 900px) 100vw, 540px" unoptimized />
-          </figure>
+          <div className="biz-hero-scroll-indicator" aria-hidden="true">
+            <span>Desliza hacia abajo</span>
+            <ChevronDown size={18} />
+          </div>
         </section>
 
         {/* Beneficios: 5 tarjetas del mismo tamaño --------------------------- */}
