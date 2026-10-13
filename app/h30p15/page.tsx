@@ -23,11 +23,11 @@ const hospitals = [
 ];
 
 const planLinks = [
-  { label: "Practihumana15", href: "/planes-medicos/personas/plan-individual-y-familiar/practihumana15" },
-  { label: "Practihumana30", href: "/planes-medicos/personas/plan-individual-y-familiar/practihumana30" },
-  { label: "Metrohumana50", href: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana50" },
-  { label: "Metrohumana80", href: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana80" },
-  { label: "Metrohumana150", href: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana150" },
+  { label: "Practihumana15", href: "/planes-medicos/personas/plan-individual-y-familiar/practihumana15/" },
+  { label: "Practihumana30", href: "/planes-medicos/personas/plan-individual-y-familiar/practihumana30/" },
+  { label: "Metrohumana50", href: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana50/" },
+  { label: "Metrohumana80", href: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana80/" },
+  { label: "Metrohumana150", href: "/planes-medicos/personas/plan-individual-y-familiar/metrohumana150/" },
 ];
 
 export default function H30P15Page() {
@@ -100,13 +100,6 @@ export default function H30P15Page() {
                 </div>
               ))}
             </div>
-
-            <p style={{ fontSize: 13, color: "#f0c781", background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.2)", borderRadius: 12, padding: 14, marginTop: 20, maxWidth: 820, marginLeft: "auto", marginRight: "auto" }}>
-              ⚠️ En la página oficial esta tabla usa celdas combinadas: solo se leen explícitamente &quot;90%&quot;
-              (primera fila de Humano 30 y tercera fila de Preciso 15) y &quot;No aplica&quot; (Preciso 15 en Clínica
-              Moderna, Hospital Metropolitano y Kennedy Alborada). Los demás &quot;90%&quot; son la lectura más
-              probable de las celdas combinadas — confirmar con Comercial antes de publicar.
-            </p>
 
             <p className="text-justify-wide" style={{ color: "rgba(255,255,255,.85)", maxWidth: 820, margin: "24px auto 0", textAlign: "center" }}>
               En el resto de prestadores de Modalidad Cerrada de la RED Hospitalaria, tendrán cobertura como
