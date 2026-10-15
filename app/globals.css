@@ -5861,3 +5861,62 @@ ul.legal-list { list-style: disc; }
   .legal-content { max-width: none; }
   body { background: #fff; }
 }
+
+/* ------------------------------------------------------------------------ */
+/* TRABAJA CON NOSOTROS (tcn-*) — hero propio con retícula de puntos y      */
+/* resplandores de marca, más formulario de postulación rediseñado. Todo    */
+/* prefijado .tcn- para no afectar .institutional-hero ni .plan-lead-form   */
+/* en las otras páginas que las reutilizan.                                 */
+/* ------------------------------------------------------------------------ */
+
+.tcn-hero { position: relative; overflow: hidden; padding: clamp(48px,6vw,84px) clamp(24px,7vw,110px); background: linear-gradient(150deg, #031420 0%, #052033 30%, #075c92 68%, #0b80bd 100%); color: #fff; }
+.tcn-hero-grid { position: absolute; inset: 0; pointer-events: none; background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 46px), repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 46px); -webkit-mask-image: radial-gradient(circle at 78% 28%, rgba(0,0,0,.9), transparent 62%); mask-image: radial-gradient(circle at 78% 28%, rgba(0,0,0,.9), transparent 62%); }
+.tcn-hero-glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(10px); }
+.tcn-hero-glow-a { top: -160px; right: -10%; width: 440px; height: 440px; background: radial-gradient(circle, rgba(18,166,162,.32), transparent 70%); }
+.tcn-hero-glow-b { bottom: -180px; left: -8%; width: 360px; height: 360px; background: radial-gradient(circle, rgba(16,167,219,.26), transparent 70%); }
+.tcn-hero-inner { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(32px,5vw,64px); align-items: center; }
+.tcn-hero-kicker { display: inline-block; margin-bottom: 14px; color: #7ce0db; font-size: 12.5px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.tcn-hero-copy h1 { margin: 0 0 16px; color: #fff; font-size: clamp(34px,4.4vw,54px); line-height: 1.04; letter-spacing: -.03em; font-weight: 780; }
+.tcn-hero-copy p { margin: 0; max-width: 480px; color: rgba(255,255,255,.86); font-size: 16.5px; line-height: 1.7; }
+.tcn-hero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.tcn-hero-chip { display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: #fff; font-size: 13px; font-weight: 650; }
+.tcn-hero-chip svg { color: #7ce0db; }
+.tcn-hero-media { position: relative; width: 100%; aspect-ratio: 4 / 3.2; border-radius: 26px; overflow: hidden; box-shadow: 0 30px 80px rgba(2,10,17,.5); border: 1px solid rgba(255,255,255,.16); }
+
+.tcn-form-section { position: relative; overflow: hidden; padding: 72px clamp(24px,7vw,110px) 92px; background: linear-gradient(180deg, var(--humana-ice) 0%, #fff 58%); }
+.tcn-form-pattern { position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(circle, rgba(11,128,189,.14) 1.4px, transparent 1.4px); background-size: 24px 24px; -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.8), transparent 70%); mask-image: linear-gradient(180deg, rgba(0,0,0,.8), transparent 70%); }
+.tcn-form-wrap { position: relative; z-index: 1; max-width: 660px; margin: 0 auto; }
+.tcn-form-head { text-align: center; margin-bottom: 32px; }
+.tcn-form-kicker { display: inline-block; margin-bottom: 10px; color: var(--humana-teal); font-size: 12.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.tcn-form-head h2 { margin: 0 0 10px; color: #073b60; font-size: clamp(26px,3.2vw,36px); letter-spacing: -.03em; line-height: 1.12; }
+.tcn-form-head p { margin: 0; color: #3f5f73; font-size: 15.5px; line-height: 1.6; }
+
+.tcn-form-card.plan-lead-form { position: relative; overflow: hidden; padding: 36px clamp(22px,4vw,42px); border-radius: 26px; border: 1px solid rgba(11,128,189,.12); box-shadow: 0 30px 80px rgba(7,63,96,.14); }
+.tcn-form-card.plan-lead-form::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, var(--humana-teal), var(--humana-blue), var(--humana-sky)); }
+.tcn-form-card .tcn-label { display: inline-flex; align-items: center; gap: 6px; }
+.tcn-form-card .tcn-label svg { color: var(--humana-blue); flex-shrink: 0; }
+.tcn-form-card .tcn-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+.tcn-form-card.plan-lead-form input, .tcn-form-card.plan-lead-form select { min-height: 48px; border-radius: 12px; border: 1px solid var(--input); padding: 0 14px; font-size: 14.5px; color: #12314a; font-weight: 500; background: #fbfdff; transition: border-color .2s ease, box-shadow .2s ease; }
+.tcn-form-card.plan-lead-form select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230b80bd' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+.tcn-form-card.plan-lead-form input:focus, .tcn-form-card.plan-lead-form select:focus { outline: none; border-color: var(--humana-blue); box-shadow: 0 0 0 4px rgba(11,128,189,.14); }
+.tcn-form-card.plan-lead-form input[type="file"] { min-height: auto; padding: 10px; background: #fbfdff; cursor: pointer; }
+.tcn-form-card.plan-lead-form input[type="file"]::file-selector-button { margin-right: 12px; border: 0; border-radius: 9px; padding: 9px 15px; background: linear-gradient(135deg, #087ab5, #06a7d8); color: #fff; font-weight: 700; font-size: 13px; cursor: pointer; }
+.tcn-form-card.plan-lead-form small { color: #7c93a3; font-size: 12px; line-height: 1.5; }
+
+.tcn-submit-btn { width: 100%; min-height: 54px; margin-top: 6px; border: 0; border-radius: 14px; display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #087ab5, #06a7d8); color: #fff; font-size: 15.5px; font-weight: 760; cursor: pointer; box-shadow: 0 16px 34px rgba(7,110,167,.28); transition: transform .25s var(--premium-ease), box-shadow .25s ease; }
+.tcn-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(7,110,167,.34); }
+
+.tcn-success { display: flex; gap: 12px; align-items: flex-start; margin-top: 22px; padding: 16px 18px; border-radius: 14px; background: #eafaf6; border: 1px solid #bdeee4; color: #0e6b5c; font-size: 13.5px; line-height: 1.6; }
+.tcn-success svg { flex-shrink: 0; margin-top: 2px; color: var(--humana-teal); }
+.tcn-success strong { color: #074e42; }
+
+@media (max-width: 900px) {
+  .tcn-hero-inner { grid-template-columns: 1fr; }
+  .tcn-hero-media { order: -1; aspect-ratio: 4 / 2.6; }
+}
+
+@media (max-width: 620px) {
+  .tcn-hero-copy h1 { font-size: clamp(30px, 8vw, 40px); }
+  .tcn-form-card .tcn-form-row { grid-template-columns: 1fr; }
+  .tcn-form-card.plan-lead-form { padding: 28px 20px; }
+}
