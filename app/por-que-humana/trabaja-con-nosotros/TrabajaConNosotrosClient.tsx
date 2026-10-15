@@ -62,8 +62,8 @@ export default function TrabajaConNosotrosClient() {
           </div>
           <figure className="tcn-hero-media">
             <Image
-              src="https://humana.med.ec/wp-content/uploads/2025/10/buscamos-talento-mas-humano.jpg"
-              alt="Buscamos talento más humano"
+              src="/images/trabaja-con-nosotros/trabaja-con-nosotros-hero.webp"
+              alt="Buscamos talento (más) humano: equipo de Humana sonriendo en una sala de reuniones"
               fill
               sizes="(max-width: 900px) 100vw, 45vw"
               unoptimized
