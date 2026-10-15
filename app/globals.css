@@ -2379,9 +2379,9 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   pointer-events: none;
 }
 .mh50-exp-hero-copy { position: relative; z-index: 2; max-width: 640px; }
-.mh50-exp-hero-copy h1 { font-size: clamp(90px, 15vw, 210px); line-height: .78; margin: 26px 0 32px; letter-spacing: -.06em; font-weight: 780; color: #fff; }
+.mh50-exp-hero-copy h1 { font-size: clamp(38px, 5.4vw, 74px); line-height: 1.02; margin: 22px 0 32px; letter-spacing: -.03em; font-weight: 760; color: #fff; }
 .mh50-exp-hero-copy h1 span { color: var(--mh-bright); }
-.mh50-exp-hero-copy h1.is-long { font-size: clamp(56px, 9vw, 130px); }
+.mh50-exp-hero-copy h1.is-long { font-size: clamp(32px, 4.6vw, 62px); }
 .mh50-exp-hero-line { font-size: clamp(30px, 3.4vw, 50px); line-height: 1.06; font-weight: 700; letter-spacing: -.03em; margin: 0; }
 .mh50-exp-hero-body { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,.72); max-width: 540px; margin-top: 16px; }
 .mh50-exp-hero-actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
@@ -2630,8 +2630,8 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* RESPONSIVE ------------------------------------------------------------ */
 @media (max-width: 980px) {
   .mh50-exp-hero { grid-template-columns: 1fr; padding: 120px 20px 80px; }
-  .mh50-exp-hero-copy h1 { font-size: 30vw; }
-  .mh50-exp-hero-copy h1.is-long { font-size: 15vw; }
+  .mh50-exp-hero-copy h1 { font-size: clamp(34px, 11vw, 60px); word-break: break-word; }
+  .mh50-exp-hero-copy h1.is-long { font-size: clamp(28px, 9vw, 50px); }
   .mh50-exp-gallery { height: min(105vw, 520px); margin-top: 30px; }
   .mh50-exp-photo.card-a { width: 60%; right: 0; }
   .mh50-exp-photo.card-b { width: 54%; left: 0; top: 30%; }
@@ -2812,7 +2812,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   pointer-events: none;
 }
 .ph15-exp-hero-copy { position: relative; z-index: 2; max-width: 640px; }
-.ph15-exp-hero-copy h1 { font-size: clamp(60px, 10vw, 140px); line-height: .82; margin: 26px 0 32px; letter-spacing: -.05em; font-weight: 780; color: #fff; }
+.ph15-exp-hero-copy h1 { font-size: clamp(38px, 5.4vw, 74px); line-height: 1.02; margin: 22px 0 32px; letter-spacing: -.03em; font-weight: 760; color: #fff; }
 .ph15-exp-hero-copy h1 span { color: var(--ph-bright); }
 .ph15-exp-hero-line { font-size: clamp(30px, 3.4vw, 50px); line-height: 1.06; font-weight: 700; letter-spacing: -.03em; margin: 0; }
 .ph15-exp-hero-body { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,.72); max-width: 540px; margin-top: 16px; }
@@ -3010,7 +3010,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* RESPONSIVE ------------------------------------------------------------ */
 @media (max-width: 980px) {
   .ph15-exp-hero { grid-template-columns: 1fr; padding: 120px 20px 80px; }
-  .ph15-exp-hero-copy h1 { font-size: clamp(44px, 18vw, 92px); word-break: break-word; }
+  .ph15-exp-hero-copy h1 { font-size: clamp(34px, 11vw, 60px); word-break: break-word; }
   .ph15-exp-gallery { height: min(105vw, 520px); margin-top: 30px; }
   .ph15-exp-photo.card-a { width: 60%; right: 0; }
   .ph15-exp-photo.card-b { width: 54%; left: 0; top: 30%; }
@@ -3142,7 +3142,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   pointer-events: none;
 }
 .ph30-exp-hero-copy { position: relative; z-index: 2; max-width: 640px; }
-.ph30-exp-hero-copy h1 { font-size: clamp(60px, 10vw, 140px); line-height: .82; margin: 26px 0 32px; letter-spacing: -.05em; font-weight: 780; color: #fff; }
+.ph30-exp-hero-copy h1 { font-size: clamp(38px, 5.4vw, 74px); line-height: 1.02; margin: 22px 0 32px; letter-spacing: -.03em; font-weight: 760; color: #fff; }
 .ph30-exp-hero-copy h1 span { color: var(--ph-bright); }
 .ph30-exp-hero-line { font-size: clamp(30px, 3.4vw, 50px); line-height: 1.06; font-weight: 700; letter-spacing: -.03em; margin: 0; }
 .ph30-exp-hero-body { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,.72); max-width: 540px; margin-top: 16px; }
@@ -3353,7 +3353,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* RESPONSIVE ------------------------------------------------------------ */
 @media (max-width: 980px) {
   .ph30-exp-hero { grid-template-columns: 1fr; padding: 120px 20px 80px; }
-  .ph30-exp-hero-copy h1 { font-size: 22vw; }
+  .ph30-exp-hero-copy h1 { font-size: clamp(34px, 11vw, 60px); word-break: break-word; }
   .ph30-exp-gallery { height: min(105vw, 520px); margin-top: 30px; }
   .ph30-exp-photo.card-a { width: 60%; right: 0; }
   .ph30-exp-photo.card-b { width: 54%; left: 0; top: 30%; }
@@ -3461,7 +3461,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
   pointer-events: none;
 }
 .mh150-exp-hero-copy { position: relative; z-index: 2; max-width: 640px; }
-.mh150-exp-hero-copy h1 { font-size: clamp(60px, 10vw, 140px); line-height: .82; margin: 26px 0 32px; letter-spacing: -.05em; font-weight: 780; color: #fff; }
+.mh150-exp-hero-copy h1 { font-size: clamp(34px, 4.8vw, 68px); line-height: 1.02; margin: 22px 0 32px; letter-spacing: -.03em; font-weight: 760; color: #fff; }
 .mh150-exp-hero-copy h1 span { color: var(--mh150-bright); }
 .mh150-exp-hero-line { font-size: clamp(30px, 3.4vw, 50px); line-height: 1.06; font-weight: 700; letter-spacing: -.03em; margin: 0; }
 .mh150-exp-hero-body { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,.72); max-width: 540px; margin-top: 16px; }
@@ -3675,7 +3675,7 @@ footer p { max-width: 670px; color: #7a8c98; font-size: 12px; line-height: 1.55;
 /* RESPONSIVE ------------------------------------------------------------ */
 @media (max-width: 980px) {
   .mh150-exp-hero { grid-template-columns: 1fr; padding: 120px 20px 80px; }
-  .mh150-exp-hero-copy h1 { font-size: 22vw; }
+  .mh150-exp-hero-copy h1 { font-size: clamp(30px, 10vw, 54px); word-break: break-word; }
   .mh150-exp-gallery { height: min(105vw, 520px); margin-top: 30px; }
   .mh150-exp-photo.card-a { width: 60%; right: 0; }
   .mh150-exp-photo.card-b { width: 54%; left: 0; top: 30%; }
